@@ -1109,11 +1109,11 @@ function shade(hex,amt){
   return'#'+((1<<24)|(f(r)<<16)|(f(gg)<<8)|f(b)).toString(16).slice(1);
 }
 const SHADOW=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),gr=x.createRadialGradient(32,32,0,32,32,32);
-  gr.addColorStop(0,'rgba(25,40,8,.45)');gr.addColorStop(.55,'rgba(25,40,8,.22)');gr.addColorStop(1,'rgba(25,40,8,0)');x.fillStyle=gr;x.fillRect(0,0,64,64);return c})();
+  gr.addColorStop(0,'rgba(20,30,6,.55)');gr.addColorStop(.62,'rgba(20,30,6,.46)');gr.addColorStop(.78,'rgba(20,30,6,.2)');gr.addColorStop(1,'rgba(20,30,6,0)');x.fillStyle=gr;x.fillRect(0,0,64,64);return c})();
 function shadow(px,py,rx,ry){g.drawImage(SHADOW,px-rx*1.3,py-ry*1.3,rx*2.6,ry*2.6)}
 function ball(x,y,rx,ry,col,stroke,lw,rot){
   const r=Math.max(rx,ry),gr=g.createRadialGradient(x-rx*.35,y-ry*.42,r*.08,x,y,r*1.08);
-  gr.addColorStop(0,shade(col,.3));gr.addColorStop(.55,col);gr.addColorStop(1,shade(col,-.22));ell(x,y,rx,ry,gr,stroke,lw,rot);
+  gr.addColorStop(0,shade(col,.42));gr.addColorStop(.22,shade(col,.12));gr.addColorStop(.62,col);gr.addColorStop(1,shade(col,-.36));ell(x,y,rx,ry,gr,stroke,lw,rot);
 }
 /* Pre-drawn sprites: static art is drawn once into a canvas, then stamped each frame. */
 const SPR={},SPR_SCALE=2.5,BOX1=[-48,-104,48,40],BOX2=[-86,-96,86,88];
@@ -1122,7 +1122,38 @@ function sprite(key,box,draw){
   const c=document.createElement('canvas'),w=box[2]-box[0],h=box[3]-box[1];
   c.width=Math.ceil(w*SPR_SCALE);c.height=Math.ceil(h*SPR_SCALE);
   const prev=g;g=c.getContext('2d');g.setTransform(SPR_SCALE,0,0,SPR_SCALE,-box[0]*SPR_SCALE,-box[1]*SPR_SCALE);draw();g=prev;
+  inkOutline(c,4);
   return SPR[key]={c,box,w,h};
+}
+/* Art style: every piece of art gets a bold, dark outline that takes on a deep shade of the colour it borders.
+   Soft shadows (low alpha) are left out of the silhouette so only solid shapes are outlined. */
+function inkOutline(c,r){
+  const w=c.width,h=c.height,x=c.getContext('2d'),src=x.getImageData(0,0,w,h),d=src.data;
+  const solid=document.createElement('canvas');solid.width=w;solid.height=h;const sx=solid.getContext('2d'),sd=sx.createImageData(w,h),o=sd.data;
+  for(let i=0;i<d.length;i+=4)if(d[i+3]>=170){o[i]=d[i];o[i+1]=d[i+1];o[i+2]=d[i+2];o[i+3]=255}
+  sx.putImageData(sd,0,0);
+  const ink=document.createElement('canvas');ink.width=w;ink.height=h;const ix=ink.getContext('2d');
+  for(let k=0;k<16;k++){const a=k/16*Math.PI*2;ix.drawImage(solid,Math.round(Math.cos(a)*r),Math.round(Math.sin(a)*r))}
+  ix.globalCompositeOperation='source-atop';ix.fillStyle='rgba(38,20,8,.82)';ix.fillRect(0,0,w,h);
+  x.save();x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='destination-over';x.drawImage(ink,0,0);x.restore();
+}
+/* Moving things (farmer, visitors, pet, truck, animated decor) are drawn into a scratch layer around their anchor,
+   then copied back through an SVG filter that adds the same bold outline. Browsers without canvas filters just skip the outline. */
+const INK=document.createElement('canvas'),INK_OK='filter' in CanvasRenderingContext2D.prototype;
+(()=>{const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('width',0);svg.setAttribute('height',0);svg.style.position='absolute';
+  let h='';for(let r=1;r<=5;r++)h+=`<filter id="ink${r}" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB"><feComponentTransfer in="SourceAlpha" result="a"><feFuncA type="discrete" tableValues="0 0 0 0 1 1"/></feComponentTransfer><feMorphology in="a" operator="dilate" radius="${r}" result="d"/><feFlood flood-color="#26140a" flood-opacity=".82"/><feComposite in2="d" operator="in" result="ink"/><feMerge><feMergeNode in="ink"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+  svg.innerHTML=h;document.body.appendChild(svg)})();
+function inkLive(ax,ay,rw,up,down,fn){
+  if(!INK_OK||ICON_MODE)return fn();
+  const T=g.getTransform(),[wx,wy]=P(ax,ay),s=Math.hypot(T.a,T.b),sx=T.a*wx+T.c*wy+T.e,sy=T.b*wx+T.d*wy+T.f;
+  const x0=Math.max(0,Math.floor(sx-rw*s/2)),y0=Math.max(0,Math.floor(sy-up*s)),x1=Math.min(cv.width,Math.ceil(sx+rw*s/2)),y1=Math.min(cv.height,Math.ceil(sy+down*s));
+  if(x1<=x0||y1<=y0)return;
+  if(INK.width!==cv.width||INK.height!==cv.height){INK.width=cv.width;INK.height=cv.height}
+  const ix=INK.getContext('2d');ix.setTransform(1,0,0,1,0,0);ix.clearRect(x0,y0,x1-x0,y1-y0);
+  ix.save();ix.beginPath();ix.rect(x0,y0,x1-x0,y1-y0);ix.clip();ix.setTransform(T);
+  const prev=g;g=ix;try{fn()}finally{g=prev;ix.restore()}
+  g.save();g.setTransform(1,0,0,1,0,0);g.filter='url(#ink'+Math.max(1,Math.min(5,Math.round(s*.65)))+')';
+  g.drawImage(INK,x0,y0,x1-x0,y1-y0,x0,y0,x1-x0,y1-y0);g.restore();
 }
 function blit(s,x,y,dx,dy){const[ox,oy]=P(x,y);g.drawImage(s.c,ox+s.box[0]+(dx||0),oy+s.box[1]+(dy||0),s.w,s.h)}
 function isoBox(x,y,w,d,h,left,right,top,stroke,z0){
@@ -1329,132 +1360,177 @@ function drawCrop(x,y,o,now){
 /* ================= animals ================= */
 function bob(now,seed){return reduce?0:Math.sin(now/330+seed)*1.2}
 function wander(now,seed){return reduce?0:Math.sin(now/2100+seed*1.7)*5}
-// Animals: chunky three-quarter view, soft round shading, big shiny eyes. Far legs are darker for depth.
-function aLeg(x,y,len,w,col,hoof,far){const c=far?shade(col,-.2):col;limb(x,y-len,x,y-1.2,w,c);ell(x,y-.9,w*.62,w*.42,hoof||shade(col,-.5))}
-function aEye(x,y,r){ell(x,y,r,r*1.15,'#fff','rgba(40,25,15,.5)',.3);ell(x+r*.18,y+r*.12,r*.7,r*.82,'#1c130e');ell(x-r*.08,y-r*.36,r*.32,r*.32,'#fff');ell(x+r*.42,y+r*.46,r*.14,r*.14,'#fff')}
+// Animals: sturdy three-quarter view, each body one solid shape lit from the top-left with a deep belly shade.
+// Small dark eyes with one glint; far legs darker for depth. The sprite pass adds the bold outline.
+function vol(path,col,top,bot,rim){
+  g.beginPath();path();
+  const gr=g.createLinearGradient(0,top,0,bot);
+  gr.addColorStop(0,shade(col,.36));gr.addColorStop(.32,shade(col,.08));gr.addColorStop(.68,col);gr.addColorStop(1,shade(col,-.42));
+  g.fillStyle=gr;g.fill();g.strokeStyle=rim||shade(col,-.45);g.lineWidth=.6;g.stroke();
+}
+function sheen(x,y,rx,ry,a,rot){ell(x,y,rx,ry,'rgba(255,255,255,'+(a||.3)+')',null,0,rot)}
+function aEye(x,y,r){ell(x,y,r*.78,r,'#1e130b');ell(x-r*.22,y-r*.38,r*.34,r*.34,'#fff')}
+function aLeg(x,y,len,w,col,hoof,far){
+  const c=far?shade(col,-.3):col;
+  g.beginPath();g.moveTo(x-w/2,y-len);g.lineTo(x+w/2,y-len);g.lineTo(x+w*.38,y-1.5);g.lineTo(x-w*.38,y-1.5);g.closePath();
+  const gr=g.createLinearGradient(x-w/2,0,x+w/2,0);gr.addColorStop(0,shade(c,.16));gr.addColorStop(1,shade(c,-.28));g.fillStyle=gr;g.fill();
+  if(hoof!==false)poly([[x-w*.44,y-2.6],[x+w*.44,y-2.6],[x+w*.5,y],[x-w*.5,y]],far?shade(hoof||shade(col,-.55),-.2):hoof||shade(col,-.55));
+}
+// a scalloped (woolly) blob around an ellipse
+function fluff(cx,cy,rx,ry,n,amp){
+  for(let i=0;i<=n;i++){
+    const a=i/n*Math.PI*2,x=cx+Math.cos(a)*rx,y=cy+Math.sin(a)*ry;
+    if(!i){g.moveTo(x,y);continue}
+    const m=(i-.5)/n*Math.PI*2;g.quadraticCurveTo(cx+Math.cos(m)*rx*(1+amp),cy+Math.sin(m)*ry*(1+amp),x,y);
+  }
+  g.closePath();
+}
+function curls(cx,cy,rx,ry,col,n){g.strokeStyle=col;g.lineWidth=.55;for(let i=0;i<n;i++){const x=cx+(hash(i,3)-.5)*rx*1.6,y=cy+(hash(3,i)-.5)*ry*1.5;g.beginPath();g.arc(x,y,1.3,.3,Math.PI*1.3);g.stroke()}}
+function feet(x,y,col){g.strokeStyle=col;g.lineWidth=1.3;g.lineCap='round';line([x,y-5],[x,y-.6]);line([x,y-.6],[x+2.4,y]);line([x,y-.6],[x-1.6,y+.3]);line([x,y-.6],[x+.6,y+.9])}
+
 function drawChicken(px,py,now,seed){
-  const b=bob(now,seed);shadow(px,py,10,3.5);
-  g.strokeStyle='#e08a1e';g.lineWidth=1.5;g.lineCap='round';for(const dx of[-2,2.2]){line([px+dx,py-.6],[px+dx,py-5]);line([px+dx,py-.6],[px+dx+2,py])}
-  for(const[a,c]of[[-1,'#f0ead8'],[-.55,'#fffdf6'],[-.2,'#e9e1cb']])ell(px-7.6,py-15+b,2.6,6,c,'#c9bfa6',.4,a);
-  ball(px,py-10+b,8.4,7,'#fffdf6','#c9bfa6',.6);
-  ell(px-1.6,py-10+b,4.8,3.2,'#efe7d4','#c9bfa6',.4,.25);g.strokeStyle='#d6ccb4';g.lineWidth=.4;for(const k of[-1,0,1])line([px-3+k*1.3,py-9+b],[px-5.6+k*1.3,py-7.4+b]);
-  const hx=px+6,hy=py-16+b;
-  ball(hx,hy,4.8,4.6,'#fffdf6','#c9bfa6',.6);
-  for(const[dx,dy,r]of[[-2,-4.2,1.6],[0,-5,1.9],[2,-4.3,1.6]])ball(hx+dx,hy+dy,r,r,'#e8382f');
-  poly([[hx+3.8,hy-.6],[hx+7.6,hy+.6],[hx+3.8,hy+1.6]],'#f5a623','#c97a10',.4);ball(hx+3.8,hy+3,1.2,1.8,'#e8382f');
-  aEye(hx+1.4,hy-.8,1.45);
+  const b=bob(now,seed),C='#f8f2e4';shadow(px,py,10,3.4);
+  feet(px-2,py,'#e0891c');feet(px+2.4,py+.4,'#e0891c');
+  vol(()=>{g.moveTo(px+4,py-18+b);g.bezierCurveTo(px+11,py-14+b,px+10,py-5+b,px+2,py-4.4+b);g.bezierCurveTo(px-6,py-4+b,px-10,py-8+b,px-9.6,py-14+b);
+    g.lineTo(px-12,py-22+b);g.quadraticCurveTo(px-8,py-21+b,px-6.6,py-16.6+b);g.bezierCurveTo(px-3,py-15+b,px,py-15+b,px+4,py-18+b)},C,py-22+b,py-4+b);
+  for(const[a,l]of[[-1.9,6],[-2.3,5.4]]){g.strokeStyle='#d6cbb3';g.lineWidth=.6;line([px-9.4,py-15+b],[px-9.4+Math.cos(a)*l,py-15+b+Math.sin(a)*l])}
+  vol(()=>g.ellipse(px-1.4,py-10.6+b,5.6,3.6,.22,0,Math.PI*2),'#efe6d2',py-14+b,py-7+b,'#cbbf9f');
+  g.strokeStyle='#cbbf9f';g.lineWidth=.5;for(const k of[-1,0,1])line([px-3+k*1.6,py-9.4+b],[px-5.2+k*1.6,py-8+b]);
+  const hx=px+6,hy=py-20+b;
+  for(const[dx,dy,r]of[[-1.6,-3.8,1.7],[.3,-4.6,2],[2.2,-3.8,1.6]])ball(hx+dx,hy+dy,r,r,'#e2332b');
+  ball(hx,hy,4.2,4.2,C,'#cbbf9f',.5);
+  poly([[hx+3.2,hy-1],[hx+6.6,hy+.2],[hx+3.4,hy+1.4]],'#f2a623','#b9740c',.4);
+  ball(hx+3.4,hy+3,1.2,2,'#e2332b');aEye(hx+1.4,hy-.8,1.25);
 }
 function drawDuck(px,py,now,seed){
-  const b=bob(now,seed);shadow(px,py,10,3.5);
-  for(const dx of[-2,2.2]){g.strokeStyle='#f5a623';g.lineWidth=1.4;g.lineCap='round';line([px+dx,py-1],[px+dx,py-4]);ell(px+dx+1,py-.7,2.4,1,'#f5a623','#c97a10',.3)}
-  poly([[px-7,py-11+b],[px-13,py-16+b],[px-11,py-9+b]],'#fffefa','#c4bca8',.5);
-  ball(px,py-9+b,9,6,'#fffefa','#c4bca8',.6);ell(px-1.5,py-10+b,5,2.8,'#efe9da','#cfc6b0',.4,.12);
-  const hx=px+6.5,hy=py-17.5+b;
-  limb(px+4.5,py-12+b,hx-.5,hy+2,4.6,'#fffefa');
-  ball(hx,hy,4.4,4.2,'#fffefa','#c4bca8',.6);
-  g.beginPath();g.moveTo(hx+3,hy+.2);g.quadraticCurveTo(hx+8.6,hy-.4,hx+8.4,hy+1.6);g.quadraticCurveTo(hx+6,hy+2.8,hx+3,hy+2.2);g.closePath();g.fillStyle='#f5a623';g.fill();g.strokeStyle='#c97a10';g.lineWidth=.4;g.stroke();
-  aEye(hx+1.2,hy-.8,1.35);blush(hx+1,hy+2);
+  const b=bob(now,seed),C='#fbf8ee';shadow(px,py,10,3.4);
+  for(const dx of[-2,2.4]){g.strokeStyle='#f0901c';g.lineWidth=1.4;g.lineCap='round';line([px+dx,py-4],[px+dx,py-1]);poly([[px+dx-1,py-1],[px+dx+3.4,py-.6],[px+dx+2.6,py+.8],[px+dx-1.4,py+.6]],'#f5a124','#b9740c',.3)}
+  vol(()=>{g.moveTo(px-12,py-16+b);g.quadraticCurveTo(px-10,py-4+b,px+1,py-4+b);g.quadraticCurveTo(px+9.4,py-4+b,px+9,py-10.6+b);g.quadraticCurveTo(px+8,py-14+b,px+3,py-14+b);g.quadraticCurveTo(px-4,py-13+b,px-12,py-16+b)},C,py-16+b,py-4+b);
+  vol(()=>g.ellipse(px-1.6,py-9.6+b,6,3,.1,0,Math.PI*2),'#eee7d6',py-12.6+b,py-6.6+b,'#cdc3aa');
+  const hx=px+6.4,hy=py-20.4+b;
+  vol(()=>{g.moveTo(px+3,py-13+b);g.quadraticCurveTo(px+3.4,py-17+b,hx-3,hy+1);g.lineTo(hx+2,hy+2);g.quadraticCurveTo(px+8.6,py-15+b,px+8.6,py-12+b);g.closePath()},C,hy,py-12+b);
+  ball(hx,hy,4.2,4,C,'#cdc3aa',.5);
+  vol(()=>{g.moveTo(hx+2.8,hy-.2);g.quadraticCurveTo(hx+8.6,hy-.8,hx+8.4,hy+1.4);g.quadraticCurveTo(hx+6,hy+2.8,hx+2.8,hy+2.2);g.closePath()},'#f5a124',hy-1,hy+3);
+  aEye(hx+1.2,hy-.8,1.2);
 }
 function drawSheep(px,py,now,seed){
-  const b=bob(now,seed);shadow(px,py,14,4.5);
-  for(const[dx,far]of[[-5,1],[6,1],[-8,0],[3,0]])aLeg(px+dx,py-(far?1.5:0),8,2.3,'#3e3739',null,far);
-  for(const[dx,dy,r]of[[-9,-13,5],[-4,-17,6],[3,-17.5,6],[8,-13.5,5],[-6,-9,5.5],[1,-9,6],[7,-9,5],[-1,-13.5,6.5]])ball(px+dx,py+dy+b,r,r*.88,'#fbf8f0','#d8d0bf',.5);
-  const hx=px+12,hy=py-15+b;
-  ell(hx-3.6,hy-1.6,3,1.4,'#3e3739',null,0,-.5);ell(hx+3.8,hy-1.8,3,1.4,'#3e3739',null,0,.5);
-  ball(hx,hy,4.6,5.4,'#4a4245','#1e1a1b',.4);ball(hx-.6,hy-4.6,3.2,2.3,'#fbf8f0','#d8d0bf',.4);
-  aEye(hx-1.7,hy-.4,1.3);aEye(hx+1.8,hy-.4,1.3);ell(hx,hy+3.2,1.4,.8,'#6a5e60');
+  const b=bob(now,seed),W='#f3eee2',F='#3a3034';shadow(px,py,14,4.4);
+  for(const[dx,far]of[[-5,1],[6,1],[-8,0],[3,0]])aLeg(px+dx,py-(far?1.5:0),8.4,2.6,F,'#1a1416',far);
+  vol(()=>fluff(px-1,py-13.6+b,11.6,7.6,13,.22),W,py-22+b,py-5+b,'#c8bfaa');
+  curls(px-2,py-14+b,9,5,'rgba(150,135,110,.55)',9);sheen(px-4,py-18.6+b,5,1.8,.4);
+  const hx=px+11.4,hy=py-15.6+b;
+  ell(hx-4,hy-1.4,3.2,1.4,shade(F,.1),null,0,-.45);
+  vol(()=>{g.moveTo(hx-3.4,hy-3);g.quadraticCurveTo(hx,hy-5.6,hx+3.4,hy-3);g.quadraticCurveTo(hx+4.2,hy+3.4,hx+.6,hy+6);g.quadraticCurveTo(hx-1.4,hy+6,hx-3,hy+3.4);g.closePath()},F,hy-5,hy+6);
+  ell(hx+4.2,hy-1.6,3.2,1.4,F,null,0,.45);
+  vol(()=>fluff(hx-.2,hy-4.2,3.4,2.2,7,.3),W,hy-7,hy-2,'#c8bfaa');
+  aEye(hx-1.4,hy,.95);aEye(hx+2,hy,.95);ell(hx+.6,hy+4.4,1.1,.5,'#1a1416');
 }
 function drawGoat(px,py,now,seed){
-  const b=bob(now,seed);shadow(px,py,13,4.5);
-  for(const[dx,far]of[[-5,1],[6,1],[-8,0],[3,0]])aLeg(px+dx,py-(far?1.5:0),9,2.2,'#e6dfd1','#5a4e40',far);
-  g.strokeStyle='#b8ae9a';g.lineWidth=1.6;g.lineCap='round';line([px-10,py-15+b],[px-12.4,py-19+b]);
-  ball(px,py-13+b,10.5,6.8,'#f1ece2','#b8ae9a',.6);ell(px-2,py-11+b,5,3,'#e2d9c6');
-  const hx=px+11,hy=py-21+b;
-  limb(px+6,py-14+b,hx-1,hy+2,5,'#f1ece2');
-  g.strokeStyle='#9a8a6a';g.lineWidth=1.6;for(const s of[-1,1]){g.beginPath();g.moveTo(hx+s*1.6,hy-3.4);g.quadraticCurveTo(hx+s*2-3,hy-8.4,hx+s*1.4-5.4,hy-7);g.stroke()}
-  ell(hx-4.6,hy-1,3,1.3,'#e2d9c6','#b8ae9a',.4,-.3);ell(hx+4.4,hy-1.2,3,1.3,'#e2d9c6','#b8ae9a',.4,.3);
-  ball(hx,hy,4.2,4.8,'#f1ece2','#b8ae9a',.5);ball(hx+1.2,hy+3,2.6,2,'#e8dfcf','#b8ae9a',.4);
-  poly([[hx-.2,hy+4.4],[hx+2.2,hy+4.4],[hx+1,hy+8.4]],'#c9bfa8');
-  aEye(hx-1.5,hy-1,1.25);aEye(hx+1.8,hy-1,1.25);ell(hx+.4,hy+2.6,.4,.3,'#6a5a4a');ell(hx+2,hy+2.6,.4,.3,'#6a5a4a');
+  const b=bob(now,seed),C='#c8935a',Wt='#f4ede0';shadow(px,py,13,4.4);
+  for(const[dx,far]of[[-5,1],[6,1],[-8,0],[3,0]])aLeg(px+dx,py-(far?1.5:0),9.4,2.4,far?C:Wt,'#3e3024',far);
+  poly([[px-9.4,py-17+b],[px-13,py-21+b],[px-10.6,py-15+b]],C,shade(C,-.45),.5);
+  vol(()=>{g.moveTo(px-10,py-17+b);g.quadraticCurveTo(px-11,py-8+b,px-6,py-8+b);g.lineTo(px+5,py-8+b);g.quadraticCurveTo(px+10,py-9+b,px+9.4,py-15+b);g.quadraticCurveTo(px+6,py-19.6+b,px-2,py-19+b);g.quadraticCurveTo(px-8,py-19.4+b,px-10,py-17+b)},C,py-20+b,py-8+b);
+  g.save();g.beginPath();g.ellipse(px+1,py-9.4+b,9,3,0,0,Math.PI*2);g.clip();vol(()=>g.rect(px-10,py-12+b,22,6),Wt,py-12+b,py-6+b,Wt);g.restore();
+  sheen(px-3,py-17.4+b,5,1.4,.32);g.strokeStyle='rgba(70,40,15,.35)';g.lineWidth=1.2;line([px-8,py-18.6+b],[px+6,py-18.6+b]);
+  const hx=px+11,hy=py-22+b;
+  vol(()=>{g.moveTo(px+5,py-17+b);g.lineTo(hx-3,hy+1);g.lineTo(hx+2.6,hy+2);g.lineTo(px+10,py-12+b);g.closePath()},C,hy,py-12+b);
+  g.lineCap='round';for(const s of[-1,1]){g.strokeStyle='#6a5236';g.lineWidth=2;g.beginPath();g.moveTo(hx+s*1.4,hy-3.6);g.quadraticCurveTo(hx+s*1.2-3,hy-9,hx+s*1-6,hy-8);g.stroke();g.strokeStyle='#9a7e58';g.lineWidth=.7;g.stroke()}
+  ell(hx-4.6,hy-.4,3.2,1.3,shade(C,-.1),shade(C,-.45),.4,-.2);
+  vol(()=>{g.moveTo(hx-3.2,hy-3.4);g.quadraticCurveTo(hx,hy-5.4,hx+3.2,hy-3.4);g.quadraticCurveTo(hx+3.8,hy+3,hx+1.4,hy+5);g.quadraticCurveTo(hx-1.4,hy+5,hx-2.6,hy+2.6);g.closePath()},C,hy-5,hy+5);
+  poly([[hx-.2,hy-3.6],[hx+1.2,hy-3.6],[hx+1.4,hy+4.6],[hx-.6,hy+4.4]],Wt);
+  ell(hx+4.6,hy-.6,3.2,1.3,C,shade(C,-.45),.4,.2);
+  poly([[hx-.4,hy+4.6],[hx+1.8,hy+4.6],[hx+.8,hy+9]],'#e8dccb','#a89880',.4);
+  aEye(hx-1.4,hy-.6,1);aEye(hx+2.2,hy-.6,1);
 }
 function drawCow(px,py,now,seed){
-  const b=bob(now,seed)*.6;shadow(px,py,17,5);
-  for(const[dx,far]of[[-7,1],[9,1],[-11,0],[5,0]])aLeg(px+dx,py-(far?1.6:0),10,3.2,'#fffdf8','#3a3a3a',far);
-  g.strokeStyle='#8a8478';g.lineWidth=1.3;g.lineCap='round';g.beginPath();g.moveTo(px-14.6,py-17+b);g.quadraticCurveTo(px-18,py-12+b,px-17,py-7+b);g.stroke();ell(px-17,py-6.5+b,1.3,2,'#2e2a2a');
-  g.save();g.beginPath();g.ellipse(px,py-15+b,15,9,0,0,Math.PI*2);g.clip();
-  ball(px,py-15+b,15,9,'#fffdf8');
-  for(const[dx,dy,rx,ry,r]of[[-7,-19,5.5,4,.3],[4,-11,4.6,3.4,-.2],[-12,-11,4,3.6,0],[9,-20,3.4,2.6,.4]])ell(px+dx,py+dy+b,rx,ry,'#2e2a2a',null,0,r);
-  const sh=g.createLinearGradient(0,py-24+b,0,py-6+b);sh.addColorStop(0,'rgba(255,255,255,.25)');sh.addColorStop(1,'rgba(60,40,30,.2)');g.fillStyle=sh;g.fillRect(px-16,py-25+b,32,20);
-  g.restore();g.beginPath();g.ellipse(px,py-15+b,15,9,0,0,Math.PI*2);g.strokeStyle='#a8a196';g.lineWidth=.6;g.stroke();
-  ell(px+1,py-6.6+b,3.2,1.8,'#f5b0b4','#c98088',.4);
-  const hx=px+15,hy=py-20+b;
-  g.strokeStyle='#e8d8a8';g.lineWidth=1.8;line([hx-3,hy-4.6],[hx-5,hy-8]);line([hx+3,hy-4.6],[hx+5,hy-8]);
-  ell(hx-6.4,hy-2,3.4,1.6,'#fffdf8','#a8a196',.4,-.3);ell(hx-6,hy-2,1.8,.8,'#f5b0b4',null,0,-.3);ell(hx+6.4,hy-2,3.4,1.6,'#2e2a2a',null,0,.3);
-  ball(hx,hy,5.6,6,'#fffdf8','#a8a196',.6);ell(hx+2.2,hy-3.2,2.4,2,'#2e2a2a');
-  ball(hx,hy+4,5,3.4,'#f6b6ba','#c98088',.5);ell(hx-1.8,hy+4,.7,.9,'#8a4048');ell(hx+1.8,hy+4,.7,.9,'#8a4048');
-  aEye(hx-2.3,hy-.6,1.45);aEye(hx+2.3,hy-.6,1.45);
+  const b=bob(now,seed)*.6,C='#fbf8f1',K='#2c2626';shadow(px,py,17,5);
+  for(const[dx,far]of[[-7,1],[9,1],[-11,0],[5,0]])aLeg(px+dx,py-(far?1.6:0),10.4,3.6,C,'#3a3030',far);
+  g.strokeStyle='#8a8478';g.lineWidth=1.4;g.lineCap='round';g.beginPath();g.moveTo(px-14.4,py-18+b);g.quadraticCurveTo(px-18,py-12+b,px-16.4,py-6.4+b);g.stroke();ell(px-16.4,py-6+b,1.4,2.2,K);
+  const bodyP=()=>{g.moveTo(px-15,py-20+b);g.quadraticCurveTo(px-16.4,py-8+b,px-11,py-8+b);g.lineTo(px+10,py-8+b);g.quadraticCurveTo(px+15.6,py-9+b,px+15,py-17+b);g.quadraticCurveTo(px+13,py-24+b,px+3,py-23.4+b);g.lineTo(px-9,py-23.6+b);g.quadraticCurveTo(px-14.4,py-23.4+b,px-15,py-20+b)};
+  vol(bodyP,C,py-24+b,py-8+b,'#a8a196');
+  g.save();g.beginPath();bodyP();g.clip();
+  for(const[dx,dy,rx,ry,r]of[[-7,-19,5.6,4,.3],[4,-11,4.8,3.4,-.2],[-12.6,-12,4,4,0],[9,-20,3.8,2.8,.4]])vol(()=>g.ellipse(px+dx,py+dy+b,rx,ry,r,0,Math.PI*2),K,py+dy-ry+b,py+dy+ry+b,K);
+  g.restore();sheen(px-3,py-21.6+b,8,1.6,.35);
+  vol(()=>g.ellipse(px+1,py-7.2+b,3.4,2,0,0,Math.PI*2),'#f2a9ae',py-9+b,py-5+b,'#c27a82');
+  const hx=px+15,hy=py-22+b;
+  g.lineCap='round';g.strokeStyle='#d8c690';g.lineWidth=1.9;line([hx-3,hy-4.8],[hx-5.4,hy-8]);line([hx+3,hy-4.8],[hx+5.4,hy-8]);
+  ell(hx-6.4,hy-2,3.6,1.7,C,'#a8a196',.4,-.3);ell(hx-6,hy-2,1.9,.8,'#f2a9ae',null,0,-.3);
+  vol(()=>{g.moveTo(hx-4.6,hy-4);g.quadraticCurveTo(hx,hy-6.6,hx+4.6,hy-4);g.quadraticCurveTo(hx+5.4,hy+2,hx+3.6,hy+3);g.lineTo(hx-3.6,hy+3);g.quadraticCurveTo(hx-5.4,hy+2,hx-4.6,hy-4)},C,hy-6,hy+3,'#a8a196');
+  ell(hx+2.4,hy-3.2,2.4,2,K);ell(hx+6.4,hy-2,3.6,1.7,K,null,0,.3);
+  vol(()=>g.ellipse(hx,hy+4,5,3.2,0,0,Math.PI*2),'#f2a9ae',hy+1,hy+7,'#c27a82');
+  ell(hx-1.8,hy+4,.7,.9,'#7a3a42');ell(hx+1.8,hy+4,.7,.9,'#7a3a42');
+  aEye(hx-2.3,hy-1,1.15);aEye(hx+2.3,hy-1,1.15);
 }
 function drawPig(px,py,now,seed){
-  const b=bob(now,seed);shadow(px,py,14,4.5);
-  for(const[dx,far]of[[-5,1],[7,1],[-8,0],[4,0]])aLeg(px+dx,py-(far?1.4:0),6,2.9,'#f4a2b2','#b86878',far);
-  ball(px,py-11+b,12.5,8,'#f9b4c2','#d8899a',.6);ell(px-2,py-16+b,6,2,'rgba(255,255,255,.35)');
-  g.strokeStyle='#d8899a';g.lineWidth=1.2;g.beginPath();g.arc(px-13.6,py-13+b,2,0,Math.PI*1.7);g.stroke();
+  const b=bob(now,seed),C='#f4a3b2';shadow(px,py,14,4.4);
+  for(const[dx,far]of[[-5,1],[7,1],[-8,0],[4,0]])aLeg(px+dx,py-(far?1.4:0),6.4,3,C,'#9a5a68',far);
+  g.strokeStyle=shade(C,-.3);g.lineWidth=1.2;g.beginPath();g.arc(px-13.6,py-14+b,2,0,Math.PI*1.7);g.stroke();
+  vol(()=>g.ellipse(px,py-11.6+b,12.8,7.6,0,0,Math.PI*2),C,py-19+b,py-4+b);sheen(px-3,py-16.6+b,6,1.8,.4);
   const hx=px+11,hy=py-14+b;
-  poly([[hx-4.6,hy-3],[hx-3,hy-8.4],[hx-.6,hy-4.4]],'#f49aac','#d8899a',.4);poly([[hx+1.4,hy-4.4],[hx+4.4,hy-8.2],[hx+5,hy-2.6]],'#f49aac','#d8899a',.4);
-  ball(hx,hy,6,5.6,'#f9b4c2','#d8899a',.6);
-  ball(hx+2.2,hy+2.2,3,2.3,'#f78ea2','#d0748a',.4);ell(hx+1.2,hy+2.2,.6,.9,'#8a3d4a');ell(hx+3.2,hy+2.2,.6,.9,'#8a3d4a');
-  aEye(hx-2.3,hy-1.4,1.35);aEye(hx+1.5,hy-1.6,1.35);blush(hx-3.8,hy+1.6);
+  vol(()=>g.ellipse(hx,hy,5.8,5.4,0,0,Math.PI*2),C,hy-5,hy+5);
+  vol(()=>{g.moveTo(hx-4.4,hy-3);g.lineTo(hx-4,hy-8.4);g.lineTo(hx-.4,hy-4);g.closePath()},shade(C,-.08),hy-8,hy-3);
+  vol(()=>{g.moveTo(hx+1.4,hy-4.4);g.lineTo(hx+5.2,hy-7.6);g.lineTo(hx+5,hy-1.6);g.closePath()},shade(C,-.08),hy-8,hy-2);
+  vol(()=>g.ellipse(hx+2.6,hy+2,3,2.3,0,0,Math.PI*2),'#ef8b9e',hy,hy+4.4);
+  ell(hx+1.6,hy+2,.6,.9,'#7a3442');ell(hx+3.6,hy+2,.6,.9,'#7a3442');
+  aEye(hx-2.2,hy-1.4,1.05);aEye(hx+1.4,hy-1.6,1.05);
 }
 function drawHorse(px,py,now,seed){
-  const b=bob(now,seed)*.6,C='#a0602e';shadow(px,py,19,5.5);
-  for(const[dx,far]of[[-8,1],[10,1],[-12,0],[6,0]])aLeg(px+dx,py-(far?1.6:0),15,3,C,'#2b1a10',far);
-  for(const dx of[-12,6])ell(px+dx,py-3.6,1.8,1.4,'#fff7e6');
-  g.strokeStyle='#3a2014';g.lineWidth=3.6;g.lineCap='round';g.beginPath();g.moveTo(px-15,py-22+b);g.quadraticCurveTo(px-22,py-17+b,px-19,py-6+b);g.stroke();g.strokeStyle='#5a3420';g.lineWidth=1.2;g.stroke();
-  ball(px,py-19+b,16,8.6,C,'#5e3418',.6);ell(px-2,py-24+b,9,2.2,'rgba(255,255,255,.22)');
+  const b=bob(now,seed)*.6,C='#9a5a2c',M='#2e1a10';shadow(px,py,19,5.4);
+  for(const[dx,far]of[[-8,1],[10,1],[-12,0],[6,0]])aLeg(px+dx,py-(far?1.6:0),15,3.2,C,'#241510',far);
+  for(const dx of[-12,6])poly([[dx+px-1.7,py-6],[dx+px+1.7,py-6],[dx+px+1.6,py-2.4],[dx+px-1.6,py-2.4]],'#f6eedf');
+  vol(()=>{g.moveTo(px-15,py-23+b);g.quadraticCurveTo(px-23,py-17+b,px-20,py-5+b);g.quadraticCurveTo(px-17,py-12+b,px-14,py-17+b);g.closePath()},M,py-23+b,py-5+b);
   const hx=px+19,hy=py-36+b;
-  poly([[px+8,py-24+b],[hx-5,hy+1],[hx+2,hy+3],[px+17,py-18+b]],C,'#5e3418',.6);
-  g.strokeStyle='#3a2014';g.lineWidth=3.4;g.beginPath();g.moveTo(hx-4,hy-3);g.quadraticCurveTo(hx-8,hy+6,px+8,py-24+b);g.stroke();
-  ell(hx-2.6,hy-5.4,1.5,3,C,'#5e3418',.4,-.3);ell(hx+1.8,hy-5.6,1.5,3,C,'#5e3418',.4,.3);
-  ball(hx,hy,5,5.4,C,'#5e3418',.6);ball(hx+2.6,hy+4.6,4.2,3.3,shade(C,.1),'#5e3418',.5);
-  poly([[hx-.2,hy-4.2],[hx+1.2,hy-4.2],[hx+3.4,hy+3],[hx+1.8,hy+3.2]],'#fff7e6');
-  ell(hx+1.6,hy+5.4,.6,.8,'#3a2014');ell(hx+4,hy+5.2,.6,.8,'#3a2014');ell(hx-3.6,hy-3,1.8,1,'#3a2014',null,0,-.6);
-  aEye(hx-2,hy-.6,1.4);aEye(hx+2.4,hy-.8,1.3);
+  vol(()=>{g.moveTo(px+7,py-25+b);g.lineTo(hx-5.4,hy+.6);g.lineTo(hx+2.4,hy+3);g.quadraticCurveTo(px+18,py-22+b,px+17,py-17+b);g.closePath()},C,hy,py-17+b);
+  vol(()=>{g.moveTo(px-16,py-20+b);g.quadraticCurveTo(px-17,py-11+b,px-10,py-11+b);g.lineTo(px+11,py-11+b);g.quadraticCurveTo(px+17,py-12+b,px+16,py-21+b);g.quadraticCurveTo(px+12,py-28+b,px+2,py-27+b);g.lineTo(px-9,py-27+b);g.quadraticCurveTo(px-15,py-26+b,px-16,py-20+b)},C,py-28+b,py-11+b);
+  sheen(px-3,py-25+b,9,1.8,.28);
+  vol(()=>{g.moveTo(hx-4,hy-4);g.quadraticCurveTo(hx-9,hy+5,px+6,py-25+b);g.lineTo(px+9,py-25.4+b);g.quadraticCurveTo(hx-5,hy+4,hx-1,hy-3);g.closePath()},M,hy-4,py-25+b);
+  vol(()=>{g.moveTo(hx-2.4,hy-4);g.lineTo(hx-3.4,hy-9);g.lineTo(hx-.6,hy-4.4);g.closePath()},C,hy-9,hy-4);
+  vol(()=>{g.moveTo(hx+1.2,hy-4.4);g.lineTo(hx+2.6,hy-9.4);g.lineTo(hx+3.4,hy-3.8);g.closePath()},C,hy-9,hy-4);
+  vol(()=>{g.moveTo(hx-4.4,hy-3.4);g.quadraticCurveTo(hx,hy-6,hx+4.4,hy-3.4);g.lineTo(hx+6.6,hy+5);g.quadraticCurveTo(hx+5.6,hy+8.6,hx+2.6,hy+8.4);g.quadraticCurveTo(hx-1,hy+8.4,hx-1.6,hy+5);g.closePath()},C,hy-6,hy+8.6);
+  poly([[hx-.2,hy-4.2],[hx+1.2,hy-4.2],[hx+3.6,hy+3.6],[hx+2,hy+3.8]],'#f6eedf');
+  ell(hx+2.8,hy+6.4,.6,.8,'#241510');ell(hx+5,hy+6,.6,.8,'#241510');
+  ell(hx-3,hy-3.6,2,1.1,M,null,0,-.6);aEye(hx-2,hy-.8,1.15);aEye(hx+2.6,hy-1,1.05);
 }
 function drawRabbit(px,py,now,seed){
-  const C='#efe9e2';shadow(px,py,9,3);
-  ball(px-1,py-6,7.4,5.6,C,'#b8aea2',.6);ell(px-7.6,py-7,2.5,2.5,'#fbf8f4','#d8d0c4',.4);ell(px-8.2,py-7.8,1,1,'#fff');
-  ell(px+2.4,py-1.6,3,1.4,C,'#b8aea2',.4);ell(px-4,py-1.4,3.4,1.4,shade(C,-.08),'#b8aea2',.4);
-  const hx=px+5,hy=py-12.5;
-  for(const s of[-1,1]){ell(hx+s*1.8,hy-6.4,1.7,5,C,'#b8aea2',.5,s*.2);ell(hx+s*1.8,hy-6.2,.8,3.6,'#f6b6c4',null,0,s*.2)}
-  ball(hx,hy,4.6,4.2,C,'#b8aea2',.6);
-  aEye(hx-1.7,hy-.4,1.3);aEye(hx+1.8,hy-.4,1.3);ell(hx+.1,hy+1.9,.8,.55,'#f08aa0');blush(hx-3,hy+1.4);blush(hx+3.2,hy+1.4);
+  const C='#bfa184';shadow(px,py,9,3);
+  vol(()=>g.ellipse(px-1,py-6.6,7.6,5.8,0,0,Math.PI*2),C,py-12.4,py-1);
+  ball(px-8,py-7.6,2.6,2.6,'#fbf8f2','#d8d0c4',.4);
+  vol(()=>g.ellipse(px+3,py-1.6,3.2,1.5,0,0,Math.PI*2),shade(C,-.05),py-3,py);vol(()=>g.ellipse(px-4,py-1.4,3.4,1.5,0,0,Math.PI*2),shade(C,-.12),py-3,py);
+  ell(px+1,py-4.4,3,2.6,'rgba(255,248,236,.55)');
+  const hx=px+5,hy=py-13;
+  for(const s of[-1,1]){vol(()=>g.ellipse(hx+s*1.8,hy-6.4,1.8,5.2,s*.22,0,Math.PI*2),C,hy-11.6,hy-1.4);ell(hx+s*1.8,hy-6.2,.8,3.6,'#eab0b6',null,0,s*.22)}
+  vol(()=>g.ellipse(hx,hy,4.6,4.2,0,0,Math.PI*2),C,hy-4.2,hy+4.2);
+  ell(hx+.2,hy+2,2.4,1.6,'rgba(255,248,236,.7)');
+  aEye(hx-1.7,hy-.6,1.05);aEye(hx+1.8,hy-.6,1.05);ell(hx+.1,hy+1.4,.8,.55,'#a8505c');
 }
 function drawTurkey(px,py,now,seed){
   const b=bob(now,seed);shadow(px,py,12,4);
-  g.strokeStyle='#d9862a';g.lineWidth=1.6;g.lineCap='round';line([px-2,py-.5],[px-2,py-5]);line([px+2.2,py-.5],[px+2.2,py-5]);
-  const cols=['#5e3a1c','#a8642a','#e0a040','#f5e0b0'];
-  for(let r=0;r<4;r++)for(let i=0;i<9;i++){const a=Math.PI*(1.08+i/8*.84),R=14-r*2.6;ell(px-4+Math.cos(a)*R*.9,py-12+b+Math.sin(a)*R*.85,2.5,4.6-r*.6,cols[r],null,0,a+Math.PI/2)}
-  ball(px,py-10+b,8,6.6,'#6a4228','#3a2414',.6);ell(px,py-11+b,5,3.4,'#8a5a34');
-  for(let i=0;i<4;i++)ell(px-3+i*2,py-8+b,1.4,.9,'#a8642a');
+  g.strokeStyle='#c97a24';g.lineWidth=1.6;g.lineCap='round';line([px-2,py-.5],[px-2,py-5]);line([px+2.2,py-.5],[px+2.2,py-5]);
+  const cols=['#4a2a14','#8a5426','#d49a44','#f2e2b8'];
+  for(let r=0;r<4;r++)for(let i=0;i<9;i++){const a=Math.PI*(1.08+i/8*.84),R=14-r*2.6,x=px-4+Math.cos(a)*R*.9,y=py-12+b+Math.sin(a)*R*.85;vol(()=>g.ellipse(x,y,2.5,4.6-r*.6,a+Math.PI/2,0,Math.PI*2),cols[r],y-4,y+4)}
+  vol(()=>g.ellipse(px,py-10+b,8,6.6,0,0,Math.PI*2),'#5a3620',py-16.6+b,py-3.4+b);
+  for(let i=0;i<5;i++)ell(px-4+i*2,py-8+b,1.2,.8,'rgba(210,150,70,.6)');sheen(px-2,py-14+b,4,1.2,.2);
   const hx=px+6,hy=py-17+b;
-  limb(px+4,py-13+b,hx,hy+2,2.6,'#c8d4e0');ball(hx,hy,3.2,3.4,'#c8d4e0','#8a98a8',.5);
-  poly([[hx+2.6,hy],[hx+5.2,hy+.8],[hx+2.6,hy+1.6]],'#f5c04a','#c98a10',.3);
-  ell(hx+2.8,hy+3,1,2.2,'#e3342f');ell(hx+1.2,hy-2.6,.6,1.8,'#e3342f',null,0,.4);
-  aEye(hx+.4,hy-.6,1.15);
+  limb(px+4,py-13+b,hx,hy+2,2.6,'#b9c6d4');ball(hx,hy,3.2,3.4,'#b9c6d4','#7a8898',.5);
+  poly([[hx+2.6,hy],[hx+5.2,hy+.8],[hx+2.6,hy+1.6]],'#f2bc44','#b9800c',.3);
+  vol(()=>g.ellipse(hx+2.8,hy+3,1,2.2,0,0,Math.PI*2),'#d8302a',hy+1,hy+5);ell(hx+1.2,hy-2.6,.6,1.8,'#d8302a',null,0,.4);
+  aEye(hx+.4,hy-.6,1);
 }
 function drawLlama(px,py,now,seed){
-  const b=bob(now,seed)*.6,C='#f2e6cf';shadow(px,py,15,5);
-  for(const[dx,far]of[[-6,1],[8,1],[-9,0],[5,0]])aLeg(px+dx,py-(far?1.5:0),12,2.6,C,'#5a4a3a',far);
-  ball(px-11,py-18+b,2.6,3.2,C,'#cbbb9a',.4);
-  for(const[dx,dy,r]of[[-8,-17,5],[-2,-19,6],[5,-19,6],[9,-16,5],[-5,-14,6],[3,-14,6.4]])ball(px+dx,py+dy+b,r,r*.85,C,'#cbbb9a',.5);
-  poly([[px-4,py-24+b],[px+5,py-24+b],[px+6,py-16+b],[px-5,py-16+b]],'#e0457b','#9a2a52',.5);
-  g.strokeStyle='#ffd23f';g.lineWidth=.9;line([px-4.6,py-19.4+b],[px+5.6,py-19.4+b]);g.strokeStyle='#2ba0a0';line([px-4.8,py-17.6+b],[px+5.8,py-17.6+b]);
+  const b=bob(now,seed)*.6,C='#efe1c6';shadow(px,py,15,5);
+  for(const[dx,far]of[[-6,1],[8,1],[-9,0],[5,0]])aLeg(px+dx,py-(far?1.5:0),12.4,2.8,C,'#4a3a2a',far);
+  vol(()=>fluff(px-11,py-18+b,2.6,3.4,6,.3),C,py-22+b,py-14+b,'#c7b48e');
+  vol(()=>fluff(px-.4,py-17.4+b,11,6.6,12,.16),C,py-24+b,py-10+b,'#c7b48e');
+  curls(px,py-17+b,8,4,'rgba(160,135,95,.5)',7);
+  vol(()=>{g.moveTo(px-4,py-24+b);g.lineTo(px+5.6,py-24+b);g.lineTo(px+6.4,py-16+b);g.lineTo(px-5,py-16+b);g.closePath()},'#d23d6e',py-24+b,py-16+b,'#7e1e44');
+  g.strokeStyle='#ffd23f';g.lineWidth=.9;line([px-4.6,py-19.4+b],[px+6,py-19.4+b]);g.strokeStyle='#2b9a9a';line([px-4.8,py-17.6+b],[px+6.2,py-17.6+b]);
   const hx=px+13,hy=py-36+b;
-  limb(px+10,py-19+b,hx,hy+3,6.4,C);
-  g.strokeStyle=shade(C,-.12);g.lineWidth=.5;for(let k=0;k<5;k++){const y=py-21-k*3+b,x=px+10.4+(hx-px-10)*(k/5);g.beginPath();g.arc(x+2.6,y,1.2,-.6,1.4);g.stroke()}
-  for(const s of[-1,1])ell(hx+s*2.4,hy-5.4,1.3,3.2,C,'#cbbb9a',.4,s*.35);
-  ball(hx,hy,4.2,4.6,C,'#cbbb9a',.5);ball(hx+1.2,hy+3,2.8,2.2,'#e8dcc2','#cbbb9a',.4);ball(hx-.4,hy-4,2.6,1.8,'#fbf6ea');
-  aEye(hx-1.6,hy-.6,1.3);aEye(hx+1.8,hy-.6,1.3);g.strokeStyle='#8a7a5a';g.lineWidth=.4;g.beginPath();g.moveTo(hx+.4,hy+3.6);g.quadraticCurveTo(hx+1.2,hy+4.2,hx+2,hy+3.6);g.stroke();
+  vol(()=>{g.moveTo(px+7,py-20+b);g.lineTo(hx-3.2,hy+2);g.lineTo(hx+2.8,hy+3);g.lineTo(px+13.4,py-17+b);g.closePath()},C,hy,py-17+b,'#c7b48e');
+  g.strokeStyle='rgba(160,135,95,.5)';g.lineWidth=.5;for(let k=0;k<5;k++){const y=py-21-k*3+b,x=px+9.4+(hx-px-9.4)*(k/5);g.beginPath();g.arc(x+2,y,1.2,-.6,1.4);g.stroke()}
+  for(const s of[-1,1])vol(()=>g.ellipse(hx+s*2.4,hy-5.6,1.3,3.4,s*.35,0,Math.PI*2),C,hy-9,hy-2,'#c7b48e');
+  vol(()=>{g.moveTo(hx-3.4,hy-3);g.quadraticCurveTo(hx,hy-5.4,hx+3.4,hy-3);g.quadraticCurveTo(hx+4.6,hy+3,hx+3,hy+5);g.quadraticCurveTo(hx,hy+6,hx-2.2,hy+4.4);g.closePath()},C,hy-5,hy+6,'#c7b48e');
+  vol(()=>fluff(hx-.4,hy-4.2,2.8,1.8,6,.3),'#fbf4e4',hy-6.6,hy-2.4,'#c7b48e');
+  aEye(hx-1.6,hy-.6,1.05);aEye(hx+1.9,hy-.6,1.05);ell(hx+1,hy+3.8,.9,.4,'#6a5a4a');
 }
 const ANIMAL_DRAW={chicken:drawChicken,duck:drawDuck,sheep:drawSheep,goat:drawGoat,cow:drawCow,pig:drawPig,horse:drawHorse,rabbit:drawRabbit,turkey:drawTurkey,llama:drawLlama};
 const GLYPH={chicken:'egg',duck:'feather',sheep:'wool',goat:'milk',cow:'milk',pig:'truffle',horse:'hair',rabbit:'wool',turkey:'feather',llama:'wool'};
@@ -2021,7 +2097,7 @@ function drawObj(x,y,o,now){
     return;
   }
   if(o.k==='deco'){
-    if(LIVE_DECO.has(o.id))return drawDeco(x,y,o,now);
+    if(LIVE_DECO.has(o.id)){const n=size(o);return inkLive(x+n/2,y+n/2,110*n+60,200,60,()=>drawDeco(x,y,o,now))}
     if(ROTATABLE.has(o.id)){const m=wallMask(x,y,o);return blit(sprite('d:'+o.id+':'+m,BOX1,()=>drawDeco(0,0,{k:'deco',id:o.id,m},0)),x,y)}
     return blit(sprite('d:'+o.id,size(o)===2?BOX2:BOX1,()=>drawDeco(0,0,{k:'deco',id:o.id},0)),x,y);
   }
@@ -2477,9 +2553,9 @@ function updateVisitors(dt,now){
 }
 function drawVisitor(v,now){
   const[px,py]=P(v.x,v.y);
-  g.save();g.translate(px,py);g.scale(v.dir,1);
+  inkLive(v.x,v.y,90,90,20,()=>{g.save();g.translate(px,py);g.scale(v.dir,1);
   drawAvatar(v.n.look,{walking:v.state==='walk',walk:v.walk,t:v.t,kind:v.state==='wave'?'wave':null});
-  g.restore();
+  g.restore()});
   // name tag
   g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=g.measureText(v.n.name).width+10,ty=py-66;
   poly([[px-w/2,ty-9],[px+w/2,ty-9],[px+w/2,ty+3],[px-w/2,ty+3]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText(v.n.name,px,ty);
@@ -2700,7 +2776,7 @@ function frame(t){
   if(S.pet)list.push([pet.x+pet.y,0,0,{pet:1}]);
   list.push([N*2+3,0,0,{deliv:1}]);
   list.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
-  for(const[,x,y,o]of list){if(!o)drawFarmer(now);else if(o.pet)drawPetSprite(now);else if(o.deliv)drawDeliveryArea(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now)}
+  for(const[,x,y,o]of list){if(!o)inkLive(farmer.x,farmer.y,190,170,50,()=>drawFarmer(now));else if(o.pet)inkLive(pet.x,pet.y,80,70,25,()=>drawPetSprite(now));else if(o.deliv)drawDeliveryArea(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now)}
   if(VIS)for(const k in S.tiles){const o=S.tiles[k];if(o.helped){const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5);ell(px,py-4,6,6,'#5bbf3a','#fff',1.4);g.strokeStyle='#fff';g.lineWidth=1.6;line([px-2.6,py-4],[px-.6,py-2]);line([px-.6,py-2],[px+2.8,py-6.4])}}
   if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);g.globalAlpha=1}}
   drawPending(now);drawTutArrow(now);
@@ -3266,10 +3342,10 @@ function drawTruck(x,y,now,moving,loaded){
 }
 const driverNPC={x:0,y:0,t:0,walk:0};
 function drawDeliveryArea(now){
-  if(VIS)return;const[bx,by]=boardSpot();drawBoard(bx,by);
+  if(VIS)return;const[bx,by]=boardSpot();inkLive(bx+.5,by+.3,90,80,20,()=>drawBoard(bx,by));
   const tp=truckPos(now);
-  if(tp){drawTruck(tp[0],tp[1],now,tp[2],!!dv().run&&truckPhase(now)==='leaving');
-    if(!dv().run){const[dx,dy]=[bx-.35,by-.15],[px,py]=P(dx,dy);g.save();g.translate(px,py);g.scale(-.9,.9);drawAvatar(DRIVER.look,{kind:Math.sin(now/1600)>.6?'wave':null,t:now/1000});g.restore();
+  if(tp){inkLive(tp[0],tp[1],260,140,90,()=>drawTruck(tp[0],tp[1],now,tp[2],!!dv().run&&truckPhase(now)==='leaving'));
+    if(!dv().run){const[dx,dy]=[bx-.35,by-.15],[px,py]=P(dx,dy);inkLive(dx,dy,80,85,20,()=>{g.save();g.translate(px,py);g.scale(-.9,.9);drawAvatar(DRIVER.look,{kind:Math.sin(now/1600)>.6?'wave':null,t:now/1000});g.restore()});
       g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=g.measureText('Dale').width+10,ty=py-62;poly([[px-w/2,ty-9],[px+w/2,ty-9],[px+w/2,ty+3],[px-w/2,ty+3]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText('Dale',px,ty)}}
   const ready=dv().jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap())&&!dv().run;
   if(ready){const[px,py]=P(bx+.5,by+.3);const k=reduce?0:Math.sin(now/240)*2;ell(px+26,py-70+k,8,8,'#3f9a3c','#fff',1.6);g.font='bold 10px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('!',px+26,py-66.5+k)}
