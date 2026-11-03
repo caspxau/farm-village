@@ -535,6 +535,11 @@ body.visiting .tut{display:none}
 .hotitem{border-color:#f2a21e!important;box-shadow:0 3px 0 #e8a23a!important}
 .hotbar{display:flex;align-items:center;gap:8px;background:#fff3dc;border:2px dashed #f2a21e;border-radius:12px;padding:4px 10px;margin:6px 0;font-size:13px;font-weight:600}.hotbar img{width:34px;height:34px}
 .lvl{cursor:pointer}
+body.tutlock .dock>*:not(.tutpulse){opacity:.4;pointer-events:none;filter:saturate(.4)}
+body.tutlock .hud,body.tutlock .side{pointer-events:none}
+.mbtn.locked svg{opacity:.35;filter:grayscale(1)}
+.mbtn.locked::after{content:"";position:absolute;right:-5px;top:-5px;width:18px;height:18px;border-radius:50%;background:#6b3c15 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='4' y='7' width='8' height='6' rx='1' fill='%23fff'/%3E%3Cpath d='M5.5 7V5.5a2.5 2.5 0 0 1 5 0V7' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E") center/12px no-repeat;border:2px solid #fff}
+.nbnews{background:#e6f5d8;border:2px solid #8cc84b;border-radius:10px;padding:6px 10px;color:#2a4a1a!important;font-weight:600}
 </style>
 </head>
 <body>
@@ -856,7 +861,7 @@ function need(l){return Math.round(24+20*l+2.5*l*l)}
 let S,occ={},N=16,VIS=null;
 function fresh(){
   const now=Date.now();
-  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,goods:{feed:30,wheat:2}};
+  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
   const put=(x,y,o)=>{s.tiles[x+','+y]=o};
   put(1,2,{k:'bld',id:'house'});put(1,6,{k:'bld',id:'barn'});
   for(let x=6;x<=10;x++)for(let y=5;y<=8;y++){
@@ -1709,10 +1714,41 @@ function faceQuad(x0,x1,yy,z0,z1,fill,stroke){poly([P(x0,yy,z0),P(x1,yy,z0),P(x1
 function drawBuilding(x,y,o){
   const x0=x+.12,y0=y+.12,w=1.76,d=1.76,yy=y0+d,[cx,cy]=P(x+1,y+1);shadow(cx,cy+8,60,20);
   if(o.id==='house'){
-    gableHouse(x0,y0,w,d,36,30,'#f6ecd6','#e0d0ae','#d2463a','#a8322a','#9a8a6a');
-    faceQuad(x0+.2,x0+.55,yy,10,26,'#8fd0f5','#6b3c15');faceQuad(x0+1.2,x0+1.55,yy,10,26,'#8fd0f5','#6b3c15');faceQuad(x0+.75,x0+1.05,yy,0,24,'#3f7fd0','#6b3c15');
-    g.strokeStyle='#fff';g.lineWidth=1.2;line(P(x0+.375,yy,10),P(x0+.375,yy,26));line(P(x0+1.375,yy,10),P(x0+1.375,yy,26));
-    ell(...P(x0+1,yy,11),1.2,1.2,'#ffd23f');isoBox(x0+1.25,y0+.25,.25,.25,60,'#b8584a','#9a4438','#c9685a','#6b2a20');
+    // the farmhouse grows nicer as you finish quests: porch and flower boxes, shutters and paint, a stone base and slate roof, then a garden and weathervane
+    const lv=o.lv||1,z=lv>=4?5:0;
+    const wall=lv>=5?'#ffffff':lv>=3?'#fbecc0':'#f6ecd6',wall2=lv>=5?'#e2e8f0':lv>=3?'#e8d49a':'#e0d0ae',roof=lv>=4?'#3f6fc0':'#d2463a',roof2=lv>=4?'#2d55a0':'#a8322a',trim=lv>=5?'#2d55a0':'#9a8a6a';
+    if(lv>=4)isoBox(x0-.05,y0-.05,w+.1,d+.1,z,'#a8a296','#9a948a','#bab4a8','#6e685e');
+    gableHouse(x0,y0,w,d,36,30,wall,wall2,roof,roof2,trim,z);
+    if(lv>=4){g.strokeStyle='rgba(80,75,68,.35)';g.lineWidth=.8;for(let i=0;i<9;i++)line(P(x0+.1+i*.2,yy+.05,0),P(x0+.1+i*.2,yy+.05,z))}
+    const fq=(a,b,z0,z1,f,s2)=>faceQuad(a,b,yy,z0+z,z1+z,f,s2);
+    fq(x0+.2-0,x0+.55,10,26,'#8fd0f5','#6b3c15');fq(x0+1.2,x0+1.55,10,26,'#8fd0f5','#6b3c15');fq(x0+.75,x0+1.05,0,24,lv>=3?'#2d6f3a':'#3f7fd0','#6b3c15');
+    g.strokeStyle='#fff';g.lineWidth=1.2;line(P(x0+.375,yy,10+z),P(x0+.375,yy,26+z));line(P(x0+1.375,yy,10+z),P(x0+1.375,yy,26+z));
+    ell(...P(x0+1,yy,11+z),1.2,1.2,'#ffd23f');isoBox(x0+1.25,y0+.25,.25,.25,60+z,'#b8584a','#9a4438','#c9685a','#6b2a20');
+    if(lv>=2){
+      // porch roof on two posts, a doormat and flower boxes
+      poly([P(x0+.62,yy,28+z),P(x0+1.18,yy,28+z),P(x0+1.18,yy+.3,22+z),P(x0+.62,yy+.3,22+z)],roof,'#3a2310',1);
+      g.strokeStyle='#fffaf0';g.lineWidth=2;line(P(x0+.66,yy+.28,z),P(x0+.66,yy+.28,22+z));line(P(x0+1.14,yy+.28,z),P(x0+1.14,yy+.28,22+z));
+      poly([P(x0+.74,yy+.02,z),P(x0+1.06,yy+.02,z),P(x0+1.06,yy+.2,z),P(x0+.74,yy+.2,z)],'#c9562a');
+      for(const a of[x0+.18,x0+1.18]){fq(a,a+.4,7,10,'#8a5530','#4e2c12');for(let k=0;k<4;k++){const[fx,fy]=P(a+.06+k*.09,yy,11+z);ell(fx,fy,1.7,1.5,['#e0457b','#ffd23f','#fff','#ff8fb5'][k])}}
+    }
+    if(lv>=3){
+      // shutters, a gable window and a brass lamp by the door
+      for(const a of[x0+.12,x0+.55,x0+1.12,x0+1.55])fq(a,a+.08,10,26,'#3f8a4a','#1f5a2a');
+      const[gx,gy]=P(x0+w,y0+d/2,36+12+z);ell(gx,gy,5,6,'#8fd0f5','#6b3c15',1.2);g.strokeStyle='#fff';g.lineWidth=1;line([gx-5,gy],[gx+5,gy]);line([gx,gy-6],[gx,gy+6]);
+      const[lx,ly]=P(x0+.6,yy,17+z);ell(lx,ly,1.8,2.4,'#ffe27a','#9a6400',.8);
+    }
+    if(lv>=4){
+      // a bench and potted shrubs
+      const[bx2,by2]=P(x0+1.45,yy+.32);poly([[bx2-10,by2-6],[bx2+10,by2-6],[bx2+10,by2-4],[bx2-10,by2-4]],'#8a5530','#4e2c12',.8);g.strokeStyle='#4e2c12';g.lineWidth=1.2;line([bx2-8,by2-4],[bx2-8,by2]);line([bx2+8,by2-4],[bx2+8,by2]);poly([[bx2-10,by2-12],[bx2+10,by2-12],[bx2+10,by2-9],[bx2-10,by2-9]],'#a8692f','#4e2c12',.8);
+      for(const a of[x0+.45,x0+1.32]){const[px2,py2]=P(a,yy+.28);poly([[px2-3,py2],[px2+3,py2],[px2+4,py2-5],[px2-4,py2-5]],'#c9562a','#7a2a12',.6);ball(px2,py2-9,5,5,'#3f9a3c','#1f5a1e',.6)}
+    }
+    if(lv>=5){
+      // a weathervane on the ridge and a picket garden out front
+      const[vx,vy]=P(x0+w*.3,y0+d/2,66+z);g.strokeStyle='#2b2b2b';g.lineWidth=1.4;line([vx,vy],[vx,vy-16]);poly([[vx-8,vy-13],[vx+6,vy-13],[vx+9,vy-11],[vx+6,vy-9],[vx-8,vy-9],[vx-5,vy-11]],'#2b2b2b');ball(vx,vy-17,1.8,1.8,'#ffc72c');
+      for(let i=0;i<=9;i++){const t=x0-.05+i*.2,[px2,py2]=P(t,yy+.48);poly([[px2-1.4,py2],[px2+1.4,py2],[px2+1.4,py2-9],[px2,py2-11],[px2-1.4,py2-9]],'#fff','#a8a296',.6)}
+      g.strokeStyle='#fff';g.lineWidth=1.4;line(P(x0-.05,yy+.48,5),P(x0+1.75,yy+.48,5));
+      for(let i=0;i<10;i++){const[fx,fy]=P(x0+.05+i*.18,yy+.36);ell(fx,fy-2,1.8,1.5,['#e0457b','#ffd23f','#fff','#7a4ec0'][i%4])}
+    }
   }else{
     gableHouse(x0,y0,w,d,32,28,'#c8382c','#a82c22','#6a5a52','#4f423c','#6b1c14');
     faceQuad(x0+.55,x0+1.21,yy,0,26,'#8a2a20','#fff');g.strokeStyle='#fff';g.lineWidth=2.2;
@@ -1989,7 +2025,7 @@ function drawObj(x,y,o,now){
     if(ROTATABLE.has(o.id)){const m=wallMask(x,y,o);return blit(sprite('d:'+o.id+':'+m,BOX1,()=>drawDeco(0,0,{k:'deco',id:o.id,m},0)),x,y)}
     return blit(sprite('d:'+o.id,size(o)===2?BOX2:BOX1,()=>drawDeco(0,0,{k:'deco',id:o.id},0)),x,y);
   }
-  if(o.k==='bld'){const lv=o.id==='barn'?(o.lv||barnLv()):1;blit(sprite('b:'+o.id+':'+lv,BOX2,()=>drawBuilding(0,0,{id:o.id,lv})),x,y)}
+  if(o.k==='bld'){const lv=o.id==='barn'?(o.lv||barnLv()):(o.lv||houseLv());blit(sprite('b:'+o.id+':'+lv,BOX2,()=>drawBuilding(0,0,{id:o.id,lv})),x,y)}
   if(o.k==='mk'){
     blit(sprite('m:'+o.id,BOX2,()=>drawMaker(0,0,o.id)),x,y);
     if(ICON_MODE)return;
@@ -2410,7 +2446,7 @@ function freeSpot(){
   return[N/2,N-1];
 }
 function inviteNeighbor(n,quiet){
-  if(VIS)return false;if(visitors.some(v=>v.n.id===n.id)){if(!quiet)toast(n.name+' is already here!');return false}
+  if(VIS||!nbOpen())return false;if(visitors.some(v=>v.n.id===n.id)){if(!quiet)toast(n.name+' is already here!');return false}
   if(visitors.length>=3){if(!quiet)toast('Your farm is full of guests right now.');return false}
   const sx=2+Math.random()*(N-4);
   visitors.push({n,x:sx,y:N+1.8,tx:sx,ty:N-1,state:'walk',t:0,walk:Math.random()*6,dir:1,stay:55+Math.random()*40,say:'',sayT:0,tipped:false,leaving:false});
@@ -2422,7 +2458,7 @@ function updateVisitors(dt,now){
   if(performance.now()>nextVisit){
     nextVisit=performance.now()+35000+Math.random()*40000;
     const free=NEIGHBORS.filter(n=>!visitors.some(v=>v.n.id===n.id));
-    if(free.length&&visitors.length<2&&!document.hidden&&!VIS&&!S.noDrop){const n=free[Math.floor(Math.random()*free.length)];inviteNeighbor(n,true);toast(n.name+' dropped by for a visit!')}
+    if(free.length&&visitors.length<2&&!document.hidden&&!VIS&&!S.noDrop&&nbOpen()){const n=free[Math.floor(Math.random()*free.length)];inviteNeighbor(n,true);toast(n.name+' dropped by for a visit!')}
   }
   for(let i=visitors.length-1;i>=0;i--){
     const v=visitors[i];v.t+=dt;v.stay-=dt;if(v.sayT>0)v.sayT-=dt;
@@ -2703,7 +2739,8 @@ function hud(){
   const c=CROPS[S.seed];$('seedchip').innerHTML='<span>Seeds to plant</span><b></b>';$('seedchip').lastChild.textContent=c.name;
   updateFuel();
   const tot=storeTotal(),cap=barnCap();$('barntext').textContent=tot+' / '+cap;$('btnBarn').classList.toggle('full',tot>=cap);$('barnBadge').hidden=tot<cap;
-  const fill=S.orders.filter(canFill).length;$('orderBadge').hidden=!fill;$('orderBadge').textContent=fill;
+  $('btnOrders').classList.toggle('locked',!nbOpen());$('btnNbrs').classList.toggle('locked',!nbOpen());
+  const fill=nbOpen()?S.orders.filter(canFill).length:0;$('orderBadge').hidden=!fill;$('orderBadge').textContent=fill;
   const dl=dv(),dready=!dl.run&&dl.jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap());$('delivBadge').hidden=!dready;
   for(const v in FARM)if(FARM[v].kind==='vehicle'){const b=document.querySelector('.tool[data-tool="'+v+'"]');if(b)b.hidden=!S.veh[v]}
   const gifts=Object.values(S.inv).reduce((a,b)=>a+b,0);$('giftBadge').hidden=!gifts;$('giftBadge').textContent=gifts;
@@ -2759,7 +2796,7 @@ const GOAL_POOL={
 };
 function ensureGoals(){
   const d=today();if(S.goals&&S.goals.day===d)return;
-  const tier=Math.min(2,Math.floor(S.level/5)),keys=Object.keys(GOAL_POOL).sort(()=>Math.random()-.5);
+  const tier=Math.min(2,Math.floor(S.level/5)),keys=Object.keys(GOAL_POOL).filter(k=>S.level>=NB_LVL||!['help','visit','order'].includes(k)).sort(()=>Math.random()-.5);
   // keep one easy farming goal in every set
   const pick=['harvest','plow'].includes(keys[0])?keys.slice(0,3):[Math.random()<.5?'harvest':'plow',...keys.filter(k=>k!=='harvest'&&k!=='plow').slice(0,2)];
   S.goals={day:d,bonus:false,list:pick.map(k=>({k,n:GOAL_POOL[k].n[tier],base:S.stats[k]||0,claimed:false,coins:25+20*tier+GOAL_POOL[k].n[tier]*2,xp:8+6*tier}))};
@@ -2838,11 +2875,14 @@ const MATS={
   paint:{name:'Paint',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 15h22l-2 19H11z" fill="#3f9ad8" stroke="#1f4f7a" stroke-width="2" stroke-linejoin="round"/><ellipse cx="20" cy="15" rx="11" ry="3.5" fill="#8fd0f5" stroke="#1f4f7a" stroke-width="2"/><path d="M9 15q0-10 11-10t11 10" fill="none" stroke="#3a3a3a" stroke-width="2"/><path d="M14 18v7" stroke="#8fd0f5" stroke-width="2.4" stroke-linecap="round"/></svg>'}
 };
 const BARN_CAP=[0,50,100,180,280,400,600];
-const BARN_UP=[null,{coins:800,mats:{board:8,nail:8}},{coins:2000,mats:{board:14,nail:14,brick:6}},{coins:4500,mats:{board:20,nail:20,brick:12,paint:6}},
+const BARN_UP=[null,{coins:400,mats:{board:2,nail:2}},{coins:2000,mats:{board:14,nail:14,brick:6}},{coins:4500,mats:{board:20,nail:20,brick:12,paint:6}},
   {coins:9000,mats:{board:28,nail:28,brick:20,paint:12}},{coins:16000,mats:{board:36,nail:36,brick:30,paint:20}}];
 const HOME_MULT=[0,1,1.5,2],HOME_BONUS=[0,0,.2,.4];
 function homeUp(id,lv){const c=HOMES[id].cost;return lv===1?{coins:c,mats:{board:6,nail:6,paint:2}}:lv===2?{coins:c*2,mats:{board:12,nail:12,brick:8,paint:6}}:null}
 function barnLv(){return S.barnLvl||1}
+// The farmhouse improves after the 1st, 2nd, 4th, 6th and 8th quest.
+const HOUSE_AT=[1,2,4,6,8];
+function houseLv(){const n=(S.qdone||[]).length;return 1+HOUSE_AT.filter(k=>n>=k).length}
 function barnCap(){return BARN_CAP[barnLv()]}
 function matTotal(){let t=0;for(const k in S.mats)t+=S.mats[k];return t}
 function storeTotal(){let t=matTotal();for(const k in S.goods)t+=S.goods[k];return t}
@@ -3017,6 +3057,8 @@ function showMaker(key){
 }
 
 /* ================= neighbor orders and advertising ================= */
+const NB_LVL=5;function nbOpen(){return S.level>=NB_LVL}
+function nbLocked(){if(nbOpen())return false;SFX.error();toast('Your neighbors move in at Level '+NB_LVL+'. Then you can trade with them and visit their farms.');return true}
 function adOn(){return S.ad&&S.ad.until>Date.now()?S.ad.id:null}
 function orderEvery(){const a=adOn();return a?ADS[a].every:150}
 function canFill(o){return o.items.every(([id,n])=>have(id)>=n)}
@@ -3038,7 +3080,7 @@ function newOrder(){
   return{id:Date.now().toString(36)+R().toString(36).slice(2,6),who:who.id,items,coins:Math.max(5,Math.round(base*mult/5)*5),xp:2+Math.round(base/80),base};
 }
 function tickOrders(){
-  if(!S||VIS)return;const now=Date.now();let added=null;
+  if(!S||VIS||!nbOpen())return;const now=Date.now();let added=null;
   if(typeof S.orderT!=='number')S.orderT=now+6000;
   while(S.orders.length<ORDER_MAX&&S.orderT<=now){const o=newOrder();if(!o){S.orderT=now+30000;break}S.orders.push(o);added=o;S.orderT+=orderEvery()*1000}
   if(S.orders.length>=ORDER_MAX&&S.orderT<now)S.orderT=now+orderEvery()*1000;
@@ -3251,7 +3293,7 @@ function genFarm(n){
   const sz=n.lvl>=20?24:n.lvl>=12?20:16,st=FARM_STYLE[n.id]||[.5,.25,.25,.4],tiles={},occ2={};
   const free=(x,y,k)=>{for(let i=0;i<k;i++)for(let j=0;j<k;j++)if(occ2[(x+i)+','+(y+j)]||x+i<0||y+j<0||x+i>=sz||y+j>=sz)return false;return true};
   const put=(x,y,o)=>{const k=size(o);if(!free(x,y,k))return false;tiles[x+','+y]=o;for(let i=0;i<k;i++)for(let j=0;j<k;j++)occ2[(x+i)+','+(y+j)]=1;return true};
-  put(1,1,{k:'bld',id:'house'});put(4,1,{k:'bld',id:'barn',lv:Math.min(6,1+Math.floor(n.lvl/5))});
+  put(1,1,{k:'bld',id:'house'});put(4,1,{k:'bld',id:'barn',lv:Math.min(6,1+Math.floor(n.lvl/5))});tiles['1,1'].lv=Math.min(6,2+Math.floor(n.lvl/8));
   const crops=Object.keys(CROPS).filter(id=>CROPS[id].lvl<=n.lvl),an=Object.keys(ANIMALS).filter(id=>ANIMALS[id].lvl<=n.lvl),tr=Object.keys(TREES).filter(id=>TREES[id].lvl<=n.lvl);
   const deco=Object.keys(DECOR).filter(id=>{const d=DECOR[id];return!d.cash&&!d.special&&d.lvl<=n.lvl&&!ROTATABLE.has(id)&&(d.sz||1)===1});
   // crop field on the left
@@ -3276,7 +3318,7 @@ function genFarm(n){
   return{tiles,size:sz};
 }
 function visitFarm(n){
-  if(VIS)return;
+  if(VIS||nbLocked())return;
   if(farmer.job||queue.length){SFX.error();toast('Let your farmer finish the current jobs first.');return}
   while(mq.length)closeModal();if(placing)stopPlacing();setTool('multi');save();
   VIS={n,home:{tiles:S.tiles,size:S.size},fx:farmer.x,fy:farmer.y};
@@ -3370,6 +3412,7 @@ function showLevelUp(l0){
     star.innerHTML='<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3l8.6 18.3 20 2.4-14.8 13.7 4 19.8L32 47.3 14.2 57.2l4-19.8L3.4 23.7l20-2.4z" fill="#ffc72c" stroke="#6b3c15" stroke-width="3.5" stroke-linejoin="round"/></svg><span class="outline" style="font-size:36px">'+lv+'</span>';
     p.appendChild(star);p.appendChild(el('p',null,(S.farmerName?'Way to go, '+S.farmerName+'! ':'')+'You reached Level '+lv+'!'));
     p.appendChild(rewardRow([['coins',bonus],['cash',lv-l0]]));
+    if(l0<NB_LVL&&lv>=NB_LVL)p.appendChild(el('p','hint nbnews','Your neighbors have moved in! Check the Orders board, and visit their farms from More > Neighbors.'));
     {const list=[];for(let l=l0+1;l<=lv;l++)list.push(...unlockList(l));if(list.length){p.appendChild(el('p',null,'New in the market:'));p.appendChild(unlockGrid(list.slice(0,8)))}}
     const go=el('button','go','Keep farming');go.dataset.focus='1';go.onclick=closeModal;p.appendChild(go);b.appendChild(p);
   }});
@@ -3634,7 +3677,7 @@ function infoCard(key){
   if(o.k==='animal'){if(isBaby(o,now)){line='Growing up: '+fmt((o.baby-now)/1000)+' to go.';k=1-(o.baby-now)/(Math.max(180,def.every*3)*1000)}else{const l=readyIn(o,def,now);line=def.product+' in '+fmt(l)+'. Sells for '+ITEMS['a_'+o.id].sell+'.';k=1-l/def.every}}
   else if(o.k==='tree'){const l=readyIn(o,def,now);line=def.product+' in '+fmt(l)+'. Sells for '+ITEMS['t_'+o.id].sell+'.';k=1-l/def.every}
   else if(o.k==='deco')line=isWall(o)?'Joins up with its neighbors.':'A little something to make the farm cozy.';
-  else line='Home sweet home, '+S.farmName+'.';
+  else{const hl=houseLv(),nxt=HOUSE_AT[hl-1];line='Farmhouse level '+hl+' of 5.'+(nxt?' Finish '+(nxt-(S.qdone||[]).length)+' more quest'+(nxt-(S.qdone||[]).length>1?'s':'')+' to improve it.':' Fully upgraded!')}
   c.appendChild(el('p',null,line));
   if(k!=null){const b=el('div','pbar');b.innerHTML='<i style="width:'+Math.max(0,Math.min(100,k*100))+'%"></i>';c.appendChild(b)}
   const row=el('div','row'),mv=el('button','btn2','Move');mv.onclick=()=>{c.hidden=true;startMove(key)};row.appendChild(mv);
@@ -3688,6 +3731,7 @@ function act(hx,hy){
   if(placing){place(hx,hy);return}
   if(!inGrid(hx,hy))return;
   if(VIS){actVisit(hx,hy);return}
+  if(tutLocked()){const t=TUT[S.tut],key=target(hx,hy),o=key&&S.tiles[key];if(!(t.btn==='btnBarn'&&o&&o.k==='bld'&&o.id==='barn')&&(!t.find||!o||!t.find(o)||pend[key])){SFX.error();tutNudge=performance.now();toast('Follow the tip: '+t.txt);return}}
   if(tool==='delete'){
     const key=target(hx,hy);if(!key)return;const o=S.tiles[key];
     if(o.k==='bld'){toast('The farmhouse and barn stay. Use Move to shift them.');return}
@@ -3726,8 +3770,8 @@ function endPointer(e){
   pointers.delete(e.pointerId);
   if(pinch&&pointers.size<2){pinch=null;const r=[...pointers.values()][0];if(r)down={x:r.x,y:r.y,cx:cam.x,cy:cam.y,moved:true};return}
   if(down&&!down.moved&&e.type==='pointerup')lastPtr={x:e.clientX,y:e.clientY};
-  if(down&&!down.moved&&e.type==='pointerup'&&!placing&&petAt(e.clientX,e.clientY)){petPet()}
-  else if(down&&!down.moved&&e.type==='pointerup'&&!placing&&tool==='multi'&&deliveryAt(e.clientX,e.clientY)){SFX.click();showDelivery()}
+  if(down&&!down.moved&&e.type==='pointerup'&&!placing&&!tutLocked()&&petAt(e.clientX,e.clientY)){petPet()}
+  else if(down&&!down.moved&&e.type==='pointerup'&&!placing&&tool==='multi'&&!tutLocked()&&deliveryAt(e.clientX,e.clientY)){SFX.click();showDelivery()}
   else if(down&&!down.moved&&e.type==='pointerup'){const v=!placing&&tool==='multi'&&visitorAt(e.clientX,e.clientY),ak=!placing&&!VEH[tool]&&animalAt(e.clientX,e.clientY);if(v)clickVisitor(v);else if(ak){const[x,y]=ak.split(',').map(Number);hover=[x,y];act(x,y)}else{const[x,y]=tileAt(e.clientX,e.clientY);hover=[x,y];act(x,y)}}
   if(pointers.size===0){down=null;cv.classList.remove('grab')}
 }
@@ -3805,7 +3849,7 @@ $('btnRib').onclick=()=>{SFX.click();showRibbons()};
 $('btnColl').onclick=()=>{SFX.click();showCollections()};
 $('btnGifts').onclick=()=>{SFX.click();showGifts()};
 $('btnBarn').onclick=()=>{SFX.click();showBarn()};
-$('btnOrders').onclick=()=>{SFX.click();showOrders()};
+$('btnOrders').onclick=()=>{if(nbLocked())return;SFX.click();showOrders()};
 $('btnDeliv').onclick=()=>{SFX.click();showDelivery()};
 $('wxchip').onclick=()=>{SFX.click();showSeason()};
 $('btnSettings').onclick=()=>{SFX.click();showSettings()};
@@ -3842,7 +3886,7 @@ $('btnTool').onclick=()=>{SFX.click();togglePop('toolPop','btnTool')};
 $('btnMore').onclick=()=>{SFX.click();togglePop('morePop','btnMore')};
 document.querySelectorAll('#morePop .mbtn,#toolPop .tool').forEach(b=>b.addEventListener('click',closePops));
 cv.addEventListener('pointerdown',closePops);
-$('btnNbrs').onclick=()=>{SFX.click();showNeighbors()};
+$('btnNbrs').onclick=()=>{if(nbLocked())return;SFX.click();showNeighbors()};
 function showNeighbors(){
   modal({title:'Neighbors',color:'green',render(b){
     const w=el('div','nbs');
@@ -4392,7 +4436,6 @@ const TUT=[
   {txt:'A chicken laid an egg. Click it to collect.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
   {txt:'Now that chicken is hungry. Click it to give it feed.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
   {txt:'Everything goes to the barn. Open the Barn and sell something.',done:()=>tst('sell')>=1,btn:'btnBarn'},
-  {txt:'Neighbors pay more than the market. Open the Orders board.',done:()=>tst('ordersSeen')>=1,btn:'btnOrders'},
   {txt:'Dale drives goods to town for coins and lots of XP. Open the Delivery Board.',done:()=>tst('delivSeen')>=1,btn:'btnDeliv'}
 ];
 function st(k){return S.stats[k]||0}
@@ -4407,19 +4450,26 @@ function checkTut(){
   }
   renderTut();
 }
+function tutLocked(){return tutOn()&&$('title').hidden}
 function renderTut(){
   const b=$('tut');if(!b)return;
   document.querySelectorAll('.tutpulse').forEach(e=>e.classList.remove('tutpulse'));
+  document.body.classList.toggle('tutlock',tutLocked());
   if(!tutOn()||!$('title').hidden){b.hidden=true;return}
+  if(tool!=='multi')setTool('multi');closePops();if(TUT[S.tut].find&&S.seed!=='wheat')S.seed='wheat';
   const t=TUT[S.tut];b.hidden=false;$('tutStep').textContent='Tip '+(S.tut+1)+' of '+TUT.length;$('tutText').textContent=t.txt;
   if(t.btn)$(t.btn).classList.add('tutpulse');
 }
 $('tutSkip').onclick=()=>{S.tut=TUT.length;SFX.click();renderTut();save();toast('Tutorial skipped.');setTimeout(nextQuest,1500)};
+let tutNudge=0;
 function drawTutArrow(now){
   if(!tutOn())return;const t=TUT[S.tut];if(!t.find)return;
-  let best=null;for(const k in S.tiles){if(pend[k])continue;const o=S.tiles[k];if(t.find(o)){const[x,y]=k.split(',').map(Number);if(!best||x+y<best[0]+best[1])best=[x,y]}}
-  if(!best)return;const[px,py]=P(best[0]+.5,best[1]+.5),b=reduce?0:Math.abs(Math.sin(now/260))*-8,y0=py-44+b;
-  poly([[px-7,y0-16],[px+7,y0-16],[px+7,y0-4],[px+13,y0-4],[px,y0+9],[px-13,y0-4],[px-7,y0-4]],'#ffd23f','#6b3c15',2);
+  let best=null;for(const k in S.tiles){if(pend[k])continue;const o=S.tiles[k];if(t.find(o)){const[x,y]=k.split(',').map(Number);if(!best||x+y<best[0]+best[1])best=[x,y,k]}}
+  if(!best)return;
+  const o=S.tiles[best[2]],n=size(o),pulse=reduce?.5:(Math.sin(now/220)+1)/2,nud=Math.max(0,1-(performance.now()-tutNudge)/700);
+  poly([P(best[0],best[1]),P(best[0]+n,best[1]),P(best[0]+n,best[1]+n),P(best[0],best[1]+n)],'rgba(255,226,90,'+(.18+pulse*.2).toFixed(2)+')','rgba(255,210,40,'+(.7+pulse*.3).toFixed(2)+')',3+nud*3);
+  const ax=o.k==='animal'?roamOf(best[2]):{x:0,y:0},[px,py]=P(best[0]+n/2+ax.x,best[1]+n/2+ax.y),b=reduce?0:Math.abs(Math.sin(now/240))*-10,y0=py-(o.k==='animal'?62:50)+b,s2=1.25+nud*.6;
+  g.save();g.translate(px,y0);g.scale(s2,s2);poly([[-7,-16],[7,-16],[7,-4],[13,-4],[0,9],[-13,-4],[-7,-4]],'#ffd23f','#6b3c15',2);g.restore();
 }
 
 /* ================= farm stats ================= */
@@ -4451,21 +4501,21 @@ function renderStats(b){
 // Story chains from neighbors and Dale. One quest runs at a time; each has a few steps and a special reward.
 // Step kinds: stat (do something n more times), have (bring n goods, handed over), own (have n of something on the farm).
 const QUESTS=[
-  {id:'welcome',who:'mabel',lvl:1,title:'Welcome to the Valley',intro:'Hello, new neighbor! Let me show you how we farm around here. Grow a little, sell a little, and you will be on your feet in no time.',
+  {id:'welcome',who:'dale',lvl:1,title:'Welcome to the Valley',intro:'Howdy, new farmer! I drive the road between the farms and town. Grow a little, sell a little, and you will be on your feet in no time.',
     steps:[{txt:'Harvest 10 crops',stat:'harvest',n:10},{txt:'Plant 10 seeds',stat:'plant',n:10},{txt:'Sell 5 goods from the barn',stat:'sell',n:5}],reward:{coins:150,xp:20,item:'deco:flowerbed'}},
   {id:'dale1',who:'dale',lvl:2,title:"Dale's First Run",intro:'Morning! I drive goods to the towns down the road. Load my truck and I will bring back the money. Towns pay in XP too, if you know what I mean.',
     steps:[{txt:'Send a delivery with Dale',stat:'delivSent',n:1},{txt:'Complete 2 deliveries',stat:'deliver',n:2}],reward:{coins:250,xp:35,item:'deco:towerclock'}},
-  {id:'hank1',who:'hank',lvl:3,title:"Hank's Feed Problem",intro:'My cows eat me out of house and home! Build yourself a Feed Mill so you never run short, then help me fill my feed trough.',
+  {id:'hank1',who:'hank',lvl:5,title:"Hank's Feed Problem",intro:'My cows eat me out of house and home! Build yourself a Feed Mill so you never run short, then help me fill my feed trough.',
     steps:[{txt:'Build a Feed Mill',own:'mk:feedmill',n:1},{txt:'Bring Hank 20 animal feed',have:'feed',n:20},{txt:'Feed your animals 5 times',stat:'feed',n:5}],reward:{coins:300,xp:45,item:'deco:hay'}},
-  {id:'otis1',who:'otis',lvl:4,title:"Otis's Orchard",intro:'Nothing beats fruit straight off the branch. Plant a few trees of your own, and save me some apples for my pies.',
+  {id:'otis1',who:'otis',lvl:6,title:"Otis's Orchard",intro:'Nothing beats fruit straight off the branch. Plant a few trees of your own, and save me some apples for my pies.',
     steps:[{txt:'Have 3 fruit trees',own:'tree',n:3},{txt:'Pick fruit 10 times',stat:'tree',n:10},{txt:'Bring Otis 8 apples',have:'t_apple',n:8}],reward:{coins:450,xp:60,item:'deco:pumpkins'}},
-  {id:'rosa1',who:'rosa',lvl:5,title:"Rosa's Ranch Dream",intro:'I want the happiest animals in the valley, and I bet you can raise some too. Show me a busy barnyard!',
+  {id:'rosa1',who:'rosa',lvl:7,title:"Rosa's Ranch Dream",intro:'I want the happiest animals in the valley, and I bet you can raise some too. Show me a busy barnyard!',
     steps:[{txt:'Have 6 animals',own:'animal',n:6},{txt:'Collect from animals 15 times',stat:'animal',n:15},{txt:'Bring Rosa 10 eggs',have:'a_chicken',n:10}],reward:{coins:600,xp:80,item:'deco:goldcow'}},
-  {id:'juniper1',who:'juniper',lvl:6,title:'Busy Bees',intro:'The bees are buzzing and I need your help! A hive near flowers makes the sweetest honey.',
+  {id:'juniper1',who:'juniper',lvl:8,title:'Busy Bees',intro:'The bees are buzzing and I need your help! A hive near flowers makes the sweetest honey.',
     steps:[{txt:'Build a Beehive',own:'mk:beehive',n:1},{txt:'Plant 15 seeds',stat:'plant',n:15},{txt:'Bring Juniper 5 honey',have:'honey',n:5}],reward:{coins:800,xp:100,item:'deco:greenhouse'}},
-  {id:'dale2',who:'dale',lvl:7,title:'The Big Contract',intro:'A big buyer in Harbor Town wants regular deliveries. If we pull this off, everyone will know your farm.',
+  {id:'dale2',who:'dale',lvl:9,title:'The Big Contract',intro:'A big buyer in Harbor Town wants regular deliveries. If we pull this off, everyone will know your farm.',
     steps:[{txt:'Complete 5 deliveries',stat:'deliver',n:5},{txt:'Fill 4 neighbor orders',stat:'order',n:4},{txt:'Make 6 goods in your buildings',stat:'make',n:6}],reward:{coins:1200,xp:140,cash:2}},
-  {id:'mabel2',who:'mabel',lvl:9,title:'Harvest Festival',intro:'The whole valley is coming to the Harvest Festival, and we need the finest food on the table. Will you bake for us?',
+  {id:'mabel2',who:'mabel',lvl:10,title:'Harvest Festival',intro:'The whole valley is coming to the Harvest Festival, and we need the finest food on the table. Will you bake for us?',
     steps:[{txt:'Bring Mabel 2 pumpkin pies',have:'pie',n:2},{txt:'Harvest 3 golden crops',stat:'golden',n:3},{txt:'Bring Mabel 3 apple ciders',have:'applecider',n:3}],reward:{coins:2500,xp:250,cash:3,item:'deco:gazebo'}}
 ];
 const PEOPLE=()=>[...NEIGHBORS,DRIVER];
@@ -4504,13 +4554,14 @@ function handOver(){
 }
 function finishQuest(){
   const q=qDef(),who=PEOPLE().find(p=>p.id===q.who),r=q.reward;
-  S.qdone=[...(S.qdone||[]),q.id];S.q=null;S.coins+=r.coins;if(r.cash)S.cash+=r.cash;
+  const hl0=houseLv();S.qdone=[...(S.qdone||[]),q.id];S.q=null;const houseUp=houseLv()>hl0;S.coins+=r.coins;if(r.cash)S.cash+=r.cash;
   let prize=null;if(r.item){S.inv[r.item]=(S.inv[r.item]||0)+1;const[cat,id]=r.item.split(':');prize=DECOR[id]}
   SFX.level();confetti();stat('quest');
   modal({title:'Quest Complete!',color:'gold',small:true,render(b){
     const p=el('div','body-pad'),face=el('div','vface');face.innerHTML=avatar(who);p.appendChild(face);
     p.appendChild(el('h3',null,q.title));p.appendChild(el('p',null,who.name+': "Thank you so much! Here is something for your trouble."'));
     p.appendChild(rewardRow([['coins',r.coins],['xp',r.xp],['cash',r.cash||0],['text',prize?prize.name+' (in your Gift Box)':0]]));
+    if(houseUp)p.appendChild(el('p','hint','Your farmhouse got an upgrade! Take a look.'));
     const go=el('button','go','Wonderful!');go.dataset.focus='1';go.onclick=()=>{closeModal();setTimeout(nextQuest,600)};p.appendChild(go);b.appendChild(p);
   }});
   addXP(r.xp);changed();renderQuest();
