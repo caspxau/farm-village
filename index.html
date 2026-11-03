@@ -500,6 +500,10 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
 .mbtn.locked svg{opacity:.35;filter:grayscale(1)}
 .mbtn.locked::after{content:"";position:absolute;right:-5px;top:-5px;width:18px;height:18px;border-radius:50%;background:#6b3c15 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='4' y='7' width='8' height='6' rx='1' fill='%23fff'/%3E%3Cpath d='M5.5 7V5.5a2.5 2.5 0 0 1 5 0V7' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E") center/12px no-repeat;border:2px solid #fff}
 .codebox{width:100%;font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;border:2px solid var(--paper-line,#e2cfa8);border-radius:10px;padding:8px;background:#fff;color:var(--ink);resize:none;word-break:break-all;user-select:text;-webkit-user-select:text}
+.tlang{position:absolute;top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));display:flex;gap:6px}
+.tlang button{border:2px solid var(--wood-d);border-radius:999px;background:rgba(255,250,240,.9);padding:4px 12px;min-height:36px;font-weight:700;font-size:13px;box-shadow:0 2px 0 var(--wood-d)}
+.tlang button[aria-pressed="true"]{background:linear-gradient(#fff8c8,var(--gold))}
+.setrow .seg .tog{min-width:0;padding:4px 12px}
 .nbnews{background:#e6f5d8;border:2px solid #8cc84b;border-radius:10px;padding:6px 10px;color:#2a4a1a!important;font-weight:600}
 
 /* =====================================================================
@@ -835,11 +839,12 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
 <div class="tut" id="tut" hidden><div><small id="tutStep"></small><strong id="tutText"></strong></div><button class="btn2" id="tutSkip">Skip</button></div>
 <div class="visitbar" id="visitbar" hidden><div><strong id="vbName"></strong><small id="vbInfo"></small></div><button class="go" id="vbHome">Go home</button></div>
 <div class="title" id="title">
-  <div class="tlogo" aria-label="Farm Village"><span>Farm<i class="leaf"></i></span><span>Village</span></div>
+  <div class="tlogo" aria-label="Farm Village" translate="no"><span>Farm<i class="leaf"></i></span><span>Village</span></div>
   <canvas class="tstage" id="tstage" aria-hidden="true"></canvas>
   <p class="tsub" id="tsub">Grow crops, raise animals and build the coziest farm in the valley.</p>
   <button class="go tplay" id="tplay">Play</button>
   <small>Music starts when you press Play</small>
+  <div class="tlang" id="tlang" role="group" aria-label="Language"></div>
 </div>
 <div class="modal" id="modal" hidden>
   <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
@@ -854,6 +859,326 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
 const W=72,H=36,KEY='clover-hollow-v3',PLOW_COST=15,FUEL_MAX=50,FUEL_EVERY=90,CAN_FUEL=10,HELP_MAX=5,ORDER_MAX=4;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MASTERY=[10,25,50];
+
+/* ================= languages ================= */
+// (the title screen language buttons are filled in right after the engine below)
+// The game is written in English. In another language, every text on screen (and every text drawn on the farm canvas)
+// passes through tr(): exact phrases come from a dictionary, sentences with numbers and names from patterns.
+// Game logic keeps working with the English text underneath.
+const LANG_KEY='farm-village-lang',LANGS=[['en','English'],['pl','Polski']];
+const LANG=(()=>{try{const l=localStorage.getItem(LANG_KEY);if(l&&LANGS.some(x=>x[0]===l))return l}catch(e){}return /^pl\b/i.test(navigator.language||'')?'pl':'en'})();
+function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.reload()}
+// Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
+// Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
+const PL_EXACT={
+// ---- HUD, dock, menus
+'Multi':'Multi','Barn':'Stodoła','Orders':'Zamówienia','Market':'Targ','Delivery':'Dostawy','More':'Więcej','Neighbors':'Sąsiedzi','Wardrobe':'Garderoba','Gifts':'Prezenty','Album':'Album','Ribbons':'Wstęgi','Music':'Muzyka','Sound':'Dźwięk','Settings':'Ustawienia',
+'Your level':'Twój poziom','Coins':'Monety','Farm Cash':'Farmdolary','Season guide':'Przewodnik po porach roku','Tools':'Narzędzia','Barn: your stored goods':'Stodoła: twoje zapasy','Neighbor orders and advertising':'Zamówienia sąsiadów i reklama','Open the market':'Otwórz targ','Delivery Board: send goods to town':'Tablica dostaw: wyślij towary do miasta','More buttons':'Więcej przycisków','Close':'Zamknij','Quest':'Zadanie','Daily':'Codziennie',"Today's Goals":'Cele na dziś',"Today's goals":'Cele na dziś','Change seed':'Zmień nasiona','Seeds to plant':'Nasiona do sadzenia',
+'Multi-tool: plow, plant and harvest':'Multinarzędzie: oraj, siej i zbieraj','Tractor: plow four plots at once':'Traktor: zaorz cztery pola naraz','Seeder: plant four plots at once':'Siewnik: obsiej cztery pola naraz','Harvester: harvest four plots at once':'Kombajn: zbierz cztery pola naraz','Move tool':'Przenoszenie','Remove tool':'Usuwanie',
+'Tractor':'Traktor','Seeder':'Siewnik','Harvester':'Kombajn','Move':'Przenieś','Remove':'Usuń','Fuel':'Paliwo','Fuel tank: refuel with diesel from the barn':'Bak: zatankuj ropą ze stodoły','Spend Farm Cash in the market':'Wydaj farmdolary na targu','Wardrobe: customize your farmer':'Garderoba: wygląd farmera','Gift box':'Pudełko z prezentami','Collections':'Kolekcje','Music on':'Muzyka włączona','Music off':'Muzyka wyłączona','Sound on':'Dźwięk włączony','Sound off':'Dźwięk wyłączony',
+'Turn ↻':'Obróć ↻','Turn the piece you are placing':'Obróć stawiany element','Skip':'Pomiń','Go home':'Wróć do domu','Play':'Graj','Music starts when you press Play':'Muzyka zacznie grać po naciśnięciu „Graj”','Grow crops, raise animals and build the coziest farm in the valley.':'Uprawiaj plony, hoduj zwierzęta i zbuduj najprzytulniejszą farmę w dolinie.',
+'Your farm. Click tiles to plow, plant and harvest.':'Twoja farma. Klikaj pola, by orać, siać i zbierać.','Details':'Szczegóły',
+'To level':'Do poziomu','Reward':'Nagroda','Done!':'Gotowe!','Done':'Gotowe','Level up!':'Nowy poziom!','Level Up!':'Nowy poziom!',
+// ---- seasons and weather
+'Spring':'Wiosna','Summer':'Lato','Autumn':'Jesień','Winter':'Zima','Sunny':'Słonecznie','Cloudy':'Pochmurno','Rain':'Deszcz','Snow':'Śnieg','Thunderstorm':'Burza',
+'Season Guide':'Przewodnik po porach roku','Nice day for farming.':'Piękny dzień na pracę w polu.','Rain is watering every growing crop for you.':'Deszcz podlewa za ciebie wszystkie rosnące plony.','Rain is watering your crops!':'Deszcz podlewa twoje plony!',
+'Rain comes and goes. When it rains, every growing crop gets watered for free.':'Deszcz przychodzi i odchodzi. Gdy pada, wszystkie rosnące plony są podlewane za darmo.','Snow blankets the farm. Winter crops grow at full speed; others grow slower.':'Śnieg przykrył farmę. Zimowe plony rosną normalnie, pozostałe wolniej.',
+'Crops planted in their season get a 25% head start. In winter, crops that are not winter crops grow 20% slower.':'Plony posadzone w swojej porze roku startują 25% szybciej. Zimą plony niezimowe rosną o 20% wolniej.',
+'In season now!':'Teraz w sezonie!',
+// ---- modal titles and tabs
+'Seeds':'Nasiona','Trees':'Drzewa','Animals':'Zwierzęta','Homes':'Domy','Decorations':'Dekoracje','Buildings':'Budynki','Farm':'Farma','Specials':'Specjalne','Everything':'Wszystko','Crops':'Plony','Animal goods':'Produkty zwierzęce','Fruit':'Owoce','Kitchen goods':'Wyroby kuchenne','Supplies':'Zaopatrzenie','Materials':'Materiały',
+'Gift Box':'Pudełko z prezentami','Delivery Board':'Tablica dostaw','Daily Bonus':'Bonus dzienny','New Quest':'Nowe zadanie','Quest Complete!':'Zadanie ukończone!','Ribbon Earned!':'Zdobyto wstęgę!','Ribbons and Stats':'Wstęgi i statystyki','Start Over?':'Zacząć od nowa?','Create Your Farmer':'Stwórz swojego farmera','Load a Save':'Wczytaj zapis','Your Save Code':'Twój kod zapisu','Install Farm Village':'Zainstaluj Farm Village',
+// ---- buttons
+'Plant':'Posadź','Selected':'Wybrane','Buy':'Kup','Buy now':'Kup teraz','Build':'Zbuduj','Place':'Postaw','Place here':'Postaw tutaj','Use':'Użyj','Owned':'Posiadane','Wearing':'Założone','Collect':'Odbierz','Make':'Zrób','Deliver':'Dostarcz','Decline':'Odrzuć','Discard':'Wyrzuć','Send':'Wyślij','Visit':'Odwiedź','Visit farm':'Odwiedź farmę','Visit ✓':'Odwiedzono ✓','Say hi':'Przywitaj się','Chat':'Pogadaj','Invite over':'Zaproś','Hand over':'Oddaj','Sell 1':'Sprzedaj 1','Sell all':'Sprzedaj wszystko','Feed animals':'Nakarm zwierzęta','Refuel':'Zatankuj','Trade in':'Wymień','Upgrade barn':'Rozbuduj stodołę','Upgrade truck':'Ulepsz ciężarówkę','Advertise':'Reklamuj','Cancel':'Anuluj','Reset':'Resetuj','Undo':'Cofnij','Surprise me':'Zaskocz mnie','Save and close':'Zapisz i zamknij','Got it':'Rozumiem','Copy':'Kopiuj','Copied!':'Skopiowano!','Keep farming':'Graj dalej','Keep my farm':'Zostaw moją farmę','Yes, start over':'Tak, zacznij od nowa','Wonderful!':'Wspaniale!','Wonderful, thanks!':'Wspaniale, dzięki!',"Let's do it!":'Do dzieła!','Hooray!':'Hura!','Thank you!':'Dziękuję!','Okay, see you later!':'Dobrze, do zobaczenia!','See you soon!':'Do zobaczenia!','On':'Wł.','Off':'Wył.','Add':'Dodaj','Enter':'Wejdź','Sure?':'Na pewno?',
+'Install app':'Zainstaluj aplikację','Copy save code':'Kopiuj kod zapisu','Load save code':'Wczytaj kod zapisu','Load this farm':'Wczytaj tę farmę','Save code':'Kod zapisu','Paste save code':'Wklej kod zapisu','Replay the tutorial':'Powtórz samouczek','Start a new farm':'Zacznij nową farmę','Effects volume':'Głośność efektów','Music volume':'Głośność muzyki','Sound effects':'Efekty dźwiękowe','Rain, snow and falling leaves':'Deszcz, śnieg i spadające liście','Language':'Język',
+'Allow surprise visits again':'Pozwól znów na niespodziewane wizyty','No more surprise visits':'Bez niespodziewanych wizyt','Run it':'Uruchom',
+// ---- settings, saves, install
+'Farm Village saves automatically in this browser. To move your farm to another browser, phone or the installed app, copy your save code here and load it there.':'Farm Village zapisuje się automatycznie w tej przeglądarce. Aby przenieść farmę do innej przeglądarki, na telefon lub do zainstalowanej aplikacji, skopiuj tutaj kod zapisu i wczytaj go tam.',
+'This code is your whole farm. Copy it, then use Load save code on the other device.':'Ten kod to cała twoja farma. Skopiuj go, a na drugim urządzeniu użyj „Wczytaj kod zapisu”.',
+'Paste a save code from another device. Your farm here will be replaced by that farm.':'Wklej kod zapisu z innego urządzenia. Farma na tym urządzeniu zostanie nim zastąpiona.',
+'That code does not look right. Copy the whole code and try again.':'Ten kod wygląda na niepoprawny. Skopiuj cały kod i spróbuj ponownie.','This browser would not save it.':'Ta przeglądarka nie pozwoliła go zapisać.','Save code copied.':'Skopiowano kod zapisu.','Select the code and copy it yourself.':'Zaznacz kod i skopiuj go ręcznie.',
+'Farm Village can live on your home screen or desktop like any other app, and it works offline.':'Farm Village może być na ekranie głównym lub pulpicie jak każda inna aplikacja i działa bez internetu.','Farm Village is installed!':'Farm Village jest zainstalowana!',
+'Open this page in Safari.':'Otwórz tę stronę w Safari.','Tap the Share button (the square with an arrow).':'Stuknij przycisk Udostępnij (kwadrat ze strzałką).','Choose "Add to Home Screen", then "Add".':'Wybierz „Do ekranu początkowego”, a potem „Dodaj”.','Open this page in Chrome or Edge.':'Otwórz tę stronę w Chrome lub Edge.',
+'On a phone: open the browser menu and choose "Install app" or "Add to Home screen".':'Na telefonie: otwórz menu przeglądarki i wybierz „Zainstaluj aplikację” lub „Dodaj do ekranu głównego”.','On a computer: click the install icon at the right end of the address bar.':'Na komputerze: kliknij ikonę instalacji po prawej stronie paska adresu.',
+'Wipes this farm and starts over from Level 1 with the tutorial.':'Usuwa tę farmę i zaczyna od poziomu 1 z samouczkiem.','Tutorial restarted. Follow the tips on screen.':'Samouczek uruchomiony ponownie. Postępuj według wskazówek.','Tutorial skipped.':'Pominięto samouczek.','Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!':'Samouczek ukończony! +150 monet i 1 farmdolar. Miłej zabawy!',
+// ---- goals, quests, tutorial
+'All done! Bonus:':'Wszystko gotowe! Bonus:','All goals done. New goals tomorrow!':'Wszystkie cele wykonane. Nowe jutro!','Finish all three for +2 Farm Cash.':'Wykonaj wszystkie trzy, a dostaniesz +2 farmdolary.','+2 Farm Cash':'+2 farmdolary','Daily goals complete! +2 Farm Cash.':'Cele dnia wykonane! +2 farmdolary.',
+'Welcome to the Valley':'Witaj w dolinie',"Dale's First Run":'Pierwszy kurs Dale’a',"Hank's Feed Problem":'Kłopot Hanka z paszą',"Otis's Orchard":'Sad Otisa',"Rosa's Ranch Dream":'Ranczo marzeń Rosy','Busy Bees':'Pracowite pszczoły','Harvest Festival':'Dożynki','The Big Contract':'Wielki kontrakt',
+'Harvest 10 crops':'Zbierz 10 plonów','Plant 10 seeds':'Posadź 10 nasion','Plant 15 seeds':'Posadź 15 nasion','Sell 5 goods from the barn':'Sprzedaj 5 towarów ze stodoły','Send a delivery with Dale':'Wyślij dostawę z Dale’em','Complete 2 deliveries':'Zrealizuj 2 dostawy','Complete 5 deliveries':'Zrealizuj 5 dostaw','Build a Feed Mill':'Zbuduj młyn paszowy','Bring Hank 20 animal feed':'Przynieś Hankowi 20 paszy','Feed your animals 5 times':'Nakarm zwierzęta 5 razy','Have 3 fruit trees':'Miej 3 drzewa owocowe','Pick fruit 10 times':'Zbierz owoce 10 razy','Bring Otis 8 apples':'Przynieś Otisowi 8 jabłek','Have 6 animals':'Miej 6 zwierząt','Collect from animals 15 times':'Odbierz od zwierząt 15 razy','Bring Rosa 10 eggs':'Przynieś Rosie 10 jajek','Build a Beehive':'Zbuduj ul','Bring Juniper 5 honey':'Przynieś Juniper 5 słoików miodu','Harvest 3 golden crops':'Zbierz 3 złote plony','Make 6 goods in your buildings':'Wytwórz 6 towarów w budynkach','Bring Mabel 2 pumpkin pies':'Przynieś Mabel 2 placki dyniowe','Bring Mabel 3 apple ciders':'Przynieś Mabel 3 cydry','Fill 4 neighbor orders':'Zrealizuj 4 zamówienia sąsiadów',
+'Howdy, new farmer! I drive the road between the farms and town. Grow a little, sell a little, and you will be on your feet in no time.':'Cześć, nowy farmerze! Jeżdżę drogą między farmami a miastem. Trochę uprawiaj, trochę sprzedawaj, a szybko staniesz na nogi.',
+'A big buyer in Harbor Town wants regular deliveries. If we pull this off, everyone will know your farm.':'Duży kupiec z Portowa chce regularnych dostaw. Jeśli się uda, cała okolica pozna twoją farmę.',
+'The bees are buzzing and I need your help! A hive near flowers makes the sweetest honey.':'Pszczoły brzęczą, a ja potrzebuję pomocy! Ul przy kwiatach daje najsłodszy miód.',
+'The whole valley is coming to the Harvest Festival, and we need the finest food on the table. Will you bake for us?':'Cała dolina przyjdzie na dożynki, a na stole musi być najlepsze jedzenie. Upieczesz coś dla nas?',
+'Thank you so much! Here is something for your trouble.':'Bardzo dziękuję! Oto coś za twój trud.','Your farmhouse got an upgrade! Take a look.':'Twój dom został rozbudowany! Zobacz.',
+'Welcome to Farm Village! Your wheat is ready: click it and your farmer will harvest it.':'Witaj w Farm Village! Twoja pszenica jest gotowa: kliknij ją, a farmer ją zbierze.','Your wheat is ripe! Click the golden wheat to harvest it.':'Pszenica dojrzała! Kliknij złotą pszenicę, by ją zebrać.','Click the empty brown plot to plow it.':'Kliknij puste brązowe pole, by je zaorać.','Click the plowed plot to plant wheat.':'Kliknij zaorane pole, by posiać pszenicę.','Click a growing crop to water it. Watered crops grow faster.':'Kliknij rosnący plon, by go podlać. Podlane plony rosną szybciej.','A chicken laid an egg. Click it to collect.':'Kura zniosła jajko. Kliknij ją, by je zebrać.','Now that chicken is hungry. Click it to give it feed.':'Teraz kura jest głodna. Kliknij ją, by dać jej paszę.','Everything goes to the barn. Open the Barn and sell something.':'Wszystko trafia do stodoły. Otwórz stodołę i coś sprzedaj.','Dale drives goods to town for coins and lots of XP. Open the Delivery Board.':'Dale wozi towary do miasta za monety i dużo XP. Otwórz tablicę dostaw.',
+'Need a hand?':'Potrzebujesz pomocy?',
+// ---- barn, market cards, orders
+'In the barn':'W stodole','Nothing stored here yet. Harvest crops, collect from animals and pick fruit: it all comes to the barn.':'Jeszcze nic tu nie ma. Zbieraj plony, odbieraj produkty od zwierząt i zrywaj owoce: wszystko trafia do stodoły.','Neighbors pay more than the market. Check the Orders board before selling here.':'Sąsiedzi płacą więcej niż targ. Zanim tu sprzedasz, zajrzyj do zamówień.','Keep farming to collect the missing materials.':'Graj dalej, by zebrać brakujące materiały.','Your barn is fully upgraded.':'Stodoła jest w pełni rozbudowana.','Barn full!':'Stodoła pełna!','Your barn is full! Sell goods or upgrade the barn to store more.':'Stodoła jest pełna! Sprzedaj coś lub ją rozbuduj.',
+'Hot today':'Hit dnia','Hot +50%':'Hit +50%','New!':'Nowość!','locked':'zablokowane','Fully upgraded':'W pełni rozbudowane','Fully upgraded!':'W pełni rozbudowane!','This home is fully upgraded.':'Ten dom jest w pełni rozbudowany.',
+'Neighbors pay well above the market price. Deliver from your barn to fill an order.':'Sąsiedzi płacą znacznie więcej niż targ. Dostarcz towary ze stodoły, by zrealizować zamówienie.','No orders right now. New ones arrive every few minutes, and advertising brings them faster.':'Na razie brak zamówień. Nowe pojawiają się co kilka minut, a reklama je przyspiesza.','The board is full. Fill or decline an order to make room.':'Tablica jest pełna. Zrealizuj lub odrzuć zamówienie.','An ad is already running.':'Reklama już trwa.','Thanks for the order!':'Dzięki za zamówienie!','You do not have everything for this order yet.':'Nie masz jeszcze wszystkiego do tego zamówienia.',
+'Newspaper Ad':'Ogłoszenie w gazecie','Flyers':'Ulotki','Radio Spot':'Reklama w radiu','Pin flyers around the valley.':'Rozwieś ulotki w całej dolinie.','A half page in the Valley Gazette.':'Pół strony w Gazecie Dolinnej.','A catchy jingle on Hollow FM.':'Wpadający w ucho dżingiel w Radiu Dolina.',
+'No contracts pinned up right now. New ones arrive every few minutes.':'Na razie brak kontraktów. Nowe pojawiają się co kilka minut.','Dale is already out on a delivery.':'Dale jest już w trasie.','Dale is pulling in now!':'Dale właśnie podjeżdża!','You do not have everything for this delivery yet.':'Nie masz jeszcze wszystkiego do tej dostawy.','Dale, your delivery driver':'Dale, twój kierowca','Delivery Board. Dale is out on a delivery':'Tablica dostaw. Dale jest w trasie','Delivery Board: send goods to town with Dale':'Tablica dostaw: wyślij towary do miasta z Dale’em','DELIVERIES':'DOSTAWY','DIESEL':'ROPA',
+// ---- makers, homes, materials
+'Empty slot':'Wolne miejsce','Nothing ready':'Nic gotowego','Ready!':'Gotowe!','Feed':'Nakarm','No hungry animals right now.':'Teraz nikt nie jest głodny.','Ran out of feed.':'Zabrakło paszy.','Let your farmer finish the current jobs first.':'Niech farmer najpierw skończy obecne zadania.','Wait for the farmer to finish there.':'Poczekaj, aż farmer tam skończy.','The farmer is still working there.':'Farmer wciąż tam pracuje.','Farmer is on the way':'Farmer już idzie',
+'Materials drop while you harvest, collect from animals and pick fruit trees. Neighbors send them too. Spend them to upgrade your barn and animal homes.':'Materiały wypadają podczas zbiorów, odbierania produktów od zwierząt i zrywania owoców. Wysyłają je też sąsiedzi. Wydawaj je na rozbudowę stodoły i domów zwierząt.',
+'Grinds crops into animal feed and fertilizer.':'Mieli plony na paszę i nawóz.','Presses oily crops into diesel for your tractor, seeder and harvester.':'Wyciska oleiste plony na ropę dla traktora, siewnika i kombajnu.','Cooks farm goods into treats that sell for much more.':'Gotuje z plonów smakołyki, które sprzedają się dużo drożej.','Presses fruit into cider and juice that sell for a lot.':'Wyciska z owoców cydr i soki, które dobrze się sprzedają.','Bees make honey on their own. Flowers help them make more.':'Pszczoły same robią miód. Kwiaty pomagają im robić go więcej.','Cast a line with some bait and catch fresh fish.':'Zarzuć wędkę z przynętą i złów świeże ryby.',
+'Collects from every ready, fed animal right now.':'Od razu odbiera produkty od wszystkich gotowych, nakarmionych zwierząt.','Harvests every ripe crop right now.':'Od razu zbiera wszystkie dojrzałe plony.','Picks every ready fruit tree right now.':'Od razu zrywa owoce ze wszystkich gotowych drzew.','Every growing crop is ready to harvest.':'Każdy rosnący plon jest gotowy do zbioru.','Fills the fuel tank to the top.':'Napełnia bak do pełna.','One can of diesel: 10 fuel. Make your own at a Diesel Press.':'Jeden kanister ropy: 10 paliwa. Zrób własną w tłoczni ropy.','Fuel tank full.':'Bak pełny.','The tank is already full.':'Bak jest już pełny.','Topped up the tank with a can of diesel.':'Dolano kanister ropy do baku.',
+'Nothing was growing. Your Farm Cash was refunded.':'Nic nie rosło. Farmdolary zostały zwrócone.','Nothing was ready. Your Farm Cash was refunded.':'Nic nie było gotowe. Farmdolary zostały zwrócone.','Your barn is full. Your Farm Cash was refunded.':'Stodoła jest pełna. Farmdolary zostały zwrócone.',
+'Point the harvester at ripe crops.':'Skieruj kombajn na dojrzałe plony.','Point the seeder at plowed plots.':'Skieruj siewnik na zaorane pola.','Point the tractor at grass or harvested plots.':'Skieruj traktor na trawę lub zebrane pola.','Tractor: click to plow a 2 by 2 area.':'Traktor: kliknij, by zaorać obszar 2 na 2.','Seeder: click to plant a 2 by 2 area.':'Siewnik: kliknij, by obsiać obszar 2 na 2.','Harvester: click to harvest a 2 by 2 area.':'Kombajn: kliknij, by zebrać obszar 2 na 2.','Move tool: click something, then click its new spot.':'Przenoszenie: kliknij coś, a potem nowe miejsce.','Remove tool: click anything you want to clear away.':'Usuwanie: kliknij to, co chcesz usunąć.','Multi-tool: plow, plant, harvest and collect.':'Multinarzędzie: oraj, siej, zbieraj i odbieraj.',
+'Connected fences and hedges line up on their own. Use Move to shift a piece.':'Płoty i żywopłoty same się łączą. Użyj przenoszenia, by przesunąć element.','The farmhouse and barn stay. Use Move to shift them.':'Dom i stodoła zostają. Możesz je przenieść.','Joins up with its neighbors.':'Łączy się z sąsiednimi elementami.','That spot is taken. Pick empty grass.':'To miejsce jest zajęte. Wybierz pustą trawę.','Spot taken':'Miejsce zajęte','Stopped placing.':'Zakończono stawianie.','You already helped there.':'Już tu pomogłeś.','Helped. Thanks!':'Pomoc udzielona. Dzięki!',
+'Get Bigger Farm first':'Najpierw kup większą farmę','Grow your land to 20 by 20.':'Powiększ ziemię do 20 na 20.','Grow your land to 24 by 24.':'Powiększ ziemię do 24 na 24.','Your farm keeps growing!':'Twoja farma wciąż rośnie!','Bigger Farm':'Większa farma','Huge Farm':'Ogromna farma','Instant Grow':'Natychmiastowy wzrost','Golden Watering Can':'Złota konewka','Fuel Refill':'Tankowanie',
+'Not enough Farm Cash.':'Za mało farmdolarów.','Watered! Grows faster':'Podlane! Rośnie szybciej','Fertilized: double harvest':'Nawiezione: podwójny zbiór','Golden crops':'Złote plony',
+// ---- neighbors and visits
+'Your farm is full of guests right now.':'Na twojej farmie jest teraz pełno gości.','Neighbors will only come when you invite them.':'Sąsiedzi przyjdą tylko na zaproszenie.','Neighbors may drop by again.':'Sąsiedzi mogą znów wpadać.','Help with crops, animals or fruit trees.':'Pomóż przy plonach, zwierzętach lub drzewach owocowych.','Help yourself to a look around.':'Rozejrzyj się śmiało.','Come again soon!':'Wpadnij znowu!','Thanks for stopping by!':'Dzięki za odwiedziny!','What a lovely farm!':'Jaka śliczna farma!','I could stay here all day.':'Mogłabym tu zostać cały dzień.','Smells like fresh hay.':'Pachnie świeżym sianem.','Beautiful flowers!':'Piękne kwiaty!','You are so kind!':'Jesteś taki miły!','You are the best neighbor!':'Jesteś najlepszym sąsiadem!','That helps a lot!':'To bardzo pomaga!','Here, a little something for you!':'Proszę, mały prezent dla ciebie!',
+'Your Gift Box is empty. Help your neighbors each day and they will send you gifts. Collection prizes land here too.':'Pudełko z prezentami jest puste. Pomagaj sąsiadom codziennie, a przyślą ci prezenty. Trafiają tu też nagrody za kolekcje.',
+// ---- stats and ribbons
+'Farm stats':'Statystyki farmy','Farm level':'Poziom farmy','Crops harvested':'Zebrane plony','Seeds planted':'Posadzone nasiona','Plots plowed':'Zaorane pola','Crops watered':'Podlane plony','Fruit picked':'Zerwane owoce','Animal goods collected':'Odebrane produkty zwierzęce','Animals fed':'Nakarmione zwierzęta','Goods made':'Wytworzone towary','Goods sold at market':'Towary sprzedane na targu','Coins earned from sales':'Monety ze sprzedaży','Orders filled':'Zrealizowane zamówienia','Deliveries made':'Zrealizowane dostawy','Neighbors helped':'Pomoc sąsiadom','Visitors greeted':'Przywitani goście','Quests completed':'Ukończone zadania','Babies born':'Urodzone młode','Day farming':'Dzień na farmie','Days farming':'Dni na farmie','All-time':'Od początku','None yet':'Jeszcze nic','None':'Brak',
+'Crop Master':'Mistrz plonów','Plow Pro':'As pługa','Green Thumb':'Ręka do roślin','Orchard Keeper':'Opiekun sadu','Animal Lover':'Przyjaciel zwierząt','Ranch Hand':'Parobek','Good Neighbor':'Dobry sąsiad','Decorator':'Dekorator','Collector':'Kolekcjoner','Farmhand':'Pomocnik','Arborist':'Arborysta',
+'crops harvested':'zebranych plonów','plots plowed':'zaoranych pól','fruit trees picked':'zerwanych drzew','collecting from animals':'odbiorów od zwierząt','neighbors helped':'pomocy sąsiadom','things placed':'postawionych rzeczy','collections traded in':'wymienionych kolekcji','harvesting crops':'zbieranie plonów','picking fruit trees':'zrywanie owoców','animal collections':'kolekcje zwierzęce','mastery stars':'gwiazdki mistrzostwa',
+// ---- wardrobe
+'Body':'Ciało','Face':'Twarz','Hair':'Włosy','Clothing':'Ubrania','Extras':'Dodatki','Gender':'Płeć','Female':'Kobieta','Male':'Mężczyzna','Body type':'Sylwetka','Shape':'Sylwetka','Skin':'Skóra','Skin tone':'Odcień skóry','Slim':'Szczupła','Normal':'Normalna','Broad':'Szeroka','Eyes':'Oczy','Eyebrows':'Brwi','Nose':'Nos','Ears':'Uszy','Mouth':'Usta','Cheeks':'Policzki','Facial hair':'Zarost','Glasses':'Okulary','Eye shape':'Kształt oczu','Eye color':'Kolor oczu','Almond':'Migdałowe','Round':'Okrągłe','Sleepy':'Senne','Thin':'Cienkie','Thick':'Grube','Arched':'Łukowate','Small':'Mały','Big':'Duży','Pointed':'Spiczasty','Button':'Guziczek','Smile':'Uśmiech','Big grin':'Szeroki uśmiech','Calm':'Spokój','Lip color':'Kolor ust','Rosy cheeks':'Rumiane policzki','No blush':'Bez rumieńców','Freckles':'Piegi','No freckles':'Bez piegów','Clean shaven':'Gładko ogolony','Beard':'Broda','Mustache':'Wąsy','No glasses':'Bez okularów','Round glasses':'Okrągłe okulary','Sunglasses':'Okulary przeciwsłoneczne',
+'Hairstyle':'Fryzura','Hair color':'Kolor włosów','Short':'Krótkie','Long':'Długie','Curly':'Kręcone','Wavy':'Falowane','Ponytail':'Kucyk','Pigtails':'Kitki','Bun':'Kok','Bob':'Bob','Pixie':'Pixie','Afro puff':'Afro kok','Side braid':'Warkocz z boku','Buzz cut':'Na jeża','Bald':'Łysy','Hats':'Kapelusze','Hat':'Kapelusz','Hat color':'Kolor kapelusza','No hat':'Bez kapelusza','Straw hat':'Słomkowy kapelusz','Ball cap':'Czapka z daszkiem','Cowboy hat':'Kapelusz kowbojski','Sun hat':'Kapelusz od słońca','Beanie':'Czapka','Top hat':'Cylinder','Bandana':'Bandana','Golden crown':'Złota korona',
+'Tops':'Góra','Top':'Góra','Top color':'Kolor góry','Bottoms':'Dół','Bottoms color':'Kolor dołu','Shoes':'Buty','Shoe color':'Kolor butów','Overalls':'Ogrodniczki','Patched overalls':'Łatane ogrodniczki','Plaid shirt':'Koszula w kratę','Striped shirt':'Koszulka w paski','T-shirt':'Koszulka','Sweater':'Sweter','Farmer vest':'Kamizelka farmera','Jeans':'Dżinsy','Shorts':'Szorty','Skirt':'Spódnica','Accessories':'Akcesoria','Accessory':'Akcesorium','Accessory color':'Kolor akcesorium','Scarf':'Szalik','Necklace':'Naszyjnik','Earrings':'Kolczyki','Hair flower':'Kwiat we włosach','Gloves':'Rękawice','Mittens':'Rękawiczki','Pet':'Zwierzak','Pet name':'Imię zwierzaka','Your pet':'Twój zwierzak','Farm Dog':'Pies podwórkowy','Barn Cat':'Kot stodolny','farm dog':'pies podwórkowy','barn cat':'kot stodolny','Farmer name':'Imię farmera','Farm name':'Nazwa farmy','Your name':'Twoje imię','Style':'Styl','Color':'Kolor','Expression':'Mina','Pick any color':'Wybierz dowolny kolor','Total price':'Cena łącznie','Wave':'Machanie','Walk':'Chodzenie','Work':'Praca','Zoom':'Zbliżenie','Preview of your farmer':'Podgląd farmera','Red':'Czerwony','Blue':'Niebieski','Yellow':'Żółty','White':'Biały','Natural':'Naturalny',
+'Pick a look. You can change it any time from the Wardrobe button.':'Wybierz wygląd. Zmienisz go w każdej chwili w garderobie.','Everything you are wearing is already yours.':'Wszystko, co masz na sobie, już do ciebie należy.','Bought! It is yours to wear any time.':'Kupione! Możesz to nosić, kiedy chcesz.','Looking sharp!':'Świetnie wyglądasz!','Things your pet found':'Znaleziska twojego zwierzaka',
+'A curious cat that follows your farmer around and finds coins and materials.':'Ciekawski kot, który chodzi za farmerem i znajduje monety oraz materiały.','A loyal pup that follows your farmer around and sniffs out coins and materials.':'Wierny piesek, który chodzi za farmerem i wywęszy monety oraz materiały.',
+// ---- crops
+'Strawberries':'Truskawki','Soybeans':'Soja','Carrots':'Marchew','Eggplant':'Bakłażan','Wheat':'Pszenica','Tomatoes':'Pomidory','Pumpkins':'Dynie','Blueberries':'Borówki','Raspberries':'Maliny','Cotton':'Bawełna','Corn':'Kukurydza','Potatoes':'Ziemniaki','Red Peppers':'Czerwona papryka','Sunflowers':'Słoneczniki','Grapes':'Winogrona','Rice':'Ryż','Lavender':'Lawenda','Daisies':'Stokrotki','Daffodils':'Żonkile','Morning Glories':'Powoje','Watermelons':'Arbuzy','Tulips':'Tulipany','Beets':'Buraki','Cranberries':'Żurawina','Barley':'Jęczmień','Butternut Squash':'Dynia piżmowa','Roses':'Róże',
+// ---- animals, products, homes
+'Chicken':'Kura','Duck':'Kaczka','Sheep':'Owca','Cow':'Krowa','Goat':'Koza','Pig':'Świnia','Horse':'Koń','Rabbit':'Królik','Turkey':'Indyk','Llama':'Lama',
+'Chickens':'Kury','Ducks':'Kaczki','Cows':'Krowy','Goats':'Kozy','Pigs':'Świnie','Horses':'Konie','Rabbits':'Króliki','Turkeys':'Indyki','Llamas':'Lamy',
+'Eggs':'Jajka','Feathers':'Pióra','Wool':'Wełna','Milk':'Mleko','Goat milk':'Kozie mleko','Truffles':'Trufle','Horse hair':'Końskie włosie','Angora fur':'Angora','Turkey feathers':'Pióra indyka','Llama wool':'Wełna lamy',
+'Chicken Coop':'Kurnik','Duck House':'Domek dla kaczek','Sheep Pen':'Owczarnia','Goat Shed':'Kozia szopa','Dairy Barn':'Obora','Pig Sty':'Chlewik','Horse Stable':'Stajnia','Rabbit Hutch':'Klatka dla królików','Turkey Roost':'Grzęda indyków','Llama Lodge':'Domek lam',
+// ---- trees and fruit
+'Apple Tree':'Jabłoń','Cherry Tree':'Wiśnia','Orange Tree':'Drzewo pomarańczowe','Lemon Tree':'Cytryna','Peach Tree':'Brzoskwinia','Plum Tree':'Śliwa','Apples':'Jabłka','Cherries':'Wiśnie','Oranges':'Pomarańcze','Lemons':'Cytryny','Peaches':'Brzoskwinie','Plums':'Śliwki','Fruit trees':'Drzewa owocowe',
+// ---- goods
+'Animal Feed':'Pasza','Fertilizer':'Nawóz','Diesel':'Ropa','Strawberry Jam':'Dżem truskawkowy','Apple Juice':'Sok jabłkowy','Country Bread':'Chleb wiejski','Cheese Wheel':'Krąg sera','Cheese':'Ser','Wool Sweater':'Wełniany sweter','Pumpkin Pie':'Placek dyniowy','Apple Pie':'Szarlotka','Apple Cider':'Cydr jabłkowy','Cherry Juice':'Sok wiśniowy','Grape Juice':'Sok winogronowy','Lemonade':'Lemoniada','Honey':'Miód','Honey Cake':'Miodownik','Fresh Fish':'Świeża ryba','Fish Pie':'Pasztecik rybny','Sandwich':'Kanapka',
+// ---- materials and collection items
+'Boards':'Deski','Nails':'Gwoździe','Bricks':'Cegły','Paint':'Farba','Shears':'Nożyce','Trowel':'Kielnia','Rake':'Grabie','Watering Can':'Konewka','Seed Packet':'Paczka nasion',
+'Garden Tools':'Narzędzia ogrodowe','Barnyard Buddies':'Podwórkowi kumple','Orchard Picnic':'Piknik w sadzie','Ladybug':'Biedronka','Butterfly':'Motyl','Bumblebee':'Trzmiel','Snail':'Ślimak','Frog':'Żaba','Bluebird':'Modraszka','Cupcake':'Babeczka','Biscuit':'Ciastko',
+// ---- buildings and decor
+'Feed Mill':'Młyn paszowy','Diesel Press':'Tłocznia ropy','Farm Kitchen':'Kuchnia farmy','Cider Press':'Tłocznia cydru','Beehive':'Ul','Fishing Pond':'Staw rybny','Farmhouse':'Dom','Silo':'Silos','Windmill':'Wiatrak','Mailbox':'Skrzynka pocztowa','Scarecrow':'Strach na wróble','Hay Bale':'Bela siana','White Fence':'Biały płot','Fence Gate':'Furtka','Hedge':'Żywopłot','Flower Bed':'Rabata','Flower Patch':'Kwietnik','Park Bench':'Ławka','Lamp Post':'Latarnia','Birdbath':'Poidełko dla ptaków','Birdhouse':'Budka dla ptaków','Garden Gnome':'Krasnal ogrodowy','Wishing Well':'Studnia życzeń','Stone Fountain':'Kamienna fontanna','Garden Arch':'Pergola','Garden Gazebo':'Altana','Picnic Table':'Stół piknikowy','Picnic Blanket':'Koc piknikowy','Stepping Stones':'Kamienna ścieżka','Pumpkin Pile':'Stos dyń','Duck Pond':'Staw z kaczkami','Town Clock':'Zegar miejski','Ladybug Topiary':'Biedronka z żywopłotu','Golden Cow Statue':'Pomnik złotej krowy','Hot Air Balloon':'Balon','Glass Greenhouse':'Szklarnia','Feed Sack':'Worek paszy','Diesel Can':'Kanister ropy','A little something to make the farm cozy.':'Drobiazg, który uprzytulni farmę.',
+// ---- misc single words used as labels
+'Plant ·':'Posadź ·','Selected ·':'Wybrane ·','Buy ·':'Kup ·','Run it ·':'Uruchom ·',
+'Welcome back to Farm Village! Come back every day for bigger rewards.':'Witaj ponownie w Farm Village! Wracaj codziennie po coraz większe nagrody.',
+'10 animal feed for your barn. Cheaper to make your own at a Feed Mill.':'10 paszy do stodoły. Taniej zrobić własną w młynie paszowym.',
+'5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.':'5 worków nawozu. Kliknij podlany plon, by go nawieźć: podwójny zbiór i większa szansa na złoto.',
+// proper names stay as they are
+'Farm Village':'Farm Village','Village':'Village','English':'English','Polski':'Polski','X':'X','Dale':'Dale','DALE':'DALE','Hank':'Hank','Mabel':'Mabel','Otis':'Otis','Juniper':'Juniper','Rosa':'Rosa',
+'Harbor Cannery':'Harbor Cannery','Mill Town Café':'Mill Town Café','Riverside Market':'Riverside Market','Valley Grocer':'Valley Grocer','Hollow Bakery':'Hollow Bakery','Bluebell Acres':'Bluebell Acres',"Hank's Homestead":"Hank's Homestead",'Otis Orchards':'Otis Orchards','Juniper Patch':'Juniper Patch','Rancho Rosa':'Rancho Rosa',
+'Plots':'Pola','Plot':'Pole','Plants':'Rośliny','Plows':'Orki','Harvests':'Zbiory','Next up':'Następne','Welcome back':'Witaj ponownie','Mastery':'Mistrzostwo'
+};
+const RIB_PL=x=>({Yellow:'Żółta',White:'Biała',Red:'Czerwona',Blue:'Niebieska'}[x]||x);
+const L_t=t=>String(t).replace(/^(\d+)s$/,'$1 s').replace(/^(\d+)h (\d+)m$/,'$1 godz. $2 min');
+const NUM='([\\d.,\\s\\u00a0]+)';
+const PL_PATS=[
+// numbers and resources
+[/^([\d.,\s ]+) coins$/,m=>m[1]+' '+p3(m[1],'moneta','monety','monet')],
+[/^([\d.,\s ]+) \/ ([\d.,\s ]+) XP$/,m=>m[1]+' / '+m[2]+' XP'],
+[/^([\d.,\s ]+) to go$/,m=>'jeszcze '+m[1]],
+[/^Level (\d+)$/,m=>'Poziom '+m[1]],
+[/^Day (\d+)$/,m=>'Dzień '+m[1]],
+[/^Tip (\d+) of (\d+)$/,m=>'Wskazówka '+m[1]+' z '+m[2]],
+[/^Claim \+(\d+)$/,m=>'Odbierz +'+m[1]],
+[/^\+(\d+) Farm Cash$/,m=>'+'+m[1]+' '+p3(m[1],'farmdolar','farmdolary','farmdolarów')],
+[/^\+(\d+) fuel$/,m=>'+'+m[1]+' paliwa'],
+[/^Ready in (.+)$/,m=>'Gotowe za '+L_t(m[1])],
+[/^Unlocks at Level (\d+)$/,m=>'Odblokowanie na poziomie '+m[1]],
+[/^Level (\d+) unlocks$/,m=>'Poziom '+m[1]+' odblokowuje'],
+[/^Market pays ([\d.,\s ]+)$/,m=>'Targ płaci '+m[1]],
+[/^Collect (\d+) finished$/,m=>'Odbierz gotowe ('+m[1]+')'],
+[/^Collect from (\d+)$/,m=>'Odbierz od '+m[1]],
+[/^Nothing ready \((.+)\)$/,m=>'Nic gotowego ('+L_t(m[1])+')'],
+[/^Feed (\d+) · (\d+) feed$/,m=>'Nakarm '+m[1]+' · '+m[2]+' paszy'],
+[/^Sell all goods · ([\d.,\s ]+)$/,m=>'Sprzedaj wszystkie towary · '+m[1]],
+[/^Sell all (.+) · ([\d.,\s ]+)$/,m=>'Sprzedaj wszystko ('+L_w(m[1])+') · '+m[2]],
+[/^Level (\d+) at farm level (\d+)$/,m=>'Poziom '+m[1]+' od poziomu farmy '+m[2]],
+[/^Level (\d+) (.+)$/,m=>L_w(m[2])+', poziom '+m[1]],
+[/^Build a (.+) first$/,m=>'Najpierw zbuduj: '+L_w(m[1])],
+[/^(.+) full: build another$/,m=>L_w(m[1])+' pełny: zbuduj kolejny'],
+[/^(.+) \(now\)$/,m=>L_w(m[1])+' (teraz)'],
+[/^(.+) wants$/,m=>m[1]+' chce'],
+[/^Upgrade to level (\d+): store (\d+) things$/,m=>'Rozbudowa do poziomu '+m[1]+': miejsce na '+m[2]+' rzeczy'],
+[/^Barn level (\d+)$/,m=>'Stodoła, poziom '+m[1]],
+[/^(\d+) \/ (\d+) stored$/,m=>m[1]+' / '+m[2]+' w stodole'],
+[/^([\d.,\s ]+) each$/,m=>m[1]+' za szt.'],
+[/^(.+) ×(\d+)$/,m=>L_w(m[1])+' ×'+m[2]],
+// goals
+[/^Harvest (\d+) crops$/,m=>'Zbierz '+m[1]+' '+p3(m[1],'plon','plony','plonów')],
+[/^Plow (\d+) plots$/,m=>'Zaorz '+m[1]+' '+p3(m[1],'pole','pola','pól')],
+[/^Collect from animals (\d+) times$/,m=>'Odbierz od zwierząt '+m[1]+' '+p3(m[1],'raz','razy','razy')],
+[/^Pick fruit trees (\d+) times$/,m=>'Zbierz owoce z drzew '+m[1]+' '+p3(m[1],'raz','razy','razy')],
+[/^Place (\d+) new things? on your farm$/,m=>'Postaw na farmie '+m[1]+' '+p3(m[1],'nową rzecz','nowe rzeczy','nowych rzeczy')],
+[/^Help (\d+) neighbors?$/,m=>'Pomóż '+m[1]+' '+p3(m[1],'sąsiadowi','sąsiadom','sąsiadom')],
+[/^Say hi to (\d+) visiting neighbors?$/,m=>'Przywitaj '+m[1]+' '+p3(m[1],'odwiedzającego sąsiada','odwiedzających sąsiadów','odwiedzających sąsiadów')],
+[/^Fill (\d+) neighbor orders?$/,m=>'Zrealizuj '+m[1]+' '+p3(m[1],'zamówienie sąsiada','zamówienia sąsiadów','zamówień sąsiadów')],
+[/^Send (\d+) deliver(?:y|ies) with Dale$/,m=>'Wyślij '+m[1]+' '+p3(m[1],'dostawę','dostawy','dostaw')+' z Dale’em'],
+// toasts and sentences
+[/^Sold (\d+) goods for ([\d.,\s ]+) coins\.$/,m=>'Sprzedano '+m[1]+' '+p3(m[1],'towar','towary','towarów')+' za '+m[2]+' '+p3(m[2],'monetę','monety','monet')+'.'],
+[/^Sold (\d+) (.+) for ([\d.,\s ]+) coins\.$/,m=>'Sprzedano: '+L_w(m[2])+' ×'+m[1]+' za '+m[3]+' '+p3(m[3],'monetę','monety','monet')+'.'],
+[/^Goal complete! \+(\d+) coins, \+(\d+) XP\.$/,m=>'Cel wykonany! +'+m[1]+' monet, +'+m[2]+' XP.'],
+[/^Daily bonus: \+(\d+) coins(?: and (\d+) Farm Cash)?!$/,m=>'Bonus dzienny: +'+m[1]+' monet'+(m[2]?' i '+m[2]+' '+p3(m[2],'farmdolar','farmdolary','farmdolarów'):'')+'!'],
+[/^(.+) has arrived on the farm!$/,m=>({Spring:'Wiosna zawitała',Summer:'Lato zawitało',Autumn:'Jesień zawitała',Winter:'Zima zawitała'}[m[1]]||m[1])+' na farmę!'],
+[/^(.+) lasts another (.+)\. Weather right now: (.+)\.$/,m=>L_w(m[1])+' potrwa jeszcze '+L_t(m[2])+'. Pogoda teraz: '+L_w(m[3])+'.'],
+[/^Night falls over (.+)\. Fireflies are out!$/,m=>'Noc zapada nad farmą '+m[1]+'. Wyleciały świetliki!'],
+[/^Back home at (.+)\.$/,m=>'Z powrotem w domu: '+m[1]+'.'],
+[/^Welcome back(?:, (.+))?! (.+) is waiting\. Level (\d+)\.$/,m=>'Witaj ponownie'+(m[1]?', '+m[1]:'')+'! '+m[2]+' czeka. Poziom '+m[3]+'.'],
+[/^(?:Way to go, (.+)! )?You reached Level (\d+)!$/,m=>(m[1]?'Brawo, '+m[1]+'! ':'')+'Osiągnięto poziom '+m[2]+'!'],
+[/^([\d.,\s ]+) XP to Level (\d+)\. Deliveries with Dale give the most XP, then quests and neighbor orders\.$/,m=>'Do poziomu '+m[2]+' brakuje '+m[1]+' XP. Najwięcej XP dają dostawy z Dale’em, potem zadania i zamówienia sąsiadów.'],
+[/^Looking sharp, (.+)!$/,m=>'Świetnie wyglądasz, '+m[1]+'!'],
+[/^Quest step done! Next: (.+)\.$/,m=>'Krok zadania wykonany! Dalej: '+L_w(m[1])+'.'],
+[/^Follow the tip: (.+)$/,m=>'Postępuj według wskazówki: '+L_w(m[1])],
+[/^Handed over (\d+) (.+)\.$/,m=>'Oddano: '+L_w(m[2])+' ×'+m[1]+'.'],
+[/^You need (\d+) (.+) in the barn\.$/,m=>'Potrzebujesz w stodole: '+L_w(m[2])+' ×'+m[1]+'.'],
+[/^You need ([\d.,\s ]+) coins for (?:this upgrade|this|that|the (.+))\.$/,m=>'Potrzebujesz '+m[1]+' '+p3(m[1],'monety','monet','monet')+(m[2]?' na: '+L_w(m[2]):'')+'.'],
+[/^You need (\d+) Farm Cash for that\.$/,m=>'Potrzebujesz '+m[1]+' '+p3(m[1],'farmdolara','farmdolarów','farmdolarów')+'.'],
+[/^You need (\d+) Farm Cash\. You earn 1 every level up and from the daily bonus\.$/,m=>'Potrzebujesz '+m[1]+' '+p3(m[1],'farmdolara','farmdolarów','farmdolarów')+'. Dostajesz 1 za każdy nowy poziom i z bonusu dziennego.'],
+[/^You need (\d+) coins to plant (.+)\.$/,m=>'Potrzebujesz '+m[1]+' monet, by posadzić: '+L_w(m[2])+'.'],
+[/^Plowing costs (\d+) coins\. Sell some goods from the barn first\.$/,m=>'Oranie kosztuje '+m[1]+' monet. Najpierw sprzedaj coś ze stodoły.'],
+[/^Not enough (coins|Farm Cash) for (.+)\.$/,m=>'Za mało '+(m[1]==='coins'?'monet':'farmdolarów')+' na: '+m[2].split(', ').map(L_w).join(', ')+'.'],
+[/^Not yet yours: (.+)\.$/,m=>'Jeszcze nie twoje: '+m[1].split(', ').map(L_w).join(', ')+'.'],
+[/^Barn upgraded! It now stores (\d+) things\.$/,m=>'Stodoła rozbudowana! Mieści teraz '+m[1]+' rzeczy.'],
+[/^Truck upgraded! It now carries (\d+) goods\.$/,m=>'Ciężarówka ulepszona! Mieści teraz '+m[1]+' towarów.'],
+[/^That is more than the truck can carry\. Upgrade the truck to load (\d+)\.$/,m=>'To więcej, niż zmieści ciężarówka. Ulepsz ją, by wozić '+m[1]+'.'],
+[/^The truck is parked by the board and ready to load\. It carries up to (\d+) goods\.$/,m=>'Ciężarówka stoi przy tablicy, gotowa do załadunku. Mieści do '+m[1]+' towarów.'],
+[/^Dale is driving to (.+)\. Back in (.+)\.$/,m=>'Dale jedzie do: '+m[1]+'. Wróci za '+L_t(m[2])+'.'],
+[/^Dale loaded the truck and is heading to (.+)\. Back in (.+)\.$/,m=>'Dale załadował ciężarówkę i jedzie do: '+m[1]+'. Wróci za '+L_t(m[2])+'.'],
+[/^Dale is back from (.+) with ([\d.,\s ]+) coins and (\d+) XP!$/,m=>'Dale wrócił z: '+m[1]+'. Przywiózł '+m[2]+' monet i '+m[3]+' XP!'],
+[/^(.+) will find another farm\. A new contract comes soon\.$/,m=>m[1]+' znajdzie inną farmę. Wkrótce nowy kontrakt.'],
+[/^Next contract in about (.+)\.$/,m=>'Następny kontrakt za około '+L_t(m[1])+'.'],
+[/^Next order in about (.+)\.$/,m=>'Następne zamówienie za około '+L_t(m[1])+'.'],
+[/^(.+) posted a new order on the Orders board!$/,m=>m[1]+' dodaje nowe zamówienie na tablicy!'],
+[/^(.+) paid ([\d.,\s ]+) coins\. Thank you!$/,m=>m[1]+' płaci '+m[2]+' monet. Dziękujemy!'],
+[/^(.+) will ask someone else\.$/,m=>m[1]+' zapyta kogoś innego.'],
+[/^(.+) dropped by for a visit!$/,m=>m[1]+' wpada z wizytą!'],
+[/^(.+) is already here!$/,m=>m[1]+' już tu jest!'],
+[/^(.+) is on the way!$/,m=>m[1]+' jest już w drodze!'],
+[/^(.+): say hi!$/,m=>m[1]+': przywitaj się!'],
+[/^(.+) from (.+), Level (\d+)\.$/,m=>m[1]+' z farmy '+m[2]+', poziom '+m[3]+'.'],
+[/^(.+), Level (\d+) · Helped (\d+) of (\d+) today$/,m=>m[1]+', poziom '+m[2]+' · pomoc dziś: '+m[3]+' z '+m[4]],
+[/^(.+) · Level (\d+) · Helped (\d+)\/(\d+)$/,m=>m[1]+' · poziom '+m[2]+' · pomoc '+m[3]+'/'+m[4]],
+[/^Welcome to (.+)! Click their crops, animals and trees to help out \((\d+) a day\)\.$/,m=>'Witaj na farmie '+m[1]+'! Klikaj plony, zwierzęta i drzewa, by pomóc ('+m[2]+' dziennie).'],
+[/^Click (.+)'s crops, animals or fruit trees to help out\.$/,m=>'Klikaj plony, zwierzęta lub drzewa, by pomóc: '+m[1]+'.'],
+[/^You have helped (.+) (\d+) times today\. Come back tomorrow!$/,m=>'Pomoc dla: '+m[1]+' już '+m[2]+' razy dzisiaj. Wróć jutro!'],
+[/^(.+) says thanks for all the help and sent you a (.+)! Find it in your Gift Box\.$/,m=>m[1]+' dziękuje za pomoc i przysyła: '+L_w(m[2])+'! Znajdziesz to w pudełku z prezentami.'],
+[/^(.+)'s (farmhouse|barn)\.$/,m=>(m[2]==='barn'?'Stodoła: ':'Dom: ')+m[1]+'.'],
+[/^(.+)'s Farmhouse$/,m=>'Dom: '+m[1]],
+[/^A baby (.+) was born! It grows up in (.+)\.$/,m=>'Urodziło się młode ('+L_w(m[1])+')! Dorośnie za '+L_t(m[2])+'.'],
+[/^♥ Baby (.+)$/,m=>'♥ Młode: '+L_w(m[1])],
+[/^Baby (.+)$/,m=>'Młode: '+L_w(m[1])],
+[/^Feeding (\d+) animals?\.( Not enough feed for the rest\.)?$/,m=>'Karmienie: '+m[1]+' '+p3(m[1],'zwierzę','zwierzęta','zwierząt')+'.'+(m[2]?' Dla reszty zabrakło paszy.':'')],
+[/^(.+) is hungry and needs (\d+) feed\. Make feed at a Feed Mill or buy a Feed Sack in Market > Farm\.$/,m=>L_w(m[1])+': głodne zwierzę, potrzebuje '+m[2]+' paszy. Zrób paszę w młynie albo kup worek paszy na targu (Farma).'],
+[/^(.+) need a (.+) before they can produce\. Find it in Market > Homes\.$/,m=>L_w(m[1])+' potrzebują domu ('+L_w(m[2])+'), zanim zaczną produkować. Znajdziesz go na targu (Domy).'],
+[/^Build a (.+) first\. Find it in Market > Homes\.$/,m=>'Najpierw zbuduj: '+L_w(m[1])+'. Znajdziesz to na targu (Domy).'],
+[/^Your (.+?)(?: is|s are) full\. Build another one for more room\.$/,m=>L_w(m[1])+': brak miejsca. Zbuduj kolejny.'],
+[/^(.+) upgraded to level (\d+)!$/,m=>L_w(m[1])+': rozbudowa do poziomu '+m[2]+'!'],
+[/^(.+): collecting from (\d+)\.$/,m=>L_w(m[1])+': odbieranie od '+m[2]+'.'],
+[/^(.+): making (\d+) (.+), ready in (.+)\.$/,m=>L_w(m[1])+' produkuje: '+L_w(m[3])+' ×'+m[2]+', gotowe za '+L_t(m[4])+'.'],
+[/^Collect or finish the jobs in this (.+) first\.$/,m=>'Najpierw odbierz lub dokończ zadania w: '+L_w(m[1])+'.'],
+[/^The (.+) can line up 3 jobs\. Collect finished goods to make room\.$/,m=>L_w(m[1])+' może mieć 3 zadania w kolejce. Odbierz gotowe towary.'],
+[/^That recipe unlocks at Level (\d+)\.$/,m=>'Ten przepis odblokujesz na poziomie '+m[1]+'.'],
+[/^(.+) unlock at Level (\d+)\.$/,m=>L_w(m[1])+': odblokowanie na poziomie '+m[2]+'.'],
+[/^Those (.+) withered\. Plow and plant again\.$/,m=>L_w(m[1])+' uschły. Zaorz i posiej ponownie.'],
+[/^(.+): ready in (.+?)\.( Fertilizer from the barn doubles the harvest\.)?$/,m=>L_w(m[1])+': gotowe za '+L_t(m[2])+'.'+(m[3]?' Nawóz ze stodoły podwaja zbiory.':'')],
+[/^(\d+) plots are ready to harvest!$/,m=>'Pola gotowe do zbioru: '+m[1]+'!'],
+[/^Your (.+) now works (\d+) by (\d+) plots per trip!$/,m=>L_w(m[1])+' obrabia teraz obszar '+m[2]+' na '+m[3]+' naraz!'],
+[/^Your new (.+) is ready! Pick it from the tools\.$/,m=>L_w(m[1])+' gotowy! Wybierz go z narzędzi.'],
+[/^Your farm grew to (\d+) by (\d+)!$/,m=>'Farma urosła do '+m[1]+' na '+m[2]+'!'],
+[/^Your neighbors move in at Level (\d+)\. Then you can trade with them and visit their farms\.$/,m=>'Sąsiedzi wprowadzą się na poziomie '+m[1]+'. Wtedy możesz z nimi handlować i odwiedzać ich farmy.'],
+[/^Poured in (\d+) cans? of diesel\. Fuel: (\d+) \/ (\d+)\.$/,m=>'Wlano '+m[1]+' '+p3(m[1],'kanister','kanistry','kanistrów')+' ropy. Paliwo: '+m[2]+' / '+m[3]+'.'],
+[/^(.+) selected\. Click plowed plots to plant them\.$/,m=>'Wybrano: '+L_w(m[1])+'. Klikaj zaorane pola, by sadzić.'],
+[/^Pick a new spot for the (.+)\.$/,m=>'Wybierz nowe miejsce dla: '+L_w(m[1])+'.'],
+[/^Click empty grass to place the (.+)\. Press Escape to stop\.$/,m=>'Kliknij pustą trawę, by postawić: '+L_w(m[1])+'. Esc kończy.'],
+[/^(\d+) (.+) added to your barn\.$/,m=>'Do stodoły trafiło: '+L_w(m[2])+' ×'+m[1]+'.'],
+[/^(.+) brought in (\d+) goods( until the barn filled up)?\. They are in your barn\.$/,m=>L_w(m[1])+' zebrał '+m[2]+' '+p3(m[2],'towar','towary','towarów')+(m[3]?', aż stodoła się zapełniła':'')+'. Są w stodole.'],
+[/^You found a (.+) for your (.+) collection!$/,m=>'Znaleziono: '+L_w(m[1])+' do kolekcji „'+L_w(m[2])+'”!'],
+[/^(.+) complete! \+(\d+) coins, \+(\d+) XP and a (.+) in your Gift Box\.$/,m=>'Kolekcja „'+L_w(m[1])+'” ukończona! +'+m[2]+' monet, +'+m[3]+' XP i '+L_w(m[4])+' w pudełku z prezentami.'],
+[/^Reward: (\d+) coins, (\d+) XP and a (.+)\.$/,m=>'Nagroda: '+m[1]+' monet, '+m[2]+' XP i '+L_w(m[3])+'.'],
+[/^Found by (.+)\. Traded in (\d+) times\.$/,m=>'Znajdują: '+m[1].split(', ').map(L_w).join(', ')+'. Wymieniono '+m[2]+' '+p3(m[2],'raz','razy','razy')+'.'],
+[/^Mastery star (\d+) for (.+)! \+(\d+) coins( and 1 Farm Cash)?\.$/,m=>'Gwiazdka mistrzostwa '+m[1]+': '+L_w(m[2])+'! +'+m[3]+' monet'+(m[4]?' i 1 farmdolar':'')+'.'],
+[/^Favorite crops: (.+)\.$/,m=>'Ulubione plony: '+m[1].replace(/([^,(]+) \((\d+)\)/g,(x,a,b)=>L_w(a.trim())+' ('+b+')')+'.'],
+[/^(.+) ribbon for (.+): (\d+) (.+)\.$/,m=>RIB_PL(m[1])+' wstęga: '+L_w(m[2])+' – '+m[3]+' '+L_w(m[4])+'.'],
+[/^All four ribbons earned\. (\d+) (.+)\.$/,m=>'Zdobyto wszystkie cztery wstęgi. '+m[1]+' '+L_w(m[2])+'.'],
+[/^(?:(.+) ribbon\. )?Next: ([\d.,\s ]+) \/ ([\d.,\s ]+) (.+)$/,m=>(m[1]?RIB_PL(m[1])+' wstęga. ':'')+'Dalej: '+m[2]+' / '+m[3]+' '+L_w(m[4])],
+[/^(.+) found (\d+) coins!$/,m=>m[1]+' znajduje '+m[2]+' '+p3(m[2],'monetę','monety','monet')+'!'],
+[/^(.+) dug up some (.+)!$/,m=>m[1]+' wykopuje: '+L_w(m[2])+'!'],
+[/^(.+) wags happily\.$/,m=>m[1]+' radośnie macha ogonem.'],
+[/^(.+) purrs\.$/,m=>m[1]+' mruczy.'],
+[/^(?:Swapped pets! )?Meet (.+), your new (farm dog|barn cat)! Rename it in the Wardrobe\.$/,m=>'Poznaj: '+m[1]+', twój nowy '+L_w(m[2])+'! Imię zmienisz w garderobie.'],
+[/^This deletes (.+) for good: your coins, level, animals and everything in the barn\. You start a brand-new farm with the tutorial\.$/,m=>'To na zawsze usunie farmę '+m[1]+': monety, poziom, zwierzęta i wszystko w stodole. Zaczniesz nową farmę z samouczkiem.'],
+[/^You have (\d+)\.$/,m=>'Masz: '+m[1]+'.'],
+[/^Feed in your barn: (\d+)\. Make more at a Feed Mill\.$/,m=>'Pasza w stodole: '+m[1]+'. Więcej zrobisz w młynie paszowym.'],
+[/^Hot today: (.+) sell for 50% more here\.$/,m=>'Hit dnia: '+L_w(m[1])+' – tutaj o 50% drożej.'],
+[/^(.+) are out! Orders come every (.+) and pay (\d+)% more for (\d+) minutes\.$/,m=>L_w(m[1])+' działają! Zamówienia co '+L_t(m[2])+', płacą o '+m[3]+'% więcej przez '+m[4]+' min.'],
+[/^(.+) running: an order every (.+), paying (\d+)% more\. (.+) left\.$/,m=>L_w(m[1])+' trwa: zamówienie co '+L_t(m[2])+', płacą o '+m[3]+'% więcej. Zostało '+L_t(m[4])+'.'],
+[/^(.+) For (\d+) minutes, an order every (.+) paying (\d+)% more\.$/,m=>L_w(m[1])+' Przez '+m[2]+' min zamówienie co '+L_t(m[3])+', płacą o '+m[4]+'% więcej.'],
+[/^(.+) It lines up to 3 jobs and works on them one after another, even while you are away\.$/,m=>L_w(m[1])+' Przyjmuje do 3 zadań i wykonuje je po kolei, nawet gdy cię nie ma.'],
+[/^Room for (\d+) (.+?)(?:, with a (\d+)% chance of double (.+))?\. Each one eats (\d+) feed per batch\. Spots used: (\d+) of (\d+)\.$/,m=>'Miejsce dla '+m[1]+' ('+L_w(m[2])+')'+(m[3]?', '+m[3]+'% szans na podwójne: '+L_w(m[4]):'')+'. Każde zjada '+m[5]+' paszy na raz. Zajęte: '+m[6]+' z '+m[7]+'.'],
+[/^(.+) → (.+) ×(\d+) in (.+?)(?:\. Sells for (\d+) each)?\.$/,m=>m[1].split(' + ').map(x=>{const y=x.match(/^(.+) ×(\d+)$/);return y?L_w(y[1])+' ×'+y[2]:x}).join(' + ')+' → '+L_w(m[2])+' ×'+m[3]+' w '+L_t(m[4])+(m[5]?'. Cena: '+m[5]+' za szt.':'.')],
+[/^(.+): "(.+)"$/,m=>m[1]+': „'+L_w(m[2])+'”'],
+[/^Best in (.+)\. Ready in (.+)\.$/,m=>'Najlepsze: '+L_w(m[1]).toLowerCase()+'. Gotowe za '+L_t(m[2])+'.'],
+[/^Sells for (\d+)\. \+(\d+) XP$/,m=>'Cena: '+m[1]+'. +'+m[2]+' XP'],
+[/^In season now! Ready in (.+)\.$/,m=>'Teraz w sezonie! Gotowe za '+L_t(m[1])+'.'],
+[/^Best in (.+)\. Ready in (.+)\. Sells for (\d+)\. \+(\d+) XP$/,m=>'Najlepsze: '+L_w(m[1]).toLowerCase()+'. Gotowe za '+L_t(m[2])+'. Cena: '+m[3]+'. +'+m[4]+' XP'],
+[/^In season now! Ready in (.+)\. Sells for (\d+)\. \+(\d+) XP$/,m=>'Teraz w sezonie! Gotowe za '+L_t(m[1])+'. Cena: '+m[2]+'. +'+m[3]+' XP'],
+[/^\+?\d+ XP$/,m=>m[0]],
+[/^\d+x\d+$/,m=>m[0]],
+[/^Invite (.+) over$/,m=>'Zaproś: '+m[1]],
+[/^Visit (.+)\. Helped (\d+) of (\d+) times today$/,m=>'Odwiedź: '+m[1]+'. Pomoc dziś: '+m[2]+' z '+m[3]],
+[/^(\d+) of (\d+) helps today$/,m=>'Pomoc dziś: '+m[1]+' z '+m[2]],
+[/^(Wearing|Use) (.+)$/,m=>(m[1]==='Use'?'Użyj: ':'Założone: ')+L_w(m[2])],
+[/^(.+ color|Skin tone) (\d+)$/,m=>L_w(m[1])+' '+m[2]],
+[/^(.+): custom color$/,m=>L_w(m[1])+': własny kolor'],
+[/^(.+), (.+)\. Open the season guide$/,m=>L_w(m[1])+', '+L_w(m[2]).toLowerCase()+'. Otwórz przewodnik po porach roku'],
+[/^Mastery: (\d+) harvested$/,m=>'Mistrzostwo: zebrano '+m[1]],
+[/^(.+) every (.+), sells for (\d+)$/,m=>L_w(m[1])+' co '+L_t(m[2])+', cena '+m[3]],
+[/^Home for up to (\d+) (.+)\. Click it to collect from all of them\. You own (\d+)\.$/,m=>'Dom dla '+m[1]+' zwierząt ('+L_w(m[2]).toLowerCase()+'). Kliknij go, by odebrać od wszystkich naraz. Masz: '+m[3]+'.'],
+[/^Takes 2 by 2 tiles\. \+(\d+) XP$/,m=>'Zajmuje 2 na 2 pola. +'+m[1]+' XP'],
+[/^(.+) (\d+) recipes?\. You own (\d+)\.$/,m=>L_w(m[1])+' Przepisy: '+m[2]+'. Masz: '+m[3]+'.'],
+[/^(Plows|Plants|Harvests) (\d+) plots per trip\. Uses 1 fuel\.$/,m=>({Plows:'Orze '+m[2]+' pola',Plants:'Sieje na '+m[2]+' polach',Harvests:'Zbiera z '+m[2]+' pól'})[m[1]]+' naraz. Zużywa 1 paliwo.'],
+[/^(.+): (\d+) of (\d+)$/,m=>L_w(m[1])+': '+m[2]+' z '+m[3]],
+[/^(.+) trip$/,m=>'Kurs: '+L_t(m[1])],
+[/^(\d+) \/ (\d+) load$/,m=>'Ładunek: '+m[1]+' / '+m[2]],
+[/^Upgrade the truck to carry (\d+) goods$/,m=>'Ulepsz ciężarówkę, by wozić '+m[1]+' towarów']
+];
+
+const I18N=LANG==='pl'?{exact:PL_EXACT,pats:PL_PATS}:null;
+for(const[c,n]of LANGS){const b=document.createElement('button');b.textContent=n;b.lang=c;b.setAttribute('aria-pressed',String(LANG===c));b.onclick=()=>{if(LANG!==c)setLang(c)};document.getElementById('tlang').appendChild(b)}
+// Polish plural: 1 one, 2-4 few (but not 12-14), everything else many
+function p3(n,one,few,many){n=parseInt(String(n).replace(/[^\d]/g,''),10)||0;if(n===1)return one;const d=n%10,dd=n%100;return d>=2&&d<=4&&!(dd>=12&&dd<=14)?few:many}
+const TR_CACHE=new Map(),TR_OUT=new Set();let TR_LOWER=null;
+function tr(s){
+  if(!I18N||!s||typeof s!=='string'||!/[A-Za-z]/.test(s)||TR_OUT.has(s))return s;
+  const hit=TR_CACHE.get(s);if(hit!==undefined)return hit;
+  const m=s.match(/^(\s*)([\s\S]*?)(\s*)$/),core=m[2];let out=I18N.exact[core];
+  if(out===undefined){out=null;for(const[re,fn]of I18N.pats){const r=core.match(re);if(r){try{out=fn(r)}catch(e){out=null}break}}}
+  if(out==null){out=core;if(window.__i18nMiss)window.__i18nMiss.add(core)}
+  if(/^[A-Z]/.test(core)&&/^[a-ząćęłńóśźż]/.test(out))out=out[0].toUpperCase()+out.slice(1);
+  const res=m[1]+out+m[3];if(TR_CACHE.size>4000)TR_CACHE.clear();TR_CACHE.set(s,res);TR_OUT.add(res);return res;
+}
+// A name inside a sentence: exact match, then a case-insensitive match (keeping lower case), then a full translation.
+function L_w(x){
+  x=String(x).trim();const e=I18N.exact[x];if(e!==undefined)return e;
+  if(!TR_LOWER){TR_LOWER=new Map();for(const k in I18N.exact)TR_LOWER.set(k.toLowerCase(),I18N.exact[k])}
+  const l=TR_LOWER.get(x.toLowerCase());if(l!==undefined)return x[0]&&x[0]!==x[0].toUpperCase()?l[0].toLowerCase()+l.slice(1):l;
+  return tr(x);
+}
+if(I18N){
+  document.documentElement.lang=LANG;
+  // Luckiest Guy has no Polish letters; Lilita One is a close, chunky match that does.
+  const f=document.createElement('link');f.rel='stylesheet';f.href='https://fonts.googleapis.com/css2?family=Lilita+One&display=swap';document.head.appendChild(f);
+  document.documentElement.style.setProperty('--f-display',"'Lilita One','Luckiest Guy','Arial Black',sans-serif");
+  const TR_ATTRS=['aria-label','title','placeholder','alt'],TR_DONE=new WeakMap();
+  const skip=n=>{const p=n.parentElement;return!p||/^(TEXTAREA|SCRIPT|STYLE|INPUT)$/.test(p.tagName)||!!p.closest('[translate="no"]')};
+  const trText=n=>{const v=n.nodeValue;if(TR_DONE.get(n)===v||skip(n))return;const o=tr(v);if(o!==v)n.nodeValue=o;TR_DONE.set(n,o)};
+  const trEl=e=>{for(const a of TR_ATTRS){const v=e.getAttribute(a);if(v){const o=tr(v);if(o!==v)e.setAttribute(a,o)}}};
+  const trTree=r=>{if(r.nodeType===3)return trText(r);if(r.nodeType!==1||/^(TEXTAREA|SCRIPT|STYLE)$/.test(r.tagName))return;trEl(r);
+    const tw=document.createTreeWalker(r,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let n;while((n=tw.nextNode())){if(n.nodeType===3)trText(n);else trEl(n)}};
+  trTree(document.body);
+  new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData')trText(m.target);else if(m.type==='attributes')trEl(m.target);else for(const n of m.addedNodes)trTree(n)}})
+    .observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:TR_ATTRS});
+  const CP=CanvasRenderingContext2D.prototype,fT=CP.fillText,sT=CP.strokeText,mT=CP.measureText;
+  CP.fillText=function(s,...a){return fT.call(this,tr(String(s)),...a)};CP.strokeText=function(s,...a){return sT.call(this,tr(String(s)),...a)};CP.measureText=function(s){return mT.call(this,tr(String(s)))};
+}
 
 /* ================= catalog ================= */
 const CROPS={
@@ -4166,6 +4491,9 @@ function showSettings(){
     const p=el('div','body-pad setp');
     const toggle=(label,on,fn)=>{const r=el('div','setrow');r.appendChild(el('span',null,label));const t=el('button','btn2 tog'+(on?' on':''),on?'On':'Off');t.setAttribute('aria-pressed',String(on));t.onclick=()=>{fn();SFX.click();save();hud();rerender()};r.appendChild(t);p.appendChild(r)};
     const slider=(label,val,fn)=>{const r=el('label','setrow');r.appendChild(el('span',null,label));const i=document.createElement('input');i.type='range';i.min=0;i.max=100;i.value=Math.round(val*100);i.setAttribute('aria-label',label);i.oninput=()=>fn(i.value/100);i.onchange=()=>{save();SFX.click()};r.appendChild(i);p.appendChild(r)};
+    const lr=el('div','setrow');lr.appendChild(el('span',null,'Language'));const lg=el('div','seg');
+    for(const[c,n]of LANGS){const bt=el('button','btn2 tog'+(LANG===c?' on':''),n);bt.lang=c;bt.setAttribute('aria-pressed',String(LANG===c));bt.onclick=()=>{if(LANG!==c){SFX.click();save();setLang(c)}};lg.appendChild(bt)}
+    lr.appendChild(lg);p.appendChild(lr);
     toggle('Music',S.music,()=>{S.music=!S.music;wakeAudio();musicSync()});
     slider('Music volume',S.musicVol??1,v=>{S.musicVol=v;const a=AC;if(a&&MUSIC.master&&MUSIC.on)MUSIC.master.gain.setTargetAtTime(.55*v,a.currentTime,.1)});
     toggle('Sound effects',S.sound,()=>{S.sound=!S.sound});
@@ -4443,7 +4771,7 @@ function renderNeighbors(){
 /* ================= wardrobe ================= */
 // Wardrobe: main tabs, sub-category chips, and a grid of option cards that preview each choice on your own farmer.
 const WCATS={
-  body:['Body',[['Gender',[['Gender','gender']]],['Build',[['Body type','build']]],['Skin',[['Skin tone','skin',SKINS],['Freckles','freckles']]]]],
+  body:['Body',[['Gender',[['Gender','gender']]],['Shape',[['Body type','build']]],['Skin',[['Skin tone','skin',SKINS],['Freckles','freckles']]]]],
   face:['Face',[['Eyes',[['Eye shape','eyeShape'],['Eye color','eyes',EYES]]],['Eyebrows',[['Eyebrows','brows']]],['Nose',[['Nose','nose']]],['Ears',[['Ears','ears']]],['Mouth',[['Expression','mouth'],['Lip color','lips',LIPS]]],['Cheeks',[['Cheeks','blush']]],['Facial hair',[['Facial hair','face']]],['Glasses',[['Glasses','glasses']]]]],
   hair:['Hair',[['Style',[['Hairstyle','hair']]],['Color',[['Hair color','hairColor',HAIRC]]]]],
   clothes:['Clothing',[['Hats',[['Hat','hat'],['Hat color','hatColor',CLOTH]]],['Tops',[['Top','top'],['Top color','topColor',CLOTH]]],['Bottoms',[['Bottoms','bottom'],['Bottoms color','bottomColor',CLOTH]]],['Shoes',[['Shoe color','shoes',SHOES]]]]],
