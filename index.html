@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Farm Village</title>
+<meta name="description" content="Grow crops, raise animals and build the coziest farm in the valley.">
+<meta name="theme-color" content="#a7672e">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Farm Village">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon-64.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@500;600;700&display=swap">
 <style>
@@ -490,6 +499,7 @@ body.tutlock .dock>*:not(.tutpulse){opacity:.4;pointer-events:none;filter:satura
 body.tutlock .hud,body.tutlock .side{pointer-events:none}
 .mbtn.locked svg{opacity:.35;filter:grayscale(1)}
 .mbtn.locked::after{content:"";position:absolute;right:-5px;top:-5px;width:18px;height:18px;border-radius:50%;background:#6b3c15 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='4' y='7' width='8' height='6' rx='1' fill='%23fff'/%3E%3Cpath d='M5.5 7V5.5a2.5 2.5 0 0 1 5 0V7' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E") center/12px no-repeat;border:2px solid #fff}
+.codebox{width:100%;font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;border:2px solid var(--paper-line,#e2cfa8);border-radius:10px;padding:8px;background:#fff;color:var(--ink);resize:none;word-break:break-all;user-select:text;-webkit-user-select:text}
 .nbnews{background:#e6f5d8;border:2px solid #8cc84b;border-radius:10px;padding:6px 10px;color:#2a4a1a!important;font-weight:600}
 
 /* =====================================================================
@@ -4163,7 +4173,49 @@ function showSettings(){
     toggle('Rain, snow and falling leaves',S.fx!==false,()=>{S.fx=S.fx===false});
     const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','water','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
     const nf=el('button','btn2 danger','Start a new farm');nf.onclick=()=>{closeModal();confirmNewFarm()};r2.appendChild(tut);r2.appendChild(nf);p.appendChild(r2);
-    p.appendChild(el('p','hint','Farm Village saves automatically in this browser.'));b.appendChild(p);
+    if(!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches&&!navigator.standalone){
+      const ins=el('button','go','Install app');ins.style.fontSize='18px';
+      ins.onclick=async()=>{SFX.click();if(installEvt){installEvt.prompt();await installEvt.userChoice.catch(()=>{});installEvt=null;rerender()}else installHelp()};p.appendChild(ins)}
+    const r3=el('div','setbtns'),ex=el('button','btn2','Copy save code'),im=el('button','btn2','Load save code');
+    ex.onclick=()=>{SFX.click();saveCodeModal()};im.onclick=()=>{SFX.click();loadCodeModal()};r3.appendChild(ex);r3.appendChild(im);p.appendChild(r3);
+    p.appendChild(el('p','hint','Farm Village saves automatically in this browser. To move your farm to another browser, phone or the installed app, copy your save code here and load it there.'));b.appendChild(p);
+  }});
+}
+function installHelp(){
+  const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  modal({title:'Install Farm Village',color:'green',small:true,render(b){
+    const p=el('div','body-pad'),ol=el('ol','qsteps');
+    const steps=ios?['Open this page in Safari.','Tap the Share button (the square with an arrow).','Choose "Add to Home Screen", then "Add".']
+      :['Open this page in Chrome or Edge.','On a phone: open the browser menu and choose "Install app" or "Add to Home screen".','On a computer: click the install icon at the right end of the address bar.'];
+    for(const t of steps)ol.appendChild(el('li',null,t));p.appendChild(el('p',null,'Farm Village can live on your home screen or desktop like any other app, and it works offline.'));p.appendChild(ol);
+    const go=el('button','go','Got it');go.dataset.focus='1';go.onclick=()=>closeModal();p.appendChild(go);b.appendChild(p);
+  }});
+}
+/* ---- save codes: move a farm between browsers and devices ---- */
+function saveCode(){const j=JSON.stringify(homeState());return'FV1.'+btoa(unescape(encodeURIComponent(j)))}
+function readCode(c){
+  c=String(c||'').replace(/\s+/g,'');if(c.startsWith('FV1.'))c=c.slice(4);
+  try{const s=JSON.parse(decodeURIComponent(escape(atob(c))));return valid(s)?s:null}catch(e){return null}
+}
+function saveCodeModal(){
+  const code=saveCode();
+  modal({title:'Your Save Code',color:'green',small:true,render(b){
+    const p=el('div','body-pad');p.appendChild(el('p',null,'This code is your whole farm. Copy it, then use Load save code on the other device.'));
+    const t=el('textarea','codebox');t.value=code;t.readOnly=true;t.rows=5;t.setAttribute('aria-label','Save code');t.onfocus=()=>t.select();p.appendChild(t);
+    const go=el('button','go','Copy');go.dataset.focus='1';
+    go.onclick=async()=>{try{await navigator.clipboard.writeText(code);go.textContent='Copied!';toast('Save code copied.')}catch(e){t.focus();t.select();toast('Select the code and copy it yourself.')}};
+    p.appendChild(go);b.appendChild(p);
+  }});
+}
+function loadCodeModal(){
+  modal({title:'Load a Save',color:'gold',small:true,render(b){
+    const p=el('div','body-pad');p.appendChild(el('p',null,'Paste a save code from another device. Your farm here will be replaced by that farm.'));
+    const t=el('textarea','codebox');t.rows=5;t.placeholder='FV1.…';t.setAttribute('aria-label','Paste save code');t.dataset.focus='1';p.appendChild(t);
+    const msg=el('p','hint','');p.appendChild(msg);
+    const go=el('button','go','Load this farm');
+    go.onclick=()=>{const s=readCode(t.value);if(!s){SFX.error();msg.textContent='That code does not look right. Copy the whole code and try again.';return}
+      RESET=true;try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){msg.textContent='This browser would not save it.';RESET=false;return}location.reload()};
+    p.appendChild(go);b.appendChild(p);
   }});
 }
 // What the next two levels bring, with pictures
@@ -4942,6 +4994,9 @@ function start(data){
   showTitle();
 }
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
+// Installed-app support: works offline once loaded. Skipped where service workers are not allowed (for example inside claude.ai).
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')&&!/claude\.ai$/.test(location.hostname))navigator.serviceWorker.register('sw.js').catch(()=>{});
+let installEvt=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e});addEventListener('appinstalled',()=>{installEvt=null;toast('Farm Village is installed!')});
 })();
 </script>
 </body>
