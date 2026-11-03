@@ -402,6 +402,37 @@ body.visiting .tools,body.visiting .neighbors,body.visiting #goals,body.visiting
 .vmenu .go{font-size:18px}
 .vface .nbface{width:84px;height:84px;border-radius:14px;border:3px solid var(--wood-d);display:block}
 button.chip{font:inherit;color:inherit}
+/* ---- HUD layout: a tidy menu dock on the right, a compact bar on phones ---- */
+.right{gap:10px}
+.menu{display:grid;grid-template-columns:repeat(3,50px);gap:24px 12px;max-width:none;padding:10px 10px 26px;border-radius:16px;background:rgba(58,35,16,.18);backdrop-filter:blur(2px)}
+.mbtn{margin-bottom:0;width:50px;height:50px}
+#btnMore,#btnNbrs{display:none}
+.toast{top:92px;max-width:min(520px,calc(100% - 32px))}
+.nbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:12px 14px 16px}
+.nbcard{border:3px solid #d8c29a;border-radius:14px;background:#fff;padding:8px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.nbcard .nbface{width:72px;height:72px;border-radius:12px;border:2px solid var(--wood-d)}
+.nbcard small{color:#6d5640;font-size:12px}.nbcard button{width:100%;min-height:36px}
+.danger{background:linear-gradient(#ff8a7a,#d9402f)!important;border-color:#7a1c12!important;color:#fff!important}
+.newfarm{margin:4px 0 6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+@media (max-width:640px){
+  .hud{gap:6px}
+  .star{width:50px;height:50px;flex-basis:50px}.star span{font-size:19px}
+  .xpbox{min-width:84px;padding:4px 8px 4px 16px;margin-left:-12px}.xptext{font-size:10px}.xpbar{height:12px}
+  .pill{margin-top:6px;padding:3px 10px 3px 4px;gap:5px}.pill b{font-size:16px}.pill .coin{width:22px;height:22px;flex-basis:22px}
+  .right{width:100%;align-items:flex-end}
+  .menu{grid-template-columns:repeat(4,44px);gap:8px;padding:6px;background:rgba(58,35,16,.22)}
+  .mbtn{width:44px;height:44px}
+  .menu .extra{display:none}
+  body.more .menu .extra{display:grid}
+  #btnMore{display:grid}
+  body.more #btnMore{background:linear-gradient(#fff8c8,var(--gold))}
+  .zoom{display:none}
+  .toast{top:auto;bottom:calc(200px + env(safe-area-inset-bottom,0px))}
+  body .tut{bottom:auto;top:calc(128px + env(safe-area-inset-top,0px));padding:6px 6px 6px 12px}body .tut strong{font-size:13.5px}
+  body.more .tut{display:none}
+}
+@media (max-width:860px){#btnNbrs{display:grid}}
+@media (max-width:640px){#btnNbrs{display:none}body.more #btnNbrs{display:grid}}
 .tut{position:fixed;left:50%;bottom:calc(150px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:21;display:flex;align-items:center;gap:10px;background:var(--grain),var(--parch);border:3px solid var(--wood-d);border-radius:14px;box-shadow:0 4px 0 var(--wood-d);padding:8px 8px 8px 14px;width:max-content;max-width:min(460px,calc(100% - 24px))}
 .tut[hidden]{display:none}.tut>div{min-width:0}
 .tut small{display:block;font-size:11px;font-weight:700;color:#9a6400;text-transform:uppercase;letter-spacing:.6px}
@@ -443,26 +474,37 @@ body.visiting .tut{display:none}
         <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="5" width="20" height="25" rx="2" fill="#fff4dc" stroke="#6b3c15" stroke-width="2"/><rect x="11" y="2.5" width="10" height="5" rx="1.5" fill="#c98a4b" stroke="#6b3c15" stroke-width="1.6"/><path d="M10 13h12M10 18h12M10 23h8" stroke="#8a6a4a" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="24" r="5" fill="#ffc72c" stroke="#9a6400" stroke-width="1.6"/></svg>
         <span class="badge" id="orderBadge" hidden>0</span>
       <em aria-hidden="true">Orders</em></button>
-      <button class="mbtn" id="btnWardrobe" aria-label="Wardrobe: customize your farmer">
+      <button class="mbtn" id="btnDeliv" aria-label="Delivery Board: send goods to town">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="9" width="17" height="13" rx="1.5" fill="#c98a4b" stroke="#6b3c15" stroke-width="2"/><path d="M19 13h6l4 5v4H19z" fill="#d9402f" stroke="#6b1c14" stroke-width="2" stroke-linejoin="round"/><path d="M21 14.5h3.4l2.4 3.2H21z" fill="#bfe6ff"/><circle cx="8" cy="24" r="3.4" fill="#2b2b2b" stroke="#111" stroke-width="1.4"/><circle cx="23.5" cy="24" r="3.4" fill="#2b2b2b" stroke="#111" stroke-width="1.4"/><circle cx="8" cy="24" r="1.2" fill="#c4ccd4"/><circle cx="23.5" cy="24" r="1.2" fill="#c4ccd4"/></svg>
+        <span class="badge" id="delivBadge" hidden>!</span>
+      <em aria-hidden="true">Delivery</em></button>
+      <button class="mbtn extra" id="btnWardrobe" aria-label="Wardrobe: customize your farmer">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 31q1-9 10-9t10 9z" fill="#d9402f" stroke="#6b3c15" stroke-width="2"/><circle cx="16" cy="15" r="6" fill="#f2c6a0" stroke="#6b3c15" stroke-width="2"/><ellipse cx="16" cy="9.5" rx="11" ry="2.8" fill="#e6c24a" stroke="#6b3c15" stroke-width="1.8"/><path d="M11 9.5q1-6 5-6t5 6z" fill="#e6c24a" stroke="#6b3c15" stroke-width="1.8"/></svg>
       <em aria-hidden="true">Wardrobe</em></button>
-      <button class="mbtn" id="btnGifts" aria-label="Gift box">
+      <button class="mbtn extra" id="btnGifts" aria-label="Gift box">
         <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="13" width="24" height="15" rx="2" fill="#e0457b" stroke="#6b3c15" stroke-width="2"/><rect x="3" y="9" width="26" height="6" rx="2" fill="#ff7aa6" stroke="#6b3c15" stroke-width="2"/><path d="M16 9v19" stroke="#ffd23f" stroke-width="4"/><path d="M16 9c-3-6-9-5-7-1s7 1 7 1c3-6 9-5 7-1s-7 1-7 1z" fill="#ffd23f" stroke="#6b3c15" stroke-width="1.5"/></svg>
         <span class="badge" id="giftBadge" hidden>0</span>
       <em aria-hidden="true">Gifts</em></button>
-      <button class="mbtn" id="btnColl" aria-label="Collections">
+      <button class="mbtn extra" id="btnColl" aria-label="Collections">
         <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="6" width="24" height="21" rx="3" fill="#f2c26b" stroke="#6b3c15" stroke-width="2"/><rect x="8" y="10" width="7" height="6" rx="1.5" fill="#e0352b"/><rect x="17" y="10" width="7" height="6" rx="1.5" fill="#3f9a3c"/><rect x="8" y="18" width="7" height="6" rx="1.5" fill="#2d8fe3"/><rect x="17" y="18" width="7" height="6" rx="1.5" fill="#fff" stroke="#c9a46a"/></svg>
         <span class="badge" id="collBadge" hidden>!</span>
       <em aria-hidden="true">Album</em></button>
-      <button class="mbtn" id="btnRib" aria-label="Ribbons">
+      <button class="mbtn extra" id="btnRib" aria-label="Ribbons">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 18l-4 12 5-3 3 4 2-12zM21 18l4 12-5-3-3 4-2-12z" fill="#2d6fd0" stroke="#6b3c15" stroke-width="1.5" stroke-linejoin="round"/><circle cx="16" cy="13" r="10" fill="#ffd23f" stroke="#6b3c15" stroke-width="2"/><circle cx="16" cy="13" r="5.5" fill="#fff3b0"/></svg>
       <em aria-hidden="true">Ribbons</em></button>
-      <button class="mbtn" id="btnMusic" aria-label="Music on" aria-pressed="true">
+      <button class="mbtn extra" id="btnMusic" aria-label="Music on" aria-pressed="true">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 24V8l14-3v16" fill="none" stroke="#6b3c15" stroke-width="2.4" stroke-linejoin="round"/><ellipse cx="9" cy="24" rx="4.2" ry="3.4" fill="#7a4ec0" stroke="#6b3c15" stroke-width="2"/><ellipse cx="23" cy="21" rx="4.2" ry="3.4" fill="#7a4ec0" stroke="#6b3c15" stroke-width="2"/><path id="musX" d="M5 6l22 22" stroke="#d9402f" stroke-width="2.8" stroke-linecap="round" style="display:none"/></svg>
       <em aria-hidden="true">Music</em></button>
-      <button class="mbtn" id="btnSound" aria-label="Sound on" aria-pressed="true">
+      <button class="mbtn extra" id="btnSound" aria-label="Sound on" aria-pressed="true">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12h5l7-6v20l-7-6H5z" fill="#2d8fe3" stroke="#6b3c15" stroke-width="2" stroke-linejoin="round"/><path id="sndWaves" d="M21 11q3 5 0 10M24 8q6 8 0 16" fill="none" stroke="#6b3c15" stroke-width="2.2" stroke-linecap="round"/><path id="sndX" d="M21 12l7 8M28 12l-7 8" stroke="#d9402f" stroke-width="2.6" stroke-linecap="round" style="display:none"/></svg>
       <em aria-hidden="true">Sound</em></button>
+      <button class="mbtn extra" id="btnNbrs" aria-label="Neighbors">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="11" cy="11" r="5" fill="#f2c6a0" stroke="#6b3c15" stroke-width="2"/><path d="M3 27c0-6 3.6-9 8-9s8 3 8 9z" fill="#3f9a3c" stroke="#1f5a1e" stroke-width="2" stroke-linejoin="round"/><circle cx="22" cy="12" r="4.4" fill="#c98b5e" stroke="#6b3c15" stroke-width="2"/><path d="M15.4 27c.4-5 3-8 6.6-8s7 3 7 8z" fill="#e0457b" stroke="#8a1f45" stroke-width="2" stroke-linejoin="round"/></svg>
+      <em aria-hidden="true">Neighbors</em></button>
+      <button class="mbtn" id="btnMore" aria-label="More buttons" aria-expanded="false">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="16" r="3.4" fill="#9a6400"/><circle cx="16" cy="16" r="3.4" fill="#9a6400"/><circle cx="24" cy="16" r="3.4" fill="#9a6400"/></svg>
+        <span class="badge" id="moreBadge" hidden>!</span>
+      <em aria-hidden="true">More</em></button>
     </div>
     <div class="zoom"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button></div>
   </div>
@@ -533,7 +575,7 @@ body.visiting .tut{display:none}
 <script>
 (function(){
 'use strict';
-const W=72,H=36,KEY='clover-hollow-v1',PLOW_COST=15,FUEL_MAX=50,FUEL_EVERY=90,CAN_FUEL=10,HELP_MAX=5,ORDER_MAX=4;
+const W=72,H=36,KEY='clover-hollow-v2',PLOW_COST=15,FUEL_MAX=50,FUEL_EVERY=90,CAN_FUEL=10,HELP_MAX=5,ORDER_MAX=4;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MASTERY=[10,25,50];
 
@@ -651,14 +693,15 @@ const MAKERS={
 };
 // Everything the barn can hold. Crops keep their crop id; animal goods are a_<animal>, fruit is t_<tree>.
 const ITEMS={};
-for(const id in CROPS)ITEMS[id]={name:CROPS[id].name,sell:CROPS[id].sell,cat:'crops',lvl:CROPS[id].lvl};
-for(const id in CROPS)ITEMS['g_'+id]={name:'Golden '+CROPS[id].name,sell:CROPS[id].sell*8,cat:'crops',lvl:CROPS[id].lvl,gold:true};
-for(const id in ANIMALS)ITEMS['a_'+id]={name:ANIMALS[id].product,sell:ANIMALS[id].give,cat:'animal',lvl:ANIMALS[id].lvl};
-for(const id in TREES)ITEMS['t_'+id]={name:TREES[id].product,sell:TREES[id].give,cat:'fruit',lvl:TREES[id].lvl};
+const SELL=.75,sellOf=v=>Math.max(1,Math.round(v*SELL));
+for(const id in CROPS)ITEMS[id]={name:CROPS[id].name,sell:sellOf(CROPS[id].sell),cat:'crops',lvl:CROPS[id].lvl};
+for(const id in CROPS)ITEMS['g_'+id]={name:'Golden '+CROPS[id].name,sell:sellOf(CROPS[id].sell*8),cat:'crops',lvl:CROPS[id].lvl,gold:true};
+for(const id in ANIMALS)ITEMS['a_'+id]={name:ANIMALS[id].product,sell:sellOf(ANIMALS[id].give),cat:'animal',lvl:ANIMALS[id].lvl};
+for(const id in TREES)ITEMS['t_'+id]={name:TREES[id].product,sell:sellOf(TREES[id].give),cat:'fruit',lvl:TREES[id].lvl};
 Object.assign(ITEMS,{
   feed:{name:'Animal Feed',sell:3,cat:'supply',lvl:1},fert:{name:'Fertilizer',sell:6,cat:'supply',lvl:2},diesel:{name:'Diesel',sell:40,cat:'supply',lvl:3},
-  jam:{name:'Strawberry Jam',sell:220,cat:'made',lvl:4},juice:{name:'Apple Juice',sell:170,cat:'made',lvl:4},bread:{name:'Country Bread',sell:420,cat:'made',lvl:4},
-  cheese:{name:'Cheese Wheel',sell:330,cat:'made',lvl:4},sweater:{name:'Wool Sweater',sell:230,cat:'made',lvl:4},pie:{name:'Pumpkin Pie',sell:480,cat:'made',lvl:4}
+  jam:{name:'Strawberry Jam',sell:170,cat:'made',lvl:4},juice:{name:'Apple Juice',sell:130,cat:'made',lvl:4},bread:{name:'Country Bread',sell:320,cat:'made',lvl:4},
+  cheese:{name:'Cheese Wheel',sell:250,cat:'made',lvl:4},sweater:{name:'Wool Sweater',sell:175,cat:'made',lvl:4},pie:{name:'Pumpkin Pie',sell:360,cat:'made',lvl:4}
 });
 function recipeLvl(r){let l=1;for(const k in r.in)l=Math.max(l,ITEMS[k].lvl);return l}
 function feedNeed(id){return Math.max(1,Math.ceil(ANIMALS[id].give/50))}
@@ -693,13 +736,13 @@ const NEIGHBORS=[
 ];
 for(const n of NEIGHBORS)n.look=Object.assign(defaultLook(),n.look);
 const DAILY=[{coins:50},{coins:100},{coins:150,fuel:20},{coins:250},{coins:300,cash:2}];
-function need(l){return 15+15*l}
+function need(l){return 20+18*l+2*l*l}
 
 /* ================= state ================= */
 let S,occ={},N=16,VIS=null;
 function fresh(){
   const now=Date.now();
-  const s={coins:320,xp:14,level:2,size:16,seed:'strawberry',tiles:{},homesV:1,v2:true,tut:0,goods:{feed:30,strawberry:4}};
+  const s={coins:250,xp:14,level:2,size:16,seed:'strawberry',tiles:{},homesV:1,v2:true,tut:0,goods:{feed:30,strawberry:4}};
   const put=(x,y,o)=>{s.tiles[x+','+y]=o};
   put(1,2,{k:'bld',id:'house'});put(1,6,{k:'bld',id:'barn'});
   for(let x=6;x<=10;x++)for(let y=5;y<=8;y++){
@@ -744,7 +787,8 @@ function load(){try{const s=JSON.parse(localStorage.getItem(KEY));return valid(s
 // While visiting a neighbor, S.tiles holds their farm; the save always keeps your own.
 function homeState(){return VIS?Object.assign({},S,{tiles:VIS.home.tiles,size:VIS.home.size}):S}
 function homeTiles(){return VIS?VIS.home.tiles:S.tiles}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(homeState()))}catch(e){}}
+let RESET=false;
+function save(){if(RESET)return;try{localStorage.setItem(KEY,JSON.stringify(homeState()))}catch(e){}}
 function defOf(o){return o.k==='mk'?MAKERS[o.id]:o.k==='home'?HOMES[o.id]:o.k==='animal'?ANIMALS[o.id]:o.k==='tree'?TREES[o.id]:o.k==='deco'?DECOR[o.id]:o.k==='plot'?(o.crop?CROPS[o.crop]:null):null}
 function size(o){return o.k==='bld'||o.k==='home'||o.k==='mk'?2:(o.k==='deco'&&DECOR[o.id].size)||1}
 let HC={},ANC={};
@@ -1000,6 +1044,8 @@ function drawSoil(x,y,fallow){
   const a=P(x,y),b=P(x+1,y+1),gr=g.createLinearGradient(a[0],a[1],b[0],b[1]);
   gr.addColorStop(0,fallow?'#a77546':'#94603a');gr.addColorStop(1,fallow?'#8c5c32':'#7a4a26');
   poly(quad(x,y,.06),gr);g.lineCap='round';
+  g.lineWidth=1.4;g.strokeStyle='rgba(255,225,180,.28)';line(P(x+.06,y+.94),P(x+.06,y+.06));line(P(x+.06,y+.06),P(x+.94,y+.06));
+  g.strokeStyle='rgba(45,22,6,.38)';line(P(x+.94,y+.06),P(x+.94,y+.94));line(P(x+.94,y+.94),P(x+.06,y+.94));
   if(fallow){for(let i=0;i<7;i++){const[px,py]=P(x+.15+hash(x+i,y)*.7,y+.15+hash(y,x+i)*.7);ell(px,py,1.9,1.1,i%2?'#7d5230':'#b58658')}return}
   for(const t of[.24,.47,.7]){
     g.strokeStyle='rgba(70,36,14,.85)';g.lineWidth=3;line(P(x+.12,y+t),P(x+.88,y+t));
@@ -1009,14 +1055,35 @@ function drawSoil(x,y,fallow){
 }
 function drawTile(x,y){const o=S.tiles[x+','+y];drawGrass(x,y);if(o&&o.k==='plot')drawSoil(x,y,!!o.fallow)}
 function drawFarmEdge(){
-  const L=P(0,N),B=P(N,N),R=P(N,0),d=12;
-  poly([L,B,[B[0],B[1]+d],[L[0],L[1]+d]],'#5d9a2c');poly([B,R,[R[0],R[1]+d],[B[0],B[1]+d]],'#4e8624');
-  poly([[L[0],L[1]+d],[B[0],B[1]+d],[B[0],B[1]+d+5],[L[0],L[1]+d+5]],'#7a5230');
-  poly([[B[0],B[1]+d],[R[0],R[1]+d],[R[0],R[1]+d+5],[B[0],B[1]+d+5]],'#664424');
+  // the farm sits on a low bank: a grassy lip over layered earth with pebbles and roots
+  const L=P(0,N),B=P(N,N),R=P(N,0),d=24;
+  const face=(a,b,lit,seed)=>{
+    const dn=(p,k)=>[p[0],p[1]+k];
+    const gr=g.createLinearGradient(0,Math.min(a[1],b[1]),0,Math.max(a[1],b[1])+d);gr.addColorStop(0,lit?'#9a6a3c':'#7e532c');gr.addColorStop(1,lit?'#6e4526':'#563419');
+    poly([dn(a,4),dn(b,4),dn(b,d),dn(a,d)],gr);
+    g.lineCap='round';
+    for(const[k,col,w]of[[11,'rgba(60,32,12,.35)',2],[17,'rgba(255,220,170,.14)',1.2],[20,'rgba(50,28,10,.3)',1.6]]){g.strokeStyle=col;g.lineWidth=w;line(dn(a,k),dn(b,k))}
+    const n=Math.round(Math.hypot(b[0]-a[0],b[1]-a[1])/9);
+    for(let i=0;i<n;i++){const t=(i+hash(i,seed))/n,x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,k=7+hash(seed,i)*14;
+      if(hash(i*3,seed)>.55)ell(x,y+k,2.2+hash(i,seed*2)*2,1.5+hash(seed*2,i),lit?'#b49a7a':'#8f7a60','rgba(40,25,10,.4)',.6);
+      else if(hash(i*5,seed)>.82){g.strokeStyle='rgba(60,35,15,.55)';g.lineWidth=.9;line([x,y+5],[x+2,y+10])}}
+    poly([a,b,dn(b,5),dn(a,5)],lit?'#68a832':'#589428');
+    for(let i=0;i<n*2;i++){const t=(i+.5)/(n*2),x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,h=3+hash(i,seed+7)*4;poly([[x-2.4,y+4],[x+2.4,y+4],[x+.3,y+4+h]],lit?'#5d9a2c':'#4e8624')}
+  };
+  ell((L[0]+R[0])/2,B[1]+d+8,(R[0]-L[0])*.52,22,'rgba(30,60,10,.16)');
+  face(L,B,true,3);face(B,R,false,9);
 }
 function drawRoad(){
-  for(let x=-3;x<N+3;x++)poly([P(x,N+1.3),P(x+1,N+1.3),P(x+1,N+2.3),P(x,N+2.3)],x%2?'#dcbc80':'#d6b577');
-  g.strokeStyle='#b8955a';g.lineWidth=2;line(P(-3,N+1.3),P(N+3,N+1.3));line(P(-3,N+2.3),P(N+3,N+2.3));
+  // a country dirt road: grassy verges, two wheel ruts, a grass crown and scattered pebbles
+  const y0=N+1.3,y1=N+2.3,x0=-10,x1=N+10;
+  poly([P(x0,y0-.12),P(x1,y0-.12),P(x1,y1+.12),P(x0,y1+.12)],'rgba(70,110,30,.35)');
+  const a=P(0,y0),b=P(0,y1),gr=g.createLinearGradient(a[0],a[1],b[0],b[1]);gr.addColorStop(0,'#e2c38a');gr.addColorStop(.5,'#d6b277');gr.addColorStop(1,'#c9a466');
+  poly([P(x0,y0),P(x1,y0),P(x1,y1),P(x0,y1)],gr);
+  for(const t of[.27,.73])poly([P(x0,y0+t-.08),P(x1,y0+t-.08),P(x1,y0+t+.08),P(x0,y0+t+.08)],'rgba(140,100,55,.32)');
+  g.lineCap='round';
+  for(let x=x0;x<x1;x+=.22){const h=hash(x*7,3),[px,py]=P(x,y0+.5+(hash(x,5)-.5)*.1);if(h<.45)continue;g.strokeStyle=h>.8?'#8fbf4a':'#7aaa3c';g.lineWidth=1.1;line([px,py],[px-1+h*2,py-2.4-h*2])}
+  for(let i=0;i<(x1-x0)*6;i++){const[px,py]=P(x0+hash(i,11)*(x1-x0),y0+.06+hash(13,i)*.88);ell(px,py,1+hash(i,2)*1.2,.7+hash(2,i)*.6,hash(i,4)>.5?'#b8955a':'#ecd7a8')}
+  for(const yy of[y0,y1])for(let x=x0;x<x1;x+=.16){const h=hash(x*3,yy),[px,py]=P(x,yy+(yy===y0?-.02:.02));g.strokeStyle=h>.5?'#6aa832':'#5d9a2c';g.lineWidth=1.2;line([px,py],[px+(h-.5)*3,py-3-h*3])}
 }
 let BORDER=[];
 function buildBorder(){
@@ -1025,7 +1092,7 @@ function buildBorder(){
     BORDER.push({x:i+hash(i,1)*.5,y:-2.2-hash(i,2)*1.4,back:true,v:hash(i,3)});
     BORDER.push({x:-2.2-hash(i,4)*1.4,y:i+hash(i,5)*.5,back:true,v:hash(i,6)});
     BORDER.push({x:N+2+hash(i,7)*1.2,y:i+hash(i,8)*.5,back:false,v:hash(i,9)});
-    BORDER.push({x:i+hash(i,10)*.5,y:N+3.4+hash(i,11)*1.2,back:false,v:hash(i,12)});
+    {const tx=i+hash(i,10)*.5;if(Math.abs(tx-boardSpot()[0]-.5)>2.4)BORDER.push({x:tx,y:N+3.4+hash(i,11)*1.2,back:false,v:hash(i,12)})}
   }
   BORDER.sort((a,b)=>(a.x+a.y)-(b.x+b.y));
 }
@@ -2329,7 +2396,7 @@ function vehicleArea(x,y){const n=vsize(tool),out=[];for(let i=0;i<n;i++)for(let
 /* Ground layers: the grass, soil, road and wild trees are drawn once into two canvases
    (behind and in front of the farm) and only touched again for tiles that change or after a zoom. */
 let GC=null,GF=null,gcScale=1,gcN=0,lastZoomT=0,gstate={},BG=null;const dirty=new Set();
-function gBounds(){return[-(N+8)*W/2,-240,(N+8)*W/2,(2*N+11)*H/2]}
+function gBounds(){return[-(N+11)*W/2,-240,(N+11)*W/2,(2*N+13)*H/2]}
 function syncGround(){
   const ns={};for(const k in S.tiles){const o=S.tiles[k];if(o.k==='plot')ns[k]=o.fallow?'f':'p'}
   for(const k in ns)if(gstate[k]!==ns[k])dirty.add(k);
@@ -2384,8 +2451,9 @@ function frame(t){
   list.push([farmer.x+farmer.y,0,0,null]);
   for(const v of visitors)list.push([v.x+v.y,0,0,v]);
   if(S.pet)list.push([pet.x+pet.y,0,0,{pet:1}]);
+  list.push([N*2+3,0,0,{deliv:1}]);
   list.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
-  for(const[,x,y,o]of list){if(!o)drawFarmer(now);else if(o.pet)drawPetSprite(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now)}
+  for(const[,x,y,o]of list){if(!o)drawFarmer(now);else if(o.pet)drawPetSprite(now);else if(o.deliv)drawDeliveryArea(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now)}
   if(VIS)for(const k in S.tiles){const o=S.tiles[k];if(o.helped){const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5);ell(px,py-4,6,6,'#5bbf3a','#fff',1.4);g.strokeStyle='#fff';g.lineWidth=1.6;line([px-2.6,py-4],[px-.6,py-2]);line([px-.6,py-2],[px+2.8,py-6.4])}}
   if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);g.globalAlpha=1}}
   drawPending(now);drawTutArrow(now);
@@ -2424,9 +2492,10 @@ function hud(){
   updateFuel();
   const tot=storeTotal(),cap=barnCap();$('barntext').textContent=tot+' / '+cap;$('barnchip').classList.toggle('full',tot>=cap);$('barnBadge').hidden=tot<cap;
   const fill=S.orders.filter(canFill).length;$('orderBadge').hidden=!fill;$('orderBadge').textContent=fill;
+  const dl=dv(),dready=!dl.run&&dl.jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap());$('delivBadge').hidden=!dready;
   for(const v in FARM)if(FARM[v].kind==='vehicle'){const b=document.querySelector('.tool[data-tool="'+v+'"]');if(b)b.hidden=!S.veh[v]}
   const gifts=Object.values(S.inv).reduce((a,b)=>a+b,0);$('giftBadge').hidden=!gifts;$('giftBadge').textContent=gifts;
-  $('collBadge').hidden=!COLLECTIONS.some(canTrade);
+  $('collBadge').hidden=!COLLECTIONS.some(canTrade);$('moreBadge').hidden=$('giftBadge').hidden&&$('collBadge').hidden;
   $('sndWaves').style.display=S.sound?'':'none';$('sndX').style.display=S.sound?'none':'';
   $('btnSound').setAttribute('aria-pressed',String(S.sound));$('btnSound').setAttribute('aria-label',S.sound?'Sound on':'Sound off');
   $('musX').style.display=S.music?'none':'';$('btnMusic').setAttribute('aria-pressed',String(S.music));$('btnMusic').setAttribute('aria-label',S.music?'Music on':'Music off');
@@ -2439,7 +2508,7 @@ function updateFuel(){
 function changed(){buildOcc();buildBars();syncGround();hud();save()}
 function addXP(n){
   S.xp+=n;const l0=S.level;
-  while(S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=50*S.level;S.cash+=1}
+  while(S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=20*S.level;S.cash+=1}
   if(S.level>l0){SFX.level();showLevelUp(l0)}
 }
 function unlockedAt(l){const out=[];for(const cat of[CROPS,ANIMALS,TREES,DECOR,FARM])for(const id in cat)if(cat[id].lvl===l&&!cat[id].cash)out.push(cat[id].name);return out}
@@ -2466,6 +2535,7 @@ function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className
 /* ================= daily goals ================= */
 // Three fresh goals every day, measured from the farm stats; finish all three for a Farm Cash bonus.
 const GOAL_POOL={
+  deliver:{n:[1,1,2],txt:n=>'Send '+n+(n>1?' deliveries':' delivery')+' with Dale'},
   harvest:{n:[8,15,25],txt:n=>'Harvest '+n+' crops'},
   plow:{n:[8,15,25],txt:n=>'Plow '+n+' plots'},
   animal:{n:[4,8,12],txt:n=>'Collect from animals '+n+' times'},
@@ -2480,7 +2550,7 @@ function ensureGoals(){
   const tier=Math.min(2,Math.floor(S.level/5)),keys=Object.keys(GOAL_POOL).sort(()=>Math.random()-.5);
   // keep one easy farming goal in every set
   const pick=['harvest','plow'].includes(keys[0])?keys.slice(0,3):[Math.random()<.5?'harvest':'plow',...keys.filter(k=>k!=='harvest'&&k!=='plow').slice(0,2)];
-  S.goals={day:d,bonus:false,list:pick.map(k=>({k,n:GOAL_POOL[k].n[tier],base:S.stats[k]||0,claimed:false,coins:40+30*tier+GOAL_POOL[k].n[tier]*4,xp:8+6*tier}))};
+  S.goals={day:d,bonus:false,list:pick.map(k=>({k,n:GOAL_POOL[k].n[tier],base:S.stats[k]||0,claimed:false,coins:25+20*tier+GOAL_POOL[k].n[tier]*2,xp:8+6*tier}))};
   save();
 }
 function goalProg(q){return Math.min(q.n,(S.stats[q.k]||0)-q.base)}
@@ -2748,8 +2818,8 @@ function newOrder(){
   const R=Math.random,pick=a=>a[Math.floor(R()*a.length)],who=pick(free);
   const lines=Math.min(pool.length,1+(S.level>=4&&R()<.5?1:0)+(S.level>=8&&R()<.35?1:0)),items=[],used=new Set();
   while(items.length<lines){const id=pick(pool);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=60+S.level*25+R()*90;items.push([id,Math.max(1,Math.min(it.cat==='made'?3:20,Math.round(want/it.sell)))])}
-  const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0),a=adOn(),mult=1.4+R()*.3+(a?ADS[a].boost:0);
-  return{id:Date.now().toString(36)+R().toString(36).slice(2,6),who:who.id,items,coins:Math.max(5,Math.round(base*mult/5)*5),xp:3+Math.round(base/60),base};
+  const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0),a=adOn(),mult=1.2+R()*.25+(a?ADS[a].boost:0);
+  return{id:Date.now().toString(36)+R().toString(36).slice(2,6),who:who.id,items,coins:Math.max(5,Math.round(base*mult/5)*5),xp:2+Math.round(base/80),base};
 }
 function tickOrders(){
   if(!S||VIS)return;const now=Date.now();let added=null;
@@ -2808,6 +2878,149 @@ function showOrders(){
     }
     b.appendChild(w);
   }});
+}
+
+/* ================= deliveries: the notice board and Dale's truck ================= */
+// Town shops pin contracts on the board by the road. Load a contract and Dale drives it to town;
+// he comes back a few minutes later with the payment. It is the best XP on the farm, but it takes time.
+const DRIVER={id:'dale',name:'Dale',look:Object.assign(defaultLook(),{gender:'male',skin:'#d9a37a',eyes:'#3f6fc0',hair:'short',hairColor:'#2a1a12',face:'beard',glasses:'none',hat:'cap',hatColor:'#2d6fd0',top:'tee',topColor:'#2d6fd0',bottom:'jeans',bottomColor:'#3a4650',acc:'none'})};
+const TOWNS=[
+  {name:'Valley Grocer',km:1,likes:['crops','fruit']},{name:'Hollow Bakery',km:2,likes:['crops','animal','made']},
+  {name:'Riverside Market',km:2,likes:['crops','fruit','animal']},{name:'Mill Town Café',km:3,likes:['made','animal','fruit']},
+  {name:'Harbor Cannery',km:4,likes:['crops','fruit']}
+];
+const TRUCK_CAP=[0,20,35,60],TRUCK_UP=[null,{coins:1500,mats:{board:10,nail:10}},{coins:5000,mats:{board:20,nail:20,paint:8}}];
+const DRIVE=6000; // ms to drive off screen or back in
+function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
+function truckCap(){return TRUCK_CAP[dv().lv||1]}
+function newContract(){
+  const pool=orderPool();if(!pool.length)return null;
+  const R=Math.random,pick=a=>a[Math.floor(R()*a.length)];
+  const town=pick(TOWNS),liked=pool.filter(id=>town.likes.includes(ITEMS[id].cat)),src=liked.length?liked:pool;
+  const lines=Math.min(src.length,S.level<3?1:1+(R()<.6?1:0)+(S.level>=7&&R()<.4?1:0)),items=[],used=new Set();let count=0;
+  const cap=truckCap();
+  while(items.length<lines){const id=pick(src);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=80+S.level*35+R()*100;
+    const n=Math.max(1,Math.min(it.cat==='made'?4:Math.floor(cap/lines),Math.round(want/it.sell)));items.push([id,n]);count+=n}
+  const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0);
+  return{id:Date.now().toString(36)+R().toString(36).slice(2,6),to:town.name,items,coins:Math.round(base*(1.15+R()*.15)/5)*5,xp:4+Math.round(base/22),time:90+town.km*45+lines*20,base};
+}
+function tickDeliv(){
+  if(!S||VIS)return;const d=dv(),now=Date.now();
+  if(d.run&&now>=d.run.end)payDelivery();
+  if(d.jobs.length<3&&now>=d.next){const c=newContract();if(c){d.jobs.push(c);if(mq[0]&&mq[0].deliv)rerender();hud()}d.next=now+(d.jobs.length<2?60000:200000)}
+}
+function contractCount(c){return c.items.reduce((a,[,n])=>a+n,0)}
+function sendDelivery(c){
+  const d=dv();
+  if(d.run){toast('Dale is already out on a delivery.');return}
+  if(!canFill(c)){SFX.error();toast('You do not have everything for this delivery yet.');return}
+  if(contractCount(c)>truckCap()){SFX.error();toast('That is more than the truck can carry. Upgrade the truck to load '+TRUCK_CAP[Math.min(3,(d.lv||1)+1)]+'.');return}
+  for(const[id,n]of c.items)takeGood(id,n);
+  d.jobs=d.jobs.filter(x=>x!==c);const now=Date.now();d.run={job:c,start:now,end:now+c.time*1000+DRIVE*2};d.next=Math.min(d.next,now+90000);
+  SFX.engine();setTimeout(SFX.engine,400);stat('delivSent');toast('Dale loaded the truck and is heading to '+c.to+'. Back in '+fmt(c.time+DRIVE/500)+'.');
+  closeModal();changed();
+}
+function payDelivery(){
+  const d=dv(),c=d.run.job;d.run=null;S.coins+=c.coins;stat('deliver');stat('earned',c.coins);
+  const[tx,ty]=truckSpot();floatText(tx+1,ty-1,'+'+c.coins.toLocaleString(),'#ffd23f');floatText(tx+1,ty-1.6,'+'+c.xp+' XP','#7cc8ff',250);
+  if(Math.random()<.5)addMat(randMat(),1+(Math.random()<.3?1:0));
+  SFX.coin();setTimeout(SFX.ribbon,180);toast('Dale is back from '+c.to+' with '+c.coins.toLocaleString()+' coins and '+c.xp+' XP!');
+  addXP(c.xp);changed();if(mq[0]&&mq[0].deliv)rerender();
+}
+function discardContract(c){const d=dv();d.jobs=d.jobs.filter(x=>x!==c);d.next=Math.min(d.next,Date.now()+120000);SFX.click();toast(c.to+' will find another farm. A new contract comes soon.');changed();rerender()}
+function showDelivery(){
+  if(VIS)return;tickDeliv();stat('delivSeen');
+  modal({title:'Delivery Board',color:'blue',wide:true,live:true,deliv:true,render(b){
+    const d=dv(),now=Date.now(),w=el('div','orders');
+    const top=el('div','order drv');top.innerHTML=avatar(DRIVER);
+    const info=el('div');info.appendChild(el('strong',null,'Dale, your delivery driver'));
+    const ph=truckPhase(now);
+    info.appendChild(el('p','hint',!d.run?'The truck is parked by the board and ready to load. It carries up to '+truckCap()+' goods.':ph==='back'?'Dale is pulling in now!':'Dale is driving to '+d.run.job.to+'. Back in '+fmt((d.run.end-now)/1000)+'.'));
+    if(d.run){const bar=el('div','pbar');bar.innerHTML='<i style="width:'+Math.min(100,(now-d.run.start)/(d.run.end-d.run.start)*100)+'%"></i>';info.appendChild(bar)}
+    top.appendChild(info);w.appendChild(top);
+    if(!d.jobs.length)w.appendChild(el('p','empty','No contracts pinned up right now. New ones arrive every few minutes.'));
+    for(const c of d.jobs){
+      const row=el('div','order'),pic=el('img');pic.className='nbface';pic.src=itemIcon(c.items[0][0]);pic.alt='';pic.style.background='#fff4dc';row.appendChild(pic);
+      const mid=el('div');mid.appendChild(el('strong',null,c.to));
+      const want=el('div','want');for(const[id,n]of c.items)want.appendChild(goodReq(id,n));mid.appendChild(want);
+      const pay=el('div','pay');pay.innerHTML='<span><span class="coin"></span> <b>'+c.coins.toLocaleString()+'</b></span><span>+'+c.xp+' XP</span><span>'+fmt(c.time)+' trip</span><span>'+contractCount(c)+' / '+truckCap()+' load</span>';mid.appendChild(pay);
+      row.appendChild(mid);
+      const acts=el('div','acts'),go=el('button','go','Send');go.disabled=!!d.run||!canFill(c)||contractCount(c)>truckCap();go.onclick=()=>sendDelivery(c);acts.appendChild(go);
+      const x=el('button','btn2','Discard');x.onclick=()=>discardContract(c);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
+    }
+    if(d.jobs.length<3)w.appendChild(el('p','hint','Next contract in about '+fmt(Math.max(1,(d.next-now)/1000))+'.'));
+    const up=TRUCK_UP[d.lv||1];
+    if(up)w.appendChild(upgradeBox('Upgrade the truck to carry '+TRUCK_CAP[(d.lv||1)+1]+' goods',up,'Upgrade truck',()=>{d.lv=(d.lv||1)+1;toast('Truck upgraded! It now carries '+TRUCK_CAP[d.lv]+' goods.')}));
+    b.appendChild(w);
+  }});
+}
+// Where things stand by the road below the farm.
+function boardSpot(){return[Math.round(N*.42)+.4,N+2.75]}
+function truckSpot(){const[bx]=boardSpot();return[bx+.7,N+1.45]}
+function truckPhase(now){
+  const r=dv().run;if(!r)return'parked';
+  if(now<r.start+DRIVE)return'leaving';if(now>=r.end-DRIVE)return'back';return'away';
+}
+function truckPos(now){
+  const[sx,sy]=truckSpot(),r=dv().run,ease=k=>k*k*(3-2*k);
+  if(!r)return[sx,sy,false];
+  if(now<r.start+DRIVE){const k=(now-r.start)/DRIVE;return[sx+ease(k)*(N+12-sx),sy,true]}
+  if(now>=r.end-DRIVE){const k=Math.min(1,(now-(r.end-DRIVE))/DRIVE);return[-12+ease(k)*(sx+12),sy,k<1]}
+  return null;
+}
+function drawBoard(x,y){
+  const[cx,cy]=P(x+.5,y+.3);shadow(cx,cy+2,30,9);
+  g.lineCap='round';
+  for(const dx of[-20,20]){poly([[cx+dx-2.4,cy],[cx+dx+2.4,cy],[cx+dx+2.4,cy-52],[cx+dx-2.4,cy-52]],'#8a5a32','#4e2c12',1)}
+  poly([[cx-27,cy-50],[cx+27,cy-50],[cx+27,cy-18],[cx-27,cy-18]],'#c98a4b','#5e3a1c',1.6);
+  poly([[cx-24,cy-47],[cx+24,cy-47],[cx+24,cy-21],[cx-24,cy-21]],'#b4783e');
+  poly([[cx-31,cy-50],[cx,cy-62],[cx+31,cy-50],[cx+29,cy-47],[cx,cy-58],[cx-29,cy-47]],'#d9402f','#7a1c12',1.2);
+  const papers=[[-19,-44,'#fffaf0',-.08],[-5,-45,'#fff4c8',.06],[9,-44,'#e8f4ff',-.04]];
+  for(const[px,py,col,r]of papers){g.save();g.translate(cx+px+6,cy+py+10);g.rotate(r);poly([[-6,-10],[6,-10],[6,10],[-6,10]],col,'#a8895a',.6);g.strokeStyle='rgba(90,70,40,.5)';g.lineWidth=.7;for(let k=0;k<4;k++)line([-4,-6+k*4],[k%2?2:4,-6+k*4]);ell(0,-9,1.2,1.2,'#e0352b');g.restore()}
+  poly([[cx-16,cy-16],[cx+16,cy-16],[cx+16,cy-8],[cx-16,cy-8]],'#fff4dc','#5e3a1c',1);
+  g.font='600 7px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#3a2310';g.fillText('DELIVERIES',cx,cy-10);
+}
+function drawTruck(x,y,now,moving,loaded){
+  const z=6,red='#d9402f',redD='#a82c22',jig=moving&&!reduce?Math.sin(now/45)*.6:0;
+  const[sx,sy]=P(x+1.1,y+.36);shadow(sx,sy+4,62,16);
+  // wheels on the far side peek out, then chassis, bed and cab
+  const wheel=(wx,wy)=>{const[a,b]=P(wx,wy,z);ell(a,b,5.4,6.4,'#2b2b2b','#111',1);ell(a,b,2.4,2.9,'#c4ccd4');
+    if(moving&&!reduce){g.strokeStyle='#8a9098';g.lineWidth=.8;const t=now/80;line([a+Math.cos(t)*2.2,b+Math.sin(t)*2.6],[a-Math.cos(t)*2.2,b-Math.sin(t)*2.6])}};
+  wheel(x+.42,y);wheel(x+1.72,y);
+  g.save();g.translate(0,jig);
+  isoBox(x,y,2.2,.72,4,'#3a3a3a','#2b2b2b','#4a4a4a','#1a1a1a',z-1);
+  // flatbed with wooden sides
+  isoBox(x,y,1.38,.72,3,'#8a5a32','#7a4e2a','#b4783e','#4e2c12',z+3);
+  isoBox(x,y+.68,1.38,.04,9,'#c98a4b','#a8692f',null,'#5e3a1c',z+6);isoBox(x,y,.05,.72,9,'#b4783e','#a8692f',null,'#5e3a1c',z+6);
+  if(loaded){isoBox(x+.18,y+.1,.5,.5,10,'#d9a05a','#c98a4b','#e8b878','#7a4e2a',z+6);isoBox(x+.75,y+.14,.45,.46,8,'#d9a05a','#c98a4b','#e8b878','#7a4e2a',z+6);isoBox(x+.3,y+.18,.35,.35,8,'#e8d5a8','#d0bc8a','#f4e6c4','#8a6a3a',z+16)}
+  // cab
+  isoBox(x+1.38,y+.02,.82,.68,13,red,redD,shade(red,.15),'#6b1c14',z+3);
+  isoBox(x+1.42,y+.06,.52,.6,11,'#bfe6ff','#8fc8ea',red,'#6b1c14',z+16);
+  const[wa,wb]=P(x+1.5,y+.66,z+19),[wc,wd]=P(x+1.88,y+.66,z+19);g.strokeStyle='rgba(255,255,255,.7)';g.lineWidth=1.4;line([wa,wb],[wa+6,wb-5]);line([wc-4,wd+1],[wc+1,wd-3]);
+  poly([P(x+2.2,y+.12,z+5),P(x+2.2,y+.6,z+5),P(x+2.2,y+.6,z+10),P(x+2.2,y+.12,z+10)],'#c4ccd4','#6e685e',.8);
+  for(const t of[.18,.54]){const[a,b]=P(x+2.2,y+t,z+12);ell(a,b,2,1.6,'#fff7c0','#9a6400',.6)}
+  // the driver behind the wheel when he is in the cab
+  if(moving){const[hx,hy]=P(x+1.66,y+.36,z+19);g.save();g.translate(hx,hy+2);g.scale(.42,.42);drawHead(DRIVER.look);g.restore()}
+  g.restore();
+  wheel(x+.42,y+.72);wheel(x+1.72,y+.72);
+  // name on the door
+  const[da,db]=P(x+1.8,y+.7,z+8);g.font='600 6px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('DALE',da,db);
+}
+const driverNPC={x:0,y:0,t:0,walk:0};
+function drawDeliveryArea(now){
+  if(VIS)return;const[bx,by]=boardSpot();drawBoard(bx,by);
+  const tp=truckPos(now);
+  if(tp){drawTruck(tp[0],tp[1],now,tp[2],!!dv().run&&truckPhase(now)==='leaving');
+    if(!dv().run){const[dx,dy]=[bx-.35,by-.15],[px,py]=P(dx,dy);g.save();g.translate(px,py);g.scale(-.9,.9);drawAvatar(DRIVER.look,{kind:Math.sin(now/1600)>.6?'wave':null,t:now/1000});g.restore();
+      g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=g.measureText('Dale').width+10,ty=py-62;poly([[px-w/2,ty-9],[px+w/2,ty-9],[px+w/2,ty+3],[px-w/2,ty+3]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText('Dale',px,ty)}}
+  const ready=dv().jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap())&&!dv().run;
+  if(ready){const[px,py]=P(bx+.5,by+.3);const k=reduce?0:Math.sin(now/240)*2;ell(px+26,py-70+k,8,8,'#3f9a3c','#fff',1.6);g.font='bold 10px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('!',px+26,py-66.5+k)}
+}
+function deliveryAt(cx,cy){
+  if(VIS)return false;const[bx,by]=boardSpot(),[px,py]=P(bx+.5,by+.3),sx=px*cam.z+cam.x,sy=(py-34)*cam.z+cam.y;
+  if(Math.abs(cx-sx)<34*cam.z&&Math.abs(cy-sy)<36*cam.z)return true;
+  const tp=truckPos(Date.now());if(tp&&!dv().run){const[tx,ty]=P(tp[0]+1.1,tp[1]+.36,14),ux=tx*cam.z+cam.x,uy=ty*cam.z+cam.y;if(Math.abs(cx-ux)<46*cam.z&&Math.abs(cy-uy)<26*cam.z)return true}
+  return false;
 }
 
 /* ================= visiting a neighbor's farm ================= */
@@ -2886,7 +3099,7 @@ function actVisit(hx,hy){
 }
 function helpDone(x,y){
   const n=VIS.n,list=helpedHere(n.id);if(list.length>=HELP_MAX)return;
-  list.push(x+','+y);S.coins+=10;floatText(x,y-.6,'+10','#ffd23f');addXP(2);maybeMat(x,y,.15);
+  list.push(x+','+y);S.coins+=6;floatText(x,y-.6,'+6','#ffd23f');addXP(1);maybeMat(x,y,.15);
   if(list.length===1)stat('help');
   const host=visitors.find(v=>v.host);
   if(list.length>=HELP_MAX){
@@ -2905,7 +3118,7 @@ function visitTip(hx,hy){
 /* ================= talking to visitors ================= */
 function greet(v){
   v.state='wave';v.t=0;v.wait=2.5;SFX.collect();
-  if(!v.tipped){v.tipped=true;stat('visit');const tip=5+Math.floor(Math.random()*11);S.coins+=tip;floatText(v.x-.5,v.y-1.4,'+'+tip,'#ffd23f');say(v,'Here, a little something for you!');if(Math.random()<.35)addMat(randMat(),1,v.x-.3,v.y);changed()}
+  if(!v.tipped){v.tipped=true;stat('visit');const tip=3+Math.floor(Math.random()*6);S.coins+=tip;floatText(v.x-.5,v.y-1.4,'+'+tip,'#ffd23f');say(v,'Here, a little something for you!');if(Math.random()<.35)addMat(randMat(),1,v.x-.3,v.y);changed()}
   else say(v,sayLine(v.n));
 }
 function clickVisitor(v){
@@ -2932,7 +3145,7 @@ function rewardRow(items){
   return r;
 }
 function showLevelUp(l0){
-  const names=[];let bonus=0;for(let l=l0+1;l<=S.level;l++){names.push(...unlockedAt(l));bonus+=50*l}
+  const names=[];let bonus=0;for(let l=l0+1;l<=S.level;l++){names.push(...unlockedAt(l));bonus+=20*l}
   const lv=S.level;
   confetti();
   modal({title:'Level Up!',color:'gold',small:true,noClose:true,render(b){
@@ -3270,6 +3483,7 @@ function endPointer(e){
   pointers.delete(e.pointerId);
   if(pinch&&pointers.size<2){pinch=null;const r=[...pointers.values()][0];if(r)down={x:r.x,y:r.y,cx:cam.x,cy:cam.y,moved:true};return}
   if(down&&!down.moved&&e.type==='pointerup'&&!placing&&petAt(e.clientX,e.clientY)){petPet()}
+  else if(down&&!down.moved&&e.type==='pointerup'&&!placing&&tool==='multi'&&deliveryAt(e.clientX,e.clientY)){SFX.click();showDelivery()}
   else if(down&&!down.moved&&e.type==='pointerup'){const v=!placing&&tool==='multi'&&visitorAt(e.clientX,e.clientY),ak=!placing&&!VEH[tool]&&animalAt(e.clientX,e.clientY);if(v)clickVisitor(v);else if(ak){const[x,y]=ak.split(',').map(Number);hover=[x,y];act(x,y)}else{const[x,y]=tileAt(e.clientX,e.clientY);hover=[x,y];act(x,y)}}
   if(pointers.size===0){down=null;cv.classList.remove('grab')}
 }
@@ -3314,12 +3528,12 @@ function tipText(hx,hy){
 }
 function updateTip(cx,cy){
   const tip=$('tip');
-  if(!hover||(down&&down.moved)||matchMedia('(hover: none)').matches){tip.hidden=true;return}
-  const vv=!placing&&tool==='multi'&&visitorAt(cx,cy),t=vv?vv.n.name+': say hi!':tipText(hover[0],hover[1]);if(!t){tip.hidden=true;return}
+  if((!hover&&!deliveryAt(cx,cy))||(down&&down.moved)||matchMedia('(hover: none)').matches){tip.hidden=true;return}
+  const vv=!placing&&tool==='multi'&&visitorAt(cx,cy),dl=!vv&&!placing&&tool==='multi'&&deliveryAt(cx,cy),t=vv?vv.n.name+': say hi!':dl?(dv().run?'Delivery Board. Dale is out on a delivery':'Delivery Board: send goods to town with Dale'):tipText(hover[0],hover[1]);if(!t){tip.hidden=true;return}
   tip.textContent=t;tip.hidden=false;const r=tip.getBoundingClientRect();
   tip.style.left=Math.min(cx+16,vw-r.width-8)+'px';tip.style.top=Math.max(8,cy-34)+'px';
 }
-setInterval(()=>{if(!S)return;if(hover&&!$('tip').hidden){const t=tipText(hover[0],hover[1]);if(t)$('tip').textContent=t}updateFuel();tickOrders();if(darkness()>.6&&Math.random()<.3)SFX.chirp();
+setInterval(()=>{if(!S)return;if(hover&&!$('tip').hidden){const t=tipText(hover[0],hover[1]);if(t)$('tip').textContent=t}updateFuel();tickOrders();tickDeliv();if(darkness()>.6&&Math.random()<.3)SFX.chirp();
   if(mq[0]&&mq[0].live&&!$('modal').hidden){const a=document.activeElement,body=$('sheetBody'),btns=[...body.querySelectorAll('button')],i=btns.indexOf(a);rerender();if(i>=0){const nb=body.querySelectorAll('button')[i];if(nb)nb.focus()}}},1000);
 
 /* ================= tools ================= */
@@ -3347,6 +3561,21 @@ $('btnColl').onclick=()=>{SFX.click();showCollections()};
 $('btnGifts').onclick=()=>{SFX.click();showGifts()};
 $('btnBarn').onclick=$('barnchip').onclick=()=>{SFX.click();showBarn()};
 $('btnOrders').onclick=()=>{SFX.click();showOrders()};
+$('btnDeliv').onclick=()=>{SFX.click();showDelivery()};
+$('btnMore').onclick=()=>{SFX.click();const on=document.body.classList.toggle('more');$('btnMore').setAttribute('aria-expanded',String(on))};
+document.querySelectorAll('.menu .extra').forEach(b=>b.addEventListener('click',()=>{document.body.classList.remove('more');$('btnMore').setAttribute('aria-expanded','false')}));
+$('btnNbrs').onclick=()=>{SFX.click();showNeighbors()};
+function showNeighbors(){
+  modal({title:'Neighbors',color:'green',render(b){
+    const w=el('div','nbs');
+    for(const n of NEIGHBORS){
+      const c=el('div','nbcard'),h=helpedHere(n.id).length;c.innerHTML=avatar(n);c.appendChild(el('strong',null,n.name));c.appendChild(el('small',null,n.farm+' · Level '+n.lvl+' · Helped '+h+'/'+HELP_MAX));
+      const v=el('button','go',h>=HELP_MAX?'Visit ✓':'Visit farm');v.onclick=()=>{closeModal();visitFarm(n)};c.appendChild(v);
+      const i=el('button','btn2','Invite over');i.onclick=()=>{closeModal();inviteNeighbor(n)};c.appendChild(i);w.appendChild(c);
+    }
+    b.appendChild(w);
+  }});
+}
 $('fuelchip').onclick=()=>{SFX.click();refuel(false)};
 $('vbHome').onclick=goHome;
 
@@ -3415,12 +3644,12 @@ function renderShop(body){
     const img=el('img');img.alt='';img.src=ICONS[key];card.appendChild(img);
     card.appendChild(el('strong',null,d.name));
     let info;
-    if(marketCat==='seeds')info='Ready in '+fmt(d.grow)+'. Sells for '+d.sell+'. +'+d.xp+' XP';
+    if(marketCat==='seeds')info='Ready in '+fmt(d.grow)+'. Sells for '+ITEMS[id].sell+'. +'+d.xp+' XP';
     else if(marketCat==='decor'||marketCat==='specials')info=(d.size===2?'Takes 2 by 2 tiles. ':'')+'+'+d.xp+' XP';
     else if(marketCat==='farm')info=d.kind==='vehicle'?d.verb+' '+(vsize(id)**2)+' plots per trip'+(vlvl(id)?' (level '+vlvl(id)+')':'')+'. Uses 1 fuel.':d.desc;
     else if(marketCat==='buildings')info=d.desc+' '+d.recipes.length+' recipes. You own '+Object.values(S.tiles).filter(o=>o.k==='mk'&&o.id===id).length+'.';
     else if(marketCat==='homes')info='Home for up to '+d.cap+' '+plural(ANIMALS[id].name).toLowerCase()+'. Click it to collect from all of them. You own '+(HC[id]||0)+'.';
-    else info=d.product+' every '+fmt(d.every)+' for '+d.give+' coins';
+    else info=d.product+' every '+fmt(d.every)+', sells for '+ITEMS[(marketCat==='animals'?'a_':'t_')+id].sell;
     card.appendChild(el('small',null,info));
     if(marketCat==='seeds'){
       const st=el('div','stars'),ml=S.mlvl[id]||0;
@@ -3703,7 +3932,7 @@ function updatePet(dt){
 function petFind(){
   const name=S.pet.name||PET_NAME[S.pet.kind],r=Math.random();
   if(r<.25){const m=randMat();if(addMat(m,1,pet.x,pet.y))toast(name+' dug up some '+MATS[m].name.toLowerCase()+'!')}
-  else if(r<.85){const c=5+Math.floor(Math.random()*16);S.coins+=c;floatText(pet.x,pet.y-1,'+'+c,'#ffd23f');toast(name+' found '+c+' coins!')}
+  else if(r<.85){const c=3+Math.floor(Math.random()*10);S.coins+=c;floatText(pet.x,pet.y-1,'+'+c,'#ffd23f');toast(name+' found '+c+' coins!')}
   else{say2(name+' sniffed around but found nothing this time.');return}
   SFX.find();stat('petfind');changed();
 }
@@ -3799,7 +4028,8 @@ const TUT=[
   {txt:'Click the plowed plot to plant strawberries.',done:()=>st('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
   {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>st('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow'].includes(cropState(o,Date.now()).st)},
   {txt:'Your harvest goes to the barn. Open the Barn and sell something.',done:()=>st('sell')>=1,btn:'btnBarn'},
-  {txt:'Neighbors pay more than the market. Open the Orders board.',done:()=>st('ordersSeen')>=1,btn:'btnOrders'}
+  {txt:'Neighbors pay more than the market. Open the Orders board.',done:()=>st('ordersSeen')>=1,btn:'btnOrders'},
+  {txt:'Dale drives goods to town for coins and lots of XP. Open the Delivery Board.',done:()=>st('delivSeen')>=1,btn:'btnDeliv'}
 ];
 function st(k){return S.stats[k]||0}
 function tutOn(){return S&&typeof S.tut==='number'&&S.tut<TUT.length&&!VIS}
@@ -3828,7 +4058,14 @@ function drawTutArrow(now){
 }
 
 /* ================= farm stats ================= */
-const STAT_LIST=[['harvest','Crops harvested'],['plant','Seeds planted'],['plow','Plots plowed'],['water','Crops watered'],['golden','Golden crops'],['animal','Animal goods collected'],['feed','Animals fed'],['baby','Babies born'],['tree','Fruit picked'],['make','Goods made'],['sell','Goods sold at market'],['order','Orders filled'],['earned','Coins earned from sales'],['help','Neighbors helped'],['visit','Visitors greeted'],['petfind','Things your pet found']];
+const STAT_LIST=[['harvest','Crops harvested'],['plant','Seeds planted'],['plow','Plots plowed'],['water','Crops watered'],['golden','Golden crops'],['animal','Animal goods collected'],['feed','Animals fed'],['baby','Babies born'],['tree','Fruit picked'],['make','Goods made'],['sell','Goods sold at market'],['order','Orders filled'],['deliver','Deliveries made'],['earned','Coins earned from sales'],['help','Neighbors helped'],['visit','Visitors greeted'],['petfind','Things your pet found']];
+function confirmNewFarm(){
+  modal({title:'Start Over?',color:'red',small:true,render(b){
+    const p=el('div','body-pad');p.appendChild(el('p',null,'This deletes '+S.farmName+' for good: your coins, level, animals and everything in the barn. You start a brand-new farm with the tutorial.'));
+    const row=el('div','wdrow'),no=el('button','btn2','Keep my farm'),yes=el('button','go danger','Yes, start over');no.dataset.focus='1';no.onclick=closeModal;
+    yes.onclick=()=>{RESET=true;try{localStorage.removeItem(KEY)}catch(e){}location.reload()};row.appendChild(no);row.appendChild(yes);p.appendChild(row);b.appendChild(p);
+  }});
+}
 function renderStats(b){
   const now=Date.now(),days=Math.max(1,Math.ceil((now-S.born)/864e5)),cnt={plot:0,animal:0,tree:0,mk:0,deco:0,home:0};
   for(const k in S.tiles){const o=S.tiles[k];if(cnt[o.k]!==undefined)cnt[o.k]++}
@@ -3840,6 +4077,7 @@ function renderStats(b){
   for(const[k,l]of STAT_LIST){const c=el('div','statc');c.appendChild(el('b',null,st(k).toLocaleString()));c.appendChild(el('span',null,l));life.appendChild(c)}
   p.appendChild(el('h3',null,'All-time'));p.appendChild(life);
   const top=Object.keys(S.mastery).sort((a,b)=>S.mastery[b]-S.mastery[a]).slice(0,3).filter(k=>CROPS[k]);
+  const nf=el('div','newfarm'),nb=el('button','btn2 danger','Start a new farm');nb.onclick=confirmNewFarm;nf.appendChild(nb);nf.appendChild(el('small',null,'Wipes this farm and starts over from Level 1 with the tutorial.'));p.appendChild(nf);
   if(top.length)p.appendChild(el('p','hint','Favorite crops: '+top.map(k=>CROPS[k].name+' ('+S.mastery[k]+')').join(', ')+'.'));
   b.appendChild(p);
 }
@@ -3880,7 +4118,7 @@ function start(data){
   if(!S.tips.avatar)showWardrobe(true);
   dailyBonus();
   renderGoals();setInterval(()=>{if(S.goals&&S.goals.day!==today())renderGoals()},60000);
-  tickOrders();
+  tickOrders();tickDeliv();
   showTitle();
 }
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
