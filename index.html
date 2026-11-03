@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Clover Hollow</title>
+<title>Farm Village</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@500;600;700&display=swap">
 <style>
@@ -629,7 +629,7 @@ body.visiting .tut{display:none}
 <div class="tut" id="tut" hidden><div><small id="tutStep"></small><strong id="tutText"></strong></div><button class="btn2" id="tutSkip">Skip</button></div>
 <div class="visitbar" id="visitbar" hidden><div><strong id="vbName"></strong><small id="vbInfo"></small></div><button class="go" id="vbHome">Go home</button></div>
 <div class="title" id="title">
-  <div class="tlogo" aria-label="Clover Hollow"><span>Cl<i class="leaf"></i>ver</span><span>Hollow</span></div>
+  <div class="tlogo" aria-label="Farm Village"><span>Farm<i class="leaf"></i></span><span>Village</span></div>
   <canvas class="tstage" id="tstage" aria-hidden="true"></canvas>
   <p class="tsub" id="tsub">Grow crops, raise animals and build the coziest farm in the valley.</p>
   <button class="go tplay" id="tplay">Play</button>
@@ -856,7 +856,7 @@ function fresh(){
   return s;
 }
 function norm(s){
-  const d={coins:320,cash:5,xp:0,level:1,size:16,seed:'strawberry',tiles:{},helped:{day:'',ids:[]},inv:{},stats:{},ribbons:{},mastery:{},mlvl:{},coll:{},collDone:{},daily:{last:'',streak:0},fuel:FUEL_MAX,fuelT:Date.now(),veh:{},mats:{},barnLvl:1,sound:true,music:true,tips:{},owned:[],farmName:'Clover Hollow',farmerName:'',goods:{},orders:[],orderT:Date.now()+45000,ad:null,visitsOff:false};
+  const d={coins:320,cash:5,xp:0,level:1,size:16,seed:'strawberry',tiles:{},helped:{day:'',ids:[]},inv:{},stats:{},ribbons:{},mastery:{},mlvl:{},coll:{},collDone:{},daily:{last:'',streak:0},fuel:FUEL_MAX,fuelT:Date.now(),veh:{},mats:{},barnLvl:1,sound:true,music:true,tips:{},owned:[],farmName:'Farm Village',farmerName:'',goods:{},orders:[],orderT:Date.now()+45000,ad:null,visitsOff:false};
   for(const k in d)if(s[k]===undefined)s[k]=d[k];
   s.look=Object.assign(defaultLook(),s.look||{});
   if(!CROPS[s.seed])s.seed='strawberry';
@@ -872,7 +872,7 @@ function norm(s){
     s.goods.feed=(s.goods.feed||0)+30;s.v2=true;s.tips.v2=false;
   }
   if(!s.helped.counts)s.helped.counts={};
-  if(!s.born)s.born=Date.now();if(s.pet&&!['dog','cat'].includes(s.pet.kind))s.pet=null;
+  if(!s.born)s.born=Date.now();if(s.farmName==='Clover Hollow')s.farmName='Farm Village';if(s.pet&&!['dog','cat'].includes(s.pet.kind))s.pet=null;
   s.barnLvl=Math.min(6,Math.max(1,s.barnLvl|0));
   s.orders=(s.orders||[]).filter(o=>o&&o.items&&o.items.every(([id])=>ITEMS[id])&&NEIGHBORS.some(n=>n.id===o.who));
   for(const k in s.goods)if(!ITEMS[k]||!(s.goods[k]>0))delete s.goods[k];
@@ -4084,7 +4084,7 @@ function showWardrobe(first){
     const row=el('div','wdrow'),reset=el('button','btn2','Reset'),buy=el('button','go buynow','Buy now');row.appendChild(reset);row.appendChild(buy);side.appendChild(row);
     const row2=el('div','wdrow'),undo=el('button','btn2','Undo'),rnd=el('button','btn2','Surprise me');row2.appendChild(undo);row2.appendChild(rnd);side.appendChild(row2);
     side.appendChild(field('Farmer name','fName',fname,20,'Your name',v=>{fname=v}));
-    side.appendChild(field('Farm name','fFarm',farmN,22,'Clover Hollow',v=>{farmN=v}));
+    side.appendChild(field('Farm name','fFarm',farmN,22,'Farm Village',v=>{farmN=v}));
     if(S.pet)side.appendChild(field('Pet name','fPet',petN,16,PET_NAME[S.pet.kind],v=>{petN=v}));
     wrap.appendChild(main);wrap.appendChild(side);b.appendChild(wrap);
     const foot=el('div','wfoot'),note=el('span','note'),saveB=el('button','go','Save and close'),cancel=el('button','btn2 cancel','Cancel');
@@ -4114,7 +4114,7 @@ function showWardrobe(first){
     cancel.onclick=()=>{SFX.click();closeModal()};
     saveB.onclick=()=>{
       if(!purchase())return;
-      S.look=Object.assign({},draft);S.farmerName=fname.trim().slice(0,20);S.farmName=(farmN.trim()||'Clover Hollow').slice(0,22);if(S.pet)S.pet.name=(petN.trim()||PET_NAME[S.pet.kind]).slice(0,16);S.tips.avatar=true;
+      S.look=Object.assign({},draft);S.farmerName=fname.trim().slice(0,20);S.farmName=(farmN.trim()||'Farm Village').slice(0,22);if(S.pet)S.pet.name=(petN.trim()||PET_NAME[S.pet.kind]).slice(0,16);S.tips.avatar=true;
       SFX.ribbon();closeModal();changed();toast(S.farmerName?'Looking sharp, '+S.farmerName+'!':'Looking sharp!');
     };
     drawTabs();drawPanel();updateFoot();
@@ -4476,7 +4476,7 @@ function dailyBonus(){
   const t=today();if(S.daily.last===t)return;
   const streak=S.daily.last===yesterday()?Math.min(5,S.daily.streak+1):1;
   modal({title:'Daily Bonus',color:'green',small:true,noClose:true,render(b){
-    const p=el('div','body-pad');p.appendChild(el('p',null,'Welcome back to Clover Hollow! Come back every day for bigger rewards.'));
+    const p=el('div','body-pad');p.appendChild(el('p',null,'Welcome back to Farm Village! Come back every day for bigger rewards.'));
     const days=el('div','days');
     DAILY.forEach((r,i)=>{const d=el('div','day'+(i+1<streak?' done':i+1===streak?' today':''));d.appendChild(el('b',null,'Day '+(i+1)));
       d.appendChild(el('span',null,r.coins+' coins'));if(r.fuel)d.appendChild(el('span',null,'+'+r.fuel+' fuel'));if(r.cash)d.appendChild(el('span',null,'+'+r.cash+' Farm Cash'));days.appendChild(d)});
@@ -4503,7 +4503,7 @@ function start(data){
   const first=!S.tips.welcome;S.tips.welcome=true;
   if(S.tips.homeGift===false){S.tips.homeGift=true;setTimeout(()=>toast('Animals now live in homes! Free homes for your animals are waiting in your Gift Box.'),1500)}
   else if(!S.tips.homes&&Object.values(S.tiles).some(o=>o.k==='animal'&&!hasHome(o.id))){S.tips.homes=true;setTimeout(()=>toast('Your chickens and sheep need homes! Buy a Chicken Coop and a Sheep Pen in Market > Homes.'),3200)}
-  if(first)toast('Welcome to Clover Hollow! Click the sparkling strawberries and your farmer will harvest them.');
+  if(first)toast('Welcome to Farm Village! Click the sparkling strawberries and your farmer will harvest them.');
   if(!S.tips.avatar)showWardrobe(true);
   dailyBonus();
   renderGoals();setInterval(()=>{if(S.goals&&S.goals.day!==today())renderGoals()},60000);
