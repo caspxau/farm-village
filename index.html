@@ -5323,7 +5323,7 @@ function start(data){
 }
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 // Installed-app support: works offline once loaded. Skipped where service workers are not allowed (for example inside claude.ai).
-if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')&&!/claude\.ai$/.test(location.hostname))navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')&&!/claude\.ai$/.test(location.hostname))navigator.serviceWorker.register('sw.js').then(r=>{addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')r.update().catch(()=>{})})}).catch(()=>{});
 let installEvt=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e});addEventListener('appinstalled',()=>{installEvt=null;toast('Farm Village is installed!')});
 })();
 </script>

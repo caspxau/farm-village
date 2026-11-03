@@ -1,7 +1,7 @@
 /* Farm Village offline support.
    The game page is fetched fresh when online (so updates arrive) and served from the cache when offline.
    Icons, the manifest and the Google fonts are cached on first use. Bump VERSION to drop old caches. */
-const VERSION = 'fv-2';
+const VERSION = 'fv-3';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './icons/apple-touch-icon.png', './icons/favicon-64.png'];
 
 self.addEventListener('install', e => {
@@ -14,7 +14,8 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).then(res => {
+    // always ask the server for the newest page (skipping the browser's 10-minute cache), fall back to the saved copy offline
+    e.respondWith(fetch(req, {cache: 'no-cache'}).then(res => {
       const copy = res.clone(); caches.open(VERSION).then(c => c.put('./index.html', copy)); return res;
     }).catch(() => caches.match('./index.html')));
     return;
