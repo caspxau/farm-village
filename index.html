@@ -1092,7 +1092,8 @@ const PL_EXACT={
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.'
 ,
-'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.'
+'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
+'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!'
 };
 const RIB_PL=x=>({Yellow:'Żółta',White:'Biała',Red:'Czerwona',Blue:'Niebieska'}[x]||x);
 const L_t=t=>PACK?String(t).replace(/^(\d+)s$/,PACK.time.s).replace(/^(\d+)h (\d+)m$/,PACK.time.hm):String(t).replace(/^(\d+)s$/,'$1 s').replace(/^(\d+)h (\d+)m$/,'$1 godz. $2 min');
@@ -1284,7 +1285,8 @@ const PL_PATS=[
 [/^Waters growing crops up to (\d+) plots away and fills up when it rains\. \+(\d+) XP$/,m=>'Podlewa rosnące plony do '+m[1]+' pól dalej i napełnia się podczas deszczu. +'+m[2]+' XP'],
 [/^(?:(.+), you|You) reached Level 99, the highest level in Farm Village!$/,m=>(m[1]?m[1]+', masz':'Masz')+' poziom 99, najwyższy w Farm Village!'],
 [/^Your special gift: the Champion Trophy, ([\d.,\s]+) coins and (\d+) Farm Cash\. Place the trophy from your Gift Box\.$/,m=>'Twój specjalny prezent: Puchar Mistrza, '+m[1]+' monet i '+m[2]+' farmdolarów. Postaw puchar z pudełka z prezentami.'],
-[/^Upgrade (.+)$/,m=>'Ulepsz: '+L_w(m[1])]
+[/^Upgrade (.+)$/,m=>'Ulepsz: '+L_w(m[1])],
+[/^Off to (.+)!$/,m=>'Jadę do: '+m[1]+'!']
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -1791,6 +1793,7 @@ const SFX={
   ribbon(){[784,988,1175,1568].forEach((f,i)=>tone(f,.18,'square',.05,i*.08))},
   find(){tone(1175,.1,'sine',.1);tone(1568,.1,'sine',.1,.08);tone(2093,.2,'sine',.08,.16)},
   click(){tone(700,.04,'sine',.06)},
+  horn(){voice(392,392,.22,{wave:'square',ft:'lowpass',f:1400,q:1,vol:.07,at:.01,hold:.8});voice(494,494,.22,{wave:'square',ft:'lowpass',f:1400,q:1,vol:.06,at:.01,hold:.8});voice(392,392,.34,{wave:'square',ft:'lowpass',f:1400,q:1,vol:.07,at:.01,hold:.85,delay:.3});voice(494,494,.34,{wave:'square',ft:'lowpass',f:1400,q:1,vol:.06,at:.01,hold:.85,delay:.3})},
   engine(){voice(55,48,.9,{wave:'sawtooth',ft:'lowpass',f:380,q:3,vol:.16,trem:22,tremD:.8,at:.08});nz(.9,{brown:1,type:'lowpass',f:200,vol:.25,at:.1})},
   // water from a can: a splashy pour with droplets
   water(){nz(.55,{f:3200,f2:1800,q:.6,vol:.12,at:.06});nz(.5,{brown:1,type:'lowpass',f:700,vol:.2,at:.08});for(let i=0;i<4;i++)voice(rr(900,1500),rr(1800,2600),.05,{wave:'sine',ft:'lowpass',f:4000,vol:.025,at:.004,delay:.1+i*.09,hold:.2})},
@@ -4111,19 +4114,26 @@ const TRUCK_CAP=[0,20,35,60],TRUCK_UP=[null,{coins:1500,mats:{board:10,nail:10}}
 const DRIVE=2000; // ms to drive off screen or back in
 function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
 function truckCap(){return TRUCK_CAP[dv().lv||1]}
+// Dale's first job on a new farm is a small wheat run you can fill right after the first harvest.
+function starterContract(){return{id:'start'+Date.now().toString(36),to:'Valley Grocer',items:[['wheat',3]],coins:150,xp:20,time:5,base:280,starter:true}}
 function newContract(){
+  const d=dv();
+  if(!(S.stats.deliver>0)&&!d.jobs.some(c=>c.starter)&&!(d.run&&d.run.job.starter))return starterContract();
   const pool=orderPool();if(!pool.length)return null;
   const R=Math.random,pick=a=>a[Math.floor(R()*a.length)];
-  const town=pick(TOWNS),liked=pool.filter(id=>town.likes.includes(ITEMS[id].cat)),src=liked.length?liked:pool;
+  // early on, Dale mostly asks for what is already in the barn, in small amounts
+  const early=S.level<6,inBarn=pool.filter(id=>have(id)>0);
+  const town=pick(TOWNS),liked=pool.filter(id=>town.likes.includes(ITEMS[id].cat)),src=early&&inBarn.length&&R()<.75?inBarn:liked.length?liked:pool;
   const lines=Math.min(src.length,S.level<3?1:1+(R()<.6?1:0)+(S.level>=7&&R()<.4?1:0)),items=[],used=new Set();let count=0;
   const cap=truckCap();
   while(items.length<lines){const id=pick(src);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=80+S.level*35+R()*100;
-    const n=Math.max(1,Math.min(it.cat==='made'?4:Math.floor(cap/lines),Math.round(want/it.sell)));items.push([id,n]);count+=n}
+    let n=Math.max(1,Math.min(it.cat==='made'?4:Math.floor(cap/lines),Math.round(want/it.sell)));if(early)n=Math.min(n,Math.max(2,have(id)||(S.level<3?3:5)));items.push([id,n]);count+=n}
   const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0);
   return{id:Date.now().toString(36)+R().toString(36).slice(2,6),to:town.name,items,coins:Math.round(base*(1.15+R()*.15)/5)*5,xp:4+Math.round(base/22),time:5+Math.floor(R()*6),base};
 }
 function tickDeliv(){
   if(!S||VIS)return;const d=dv(),now=Date.now();
+  if(!(S.stats.deliver>0)&&!d.run&&!d.jobs.some(c=>c.starter)&&!d.fixedStart){d.fixedStart=1;d.jobs=d.jobs.filter(c=>canFill(c));d.jobs.unshift(starterContract());hud()}
   if(d.run&&now>=d.run.end)payDelivery();
   if(d.jobs.length<3&&now>=d.next){const c=newContract();if(c){d.jobs.push(c);if(mq[0]&&mq[0].deliv)rerender();hud()}d.next=now+(d.jobs.length<2?60000:200000)}
 }
@@ -4135,7 +4145,7 @@ function sendDelivery(c){
   if(contractCount(c)>truckCap()){SFX.error();toast('That is more than the truck can carry. Upgrade the truck to load '+TRUCK_CAP[Math.min(3,(d.lv||1)+1)]+'.');return}
   for(const[id,n]of c.items)takeGood(id,n);
   d.jobs=d.jobs.filter(x=>x!==c);const now=Date.now(),trip=Math.max(5,Math.min(10,c.time));d.run={job:c,start:now,end:now+trip*1000};d.next=Math.min(d.next,now+90000);
-  SFX.engine();setTimeout(SFX.engine,400);stat('delivSent');toast('Dale loaded the truck and is heading to '+c.to+'. Back in '+fmt(Math.max(5,Math.min(10,c.time)))+'.');
+  SFX.horn();setTimeout(SFX.engine,350);setTimeout(SFX.engine,900);dale.say=['Off to '+c.to+'!','See you soon!','Back before you know it!'][Math.floor(Math.random()*3)];dale.sayT=2.2;stat('delivSent');toast('Dale loaded the truck and is heading to '+c.to+'. Back in '+fmt(Math.max(5,Math.min(10,c.time)))+'.');
   closeModal();changed();
 }
 function payDelivery(){
@@ -4198,7 +4208,18 @@ function drawBoard(x,y){
   poly([[cx-16,cy-16],[cx+16,cy-16],[cx+16,cy-8],[cx-16,cy-8]],'#fff4dc','#5e3a1c',1);
   g.font='600 7px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#3a2310';g.fillText('DELIVERIES',cx,cy-10);
 }
-function drawTruck(x,y,now,moving,loaded){
+// a burlap money bag tied with string, a gold coin on the front and a few coins spilling out
+function moneyBag(cx,cy){
+  shadow(cx,cy+1,12,4);
+  g.beginPath();g.moveTo(cx-6,cy-17);g.quadraticCurveTo(cx-14,cy-12,cx-12,cy-3);g.quadraticCurveTo(cx-10,cy+2,cx,cy+2);g.quadraticCurveTo(cx+10,cy+2,cx+12,cy-3);g.quadraticCurveTo(cx+14,cy-12,cx+6,cy-17);g.closePath();
+  const gr=g.createLinearGradient(cx-12,0,cx+12,0);gr.addColorStop(0,'#e8c58a');gr.addColorStop(.5,'#cfa565');gr.addColorStop(1,'#9a7338');g.fillStyle=gr;g.fill();g.strokeStyle='#5e3a1c';g.lineWidth=1.3;g.stroke();
+  poly([[cx-6,cy-17],[cx-8,cy-23],[cx-3,cy-20],[cx,cy-24],[cx+3,cy-20],[cx+8,cy-23],[cx+6,cy-17]],'#cfa565','#5e3a1c',1.1);
+  g.strokeStyle='#8a3a1c';g.lineWidth=1.8;line([cx-6.5,cy-17],[cx+6.5,cy-17]);
+  ell(cx,cy-8,5.2,5.2,'#ffc72c','#9a6400',1.1);ell(cx-1.2,cy-9.4,1.6,1.4,'rgba(255,255,255,.6)');
+  g.font='bold 7px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#9a6400';g.fillText('$',cx,cy-5.4);
+  for(const[a,b]of[[-13,1],[13,0],[9,3]]){ell(cx+a,cy+b,3,1.5,'#ffc72c','#9a6400',.8)}
+}
+function drawTruck(x,y,now,moving,cargo){
   const z=6,red='#d9402f',redD='#a82c22',jig=moving&&!reduce?Math.sin(now/45)*.6:0;
   const[sx,sy]=P(x+1.1,y+.36);shadow(sx,sy+4,62,16);
   // wheels on the far side peek out, then chassis, bed and cab
@@ -4210,7 +4231,14 @@ function drawTruck(x,y,now,moving,loaded){
   // flatbed with wooden sides
   isoBox(x,y,1.38,.72,3,'#8a5a32','#7a4e2a','#b4783e','#4e2c12',z+3);
   isoBox(x,y+.68,1.38,.04,9,'#c98a4b','#a8692f',null,'#5e3a1c',z+6);isoBox(x,y,.05,.72,9,'#b4783e','#a8692f',null,'#5e3a1c',z+6);
-  if(loaded){isoBox(x+.18,y+.1,.5,.5,10,'#d9a05a','#c98a4b','#e8b878','#7a4e2a',z+6);isoBox(x+.75,y+.14,.45,.46,8,'#d9a05a','#c98a4b','#e8b878','#7a4e2a',z+6);isoBox(x+.3,y+.18,.35,.35,8,'#e8d5a8','#d0bc8a','#f4e6c4','#8a6a3a',z+16)}
+  if(cargo==='money'){const[mx,my]=P(x+.7,y+.38,z+6);moneyBag(mx,my)}
+  else if(cargo&&cargo.length){
+    // one open crate per kind of good, with the goods themselves showing on top
+    // back row first so the front crates sit in front of it; a fourth goods kind rides on top
+    const spots=[[.02,.04],[.48,.04],[.2,.36]],list=cargo.slice(0,3);
+    list.forEach(([id],i)=>{const[ox,oy]=spots[i];isoBox(x+ox,y+oy,.44,.3,6,'#d9a05a','#c98a4b','#e8b878','#7a4e2a',z+6);
+      const[gx,gy]=P(x+ox+.22,y+oy+.15,z+12);drawGood(id,gx,gy+3,.85)});
+  }
   // cab
   isoBox(x+1.38,y+.02,.82,.68,13,red,redD,shade(red,.15),'#6b1c14',z+3);
   isoBox(x+1.42,y+.06,.52,.6,11,'#bfe6ff','#8fc8ea',red,'#6b1c14',z+16);
@@ -4224,14 +4252,29 @@ function drawTruck(x,y,now,moving,loaded){
   // name on the door
   const[da,db]=P(x+1.8,y+.7,z+8);g.font='600 6px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('DALE',da,db);
 }
-const driverNPC={x:0,y:0,t:0,walk:0};
+const dale={say:'',sayT:0,next:8};
+const DALE_IDLE=['Got anything for town?','The truck is ready to roll!','Nice day for a drive.','Fill a contract and I will take it to town.'];
+function speech(px,py,text){
+  g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const t=tr(text),w=Math.min(150,g.measureText(t).width+14),h=18;
+  poly([[px-w/2,py-h],[px+w/2,py-h],[px+w/2,py],[px+5,py],[px,py+6],[px-5,py],[px-w/2,py]],'rgba(255,253,245,.97)','#6b3c15',1.2);
+  g.fillStyle='#3a2310';g.fillText(t,px,py-5.5);
+}
+let lastPhase='parked',dustT=0;
 function drawDeliveryArea(now){
   if(VIS)return;const[bx,by]=boardSpot();inkLive(bx+.5,by+.3,90,80,20,()=>drawBoard(bx,by));
-  const tp=truckPos(now);
-  if(tp){inkLive(tp[0],tp[1],260,140,90,()=>drawTruck(tp[0],tp[1],now,tp[2],!!dv().run&&truckPhase(now)==='leaving'));
-    if(!dv().run){const[dx,dy]=[bx-.35,by-.15],[px,py]=P(dx,dy);inkLive(dx,dy,80,85,20,()=>{g.save();g.translate(px,py);g.scale(-.9,.9);drawAvatar(DRIVER.look,{kind:Math.sin(now/1600)>.6?'wave':null,t:now/1000});g.restore()});
-      g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=g.measureText('Dale').width+10,ty=py-62;poly([[px-w/2,ty-9],[px+w/2,ty-9],[px+w/2,ty+3],[px-w/2,ty+3]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText('Dale',px,ty)}}
-  const ready=dv().jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap())&&!dv().run;
+  const d=dv(),ph=truckPhase(now),tp=truckPos(now),ready=d.jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap())&&!d.run;
+  if(ph==='back'&&lastPhase!=='back')setTimeout(SFX.horn,DRIVE-500);lastPhase=ph;
+  if(tp){const cargo=d.run?(ph==='leaving'?d.run.job.items:ph==='back'?'money':null):null;
+    inkLive(tp[0],tp[1],260,140,90,()=>drawTruck(tp[0],tp[1],now,tp[2],cargo));
+    if(tp[2]&&!reduce&&performance.now()>dustT){dustT=performance.now()+70;const back=ph==='leaving'?-.1:2.3,[ux,uy]=P(tp[0]+back,tp[1]+.4);spray(ux,uy,2,{c:['#d8c4a0','#c4ad84','#e8dcc0'],v:.6,r:2.6,gr:-.02,life:.8,a:Math.PI*(ph==='leaving'?1:0)-.3,spread:1})}
+    if(!d.run){const[dx,dy]=[bx-.35,by-.15],[px,py]=P(dx,dy),wave=ready?Math.sin(now/500)>-.2:Math.sin(now/1600)>.6;
+      inkLive(dx,dy,80,85,20,()=>{g.save();g.translate(px,py);g.scale(-.9,.9);drawAvatar(DRIVER.look,{kind:wave?'wave':null,t:now/1000});g.restore()});
+      g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=g.measureText('Dale').width+10,ty=py-62;poly([[px-w/2,ty-9],[px+w/2,ty-9],[px+w/2,ty+3],[px-w/2,ty+3]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText('Dale',px,ty);
+      // now and then Dale calls out; when a contract can be filled he says so
+      const dt=1/60;dale.next-=dt;if(dale.sayT>0)dale.sayT-=dt;
+      if(dale.next<=0&&dale.sayT<=0&&$('title').hidden){dale.next=22+Math.random()*20;dale.say=ready?'I can take that to town!':DALE_IDLE[Math.floor(Math.random()*DALE_IDLE.length)];dale.sayT=3.5}
+      if(dale.sayT>0)speech(px,ty-14,dale.say)}
+    else if(dale.sayT>0&&ph==='leaving'){const[hx,hy]=P(tp[0]+1.66,tp[1]+.36,40);dale.sayT-=1/60;speech(hx,hy,dale.say)}}
   if(ready){const[px,py]=P(bx+.5,by+.3);const k=reduce?0:Math.sin(now/240)*2;ell(px+26,py-70+k,8,8,'#3f9a3c','#fff',1.6);g.font='bold 10px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('!',px+26,py-66.5+k)}
 }
 function deliveryAt(cx,cy){

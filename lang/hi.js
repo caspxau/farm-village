@@ -766,7 +766,13 @@ Plow|जोतें
 Tapping grass: walk or plow|घास पर टैप: चलें या जोतें
 Tapping grass now plows it into new farmland.|अब घास पर टैप करने से वह नया खेत बन जाएगी।
 Tapping grass now walks your farmer there.|अब घास पर टैप करने से किसान वहाँ चलेगा।
-Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|घास पर टैप करने से किसान वहाँ चलता है। नया खेत बनाने के लिए चलें / जोतें स्विच इस्तेमाल करें। अभी उसे टैप करें।`,
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|घास पर टैप करने से किसान वहाँ चलता है। नया खेत बनाने के लिए चलें / जोतें स्विच इस्तेमाल करें। अभी उसे टैप करें।
+Back before you know it!|पलक झपकते लौट आऊँगा!
+Got anything for town?|शहर के लिए कुछ है?
+The truck is ready to roll!|ट्रक चलने को तैयार है!
+Nice day for a drive.|गाड़ी चलाने के लिए बढ़िया दिन है।
+Fill a contract and I will take it to town.|एक कॉन्ट्रैक्ट पूरा करो, मैं उसे शहर ले जाऊँगा।
+I can take that to town!|मैं यह शहर ले जा सकता हूँ!`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -949,4 +955,5 @@ p:`0|$1 सिक्के
 179|$1 खेत दूर तक बढ़ती फ़सलों को पानी देता है और बारिश में भरता है। +$2 XP
 180|आप लेवल 99 पर पहुँच गए, Farm Village का सबसे ऊँचा लेवल![[ बधाई हो, $1!]]
 181|आपका ख़ास तोहफ़ा: चैंपियन ट्रॉफ़ी, $1 सिक्के और $2 फ़ार्म कैश। तोहफ़ों के डिब्बे से ट्रॉफ़ी रखें।
-182|{1} बढ़ाएँ`};
+182|{1} बढ़ाएँ
+183|$1 चला!`};

@@ -758,7 +758,13 @@ Plow|Labourer
 Tapping grass: walk or plow|Toucher l'herbe : marcher ou labourer
 Tapping grass now plows it into new farmland.|Toucher l'herbe la transforme maintenant en terre cultivable.
 Tapping grass now walks your farmer there.|Toucher l'herbe fait maintenant marcher ton fermier jusque-là.
-Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|Toucher l'herbe fait marcher ton fermier jusque-là. Utilise l'interrupteur Marcher / Labourer pour créer de la terre cultivable. Touche-le maintenant.`,
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|Toucher l'herbe fait marcher ton fermier jusque-là. Utilise l'interrupteur Marcher / Labourer pour créer de la terre cultivable. Touche-le maintenant.
+Back before you know it!|De retour en un clin d'œil !
+Got anything for town?|Tu as quelque chose pour la ville ?
+The truck is ready to roll!|Le camion est prêt à partir !
+Nice day for a drive.|Belle journée pour rouler.
+Fill a contract and I will take it to town.|Remplis un contrat et je l'emmène en ville.
+I can take that to town!|Je peux emmener ça en ville !`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -941,4 +947,5 @@ p:`0|$1 {p1:pièce|pièces}
 179|Arrose les cultures jusqu'à $1 parcelles autour et se remplit sous la pluie. +$2 XP
 180|Tu as atteint le niveau 99, le plus haut de Farm Village ![[ Bravo, $1 !]]
 181|Ton cadeau spécial : le Trophée du champion, $1 pièces et $2 billets de ferme. Pose le trophée depuis ta boîte à cadeaux.
-182|Améliorer : {1}`};
+182|Améliorer : {1}
+183|En route pour $1 !`};

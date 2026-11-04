@@ -758,7 +758,13 @@ Plow|Bajak
 Tapping grass: walk or plow|Mengetuk rumput: jalan atau bajak
 Tapping grass now plows it into new farmland.|Sekarang mengetuk rumput akan mengubahnya jadi lahan baru.
 Tapping grass now walks your farmer there.|Sekarang mengetuk rumput akan membuat petanimu berjalan ke sana.
-Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|Mengetuk rumput membuat petanimu berjalan ke sana. Pakai tombol Jalan / Bajak untuk membuat lahan baru. Ketuk sekarang.`,
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|Mengetuk rumput membuat petanimu berjalan ke sana. Pakai tombol Jalan / Bajak untuk membuat lahan baru. Ketuk sekarang.
+Back before you know it!|Sebentar lagi aku kembali!
+Got anything for town?|Ada barang untuk kota?
+The truck is ready to roll!|Truk siap berangkat!
+Nice day for a drive.|Hari yang bagus untuk menyetir.
+Fill a contract and I will take it to town.|Penuhi kontrak dan aku antar ke kota.
+I can take that to town!|Aku bisa antar itu ke kota!`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -941,4 +947,5 @@ p:`0|$1 koin
 179|Menyiram tanaman sampai $1 petak jauhnya dan terisi saat hujan. +$2 XP
 180|Kamu mencapai Level 99, level tertinggi di Farm Village![[ Selamat, $1!]]
 181|Hadiah spesialmu: Piala Juara, $1 koin, dan $2 Uang Kebun. Taruh pialanya dari Kotak Hadiah.
-182|Tingkatkan {1}`};
+182|Tingkatkan {1}
+183|Berangkat ke $1!`};

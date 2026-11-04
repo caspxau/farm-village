@@ -766,7 +766,13 @@ Plow|Пахать
 Tapping grass: walk or plow|Нажатие на траву: идти или пахать
 Tapping grass now plows it into new farmland.|Теперь нажатие на траву превращает её в новую грядку.
 Tapping grass now walks your farmer there.|Теперь при нажатии на траву фермер идёт туда.
-Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|При нажатии на траву фермер идёт туда. Переключатель «Идти / Пахать» позволяет делать новые грядки. Нажми на него.`,
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|При нажатии на траву фермер идёт туда. Переключатель «Идти / Пахать» позволяет делать новые грядки. Нажми на него.
+Back before you know it!|Вернусь — и глазом моргнуть не успеешь!
+Got anything for town?|Есть что-нибудь для города?
+The truck is ready to roll!|Грузовик готов в путь!
+Nice day for a drive.|Отличный день для поездки.
+Fill a contract and I will take it to town.|Собери заказ, и я отвезу его в город.
+I can take that to town!|Могу отвезти это в город!`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -949,4 +955,5 @@ p:`0|$1 {p1:монета|монеты|монет}
 179|Поливает посадки на расстоянии до $1 грядок и наполняется в дождь. +$2 XP
 180|Ты достиг 99 уровня, самого высокого в Farm Village![[ Поздравляем, $1!]]
 181|Твой особый подарок: Кубок чемпиона, $1 монет и $2 фермерских долларов. Поставь кубок из коробки подарков.
-182|Улучшить: {1}`};
+182|Улучшить: {1}
+183|Еду в $1!`};

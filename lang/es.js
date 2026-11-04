@@ -758,7 +758,13 @@ Plow|Arar
 Tapping grass: walk or plow|Al tocar hierba: caminar o arar
 Tapping grass now plows it into new farmland.|Ahora, al tocar la hierba, la conviertes en tierra de cultivo.
 Tapping grass now walks your farmer there.|Ahora, al tocar la hierba, tu granjero camina hasta allí.
-Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|Al tocar la hierba, tu granjero camina hasta allí. Usa el interruptor Caminar / Arar para crear tierra de cultivo. Tócalo ahora.`,
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|Al tocar la hierba, tu granjero camina hasta allí. Usa el interruptor Caminar / Arar para crear tierra de cultivo. Tócalo ahora.
+Back before you know it!|¡Vuelvo antes de que te des cuenta!
+Got anything for town?|¿Tienes algo para el pueblo?
+The truck is ready to roll!|¡El camión está listo para salir!
+Nice day for a drive.|Buen día para conducir.
+Fill a contract and I will take it to town.|Completa un contrato y lo llevo al pueblo.
+I can take that to town!|¡Puedo llevar eso al pueblo!`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1
@@ -941,4 +947,5 @@ p:`0|$1 {p1:moneda|monedas}
 179|Riega los cultivos que crecen hasta a $1 parcelas y se llena cuando llueve. +$2 XP
 180|¡Llegaste al nivel 99, el más alto de Farm Village![[ ¡Enhorabuena, $1!]]
 181|Tu regalo especial: el Trofeo de campeón, $1 monedas y $2 de dinero de granja. Coloca el trofeo desde tu caja de regalos.
-182|Mejorar: {1}`};
+182|Mejorar: {1}
+183|¡Rumbo a $1!`};

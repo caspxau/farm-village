@@ -766,7 +766,13 @@ Plow|চাষ
 Tapping grass: walk or plow|ঘাসে ট্যাপ: হাঁটো বা চাষ করো
 Tapping grass now plows it into new farmland.|এখন ঘাসে ট্যাপ করলে সেটা নতুন জমি হবে।
 Tapping grass now walks your farmer there.|এখন ঘাসে ট্যাপ করলে কৃষক সেখানে হাঁটবে।
-Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|ঘাসে ট্যাপ করলে কৃষক সেখানে হাঁটে। নতুন জমি বানাতে হাঁটো / চাষ সুইচ ব্যবহার করো। এখনই ট্যাপ করো।`,
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|ঘাসে ট্যাপ করলে কৃষক সেখানে হাঁটে। নতুন জমি বানাতে হাঁটো / চাষ সুইচ ব্যবহার করো। এখনই ট্যাপ করো।
+Back before you know it!|চোখের পলকে ফিরে আসব!
+Got anything for town?|শহরের জন্য কিছু আছে?
+The truck is ready to roll!|ট্রাক রওনা দিতে তৈরি!
+Nice day for a drive.|গাড়ি চালানোর জন্য দারুণ দিন।
+Fill a contract and I will take it to town.|একটা চুক্তি পূরণ করো, আমি শহরে নিয়ে যাব।
+I can take that to town!|এটা আমি শহরে নিয়ে যেতে পারি!`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -949,4 +955,5 @@ p:`0|$1 কয়েন
 179|$1 জমি দূর পর্যন্ত বাড়ন্ত ফসলে জল দেয় আর বৃষ্টিতে ভরে। +$2 XP
 180|তুমি লেভেল ৯৯-এ পৌঁছেছ, Farm Village-এর সর্বোচ্চ লেভেল![[ অভিনন্দন, $1!]]
 181|তোমার বিশেষ উপহার: চ্যাম্পিয়ন ট্রফি, $1 কয়েন আর $2 ফার্ম ক্যাশ। উপহার বাক্স থেকে ট্রফি বসাও।
-182|{1} উন্নত করো`};
+182|{1} উন্নত করো
+183|$1-এর পথে!`};

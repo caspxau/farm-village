@@ -766,7 +766,13 @@ Plow|耕地
 Tapping grass: walk or plow|点击草地：走过去或耕地
 Tapping grass now plows it into new farmland.|现在点击草地会把它开成新农田。
 Tapping grass now walks your farmer there.|现在点击草地，农夫会走过去。
-Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|点击草地时，农夫会走过去。用"走路 / 耕地"开关可以改为开垦新农田。现在点一下它。`,
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|点击草地时，农夫会走过去。用"走路 / 耕地"开关可以改为开垦新农田。现在点一下它。
+Back before you know it!|一眨眼就回来！
+Got anything for town?|有东西要送到镇上吗？
+The truck is ready to roll!|卡车准备出发啦！
+Nice day for a drive.|今天适合开车兜风。
+Fill a contract and I will take it to town.|备齐一份合同，我就送到镇上。
+I can take that to town!|这个我能送到镇上！`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -949,4 +955,5 @@ p:`0|$1金币
 179|给$1格以内生长中的作物浇水，下雨时蓄满。+$2经验
 180|你达到了99级，Farm Village 的最高等级！[[恭喜你，$1！]]
 181|你的特别礼物：冠军奖杯、$1金币和$2农场币。从礼物盒里放置奖杯吧。
-182|升级{1}`};
+182|升级{1}
+183|出发去$1！`};

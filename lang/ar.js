@@ -766,7 +766,13 @@ Plow|حرث
 Tapping grass: walk or plow|الضغط على العشب: مشي أو حرث
 Tapping grass now plows it into new farmland.|الضغط على العشب يحوّله الآن إلى أرض زراعية جديدة.
 Tapping grass now walks your farmer there.|الضغط على العشب يجعل مزارعك يمشي إليه الآن.
-Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|الضغط على العشب يجعل مزارعك يمشي إليه. استخدم مفتاح مشي / حرث لصنع أرض زراعية بدلًا من ذلك. اضغط عليه الآن.`,
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|الضغط على العشب يجعل مزارعك يمشي إليه. استخدم مفتاح مشي / حرث لصنع أرض زراعية بدلًا من ذلك. اضغط عليه الآن.
+Back before you know it!|سأعود قبل أن تشعر!
+Got anything for town?|هل لديك شيء للبلدة؟
+The truck is ready to roll!|الشاحنة جاهزة للانطلاق!
+Nice day for a drive.|يوم جميل للقيادة.
+Fill a contract and I will take it to town.|أكمل عقدًا وسأوصله إلى البلدة.
+I can take that to town!|يمكنني إيصال هذا إلى البلدة!`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -949,4 +955,5 @@ p:`0|$1 عملة
 179|يسقي المحاصيل النامية حتى بُعد $1 قطع ويمتلئ عند المطر. +$2 خبرة
 180|وصلت إلى المستوى 99، أعلى مستوى في Farm Village![[ مبروك يا $1!]]
 181|هديتك الخاصة: كأس البطل و$1 عملة و$2 من نقود المزرعة. ضع الكأس من صندوق الهدايا.
-182|طوّر {1}`};
+182|طوّر {1}
+183|في الطريق إلى $1!`};
