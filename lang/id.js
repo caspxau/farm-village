@@ -764,7 +764,23 @@ Got anything for town?|Ada barang untuk kota?
 The truck is ready to roll!|Truk siap berangkat!
 Nice day for a drive.|Hari yang bagus untuk menyetir.
 Fill a contract and I will take it to town.|Penuhi kontrak dan aku antar ke kota.
-I can take that to town!|Aku bisa antar itu ke kota!`,
+I can take that to town!|Aku bisa antar itu ke kota!
+Neighbor trades: swap goods for materials|Tukar dengan tetangga: barang untuk bahan
+Trades|Tukar
+Trade with neighbors for materials|Tukar dengan tetangga untuk bahan
+Neighbor Trades|Tukar dengan Tetangga
+Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.|Tetangga menukar bahan bangunan dengan hasil kebun. Pakai untuk meningkatkan lumbung dan kandang.
+In return for|Sebagai gantinya
+Trade|Tukar
+Traded|Sudah ditukar
+You do not have everything for this trade yet.|Barangmu belum cukup untuk tukar ini.
+Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.|Alat serba guna: menanam, memanen, dan mengambil, serta memakai traktor, penanam, dan pemanen sendiri.
+Graphics|Grafik
+Sharpest|Paling tajam
+Smoothest|Paling mulus
+Machines|Mesin
+Use by themselves|Otomatis
+By hand|Manual`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -948,4 +964,9 @@ p:`0|$1 koin
 180|Kamu mencapai Level 99, level tertinggi di Farm Village![[ Selamat, $1!]]
 181|Hadiah spesialmu: Piala Juara, $1 koin, dan $2 Uang Kebun. Taruh pialanya dari Kotak Hadiah.
 182|Tingkatkan {1}
-183|Berangkat ke $1!`};
+183|Berangkat ke $1!
+184|$1 menawarkan
+185|Tawaran baru dalam {t1}
+186|Tawaran baru dalam {t1}.
+187|$1 bertukar denganmu: {l2}.
+188|{1} barumu siap! Alat serba guna memakainya sendiri.`};

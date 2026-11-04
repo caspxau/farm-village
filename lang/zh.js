@@ -772,7 +772,23 @@ Got anything for town?|有东西要送到镇上吗？
 The truck is ready to roll!|卡车准备出发啦！
 Nice day for a drive.|今天适合开车兜风。
 Fill a contract and I will take it to town.|备齐一份合同，我就送到镇上。
-I can take that to town!|这个我能送到镇上！`,
+I can take that to town!|这个我能送到镇上！
+Neighbor trades: swap goods for materials|邻居交换：用货物换材料
+Trades|交换
+Trade with neighbors for materials|和邻居交换材料
+Neighbor Trades|邻居交换
+Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.|邻居们愿意用建筑材料换你的农产品。用它们来升级谷仓和动物屋。
+In return for|换取
+Trade|交换
+Traded|已交换
+You do not have everything for this trade yet.|这次交换的东西还不够。
+Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.|多用工具：播种、收获和收取，还会自动使用拖拉机、播种机和收割机。
+Graphics|画质
+Sharpest|最清晰
+Smoothest|最流畅
+Machines|农机
+Use by themselves|自动使用
+By hand|手动`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -956,4 +972,9 @@ p:`0|$1金币
 180|你达到了99级，Farm Village 的最高等级！[[恭喜你，$1！]]
 181|你的特别礼物：冠军奖杯、$1金币和$2农场币。从礼物盒里放置奖杯吧。
 182|升级{1}
-183|出发去$1！`};
+183|出发去$1！
+184|{1} 提供
+185|{t1}后有新报价
+186|{t1}后有新报价。
+187|{1} 和你交换了：{l2}。
+188|你的新{1}准备好了！多用工具会自动使用它。`};

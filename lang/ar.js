@@ -772,7 +772,23 @@ Got anything for town?|هل لديك شيء للبلدة؟
 The truck is ready to roll!|الشاحنة جاهزة للانطلاق!
 Nice day for a drive.|يوم جميل للقيادة.
 Fill a contract and I will take it to town.|أكمل عقدًا وسأوصله إلى البلدة.
-I can take that to town!|يمكنني إيصال هذا إلى البلدة!`,
+I can take that to town!|يمكنني إيصال هذا إلى البلدة!
+Neighbor trades: swap goods for materials|مقايضة الجيران: بضائع مقابل مواد
+Trades|المقايضة
+Trade with neighbors for materials|قايض الجيران للحصول على مواد
+Neighbor Trades|مقايضة الجيران
+Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.|جيرانك يقايضون مواد البناء بمنتجات المزرعة. استخدمها لتطوير الحظيرة وبيوت الحيوانات.
+In return for|مقابل
+Trade|قايض
+Traded|تمت المقايضة
+You do not have everything for this trade yet.|ليس لديك كل ما يلزم لهذه المقايضة بعد.
+Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.|الأداة المتعددة: تزرع وتحصد وتجمع، وتستخدم الجرار والبذارة والحصادة وحدها.
+Graphics|الرسوميات
+Sharpest|الأوضح
+Smoothest|الأنعم
+Machines|الآلات
+Use by themselves|تلقائيًا
+By hand|يدويًا`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -956,4 +972,9 @@ p:`0|$1 عملة
 180|وصلت إلى المستوى 99، أعلى مستوى في Farm Village![[ مبروك يا $1!]]
 181|هديتك الخاصة: كأس البطل و$1 عملة و$2 من نقود المزرعة. ضع الكأس من صندوق الهدايا.
 182|طوّر {1}
-183|في الطريق إلى $1!`};
+183|في الطريق إلى $1!
+184|{1} يعرض
+185|عرض جديد بعد {t1}
+186|عروض جديدة بعد {t1}.
+187|{1} قايضك: {l2}.
+188|{1} الجديد جاهز! الأداة المتعددة تستخدمه وحدها.`};

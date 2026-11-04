@@ -772,7 +772,23 @@ Got anything for town?|Есть что-нибудь для города?
 The truck is ready to roll!|Грузовик готов в путь!
 Nice day for a drive.|Отличный день для поездки.
 Fill a contract and I will take it to town.|Собери заказ, и я отвезу его в город.
-I can take that to town!|Могу отвезти это в город!`,
+I can take that to town!|Могу отвезти это в город!
+Neighbor trades: swap goods for materials|Обмен с соседями: товары на материалы
+Trades|Обмен
+Trade with neighbors for materials|Обменяться с соседями на материалы
+Neighbor Trades|Обмен с соседями
+Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.|Соседи меняют стройматериалы на товары с фермы. Используй их для улучшения амбара и домиков животных.
+In return for|В обмен на
+Trade|Обменять
+Traded|Обменяно
+You do not have everything for this trade yet.|Для этого обмена пока не всё есть.
+Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.|Мультиинструмент сажает, собирает урожай и продукты и сам включает трактор, сеялку и комбайн.
+Graphics|Графика
+Sharpest|Чётче
+Smoothest|Плавнее
+Machines|Машины
+Use by themselves|Сами
+By hand|Вручную`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -956,4 +972,9 @@ p:`0|$1 {p1:монета|монеты|монет}
 180|Ты достиг 99 уровня, самого высокого в Farm Village![[ Поздравляем, $1!]]
 181|Твой особый подарок: Кубок чемпиона, $1 монет и $2 фермерских долларов. Поставь кубок из коробки подарков.
 182|Улучшить: {1}
-183|Еду в $1!`};
+183|Еду в $1!
+184|{1} предлагает
+185|Новое предложение через {t1}
+186|Новые предложения через {t1}.
+187|{1} обменялся с тобой: {l2}.
+188|{1}: готово! Мультиинструмент использует его сам.`};

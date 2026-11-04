@@ -764,7 +764,23 @@ Got anything for town?|Tu as quelque chose pour la ville ?
 The truck is ready to roll!|Le camion est prêt à partir !
 Nice day for a drive.|Belle journée pour rouler.
 Fill a contract and I will take it to town.|Remplis un contrat et je l'emmène en ville.
-I can take that to town!|Je peux emmener ça en ville !`,
+I can take that to town!|Je peux emmener ça en ville !
+Neighbor trades: swap goods for materials|Échanges entre voisins : produits contre matériaux
+Trades|Échanges
+Trade with neighbors for materials|Échanger avec les voisins contre des matériaux
+Neighbor Trades|Échanges entre voisins
+Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.|Tes voisins échangent des matériaux de construction contre des produits de la ferme. Sers-t'en pour améliorer ta grange et les abris.
+In return for|En échange de
+Trade|Échanger
+Traded|Échangé
+You do not have everything for this trade yet.|Tu n'as pas encore tout pour cet échange.
+Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.|Multi-outil : plante, récolte et récupère, et utilise tout seul ton tracteur, ton semoir et ta moissonneuse.
+Graphics|Graphismes
+Sharpest|Le plus net
+Smoothest|Le plus fluide
+Machines|Machines
+Use by themselves|Toutes seules
+By hand|À la main`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -948,4 +964,9 @@ p:`0|$1 {p1:pièce|pièces}
 180|Tu as atteint le niveau 99, le plus haut de Farm Village ![[ Bravo, $1 !]]
 181|Ton cadeau spécial : le Trophée du champion, $1 pièces et $2 billets de ferme. Pose le trophée depuis ta boîte à cadeaux.
 182|Améliorer : {1}
-183|En route pour $1 !`};
+183|En route pour $1 !
+184|$1 propose
+185|Nouvelle offre dans {t1}
+186|Nouvelles offres dans {t1}.
+187|$1 a échangé avec toi : {l2}.
+188|Ton {1} est prêt ! Le multi-outil l'utilise tout seul.`};

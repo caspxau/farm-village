@@ -819,6 +819,11 @@ body.visiting .modesw{display:none}
 @media (max-width:640px){.modesw{top:calc(max(8px,env(safe-area-inset-top,0px)) + 66px);right:10px}.modesw button{font-size:13px;min-height:36px;padding:3px 10px 3px 6px}}
 @media (max-width:460px){.modesw button span{display:none}.modesw button{padding:4px 9px}}
 @media (max-height:520px) and (orientation:landscape){.modesw{top:calc(max(6px,env(safe-area-inset-top,0px)) + 62px)}.modesw button{min-height:32px}}
+
+/* the tools pop-up is just Multi, Move and Remove now: one compact row */
+#toolPop .poptools{flex-wrap:nowrap;gap:16px;padding:2px 6px 20px}
+#toolPop{width:max-content;max-width:calc(100vw - 20px)}
+#toolPop .poptools .tool[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -849,7 +854,7 @@ body.visiting .modesw{display:none}
         <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M14 34V18a3 3 0 0 1 6 0v-4a3 3 0 0 1 6 0v2a3 3 0 0 1 6 0v8c0 6-4 10-9 10z" fill="#ffd9b0" stroke="#6b3c15" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 22l-3-3a3 3 0 0 0-4 4l7 9" fill="#ffd9b0" stroke="#6b3c15" stroke-width="2.5" stroke-linejoin="round"/></svg>
         <span class="outline-s">Multi</span>
       </button>
-    <button class="tool" data-tool="plow" aria-pressed="false" aria-label="Hoe: turn grass into new farmland">
+    <button class="tool" data-tool="plow" aria-pressed="false" aria-label="Hoe: turn grass into new farmland" hidden>
         <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 33l9-6 15 0-6 6z" fill="#8b5a2e" stroke="#4e2c12" stroke-width="2" stroke-linejoin="round"/><path d="M27 6L14 26" stroke="#a8642a" stroke-width="4" stroke-linecap="round"/><path d="M27 6L14 26" stroke="#6b3c15" stroke-width="1.2" stroke-linecap="round" opacity=".5"/><path d="M10 22l8 6-3 3-8-5z" fill="#c9ced2" stroke="#3a4650" stroke-width="2" stroke-linejoin="round"/></svg>
         <span class="outline-s">Hoe</span>
       </button>
@@ -892,6 +897,10 @@ body.visiting .modesw{display:none}
         <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="6" width="24" height="21" rx="3" fill="#f2c26b" stroke="#6b3c15" stroke-width="2"/><rect x="8" y="10" width="7" height="6" rx="1.5" fill="#e0352b"/><rect x="17" y="10" width="7" height="6" rx="1.5" fill="#3f9a3c"/><rect x="8" y="18" width="7" height="6" rx="1.5" fill="#2d8fe3"/><rect x="17" y="18" width="7" height="6" rx="1.5" fill="#fff" stroke="#c9a46a"/></svg>
         <span class="badge" id="collBadge" hidden>!</span>
       <em aria-hidden="true">Album</em></button>
+    <button class="mbtn" id="btnTrade" aria-label="Neighbor trades: swap goods for materials">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 11h17l-4-4M27 21H10l4 4" fill="none" stroke="#6b3c15" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="15" width="10" height="4" rx="1.2" fill="#d39a5a" stroke="#6b3c15" stroke-width="1.6"/><path d="M21 13v7M19 13h4" stroke="#3a4650" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="badge" id="tradeBadge" hidden>!</span>
+      <em aria-hidden="true">Trades</em></button>
     <button class="mbtn" id="btnRib" aria-label="Ribbons">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 18l-4 12 5-3 3 4 2-12zM21 18l4 12-5-3-3 4-2-12z" fill="#2d6fd0" stroke="#6b3c15" stroke-width="1.5" stroke-linejoin="round"/><circle cx="16" cy="13" r="10" fill="#ffd23f" stroke="#6b3c15" stroke-width="2"/><circle cx="16" cy="13" r="5.5" fill="#fff3b0"/></svg>
       <em aria-hidden="true">Ribbons</em></button>
@@ -1093,7 +1102,8 @@ const PL_EXACT={
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.'
 ,
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
-'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!'
+'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
+'Neighbor trades: swap goods for materials':'Wymiana z sąsiadami: towary za materiały','Trades':'Wymiana','Trade with neighbors for materials':'Wymień się z sąsiadami na materiały','Neighbor Trades':'Wymiana z sąsiadami','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.':'Sąsiedzi wymieniają materiały budowlane na towary z farmy. Użyj ich do rozbudowy stodoły i domów zwierząt.','In return for':'W zamian za','Trade':'Wymień','Traded':'Wymienione','You do not have everything for this trade yet.':'Nie masz jeszcze wszystkiego do tej wymiany.','Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.':'Multi-narzędzie: sadzi, zbiera i odbiera, a traktor, siewnik i kombajn włącza samo.','Graphics':'Grafika','Sharpest':'Najostrzej','Smoothest':'Najpłynniej','Machines':'Maszyny','Use by themselves':'Same','By hand':'Ręcznie'
 };
 const RIB_PL=x=>({Yellow:'Żółta',White:'Biała',Red:'Czerwona',Blue:'Niebieska'}[x]||x);
 const L_t=t=>PACK?String(t).replace(/^(\d+)s$/,PACK.time.s).replace(/^(\d+)h (\d+)m$/,PACK.time.hm):String(t).replace(/^(\d+)s$/,'$1 s').replace(/^(\d+)h (\d+)m$/,'$1 godz. $2 min');
@@ -1286,7 +1296,12 @@ const PL_PATS=[
 [/^(?:(.+), you|You) reached Level 99, the highest level in Farm Village!$/,m=>(m[1]?m[1]+', masz':'Masz')+' poziom 99, najwyższy w Farm Village!'],
 [/^Your special gift: the Champion Trophy, ([\d.,\s]+) coins and (\d+) Farm Cash\. Place the trophy from your Gift Box\.$/,m=>'Twój specjalny prezent: Puchar Mistrza, '+m[1]+' monet i '+m[2]+' farmdolarów. Postaw puchar z pudełka z prezentami.'],
 [/^Upgrade (.+)$/,m=>'Ulepsz: '+L_w(m[1])],
-[/^Off to (.+)!$/,m=>'Jadę do: '+m[1]+'!']
+[/^Off to (.+)!$/,m=>'Jadę do: '+m[1]+'!'],
+[/^(.+) offers$/,m=>m[1]+' oferuje'],
+[/^New offer in (.+)$/,m=>'Nowa oferta za '+L_t(m[1])],
+[/^New offers in (.+)\.$/,m=>'Nowe oferty za '+L_t(m[1])+'.'],
+[/^(.+) traded with you: (.+)\.$/,m=>m[1]+' wymienia się z tobą: '+m[2].split(', ').map(L_w).join(', ')+'.'],
+[/^Your new (.+) is ready! The Multi-tool uses it by itself\.$/,m=>L_w(m[1])+' gotowy! Multi-narzędzie używa go samo.']
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -1625,7 +1640,7 @@ function fits(x,y,n,ignore){
   return true;
 }
 function cropState(o,now){
-  const c=CROPS[o.crop],el=(now-o.t)/1000,wither=c.grow+Math.max(c.grow*2,180);
+  const c=CROPS[o.crop],el=(now-o.t)/1000,wither=c.grow+Math.max(c.grow*12,4*3600); // ripe crops keep for hours before they wither
   if(el>=wither)return{st:'withered',c};
   if(el>=c.grow)return{st:'ripe',c,left:wither-el};
   const f=el/c.grow;
@@ -1821,7 +1836,20 @@ function animalSfx(id){(ANIMAL_SFX[id]||SFX.collect)()}
 
 /* ================= canvas + camera ================= */
 const cv=document.getElementById('farm');
-let g=cv.getContext('2d'),dpr=1,vw=0,vh=0;
+let g=cv.getContext('2d',{alpha:false,desynchronized:true}),dpr=1,vw=0,vh=0;
+// Graphics quality. 'auto' starts sharp and steps down (resolution, outline passes, particles) if frames run slow.
+const GFX_KEY='farm-village-gfx';
+function gfxPref(){try{return localStorage.getItem(GFX_KEY)||'auto'}catch(e){return'auto'}}
+let QL=gfxPref()==='smooth'?0:gfxPref()==='high'?2:((navigator.hardwareConcurrency||4)<=4&&(window.devicePixelRatio||1)>2?1:2);
+const QL_DPR=[1,1.5,2],INK_DIRS_HI=[[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[.7,-.7],[-.7,-.7]],INK_DIRS_LO=[[1,0],[-1,0],[0,1],[0,-1]];
+const perf={sum:0,n:0,t0:0,stable:0};
+function perfTick(dt){
+  if(gfxPref()!=='auto'||document.hidden)return;perf.sum+=dt;perf.n++;
+  if(perf.n<90)return;const avg=perf.sum/perf.n*1000;perf.sum=perf.n=0;
+  if(avg>24&&QL>0){QL--;perf.stable=0;applyQuality()}
+  else if(avg<15&&QL<2){if(++perf.stable>=12){QL++;perf.stable=0;applyQuality()}}else perf.stable=0;
+}
+function applyQuality(){INK_DIRS.length=0;INK_DIRS.push(...(QL>=2?INK_DIRS_HI:INK_DIRS_LO));resize()}
 const cam={x:0,y:0,z:1};
 function P(x,y,z){return[(x-y)*W/2,(x+y)*H/2-(z||0)]}
 function fit(){
@@ -1829,7 +1857,7 @@ function fit(){
   cam.z=z;cam.x=vw/2;cam.y=Math.max(70,90+((vh-90-120)-N*H*z)/2);
 }
 function resize(){
-  dpr=Math.min(window.devicePixelRatio||1,2);
+  dpr=Math.min(window.devicePixelRatio||1,QL_DPR[QL]);
   BG=null;VIG=null;const first=!vw,ow=vw,oh=vh;vw=innerWidth;vh=innerHeight;cv.width=Math.round(vw*dpr);cv.height=Math.round(vh*dpr);
   if(first)fit();else{cam.x+=(vw-ow)/2;cam.y+=(vh-oh)/2}
 }
@@ -1887,6 +1915,7 @@ function inkOutline(c,r){
    turned into a dark silhouette, and stamped around themselves to get the same bold outline as the sprites.
    Plain canvas copies only (no filters), so it stays cheap on every device. */
 const INK_OFF=[0,0],INK=document.createElement('canvas'),INK2=document.createElement('canvas'),INK_DIRS=[[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[.7,-.7],[-.7,-.7]];
+if(QL<2){INK_DIRS.length=0;INK_DIRS.push(...INK_DIRS_LO)}
 function inkLive(ax,ay,rw,up,down,fn){
   if(ICON_MODE)return fn();
   const T=g.getTransform(),[wx,wy]=P(ax,ay),s=Math.hypot(T.a,T.b),sx=T.a*wx+T.c*wy+T.e,sy=T.b*wx+T.d*wy+T.f,r=Math.max(1,Math.min(4,s*.65));
@@ -3473,6 +3502,7 @@ function burst(x,y,colors){
   for(let i=0;i<10;i++){const a=Math.random()*Math.PI*2,v=1+Math.random()*2;parts.push({x:px,y:py-8,vx:Math.cos(a)*v,vy:-1.5-Math.random()*2.5,c:colors[i%colors.length],t0:performance.now()})}
 }
 function drawEffects(t){
+  {const cap=QL>=2?320:QL?200:110;if(parts.length>cap)parts.splice(0,parts.length-cap)}
   for(let i=parts.length-1;i>=0;i--){
     const p=parts[i],age=(t-p.t0)/1000,life=p.life||.7;if(age>life){parts.splice(i,1);continue}
     p.x+=p.vx;p.y+=p.vy;p.vy+=p.gr??.18;const k=age/life;
@@ -3540,7 +3570,7 @@ function target(x,y){
 const VSIZE=[0,2,3,4];
 function vlvl(id){const v=S.veh[id];return v===true?1:(v||0)}
 function vsize(id){return VSIZE[Math.max(1,vlvl(id))]}
-function vehicleArea(x,y){const n=vsize(tool),out=[];for(let i=0;i<n;i++)for(let j=0;j<n;j++)if(inGrid(x+i,y+j))out.push([x+i,y+j]);return out}
+function vehicleArea(x,y,v){const n=vsize(v||tool),out=[];for(let i=0;i<n;i++)for(let j=0;j<n;j++)if(inGrid(x+i,y+j))out.push([x+i,y+j]);return out}
 
 /* ================= main loop ================= */
 /* Ground layers: the grass, soil, road and wild trees are drawn once into two canvases
@@ -3593,7 +3623,7 @@ function drawVignette(){
   g.setTransform(1,0,0,1,0,0);g.drawImage(VIG,0,0,cv.width,cv.height);
 }
 function frame(t){
-  const dt=Math.min(.05,(t-last)/1000);last=t;
+  const rawDt=(t-last)/1000,dt=Math.min(.05,rawDt);last=t;if(rawDt>0&&rawDt<.5)perfTick(rawDt);
   const now=Date.now();
   seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
   g.setTransform(1,0,0,1,0,0);
@@ -3603,7 +3633,11 @@ function frame(t){
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
   drawHover();
   const list=[];
-  for(const k in S.tiles){const[x,y]=k.split(',').map(Number),o=S.tiles[k],n=size(o);let d=x+y+1+(n-1)*2+(o.k==='plot'?-.4:0)+(o.k==='animal'?roamOf(k).x+roamOf(k).y:0);
+  // only draw what is on screen (with a margin for tall things)
+  const vx0=(-cam.x-140*cam.z)/cam.z,vx1=(vw-cam.x+140*cam.z)/cam.z,vy0=(-cam.y-40*cam.z)/cam.z,vy1=(vh-cam.y+160*cam.z)/cam.z;
+  for(const k in S.tiles){const[x,y]=k.split(',').map(Number),o=S.tiles[k],n=size(o);
+    if(o.k!=='animal'){const sx=(x-y)*W/2,sy=(x+y+n)*H/2;if(sx<vx0-n*W||sx>vx1+n*W||sy<vy0||sy>vy1+n*H)continue}
+    let d=x+y+1+(n-1)*2+(o.k==='plot'?-.4:0)+(o.k==='animal'?roamOf(k).x+roamOf(k).y:0);
     if(o.k==='animal'&&x<=HX){const h=yardOf(k,o.id),r=roamOf(k);if(h&&!r.walkIn)d=h[0]+h[1]+3.02+(x+.5+r.x+.5+r.y-h[0]-h[1])*.004}
     list.push([d,x,y,o])}
   list.push([farmer.x+farmer.y,0,0,null]);
@@ -3671,9 +3705,9 @@ function hud(){
   $('btnOrders').classList.toggle('locked',!nbOpen());$('btnNbrs').classList.toggle('locked',!nbOpen());
   const fill=nbOpen()?S.orders.filter(canFill).length:0;$('orderBadge').hidden=!fill;$('orderBadge').textContent=fill;
   const dl=dv(),dready=!dl.run&&dl.jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap());$('delivBadge').hidden=!dready;
-  for(const v in FARM)if(FARM[v].kind==='vehicle'){const b=document.querySelector('.tool[data-tool="'+v+'"]');if(b)b.hidden=!S.veh[v]}
+  for(const v in FARM)if(FARM[v].kind==='vehicle'){const b=document.querySelector('.tool[data-tool="'+v+'"]');if(b)b.hidden=true}
   const gifts=Object.values(S.inv).reduce((a,b)=>a+b,0);$('giftBadge').hidden=!gifts;$('giftBadge').textContent=gifts;
-  $('collBadge').hidden=!COLLECTIONS.some(canTrade);$('moreBadge').hidden=$('giftBadge').hidden&&$('collBadge').hidden;
+  $('collBadge').hidden=!COLLECTIONS.some(canTrade);$('tradeBadge').hidden=!tradeReady();$('moreBadge').hidden=$('giftBadge').hidden&&$('collBadge').hidden&&$('tradeBadge').hidden;
   $('sndWaves').style.display=S.sound?'':'none';$('sndX').style.display=S.sound?'none':'';
   $('btnSound').setAttribute('aria-pressed',String(S.sound));$('btnSound').setAttribute('aria-label',S.sound?'Sound on':'Sound off');
   $('musX').style.display=S.music?'none':'';$('btnMusic').setAttribute('aria-pressed',String(S.music));$('btnMusic').setAttribute('aria-label',S.music?'Music on':'Music off');
@@ -3873,7 +3907,8 @@ function costView(c){
 function upgradeBox(title,c,label,onGo){
   const box=el('div','upbox');box.appendChild(el('strong',null,title));box.appendChild(costView(c));
   const go=el('button','go',label);go.disabled=!canPay(c);go.onclick=()=>{if(!canPay(c))return;pay(c);onGo();SFX.level();confetti();changed();rerender()};box.appendChild(go);
-  if(!canPay(c))box.appendChild(el('small',null,'Keep farming to collect the missing materials.'));
+  if(!canPay(c)){box.appendChild(el('small',null,'Keep farming to collect the missing materials.'));
+    if(Object.keys(c.mats||{}).some(k=>(S.mats[k]||0)<c.mats[k])){const t=el('button','btn2','Trade with neighbors for materials');t.onclick=()=>{SFX.click();closeModal();showTrades()};box.appendChild(t)}}
   return box;
 }
 // One crop is in demand each day and sells for 50% more at the barn.
@@ -3905,6 +3940,7 @@ function showBarn(){
       const grid=el('div','mats');
       for(const k in MATS){const c=el('div','mat');c.innerHTML=MATS[k].svg+'<strong>'+MATS[k].name+'</strong><b>'+(S.mats[k]||0)+'</b>';grid.appendChild(c)}
       p.appendChild(grid);p.appendChild(el('p','hint','Materials drop while you harvest, collect from animals and pick fruit trees. Neighbors send them too. Spend them to upgrade your barn and animal homes.'));
+      {const t=el('button','go','Trade with neighbors for materials');t.onclick=()=>{SFX.click();closeModal();showTrades()};p.appendChild(t)}
     }else if(!ids.length){
       p.appendChild(el('p','empty',barnTab==='supply'?'No feed or diesel. Build a Feed Mill and a Diesel Press from Market > Buildings.':'Nothing stored here yet. Harvest crops, collect from animals and pick fruit: it all comes to the barn.'));
     }else{
@@ -4505,6 +4541,7 @@ function clickMulti(hx,hy){
     return;
   }
   if(kind==='harvest'&&!room()){barnFull();return}
+  if(autoVehicle(kind,hx,hy))return;
   queueKind(kind,[[hx,hy]],null);
 }
 // Plowing grass makes new farmland (NEW_PLOT coins); plowing a harvested plot again costs PLOW_COST.
@@ -4539,16 +4576,27 @@ function refuel(quiet){
   if(!quiet){if(S.fuel>FUEL_MAX-CAN_FUEL/2)toast('The tank is already full.');else{SFX.error();toast('No diesel in the barn. Build a Diesel Press (Market > Buildings) to make it from soybeans, sunflowers or corn.')}}
   return false;
 }
-function clickVehicle(hx,hy){
-  const v=tool,want={tractor:'plow',seeder:'plant',harvester:'harvest'}[v],cost=fuelCost(v);
-  if(fuelNow()<cost){if(have('diesel')){takeGood('diesel',1);S.fuel=Math.min(FUEL_MAX,S.fuel+CAN_FUEL);toast('Topped up the tank with a can of diesel.');SFX.engine()}else{SFX.error();toast('Out of fuel! Make diesel at a Diesel Press, buy a can in Market > Farm, or wait for the tank to trickle back.');return}}
-  const area=vehicleArea(hx,hy).filter(([x,y])=>{const k=planAt(x,y);return k===want||(want==='harvest'&&k==='clear')});
+function clickVehicle(hx,hy,vv,same){
+  const v=vv||tool,want={tractor:'plow',seeder:'plant',harvester:'harvest'}[v],cost=fuelCost(v),auto=!!vv;
+  if(fuelNow()<cost){if(have('diesel')){takeGood('diesel',1);S.fuel=Math.min(FUEL_MAX,S.fuel+CAN_FUEL);toast('Topped up the tank with a can of diesel.');SFX.engine()}else{if(auto)return false;SFX.error();toast('Out of fuel! Make diesel at a Diesel Press, buy a can in Market > Farm, or wait for the tank to trickle back.');return}}
+  // when the Multi-tool drives for you, it only takes tiles like the one you tapped (no surprise new farmland)
+  const area=vehicleArea(hx,hy,v).filter(([x,y])=>{const k=planAt(x,y);if(!(k===want||(want==='harvest'&&k==='clear')))return false;return!same||same(x,y)});
+  if(auto&&area.length<2)return false;
   if(!area.length){toast(v==='tractor'?'Point the tractor at grass or harvested plots.':v==='seeder'?'Point the seeder at plowed plots.':'Point the harvester at ripe crops.');return}
   if(want==='harvest'){
     if(!room()){barnFull();return}
-    S.fuel-=cost;enqueue({kind:'harvest',tiles:area,vehicle:v});hud();return;
+    S.fuel-=cost;enqueue({kind:'harvest',tiles:area,vehicle:v});hud();return true;
   }
-  if(queueKind(want,area,v)){S.fuel-=cost;hud()}
+  if(queueKind(want,area,v)){S.fuel-=cost;hud();return true}
+  return auto?true:undefined;
+}
+// The Multi-tool brings out the tractor, seeder or harvester by itself when you own one and there is fuel.
+const AUTO_VEH={plow:'tractor',plant:'seeder',harvest:'harvester',clear:'harvester'};
+function autoVehicle(kind,hx,hy){
+  const v=AUTO_VEH[kind];if(!v||!S.veh[v]||VIS||S.autoVeh===false)return false;
+  const e0=effective(hx,hy),grass=!!e0.grass,same=(x,y)=>!!effective(x,y).grass===grass;
+  const n=vsize(v),x0=Math.max(0,Math.min(N-n,hx-Math.floor((n-1)/2))),y0=Math.max(0,Math.min(N-n,hy-Math.floor((n-1)/2)));
+  return clickVehicle(x0,y0,v,same)===true;
 }
 function finishJob(j,now){
   let xp=0,spent=0,full=false;const got={};
@@ -4883,7 +4931,7 @@ function setTool(tl){
 }
 document.querySelectorAll('.tool[data-tool]').forEach(b=>b.addEventListener('click',()=>{
   SFX.click();setTool(b.dataset.tool);
-  const msg={multi:'Multi-tool: plant, harvest and collect. Tap grass to walk.',plow:'Hoe: tap grass to make new farmland for '+NEW_PLOT+' coins a plot.',move:'Move tool: click something, then click its new spot.',delete:'Remove tool: click anything you want to clear away.',tractor:'Tractor: click to plow a 2 by 2 area.',seeder:'Seeder: click to plant a 2 by 2 area.',harvester:'Harvester: click to harvest a 2 by 2 area.'}[tool];
+  const msg={multi:'Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.',plow:'Hoe: tap grass to make new farmland for '+NEW_PLOT+' coins a plot.',move:'Move tool: click something, then click its new spot.',delete:'Remove tool: click anything you want to clear away.',tractor:'Tractor: click to plow a 2 by 2 area.',seeder:'Seeder: click to plant a 2 by 2 area.',harvester:'Harvester: click to harvest a 2 by 2 area.'}[tool];
   toast(msg);
 }));
 $('seedchip').onclick=()=>{SFX.click();closePops();openMarket('seeds')};
@@ -4902,6 +4950,7 @@ $('cashPlus').onclick=()=>{SFX.click();openMarket('specials')};
 $('btnMusic').onclick=()=>{S.music=!S.music;save();hud();SFX.click();wakeAudio();musicSync();toast(S.music?'Music on':'Music off')};
 $('btnSound').onclick=()=>{S.sound=!S.sound;const a=ac();if(a&&a.state==='suspended')a.resume();save();hud();SFX.click()};
 $('btnRib').onclick=()=>{SFX.click();showRibbons()};
+$('btnTrade').onclick=()=>{SFX.click();closePops();showTrades()};
 $('btnColl').onclick=()=>{SFX.click();showCollections()};
 $('btnGifts').onclick=()=>{SFX.click();showGifts()};
 $('btnBarn').onclick=()=>{SFX.click();showBarn()};
@@ -4923,6 +4972,8 @@ function showSettings(){
       r.appendChild(sg);p.appendChild(r)};
     seg('Screen',[['auto','Auto'],['portrait','Portrait'],['landscape','Landscape']],orientPref()||'auto',v=>setOrient(v,true));
     seg('Animals',[['home','Stay home'],['free','Free roam']],S.animalMode==='free'?'free':'home',v=>{S.animalMode=v;changed();toast(v==='free'?'Your animals can roam the farm now. Fences keep them in.':'Your animals are heading home.')});
+    seg('Graphics',[['auto','Auto'],['high','Sharpest'],['smooth','Smoothest']],gfxPref(),v=>{try{localStorage.setItem(GFX_KEY,v)}catch(e){}QL=v==='smooth'?0:2;applyQuality()});
+    seg('Machines',[['on','Use by themselves'],['off','By hand']],S.autoVeh===false?'off':'on',v=>{S.autoVeh=v!=='off'});
     seg('Tapping grass',[['walk','Walk there'],['plow','Plow it']],S.tapGrass==='plow'?'plow':'walk',v=>{S.tapGrass=v;renderModeSw()});
     if(S.pet){const r=el('div','setrow');r.appendChild(el('span',null,'Pet name'));const nb=el('button','btn2',S.pet.name||PET_NAME[S.pet.kind]);nb.setAttribute('aria-label','Rename your pet');nb.onclick=()=>{SFX.click();renamePet()};r.appendChild(nb);p.appendChild(r)}
     toggle('Music',S.music,()=>{S.music=!S.music;wakeAudio();musicSync()});
@@ -5127,7 +5178,7 @@ function buyItem(cat,id,d){
     if(d.cash)S.cash-=d.cash;else S.coins-=d.cost;
     const now=Date.now();let n=0;
     if(d.kind==='pet'){const had=S.pet;S.pet={kind:d.pet,name:PET_NAME[d.pet]};placePet();d.pet==='dog'?SFX.bark():SFX.meow();closeModal();toast((had?'Swapped pets! ':'')+'Meet '+S.pet.name+', your new '+(d.pet==='dog'?'farm dog':'barn cat')+'! Tap your pet to give it a name.');changed();setTimeout(renamePet,500);return}
-    if(d.kind==='vehicle'){S.veh[id]=true;toast('Your new '+d.name.toLowerCase()+' is ready! Pick it from the tools.');SFX.engine()}
+    if(d.kind==='vehicle'){S.veh[id]=true;toast('Your new '+d.name.toLowerCase()+' is ready! The Multi-tool uses it by itself.');SFX.engine()}
     else if(d.kind==='expand'){S.size=d.to;N=S.size;buildBorder();fit();toast('Your farm grew to '+d.to+' by '+d.to+'!');SFX.level()}
     else if(d.kind==='fuel'){S.fuel=FUEL_MAX;S.fuelT=now;toast('Fuel tank full.')}
     else if(d.kind==='supply'){addGood(d.item,d.n);SFX.coin();toast(d.n+' '+ITEMS[d.item].name.toLowerCase()+' added to your barn.')}
@@ -5148,6 +5199,64 @@ function buyItem(cat,id,d){
   const kind=cat==='animals'?'animal':cat==='trees'?'tree':cat==='homes'?'home':cat==='buildings'?'mk':'deco';
   closeModal();setTool('multi');
   startPlacing({cat:kind,id,def:d,name:d.name,ghost:kind==='mk'?{k:'mk',id,q:[]}:{k:kind,id,t:Date.now()}});
+}
+
+/* ================= neighbor trades ================= */
+// Neighbors swap boards, nails, bricks and paint for farm goods. Four offers at a time; a fresh set every 4 hours,
+// and a used offer is replaced after 30 minutes. Open from the first level on.
+let TRADE_WHO=NEIGHBORS.map(n=>n.id);
+const TRADE_SLOT=4*3600e3,MAT_VALUE={board:60,nail:60,brick:110,paint:140};
+function tradeState(){
+  const slot=Math.floor(Date.now()/TRADE_SLOT);
+  if(!S.trades||S.trades.slot!==slot){TRADE_WHO=NEIGHBORS.map(n=>n.id).sort(()=>Math.random()-.5);S.trades={slot,offers:[0,1,2,3].map(i=>newTrade(i))}}
+  const now=Date.now();S.trades.offers.forEach((o,i)=>{if(o.done&&now>=o.done)S.trades.offers[i]=newTrade(i)});
+  return S.trades;
+}
+function newTrade(i){
+  const R=Math.random,pick=a=>a[Math.floor(R()*a.length)],who=TRADE_WHO[i%TRADE_WHO.length];
+  const mats=S.level<4?['board','nail','board','nail','paint']:['board','nail','brick','paint','board','nail','brick'];
+  // the last offer swaps one material for another; the others ask for goods
+  if(i===3&&S.level>=3){const give=pick(Object.keys(MATS)),get=pick(Object.keys(MATS).filter(k=>k!==give)),n=1+Math.floor(R()*2);
+    return{who,give:[['m:'+give,Math.ceil(n*MAT_VALUE[get]/MAT_VALUE[give]*1.25)]],get:[[get,n]]}}
+  const get=[[pick(mats),1+Math.floor(R()*(S.level<4?2:3))]];if(S.level>=6&&R()<.35){const m2=pick(mats.filter(k=>k!==get[0][0]));get.push([m2,1+Math.floor(R()*2)])}
+  const value=get.reduce((a,[k,n])=>a+MAT_VALUE[k]*n,0)*1.5;
+  const pool=orderPool().filter(id=>ITEMS[id].cat!=='made'||S.level>=6),inBarn=pool.filter(id=>have(id)>0);
+  const id=pick(inBarn.length&&R()<.7?inBarn:pool.length?pool:['wheat']);
+  return{who,give:[[id,Math.max(1,Math.round(value/ITEMS[id].sell))]],get};
+}
+function tradeHas([id,n]){return id.startsWith('m:')?(S.mats[id.slice(2)]||0)>=n:have(id)>=n}
+function canTrade2(o){return!o.done&&o.give.every(tradeHas)}
+function doTrade(o){
+  if(!canTrade2(o)){SFX.error();toast('You do not have everything for this trade yet.');return}
+  const room0=room()+o.give.reduce((a,[id,n])=>a+n,0);if(o.get.reduce((a,[,n])=>a+n,0)>room0){barnFull();return}
+  for(const[id,n]of o.give){if(id.startsWith('m:'))S.mats[id.slice(2)]-=n;else takeGood(id,n)}
+  for(const[k,n]of o.get)S.mats[k]=(S.mats[k]||0)+n;
+  o.done=Date.now()+1800e3;stat('trades');SFX.coin();setTimeout(SFX.find,150);
+  const nb=NEIGHBORS.find(x=>x.id===o.who);toast(nb.name+' traded with you: '+o.get.map(([k,n])=>MATS[k].name+' ×'+n).join(', ')+'.');
+  changed();rerender();
+}
+function matChip(k,n,ok){const r=el('span','req'+(ok?' ok':''));r.innerHTML=MATS[k].svg;r.appendChild(el('b',null,(ok?'+':'')+n));r.title=MATS[k].name;r.setAttribute('aria-label',MATS[k].name+': '+n);return r}
+function tradeReady(){if(!S)return false;const t=tradeState();return t.offers.some(canTrade2)}
+function showTrades(){
+  if(VIS)return;
+  modal({title:'Neighbor Trades',color:'green',wide:true,live:true,render(b){
+    const t=tradeState(),now=Date.now(),w=el('div','orders');
+    w.appendChild(el('p','hint','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.'));
+    const have2=el('div','want');for(const k in MATS)have2.appendChild(matChip(k,S.mats[k]||0,false));w.appendChild(have2);
+    for(const o of t.offers){
+      const nb=NEIGHBORS.find(x=>x.id===o.who),row=el('div','order'),face=el('div','nbface');face.innerHTML=avatar(nb);row.appendChild(face);
+      const mid=el('div');mid.appendChild(el('strong',null,nb.name+' offers'));
+      const gets=el('div','want');for(const[k,n]of o.get)gets.appendChild(matChip(k,n,true));mid.appendChild(gets);
+      mid.appendChild(el('small',null,'In return for'));
+      const gives=el('div','want');for(const[id,n]of o.give){if(id.startsWith('m:'))gives.appendChild(matChip(id.slice(2),(S.mats[id.slice(2)]||0)+'/'+n,false));else gives.appendChild(goodReq(id,n))}mid.appendChild(gives);
+      row.appendChild(mid);
+      const acts=el('div','acts'),go=el('button','go',o.done?'Traded':'Trade');go.disabled=!canTrade2(o);go.onclick=()=>doTrade(o);acts.appendChild(go);
+      if(o.done)acts.appendChild(el('small',null,'New offer in '+fmt(Math.max(1,(o.done-now)/1000))));
+      row.appendChild(acts);w.appendChild(row);
+    }
+    w.appendChild(el('p','hint','New offers in '+fmt((TRADE_SLOT-now%TRADE_SLOT)/1000)+'.'));
+    b.appendChild(w);
+  }});
 }
 
 /* ================= gift box ================= */
@@ -5557,7 +5666,7 @@ function drawWeather(now,dt){
   const sc=dpr;
   if(w==='rain'||w==='storm'){
     g.strokeStyle='rgba(210,230,255,.55)';g.lineWidth=1.2*sc;g.lineCap='round';g.beginPath();
-    const n=w==='storm'?150:100;
+    const n=(w==='storm'?150:100)*(QL?1:.5);
     for(let i=0;i<n;i++){const r=RAIN[i];r.y+=dt*1.6*r.s;r.x-=dt*.25*r.s;if(r.y>1){r.y-=1;r.x=Math.random()*1.2}if(r.x<0)r.x+=1.2;const x=r.x*W2,y=r.y*H2;g.moveTo(x,y);g.lineTo(x+5*sc,y-16*sc*r.s)}
     g.stroke();
   }

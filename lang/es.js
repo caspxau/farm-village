@@ -764,7 +764,23 @@ Got anything for town?|¿Tienes algo para el pueblo?
 The truck is ready to roll!|¡El camión está listo para salir!
 Nice day for a drive.|Buen día para conducir.
 Fill a contract and I will take it to town.|Completa un contrato y lo llevo al pueblo.
-I can take that to town!|¡Puedo llevar eso al pueblo!`,
+I can take that to town!|¡Puedo llevar eso al pueblo!
+Neighbor trades: swap goods for materials|Trueques con vecinos: productos por materiales
+Trades|Trueques
+Trade with neighbors for materials|Cambia con tus vecinos por materiales
+Neighbor Trades|Trueques con vecinos
+Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.|Tus vecinos cambian materiales de construcción por productos de la granja. Úsalos para mejorar tu granero y las casas de los animales.
+In return for|A cambio de
+Trade|Cambiar
+Traded|Cambiado
+You do not have everything for this trade yet.|Aún no tienes todo para este cambio.
+Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.|Multiherramienta: planta, cosecha y recoge, y usa tu tractor, sembradora y cosechadora por sí sola.
+Graphics|Gráficos
+Sharpest|Más nítido
+Smoothest|Más fluido
+Machines|Máquinas
+Use by themselves|Solas
+By hand|A mano`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1
@@ -948,4 +964,9 @@ p:`0|$1 {p1:moneda|monedas}
 180|¡Llegaste al nivel 99, el más alto de Farm Village![[ ¡Enhorabuena, $1!]]
 181|Tu regalo especial: el Trofeo de campeón, $1 monedas y $2 de dinero de granja. Coloca el trofeo desde tu caja de regalos.
 182|Mejorar: {1}
-183|¡Rumbo a $1!`};
+183|¡Rumbo a $1!
+184|$1 ofrece
+185|Nueva oferta en {t1}
+186|Nuevas ofertas en {t1}.
+187|$1 hizo un cambio contigo: {l2}.
+188|¡Tu {1} está listo! La multiherramienta lo usa sola.`};

@@ -772,7 +772,23 @@ Got anything for town?|शहर के लिए कुछ है?
 The truck is ready to roll!|ट्रक चलने को तैयार है!
 Nice day for a drive.|गाड़ी चलाने के लिए बढ़िया दिन है।
 Fill a contract and I will take it to town.|एक कॉन्ट्रैक्ट पूरा करो, मैं उसे शहर ले जाऊँगा।
-I can take that to town!|मैं यह शहर ले जा सकता हूँ!`,
+I can take that to town!|मैं यह शहर ले जा सकता हूँ!
+Neighbor trades: swap goods for materials|पड़ोसियों से अदला-बदली: सामान के बदले मटीरियल
+Trades|अदला-बदली
+Trade with neighbors for materials|मटीरियल के लिए पड़ोसियों से अदला-बदली करें
+Neighbor Trades|पड़ोसियों से अदला-बदली
+Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.|पड़ोसी फ़ार्म के सामान के बदले निर्माण मटीरियल देते हैं। इनसे खलिहान और बाड़े बढ़ाएँ।
+In return for|इसके बदले
+Trade|बदलें
+Traded|बदल लिया
+You do not have everything for this trade yet.|इस अदला-बदली के लिए अभी सब कुछ नहीं है।
+Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.|मल्टी-टूल: बुआई, कटाई और लेना, और ट्रैक्टर, सीडर व हार्वेस्टर ख़ुद इस्तेमाल करता है।
+Graphics|ग्राफ़िक्स
+Sharpest|सबसे साफ़
+Smoothest|सबसे स्मूथ
+Machines|मशीनें
+Use by themselves|अपने-आप
+By hand|हाथ से`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -956,4 +972,9 @@ p:`0|$1 सिक्के
 180|आप लेवल 99 पर पहुँच गए, Farm Village का सबसे ऊँचा लेवल![[ बधाई हो, $1!]]
 181|आपका ख़ास तोहफ़ा: चैंपियन ट्रॉफ़ी, $1 सिक्के और $2 फ़ार्म कैश। तोहफ़ों के डिब्बे से ट्रॉफ़ी रखें।
 182|{1} बढ़ाएँ
-183|$1 चला!`};
+183|$1 चला!
+184|{1} दे रहे हैं
+185|{t1} में नया ऑफ़र
+186|{t1} में नए ऑफ़र।
+187|{1} ने आपसे अदला-बदली की: {l2}।
+188|आपका नया {1} तैयार है! मल्टी-टूल उसे ख़ुद इस्तेमाल करता है।`};

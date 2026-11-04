@@ -772,7 +772,23 @@ Got anything for town?|শহরের জন্য কিছু আছে?
 The truck is ready to roll!|ট্রাক রওনা দিতে তৈরি!
 Nice day for a drive.|গাড়ি চালানোর জন্য দারুণ দিন।
 Fill a contract and I will take it to town.|একটা চুক্তি পূরণ করো, আমি শহরে নিয়ে যাব।
-I can take that to town!|এটা আমি শহরে নিয়ে যেতে পারি!`,
+I can take that to town!|এটা আমি শহরে নিয়ে যেতে পারি!
+Neighbor trades: swap goods for materials|প্রতিবেশীদের সাথে বিনিময়: জিনিসের বদলে উপকরণ
+Trades|বিনিময়
+Trade with neighbors for materials|উপকরণের জন্য প্রতিবেশীদের সাথে বিনিময় করো
+Neighbor Trades|প্রতিবেশীদের সাথে বিনিময়
+Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.|প্রতিবেশীরা খামারের জিনিসের বদলে নির্মাণ উপকরণ দেয়। এগুলো দিয়ে গোলাঘর আর খোঁয়াড় উন্নত করো।
+In return for|এর বদলে
+Trade|বিনিময় করো
+Traded|বিনিময় হয়েছে
+You do not have everything for this trade yet.|এই বিনিময়ের জন্য এখনো সব নেই।
+Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.|মাল্টি-টুল: বোনা, ফসল তোলা আর নেওয়া, আর নিজেই ট্রাক্টর, সিডার ও হারভেস্টার চালায়।
+Graphics|গ্রাফিক্স
+Sharpest|সবচেয়ে পরিষ্কার
+Smoothest|সবচেয়ে মসৃণ
+Machines|যন্ত্র
+Use by themselves|নিজে থেকে
+By hand|হাতে`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -956,4 +972,9 @@ p:`0|$1 কয়েন
 180|তুমি লেভেল ৯৯-এ পৌঁছেছ, Farm Village-এর সর্বোচ্চ লেভেল![[ অভিনন্দন, $1!]]
 181|তোমার বিশেষ উপহার: চ্যাম্পিয়ন ট্রফি, $1 কয়েন আর $2 ফার্ম ক্যাশ। উপহার বাক্স থেকে ট্রফি বসাও।
 182|{1} উন্নত করো
-183|$1-এর পথে!`};
+183|$1-এর পথে!
+184|{1} দিচ্ছে
+185|{t1} পরে নতুন প্রস্তাব
+186|{t1} পরে নতুন প্রস্তাব।
+187|{1} তোমার সাথে বিনিময় করেছে: {l2}।
+188|তোমার নতুন {1} তৈরি! মাল্টি-টুল নিজেই সেটা চালায়।`};
