@@ -761,7 +761,12 @@ You reached Level 99, the top level. Well done, champion!|आप लेवल 99
 At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|लेवल 99 पर आपको चैंपियन ट्रॉफ़ी, 50,000 सिक्के और 50 फ़ार्म कैश मिलेंगे।
 Auto Waterer|ऑटो सिंचाई मशीन
 The Auto Waterer is full.|ऑटो सिंचाई मशीन भरी है।
-Animals live in their home. Switch Animals to Free roam in Settings to move them around.|जानवर अपने बाड़े में रहते हैं। उन्हें खिसकाने के लिए सेटिंग्स में जानवर: खुले में चुनें।`,
+Animals live in their home. Switch Animals to Free roam in Settings to move them around.|जानवर अपने बाड़े में रहते हैं। उन्हें खिसकाने के लिए सेटिंग्स में जानवर: खुले में चुनें।
+Plow|जोतें
+Tapping grass: walk or plow|घास पर टैप: चलें या जोतें
+Tapping grass now plows it into new farmland.|अब घास पर टैप करने से वह नया खेत बन जाएगी।
+Tapping grass now walks your farmer there.|अब घास पर टैप करने से किसान वहाँ चलेगा।
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|घास पर टैप करने से किसान वहाँ चलता है। नया खेत बनाने के लिए चलें / जोतें स्विच इस्तेमाल करें। अभी उसे टैप करें।`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी

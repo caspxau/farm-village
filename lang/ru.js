@@ -761,7 +761,12 @@ You reached Level 99, the top level. Well done, champion!|Ты достиг 99 �
 At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|На 99 уровне ты получишь Кубок чемпиона, 50 000 монет и 50 фермерских долларов.
 Auto Waterer|Автополивалка
 The Auto Waterer is full.|Автополивалка полна.
-Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Животные живут в своём домике. Чтобы их перемещать, выбери в настройках «Животные: На свободе».`,
+Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Животные живут в своём домике. Чтобы их перемещать, выбери в настройках «Животные: На свободе».
+Plow|Пахать
+Tapping grass: walk or plow|Нажатие на траву: идти или пахать
+Tapping grass now plows it into new farmland.|Теперь нажатие на траву превращает её в новую грядку.
+Tapping grass now walks your farmer there.|Теперь при нажатии на траву фермер идёт туда.
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|При нажатии на траву фермер идёт туда. Переключатель «Идти / Пахать» позволяет делать новые грядки. Нажми на него.`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1

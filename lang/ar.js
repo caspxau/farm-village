@@ -761,7 +761,12 @@ You reached Level 99, the top level. Well done, champion!|وصلت إلى الم
 At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|في المستوى 99 تربح كأس البطل و50,000 عملة و50 من نقود المزرعة.
 Auto Waterer|الرشاش التلقائي
 The Auto Waterer is full.|الرشاش التلقائي ممتلئ.
-Animals live in their home. Switch Animals to Free roam in Settings to move them around.|تعيش الحيوانات في بيوتها. اختر الحيوانات: تجوال حر في الإعدادات لتحريكها.`,
+Animals live in their home. Switch Animals to Free roam in Settings to move them around.|تعيش الحيوانات في بيوتها. اختر الحيوانات: تجوال حر في الإعدادات لتحريكها.
+Plow|حرث
+Tapping grass: walk or plow|الضغط على العشب: مشي أو حرث
+Tapping grass now plows it into new farmland.|الضغط على العشب يحوّله الآن إلى أرض زراعية جديدة.
+Tapping grass now walks your farmer there.|الضغط على العشب يجعل مزارعك يمشي إليه الآن.
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|الضغط على العشب يجعل مزارعك يمشي إليه. استخدم مفتاح مشي / حرث لصنع أرض زراعية بدلًا من ذلك. اضغط عليه الآن.`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1

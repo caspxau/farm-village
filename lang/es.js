@@ -753,7 +753,12 @@ You reached Level 99, the top level. Well done, champion!|Llegaste al nivel 99, 
 At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|En el nivel 99 ganas el Trofeo de campeón, 50.000 monedas y 50 de dinero de granja.
 Auto Waterer|Regador automático
 The Auto Waterer is full.|El regador automático está lleno.
-Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Los animales viven en su casa. Elige Animales: Libres en Ajustes para moverlos.`,
+Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Los animales viven en su casa. Elige Animales: Libres en Ajustes para moverlos.
+Plow|Arar
+Tapping grass: walk or plow|Al tocar hierba: caminar o arar
+Tapping grass now plows it into new farmland.|Ahora, al tocar la hierba, la conviertes en tierra de cultivo.
+Tapping grass now walks your farmer there.|Ahora, al tocar la hierba, tu granjero camina hasta allí.
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|Al tocar la hierba, tu granjero camina hasta allí. Usa el interruptor Caminar / Arar para crear tierra de cultivo. Tócalo ahora.`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1

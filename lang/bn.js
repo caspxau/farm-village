@@ -761,7 +761,12 @@ You reached Level 99, the top level. Well done, champion!|তুমি লেভ
 At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|লেভেল ৯৯-এ পাবে চ্যাম্পিয়ন ট্রফি, ৫০,০০০ কয়েন আর ৫০ ফার্ম ক্যাশ।
 Auto Waterer|স্বয়ংক্রিয় সেচযন্ত্র
 The Auto Waterer is full.|স্বয়ংক্রিয় সেচযন্ত্র ভরা।
-Animals live in their home. Switch Animals to Free roam in Settings to move them around.|পশুরা নিজেদের খোঁয়াড়ে থাকে। সরাতে সেটিংসে পশু: খোলা ঘুরুক বেছে নাও।`,
+Animals live in their home. Switch Animals to Free roam in Settings to move them around.|পশুরা নিজেদের খোঁয়াড়ে থাকে। সরাতে সেটিংসে পশু: খোলা ঘুরুক বেছে নাও।
+Plow|চাষ
+Tapping grass: walk or plow|ঘাসে ট্যাপ: হাঁটো বা চাষ করো
+Tapping grass now plows it into new farmland.|এখন ঘাসে ট্যাপ করলে সেটা নতুন জমি হবে।
+Tapping grass now walks your farmer there.|এখন ঘাসে ট্যাপ করলে কৃষক সেখানে হাঁটবে।
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|ঘাসে ট্যাপ করলে কৃষক সেখানে হাঁটে। নতুন জমি বানাতে হাঁটো / চাষ সুইচ ব্যবহার করো। এখনই ট্যাপ করো।`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1

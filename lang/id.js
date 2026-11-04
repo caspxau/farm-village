@@ -753,7 +753,12 @@ You reached Level 99, the top level. Well done, champion!|Kamu mencapai Level 99
 At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|Di Level 99 kamu memenangkan Piala Juara, 50.000 koin, dan 50 Uang Kebun.
 Auto Waterer|Penyiram Otomatis
 The Auto Waterer is full.|Penyiram Otomatis sudah penuh.
-Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Hewan tinggal di kandangnya. Pilih Hewan: Bebas di Pengaturan untuk memindahkannya.`,
+Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Hewan tinggal di kandangnya. Pilih Hewan: Bebas di Pengaturan untuk memindahkannya.
+Plow|Bajak
+Tapping grass: walk or plow|Mengetuk rumput: jalan atau bajak
+Tapping grass now plows it into new farmland.|Sekarang mengetuk rumput akan mengubahnya jadi lahan baru.
+Tapping grass now walks your farmer there.|Sekarang mengetuk rumput akan membuat petanimu berjalan ke sana.
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|Mengetuk rumput membuat petanimu berjalan ke sana. Pakai tombol Jalan / Bajak untuk membuat lahan baru. Ketuk sekarang.`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1

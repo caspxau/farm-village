@@ -761,7 +761,12 @@ You reached Level 99, the top level. Well done, champion!|你达到了99级，�
 At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|达到99级可获得冠军奖杯、50,000金币和50农场币。
 Auto Waterer|自动浇水器
 The Auto Waterer is full.|自动浇水器已满。
-Animals live in their home. Switch Animals to Free roam in Settings to move them around.|动物住在自己的屋里。在设置里把"动物"改成"自由活动"才能移动它们。`,
+Animals live in their home. Switch Animals to Free roam in Settings to move them around.|动物住在自己的屋里。在设置里把"动物"改成"自由活动"才能移动它们。
+Plow|耕地
+Tapping grass: walk or plow|点击草地：走过去或耕地
+Tapping grass now plows it into new farmland.|现在点击草地会把它开成新农田。
+Tapping grass now walks your farmer there.|现在点击草地，农夫会走过去。
+Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.|点击草地时，农夫会走过去。用"走路 / 耕地"开关可以改为开垦新农田。现在点一下它。`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1

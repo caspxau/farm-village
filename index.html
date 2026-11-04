@@ -808,6 +808,17 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
 .rtl .sheet-body,.rtl .toast,.rtl .tut,.rtl .ocard,.rtl .tip,.rtl .side,.rtl .rotate,.rtl .tsub{direction:rtl}
 
 .tlogo{font-family:'Luckiest Guy','Arial Black',Impact,sans-serif}
+
+/* Walk / Plow switch: what tapping empty grass does */
+.modesw{position:fixed;right:max(14px,env(safe-area-inset-right,0px));top:calc(max(14px,env(safe-area-inset-top,0px)) + 84px);z-index:21;display:flex;padding:4px;gap:3px;border-radius:999px;background:var(--wood-bg,#b4723a);border:3px solid var(--wood-d);box-shadow:0 4px 0 var(--wood-d),0 8px 18px rgba(30,15,5,.3)}
+.modesw button{display:flex;align-items:center;gap:5px;font:inherit;font-weight:700;font-size:14px;color:#3a2310;background:#fff3d6;border:2px solid #d8c29a;border-radius:999px;padding:4px 12px 4px 7px;min-height:38px;cursor:pointer}
+.modesw button svg{width:22px;height:22px}
+.modesw button[aria-pressed="true"]{background:linear-gradient(#a8e67e,#3f9a3c);border-color:#1f5a1e;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.3)}
+.modesw.tutpulse{border-radius:999px}
+body.visiting .modesw{display:none}
+@media (max-width:640px){.modesw{top:calc(max(8px,env(safe-area-inset-top,0px)) + 66px);right:10px}.modesw button{font-size:13px;min-height:36px;padding:3px 10px 3px 6px}}
+@media (max-width:460px){.modesw button span{display:none}.modesw button{padding:4px 9px}}
+@media (max-height:520px) and (orientation:landscape){.modesw{top:calc(max(6px,env(safe-area-inset-top,0px)) + 62px)}.modesw button{min-height:32px}}
 </style>
 </head>
 <body>
@@ -894,6 +905,10 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l2.4 1 .6 3 2.6 1.4 2.8-1.2 1.8 1.8-1.2 2.8L26 15.4l3 .6v3l-3 .6-1.4 2.6 1.2 2.8-1.8 1.8-2.8-1.2L19 26.4l-.6 3h-3l-.6-3-2.6-1.4-2.8 1.2-1.8-1.8 1.2-2.8L7 19l-3-.6v-3l3-.6 1.4-2.6-1.2-2.8 1.8-1.8 2.8 1.2L13 7l.6-3z" fill="#9aa6b0" stroke="#3a4650" stroke-width="1.8" stroke-linejoin="round" transform="translate(0 -1)"/><circle cx="16" cy="16" r="4.4" fill="#fffaf0" stroke="#3a4650" stroke-width="1.8"/></svg>
       <em aria-hidden="true">Settings</em></button>
   </div>
+</div>
+<div class="modesw" id="modeSw" role="group" aria-label="Tapping grass: walk or plow">
+  <button id="modeWalk" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2.4" fill="#f2c6a0" stroke="#6b3c15" stroke-width="1.6"/><path d="M12 8l-3 5 3 2-1 6M12 8l3 4 3 1M12 8l1 5 3 3 1 5M9 13l-3 1" fill="none" stroke="#6b3c15" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Walk</span></button>
+  <button id="modePlow" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3L8 16" stroke="#a8642a" stroke-width="3" stroke-linecap="round"/><path d="M5 13l6 4-2 3-6-4z" fill="#c9ced2" stroke="#3a4650" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 21h18" stroke="#8b5a2e" stroke-width="2.4" stroke-linecap="round"/></svg><span>Plow</span></button>
 </div>
 <footer class="dock">
   <button class="mbtn" id="btnTool" aria-label="Tools" aria-expanded="false"><span class="toolic" id="toolIcon"></span><em aria-hidden="true" id="toolLabel">Multi</em></button>
@@ -1076,7 +1091,8 @@ const PL_EXACT={
 'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.'
-
+,
+'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.'
 };
 const RIB_PL=x=>({Yellow:'Żółta',White:'Biała',Red:'Czerwona',Blue:'Niebieska'}[x]||x);
 const L_t=t=>PACK?String(t).replace(/^(\d+)s$/,PACK.time.s).replace(/^(\d+)h (\d+)m$/,PACK.time.hm):String(t).replace(/^(\d+)s$/,'$1 s').replace(/^(\d+)h (\d+)m$/,'$1 godz. $2 min');
@@ -1529,7 +1545,7 @@ function need(l){return Math.round(24+20*l+2.5*l*l)}
 let S,occ={},N=16,VIS=null;
 function fresh(){
   const now=Date.now();
-  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
+  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,tutV:2,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
   const put=(x,y,o)=>{s.tiles[x+','+y]=o};
   put(1,2,{k:'bld',id:'house'});put(1,6,{k:'bld',id:'barn'});
   for(let x=6;x<=10;x++)for(let y=5;y<=8;y++){
@@ -1566,6 +1582,8 @@ function norm(s){
   if(!s.born)s.born=Date.now();if(s.farmName==='Clover Hollow')s.farmName='Farm Village';if(s.pet&&!['dog','cat'].includes(s.pet.kind))s.pet=null;
   s.barnLvl=Math.min(6,Math.max(1,s.barnLvl|0));
   if(s.level>99){s.level=99;s.xp=0}
+  // the Walk / Plow step was added as tutorial step 4: older saves past step 3 move up one
+  if(s.tutV!==2){if(typeof s.tut==='number'&&s.tut>=3)s.tut++;s.tutV=2}
   s.orders=(s.orders||[]).filter(o=>o&&o.items&&o.items.every(([id])=>ITEMS[id])&&NEIGHBORS.some(n=>n.id===o.who));
   for(const k in s.goods)if(!ITEMS[k]||!(s.goods[k]>0))delete s.goods[k];
   return s;
@@ -4814,6 +4832,11 @@ addEventListener('keydown',e=>{
   if(!$('toolPop').hidden||!$('morePop').hidden)closePops();else if(mq.length&&!mq[0].noClose)closeModal();else if(placing){stopPlacing();toast('Stopped placing.')}else if(tool!=='multi')setTool('multi');
 });
 $('rotBtn').onclick=()=>{if(placing)rotatePlacing()};
+// the on-screen Walk / Plow switch (same setting as Settings > Tapping grass)
+function renderModeSw(){const p=S&&S.tapGrass==='plow';$('modeWalk').setAttribute('aria-pressed',String(!p));$('modePlow').setAttribute('aria-pressed',String(p))}
+function setTapGrass(v){S.tapGrass=v;if(tool!=='multi')setTool('multi');renderModeSw();SFX.click();stat('modeSwitch');save();
+  toast(v==='plow'?'Tapping grass now plows it into new farmland.':'Tapping grass now walks your farmer there.')}
+$('modeWalk').onclick=()=>setTapGrass('walk');$('modePlow').onclick=()=>setTapGrass('plow');
 $('cashPlus').onclick=()=>{SFX.click();openMarket('specials')};
 $('btnMusic').onclick=()=>{S.music=!S.music;save();hud();SFX.click();wakeAudio();musicSync();toast(S.music?'Music on':'Music off')};
 $('btnSound').onclick=()=>{S.sound=!S.sound;const a=ac();if(a&&a.state==='suspended')a.resume();save();hud();SFX.click()};
@@ -4839,14 +4862,14 @@ function showSettings(){
       r.appendChild(sg);p.appendChild(r)};
     seg('Screen',[['auto','Auto'],['portrait','Portrait'],['landscape','Landscape']],orientPref()||'auto',v=>setOrient(v,true));
     seg('Animals',[['home','Stay home'],['free','Free roam']],S.animalMode==='free'?'free':'home',v=>{S.animalMode=v;changed();toast(v==='free'?'Your animals can roam the farm now. Fences keep them in.':'Your animals are heading home.')});
-    seg('Tapping grass',[['walk','Walk there'],['plow','Plow it']],S.tapGrass==='plow'?'plow':'walk',v=>{S.tapGrass=v});
+    seg('Tapping grass',[['walk','Walk there'],['plow','Plow it']],S.tapGrass==='plow'?'plow':'walk',v=>{S.tapGrass=v;renderModeSw()});
     if(S.pet){const r=el('div','setrow');r.appendChild(el('span',null,'Pet name'));const nb=el('button','btn2',S.pet.name||PET_NAME[S.pet.kind]);nb.setAttribute('aria-label','Rename your pet');nb.onclick=()=>{SFX.click();renamePet()};r.appendChild(nb);p.appendChild(r)}
     toggle('Music',S.music,()=>{S.music=!S.music;wakeAudio();musicSync()});
     slider('Music volume',S.musicVol??1,v=>{S.musicVol=v;const a=AC;if(a&&MUSIC.master&&MUSIC.on)MUSIC.master.gain.setTargetAtTime(.55*v,a.currentTime,.1)});
     toggle('Sound effects',S.sound,()=>{S.sound=!S.sound});
     slider('Effects volume',S.sfxVol??1,v=>{S.sfxVol=v});
     toggle('Rain, snow and falling leaves',S.fx!==false,()=>{S.fx=S.fx===false});
-    const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','water','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
+    const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','modeSwitch','water','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
     const nf=el('button','btn2 danger','Start a new farm');nf.onclick=()=>{closeModal();confirmNewFarm()};r2.appendChild(tut);r2.appendChild(nf);p.appendChild(r2);
     if(!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches&&!navigator.standalone){
       const ins=el('button','go','Install app');ins.style.fontSize='18px';
@@ -5494,6 +5517,7 @@ const TUT=[
   {txt:'Your wheat is ripe! Click the golden wheat to harvest it.',done:()=>tst('harvest')>=1,find:o=>o.k==='plot'&&o.crop&&cropState(o,Date.now()).st==='ripe'},
   {txt:'Click the empty brown plot to plow it.',done:()=>tst('plow')>=1,find:o=>o.k==='plot'&&o.fallow},
   {txt:'Click the plowed plot to plant wheat.',done:()=>tst('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
+  {txt:'Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.',done:()=>tst('modeSwitch')>=1,btn:'modeSw'},
   {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow'].includes(cropState(o,Date.now()).st)},
   {txt:'A chicken laid an egg. Click it to collect.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
   {txt:'Now that chicken is hungry. Click it to give it feed.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
@@ -5721,7 +5745,7 @@ function start(data){
   S=norm(valid(data&&data.S)?data.S:(load()||fresh()));
   N=S.size;
   for(const k in S.tiles){const o=S.tiles[k];if(o.k==='bld'){farmer.x=+k.split(',')[0]+2.4;farmer.y=+k.split(',')[1]+2.6;break}}
-  resize();buildBorder();buildOcc();if(syncHousing())buildOcc();buildBars();renderNeighbors();hud();save();placePet();setTool('multi');
+  resize();buildBorder();buildOcc();if(syncHousing())buildOcc();buildBars();renderModeSw();renderNeighbors();hud();save();placePet();setTool('multi');
   window.claude?.hot?.snapshot?.(()=>({S}));
   requestAnimationFrame(frame);
   setInterval(save,10000);
