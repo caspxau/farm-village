@@ -815,7 +815,9 @@ Have 2 pigs|امتلك خنزيرين
 Bring Rosa 2 bacon and eggs|أحضر لروزا طبقين من البيض باللحم المقدد
 Sell 20 goods from the barn|بع 20 بضاعة من الحظيرة
 Complete 8 deliveries|أكمل 8 شحنات
-Make 10 goods in your buildings|اصنع 10 بضائع في مبانيك`,
+Make 10 goods in your buildings|اصنع 10 بضائع في مبانيك
+You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|يمكنك زراعة محاصيل أخرى أيضًا. افتح السوق، واذهب إلى البذور واضغط ازرع على فول الصويا.
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|بذورك الآن فول الصويا. انقر على قطعة محروثة لزراعتها. غيّر البذور متى شئت من السوق > البذور.`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1

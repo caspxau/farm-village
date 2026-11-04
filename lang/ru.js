@@ -815,7 +815,9 @@ Have 2 pigs|Заведи 2 свиней
 Bring Rosa 2 bacon and eggs|Принеси Розе 2 яичницы с беконом
 Sell 20 goods from the barn|Продай 20 товаров из амбара
 Complete 8 deliveries|Выполни 8 доставок
-Make 10 goods in your buildings|Сделай 10 товаров в постройках`,
+Make 10 goods in your buildings|Сделай 10 товаров в постройках
+You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Можно сажать и другие культуры. Открой рынок, перейди в «Семена» и нажми «Посадить» у сои.
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Теперь у тебя семена сои. Нажми на вспаханную грядку, чтобы посадить. Сменить семена можно в любой момент: «Рынок > Семена».`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1

@@ -807,7 +807,9 @@ Have 2 pigs|Punya 2 babi
 Bring Rosa 2 bacon and eggs|Bawakan Rosa 2 telur dan bacon
 Sell 20 goods from the barn|Jual 20 barang dari lumbung
 Complete 8 deliveries|Selesaikan 8 kiriman
-Make 10 goods in your buildings|Buat 10 barang di bangunanmu`,
+Make 10 goods in your buildings|Buat 10 barang di bangunanmu
+You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Kamu juga bisa menanam tanaman lain. Buka Pasar, pilih Benih, lalu ketuk Tanam pada Kedelai.
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Sekarang benihmu kedelai. Ketuk petak yang dibajak untuk menanamnya. Ganti benih kapan saja di Pasar > Benih.`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1

@@ -807,7 +807,9 @@ Have 2 pigs|Aie 2 cochons
 Bring Rosa 2 bacon and eggs|Apporte 2 œufs au bacon à Rosa
 Sell 20 goods from the barn|Vends 20 produits de la grange
 Complete 8 deliveries|Termine 8 livraisons
-Make 10 goods in your buildings|Fabrique 10 produits dans tes bâtiments`,
+Make 10 goods in your buildings|Fabrique 10 produits dans tes bâtiments
+You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Tu peux planter d'autres cultures. Ouvre le Marché, va dans Graines et touche Planter sur le Soja.
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Le soja est ta graine maintenant. Touche une parcelle labourée pour le planter. Change de graine quand tu veux dans Marché > Graines.`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1

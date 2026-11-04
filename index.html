@@ -1108,6 +1108,7 @@ const PL_EXACT={
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
 'Neighbor trades: swap goods for materials':'Wymiana z sąsiadami: towary za materiały','Trades':'Wymiana','Trade with neighbors for materials':'Wymień się z sąsiadami na materiały','Neighbor Trades':'Wymiana z sąsiadami','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.':'Sąsiedzi wymieniają materiały budowlane na towary z farmy. Użyj ich do rozbudowy stodoły i domów zwierząt.','In return for':'W zamian za','Trade':'Wymień','Traded':'Wymienione','You do not have everything for this trade yet.':'Nie masz jeszcze wszystkiego do tej wymiany.','Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.':'Multi-narzędzie: sadzi, zbiera i odbiera, a traktor, siewnik i kombajn włącza samo.','Graphics':'Grafika','Sharpest':'Najostrzej','Smoothest':'Najpłynniej','Machines':'Maszyny','Use by themselves':'Same','By hand':'Ręcznie',
 'Raw Bacon':'Surowy boczek','Bacon and Eggs':'Jajka na boczku',
+'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.':'Możesz sadzić też inne rośliny. Otwórz targ, przejdź do Nasion i dotknij Posadź przy Soi.','Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.':'Teraz sadzisz soję. Kliknij zaorane pole, by ją posadzić. Nasiona zmienisz w każdej chwili w: Targ > Nasiona.',
 'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.':'Dale wozi towary do miasta za monety i mnóstwo XP. Otwórz tablicę dostaw i wyślij go z pszenicą.','Everything you harvest goes to the barn. Open the Barn and sell something.':'Wszystko, co zbierzesz, trafia do stodoły. Otwórz stodołę i coś sprzedaj.','Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.':'Rozbudowy wymagają desek, gwoździ, cegieł i farby. Znajdujesz je podczas pracy, a sąsiedzi wymieniają je w: Więcej > Wymiana.','Skip quest':'Pomiń zadanie','Sure? Skip it':'Na pewno? Pomiń','Quest skipped. A new one will come along.':'Zadanie pominięte. Wkrótce pojawi się nowe.','Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.':'Stodoła jest pełna, więc nadmiar sprzedano po cenie targowej. Rozbuduj stodołę, by mieścić więcej.','Dairy Days':'Dni nabiału','The Orchard Fair':'Jarmark sadowniczy','Sunday Breakfast':'Niedzielne śniadanie','Across the Valley':'Przez całą dolinę','Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.':'Krowy to serce farmy. Trzymaj kilka, daj im dobry dom i pokaż mi ser na stole.','The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.':'Zbliża się jarmark sadowniczy i chcę, żeby dolina spróbowała najlepszych owoców. Powiększ sad i wyciśnij sok wiśniowy.','Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!':'Nic nie mówi „niedziela” jak wiejskie śniadanie. Wyhoduj parę świń i usmaż mi jajka na boczku!','Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!':'Wieść o twojej farmie się rozeszła. Każde miasto chce od ciebie ładunek. Niech ciężarówka jeździ!','Have 3 cows':'Miej 3 krowy','Bring Hank 3 cheese wheels':'Przynieś Hankowi 3 koła sera','Have 6 fruit trees':'Miej 6 drzew owocowych','Pick fruit 25 times':'Zbierz owoce 25 razy','Bring Otis 3 cherry juices':'Przynieś Otisowi 3 soki wiśniowe','Have 2 pigs':'Miej 2 świnie','Bring Rosa 2 bacon and eggs':'Przynieś Rosie 2 porcje jajek na boczku','Sell 20 goods from the barn':'Sprzedaj 20 towarów ze stodoły','Complete 8 deliveries':'Wykonaj 8 dostaw','Make 10 goods in your buildings':'Zrób 10 towarów w budynkach'
 };
 const RIB_PL=x=>({Yellow:'Żółta',White:'Biała',Red:'Czerwona',Blue:'Niebieska'}[x]||x);
@@ -1569,7 +1570,7 @@ function need(l){return Math.round(30+25*l+5*l*l)} // XP for the next level: gro
 let S,occ={},N=16,VIS=null;
 function fresh(){
   const now=Date.now();
-  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,tutV:3,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
+  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,tutV:4,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
   const put=(x,y,o)=>{s.tiles[x+','+y]=o};
   put(1,2,{k:'bld',id:'house'});put(1,6,{k:'bld',id:'barn'});
   for(let x=6;x<=10;x++)for(let y=5;y<=8;y++){
@@ -1610,6 +1611,8 @@ function norm(s){
   if(s.tutV!==2&&s.tutV!==3){if(typeof s.tut==='number'&&s.tut>=3)s.tut++;s.tutV=2}
   // v3: the Delivery step moved before Sell and a Trades tip was added at the end
   if(s.tutV===2){if(typeof s.tut==='number'){if(s.tut>=9)s.tut=99;else if(s.tut>=7)s.tut=7}s.tutV=3}
+  // v4: two seed-choosing tips were added after the first planting
+  if(s.tutV===3){if(typeof s.tut==='number'&&s.tut>=3&&s.tut<10)s.tut+=2;else if(s.tut>=10)s.tut=99;s.tutV=4}
   s.orders=(s.orders||[]).filter(o=>o&&o.items&&o.items.every(([id])=>ITEMS[id])&&NEIGHBORS.some(n=>n.id===o.who));
   for(const k in s.goods)if(!ITEMS[k]||!(s.goods[k]>0))delete s.goods[k];
   return s;
@@ -5035,7 +5038,7 @@ function showSettings(){
     toggle('Sound effects',S.sound,()=>{S.sound=!S.sound});
     slider('Effects volume',S.sfxVol??1,v=>{S.sfxVol=v});
     toggle('Rain, snow and falling leaves',S.fx!==false,()=>{S.fx=S.fx===false});
-    const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','modeSwitch','water','delivSent','tradesSeen','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
+    const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','seedPick','modeSwitch','water','delivSent','tradesSeen','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
     const nf=el('button','btn2 danger','Start a new farm');nf.onclick=()=>{closeModal();confirmNewFarm()};r2.appendChild(tut);r2.appendChild(nf);p.appendChild(r2);
     if(!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches&&!navigator.standalone){
       const ins=el('button','go','Install app');ins.style.fontSize='18px';
@@ -5161,7 +5164,7 @@ function openMarket(cat){
   if(placing)stopPlacing();if(cat)marketCat=cat;
   modal({title:'Market',render:renderShop});
 }
-$('openMarket').onclick=()=>{SFX.click();openMarket()};
+$('openMarket').onclick=()=>{SFX.click();openMarket(tutOn()&&TUT[S.tut].btn==='openMarket'?'seeds':undefined)};
 function renderShop(body){
   const tabs=el('div','tabs');tabs.setAttribute('role','tablist');
   for(const[k,label]of[['seeds','Seeds'],['trees','Trees'],['animals','Animals'],['homes','Homes'],['decor','Decorations'],['buildings','Buildings'],['farm','Farm'],['specials','Specials']]){
@@ -5224,7 +5227,7 @@ function renderShop(body){
 }
 function buyItem(cat,id,d){
   SFX.click();
-  if(cat==='seeds'){S.seed=id;setTool('multi');closeModal();toast(d.name+' selected. Click plowed plots to plant them.');changed();return}
+  if(cat==='seeds'){S.seed=id;stat('seedPick');setTool('multi');closeModal();toast(d.name+' selected. Click plowed plots to plant them.');changed();return}
   if(d.cash&&S.cash<d.cash){SFX.error();toast('You need '+d.cash+' Farm Cash. You earn 1 every level up and from the daily bonus.');return}
   if(!d.cash&&S.coins<d.cost){SFX.error();toast('You need '+d.cost.toLocaleString()+' coins for the '+d.name.toLowerCase()+'.');return}
   if(cat==='farm'){
@@ -5742,6 +5745,8 @@ const TUT=[
   {txt:'Your wheat is ripe! Click the golden wheat to harvest it.',done:()=>tst('harvest')>=1,find:o=>o.k==='plot'&&o.crop&&cropState(o,Date.now()).st==='ripe'},
   {txt:'Click the empty brown plot to plow it.',done:()=>tst('plow')>=1,find:o=>o.k==='plot'&&o.fallow},
   {txt:'Click the plowed plot to plant wheat.',done:()=>tst('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
+  {txt:'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.',done:()=>tst('seedPick')>=1,btn:'openMarket'},
+  {txt:'Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.',done:()=>tst('plant')>=2,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
   {txt:'Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.',done:()=>tst('modeSwitch')>=1,btn:'modeSw'},
   {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow'].includes(cropState(o,Date.now()).st)},
   {txt:'A chicken laid an egg. Click it to collect.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
@@ -5768,7 +5773,7 @@ function renderTut(){
   document.querySelectorAll('.tutpulse').forEach(e=>e.classList.remove('tutpulse'));
   document.body.classList.toggle('tutlock',tutLocked());
   if(!tutOn()||!$('title').hidden){b.hidden=true;return}
-  if(tool!=='multi')setTool('multi');closePops();if(TUT[S.tut].find&&S.seed!=='wheat')S.seed='wheat';
+  if(tool!=='multi')setTool('multi');closePops();if(S.tut<=2&&S.seed!=='wheat')S.seed='wheat';
   const t=TUT[S.tut];b.hidden=false;$('tutStep').textContent='Tip '+(S.tut+1)+' of '+TUT.length;$('tutText').textContent=t.txt;
   if(t.btn)$(t.btn).classList.add('tutpulse');if(t.btn2)$(t.btn2).classList.add('tutpulse');
 }

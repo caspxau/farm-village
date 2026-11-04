@@ -815,7 +815,9 @@ Have 2 pigs|拥有2头猪
 Bring Rosa 2 bacon and eggs|给罗莎带2份培根煎蛋
 Sell 20 goods from the barn|从谷仓卖出20件物品
 Complete 8 deliveries|完成8次送货
-Make 10 goods in your buildings|在建筑里制作10件物品`,
+Make 10 goods in your buildings|在建筑里制作10件物品
+You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|你也可以种别的作物。打开市场，进入种子，在大豆上点"种植"。
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|现在你的种子是大豆。点击耕好的地块来种。随时可以在 市场 > 种子 里更换。`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1

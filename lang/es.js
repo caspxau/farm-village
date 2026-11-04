@@ -807,7 +807,9 @@ Have 2 pigs|Ten 2 cerdos
 Bring Rosa 2 bacon and eggs|Lleva a Rosa 2 huevos con bacon
 Sell 20 goods from the barn|Vende 20 productos del granero
 Complete 8 deliveries|Completa 8 entregas
-Make 10 goods in your buildings|Fabrica 10 productos en tus edificios`,
+Make 10 goods in your buildings|Fabrica 10 productos en tus edificios
+You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|También puedes plantar otros cultivos. Abre el Mercado, ve a Semillas y toca Plantar en Soja.
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Ahora tu semilla es la soja. Toca una parcela arada para plantarla. Cambia de semilla cuando quieras en Mercado > Semillas.`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1

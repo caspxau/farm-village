@@ -815,7 +815,9 @@ Have 2 pigs|২টি শূকর রাখো
 Bring Rosa 2 bacon and eggs|রোজাকে ২টি বেকন আর ডিম দাও
 Sell 20 goods from the barn|গোলাঘর থেকে ২০টি জিনিস বেচো
 Complete 8 deliveries|৮টি ডেলিভারি শেষ করো
-Make 10 goods in your buildings|ভবনে ১০টি জিনিস বানাও`,
+Make 10 goods in your buildings|ভবনে ১০টি জিনিস বানাও
+You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|তুমি অন্য ফসলও বুনতে পারো। বাজার খুলে বীজে যাও আর সয়াবিনে বোনো চাপো।
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|এখন তোমার বীজ সয়াবিন। বুনতে চাষ করা জমিতে ট্যাপ করো। যেকোনো সময় বাজার > বীজ-এ বীজ বদলাও।`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
