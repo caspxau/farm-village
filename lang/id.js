@@ -780,7 +780,9 @@ Sharpest|Paling tajam
 Smoothest|Paling mulus
 Machines|Mesin
 Use by themselves|Otomatis
-By hand|Manual`,
+By hand|Manual
+Raw Bacon|Bacon mentah
+Bacon and Eggs|Telur dan bacon`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -969,4 +971,5 @@ p:`0|$1 koin
 185|Tawaran baru dalam {t1}
 186|Tawaran baru dalam {t1}.
 187|$1 bertukar denganmu: {l2}.
-188|{1} barumu siap! Alat serba guna memakainya sendiri.`};
+188|{1} barumu siap! Alat serba guna memakainya sendiri.
+189|{1}: $2 petak`};

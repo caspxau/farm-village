@@ -1103,7 +1103,8 @@ const PL_EXACT={
 ,
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
-'Neighbor trades: swap goods for materials':'Wymiana z sąsiadami: towary za materiały','Trades':'Wymiana','Trade with neighbors for materials':'Wymień się z sąsiadami na materiały','Neighbor Trades':'Wymiana z sąsiadami','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.':'Sąsiedzi wymieniają materiały budowlane na towary z farmy. Użyj ich do rozbudowy stodoły i domów zwierząt.','In return for':'W zamian za','Trade':'Wymień','Traded':'Wymienione','You do not have everything for this trade yet.':'Nie masz jeszcze wszystkiego do tej wymiany.','Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.':'Multi-narzędzie: sadzi, zbiera i odbiera, a traktor, siewnik i kombajn włącza samo.','Graphics':'Grafika','Sharpest':'Najostrzej','Smoothest':'Najpłynniej','Machines':'Maszyny','Use by themselves':'Same','By hand':'Ręcznie'
+'Neighbor trades: swap goods for materials':'Wymiana z sąsiadami: towary za materiały','Trades':'Wymiana','Trade with neighbors for materials':'Wymień się z sąsiadami na materiały','Neighbor Trades':'Wymiana z sąsiadami','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.':'Sąsiedzi wymieniają materiały budowlane na towary z farmy. Użyj ich do rozbudowy stodoły i domów zwierząt.','In return for':'W zamian za','Trade':'Wymień','Traded':'Wymienione','You do not have everything for this trade yet.':'Nie masz jeszcze wszystkiego do tej wymiany.','Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.':'Multi-narzędzie: sadzi, zbiera i odbiera, a traktor, siewnik i kombajn włącza samo.','Graphics':'Grafika','Sharpest':'Najostrzej','Smoothest':'Najpłynniej','Machines':'Maszyny','Use by themselves':'Same','By hand':'Ręcznie',
+'Raw Bacon':'Surowy boczek','Bacon and Eggs':'Jajka na boczku'
 };
 const RIB_PL=x=>({Yellow:'Żółta',White:'Biała',Red:'Czerwona',Blue:'Niebieska'}[x]||x);
 const L_t=t=>PACK?String(t).replace(/^(\d+)s$/,PACK.time.s).replace(/^(\d+)h (\d+)m$/,PACK.time.hm):String(t).replace(/^(\d+)s$/,'$1 s').replace(/^(\d+)h (\d+)m$/,'$1 godz. $2 min');
@@ -1302,6 +1303,7 @@ const PL_PATS=[
 [/^New offers in (.+)\.$/,m=>'Nowe oferty za '+L_t(m[1])+'.'],
 [/^(.+) traded with you: (.+)\.$/,m=>m[1]+' wymienia się z tobą: '+m[2].split(', ').map(L_w).join(', ')+'.'],
 [/^Your new (.+) is ready! The Multi-tool uses it by itself\.$/,m=>L_w(m[1])+' gotowy! Multi-narzędzie używa go samo.']
+,[/^(Tractor|Seeder|Harvester): (\d+) plots$/,m=>L_w(m[1])+': '+m[2]+' '+p3(m[2],'pole','pola','pól')]
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -1373,33 +1375,33 @@ if(I18N){
 
 /* ================= catalog ================= */
 const CROPS={
-  strawberry:{name:'Strawberries',lvl:2,cost:10,grow:45,sell:35,xp:1,shape:'berry',fruit:'#e8344a',leaf:'#3fa53a'},
-  soybean:{name:'Soybeans',lvl:1,cost:15,grow:90,sell:55,xp:1,shape:'pod',fruit:'#b9d65a',leaf:'#4c9e34'},
-  carrot:{name:'Carrots',lvl:3,cost:20,grow:60,sell:50,xp:1,shape:'carrot',fruit:'#f28a26',leaf:'#4fae3a'},
-  eggplant:{name:'Eggplant',lvl:5,cost:25,grow:150,sell:95,xp:2,shape:'long',fruit:'#6a3c9e',leaf:'#3f9a3c'},
-  wheat:{name:'Wheat',lvl:1,cost:35,grow:200,sell:125,xp:2,shape:'wheat',fruit:'#e8be45',leaf:'#9fb84a'},
-  tomato:{name:'Tomatoes',lvl:4,cost:30,grow:120,sell:90,xp:2,shape:'tomato',fruit:'#e0352b',leaf:'#3f9a3c'},
-  pumpkin:{name:'Pumpkins',lvl:6,cost:30,grow:300,sell:160,xp:3,shape:'pumpkin',fruit:'#f28a26',leaf:'#3f9a3c'},
-  blueberry:{name:'Blueberries',lvl:6,cost:25,grow:75,sell:70,xp:2,shape:'berry',fruit:'#3f5fbf',leaf:'#3c8f3a'},
-  raspberry:{name:'Raspberries',lvl:7,cost:20,grow:30,sell:46,xp:2,shape:'berry',fruit:'#c9285f',leaf:'#3c8f3a'},
-  cotton:{name:'Cotton',lvl:8,cost:40,grow:240,sell:150,xp:3,shape:'cotton',fruit:'#ffffff',leaf:'#4a8a34'},
-  corn:{name:'Corn',lvl:8,cost:50,grow:240,sell:175,xp:3,shape:'corn',fruit:'#f5cd3a',leaf:'#5aa83a'},
-  potato:{name:'Potatoes',lvl:7,cost:45,grow:180,sell:140,xp:3,shape:'potato',fruit:'#c09060',leaf:'#4c9e34'},
-  pepper:{name:'Red Peppers',lvl:9,cost:40,grow:150,sell:130,xp:3,shape:'long',fruit:'#e0352b',leaf:'#3f9a3c'},
-  sunflower:{name:'Sunflowers',lvl:11,cost:60,grow:360,sell:250,xp:4,shape:'sunflower',fruit:'#ffc531',leaf:'#4f9a32'},
-  grapes:{name:'Grapes',lvl:12,cost:70,grow:300,sell:240,xp:4,shape:'grapes',fruit:'#7a3ea0',leaf:'#4c9e34'},
-  rice:{name:'Rice',lvl:13,cost:55,grow:240,sell:200,xp:4,shape:'wheat',fruit:'#ece4a8',leaf:'#6fb84a'},
-  lavender:{name:'Lavender',lvl:13,cost:80,grow:420,sell:320,xp:5,shape:'wheat',fruit:'#9b6fd6',leaf:'#6a9e5a'},
-  daisy:{name:'Daisies',lvl:3,cost:15,grow:75,sell:52,xp:1,shape:'flower',fruit:'#ffffff',center:'#ffc531',leaf:'#4fae3a'},
-  daffodil:{name:'Daffodils',lvl:5,cost:25,grow:110,sell:85,xp:2,shape:'flower',fruit:'#ffd23f',center:'#f28a26',trumpet:true,leaf:'#4f9a32'},
-  glory:{name:'Morning Glories',lvl:9,cost:35,grow:200,sell:150,xp:3,shape:'glory',fruit:'#3f6fe0',leaf:'#3c8f3a'},
-  watermelon:{name:'Watermelons',lvl:14,cost:90,grow:480,sell:380,xp:6,shape:'pumpkin',fruit:'#3f8f3a',leaf:'#3f9a3c'},
-  tulip:{name:'Tulips',lvl:10,cost:40,grow:160,sell:130,xp:3,shape:'flower',fruit:'#ff5f8f',center:'#ffd23f',trumpet:true,leaf:'#4fae3a'},
-  beet:{name:'Beets',lvl:11,cost:45,grow:200,sell:165,xp:3,shape:'carrot',fruit:'#a3123f',leaf:'#4c9e34'},
-  cranberry:{name:'Cranberries',lvl:14,cost:70,grow:260,sell:240,xp:5,shape:'berry',fruit:'#b0102a',leaf:'#3c7f3a'},
-  barley:{name:'Barley',lvl:15,cost:60,grow:300,sell:250,xp:5,shape:'wheat',fruit:'#d8b46a',leaf:'#a8b84a'},
-  squash:{name:'Butternut Squash',lvl:16,cost:85,grow:420,sell:360,xp:6,shape:'pumpkin',fruit:'#f2c06a',leaf:'#3f9a3c'},
-  rose:{name:'Roses',lvl:17,cost:100,grow:480,sell:440,xp:7,shape:'flower',fruit:'#d9203f',center:'#8a1020',leaf:'#3c8f3a'}
+  strawberry:{name:'Strawberries',lvl:2,cost:11,grow:45,sell:43,xp:1,shape:'berry',fruit:'#e8344a',leaf:'#3fa53a'},
+  soybean:{name:'Soybeans',lvl:1,cost:12,grow:90,sell:49,xp:1,shape:'pod',fruit:'#b9d65a',leaf:'#4c9e34'},
+  carrot:{name:'Carrots',lvl:3,cost:14,grow:60,sell:52,xp:1,shape:'carrot',fruit:'#f28a26',leaf:'#4fae3a'},
+  eggplant:{name:'Eggplant',lvl:5,cost:24,grow:150,sell:82,xp:2,shape:'long',fruit:'#6a3c9e',leaf:'#3f9a3c'},
+  wheat:{name:'Wheat',lvl:1,cost:18,grow:200,sell:71,xp:2,shape:'wheat',fruit:'#e8be45',leaf:'#9fb84a'},
+  tomato:{name:'Tomatoes',lvl:4,cost:20,grow:120,sell:71,xp:2,shape:'tomato',fruit:'#e0352b',leaf:'#3f9a3c'},
+  pumpkin:{name:'Pumpkins',lvl:6,cost:34,grow:300,sell:114,xp:3,shape:'pumpkin',fruit:'#f28a26',leaf:'#3f9a3c'},
+  blueberry:{name:'Blueberries',lvl:6,cost:22,grow:75,sell:72,xp:2,shape:'berry',fruit:'#3f5fbf',leaf:'#3c8f3a'},
+  raspberry:{name:'Raspberries',lvl:7,cost:21,grow:30,sell:65,xp:2,shape:'berry',fruit:'#c9285f',leaf:'#3c8f3a'},
+  cotton:{name:'Cotton',lvl:8,cost:36,grow:240,sell:115,xp:3,shape:'cotton',fruit:'#ffffff',leaf:'#4a8a34'},
+  corn:{name:'Corn',lvl:8,cost:36,grow:240,sell:115,xp:3,shape:'corn',fruit:'#f5cd3a',leaf:'#5aa83a'},
+  potato:{name:'Potatoes',lvl:7,cost:30,grow:180,sell:98,xp:3,shape:'potato',fruit:'#c09060',leaf:'#4c9e34'},
+  pepper:{name:'Red Peppers',lvl:9,cost:33,grow:150,sell:103,xp:3,shape:'long',fruit:'#e0352b',leaf:'#3f9a3c'},
+  sunflower:{name:'Sunflowers',lvl:11,cost:48,grow:360,sell:150,xp:4,shape:'sunflower',fruit:'#ffc531',leaf:'#4f9a32'},
+  grapes:{name:'Grapes',lvl:12,cost:47,grow:300,sell:145,xp:4,shape:'grapes',fruit:'#7a3ea0',leaf:'#4c9e34'},
+  rice:{name:'Rice',lvl:13,cost:47,grow:240,sell:141,xp:4,shape:'wheat',fruit:'#ece4a8',leaf:'#6fb84a'},
+  lavender:{name:'Lavender',lvl:13,cost:55,grow:420,sell:169,xp:5,shape:'wheat',fruit:'#9b6fd6',leaf:'#6a9e5a'},
+  daisy:{name:'Daisies',lvl:3,cost:15,grow:75,sell:56,xp:1,shape:'flower',fruit:'#ffffff',center:'#ffc531',leaf:'#4fae3a'},
+  daffodil:{name:'Daffodils',lvl:5,cost:22,grow:110,sell:74,xp:2,shape:'flower',fruit:'#ffd23f',center:'#f28a26',trumpet:true,leaf:'#4f9a32'},
+  glory:{name:'Morning Glories',lvl:9,cost:36,grow:200,sell:113,xp:3,shape:'glory',fruit:'#3f6fe0',leaf:'#3c8f3a'},
+  watermelon:{name:'Watermelons',lvl:14,cost:60,grow:480,sell:184,xp:6,shape:'pumpkin',fruit:'#3f8f3a',leaf:'#3f9a3c'},
+  tulip:{name:'Tulips',lvl:10,cost:36,grow:160,sell:110,xp:3,shape:'flower',fruit:'#ff5f8f',center:'#ffd23f',trumpet:true,leaf:'#4fae3a'},
+  beet:{name:'Beets',lvl:11,cost:40,grow:200,sell:123,xp:3,shape:'carrot',fruit:'#a3123f',leaf:'#4c9e34'},
+  cranberry:{name:'Cranberries',lvl:14,cost:50,grow:260,sell:149,xp:5,shape:'berry',fruit:'#b0102a',leaf:'#3c7f3a'},
+  barley:{name:'Barley',lvl:15,cost:54,grow:300,sell:161,xp:5,shape:'wheat',fruit:'#d8b46a',leaf:'#a8b84a'},
+  squash:{name:'Butternut Squash',lvl:16,cost:61,grow:420,sell:184,xp:6,shape:'pumpkin',fruit:'#f2c06a',leaf:'#3f9a3c'},
+  rose:{name:'Roses',lvl:17,cost:66,grow:480,sell:199,xp:7,shape:'flower',fruit:'#d9203f',center:'#8a1020',leaf:'#3c8f3a'}
 };
 // Each crop has a season it loves: planted in season it gets a head start. In winter, everything but winter crops grows slower.
 const CROP_SEASON={strawberry:'spring',carrot:'spring',daisy:'spring',daffodil:'spring',tulip:'spring',raspberry:'spring',blueberry:'spring',
@@ -1407,38 +1409,38 @@ const CROP_SEASON={strawberry:'spring',carrot:'spring',daisy:'spring',daffodil:'
   pumpkin:'autumn',wheat:'autumn',potato:'autumn',grapes:'autumn',cotton:'autumn',squash:'autumn',cranberry:'autumn',beet:'autumn',
   soybean:'winter',rice:'winter',barley:'winter',rose:'winter'};
 const ANIMALS={
-  chicken:{name:'Chicken',lvl:1,cost:100,every:60,give:15,xp:1,product:'Eggs',buyxp:5},
-  duck:{name:'Duck',lvl:3,cost:180,every:90,give:25,xp:1,product:'Feathers',buyxp:7},
-  sheep:{name:'Sheep',lvl:5,cost:300,every:120,give:40,xp:2,product:'Wool',buyxp:10},
-  cow:{name:'Cow',lvl:7,cost:500,every:150,give:60,xp:3,product:'Milk',buyxp:15},
-  goat:{name:'Goat',lvl:9,cost:450,every:140,give:55,xp:3,product:'Goat milk',buyxp:14},
-  pig:{name:'Pig',lvl:10,cost:700,every:200,give:90,xp:4,product:'Truffles',buyxp:20},
-  horse:{name:'Horse',lvl:12,cost:1200,every:300,give:150,xp:6,product:'Horse hair',buyxp:35},
-  rabbit:{name:'Rabbit',lvl:6,cost:350,every:110,give:45,xp:2,product:'Angora fur',buyxp:12},
-  turkey:{name:'Turkey',lvl:8,cost:420,every:160,give:60,xp:3,product:'Turkey feathers',buyxp:14},
-  llama:{name:'Llama',lvl:14,cost:1500,every:320,give:170,xp:7,product:'Llama wool',buyxp:40}
+  chicken:{name:'Chicken',lvl:1,cost:100,every:60,give:17,feed:1,xp:1,product:'Eggs',buyxp:5},
+  duck:{name:'Duck',lvl:4,cost:260,every:90,give:29,feed:1,xp:1,product:'Feathers',buyxp:9},
+  sheep:{name:'Sheep',lvl:5,cost:380,every:120,give:35,feed:1,xp:2,product:'Wool',buyxp:12},
+  cow:{name:'Cow',lvl:2,cost:300,every:150,give:34,feed:2,xp:3,product:'Milk',buyxp:12},
+  goat:{name:'Goat',lvl:7,cost:520,every:140,give:48,feed:2,xp:3,product:'Goat milk',buyxp:16},
+  pig:{name:'Pig',lvl:3,cost:420,every:200,give:41,feed:2,xp:4,product:'Raw Bacon',buyxp:16},
+  horse:{name:'Horse',lvl:11,cost:1300,every:300,give:78,feed:3,xp:6,product:'Horse hair',buyxp:35},
+  rabbit:{name:'Rabbit',lvl:6,cost:420,every:110,give:37,feed:1,xp:2,product:'Angora fur',buyxp:13},
+  turkey:{name:'Turkey',lvl:8,cost:560,every:160,give:53,feed:2,xp:3,product:'Turkey feathers',buyxp:17},
+  llama:{name:'Llama',lvl:13,cost:1600,every:320,give:86,feed:3,xp:7,product:'Llama wool',buyxp:40}
 };
 // Every animal breed lives in its own home. You need the home before you can buy that animal; each home holds up to 7 animals.
 const HOMES={
   chicken:{name:'Chicken Coop',cost:100,cap:7,xp:10,wall:'#d9402f',wall2:'#b8322a',roof:'#f4efe2',roof2:'#d8d0bf',style:'stilts'},
-  duck:{name:'Duck House',cost:150,cap:7,xp:12,wall:'#4fa6d8',wall2:'#3a88b8',roof:'#f2a21e',roof2:'#c97a10',style:'pond'},
-  sheep:{name:'Sheep Pen',cost:200,cap:7,xp:15,wall:'#c9a06a',wall2:'#a8804e',roof:'#6a8a4a',roof2:'#4f6a36',style:'pen'},
-  goat:{name:'Goat Shed',cost:300,cap:7,xp:18,wall:'#bdb7ab',wall2:'#9a948a',roof:'#8a5a32',roof2:'#6b4122',style:'stone'},
-  cow:{name:'Dairy Barn',cost:450,cap:7,xp:25,wall:'#f6f2e8',wall2:'#ddd6c6',roof:'#3a3434',roof2:'#252020',style:'barn'},
-  pig:{name:'Pig Sty',cost:500,cap:7,xp:25,wall:'#e0a0aa',wall2:'#c88090',roof:'#8a5a32',roof2:'#6b4122',style:'mud'},
+  duck:{name:'Duck House',cost:200,cap:7,xp:12,wall:'#4fa6d8',wall2:'#3a88b8',roof:'#f2a21e',roof2:'#c97a10',style:'pond'},
+  sheep:{name:'Sheep Pen',cost:320,cap:7,xp:15,wall:'#c9a06a',wall2:'#a8804e',roof:'#6a8a4a',roof2:'#4f6a36',style:'pen'},
+  goat:{name:'Goat Shed',cost:380,cap:7,xp:18,wall:'#bdb7ab',wall2:'#9a948a',roof:'#8a5a32',roof2:'#6b4122',style:'stone'},
+  cow:{name:'Dairy Barn',cost:250,cap:7,xp:25,wall:'#f6f2e8',wall2:'#ddd6c6',roof:'#3a3434',roof2:'#252020',style:'barn'},
+  pig:{name:'Pig Sty',cost:300,cap:7,xp:25,wall:'#e0a0aa',wall2:'#c88090',roof:'#8a5a32',roof2:'#6b4122',style:'mud'},
   horse:{name:'Horse Stable',cost:900,cap:7,xp:40,wall:'#8a5530',wall2:'#6e4424',roof:'#3f6fc0',roof2:'#2d55a0',style:'stable'},
-  rabbit:{name:'Rabbit Hutch',cost:250,cap:7,xp:15,wall:'#f0d9a8',wall2:'#d8bf88',roof:'#3f9a3c',roof2:'#2f7a2c',style:'hutch'},
-  turkey:{name:'Turkey Roost',cost:300,cap:7,xp:18,wall:'#a8642a',wall2:'#8a4e1e',roof:'#e0a040',roof2:'#b8802a',style:'stilts'},
+  rabbit:{name:'Rabbit Hutch',cost:300,cap:7,xp:15,wall:'#f0d9a8',wall2:'#d8bf88',roof:'#3f9a3c',roof2:'#2f7a2c',style:'hutch'},
+  turkey:{name:'Turkey Roost',cost:400,cap:7,xp:18,wall:'#a8642a',wall2:'#8a4e1e',roof:'#e0a040',roof2:'#b8802a',style:'stilts'},
   llama:{name:'Llama Lodge',cost:1000,cap:7,xp:45,wall:'#f2e6cf',wall2:'#d8c8a8',roof:'#e0457b',roof2:'#b8305e',style:'lodge'}
 };
 for(const id in HOMES)HOMES[id].lvl=ANIMALS[id].lvl;
 const TREES={
-  apple:{name:'Apple Tree',lvl:1,cost:120,every:120,give:35,xp:1,fruit:'#e0352b',product:'Apples',buyxp:5,tone:'#3f9a3c'},
-  cherry:{name:'Cherry Tree',lvl:4,cost:200,every:180,give:60,xp:2,fruit:'#a3122f',product:'Cherries',buyxp:8,tone:'#3b9440'},
-  peach:{name:'Peach Tree',lvl:6,cost:260,every:200,give:75,xp:2,fruit:'#ffa36b',product:'Peaches',buyxp:10,tone:'#4aa042'},
-  orange:{name:'Orange Tree',lvl:8,cost:300,every:240,give:90,xp:3,fruit:'#f5901e',product:'Oranges',buyxp:12,tone:'#2f8a3a'},
-  lemon:{name:'Lemon Tree',lvl:10,cost:380,every:260,give:110,xp:3,fruit:'#f7dc3a',product:'Lemons',buyxp:14,tone:'#378c34'},
-  plum:{name:'Plum Tree',lvl:12,cost:450,every:300,give:130,xp:4,fruit:'#6b2e8a',product:'Plums',buyxp:16,tone:'#3f9a3c'}
+  apple:{name:'Apple Tree',lvl:1,cost:120,every:120,give:20,xp:1,fruit:'#e0352b',product:'Apples',buyxp:5,tone:'#3f9a3c'},
+  cherry:{name:'Cherry Tree',lvl:4,cost:200,every:180,give:35,xp:2,fruit:'#a3122f',product:'Cherries',buyxp:8,tone:'#3b9440'},
+  peach:{name:'Peach Tree',lvl:6,cost:260,every:200,give:43,xp:2,fruit:'#ffa36b',product:'Peaches',buyxp:10,tone:'#4aa042'},
+  orange:{name:'Orange Tree',lvl:8,cost:300,every:240,give:52,xp:3,fruit:'#f5901e',product:'Oranges',buyxp:12,tone:'#2f8a3a'},
+  lemon:{name:'Lemon Tree',lvl:10,cost:380,every:260,give:60,xp:3,fruit:'#f7dc3a',product:'Lemons',buyxp:14,tone:'#378c34'},
+  plum:{name:'Plum Tree',lvl:12,cost:450,every:300,give:69,xp:4,fruit:'#6b2e8a',product:'Plums',buyxp:16,tone:'#3f9a3c'}
 };
 const DECOR={
   fence:{name:'White Fence',lvl:1,cost:15,xp:1},
@@ -1500,7 +1502,7 @@ const MAKERS={
   kitchen:{name:'Farm Kitchen',lvl:4,cost:1800,xp:60,desc:'Cooks farm goods into treats that sell for much more.',recipes:[
     {in:{strawberry:4},out:'jam',n:1,time:60},{in:{t_apple:3},out:'juice',n:1,time:60},{in:{wheat:2,a_chicken:1},out:'bread',n:1,time:120},
     {in:{a_cow:3},out:'cheese',n:1,time:150},{in:{a_sheep:3},out:'sweater',n:1,time:180},{in:{pumpkin:1,a_chicken:1,wheat:1},out:'pie',n:1,time:180},
-    {in:{wheat:2,honey:1,a_chicken:1},out:'honeycake',n:1,time:200},{in:{fish:2,potato:2,wheat:1},out:'fishpie',n:1,time:220}]},
+    {in:{a_pig:1,a_chicken:2},out:'baconeggs',n:1,time:90},{in:{wheat:2,honey:1,a_chicken:1},out:'honeycake',n:1,time:200},{in:{fish:2,potato:2,wheat:1},out:'fishpie',n:1,time:220}]},
   beehive:{name:'Beehive',lvl:5,cost:1400,xp:45,desc:'Bees make honey on their own. Flowers help them make more.',recipes:[
     {in:{},out:'honey',n:1,time:240},{in:{daisy:3},out:'honey',n:3,time:240},{in:{lavender:2},out:'honey',n:5,time:300}]},
   fishpond:{name:'Fishing Pond',lvl:6,cost:2200,xp:60,desc:'Cast a line with some bait and catch fresh fish.',recipes:[
@@ -1511,20 +1513,20 @@ const MAKERS={
 // Everything the barn can hold. Crops keep their crop id; animal goods are a_<animal>, fruit is t_<tree>.
 const ITEMS={};
 const SELL=.75,sellOf=v=>Math.max(1,Math.round(v*SELL));
-for(const id in CROPS)ITEMS[id]={name:CROPS[id].name,sell:sellOf(CROPS[id].sell),cat:'crops',lvl:CROPS[id].lvl};
-for(const id in CROPS)ITEMS['g_'+id]={name:'Golden '+CROPS[id].name,sell:sellOf(CROPS[id].sell*8),cat:'crops',lvl:CROPS[id].lvl,gold:true};
-for(const id in ANIMALS)ITEMS['a_'+id]={name:ANIMALS[id].product,sell:sellOf(ANIMALS[id].give),cat:'animal',lvl:ANIMALS[id].lvl};
-for(const id in TREES)ITEMS['t_'+id]={name:TREES[id].product,sell:sellOf(TREES[id].give),cat:'fruit',lvl:TREES[id].lvl};
+for(const id in CROPS)ITEMS[id]={name:CROPS[id].name,sell:CROPS[id].sell,cat:'crops',lvl:CROPS[id].lvl};
+for(const id in CROPS)ITEMS['g_'+id]={name:'Golden '+CROPS[id].name,sell:CROPS[id].sell*6,cat:'crops',lvl:CROPS[id].lvl,gold:true};
+for(const id in ANIMALS)ITEMS['a_'+id]={name:ANIMALS[id].product,sell:ANIMALS[id].give,cat:'animal',lvl:ANIMALS[id].lvl};
+for(const id in TREES)ITEMS['t_'+id]={name:TREES[id].product,sell:TREES[id].give,cat:'fruit',lvl:TREES[id].lvl};
 Object.assign(ITEMS,{
   feed:{name:'Animal Feed',sell:3,cat:'supply',lvl:1},fert:{name:'Fertilizer',sell:6,cat:'supply',lvl:2},diesel:{name:'Diesel',sell:40,cat:'supply',lvl:3},
-  jam:{name:'Strawberry Jam',sell:170,cat:'made',lvl:4},juice:{name:'Apple Juice',sell:130,cat:'made',lvl:4},bread:{name:'Country Bread',sell:320,cat:'made',lvl:4},
-  cheese:{name:'Cheese Wheel',sell:250,cat:'made',lvl:4},sweater:{name:'Wool Sweater',sell:175,cat:'made',lvl:4},pie:{name:'Pumpkin Pie',sell:360,cat:'made',lvl:4},
-  honey:{name:'Honey',sell:60,cat:'animal',lvl:5},fish:{name:'Fresh Fish',sell:70,cat:'animal',lvl:6},
-  honeycake:{name:'Honey Cake',sell:420,cat:'made',lvl:5},fishpie:{name:'Fish Pie',sell:520,cat:'made',lvl:6},
-  applecider:{name:'Apple Cider',sell:210,cat:'made',lvl:8},cherryjuice:{name:'Cherry Juice',sell:300,cat:'made',lvl:8},grapejuice:{name:'Grape Juice',sell:330,cat:'made',lvl:8}
+  jam:{name:'Strawberry Jam',sell:255,cat:'made',lvl:4},juice:{name:'Apple Juice',sell:110,cat:'made',lvl:4},bread:{name:'Country Bread',sell:255,cat:'made',lvl:4},
+  cheese:{name:'Cheese Wheel',sell:190,cat:'made',lvl:4},sweater:{name:'Wool Sweater',sell:200,cat:'made',lvl:4},pie:{name:'Pumpkin Pie',sell:325,cat:'made',lvl:4},
+  baconeggs:{name:'Bacon and Eggs',sell:135,cat:'made',lvl:4},honey:{name:'Honey',sell:60,cat:'animal',lvl:5},fish:{name:'Fresh Fish',sell:70,cat:'animal',lvl:6},
+  honeycake:{name:'Honey Cake',sell:355,cat:'made',lvl:5},fishpie:{name:'Fish Pie',sell:605,cat:'made',lvl:6},
+  applecider:{name:'Apple Cider',sell:160,cat:'made',lvl:8},cherryjuice:{name:'Cherry Juice',sell:240,cat:'made',lvl:8},grapejuice:{name:'Grape Juice',sell:630,cat:'made',lvl:8}
 });
 function recipeLvl(r){let l=1;for(const k in r.in)l=Math.max(l,ITEMS[k].lvl);return l}
-function feedNeed(id){return Math.max(1,Math.ceil(ANIMALS[id].give/50))}
+function feedNeed(id){return ANIMALS[id].feed||1}
 const ADS={
   flyer:{name:'Flyers',cost:120,mins:10,every:75,boost:.1,desc:'Pin flyers around the valley.'},
   paper:{name:'Newspaper Ad',cost:450,mins:20,every:45,boost:.2,desc:'A half page in the Valley Gazette.'},
@@ -2309,7 +2311,7 @@ function drawLlama(px,py,now,seed){
   aEye(hx-1.6,hy-.6,1.05);aEye(hx+1.9,hy-.6,1.05);ell(hx+1,hy+3.8,.9,.4,'#6a5a4a');
 }
 const ANIMAL_DRAW={chicken:drawChicken,duck:drawDuck,sheep:drawSheep,goat:drawGoat,cow:drawCow,pig:drawPig,horse:drawHorse,rabbit:drawRabbit,turkey:drawTurkey,llama:drawLlama};
-const GLYPH={chicken:'egg',duck:'feather',sheep:'wool',goat:'milk',cow:'milk',pig:'truffle',horse:'hair',rabbit:'wool',turkey:'feather',llama:'wool'};
+const GLYPH={chicken:'egg',duck:'feather',sheep:'wool',goat:'milk',cow:'milk',pig:'bacon',horse:'hair',rabbit:'wool',turkey:'feather',llama:'wool'};
 function bubble(px,py,kind,now){
   py+=reduce?0:Math.sin(now/240)*2;
   poly([[px-3,py+8],[px+3,py+8],[px,py+13]],'#fff','#6b3c15',1.5);ell(px,py,11,10,'#fff','#6b3c15',2);
@@ -2320,6 +2322,8 @@ function glyph(px,py,kind){
   else if(kind==='wool')for(const[dx,dy]of[[-3,0],[3,0],[0,-3],[0,3],[0,0]])ell(px+dx,py+dy,3.4,3.2,'#f4f0e6','#c9c2b0',.8);
   else if(kind==='milk'){poly([[px-3,py-4],[px+3,py-4],[px+4,py+6],[px-4,py+6]],'#fff','#7a8a99',1.2);poly([[px-3,py-7],[px+3,py-7],[px+3,py-4],[px-3,py-4]],'#2d8fe3')}
   else if(kind==='truffle'){ell(px,py+1,5,4.2,'#6b4a2a');ell(px-2,py,1.2,1,'#8d6a45')}
+  else if(kind==='bacon'){g.lineCap='round';for(const o of[-2.6,2.6]){g.beginPath();g.moveTo(px-6,py+o);g.quadraticCurveTo(px-3,py+o-2.6,px,py+o);g.quadraticCurveTo(px+3,py+o+2.6,px+6,py+o);
+    g.lineWidth=3.6;g.strokeStyle='#7a2418';g.stroke();g.lineWidth=2.6;g.strokeStyle='#d24a3c';g.stroke();g.lineWidth=.9;g.strokeStyle='#f8dccd';g.stroke()}}
   else if(kind==='feather'){ell(px,py,2.6,7,'#f4f6ff','#9aa6c0',1,.6);g.strokeStyle='#9aa6c0';line([px-4,py+5],[px+3,py-4])}
   else if(kind==='home'){poly([[px-6,py-1],[px,py-6.5],[px+6,py-1]],'#d9402f','#7a1c12',1);poly([[px-4.4,py-1],[px+4.4,py-1],[px+4.4,py+5.5],[px-4.4,py+5.5]],'#f6ecd6','#7a1c12',1);poly([[px-1.4,py+1.6],[px+1.4,py+1.6],[px+1.4,py+5.5],[px-1.4,py+5.5]],'#8a5a32')}
   else if(kind==='hair'){g.strokeStyle='#5e3418';g.lineWidth=1.6;for(let i=-3;i<=3;i+=1.5)line([px+i,py+5],[px+i*1.4,py-5])}
@@ -2725,6 +2729,12 @@ function drawGood(id,x,y,s){
       g.strokeStyle='#a8281c';g.lineWidth=1.2;line([-5,-1],[5,6]);line([5,-1],[-5,6]);
       poly([[-6,-10],[-1,-10],[-1,-6],[-6,-6]],'#7a1c12');g.strokeStyle='#7a1c12';g.lineWidth=1.6;line([-5,-10],[-2,-10]);
       poly([[3,-6],[6,-6],[6.6,-11],[4.6,-11]],'#3a3a3a');
+      break;
+    case'baconeggs':
+      // a breakfast plate: two fried eggs and two strips of bacon
+      ell(0,8,11,3,'rgba(40,30,10,.18)');ell(0,3,11,6,'#f4f6f8','#8a96a0',1.1);ell(0,2.4,8,4.2,'#ffffff');
+      for(const[a,b]of[[-3.5,1.5],[3,3]]){ell(a,b,3.6,2.4,'#fffdf4','#d8d0bc',.6);ell(a+.3,b-.4,1.5,1.2,'#ffc22a','#d08a10',.5)}
+      g.lineCap='round';for(const o of[-1.8,.4]){g.beginPath();g.moveTo(-6,o-2.5);g.quadraticCurveTo(-2,o-5,1,o-2.5);g.quadraticCurveTo(4,o,7,o-2.8);g.lineWidth=2.4;g.strokeStyle='#7a2418';g.stroke();g.lineWidth=1.7;g.strokeStyle='#d24a3c';g.stroke();g.lineWidth=.6;g.strokeStyle='#f8dccd';g.stroke()}
       break;
     case'jam':
       ell(0,9,8,2.4,'rgba(40,30,10,.18)');
@@ -3551,6 +3561,7 @@ function drawLight(){
   g.setTransform(1,0,0,1,0,0);g.drawImage(LIGHT,0,0);
 }
 function drawPending(now){
+  if(areaFlash){const k=(performance.now()-areaFlash.t)/1400;if(k>=1)areaFlash=null;else drawArea(areaFlash.tiles,1-k)}
   if(walkMark&&!VIS){const[px,py]=P(walkMark.x+.5,walkMark.y+.5),k=((performance.now()-walkMark.t)/700)%1;ell(px,py,10+k*8,5+k*4,null,'rgba(255,255,255,'+(.8*(1-k)).toFixed(2)+')',2);ell(px,py,4,2,'rgba(255,255,255,.7)')}
   for(const k in pend){
     const[x,y]=vis(...k.split(',').map(Number)),[px,py]=P(x+.5,y+.5),kind=pend[k][pend[k].length-1],b=reduce?0:Math.sin(now/180+x)*1.5;
@@ -3664,8 +3675,10 @@ function drawHover(){
   if(!hover||!inGrid(hover[0],hover[1]))return;
   let hx=hover[0],hy=hover[1],n=1,col='rgba(255,255,255,.9)';
   if(placing){n=placing.n;col=fits(hx,hy,n)?'rgba(120,255,120,.95)':'rgba(255,80,60,.95)'}
-  else if(VEH[tool]){const n=vsize(tool);poly([P(hx,hy),P(hx+n,hy),P(hx+n,hy+n),P(hx,hy+n)],'rgba(255,255,255,.18)','rgba(255,215,60,.95)',2.5);return}
-  else{const k=target(hx,hy);if(k){[hx,hy]=k.split(',').map(Number);n=size(S.tiles[k])}if(tool==='delete')col='rgba(255,80,60,.95)';if(tool==='move')col='rgba(90,170,255,.95)'}
+  else{
+    if(tool==='multi'){const pl=autoPlan(hx,hy);if(pl){drawArea(pl.tiles,1);return}}
+    if(VEH[tool]){const n=vsize(tool);poly([P(hx,hy),P(hx+n,hy),P(hx+n,hy+n),P(hx,hy+n)],'rgba(255,255,255,.18)','rgba(255,215,60,.95)',2.5);return}
+    const k=target(hx,hy);if(k){[hx,hy]=k.split(',').map(Number);n=size(S.tiles[k])}if(tool==='delete')col='rgba(255,80,60,.95)';if(tool==='move')col='rgba(90,170,255,.95)'}
   const k=reduce?.5:(Math.sin(performance.now()/260)+1)/2;
   poly([P(hx,hy),P(hx+n,hy),P(hx+n,hy+n),P(hx,hy+n)],'rgba(255,255,255,'+(.12+k*.14).toFixed(3)+')',col,2.5+k);
 }
@@ -4153,7 +4166,7 @@ function tripSecs(c){return Math.max(12,Math.min(20,c.time*2))}
 function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
 function truckCap(){return TRUCK_CAP[dv().lv||1]}
 // Dale's first job on a new farm is a small wheat run you can fill right after the first harvest.
-function starterContract(){return{id:'start'+Date.now().toString(36),to:'Valley Grocer',items:[['wheat',3]],coins:150,xp:20,time:5,base:280,starter:true}}
+function starterContract(){return{id:'start'+Date.now().toString(36),to:'Valley Grocer',items:[['wheat',3]],coins:260,xp:20,time:5,base:280,starter:true}}
 function newContract(){
   const d=dv();
   if(!(S.stats.deliver>0)&&!d.jobs.some(c=>c.starter)&&!(d.run&&d.run.job.starter))return starterContract();
@@ -4592,12 +4605,28 @@ function clickVehicle(hx,hy,vv,same){
 }
 // The Multi-tool brings out the tractor, seeder or harvester by itself when you own one and there is fuel.
 const AUTO_VEH={plow:'tractor',plant:'seeder',harvest:'harvester',clear:'harvester'};
-function autoVehicle(kind,hx,hy){
-  const v=AUTO_VEH[kind];if(!v||!S.veh[v]||VIS||S.autoVeh===false)return false;
-  const e0=effective(hx,hy),grass=!!e0.grass,same=(x,y)=>!!effective(x,y).grass===grass;
-  const n=vsize(v),x0=Math.max(0,Math.min(N-n,hx-Math.floor((n-1)/2))),y0=Math.max(0,Math.min(N-n,hy-Math.floor((n-1)/2)));
-  return clickVehicle(x0,y0,v,same)===true;
+// What the Multi-tool would do with a machine at this tile: the machine and the exact plots it would work.
+const VEH_NAME={tractor:'Tractor',seeder:'Seeder',harvester:'Harvester'};
+function autoPlan(hx,hy){
+  if(tool!=='multi'||VIS||placing||!S||S.autoVeh===false||!inGrid(hx,hy))return null;
+  const key=target(hx,hy);if(key&&S.tiles[key].k!=='plot')return null;
+  const kind=planAt(hx,hy),v=AUTO_VEH[kind];if(!v||!S.veh[v])return null;
+  if(fuelNow()<fuelCost(v)&&!have('diesel'))return null;
+  const want={tractor:'plow',seeder:'plant',harvester:'harvest'}[v],grass=!!effective(hx,hy).grass,n=vsize(v);
+  const x0=Math.max(0,Math.min(N-n,hx-Math.floor((n-1)/2))),y0=Math.max(0,Math.min(N-n,hy-Math.floor((n-1)/2))),tiles=[];
+  for(let j=0;j<n;j++)for(let i=0;i<n;i++){const x=x0+i,y=y0+j,k=planAt(x,y);if((k===want||(want==='harvest'&&k==='clear'))&&!!effective(x,y).grass===grass)tiles.push([x,y])}
+  return tiles.length>=2?{v,tiles,n,x0,y0}:null;
 }
+let areaFlash=null;
+function autoVehicle(kind,hx,hy){
+  const pl=autoPlan(hx,hy);if(!pl)return false;const v=pl.v,cost=fuelCost(v),want={tractor:'plow',seeder:'plant',harvester:'harvest'}[v];
+  if(fuelNow()<cost){if(!have('diesel'))return false;takeGood('diesel',1);S.fuel=Math.min(FUEL_MAX,S.fuel+CAN_FUEL);SFX.engine()}
+  if(want==='harvest'){if(!room()){barnFull();return true}S.fuel-=cost;enqueue({kind:'harvest',tiles:pl.tiles,vehicle:v})}
+  else if(queueKind(want,pl.tiles,v))S.fuel-=cost;else return true;
+  areaFlash={tiles:pl.tiles,t:performance.now()};floatText(hx,hy-.8,VEH_NAME[v]+': '+pl.tiles.length+' plots','#fff3b0');hud();
+  return true;
+}
+function drawArea(tiles,a){for(const[x,y]of tiles)poly([P(x+.06,y+.06),P(x+.94,y+.06),P(x+.94,y+.94),P(x+.06,y+.94)],'rgba(255,230,90,'+(.22*a).toFixed(3)+')','rgba(255,215,60,'+(.95*a).toFixed(3)+')',2)}
 function finishJob(j,now){
   let xp=0,spent=0,full=false;const got={};
   for(const[x,y]of j.tiles){
@@ -4889,6 +4918,7 @@ function tipText(hx,hy){
   if(VEH[tool]){const n=vsize(tool)**2;let pc=0;if(tool==='tractor')for(const[x,y]of vehicleArea(hx,hy))if(planAt(x,y)==='plow')pc+=plowCost(x,y);return{tractor:'Plow '+n+' plots ('+pc+' coins)',seeder:'Plant '+n+' plots of '+CROPS[S.seed].name.toLowerCase(),harvester:'Harvest '+n+' plots'}[tool]}
   const key=target(hx,hy),now=Date.now();
   if(pend[key||(hx+','+hy)])return'Farmer is on the way';
+  {const pl=autoPlan(hx,hy);if(pl)return VEH_NAME[pl.v]+': '+pl.tiles.length+' plots'}
   if(!key)return tool==='plow'||(tool==='multi'&&S.tapGrass==='plow')?'New farmland for '+NEW_PLOT+' coins':tool==='multi'?'Walk here':'';
   const o=S.tiles[key];
   if(tool==='delete')return o.k==='bld'?'Buildings stay':'Remove';

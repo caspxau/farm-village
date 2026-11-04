@@ -780,7 +780,9 @@ Sharpest|Más nítido
 Smoothest|Más fluido
 Machines|Máquinas
 Use by themselves|Solas
-By hand|A mano`,
+By hand|A mano
+Raw Bacon|Bacon crudo
+Bacon and Eggs|Huevos con bacon`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1
@@ -969,4 +971,5 @@ p:`0|$1 {p1:moneda|monedas}
 185|Nueva oferta en {t1}
 186|Nuevas ofertas en {t1}.
 187|$1 hizo un cambio contigo: {l2}.
-188|¡Tu {1} está listo! La multiherramienta lo usa sola.`};
+188|¡Tu {1} está listo! La multiherramienta lo usa sola.
+189|{1}: $2 parcelas`};

@@ -780,7 +780,9 @@ Sharpest|Le plus net
 Smoothest|Le plus fluide
 Machines|Machines
 Use by themselves|Toutes seules
-By hand|À la main`,
+By hand|À la main
+Raw Bacon|Bacon cru
+Bacon and Eggs|Œufs au bacon`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -969,4 +971,5 @@ p:`0|$1 {p1:pièce|pièces}
 185|Nouvelle offre dans {t1}
 186|Nouvelles offres dans {t1}.
 187|$1 a échangé avec toi : {l2}.
-188|Ton {1} est prêt ! Le multi-outil l'utilise tout seul.`};
+188|Ton {1} est prêt ! Le multi-outil l'utilise tout seul.
+189|{1} : $2 parcelles`};
