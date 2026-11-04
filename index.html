@@ -824,6 +824,9 @@ body.visiting .modesw{display:none}
 #toolPop .poptools{flex-wrap:nowrap;gap:16px;padding:2px 6px 20px}
 #toolPop{width:max-content;max-width:calc(100vw - 20px)}
 #toolPop .poptools .tool[hidden]{display:none}
+
+.qskip{display:block;margin:8px auto 2px;font:inherit;font-size:12px;font-weight:700;color:#6b3c15;background:none;border:1.5px dashed #c9a46a;border-radius:999px;padding:2px 12px;cursor:pointer}
+.qskip.danger{border-style:solid}
 </style>
 </head>
 <body>
@@ -1104,7 +1107,8 @@ const PL_EXACT={
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
 'Neighbor trades: swap goods for materials':'Wymiana z sąsiadami: towary za materiały','Trades':'Wymiana','Trade with neighbors for materials':'Wymień się z sąsiadami na materiały','Neighbor Trades':'Wymiana z sąsiadami','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.':'Sąsiedzi wymieniają materiały budowlane na towary z farmy. Użyj ich do rozbudowy stodoły i domów zwierząt.','In return for':'W zamian za','Trade':'Wymień','Traded':'Wymienione','You do not have everything for this trade yet.':'Nie masz jeszcze wszystkiego do tej wymiany.','Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.':'Multi-narzędzie: sadzi, zbiera i odbiera, a traktor, siewnik i kombajn włącza samo.','Graphics':'Grafika','Sharpest':'Najostrzej','Smoothest':'Najpłynniej','Machines':'Maszyny','Use by themselves':'Same','By hand':'Ręcznie',
-'Raw Bacon':'Surowy boczek','Bacon and Eggs':'Jajka na boczku'
+'Raw Bacon':'Surowy boczek','Bacon and Eggs':'Jajka na boczku',
+'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.':'Dale wozi towary do miasta za monety i mnóstwo XP. Otwórz tablicę dostaw i wyślij go z pszenicą.','Everything you harvest goes to the barn. Open the Barn and sell something.':'Wszystko, co zbierzesz, trafia do stodoły. Otwórz stodołę i coś sprzedaj.','Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.':'Rozbudowy wymagają desek, gwoździ, cegieł i farby. Znajdujesz je podczas pracy, a sąsiedzi wymieniają je w: Więcej > Wymiana.','Skip quest':'Pomiń zadanie','Sure? Skip it':'Na pewno? Pomiń','Quest skipped. A new one will come along.':'Zadanie pominięte. Wkrótce pojawi się nowe.','Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.':'Stodoła jest pełna, więc nadmiar sprzedano po cenie targowej. Rozbuduj stodołę, by mieścić więcej.','Dairy Days':'Dni nabiału','The Orchard Fair':'Jarmark sadowniczy','Sunday Breakfast':'Niedzielne śniadanie','Across the Valley':'Przez całą dolinę','Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.':'Krowy to serce farmy. Trzymaj kilka, daj im dobry dom i pokaż mi ser na stole.','The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.':'Zbliża się jarmark sadowniczy i chcę, żeby dolina spróbowała najlepszych owoców. Powiększ sad i wyciśnij sok wiśniowy.','Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!':'Nic nie mówi „niedziela” jak wiejskie śniadanie. Wyhoduj parę świń i usmaż mi jajka na boczku!','Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!':'Wieść o twojej farmie się rozeszła. Każde miasto chce od ciebie ładunek. Niech ciężarówka jeździ!','Have 3 cows':'Miej 3 krowy','Bring Hank 3 cheese wheels':'Przynieś Hankowi 3 koła sera','Have 6 fruit trees':'Miej 6 drzew owocowych','Pick fruit 25 times':'Zbierz owoce 25 razy','Bring Otis 3 cherry juices':'Przynieś Otisowi 3 soki wiśniowe','Have 2 pigs':'Miej 2 świnie','Bring Rosa 2 bacon and eggs':'Przynieś Rosie 2 porcje jajek na boczku','Sell 20 goods from the barn':'Sprzedaj 20 towarów ze stodoły','Complete 8 deliveries':'Wykonaj 8 dostaw','Make 10 goods in your buildings':'Zrób 10 towarów w budynkach'
 };
 const RIB_PL=x=>({Yellow:'Żółta',White:'Biała',Red:'Czerwona',Blue:'Niebieska'}[x]||x);
 const L_t=t=>PACK?String(t).replace(/^(\d+)s$/,PACK.time.s).replace(/^(\d+)h (\d+)m$/,PACK.time.hm):String(t).replace(/^(\d+)s$/,'$1 s').replace(/^(\d+)h (\d+)m$/,'$1 godz. $2 min');
@@ -1304,6 +1308,7 @@ const PL_PATS=[
 [/^(.+) traded with you: (.+)\.$/,m=>m[1]+' wymienia się z tobą: '+m[2].split(', ').map(L_w).join(', ')+'.'],
 [/^Your new (.+) is ready! The Multi-tool uses it by itself\.$/,m=>L_w(m[1])+' gotowy! Multi-narzędzie używa go samo.']
 ,[/^(Tractor|Seeder|Harvester): (\d+) plots$/,m=>L_w(m[1])+': '+m[2]+' '+p3(m[2],'pole','pola','pól')]
+,[/^Leaves in (.+)$/,m=>'Odejdzie za '+L_t(m[1])]
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -1558,13 +1563,13 @@ const NEIGHBORS=[
 ];
 for(const n of NEIGHBORS)n.look=Object.assign(defaultLook(),n.look);
 const DAILY=[{coins:50},{coins:100},{coins:150,fuel:20},{coins:250},{coins:300,cash:2}];
-function need(l){return Math.round(24+20*l+2.5*l*l)}
+function need(l){return Math.round(30+25*l+5*l*l)} // XP for the next level: grows steadily so Level 20 takes days of play, not hours
 
 /* ================= state ================= */
 let S,occ={},N=16,VIS=null;
 function fresh(){
   const now=Date.now();
-  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,tutV:2,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
+  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,tutV:3,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
   const put=(x,y,o)=>{s.tiles[x+','+y]=o};
   put(1,2,{k:'bld',id:'house'});put(1,6,{k:'bld',id:'barn'});
   for(let x=6;x<=10;x++)for(let y=5;y<=8;y++){
@@ -1602,7 +1607,9 @@ function norm(s){
   s.barnLvl=Math.min(6,Math.max(1,s.barnLvl|0));
   if(s.level>99){s.level=99;s.xp=0}
   // the Walk / Plow step was added as tutorial step 4: older saves past step 3 move up one
-  if(s.tutV!==2){if(typeof s.tut==='number'&&s.tut>=3)s.tut++;s.tutV=2}
+  if(s.tutV!==2&&s.tutV!==3){if(typeof s.tut==='number'&&s.tut>=3)s.tut++;s.tutV=2}
+  // v3: the Delivery step moved before Sell and a Trades tip was added at the end
+  if(s.tutV===2){if(typeof s.tut==='number'){if(s.tut>=9)s.tut=99;else if(s.tut>=7)s.tut=7}s.tutV=3}
   s.orders=(s.orders||[]).filter(o=>o&&o.items&&o.items.every(([id])=>ITEMS[id])&&NEIGHBORS.some(n=>n.id===o.who));
   for(const k in s.goods)if(!ITEMS[k]||!(s.goods[k]>0))delete s.goods[k];
   return s;
@@ -3884,7 +3891,7 @@ const MATS={
   brick:{name:'Bricks',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><g stroke="#6b2a20" stroke-width="2" fill="#cf5f4f"><rect x="3" y="21" width="16" height="9" rx="1"/><rect x="21" y="21" width="16" height="9" rx="1"/><rect x="12" y="10" width="16" height="9" rx="1"/></g></svg>'},
   paint:{name:'Paint',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 15h22l-2 19H11z" fill="#3f9ad8" stroke="#1f4f7a" stroke-width="2" stroke-linejoin="round"/><ellipse cx="20" cy="15" rx="11" ry="3.5" fill="#8fd0f5" stroke="#1f4f7a" stroke-width="2"/><path d="M9 15q0-10 11-10t11 10" fill="none" stroke="#3a3a3a" stroke-width="2"/><path d="M14 18v7" stroke="#8fd0f5" stroke-width="2.4" stroke-linecap="round"/></svg>'}
 };
-const BARN_CAP=[0,50,100,180,280,400,600];
+const BARN_CAP=[0,60,150,250,400,600,900];
 const BARN_UP=[null,{coins:400,mats:{board:2,nail:2}},{coins:2000,mats:{board:14,nail:14,brick:6}},{coins:4500,mats:{board:20,nail:20,brick:12,paint:6}},
   {coins:9000,mats:{board:28,nail:28,brick:20,paint:12}},{coins:16000,mats:{board:36,nail:36,brick:30,paint:20}}];
 const HOME_MULT=[0,1,1,1],HOME_BONUS=[0,0,.2,.4];
@@ -3900,6 +3907,11 @@ function room(){return Math.max(0,barnCap()-storeTotal())}
 function have(id){return S.goods[id]||0}
 let lastFull=0;
 function barnFull(){const t=performance.now();if(t-lastFull>5000){lastFull=t;SFX.error();toast('Your barn is full! Sell goods or upgrade the barn to store more.')}}
+// Harvests never go to waste: what does not fit in the barn is sold straight away at the market price.
+let overSold=0,overTold=0;
+function stash(id,n){const k=Math.max(0,Math.min(n,room()));if(k>0)S.goods[id]=(S.goods[id]||0)+k;const over=n-k;
+  if(over>0){const c=sellPrice(id)*over;S.coins+=c;stat('earned',c);overSold+=c;const t=performance.now();if(t-overTold>25000){overTold=t;toast('Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.')}}
+  return n}
 function addGood(id,n){n=Math.min(n,room());if(n<=0){barnFull();return 0}S.goods[id]=(S.goods[id]||0)+n;return n}
 function takeGood(id,n){S.goods[id]=(S.goods[id]||0)-n;if(S.goods[id]<=0)delete S.goods[id]}
 function randMat(){const r=Math.random();return r<.38?'board':r<.72?'nail':r<.9?'brick':'paint'}
@@ -3988,7 +4000,7 @@ function showHome(key){
     info.appendChild(el('p',null,'Room for '+H.cap+' '+plural(A.name).toLowerCase()+(HOME_BONUS[lv]?', with a '+HOME_BONUS[lv]*100+'% chance of double '+A.product.toLowerCase():'')+'. Each one eats '+feedNeed(o.id)+' feed per batch. Spots used: '+(ANC[o.id]||0)+' of '+homeCap(o.id)+'.'));
     const row=el('div','wdrow');
     const col=el('button','go',ready.length?'Collect from '+ready.length:'Nothing ready'+(next<Infinity?' ('+fmt(next)+')':''));col.disabled=!ready.length;
-    col.onclick=()=>{if(!room()){barnFull();return}for(const t of ready)enqueue({kind:'collect',tiles:[t]});closeModal();toast(H.name+': collecting from '+ready.length+'.')};row.appendChild(col);
+    col.onclick=()=>{for(const t of ready)enqueue({kind:'collect',tiles:[t]});closeModal();toast(H.name+': collecting from '+ready.length+'.')};row.appendChild(col);
     const need=hun.length*feedNeed(o.id),fd=el('button','go','Feed '+hun.length+' · '+need+' feed');fd.disabled=!hun.length;fd.style.background=hun.length?'linear-gradient(#ffd23f,#f2a21e)':'';fd.style.color='#3a2310';
     fd.onclick=()=>{closeModal();feedAll(o.id)};row.appendChild(fd);info.appendChild(row);
     info.appendChild(el('p','hint','Feed in your barn: '+have('feed')+'. Make more at a Feed Mill.'));
@@ -4087,12 +4099,17 @@ function newOrder(){
   if(!pool.length||!free.length)return null;
   const R=Math.random,pick=a=>a[Math.floor(R()*a.length)],who=pick(free);
   const lines=Math.min(pool.length,1+(S.level>=4&&R()<.5?1:0)+(S.level>=8&&R()<.35?1:0)),items=[],used=new Set();
-  while(items.length<lines){const id=pick(pool);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=60+S.level*25+R()*90;items.push([id,Math.max(1,Math.min(it.cat==='made'?3:20,Math.round(want/it.sell)))])}
+  while(items.length<lines){const id=pick(pool);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=60+S.level*25+R()*90;items.push([id,Math.max(1,Math.min(makeCap(id,20),Math.round(want/it.sell)))])}
   const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0),a=adOn(),mult=1.2+R()*.25+(a?ADS[a].boost:0);
-  return{id:Date.now().toString(36)+R().toString(36).slice(2,6),who:who.id,items,coins:Math.max(5,Math.round(base*mult/5)*5),xp:2+Math.round(base/80),base};
+  return{id:Date.now().toString(36)+R().toString(36).slice(2,6),who:who.id,items,coins:Math.max(5,Math.round(base*mult/5)*5),xp:2+Math.round(base/80),base,made:Date.now()};
 }
+// Orders and contracts you cannot fill do not block the board forever: after a while they leave and a new one comes.
+const POST_LIFE=30*60e3;
+function postLeft(o,now){return Math.max(0,(o.made||now)+POST_LIFE-now)}
+function expirePosts(list,now,keep){const out=[];let gone=0;for(const o of list){if(!o.made)o.made=now;if(keep&&keep(o)||canFill(o)||postLeft(o,now)>0)out.push(o);else gone++}return[out,gone]}
 function tickOrders(){
   if(!S||VIS||!nbOpen())return;const now=Date.now();let added=null;
+  {const[o2,gone]=expirePosts(S.orders,now);if(gone){S.orders=o2;S.orderT=Math.min(S.orderT,now+20000)}}
   if(typeof S.orderT!=='number')S.orderT=now+6000;
   while(S.orders.length<ORDER_MAX&&S.orderT<=now){const o=newOrder();if(!o){S.orderT=now+30000;break}S.orders.push(o);added=o;S.orderT+=orderEvery()*1000}
   if(S.orders.length>=ORDER_MAX&&S.orderT<now)S.orderT=now+orderEvery()*1000;
@@ -4132,6 +4149,7 @@ function showOrders(){
       const want=el('div','want');for(const[id,k]of o.items)want.appendChild(goodReq(id,k));mid.appendChild(want);
       const pay=el('div','pay');pay.innerHTML='<span><span class="coin"></span> <b>'+o.coins.toLocaleString()+'</b></span><span>+'+o.xp+' XP</span>';
       if(o.base)pay.appendChild(el('small',null,'Market pays '+o.base.toLocaleString()));
+      if(!canFill(o))pay.appendChild(el('small',null,'Leaves in '+fmt(postLeft(o,Date.now())/1000)));
       mid.appendChild(pay);row.appendChild(mid);
       const acts=el('div','acts'),d=el('button','go','Deliver');d.disabled=!canFill(o);d.onclick=()=>deliver(o);acts.appendChild(d);
       const x=el('button','btn2','Decline');x.onclick=()=>decline(o);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
@@ -4166,27 +4184,35 @@ function tripSecs(c){return Math.max(12,Math.min(20,c.time*2))}
 function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
 function truckCap(){return TRUCK_CAP[dv().lv||1]}
 // Dale's first job on a new farm is a small wheat run you can fill right after the first harvest.
-function starterContract(){return{id:'start'+Date.now().toString(36),to:'Valley Grocer',items:[['wheat',3]],coins:260,xp:20,time:5,base:280,starter:true}}
+function starterContract(){return{id:'start'+Date.now().toString(36),to:'Valley Grocer',items:[['wheat',2]],coins:200,xp:20,time:5,base:280,starter:true}}
 function newContract(){
   const d=dv();
   if(!(S.stats.deliver>0)&&!d.jobs.some(c=>c.starter)&&!(d.run&&d.run.job.starter))return starterContract();
   const pool=orderPool();if(!pool.length)return null;
   const R=Math.random,pick=a=>a[Math.floor(R()*a.length)];
   // early on, Dale mostly asks for what is already in the barn, in small amounts
-  const early=S.level<6,inBarn=pool.filter(id=>have(id)>0);
-  const town=pick(TOWNS),liked=pool.filter(id=>town.likes.includes(ITEMS[id].cat)),src=early&&inBarn.length&&R()<.75?inBarn:liked.length?liked:pool;
+  const early=S.level<6,inBarn=pool.filter(id=>have(id)>0); // Dale mostly asks for goods you already make
+  const town=pick(TOWNS),liked=pool.filter(id=>town.likes.includes(ITEMS[id].cat)),src=inBarn.length&&R()<(early?.75:.6)?inBarn:liked.length?liked:pool;
   const lines=Math.min(src.length,S.level<3?1:1+(R()<.6?1:0)+(S.level>=7&&R()<.4?1:0)),items=[],used=new Set();let count=0;
   const cap=truckCap();
   while(items.length<lines){const id=pick(src);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=80+S.level*35+R()*100;
-    let n=Math.max(1,Math.min(it.cat==='made'?4:Math.floor(cap/lines),Math.round(want/it.sell)));if(early)n=Math.min(n,Math.max(2,have(id)||(S.level<3?3:5)));items.push([id,n]);count+=n}
+    let n=Math.max(1,Math.min(makeCap(id,Math.floor(cap/lines)),Math.round(want/it.sell)));if(early)n=Math.min(n,Math.max(2,have(id)||(S.level<3?3:5)));items.push([id,n]);count+=n}
   const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0);
-  return{id:Date.now().toString(36)+R().toString(36).slice(2,6),to:town.name,items,coins:Math.round(base*(1.15+R()*.15)/5)*5,xp:4+Math.round(base/22),time:5+Math.floor(R()*6),base};
+  return{made:Date.now(),id:Date.now().toString(36)+R().toString(36).slice(2,6),to:town.name,items,coins:Math.round(base*(1.15+R()*.15)/5)*5,xp:4+Math.round(base/22),time:5+Math.floor(R()*6),base};
 }
 function tickDeliv(){
   if(!S||VIS)return;const d=dv(),now=Date.now();
+  {const[j2,gone]=expirePosts(d.jobs,now,c=>c.starter);if(gone){d.jobs=j2;d.next=Math.min(d.next,now+20000)}}
   if(!(S.stats.deliver>0)&&!d.run&&!d.jobs.some(c=>c.starter)&&!d.fixedStart){d.fixedStart=1;d.jobs=d.jobs.filter(c=>canFill(c));d.jobs.unshift(starterContract());hud()}
   if(d.run&&now>=d.run.end)payDelivery();
   if(d.jobs.length<3&&now>=d.next){const c=newContract();if(c){d.jobs.push(c);if(mq[0]&&mq[0].deliv)rerender();hud()}d.next=now+(d.jobs.length<2?60000:200000)}
+}
+// How many of a good a request may ask for: about what the farm can make in a couple of rounds.
+function makeCap(id,dflt){
+  if(id.startsWith('a_')){const a=id.slice(2);return Math.max(2,(ANC[a]||0)*2)}
+  if(id.startsWith('t_')){const t=id.slice(2);return Math.max(2,Object.values(S.tiles).filter(o=>o.k==='tree'&&o.id===t).length*2)}
+  if(ITEMS[id]&&ITEMS[id].cat==='made')return 3;
+  return dflt;
 }
 function contractCount(c){return c.items.reduce((a,[,n])=>a+n,0)}
 function sendDelivery(c){
@@ -4222,7 +4248,7 @@ function showDelivery(){
       const row=el('div','order'),pic=el('img');pic.className='nbface';pic.src=itemIcon(c.items[0][0]);pic.alt='';pic.style.background='#fff4dc';row.appendChild(pic);
       const mid=el('div');mid.appendChild(el('strong',null,c.to));
       const want=el('div','want');for(const[id,n]of c.items)want.appendChild(goodReq(id,n));mid.appendChild(want);
-      const pay=el('div','pay');pay.innerHTML='<span><span class="coin"></span> <b>'+c.coins.toLocaleString()+'</b></span><span>+'+c.xp+' XP</span><span>'+fmt(tripSecs(c))+' trip</span><span>'+contractCount(c)+' / '+truckCap()+' load</span>';mid.appendChild(pay);
+      const pay=el('div','pay');pay.innerHTML='<span><span class="coin"></span> <b>'+c.coins.toLocaleString()+'</b></span><span>+'+c.xp+' XP</span><span>'+fmt(tripSecs(c))+' trip</span>'+(!c.starter&&!canFill(c)?'<span>Leaves in '+fmt(postLeft(c,now)/1000)+'</span>':'')+'<span>'+contractCount(c)+' / '+truckCap()+' load</span>';mid.appendChild(pay);
       row.appendChild(mid);
       const acts=el('div','acts'),go=el('button','go','Send');go.disabled=!!d.run||!canFill(c)||contractCount(c)>truckCap();go.onclick=()=>sendDelivery(c);acts.appendChild(go);
       const x=el('button','btn2','Discard');x.onclick=()=>discardContract(c);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
@@ -4530,7 +4556,6 @@ function clickMulti(hx,hy){
       if(pend[key]){return}
       const def=defOf(o),left=readyIn(o,def,Date.now());
       if(isBaby(o)||left>0){infoCard(key);return}
-      if(!room()){barnFull();return}
       enqueue({kind:'collect',tiles:[[x,y]]});return;
     }
     if(o.k==='deco'){
@@ -4553,7 +4578,6 @@ function clickMulti(hx,hy){
       toast(s.c.name+': ready in '+fmt(s.left)+'.'+(s.st!=='ripe'&&!e.o.fert&&e.o.wet?' Fertilizer from the barn doubles the harvest.':''))}
     return;
   }
-  if(kind==='harvest'&&!room()){barnFull();return}
   if(autoVehicle(kind,hx,hy))return;
   queueKind(kind,[[hx,hy]],null);
 }
@@ -4597,7 +4621,6 @@ function clickVehicle(hx,hy,vv,same){
   if(auto&&area.length<2)return false;
   if(!area.length){toast(v==='tractor'?'Point the tractor at grass or harvested plots.':v==='seeder'?'Point the seeder at plowed plots.':'Point the harvester at ripe crops.');return}
   if(want==='harvest'){
-    if(!room()){barnFull();return}
     S.fuel-=cost;enqueue({kind:'harvest',tiles:area,vehicle:v});hud();return true;
   }
   if(queueKind(want,area,v)){S.fuel-=cost;hud();return true}
@@ -4621,7 +4644,7 @@ let areaFlash=null;
 function autoVehicle(kind,hx,hy){
   const pl=autoPlan(hx,hy);if(!pl)return false;const v=pl.v,cost=fuelCost(v),want={tractor:'plow',seeder:'plant',harvester:'harvest'}[v];
   if(fuelNow()<cost){if(!have('diesel'))return false;takeGood('diesel',1);S.fuel=Math.min(FUEL_MAX,S.fuel+CAN_FUEL);SFX.engine()}
-  if(want==='harvest'){if(!room()){barnFull();return true}S.fuel-=cost;enqueue({kind:'harvest',tiles:pl.tiles,vehicle:v})}
+  if(want==='harvest'){S.fuel-=cost;enqueue({kind:'harvest',tiles:pl.tiles,vehicle:v})}
   else if(queueKind(want,pl.tiles,v))S.fuel-=cost;else return true;
   areaFlash={tiles:pl.tiles,t:performance.now()};floatText(hx,hy-.8,VEH_NAME[v]+': '+pl.tiles.length+' plots','#fff3b0');hud();
   return true;
@@ -4640,7 +4663,7 @@ function finishJob(j,now){
     }else if(j.kind==='harvest'||j.kind==='clear'){
       if(o&&o.k==='plot'&&o.crop){
         const s=cropState(o,now);
-        if(s.st==='ripe'){const id=o.gold?'g_'+o.crop:o.crop,n=addGood(id,o.fert&&!o.gold?2:1);
+        if(s.st==='ripe'){const id=o.gold?'g_'+o.crop:o.crop,n=stash(id,o.fert&&!o.gold?2:1);
           if(n){got[id]=(got[id]||0)+n;harvested(o.crop,x,y);burst(x,y,o.gold?['#ffd23f','#fff7c0','#ffe066']:[s.c.fruit,'#ffe066']);
             if(o.gold){stat('golden');SFX.golden();floatText(x,y-1.7,'Golden '+s.c.name+'!','#ffd23f',350)}
             S.tiles[k]={k:'plot',fallow:true}}else full=true}
@@ -4648,7 +4671,7 @@ function finishJob(j,now){
       }
     }else if(j.kind==='collect'){
       if(o&&(o.k==='animal'||o.k==='tree')){const def=defOf(o);if(readyIn(o,def,now)<=0){
-        const id=(o.k==='animal'?'a_':'t_')+o.id,n=o.k==='animal'&&Math.random()<HOME_BONUS[HLV[o.id]||1]?2:1,added=addGood(id,n);
+        const id=(o.k==='animal'?'a_':'t_')+o.id,n=o.k==='animal'&&Math.random()<HOME_BONUS[HLV[o.id]||1]?2:1,added=stash(id,n);
         if(added){got[id]=(got[id]||0)+added;o.t=now;if(o.k==='animal'){o.fed=false;if(Math.random()<[0,.05,.08,.12][HLV[o.id]||1])babyBorn(o.id,x,y,now)}maybeMat(x,y,.12);xp+=def.xp;stat(o.k==='animal'?'animal':'tree');burst(x,y,['#fff',def.fruit||'#ffe066']);drop(o.k==='animal'?'critters':'picnic',x,y)}else full=true;
       }}
     }else if(j.kind==='water'){
@@ -4662,6 +4685,7 @@ function finishJob(j,now){
     }
   }
   const[cx,cy]=j.tiles[0];let line2=0;
+  if(overSold){floatText(cx,cy-1.1,'+'+overSold+' coins','#ffd23f',250);overSold=0}
   for(const id in got){floatText(cx,cy-line2*.55,'+'+got[id]+' '+ITEMS[id].name,'#fff3b0',line2*160);line2++}
   if(line2){if(j.kind==='collect'){const o=S.tiles[cx+','+cy];if(o&&o.k==='animal'){animalSfx(o.id);setTimeout(SFX.collect,250)}else SFX.pick()}else SFX.harvest()}
   if(full)floatText(cx,cy-line2*.55,'Barn full!','#ff9a8a');
@@ -5011,7 +5035,7 @@ function showSettings(){
     toggle('Sound effects',S.sound,()=>{S.sound=!S.sound});
     slider('Effects volume',S.sfxVol??1,v=>{S.sfxVol=v});
     toggle('Rain, snow and falling leaves',S.fx!==false,()=>{S.fx=S.fx===false});
-    const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','modeSwitch','water','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
+    const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','modeSwitch','water','delivSent','tradesSeen','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
     const nf=el('button','btn2 danger','Start a new farm');nf.onclick=()=>{closeModal();confirmNewFarm()};r2.appendChild(tut);r2.appendChild(nf);p.appendChild(r2);
     if(!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches&&!navigator.standalone){
       const ins=el('button','go','Install app');ins.style.fontSize='18px';
@@ -5218,8 +5242,8 @@ function buyItem(cat,id,d){
       for(const k in S.tiles){
         if(pend[k]||full)continue;
         const o=S.tiles[k],[x,y]=k.split(',').map(Number);
-        if(d.kind==='farmhand'&&o.k==='plot'&&o.crop){const s=cropState(o,now);if(s.st==='ripe'){if(!addGood(o.crop,1)){full=true;continue}got[o.crop]=(got[o.crop]||0)+1;n++;harvested(o.crop,x,y);S.tiles[k]={k:'plot',fallow:true};burst(x,y,[s.c.fruit])}}
-        if((d.kind==='arborist'&&o.k==='tree')||(d.kind==='feed'&&o.k==='animal'&&hasHome(o.id)&&!hungry(o))){const def=defOf(o);if(readyIn(o,def,now)<=0){const id=(o.k==='animal'?'a_':'t_')+o.id;if(!addGood(id,1)){full=true;continue}got[id]=(got[id]||0)+1;o.t=now;if(o.k==='animal')o.fed=false;xp+=def.xp;n++;stat(o.k==='animal'?'animal':'tree');burst(x,y,['#fff',def.fruit||'#ffe066'])}}
+        if(d.kind==='farmhand'&&o.k==='plot'&&o.crop){const s=cropState(o,now);if(s.st==='ripe'){if(!stash(o.crop,1)){full=true;continue}got[o.crop]=(got[o.crop]||0)+1;n++;harvested(o.crop,x,y);S.tiles[k]={k:'plot',fallow:true};burst(x,y,[s.c.fruit])}}
+        if((d.kind==='arborist'&&o.k==='tree')||(d.kind==='feed'&&o.k==='animal'&&hasHome(o.id)&&!hungry(o))){const def=defOf(o);if(readyIn(o,def,now)<=0){const id=(o.k==='animal'?'a_':'t_')+o.id;if(!stash(id,1)){full=true;continue}got[id]=(got[id]||0)+1;o.t=now;if(o.k==='animal')o.fed=false;xp+=def.xp;n++;stat(o.k==='animal'?'animal':'tree');burst(x,y,['#fff',def.fruit||'#ffe066'])}}
       }
       if(!n){S.cash+=d.cash;toast(full?'Your barn is full. Your Farm Cash was refunded.':'Nothing was ready. Your Farm Cash was refunded.')}
       else{toast(d.name+' brought in '+n+' goods'+(full?' until the barn filled up':'')+'. They are in your barn.');SFX.harvest();if(xp)addXP(xp)}
@@ -5248,7 +5272,8 @@ function newTrade(i){
   // the last offer swaps one material for another; the others ask for goods
   if(i===3&&S.level>=3){const give=pick(Object.keys(MATS)),get=pick(Object.keys(MATS).filter(k=>k!==give)),n=1+Math.floor(R()*2);
     return{who,give:[['m:'+give,Math.ceil(n*MAT_VALUE[get]/MAT_VALUE[give]*1.25)]],get:[[get,n]]}}
-  const get=[[pick(mats),1+Math.floor(R()*(S.level<4?2:3))]];if(S.level>=6&&R()<.35){const m2=pick(mats.filter(k=>k!==get[0][0]));get.push([m2,1+Math.floor(R()*2)])}
+  const up=BARN_UP[barnLv()],missing=up?Object.keys(up.mats).filter(k=>(S.mats[k]||0)<up.mats[k]):[];
+  const get=[[missing.length&&R()<.65?pick(missing):pick(mats),1+Math.floor(R()*(S.level<4?2:3))]];if(S.level>=6&&R()<.35){const m2=pick(mats.filter(k=>k!==get[0][0]));get.push([m2,1+Math.floor(R()*2)])}
   const value=get.reduce((a,[k,n])=>a+MAT_VALUE[k]*n,0)*1.5;
   const pool=orderPool().filter(id=>ITEMS[id].cat!=='made'||S.level>=6),inBarn=pool.filter(id=>have(id)>0);
   const id=pick(inBarn.length&&R()<.7?inBarn:pool.length?pool:['wheat']);
@@ -5268,7 +5293,7 @@ function doTrade(o){
 function matChip(k,n,ok){const r=el('span','req'+(ok?' ok':''));r.innerHTML=MATS[k].svg;r.appendChild(el('b',null,(ok?'+':'')+n));r.title=MATS[k].name;r.setAttribute('aria-label',MATS[k].name+': '+n);return r}
 function tradeReady(){if(!S)return false;const t=tradeState();return t.offers.some(canTrade2)}
 function showTrades(){
-  if(VIS)return;
+  if(VIS)return;stat('tradesSeen');
   modal({title:'Neighbor Trades',color:'green',wide:true,live:true,render(b){
     const t=tradeState(),now=Date.now(),w=el('div','orders');
     w.appendChild(el('p','hint','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.'));
@@ -5721,8 +5746,9 @@ const TUT=[
   {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow'].includes(cropState(o,Date.now()).st)},
   {txt:'A chicken laid an egg. Click it to collect.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
   {txt:'Now that chicken is hungry. Click it to give it feed.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
-  {txt:'Everything goes to the barn. Open the Barn and sell something.',done:()=>tst('sell')>=1,btn:'btnBarn'},
-  {txt:'Dale drives goods to town for coins and lots of XP. Open the Delivery Board.',done:()=>tst('delivSeen')>=1,btn:'btnDeliv'}
+  {txt:'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.',done:()=>tst('delivSent')>=1,btn:'btnDeliv'},
+  {txt:'Everything you harvest goes to the barn. Open the Barn and sell something.',done:()=>tst('sell')>=1,btn:'btnBarn'},
+  {txt:'Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.',done:()=>tst('tradesSeen')>=1,btn:'btnMore',btn2:'btnTrade'}
 ];
 function st(k){return S.stats[k]||0}
 function tst(k){return st(k)-(S.stats['tut_'+k]||0)}
@@ -5744,7 +5770,7 @@ function renderTut(){
   if(!tutOn()||!$('title').hidden){b.hidden=true;return}
   if(tool!=='multi')setTool('multi');closePops();if(TUT[S.tut].find&&S.seed!=='wheat')S.seed='wheat';
   const t=TUT[S.tut];b.hidden=false;$('tutStep').textContent='Tip '+(S.tut+1)+' of '+TUT.length;$('tutText').textContent=t.txt;
-  if(t.btn)$(t.btn).classList.add('tutpulse');
+  if(t.btn)$(t.btn).classList.add('tutpulse');if(t.btn2)$(t.btn2).classList.add('tutpulse');
 }
 $('tutSkip').onclick=()=>{S.tut=TUT.length;SFX.click();renderTut();save();toast('Tutorial skipped.');setTimeout(nextQuest,1500)};
 let tutNudge=0;
@@ -5802,18 +5828,28 @@ const QUESTS=[
   {id:'dale2',who:'dale',lvl:9,title:'The Big Contract',intro:'A big buyer in Harbor Town wants regular deliveries. If we pull this off, everyone will know your farm.',
     steps:[{txt:'Complete 5 deliveries',stat:'deliver',n:5},{txt:'Fill 4 neighbor orders',stat:'order',n:4},{txt:'Make 6 goods in your buildings',stat:'make',n:6}],reward:{coins:1200,xp:140,cash:2}},
   {id:'mabel2',who:'mabel',lvl:10,title:'Harvest Festival',intro:'The whole valley is coming to the Harvest Festival, and we need the finest food on the table. Will you bake for us?',
-    steps:[{txt:'Bring Mabel 2 pumpkin pies',have:'pie',n:2},{txt:'Harvest 3 golden crops',stat:'golden',n:3},{txt:'Bring Mabel 3 apple ciders',have:'applecider',n:3}],reward:{coins:2500,xp:250,cash:3,item:'deco:gazebo'}}
+    steps:[{txt:'Bring Mabel 2 pumpkin pies',have:'pie',n:2},{txt:'Harvest 3 golden crops',stat:'golden',n:3},{txt:'Bring Mabel 3 apple ciders',have:'applecider',n:3}],reward:{coins:2500,xp:250,cash:3,item:'deco:gazebo'}},
+  {id:'hank2',who:'hank',lvl:11,title:'Dairy Days',intro:'Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.',
+    steps:[{txt:'Have 3 cows',own:'animal:cow',n:3},{txt:'Collect from animals 20 times',stat:'animal',n:20},{txt:'Bring Hank 3 cheese wheels',have:'cheese',n:3}],reward:{coins:2000,xp:220,cash:2}},
+  {id:'otis2',who:'otis',lvl:14,title:'The Orchard Fair',intro:'The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.',
+    steps:[{txt:'Have 6 fruit trees',own:'tree',n:6},{txt:'Pick fruit 25 times',stat:'tree',n:25},{txt:'Bring Otis 3 cherry juices',have:'cherryjuice',n:3}],reward:{coins:3000,xp:300,cash:3}},
+  {id:'rosa2',who:'rosa',lvl:15,title:'Sunday Breakfast',intro:'Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!',
+    steps:[{txt:'Have 2 pigs',own:'animal:pig',n:2},{txt:'Bring Rosa 2 bacon and eggs',have:'baconeggs',n:2},{txt:'Sell 20 goods from the barn',stat:'sell',n:20}],reward:{coins:4000,xp:350,cash:3}},
+  {id:'dale3',who:'dale',lvl:18,title:'Across the Valley',intro:'Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!',
+    steps:[{txt:'Complete 8 deliveries',stat:'deliver',n:8},{txt:'Fill 6 neighbor orders',stat:'order',n:6},{txt:'Make 10 goods in your buildings',stat:'make',n:10}],reward:{coins:6000,xp:450,cash:5}}
 ];
 const PEOPLE=()=>[...NEIGHBORS,DRIVER];
 function qDef(){return S.q&&QUESTS.find(q=>q.id===S.q.id)}
-function ownCount(what){let n=0;for(const k in S.tiles){const o=S.tiles[k];if(what==='tree'?o.k==='tree':what==='animal'?o.k==='animal':o.k==='mk'&&'mk:'+o.id===what)n++}return n}
+function ownCount(what){let n=0;for(const k in S.tiles){const o=S.tiles[k];if(what.startsWith('animal:')?o.k==='animal'&&o.id===what.slice(7)&&!isBaby(o):what==='tree'?o.k==='tree':what==='animal'?o.k==='animal':o.k==='mk'&&'mk:'+o.id===what)n++}return n}
 function stepProg(st){
+  if(!st)return 0;
   if(st.stat)return Math.min(st.n,(S.stats[st.stat]||0)-(S.q.base||0));
   if(st.own)return Math.min(st.n,ownCount(st.own));
   return Math.min(st.n,have(st.have));
 }
 function startStep(){const st=qDef().steps[S.q.step];S.q.base=st.stat?(S.stats[st.stat]||0):0}
-function nextQuest(){if(VIS||S.q||typeof S.tut==='number'&&S.tut<TUT.length)return;const done=S.qdone||[];const q=QUESTS.find(q=>!done.includes(q.id)&&q.lvl<=S.level);if(q)offerQuest(q)}
+function nextQuest(){if(VIS||S.q||typeof S.tut==='number'&&S.tut<TUT.length)return;const done=S.qdone||[],skip=S.qskip||[];const q=QUESTS.find(q=>!done.includes(q.id)&&!skip.includes(q.id)&&q.lvl<=S.level);if(q)offerQuest(q)}
+function skipQuest(){const q=qDef();if(!q)return;S.qskip=[...(S.qskip||[]),q.id];S.q=null;SFX.click();toast('Quest skipped. A new one will come along.');renderQuest();save();setTimeout(nextQuest,1500)}
 function offerQuest(q){
   const who=PEOPLE().find(p=>p.id===q.who);S.q={id:q.id,step:0,base:0};startStep();save();
   modal({title:'New Quest',color:'gold',small:true,render(b){
@@ -5836,7 +5872,8 @@ function checkQuest(){
 function handOver(){
   const q=qDef(),st=q.steps[S.q.step];if(!st.have||have(st.have)<st.n){SFX.error();toast('You need '+st.n+' '+ITEMS[st.have].name.toLowerCase()+' in the barn.');return}
   takeGood(st.have,st.n);S.q.step++;SFX.coin();toast('Handed over '+st.n+' '+ITEMS[st.have].name.toLowerCase()+'.');
-  if(S.q.step<q.steps.length)startStep();changed();checkQuest();
+  // a hand-over can be the last step: finish the quest before anything redraws the tracker
+  if(S.q.step<q.steps.length)startStep();checkQuest();changed();
 }
 function finishQuest(){
   const q=qDef(),who=PEOPLE().find(p=>p.id===q.who),r=q.reward;
@@ -5855,6 +5892,7 @@ function finishQuest(){
 function renderQuest(){
   const box=$('qtrack');if(!box||!S)return;const q=qDef();
   if(!q||VIS){box.hidden=true;return}
+  if(!q.steps[S.q.step]){box.hidden=true;return}
   const who=PEOPLE().find(p=>p.id===q.who),st=q.steps[S.q.step],pr=stepProg(st),open=S.tips.questOpen!==false&&!(matchMedia('(max-width:640px)').matches&&S.tips.questOpen===undefined);
   const key=q.id+':'+S.q.step,moved=box.dataset.k&&box.dataset.k!==key;box.dataset.k=key;
   box.hidden=false;box.className='qtrack'+(open?'':' closed');box.innerHTML='';
@@ -5867,6 +5905,7 @@ function renderQuest(){
   if(st.have){const h=el('button','claim','Hand over');h.disabled=pr<st.n;h.onclick=handOver;body.appendChild(h)}
   if(q.steps.length>1){const ol=el('ol','qsteplist');q.steps.forEach((x,i)=>ol.appendChild(el('li',i<S.q.step?'done':i===S.q.step?'now':'later',x.txt)));body.appendChild(ol)}
   body.appendChild(rewardChips(q.reward));
+  {const sk=el('button','qskip','Skip quest');sk.onclick=e=>{e.stopPropagation();if(sk.dataset.sure)skipQuest();else{sk.dataset.sure='1';sk.textContent='Sure? Skip it';sk.classList.add('danger')}};body.appendChild(sk)}
   fold.appendChild(body);box.appendChild(fold);
   if(moved)flash(box);
 }

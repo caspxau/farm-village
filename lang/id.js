@@ -782,7 +782,32 @@ Machines|Mesin
 Use by themselves|Otomatis
 By hand|Manual
 Raw Bacon|Bacon mentah
-Bacon and Eggs|Telur dan bacon`,
+Bacon and Eggs|Telur dan bacon
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|Dale membawa barang ke kota untuk koin dan banyak XP. Buka Papan Kiriman dan kirim dia dengan gandummu.
+Everything you harvest goes to the barn. Open the Barn and sell something.|Semua hasil panen masuk ke lumbung. Buka Lumbung dan jual sesuatu.
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|Peningkatan butuh papan, paku, bata, dan cat. Kamu menemukannya saat berkebun, dan tetangga menukarnya di Lainnya > Tukar.
+Skip quest|Lewati misi
+Sure? Skip it|Yakin? Lewati
+Quest skipped. A new one will come along.|Misi dilewati. Misi baru akan datang.
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|Lumbungmu penuh, jadi kelebihannya dijual dengan harga pasar. Tingkatkan lumbung agar muat lebih banyak.
+Dairy Days|Hari Susu
+The Orchard Fair|Pekan Raya Kebun Buah
+Sunday Breakfast|Sarapan Hari Minggu
+Across the Valley|Melintasi Lembah
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|Sapi adalah jantung kebun. Pelihara beberapa, beri kandang yang bagus, dan biar ada keju di meja.
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|Pekan raya kebun buah segera tiba dan aku ingin lembah mencicipi buah terbaik. Perbesar kebun buahmu dan buat jus ceri.
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|Tak ada yang seperti sarapan kebun di hari Minggu. Pelihara beberapa babi dan buatkan aku telur dan bacon!
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|Kebunmu terkenal. Setiap kota ingin muatan darimu. Ayo terus jalankan truknya!
+Have 3 cows|Punya 3 sapi
+Bring Hank 3 cheese wheels|Bawakan Hank 3 keju bulat
+Have 6 fruit trees|Punya 6 pohon buah
+Pick fruit 25 times|Petik buah 25 kali
+Bring Otis 3 cherry juices|Bawakan Otis 3 jus ceri
+Have 2 pigs|Punya 2 babi
+Bring Rosa 2 bacon and eggs|Bawakan Rosa 2 telur dan bacon
+Sell 20 goods from the barn|Jual 20 barang dari lumbung
+Complete 8 deliveries|Selesaikan 8 kiriman
+Make 10 goods in your buildings|Buat 10 barang di bangunanmu`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -972,4 +997,5 @@ p:`0|$1 koin
 186|Tawaran baru dalam {t1}.
 187|$1 bertukar denganmu: {l2}.
 188|{1} barumu siap! Alat serba guna memakainya sendiri.
-189|{1}: $2 petak`};
+189|{1}: $2 petak
+190|Pergi dalam {t1}`};

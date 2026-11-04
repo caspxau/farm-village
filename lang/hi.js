@@ -790,7 +790,32 @@ Machines|मशीनें
 Use by themselves|अपने-आप
 By hand|हाथ से
 Raw Bacon|कच्चा बेकन
-Bacon and Eggs|बेकन और अंडे`,
+Bacon and Eggs|बेकन और अंडे
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|डेल सिक्कों और ढेर सारे XP के बदले सामान शहर ले जाता है। डिलीवरी बोर्ड खोलें और उसे अपने गेहूँ के साथ भेजें।
+Everything you harvest goes to the barn. Open the Barn and sell something.|आपकी हर फ़सल खलिहान में जाती है। खलिहान खोलकर कुछ बेचें।
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|सुधार के लिए तख़्ते, कीलें, ईंटें और पेंट चाहिए। ये खेती करते हुए मिलते हैं, और पड़ोसी और > अदला-बदली में देते हैं।
+Skip quest|मिशन छोड़ें
+Sure? Skip it|पक्का? छोड़ें
+Quest skipped. A new one will come along.|मिशन छोड़ दिया। जल्द नया आएगा।
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|खलिहान भरा है, इसलिए बचा हुआ सामान बाज़ार भाव पर बिक गया। ज़्यादा रखने के लिए खलिहान बढ़ाएँ।
+Dairy Days|डेयरी के दिन
+The Orchard Fair|बाग़ का मेला
+Sunday Breakfast|रविवार का नाश्ता
+Across the Valley|पूरी घाटी में
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|गायें फ़ार्म की जान हैं। कुछ पालो, उन्हें अच्छा घर दो, और मेज़ पर पनीर दिखाओ।
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|बाग़ का मेला आ रहा है और मैं चाहता हूँ कि घाटी सबसे अच्छे फल चखे। अपना बाग़ बढ़ाओ और चेरी का जूस निकालो।
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|रविवार मतलब फ़ार्म का नाश्ता। दो सूअर पालो और मेरे लिए बेकन और अंडे बनाओ!
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|आपके फ़ार्म की चर्चा है। हर शहर आपसे माल चाहता है। ट्रक चलता रहे!
+Have 3 cows|3 गायें रखें
+Bring Hank 3 cheese wheels|हैंक को 3 पनीर के गोले दें
+Have 6 fruit trees|6 फलदार पेड़ रखें
+Pick fruit 25 times|25 बार फल तोड़ें
+Bring Otis 3 cherry juices|ओटिस को 3 चेरी जूस दें
+Have 2 pigs|2 सूअर रखें
+Bring Rosa 2 bacon and eggs|रोज़ा को 2 बेकन और अंडे दें
+Sell 20 goods from the barn|खलिहान से 20 चीज़ें बेचें
+Complete 8 deliveries|8 डिलीवरी पूरी करें
+Make 10 goods in your buildings|अपनी इमारतों में 10 चीज़ें बनाएँ`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -980,4 +1005,5 @@ p:`0|$1 सिक्के
 186|{t1} में नए ऑफ़र।
 187|{1} ने आपसे अदला-बदली की: {l2}।
 188|आपका नया {1} तैयार है! मल्टी-टूल उसे ख़ुद इस्तेमाल करता है।
-189|{1}: $2 खेत`};
+189|{1}: $2 खेत
+190|{t1} में चला जाएगा`};

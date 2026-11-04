@@ -790,7 +790,32 @@ Machines|Машины
 Use by themselves|Сами
 By hand|Вручную
 Raw Bacon|Сырой бекон
-Bacon and Eggs|Яичница с беконом`,
+Bacon and Eggs|Яичница с беконом
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|Дейл возит товары в город за монеты и много опыта. Открой доску доставки и отправь его с пшеницей.
+Everything you harvest goes to the barn. Open the Barn and sell something.|Весь урожай попадает в амбар. Открой амбар и продай что-нибудь.
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|Для улучшений нужны доски, гвозди, кирпичи и краска. Ты находишь их за работой, а соседи меняют их в «Ещё > Обмен».
+Skip quest|Пропустить задание
+Sure? Skip it|Точно? Пропустить
+Quest skipped. A new one will come along.|Задание пропущено. Скоро будет новое.
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|Амбар полон, поэтому лишнее продано по рыночной цене. Улучши амбар, чтобы хранить больше.
+Dairy Days|Молочные дни
+The Orchard Fair|Ярмарка в саду
+Sunday Breakfast|Воскресный завтрак
+Across the Valley|Через всю долину
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|Коровы — сердце фермы. Заведи несколько, дай им хороший дом, и пусть на столе будет сыр.
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|Скоро ярмарка в саду, и я хочу, чтобы долина попробовала лучшие фрукты. Расширь сад и выжми вишнёвый сок.
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|Воскресенье — это фермерский завтрак. Вырасти пару свиней и приготовь мне яичницу с беконом!
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|О твоей ферме все говорят. Каждый город хочет груз от тебя. Пусть грузовик не стоит!
+Have 3 cows|Заведи 3 коров
+Bring Hank 3 cheese wheels|Принеси Хэнку 3 головки сыра
+Have 6 fruit trees|Заведи 6 фруктовых деревьев
+Pick fruit 25 times|Собери фрукты 25 раз
+Bring Otis 3 cherry juices|Принеси Отису 3 вишнёвых сока
+Have 2 pigs|Заведи 2 свиней
+Bring Rosa 2 bacon and eggs|Принеси Розе 2 яичницы с беконом
+Sell 20 goods from the barn|Продай 20 товаров из амбара
+Complete 8 deliveries|Выполни 8 доставок
+Make 10 goods in your buildings|Сделай 10 товаров в постройках`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -980,4 +1005,5 @@ p:`0|$1 {p1:монета|монеты|монет}
 186|Новые предложения через {t1}.
 187|{1} обменялся с тобой: {l2}.
 188|{1}: готово! Мультиинструмент использует его сам.
-189|{1}: $2 {p2:грядка|грядки|грядок}`};
+189|{1}: $2 {p2:грядка|грядки|грядок}
+190|Уйдёт через {t1}`};

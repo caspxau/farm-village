@@ -782,7 +782,32 @@ Machines|Machines
 Use by themselves|Toutes seules
 By hand|À la main
 Raw Bacon|Bacon cru
-Bacon and Eggs|Œufs au bacon`,
+Bacon and Eggs|Œufs au bacon
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|Dale livre tes produits en ville contre des pièces et beaucoup d'XP. Ouvre le tableau des livraisons et envoie-le avec ton blé.
+Everything you harvest goes to the barn. Open the Barn and sell something.|Tout ce que tu récoltes va dans la grange. Ouvre la grange et vends quelque chose.
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|Les améliorations demandent des planches, des clous, des briques et de la peinture. Tu en trouves en travaillant, et les voisins en échangent dans Plus > Échanges.
+Skip quest|Passer la quête
+Sure? Skip it|Sûr ? Passer
+Quest skipped. A new one will come along.|Quête passée. Une nouvelle viendra bientôt.
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|Ta grange est pleine, alors le surplus a été vendu au prix du marché. Améliore la grange pour en garder plus.
+Dairy Days|Jours de laiterie
+The Orchard Fair|La foire du verger
+Sunday Breakfast|Petit-déjeuner du dimanche
+Across the Valley|À travers la vallée
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|Les vaches sont le cœur d'une ferme. Garde-en quelques-unes, offre-leur un bon abri, et qu'on voie du fromage sur la table.
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|La foire du verger approche et je veux que la vallée goûte les meilleurs fruits. Agrandis ton verger et presse du jus de cerise.
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|Rien ne vaut un petit-déjeuner de ferme le dimanche. Élève quelques cochons et prépare-moi des œufs au bacon !
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|Ta ferme fait parler d'elle. Chaque ville veut un chargement. Que le camion roule !
+Have 3 cows|Aie 3 vaches
+Bring Hank 3 cheese wheels|Apporte 3 meules de fromage à Hank
+Have 6 fruit trees|Aie 6 arbres fruitiers
+Pick fruit 25 times|Cueille des fruits 25 fois
+Bring Otis 3 cherry juices|Apporte 3 jus de cerise à Otis
+Have 2 pigs|Aie 2 cochons
+Bring Rosa 2 bacon and eggs|Apporte 2 œufs au bacon à Rosa
+Sell 20 goods from the barn|Vends 20 produits de la grange
+Complete 8 deliveries|Termine 8 livraisons
+Make 10 goods in your buildings|Fabrique 10 produits dans tes bâtiments`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -972,4 +997,5 @@ p:`0|$1 {p1:pièce|pièces}
 186|Nouvelles offres dans {t1}.
 187|$1 a échangé avec toi : {l2}.
 188|Ton {1} est prêt ! Le multi-outil l'utilise tout seul.
-189|{1} : $2 parcelles`};
+189|{1} : $2 parcelles
+190|Part dans {t1}`};

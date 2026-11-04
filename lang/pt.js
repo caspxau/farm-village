@@ -782,7 +782,32 @@ Machines|Máquinas
 Use by themselves|Sozinhas
 By hand|À mão
 Raw Bacon|Bacon cru
-Bacon and Eggs|Ovos com bacon`,
+Bacon and Eggs|Ovos com bacon
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|O Dale leva produtos para a cidade em troca de moedas e muito XP. Abra o quadro de entregas e mande-o com seu trigo.
+Everything you harvest goes to the barn. Open the Barn and sell something.|Tudo o que você colhe vai para o celeiro. Abra o celeiro e venda algo.
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|Melhorias precisam de tábuas, pregos, tijolos e tinta. Você os encontra trabalhando, e os vizinhos trocam em Mais > Trocas.
+Skip quest|Pular missão
+Sure? Skip it|Certeza? Pular
+Quest skipped. A new one will come along.|Missão pulada. Logo vem outra.
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|Seu celeiro está cheio, então o excesso foi vendido a preço de mercado. Melhore o celeiro para guardar mais.
+Dairy Days|Dias de laticínios
+The Orchard Fair|A feira do pomar
+Sunday Breakfast|Café da manhã de domingo
+Across the Valley|Por todo o vale
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|As vacas são o coração de uma fazenda. Tenha algumas, dê a elas uma boa casa e vamos ver queijo na mesa.
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|A feira do pomar está chegando e quero que o vale prove as melhores frutas. Aumente o pomar e faça suco de cereja.
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|Nada diz domingo como um café da fazenda. Crie uns porcos e me prepare ovos com bacon!
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|Sua fazenda ficou famosa. Toda cidade quer uma carga sua. Vamos manter o caminhão rodando!
+Have 3 cows|Tenha 3 vacas
+Bring Hank 3 cheese wheels|Leve 3 queijos inteiros para o Hank
+Have 6 fruit trees|Tenha 6 árvores frutíferas
+Pick fruit 25 times|Colha frutas 25 vezes
+Bring Otis 3 cherry juices|Leve 3 sucos de cereja para o Otis
+Have 2 pigs|Tenha 2 porcos
+Bring Rosa 2 bacon and eggs|Leve 2 ovos com bacon para a Rosa
+Sell 20 goods from the barn|Venda 20 produtos do celeiro
+Complete 8 deliveries|Complete 8 entregas
+Make 10 goods in your buildings|Faça 10 produtos nas suas construções`,
 p:`0|$1 {p1:moeda|moedas}
 1|$1 / $2 XP
 2|faltam $1
@@ -972,4 +997,5 @@ p:`0|$1 {p1:moeda|moedas}
 186|Novas ofertas em {t1}.
 187|$1 trocou com você: {l2}.
 188|Seu {1} está pronto! A multiferramenta usa sozinha.
-189|{1}: $2 lotes`};
+189|{1}: $2 lotes
+190|Sai em {t1}`};

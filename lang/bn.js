@@ -790,7 +790,32 @@ Machines|যন্ত্র
 Use by themselves|নিজে থেকে
 By hand|হাতে
 Raw Bacon|কাঁচা বেকন
-Bacon and Eggs|বেকন আর ডিম`,
+Bacon and Eggs|বেকন আর ডিম
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|ডেল কয়েন আর অনেক XP-এর বদলে জিনিস শহরে নিয়ে যায়। ডেলিভারি বোর্ড খুলে তোমার গম দিয়ে ওকে পাঠাও।
+Everything you harvest goes to the barn. Open the Barn and sell something.|যা ফসল তোলো সব গোলাঘরে যায়। গোলাঘর খুলে কিছু বেচো।
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|উন্নতির জন্য তক্তা, পেরেক, ইট আর রং লাগে। চাষ করতে করতে পাওয়া যায়, আর প্রতিবেশীরা আরও > বিনিময়-এ দেয়।
+Skip quest|মিশন বাদ দাও
+Sure? Skip it|নিশ্চিত? বাদ দাও
+Quest skipped. A new one will come along.|মিশন বাদ দেওয়া হলো। শীঘ্রই নতুন আসবে।
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|গোলাঘর ভরা, তাই বাড়তি জিনিস বাজারদরে বিক্রি হয়েছে। বেশি রাখতে গোলাঘর বাড়াও।
+Dairy Days|দুধের দিন
+The Orchard Fair|বাগানের মেলা
+Sunday Breakfast|রবিবারের নাস্তা
+Across the Valley|উপত্যকা জুড়ে
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|গরুই খামারের প্রাণ। কয়েকটা রাখো, ভালো ঘর দাও, আর টেবিলে পনির আনো।
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|বাগানের মেলা আসছে, আমি চাই উপত্যকা সেরা ফল খাক। বাগান বাড়াও আর চেরির জুস বানাও।
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|রবিবার মানেই খামারের নাস্তা। দুটো শূকর পালো আর আমার জন্য বেকন আর ডিম রাঁধো!
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|তোমার খামারের নাম ছড়িয়েছে। প্রতিটি শহর তোমার মাল চায়। ট্রাক চলতে থাকুক!
+Have 3 cows|৩টি গরু রাখো
+Bring Hank 3 cheese wheels|হ্যাঙ্ককে ৩টি চাকা পনির দাও
+Have 6 fruit trees|৬টি ফলগাছ রাখো
+Pick fruit 25 times|২৫ বার ফল পাড়ো
+Bring Otis 3 cherry juices|ওটিসকে ৩টি চেরির জুস দাও
+Have 2 pigs|২টি শূকর রাখো
+Bring Rosa 2 bacon and eggs|রোজাকে ২টি বেকন আর ডিম দাও
+Sell 20 goods from the barn|গোলাঘর থেকে ২০টি জিনিস বেচো
+Complete 8 deliveries|৮টি ডেলিভারি শেষ করো
+Make 10 goods in your buildings|ভবনে ১০টি জিনিস বানাও`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -980,4 +1005,5 @@ p:`0|$1 কয়েন
 186|{t1} পরে নতুন প্রস্তাব।
 187|{1} তোমার সাথে বিনিময় করেছে: {l2}।
 188|তোমার নতুন {1} তৈরি! মাল্টি-টুল নিজেই সেটা চালায়।
-189|{1}: $2টি জমি`};
+189|{1}: $2টি জমি
+190|{t1} পরে চলে যাবে`};

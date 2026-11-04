@@ -790,7 +790,32 @@ Machines|الآلات
 Use by themselves|تلقائيًا
 By hand|يدويًا
 Raw Bacon|لحم مقدد نيء
-Bacon and Eggs|بيض باللحم المقدد`,
+Bacon and Eggs|بيض باللحم المقدد
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|ينقل ديل البضائع إلى البلدة مقابل عملات وكثير من الخبرة. افتح لوحة التوصيل وأرسله مع قمحك.
+Everything you harvest goes to the barn. Open the Barn and sell something.|كل ما تحصده يذهب إلى الحظيرة. افتح الحظيرة وبع شيئًا.
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|التطويرات تحتاج ألواحًا ومسامير وطوبًا وطلاءً. تجدها أثناء الزراعة، ويقايضها الجيران في المزيد > المقايضة.
+Skip quest|تخطَّ المهمة
+Sure? Skip it|متأكد؟ تخطَّها
+Quest skipped. A new one will come along.|تم تخطي المهمة. ستأتي مهمة جديدة قريبًا.
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|حظيرتك ممتلئة، لذلك بيع الفائض بسعر السوق. طوّر الحظيرة لتخزن المزيد.
+Dairy Days|أيام الألبان
+The Orchard Fair|معرض البستان
+Sunday Breakfast|فطور الأحد
+Across the Valley|عبر الوادي
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|الأبقار قلب المزرعة. ربِّ بعضها وامنحها بيتًا جيدًا، ولنرَ الجبن على المائدة.
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|معرض البستان قادم وأريد أن يتذوق الوادي أفضل الفواكه. وسّع بستانك واعصر عصير الكرز.
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|لا شيء مثل فطور المزرعة يوم الأحد. ربِّ خنزيرين واطهُ لي بيضًا باللحم المقدد!
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|ذاع صيت مزرعتك. كل بلدة تريد حمولة منك. لنُبقِ الشاحنة تسير!
+Have 3 cows|امتلك 3 أبقار
+Bring Hank 3 cheese wheels|أحضر لهانك 3 عجلات جبن
+Have 6 fruit trees|امتلك 6 أشجار فاكهة
+Pick fruit 25 times|اقطف الفاكهة 25 مرة
+Bring Otis 3 cherry juices|أحضر لأوتيس 3 عصائر كرز
+Have 2 pigs|امتلك خنزيرين
+Bring Rosa 2 bacon and eggs|أحضر لروزا طبقين من البيض باللحم المقدد
+Sell 20 goods from the barn|بع 20 بضاعة من الحظيرة
+Complete 8 deliveries|أكمل 8 شحنات
+Make 10 goods in your buildings|اصنع 10 بضائع في مبانيك`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -980,4 +1005,5 @@ p:`0|$1 عملة
 186|عروض جديدة بعد {t1}.
 187|{1} قايضك: {l2}.
 188|{1} الجديد جاهز! الأداة المتعددة تستخدمه وحدها.
-189|{1}: $2 قطعة`};
+189|{1}: $2 قطعة
+190|يغادر بعد {t1}`};

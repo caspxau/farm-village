@@ -782,7 +782,32 @@ Machines|Máquinas
 Use by themselves|Solas
 By hand|A mano
 Raw Bacon|Bacon crudo
-Bacon and Eggs|Huevos con bacon`,
+Bacon and Eggs|Huevos con bacon
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|Dale lleva productos al pueblo a cambio de monedas y mucha XP. Abre el tablón de entregas y envíalo con tu trigo.
+Everything you harvest goes to the barn. Open the Barn and sell something.|Todo lo que cosechas va al granero. Abre el granero y vende algo.
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|Las mejoras necesitan tablas, clavos, ladrillos y pintura. Los encuentras al trabajar, y los vecinos los cambian en Más > Trueques.
+Skip quest|Saltar misión
+Sure? Skip it|¿Seguro? Saltar
+Quest skipped. A new one will come along.|Misión saltada. Pronto llegará otra.
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|Tu granero está lleno, así que lo que sobraba se vendió a precio de mercado. Mejora el granero para guardar más.
+Dairy Days|Días de lechería
+The Orchard Fair|La feria del huerto
+Sunday Breakfast|Desayuno de domingo
+Across the Valley|Por todo el valle
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|Las vacas son el corazón de una granja. Ten unas cuantas, dales un buen hogar y veamos queso en la mesa.
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|Se acerca la feria del huerto y quiero que el valle pruebe la mejor fruta. Amplía tu huerto y prensa zumo de cereza.
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|Nada dice domingo como un desayuno de granja. ¡Cría un par de cerdos y prepárame huevos con bacon!
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|Tu granja se ha hecho famosa. Todos los pueblos quieren un cargamento tuyo. ¡Que no pare el camión!
+Have 3 cows|Ten 3 vacas
+Bring Hank 3 cheese wheels|Lleva a Hank 3 ruedas de queso
+Have 6 fruit trees|Ten 6 árboles frutales
+Pick fruit 25 times|Recoge fruta 25 veces
+Bring Otis 3 cherry juices|Lleva a Otis 3 zumos de cereza
+Have 2 pigs|Ten 2 cerdos
+Bring Rosa 2 bacon and eggs|Lleva a Rosa 2 huevos con bacon
+Sell 20 goods from the barn|Vende 20 productos del granero
+Complete 8 deliveries|Completa 8 entregas
+Make 10 goods in your buildings|Fabrica 10 productos en tus edificios`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1
@@ -972,4 +997,5 @@ p:`0|$1 {p1:moneda|monedas}
 186|Nuevas ofertas en {t1}.
 187|$1 hizo un cambio contigo: {l2}.
 188|¡Tu {1} está listo! La multiherramienta lo usa sola.
-189|{1}: $2 parcelas`};
+189|{1}: $2 parcelas
+190|Se va en {t1}`};

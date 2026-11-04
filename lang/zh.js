@@ -790,7 +790,32 @@ Machines|农机
 Use by themselves|自动使用
 By hand|手动
 Raw Bacon|生培根
-Bacon and Eggs|培根煎蛋`,
+Bacon and Eggs|培根煎蛋
+Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.|戴尔把货送到镇上，换来金币和大量经验。打开送货板，让他带着你的小麦出发吧。
+Everything you harvest goes to the barn. Open the Barn and sell something.|你收获的一切都会进谷仓。打开谷仓卖点东西吧。
+Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.|升级需要木板、钉子、砖块和油漆。种田时会找到，邻居也会在 更多 > 交换 里和你换。
+Skip quest|跳过任务
+Sure? Skip it|确定？跳过
+Quest skipped. A new one will come along.|任务已跳过。很快会有新任务。
+Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.|谷仓满了，多出来的物品已按市场价卖掉。升级谷仓可以存更多。
+Dairy Days|牛奶时光
+The Orchard Fair|果园集市
+Sunday Breakfast|周日早餐
+Across the Valley|走遍山谷
+Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.|奶牛是农场的心脏。养几头，给它们一个好家，让桌上有奶酪吧。
+The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.|果园集市快到了，我想让整个山谷尝到最好的水果。扩大你的果园，再榨些樱桃汁。
+Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!|周日就该吃农场早餐。养两头猪，给我做份培根煎蛋！
+Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!|你的农场出名了。每个镇子都想要你的货。让卡车跑起来吧！
+Have 3 cows|拥有3头奶牛
+Bring Hank 3 cheese wheels|给汉克带3个奶酪轮
+Have 6 fruit trees|拥有6棵果树
+Pick fruit 25 times|摘果子25次
+Bring Otis 3 cherry juices|给奥蒂斯带3杯樱桃汁
+Have 2 pigs|拥有2头猪
+Bring Rosa 2 bacon and eggs|给罗莎带2份培根煎蛋
+Sell 20 goods from the barn|从谷仓卖出20件物品
+Complete 8 deliveries|完成8次送货
+Make 10 goods in your buildings|在建筑里制作10件物品`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -980,4 +1005,5 @@ p:`0|$1金币
 186|{t1}后有新报价。
 187|{1} 和你交换了：{l2}。
 188|你的新{1}准备好了！多用工具会自动使用它。
-189|{1}：$2块地`};
+189|{1}：$2块地
+190|{t1}后离开`};
