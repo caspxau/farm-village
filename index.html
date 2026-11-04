@@ -4112,6 +4112,7 @@ const TOWNS=[
 ];
 const TRUCK_CAP=[0,20,35,60],TRUCK_UP=[null,{coins:1500,mats:{board:10,nail:10}},{coins:5000,mats:{board:20,nail:20,paint:8}}];
 const DRIVE=5000; // ms to drive off screen or back in: an easy, unhurried pace
+const BOARD=1800; // ms for Dale to walk to the cab, climb in and shut the door
 function tripSecs(c){return Math.max(12,Math.min(20,c.time*2))}
 function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
 function truckCap(){return TRUCK_CAP[dv().lv||1]}
@@ -4146,11 +4147,11 @@ function sendDelivery(c){
   if(contractCount(c)>truckCap()){SFX.error();toast('That is more than the truck can carry. Upgrade the truck to load '+TRUCK_CAP[Math.min(3,(d.lv||1)+1)]+'.');return}
   for(const[id,n]of c.items)takeGood(id,n);
   d.jobs=d.jobs.filter(x=>x!==c);const now=Date.now(),trip=tripSecs(c);d.run={job:c,start:now,end:now+trip*1000};d.next=Math.min(d.next,now+90000);
-  SFX.horn();setTimeout(SFX.engine,350);setTimeout(SFX.engine,900);dale.say=['Off to '+c.to+'!','See you soon!','Back before you know it!'][Math.floor(Math.random()*3)];dale.sayT=2.2;stat('delivSent');toast('Dale loaded the truck and is heading to '+c.to+'. Back in '+fmt(tripSecs(c))+'.');
+  setTimeout(()=>nz(.12,{brown:1,type:'lowpass',f:300,vol:.5}),BOARD*.8);setTimeout(SFX.engine,BOARD*.85);setTimeout(SFX.horn,BOARD);setTimeout(SFX.engine,BOARD+500);dale.say=['Off to '+c.to+'!','See you soon!','Back before you know it!'][Math.floor(Math.random()*3)];dale.sayT=2.2;stat('delivSent');toast('Dale loaded the truck and is heading to '+c.to+'. Back in '+fmt(tripSecs(c))+'.');
   closeModal();changed();
 }
 function payDelivery(){
-  const d=dv(),c=d.run.job;d.run=null;S.coins+=c.coins;stat('deliver');stat('earned',c.coins);
+  const d=dv(),c=d.run.job;d.run=null;dale.outT=Date.now();S.coins+=c.coins;stat('deliver');stat('earned',c.coins);
   const[tx,ty]=truckSpot();floatText(tx+1,ty-1,'+'+c.coins.toLocaleString(),'#ffd23f');floatText(tx+1,ty-1.6,'+'+c.xp+' XP','#7cc8ff',250);
   if(Math.random()<.5)addMat(randMat(),1+(Math.random()<.3?1:0));
   SFX.coin();setTimeout(SFX.ribbon,180);toast('Dale is back from '+c.to+' with '+c.coins.toLocaleString()+' coins and '+c.xp+' XP!');
@@ -4188,12 +4189,14 @@ function boardSpot(){return[Math.round(N*.42)+.4,N+2.75]}
 function truckSpot(){const[bx]=boardSpot();return[bx+.7,N+1.45]}
 function truckPhase(now){
   const r=dv().run;if(!r)return'parked';
-  if(now<r.start+DRIVE)return'leaving';if(now>=r.end-DRIVE)return'back';return'away';
+  if(now<r.start+BOARD)return'boarding';
+  if(now<r.start+BOARD+DRIVE)return'leaving';if(now>=r.end-DRIVE)return'back';return'away';
 }
 function truckPos(now){
   const[sx,sy]=truckSpot(),r=dv().run,ease=k=>k*k*(3-2*k);
   if(!r)return[sx,sy,false];
-  if(now<r.start+DRIVE){const k=(now-r.start)/DRIVE;return[sx+ease(k)*(N+12-sx),sy,true]}
+  if(now<r.start+BOARD)return[sx,sy,false];
+  if(now<r.start+BOARD+DRIVE){const k=(now-r.start-BOARD)/DRIVE;return[sx+ease(k)*(N+12-sx),sy,true]}
   if(now>=r.end-DRIVE){const k=Math.min(1,(now-(r.end-DRIVE))/DRIVE);return[-12+ease(k)*(sx+12),sy,k<1]}
   return null;
 }
@@ -4220,7 +4223,7 @@ function moneyBag(cx,cy){
   g.font='bold 7px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#9a6400';g.fillText('$',cx,cy-5.4);
   for(const[a,b]of[[-13,1],[13,0],[9,3]]){ell(cx+a,cy+b,3,1.5,'#ffc72c','#9a6400',.8)}
 }
-function drawTruck(x,y,now,moving,cargo){
+function drawTruck(x,y,now,moving,cargo,inCab,door){
   const z=6,red='#d9402f',redD='#a82c22',jig=moving&&!reduce?Math.sin(now/45)*.6:0;
   const[sx,sy]=P(x+1.1,y+.36);shadow(sx,sy+4,62,16);
   // wheels on the far side peek out, then chassis, bed and cab
@@ -4247,7 +4250,9 @@ function drawTruck(x,y,now,moving,cargo){
   poly([P(x+2.2,y+.12,z+5),P(x+2.2,y+.6,z+5),P(x+2.2,y+.6,z+10),P(x+2.2,y+.12,z+10)],'#c4ccd4','#6e685e',.8);
   for(const t of[.18,.54]){const[a,b]=P(x+2.2,y+t,z+12);ell(a,b,2,1.6,'#fff7c0','#9a6400',.6)}
   // the driver behind the wheel when he is in the cab
-  if(moving){const[hx,hy]=P(x+1.66,y+.36,z+19);g.save();g.translate(hx,hy+2);g.scale(.42,.42);drawHead(DRIVER.look);g.restore()}
+  if(door>0){const k=Math.min(1,door),a=P(x+1.46,y+.7,z+4),b=P(x+1.46+.34*(1-k*.75),y+.7+.34*k,z+4),c=P(x+1.46+.34*(1-k*.75),y+.7+.34*k,z+15),d2=P(x+1.46,y+.7,z+15);
+    poly([a,b,c,d2],'#d9402f','#6b1c14',1.2);poly([P(x+1.48,y+.7,z+9),P(x+1.48+.3*(1-k*.75),y+.7+.3*k,z+9),P(x+1.48+.3*(1-k*.75),y+.7+.3*k,z+14),P(x+1.48,y+.7,z+14)],'#bfe6ff','#6b1c14',.8)}
+  if(moving||inCab){const[hx,hy]=P(x+1.66,y+.36,z+19);g.save();g.translate(hx,hy+2);g.scale(.42,.42);drawHead(DRIVER.look);g.restore()}
   g.restore();
   wheel(x+.42,y+.72);wheel(x+1.72,y+.72);
   // name on the door
@@ -4265,11 +4270,23 @@ function drawDeliveryArea(now){
   if(VIS)return;const[bx,by]=boardSpot();inkLive(bx+.5,by+.3,90,80,20,()=>drawBoard(bx,by));
   const d=dv(),ph=truckPhase(now),tp=truckPos(now),ready=d.jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap())&&!d.run;
   if(ph==='back'&&lastPhase!=='back')setTimeout(SFX.horn,DRIVE-500);lastPhase=ph;
-  if(tp){const cargo=d.run?(ph==='leaving'?d.run.job.items:ph==='back'?'money':null):null;
-    inkLive(tp[0],tp[1],260,140,90,()=>drawTruck(tp[0],tp[1],now,tp[2],cargo));
+  // Dale's spot is beside the driver door; the door itself is where he climbs in and out
+  const[sx0,sy0]=truckSpot(),stand=[sx0+2.55,sy0+1.0],doorAt=[sx0+1.62,sy0+.9];
+  let dalePos=null,daleWalk=false,inCab=false,door=0;
+  if(!d.run){const k=dale.outT?(now-dale.outT)/1300:1;
+    if(k<1){const e=Math.max(0,(k-.25)/.75);dalePos=[doorAt[0]+(stand[0]-doorAt[0])*e,doorAt[1]+(stand[1]-doorAt[1])*e];daleWalk=e>0;door=k<.25?k/.25:Math.max(0,1-(k-.25)/.4)}
+    else dalePos=stand}
+  else if(ph==='boarding'){const k=(now-d.run.start)/BOARD;
+    if(k<.6){const e=k/.6;dalePos=[stand[0]+(doorAt[0]-stand[0])*e,stand[1]+(doorAt[1]-stand[1])*e];daleWalk=true;door=Math.min(1,Math.max(0,(k-.35)/.25))}
+    else{inCab=true;door=k<.8?1:Math.max(0,1-(k-.8)/.2)}}
+  if(tp){const cargo=d.run?(ph==='leaving'||ph==='boarding'?d.run.job.items:ph==='back'?'money':null):null;
+    inkLive(tp[0],tp[1],260,140,90,()=>drawTruck(tp[0],tp[1],now,tp[2],cargo,inCab||(d.run&&ph!=='boarding')||(!d.run&&dale.outT&&now-dale.outT<330),door));
     if(tp[2]&&!reduce&&performance.now()>dustT){dustT=performance.now()+70;const back=ph==='leaving'?-.1:2.3,[ux,uy]=P(tp[0]+back,tp[1]+.4);spray(ux,uy,2,{c:['#d8c4a0','#c4ad84','#e8dcc0'],v:.6,r:2.6,gr:-.02,life:.8,a:Math.PI*(ph==='leaving'?1:0)-.3,spread:1})}
-    if(!d.run){const[dx,dy]=[bx-.35,by-.15],[px,py]=P(dx,dy),wave=ready?Math.sin(now/500)>-.2:Math.sin(now/1600)>.6;
-      inkLive(dx,dy,80,85,20,()=>{g.save();g.translate(px,py);g.scale(-.9,.9);drawAvatar(DRIVER.look,{kind:wave?'wave':null,t:now/1000});g.restore()});
+    if(dalePos){const[dx,dy]=dalePos,[px,py]=P(dx,dy),wave=!daleWalk&&!d.run&&(ready?Math.sin(now/500)>-.2:Math.sin(now/1600)>.6);
+      const toDoor=!!d.run,face=daleWalk?(toDoor?1:-1):-1;
+      inkLive(dx,dy,80,85,20,()=>{g.save();g.translate(px,py);g.scale(.9*face,.9);drawAvatar(DRIVER.look,{kind:daleWalk?'walk':wave?'wave':null,t:now/1000});g.restore()});
+    }
+    if(!d.run&&dalePos){const[px,py]=P(dalePos[0],dalePos[1]);
       g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=g.measureText('Dale').width+10,ty=py-62;poly([[px-w/2,ty-9],[px+w/2,ty-9],[px+w/2,ty+3],[px-w/2,ty+3]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText('Dale',px,ty);
       // now and then Dale calls out; when a contract can be filled he says so
       const dt=1/60;dale.next-=dt;if(dale.sayT>0)dale.sayT-=dt;
