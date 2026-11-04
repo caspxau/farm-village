@@ -14,6 +14,13 @@
 <link rel="icon" type="image/png" href="icons/favicon-64.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<script>
+// Language packs (lang/<code>.js) load before the game so every text is translated from the first frame.
+// English is built in; Polish lives inside the game script.
+(function(){var L=['zh','hi','es','fr','ar','bn','pt','ru','id'],l=null;try{l=localStorage.getItem('farm-village-lang')}catch(e){}
+if(!l){var n=(navigator.language||'en').toLowerCase().split('-')[0];if(L.indexOf(n)>=0)l=n}
+if(l&&L.indexOf(l)>=0)document.write('<script src="lang/'+l+'.js"><\/script>')})();
+</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@500;600;700&display=swap">
 <style>
 /* Layout: full-screen isometric farm canvas. Level/XP/coins/cash float top-left, farm menus top-right, neighbors bottom-left, tools bottom-right; every panel opens in one shared modal. One committed sunny-meadow world. */
@@ -105,6 +112,7 @@ button:focus-visible{outline:3px solid var(--xp);outline-offset:2px}
 .buy{border:0;border-radius:10px;background:var(--leaf);color:#fff;min-height:40px;width:100%;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;box-shadow:0 3px 0 #276b25;padding:0 6px}
 .buy.needhome{background:#f2a21e;box-shadow:0 3px 0 #9a6400}
 .buy .coin{width:18px;height:18px;flex-basis:18px;border-width:1px}
+.buy .bfree{background:#e8f5c8;color:#2f6b1e;border:2px solid #5a9a3a;border-radius:8px;padding:0 6px;font-size:12px;line-height:18px}
 .buy .bill{width:24px;height:17px;flex-basis:24px;font-size:10px;border-width:1px}
 .buy.cashbuy{background:#2f8a3a}
 .buy[disabled]{background:#9c8f7c;box-shadow:none;cursor:default}
@@ -727,6 +735,79 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
   .delta,.toast span,.toast span.out,.modal.closing .sheet,.dock .mbtn svg,.goal.flash,.qtrack.flash,.lvl.up .star{animation:none!important}
   .qfold,.gfold,.gbar b,.hud .xpbar i{transition:none!important}
 }
+
+/* ---------- phones: every window fits inside the visible screen ---------- */
+.sheet{max-height:min(660px,100%)}
+.setrow{flex-wrap:wrap}.setrow .seg{flex-wrap:wrap;justify-content:flex-end}
+.petname{width:100%;font:inherit;font-size:20px;padding:8px 12px;border:3px solid var(--wood-d);border-radius:12px;background:#fff;color:#3a2310;text-align:center}
+.petideas{flex-wrap:wrap;justify-content:center}.petideas .btn2{min-height:34px;padding:2px 10px;font-size:14px}
+.torient{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px;font-weight:700;color:#2f5a1e;position:relative;z-index:2}
+.torient button{font:inherit;font-size:14px;border:3px solid var(--wood-d);border-radius:999px;background:#fff7e6;color:#3a2310;padding:4px 12px;min-height:36px;cursor:pointer}
+.torient button[aria-pressed="true"]{background:linear-gradient(#ffe27a,#f2a21e)}
+.rotate{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;background:radial-gradient(circle,#7fc85a,#3f8a2c);color:#fff}
+.rotate[hidden]{display:none}
+.rotate svg{width:96px;height:96px;animation:turnme 2.2s ease-in-out infinite}
+.rotate h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:30px}.rotate p{margin:0;font-size:17px;font-weight:600}
+.rotate .btn2{margin-top:8px;color:#3a2310}
+@keyframes turnme{0%,20%{transform:rotate(0)}50%,70%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+@media (prefers-reduced-motion:reduce){.rotate svg{animation:none}}
+@media (max-width:640px){
+  .modal{padding:0}
+  .sheet,.sheet.small,.sheet.wide{max-height:92vh;max-height:calc(100dvh - 10px - env(safe-area-inset-top,0px))}
+  .sheet-head{min-height:52px;padding:6px 12px}.sheet-head h2{font-size:24px}
+  .wd2{display:flex;flex-direction:column;overflow-y:auto}
+  .wdside{display:contents}
+  .wdside>.wdstage{order:-2;margin:8px 10px 0;flex:none}
+  .wdside>.seg{order:-1;justify-content:center;padding:6px 8px 4px;flex:none}
+  .wdside>:not(.wdstage):not(.seg){order:1;margin:0 10px 8px;flex:none}
+  .wdside>.wdrow:first-of-type{margin-top:10px}
+  .wdstage canvas{width:auto;height:min(190px,22dvh)}
+  .wdmain{flex:none;height:min(440px,58dvh);border-top:3px solid var(--wood-d)}
+  .wfoot{padding:8px 12px;gap:6px}.wfoot .note{font-size:12px}
+}
+/* phones held sideways: little height, so headers shrink and windows use the full screen */
+@media (max-height:520px) and (orientation:landscape){
+  .modal{place-items:center;padding:6px max(8px,env(safe-area-inset-right,0px)) 6px max(8px,env(safe-area-inset-left,0px))}
+  .sheet,.sheet.small,.sheet.wide{max-height:calc(100dvh - 12px);border-radius:16px;animation:popin .25s ease-out}
+  .sheet.small{width:min(520px,100%)}
+  .sheet-head{min-height:40px;padding:3px 12px}.sheet-head h2{font-size:20px}
+  .sheet-head .close{width:34px;height:34px}
+  .wd2{display:grid;grid-template-columns:1fr 210px;overflow:hidden}
+  .wdside{order:0;border-top:0;border-left:3px solid var(--wood-d);padding:6px}
+  .wdstage canvas{width:auto;height:min(150px,34dvh)}
+  .wdsubs{padding:4px 10px}.wdpanel{padding:6px 10px;gap:8px}
+  .wdpanel h3{margin:0;font-size:15px}.icards{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:6px}
+  .icard{padding:4px 4px 5px;gap:2px}.icard canvas{width:56px!important;height:56px!important}.icard .use{min-height:26px}
+  .sheet .tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.sheet .tab{flex:none}
+  .wfoot{padding:5px 10px;flex-wrap:nowrap}.wfoot .note{display:none}
+  .wfoot .go,.wfoot .btn2{min-height:38px;font-size:15px;padding:4px 14px}
+  .body-pad{padding:8px 14px}.body-pad p{margin:4px 0}.body-pad h3{margin:2px 0}
+  .sheet.small .body-pad>.vface,.sheet.small .body-pad>.star{float:left;width:78px!important;height:78px!important;flex-basis:78px!important;margin:0 12px 4px 0}
+  .sheet.small .body-pad>.vface svg,.sheet.small .body-pad>.vface img{width:100%;height:100%}
+  .body-pad>.go:last-child{position:sticky;bottom:4px;z-index:2;clear:both}
+  .hud{top:max(4px,env(safe-area-inset-top,0px))}
+  .side{top:58px;width:200px;max-height:calc(100dvh - 140px);overflow:auto}
+  .dock{padding:5px 8px 18px;gap:5px}
+  .dock .mbtn{width:42px;height:42px}.dock .mbtn svg,.toolic svg{width:25px;height:25px}
+  .dock .mbtn>em{font-size:9.5px;bottom:-16px}
+  .dock .tool.market{width:54px;height:54px;margin:-16px 2px 0}.dock .tool.market svg{width:32px;height:32px}
+  .pop{bottom:calc(84px + env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 100px);overflow:auto}
+  .toast{top:auto;bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+  .title{gap:4px;padding:6px 16px}
+  .title .tlogo{font-size:clamp(34px,11dvh,56px)}
+  .title .tstage{height:30dvh;width:min(360px,60vw)}
+  .title .tsub{display:none}
+  .title .tplay{font-size:24px;padding:6px 40px;min-height:46px}
+  .torient{margin-top:2px}.torient button{min-height:30px;padding:2px 10px;font-size:13px}
+}
+
+/* language picker and right-to-left text */
+.langsel{font:inherit;font-size:15px;font-weight:700;color:#3a2310;background:#fff7e6;border:3px solid var(--wood-d);border-radius:999px;padding:5px 30px 5px 12px;min-height:40px;max-width:200px;appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,#6b3c15 50%),linear-gradient(135deg,#6b3c15 50%,transparent 50%);background-position:calc(100% - 16px) 52%,calc(100% - 11px) 52%;background-size:5px 5px;background-repeat:no-repeat}
+.tlang{align-items:center}.tlang .globe{width:30px;height:30px;display:inline-block}.tlang .globe svg{width:100%;height:100%}
+.rtl .sheet-body,.rtl .toast,.rtl .tut,.rtl .ocard,.rtl .tip,.rtl .side,.rtl .rotate,.rtl .tsub{direction:rtl}
+
+.tlogo{font-family:'Luckiest Guy','Arial Black',Impact,sans-serif}
 </style>
 </head>
 <body>
@@ -753,9 +834,13 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
 
 <div class="pop" id="toolPop" hidden role="dialog" aria-label="Tools">
   <div class="poptools">
-    <button class="tool" data-tool="multi" aria-pressed="true" aria-label="Multi-tool: plow, plant and harvest">
+    <button class="tool" data-tool="multi" aria-pressed="true" aria-label="Multi-tool: plant, harvest, collect and walk">
         <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M14 34V18a3 3 0 0 1 6 0v-4a3 3 0 0 1 6 0v2a3 3 0 0 1 6 0v8c0 6-4 10-9 10z" fill="#ffd9b0" stroke="#6b3c15" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 22l-3-3a3 3 0 0 0-4 4l7 9" fill="#ffd9b0" stroke="#6b3c15" stroke-width="2.5" stroke-linejoin="round"/></svg>
         <span class="outline-s">Multi</span>
+      </button>
+    <button class="tool" data-tool="plow" aria-pressed="false" aria-label="Hoe: turn grass into new farmland">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 33l9-6 15 0-6 6z" fill="#8b5a2e" stroke="#4e2c12" stroke-width="2" stroke-linejoin="round"/><path d="M27 6L14 26" stroke="#a8642a" stroke-width="4" stroke-linecap="round"/><path d="M27 6L14 26" stroke="#6b3c15" stroke-width="1.2" stroke-linecap="round" opacity=".5"/><path d="M10 22l8 6-3 3-8-5z" fill="#c9ced2" stroke="#3a4650" stroke-width="2" stroke-linejoin="round"/></svg>
+        <span class="outline-s">Hoe</span>
       </button>
     <button class="tool" data-tool="tractor" aria-pressed="false" aria-label="Tractor: plow four plots at once" hidden>
         <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="12" width="12" height="12" rx="2" fill="#d9402f" stroke="#6b3c15" stroke-width="2"/><rect x="16" y="17" width="16" height="9" rx="2" fill="#d9402f" stroke="#6b3c15" stroke-width="2"/><rect x="9" y="14" width="6" height="5" fill="#bfe6ff"/><circle cx="12" cy="28" r="7" fill="#333" stroke="#6b3c15" stroke-width="2"/><circle cx="12" cy="28" r="2.5" fill="#ffc72c"/><circle cx="29" cy="29" r="4.5" fill="#333" stroke="#6b3c15" stroke-width="2"/></svg>
@@ -844,7 +929,14 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
   <p class="tsub" id="tsub">Grow crops, raise animals and build the coziest farm in the valley.</p>
   <button class="go tplay" id="tplay">Play</button>
   <small>Music starts when you press Play</small>
+  <div class="torient" id="torient" role="group" aria-label="Screen"><span>Play in</span></div>
   <div class="tlang" id="tlang" role="group" aria-label="Language"></div>
+</div>
+<div class="rotate" id="rotate" hidden role="dialog" aria-labelledby="rotTitle">
+  <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="20" y="6" width="24" height="44" rx="5" fill="#fff7e6" stroke="#6b3c15" stroke-width="3.5"/><circle cx="32" cy="44" r="2.4" fill="#6b3c15"/><path d="M10 40a24 24 0 0 0 16 18" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/><path d="M22 56l5 3-1-6" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <h2 class="outline" id="rotTitle"></h2>
+  <p id="rotText"></p>
+  <button class="btn2" id="rotKeep">Play this way instead</button>
 </div>
 <div class="modal" id="modal" hidden>
   <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
@@ -856,7 +948,7 @@ body.tutlock .hud,body.tutlock .side{pointer-events:none}
 <script>
 (function(){
 'use strict';
-const W=72,H=36,KEY='clover-hollow-v3',PLOW_COST=15,FUEL_MAX=50,FUEL_EVERY=90,CAN_FUEL=10,HELP_MAX=5,ORDER_MAX=4;
+const W=72,H=36,KEY='clover-hollow-v3',PLOW_COST=15,NEW_PLOT=150,FUEL_MAX=50,FUEL_EVERY=90,CAN_FUEL=10,HELP_MAX=5,ORDER_MAX=4;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MASTERY=[10,25,50];
 
@@ -865,8 +957,11 @@ const MASTERY=[10,25,50];
 // The game is written in English. In another language, every text on screen (and every text drawn on the farm canvas)
 // passes through tr(): exact phrases come from a dictionary, sentences with numbers and names from patterns.
 // Game logic keeps working with the English text underneath.
-const LANG_KEY='farm-village-lang',LANGS=[['en','English'],['pl','Polski']];
-const LANG=(()=>{try{const l=localStorage.getItem(LANG_KEY);if(l&&LANGS.some(x=>x[0]===l))return l}catch(e){}return /^pl\b/i.test(navigator.language||'')?'pl':'en'})();
+// The most spoken languages in the world, plus Polish. Each one except English and Polish is a file in lang/.
+const LANG_KEY='farm-village-lang',LANGS=[['en','English'],['zh','中文'],['hi','हिन्दी'],['es','Español'],['fr','Français'],['ar','العربية'],['bn','বাংলা'],['pt','Português'],['ru','Русский'],['id','Bahasa Indonesia'],['pl','Polski']];
+const LANG=(()=>{let l=null;try{l=localStorage.getItem(LANG_KEY)}catch(e){}if(!l)l=(navigator.language||'en').toLowerCase().split('-')[0];
+  if(!LANGS.some(x=>x[0]===l))return'en';if(l!=='en'&&l!=='pl'&&!window.FV_PACK)return'en';return l})();
+const PACK=LANG!=='en'&&LANG!=='pl'?window.FV_PACK:null;
 function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.reload()}
 // Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
 // Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
@@ -966,9 +1061,25 @@ const PL_EXACT={
 'Farm Village':'Farm Village','Village':'Village','English':'English','Polski':'Polski','X':'X','Dale':'Dale','DALE':'DALE','Hank':'Hank','Mabel':'Mabel','Otis':'Otis','Juniper':'Juniper','Rosa':'Rosa',
 'Harbor Cannery':'Harbor Cannery','Mill Town Café':'Mill Town Café','Riverside Market':'Riverside Market','Valley Grocer':'Valley Grocer','Hollow Bakery':'Hollow Bakery','Bluebell Acres':'Bluebell Acres',"Hank's Homestead":"Hank's Homestead",'Otis Orchards':'Otis Orchards','Juniper Patch':'Juniper Patch','Rancho Rosa':'Rancho Rosa',
 'Plots':'Pola','Plot':'Pole','Plants':'Rośliny','Plows':'Orki','Harvests':'Zbiory','Next up':'Następne','Welcome back':'Witaj ponownie','Mastery':'Mistrzostwo'
+,// ---- added with the Hoe, homes, Auto Waterer, Level 99, screen and pet options
+'Hoe':'Motyka','Hoe: turn grass into new farmland':'Motyka: zamień trawę w nowe pole','Multi-tool: plant, harvest, collect and walk':'Multi-narzędzie: sadzenie, zbiory, odbiór i spacer',
+'Walk here':'Idź tutaj','Multi-tool: plant, harvest and collect. Tap grass to walk.':'Multi-narzędzie: sadzenie, zbiory i odbiór. Dotknij trawy, by tam pójść.',
+'The hoe turns grass into new farmland. Switch to the Multi-tool to plant and harvest.':'Motyka zamienia trawę w nowe pole. Do sadzenia i zbiorów wybierz multi-narzędzie.',
+'Screen':'Ekran','Auto':'Auto','Portrait':'Pionowo','Landscape':'Poziomo','Stay home':'W domu','Free roam':'Swobodnie','Tapping grass':'Dotknięcie trawy','Walk there':'Idź tam','Plow it':'Zaorz',
+'Pet name':'Imię zwierzaka','Rename your pet':'Zmień imię zwierzaka','Rename':'Zmień imię','Save name':'Zapisz imię',
+'Your animals can roam the farm now. Fences keep them in.':'Zwierzęta mogą teraz chodzić po całej farmie. Płoty je zatrzymują.','Your animals are heading home.':'Zwierzęta wracają do domu.',
+'Your farm dog wags happily. Pets find coins and materials.':'Twój pies radośnie macha ogonem. Zwierzaki znajdują monety i materiały.','Your barn cat purrs. Pets find coins and materials.':'Twój kot mruczy. Zwierzaki znajdują monety i materiały.',
+'Name your dog':'Nazwij psa','Name your cat':'Nazwij kota','What should your farm dog be called?':'Jak ma się nazywać twój pies?','What should your barn cat be called?':'Jak ma się nazywać twój kot?',
+'Play in':'Graj','Turn your phone upright':'Obróć telefon pionowo','Turn your phone sideways':'Obróć telefon poziomo','You chose to play in portrait.':'Wybrano grę w pionie.','You chose to play in landscape.':'Wybrano grę w poziomie.','Play this way instead':'Graj jednak tak',
+'Champion Trophy':'Puchar Mistrza','Champion Farmer!':'Mistrz farmy!','Thank you!':'Dziękuję!','Top level!':'Najwyższy poziom!','Max level':'Maks. poziom',
+'You reached Level 99, the top level. Well done, champion!':'Masz poziom 99, najwyższy w grze. Brawo, mistrzu!',
+'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
+'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
+'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.'
+
 };
 const RIB_PL=x=>({Yellow:'Żółta',White:'Biała',Red:'Czerwona',Blue:'Niebieska'}[x]||x);
-const L_t=t=>String(t).replace(/^(\d+)s$/,'$1 s').replace(/^(\d+)h (\d+)m$/,'$1 godz. $2 min');
+const L_t=t=>PACK?String(t).replace(/^(\d+)s$/,PACK.time.s).replace(/^(\d+)h (\d+)m$/,PACK.time.hm):String(t).replace(/^(\d+)s$/,'$1 s').replace(/^(\d+)h (\d+)m$/,'$1 godz. $2 min');
 const NUM='([\\d.,\\s\\u00a0]+)';
 const PL_PATS=[
 // numbers and resources
@@ -1023,7 +1134,7 @@ const PL_PATS=[
 [/^Back home at (.+)\.$/,m=>'Z powrotem w domu: '+m[1]+'.'],
 [/^Welcome back(?:, (.+))?! (.+) is waiting\. Level (\d+)\.$/,m=>'Witaj ponownie'+(m[1]?', '+m[1]:'')+'! '+m[2]+' czeka. Poziom '+m[3]+'.'],
 [/^(?:Way to go, (.+)! )?You reached Level (\d+)!$/,m=>(m[1]?'Brawo, '+m[1]+'! ':'')+'Osiągnięto poziom '+m[2]+'!'],
-[/^([\d.,\s ]+) XP to Level (\d+)\. Deliveries with Dale give the most XP, then quests and neighbor orders\.$/,m=>'Do poziomu '+m[2]+' brakuje '+m[1]+' XP. Najwięcej XP dają dostawy z Dale’em, potem zadania i zamówienia sąsiadów.'],
+[/^([\d.,\s ]+) XP to Level (\d+)(?: of 99)?\. Deliveries with Dale give the most XP, then quests and neighbor orders\.$/,m=>'Do poziomu '+m[2]+' brakuje '+m[1]+' XP. Najwięcej XP dają dostawy z Dale’em, potem zadania i zamówienia sąsiadów.'],
 [/^Looking sharp, (.+)!$/,m=>'Świetnie wyglądasz, '+m[1]+'!'],
 [/^Quest step done! Next: (.+)\.$/,m=>'Krok zadania wykonany! Dalej: '+L_w(m[1])+'.'],
 [/^Follow the tip: (.+)$/,m=>'Postępuj według wskazówki: '+L_w(m[1])],
@@ -1103,7 +1214,7 @@ const PL_PATS=[
 [/^(.+) dug up some (.+)!$/,m=>m[1]+' wykopuje: '+L_w(m[2])+'!'],
 [/^(.+) wags happily\.$/,m=>m[1]+' radośnie macha ogonem.'],
 [/^(.+) purrs\.$/,m=>m[1]+' mruczy.'],
-[/^(?:Swapped pets! )?Meet (.+), your new (farm dog|barn cat)! Rename it in the Wardrobe\.$/,m=>'Poznaj: '+m[1]+', twój nowy '+L_w(m[2])+'! Imię zmienisz w garderobie.'],
+[/^(?:Swapped pets! )?Meet (.+), your new (farm dog|barn cat)! Tap your pet to give it a name\.$/,m=>'Poznaj: '+m[1]+', twój nowy '+L_w(m[2])+'! Dotknij zwierzaka, by nadać mu imię.'],
 [/^This deletes (.+) for good: your coins, level, animals and everything in the barn\. You start a brand-new farm with the tutorial\.$/,m=>'To na zawsze usunie farmę '+m[1]+': monety, poziom, zwierzęta i wszystko w stodole. Zaczniesz nową farmę z samouczkiem.'],
 [/^You have (\d+)\.$/,m=>'Masz: '+m[1]+'.'],
 [/^Feed in your barn: (\d+)\. Make more at a Feed Mill\.$/,m=>'Pasza w stodole: '+m[1]+'. Więcej zrobisz w młynie paszowym.'],
@@ -1118,8 +1229,8 @@ const PL_PATS=[
 [/^Best in (.+)\. Ready in (.+)\.$/,m=>'Najlepsze: '+L_w(m[1]).toLowerCase()+'. Gotowe za '+L_t(m[2])+'.'],
 [/^Sells for (\d+)\. \+(\d+) XP$/,m=>'Cena: '+m[1]+'. +'+m[2]+' XP'],
 [/^In season now! Ready in (.+)\.$/,m=>'Teraz w sezonie! Gotowe za '+L_t(m[1])+'.'],
-[/^Best in (.+)\. Ready in (.+)\. Sells for (\d+)\. \+(\d+) XP$/,m=>'Najlepsze: '+L_w(m[1]).toLowerCase()+'. Gotowe za '+L_t(m[2])+'. Cena: '+m[3]+'. +'+m[4]+' XP'],
-[/^In season now! Ready in (.+)\. Sells for (\d+)\. \+(\d+) XP$/,m=>'Teraz w sezonie! Gotowe za '+L_t(m[1])+'. Cena: '+m[2]+'. +'+m[3]+' XP'],
+[/^Best in (.+)\. Ready in (.+)\. Sells for (\d+)\. \+(\d+) XP(?:\. In your barn: (\d+) \(planted for free\))?$/,m=>'Najlepsze: '+L_w(m[1]).toLowerCase()+'. Gotowe za '+L_t(m[2])+'. Cena: '+m[3]+'. +'+m[4]+' XP'+(m[5]?'. W stodole: '+m[5]+' (sadzisz za darmo)':'')],
+[/^In season now! Ready in (.+)\. Sells for (\d+)\. \+(\d+) XP(?:\. In your barn: (\d+) \(planted for free\))?$/,m=>'Teraz w sezonie! Gotowe za '+L_t(m[1])+'. Cena: '+m[2]+'. +'+m[3]+' XP'+(m[4]?'. W stodole: '+m[4]+' (sadzisz za darmo)':'')],
 [/^\+?\d+ XP$/,m=>m[0]],
 [/^\d+x\d+$/,m=>m[0]],
 [/^Invite (.+) over$/,m=>'Zaproś: '+m[1]],
@@ -1138,11 +1249,54 @@ const PL_PATS=[
 [/^(.+): (\d+) of (\d+)$/,m=>L_w(m[1])+': '+m[2]+' z '+m[3]],
 [/^(.+) trip$/,m=>'Kurs: '+L_t(m[1])],
 [/^(\d+) \/ (\d+) load$/,m=>'Ładunek: '+m[1]+' / '+m[2]],
-[/^Upgrade the truck to carry (\d+) goods$/,m=>'Ulepsz ciężarówkę, by wozić '+m[1]+' towarów']
+[/^Upgrade the truck to carry (\d+) goods$/,m=>'Ulepsz ciężarówkę, by wozić '+m[1]+' towarów'],
+// added with the Hoe, homes, Auto Waterer, Level 99 and pets
+[/^New farmland costs (\d+) coins a plot\. Sell some goods from the barn first\.$/,m=>'Nowe pole kosztuje '+m[1]+' monet. Najpierw sprzedaj coś ze stodoły.'],
+[/^New farmland for (\d+) coins$/,m=>'Nowe pole za '+m[1]+' monet'],
+[/^Hoe: tap grass to make new farmland for (\d+) coins a plot\.$/,m=>'Motyka: dotknij trawy, by zrobić nowe pole za '+m[1]+' monet.'],
+[/^-(\d+) (.+) from the barn$/,m=>'-'+m[1]+' ze stodoły: '+L_w(m[2])],
+[/^Plant (.+) from your barn \((\d+) left\)$/,m=>'Posadź ze stodoły: '+L_w(m[1])+' (zostało '+m[2]+')'],
+[/^(.+) \((\d+) in barn\)$/,m=>L_w(m[1])+' ('+m[2]+' w stodole)'],
+[/^Plow (\d+) plots \((\d+) coins\)$/,m=>'Zaorz '+m[1]+' '+p3(m[1],'pole','pola','pól')+' ('+m[2]+' monet)'],
+[/^Upgrade to level (\d+): (\d+)% chance of double (.+) and more babies$/,m=>'Rozbudowa do poziomu '+m[1]+': '+m[2]+'% szans na podwójne ('+L_w(m[3])+') i więcej młodych'],
+[/^A new (.+) moved into your (.+)\.$/,m=>'Nowe zwierzę ('+L_w(m[1])+') wprowadza się do: '+L_w(m[2])+'.'],
+[/^Say hi to (.+)!$/,m=>'Przywitaj się: '+m[1]+'!'],
+[/^Water: (\d+) \/ (\d+)\. Fills up when it rains or snows and waters growing crops up to (\d+) plots away\.$/,m=>'Woda: '+m[1]+' / '+m[2]+'. Napełnia się, gdy pada deszcz lub śnieg, i podlewa rosnące plony do '+m[3]+' pól dalej.'],
+[/^Auto Waterer: (\d+) \/ (\d+) water$/,m=>'Zraszacz: '+m[1]+' / '+m[2]+' wody'],
+[/^Fill · (\d+) coins$/,m=>'Napełnij · '+m[1]+' monet'],
+[/^You need (\d+) coins to fill it with well water\.$/,m=>'Potrzebujesz '+m[1]+' monet, by napełnić go wodą ze studni.'],
+[/^Waters growing crops up to (\d+) plots away and fills up when it rains\. \+(\d+) XP$/,m=>'Podlewa rosnące plony do '+m[1]+' pól dalej i napełnia się podczas deszczu. +'+m[2]+' XP'],
+[/^(?:(.+), you|You) reached Level 99, the highest level in Farm Village!$/,m=>(m[1]?m[1]+', masz':'Masz')+' poziom 99, najwyższy w Farm Village!'],
+[/^Your special gift: the Champion Trophy, ([\d.,\s]+) coins and (\d+) Farm Cash\. Place the trophy from your Gift Box\.$/,m=>'Twój specjalny prezent: Puchar Mistrza, '+m[1]+' monet i '+m[2]+' farmdolarów. Postaw puchar z pudełka z prezentami.'],
+[/^Upgrade (.+)$/,m=>'Ulepsz: '+L_w(m[1])]
 ];
 
-const I18N=LANG==='pl'?{exact:PL_EXACT,pats:PL_PATS}:null;
-for(const[c,n]of LANGS){const b=document.createElement('button');b.textContent=n;b.lang=c;b.setAttribute('aria-pressed',String(LANG===c));b.onclick=()=>{if(LANG!==c)setLang(c)};document.getElementById('tlang').appendChild(b)}
+// Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
+// sentence patterns above, by their position in PL_PATS (so new patterns only ever go at the end of PL_PATS).
+// In a template: $1 is a capture as is, {1} a translated name, {t1} a time, {l1} a translated list,
+// {r1} a recipe, {c1} favorite crops, {p1:one|other} or {p1:one|few|many} a plural for the number in capture 1,
+// {?1} shows nothing but needs capture 1, and [[...]] is dropped when a capture inside it is missing.
+function packPlural(n,forms){const f=forms.split('|');if(f.length<2)return f[0];n=parseInt(String(n).replace(/[^\d]/g,''),10)||0;
+  const c=new Intl.PluralRules(LANG).select(n);return f.length===2?(c==='one'?f[0]:f[1]):(c==='one'?f[0]:c==='few'?f[1]:f[2])}
+function packTpl(t,m){
+  const val=(k,i,forms)=>{const v=m[i];if(v==null||v==='')return null;
+    if(k==='p')return packPlural(v,forms);if(k==='t')return L_t(v);if(k==='l')return v.split(', ').map(L_w).join(', ');
+    if(k==='r')return v.split(' + ').map(x=>{const y=x.match(/^(.+) ×(\d+)$/);return y?L_w(y[1])+' ×'+y[2]:L_w(x)}).join(' + ');
+    if(k==='c')return v.replace(/([^,(]+) \((\d+)\)/g,(x,a,b)=>L_w(a.trim())+' ('+b+')');return k==='w'?L_w(v):v};
+  let ok=true;const sub=x=>x.replace(/\{([wtlrcp?]?)(\d)(?::([^}]*))?\}|\$(\d)/g,(z,k,i,f,j)=>{const v=k==='?'?(m[+i]?'':null):j?val('',+j):val(k||'w',+i,f);if(v==null){ok=false;return''}return v});
+  t=t.replace(/\[\[([\s\S]*?)\]\]/g,(z,inner)=>{ok=true;const r=sub(inner);return ok?r:''});ok=true;return sub(t);
+}
+function packI18N(P){
+  const exact={};for(const ln of P.x.split('\n')){const i=ln.indexOf('|');if(i>0)exact[ln.slice(0,i).trim()]=ln.slice(i+1).trim()}
+  const pats=[];for(const ln of P.p.split('\n')){const m=ln.match(/^\s*(\d+)\|(.*)$/);if(m&&PL_PATS[+m[1]]){const t=m[2].trim();pats[+m[1]]=[PL_PATS[+m[1]][0],r=>packTpl(t,r)]}}
+  return{exact,pats:pats.filter(Boolean)};
+}
+const I18N=LANG==='pl'?{exact:PL_EXACT,pats:PL_PATS}:PACK?packI18N(PACK):null;
+{const tl=document.getElementById('tlang'),sel=document.createElement('select');sel.className='langsel';sel.setAttribute('aria-label','Language');sel.setAttribute('translate','no');
+  for(const[c,n]of LANGS){const o=document.createElement('option');o.value=c;o.textContent=n;o.lang=c;if(c===LANG)o.selected=true;sel.appendChild(o)}
+  sel.onchange=()=>{if(sel.value!==LANG)setLang(sel.value)};
+  const g=document.createElement('span');g.className='globe';g.setAttribute('aria-hidden','true');g.innerHTML='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="#bfe6ff" stroke="#6b3c15" stroke-width="2"/><path d="M2.5 12h19M12 2.5c3 3 3 16 0 19M12 2.5c-3 3-3 16 0 19" fill="none" stroke="#6b3c15" stroke-width="1.6"/></svg>';
+  tl.appendChild(g);tl.appendChild(sel)}
 // Polish plural: 1 one, 2-4 few (but not 12-14), everything else many
 function p3(n,one,few,many){n=parseInt(String(n).replace(/[^\d]/g,''),10)||0;if(n===1)return one;const d=n%10,dd=n%100;return d>=2&&d<=4&&!(dd>=12&&dd<=14)?few:many}
 const TR_CACHE=new Map(),TR_OUT=new Set();let TR_LOWER=null;
@@ -1152,7 +1306,7 @@ function tr(s){
   const m=s.match(/^(\s*)([\s\S]*?)(\s*)$/),core=m[2];let out=I18N.exact[core];
   if(out===undefined){out=null;for(const[re,fn]of I18N.pats){const r=core.match(re);if(r){try{out=fn(r)}catch(e){out=null}break}}}
   if(out==null){out=core;if(window.__i18nMiss)window.__i18nMiss.add(core)}
-  if(/^[A-Z]/.test(core)&&/^[a-ząćęłńóśźż]/.test(out))out=out[0].toUpperCase()+out.slice(1);
+  if(/^[A-Z]/.test(core)&&/^[a-ząćęłńóśźżáéíóúñçãõâêôàèùëïüœ]/.test(out))out=out[0].toUpperCase()+out.slice(1);
   const res=m[1]+out+m[3];if(TR_CACHE.size>4000)TR_CACHE.clear();TR_CACHE.set(s,res);TR_OUT.add(res);return res;
 }
 // A name inside a sentence: exact match, then a case-insensitive match (keeping lower case), then a full translation.
@@ -1164,9 +1318,13 @@ function L_w(x){
 }
 if(I18N){
   document.documentElement.lang=LANG;
-  // Luckiest Guy has no Polish letters; Lilita One is a close, chunky match that does.
-  const f=document.createElement('link');f.rel='stylesheet';f.href='https://fonts.googleapis.com/css2?family=Lilita+One&display=swap';document.head.appendChild(f);
-  document.documentElement.style.setProperty('--f-display',"'Lilita One','Luckiest Guy','Arial Black',sans-serif");
+  // Luckiest Guy only has plain Latin letters. Polish and the Latin-script packs use Lilita One, a close chunky match;
+  // other scripts bring their own fonts (and Arabic reads right to left).
+  const font=PACK&&PACK.font||{css:'family=Lilita+One',display:"'Lilita One'"};
+  const f=document.createElement('link');f.rel='stylesheet';f.href='https://fonts.googleapis.com/css2?'+font.css+'&display=swap';document.head.appendChild(f);
+  document.documentElement.style.setProperty('--f-display',font.display+",'Luckiest Guy','Arial Black',sans-serif");
+  if(font.body)document.documentElement.style.setProperty('--f-body',font.body+",'Fredoka','Trebuchet MS',system-ui,sans-serif");
+  if(PACK&&PACK.rtl)document.documentElement.classList.add('rtl');
   const TR_ATTRS=['aria-label','title','placeholder','alt'],TR_DONE=new WeakMap();
   const skip=n=>{const p=n.parentElement;return!p||/^(TEXTAREA|SCRIPT|STYLE|INPUT)$/.test(p.tagName)||!!p.closest('[translate="no"]')};
   const trText=n=>{const v=n.nodeValue;if(TR_DONE.get(n)===v||skip(n))return;const o=tr(v);if(o!==v)n.nodeValue=o;TR_DONE.set(n,o)};
@@ -1227,18 +1385,18 @@ const ANIMALS={
   turkey:{name:'Turkey',lvl:8,cost:420,every:160,give:60,xp:3,product:'Turkey feathers',buyxp:14},
   llama:{name:'Llama',lvl:14,cost:1500,every:320,give:170,xp:7,product:'Llama wool',buyxp:40}
 };
-// Every animal breed lives in its own home. You need the home before you can buy that animal; each home holds `cap` animals.
+// Every animal breed lives in its own home. You need the home before you can buy that animal; each home holds up to 7 animals.
 const HOMES={
-  chicken:{name:'Chicken Coop',cost:100,cap:8,xp:10,wall:'#d9402f',wall2:'#b8322a',roof:'#f4efe2',roof2:'#d8d0bf',style:'stilts'},
-  duck:{name:'Duck House',cost:150,cap:8,xp:12,wall:'#4fa6d8',wall2:'#3a88b8',roof:'#f2a21e',roof2:'#c97a10',style:'pond'},
-  sheep:{name:'Sheep Pen',cost:200,cap:6,xp:15,wall:'#c9a06a',wall2:'#a8804e',roof:'#6a8a4a',roof2:'#4f6a36',style:'pen'},
-  goat:{name:'Goat Shed',cost:300,cap:6,xp:18,wall:'#bdb7ab',wall2:'#9a948a',roof:'#8a5a32',roof2:'#6b4122',style:'stone'},
-  cow:{name:'Dairy Barn',cost:450,cap:5,xp:25,wall:'#f6f2e8',wall2:'#ddd6c6',roof:'#3a3434',roof2:'#252020',style:'barn'},
-  pig:{name:'Pig Sty',cost:500,cap:5,xp:25,wall:'#e0a0aa',wall2:'#c88090',roof:'#8a5a32',roof2:'#6b4122',style:'mud'},
-  horse:{name:'Horse Stable',cost:900,cap:4,xp:40,wall:'#8a5530',wall2:'#6e4424',roof:'#3f6fc0',roof2:'#2d55a0',style:'stable'},
-  rabbit:{name:'Rabbit Hutch',cost:250,cap:8,xp:15,wall:'#f0d9a8',wall2:'#d8bf88',roof:'#3f9a3c',roof2:'#2f7a2c',style:'hutch'},
-  turkey:{name:'Turkey Roost',cost:300,cap:6,xp:18,wall:'#a8642a',wall2:'#8a4e1e',roof:'#e0a040',roof2:'#b8802a',style:'stilts'},
-  llama:{name:'Llama Lodge',cost:1000,cap:4,xp:45,wall:'#f2e6cf',wall2:'#d8c8a8',roof:'#e0457b',roof2:'#b8305e',style:'lodge'}
+  chicken:{name:'Chicken Coop',cost:100,cap:7,xp:10,wall:'#d9402f',wall2:'#b8322a',roof:'#f4efe2',roof2:'#d8d0bf',style:'stilts'},
+  duck:{name:'Duck House',cost:150,cap:7,xp:12,wall:'#4fa6d8',wall2:'#3a88b8',roof:'#f2a21e',roof2:'#c97a10',style:'pond'},
+  sheep:{name:'Sheep Pen',cost:200,cap:7,xp:15,wall:'#c9a06a',wall2:'#a8804e',roof:'#6a8a4a',roof2:'#4f6a36',style:'pen'},
+  goat:{name:'Goat Shed',cost:300,cap:7,xp:18,wall:'#bdb7ab',wall2:'#9a948a',roof:'#8a5a32',roof2:'#6b4122',style:'stone'},
+  cow:{name:'Dairy Barn',cost:450,cap:7,xp:25,wall:'#f6f2e8',wall2:'#ddd6c6',roof:'#3a3434',roof2:'#252020',style:'barn'},
+  pig:{name:'Pig Sty',cost:500,cap:7,xp:25,wall:'#e0a0aa',wall2:'#c88090',roof:'#8a5a32',roof2:'#6b4122',style:'mud'},
+  horse:{name:'Horse Stable',cost:900,cap:7,xp:40,wall:'#8a5530',wall2:'#6e4424',roof:'#3f6fc0',roof2:'#2d55a0',style:'stable'},
+  rabbit:{name:'Rabbit Hutch',cost:250,cap:7,xp:15,wall:'#f0d9a8',wall2:'#d8bf88',roof:'#3f9a3c',roof2:'#2f7a2c',style:'hutch'},
+  turkey:{name:'Turkey Roost',cost:300,cap:7,xp:18,wall:'#a8642a',wall2:'#8a4e1e',roof:'#e0a040',roof2:'#b8802a',style:'stilts'},
+  llama:{name:'Llama Lodge',cost:1000,cap:7,xp:45,wall:'#f2e6cf',wall2:'#d8c8a8',roof:'#e0457b',roof2:'#b8305e',style:'lodge'}
 };
 for(const id in HOMES)HOMES[id].lvl=ANIMALS[id].lvl;
 const TREES={
@@ -1273,7 +1431,9 @@ const DECOR={
   fountain:{name:'Stone Fountain',lvl:1,cash:8,xp:80},
   pumpkins:{name:'Pumpkin Pile',lvl:4,cost:140,xp:14},
   gazebo:{name:'Garden Gazebo',lvl:8,cost:2400,xp:220,size:2},
+  sprinkler:{name:'Auto Waterer',lvl:10,cost:1800,xp:60},
   goldcow:{name:'Golden Cow Statue',special:true,xp:150},
+  champion:{name:'Champion Trophy',special:true,xp:0},
   towerclock:{name:'Town Clock',special:true,xp:120},
   greenhouse:{name:'Glass Greenhouse',special:true,xp:200,size:2},
   goldcan:{name:'Golden Watering Can',special:true,xp:50},
@@ -1405,6 +1565,7 @@ function norm(s){
   if(!s.helped.counts)s.helped.counts={};
   if(!s.born)s.born=Date.now();if(s.farmName==='Clover Hollow')s.farmName='Farm Village';if(s.pet&&!['dog','cat'].includes(s.pet.kind))s.pet=null;
   s.barnLvl=Math.min(6,Math.max(1,s.barnLvl|0));
+  if(s.level>99){s.level=99;s.xp=0}
   s.orders=(s.orders||[]).filter(o=>o&&o.items&&o.items.every(([id])=>ITEMS[id])&&NEIGHBORS.some(n=>n.id===o.who));
   for(const k in s.goods)if(!ITEMS[k]||!(s.goods[k]>0))delete s.goods[k];
   return s;
@@ -1424,12 +1585,16 @@ function hasHome(id){return(HC[id]||0)>0}
 let HCAP={},HLV={};
 function homeCap(id){return HCAP[id]||0}
 function buildOcc(){
-  occ={};HC={};ANC={};HCAP={};HLV={};
+  occ={};HC={};ANC={};HCAP={};HLV={};HOMEPOS={};HOUSED={};
   for(const key in S.tiles){const o=S.tiles[key];if(o.k==='home'){const lv=o.lv||1;HC[o.id]=(HC[o.id]||0)+1;HCAP[o.id]=(HCAP[o.id]||0)+Math.floor(HOMES[o.id].cap*HOME_MULT[lv]);HLV[o.id]=Math.max(HLV[o.id]||1,lv)}else if(o.k==='animal')ANC[o.id]=(ANC[o.id]||0)+1}
   for(const key in S.tiles){
     const o=S.tiles[key],[x,y]=key.split(',').map(Number),n=size(o);
     for(let i=0;i<n;i++)for(let j=0;j<n;j++)occ[(x+i)+','+(y+j)]=key;
+    if(o.k==='home')(HOMEPOS[o.id]=HOMEPOS[o.id]||[]).push([x,y]);
+    else if(o.k==='animal'&&x<=HX)(HOUSED[o.id]=HOUSED[o.id]||[]).push(key);
   }
+  for(const id in HOMEPOS)HOMEPOS[id].sort((a,b)=>a[1]-b[1]||a[0]-b[0]);
+  for(const id in HOUSED)HOUSED[id].sort((a,b)=>parseFloat(b)-parseFloat(a));
 }
 function fits(x,y,n,ignore){
   for(let i=0;i<n;i++)for(let j=0;j<n;j++){
@@ -1563,26 +1728,75 @@ function musicSync(){
   }
 }
 document.addEventListener('visibilitychange',musicSync);
+// Farm sounds are built from filtered noise (leaves, soil, straw) and shaped voices (animals), not beeps.
+function sfxOut(a){return a.destination}
+// a burst of filtered noise: rustling leaves, soil, splashes
+function nz(d,o){
+  if(!S||!S.sound)return;const a=ac();if(!a||a.state!=='running')return;o=o||{};
+  const t=a.currentTime+(o.delay||0),len=Math.max(1,Math.floor(a.sampleRate*d)),buf=a.createBuffer(1,len,a.sampleRate),ch=buf.getChannelData(0);
+  let b=0;for(let i=0;i<len;i++){const w=Math.random()*2-1;b=o.brown?(b+.02*w)/1.02:w;ch[i]=o.brown?b*3.5:b}
+  const src=a.createBufferSource(),f=a.createBiquadFilter(),gn=a.createGain();src.buffer=buf;
+  f.type=o.type||'bandpass';f.frequency.setValueAtTime(o.f||1500,t);if(o.f2)f.frequency.exponentialRampToValueAtTime(o.f2,t+d);f.Q.value=o.q||1;
+  const v=(o.vol||.2)*(S.sfxVol??1),at=o.at||.004;
+  gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(v,t+at);gn.gain.exponentialRampToValueAtTime(.0001,t+d);
+  src.connect(f).connect(gn).connect(sfxOut(a));src.start(t);src.stop(t+d+.02);
+}
+// a shaped, filtered voice with pitch glide, vibrato and tremolo: moos, baas, quacks and neighs
+function voice(f0,f1,d,o){
+  if(!S||!S.sound)return;const a=ac();if(!a||a.state!=='running')return;o=o||{};
+  const t=a.currentTime+(o.delay||0),os=a.createOscillator(),f=a.createBiquadFilter(),gn=a.createGain(),v=(o.vol||.12)*(S.sfxVol??1);
+  os.type=o.wave||'sawtooth';os.frequency.setValueAtTime(f0,t);os.frequency.exponentialRampToValueAtTime(Math.max(20,f1),t+d*(o.glide||1));
+  if(o.vib){const l=a.createOscillator(),lg=a.createGain();l.frequency.value=o.vib;lg.gain.value=o.vibD||f0*.03;l.connect(lg).connect(os.frequency);l.start(t);l.stop(t+d+.05)}
+  f.type=o.ft||'bandpass';f.frequency.setValueAtTime(o.f||900,t);if(o.fEnd)f.frequency.linearRampToValueAtTime(o.fEnd,t+d);f.Q.value=o.q||2;
+  const at=o.at||.05;gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(v,t+at);gn.gain.setValueAtTime(v,t+Math.max(at,d*(o.hold||.6)));gn.gain.exponentialRampToValueAtTime(.0001,t+d);
+  let out=gn;
+  if(o.trem){const tg=a.createGain(),l=a.createOscillator(),lg=a.createGain();tg.gain.value=1-(o.tremD||.5)/2;l.frequency.value=o.trem;lg.gain.value=(o.tremD||.5)/2;l.connect(lg).connect(tg.gain);l.start(t);l.stop(t+d+.05);gn.connect(tg);out=tg}
+  os.connect(f).connect(gn);out.connect(sfxOut(a));os.start(t);os.stop(t+d+.05);
+}
+const rr=(a,b)=>a+Math.random()*(b-a);
 const SFX={
-  plow(){noise(.18,.3,600)},
-  plant(){tone(420,.09,'sine',.12);tone(640,.08,'sine',.08,.06)},
-  harvest(){tone(880,.08,'triangle',.12);tone(1320,.14,'triangle',.1,.07)},
+  // turning soil: a gritty scrape of the hoe plus a dull thud of earth
+  plow(){nz(.28,{brown:1,type:'lowpass',f:900,f2:300,vol:.5,at:.03});nz(.12,{f:2600,q:.8,vol:.07,delay:.03});nz(.09,{brown:1,type:'lowpass',f:220,vol:.6,delay:.16})},
+  // seeds pressed into the ground: two soft pats of soil
+  plant(){nz(.07,{brown:1,type:'lowpass',f:500,vol:.45});nz(.07,{brown:1,type:'lowpass',f:420,vol:.4,delay:.13});nz(.05,{f:3200,q:1.5,vol:.03,delay:.02})},
+  // pulling crops: leaves and stalks rustle, a stem snaps, the crop lands in the basket
+  harvest(){for(let i=0;i<5;i++)nz(rr(.05,.11),{f:rr(2400,5200),q:rr(.7,1.6),vol:rr(.05,.09),delay:i*rr(.03,.05)});
+    nz(.03,{type:'highpass',f:1800,vol:.16,delay:.2});nz(.12,{brown:1,type:'lowpass',f:300,vol:.5,delay:.27});nz(.08,{f:1100,q:2,vol:.05,delay:.28})},
   coin(){tone(1046,.07,'square',.05);tone(1568,.16,'square',.05,.06)},
-  collect(){tone(660,.1,'triangle',.12,0,990)},
-  place(){tone(300,.12,'sine',.14,0,180);noise(.08,.15,1200)},
+  // goods dropped into a wicker basket
+  collect(){nz(.1,{brown:1,type:'lowpass',f:380,vol:.4});nz(.06,{f:1700,q:3,vol:.06,delay:.01});nz(.05,{f:2500,q:2,vol:.04,delay:.06})},
+  // picking fruit: a branch shakes, leaves rustle, the fruit comes off with a pop
+  pick(){for(let i=0;i<7;i++)nz(rr(.06,.12),{f:rr(3000,6000),q:1,vol:rr(.04,.07),delay:i*.035});voice(700,380,.06,{wave:'sine',ft:'lowpass',f:1600,vol:.12,at:.005,delay:.26,hold:.2});SFX.collect()},
+  place(){nz(.1,{brown:1,type:'lowpass',f:400,vol:.45});nz(.06,{f:1200,q:1.5,vol:.06,delay:.02})},
   error(){tone(220,.15,'sawtooth',.06,0,160)},
   level(){[523,659,784,1046].forEach((f,i)=>tone(f,.22,'triangle',.12,i*.11))},
   ribbon(){[784,988,1175,1568].forEach((f,i)=>tone(f,.18,'square',.05,i*.08))},
   find(){tone(1175,.1,'sine',.1);tone(1568,.1,'sine',.1,.08);tone(2093,.2,'sine',.08,.16)},
   click(){tone(700,.04,'sine',.06)},
-  engine(){tone(90,.35,'sawtooth',.05,0,70)},
-  water(){noise(.3,.14,2600);tone(1300,.1,'sine',.035,.06,800);tone(1100,.1,'sine',.03,.16,700)},
-  bark(){tone(430,.07,'square',.05,0,300);tone(410,.09,'square',.05,.14,270)},
-  meow(){tone(640,.18,'triangle',.08,0,980);tone(980,.22,'triangle',.07,.18,560)},
+  engine(){voice(55,48,.9,{wave:'sawtooth',ft:'lowpass',f:380,q:3,vol:.16,trem:22,tremD:.8,at:.08});nz(.9,{brown:1,type:'lowpass',f:200,vol:.25,at:.1})},
+  // water from a can: a splashy pour with droplets
+  water(){nz(.55,{f:3200,f2:1800,q:.6,vol:.12,at:.06});nz(.5,{brown:1,type:'lowpass',f:700,vol:.2,at:.08});for(let i=0;i<4;i++)voice(rr(900,1500),rr(1800,2600),.05,{wave:'sine',ft:'lowpass',f:4000,vol:.025,at:.004,delay:.1+i*.09,hold:.2})},
+  bark(){voice(520,330,.12,{wave:'sawtooth',f:900,q:1.4,vol:.16,at:.008,hold:.3});nz(.08,{f:1300,q:1,vol:.08});voice(500,320,.13,{wave:'sawtooth',f:900,q:1.4,vol:.15,at:.008,hold:.3,delay:.2});nz(.08,{f:1300,q:1,vol:.07,delay:.2})},
+  meow(){voice(560,780,.5,{wave:'sawtooth',f:1300,fEnd:900,q:3,vol:.1,at:.06,glide:.4,vib:6,vibD:14,hold:.5})},
   baby(){tone(1400,.08,'sine',.08);tone(1800,.1,'sine',.08,.09);tone(2300,.16,'sine',.07,.19)},
   golden(){[1046,1318,1568,2093,2637].forEach((f,i)=>tone(f,.28,'sine',.07,i*.07))},
   chirp(){tone(4300,.035,'sine',.012);tone(4400,.035,'sine',.012,.07);tone(4300,.035,'sine',.012,.14)}
 };
+// Each animal makes its own sound when you collect from it or feed it.
+const MOO=()=>voice(rr(105,125),rr(85,95),1.1,{wave:'sawtooth',f:520,fEnd:380,q:2.5,vol:.2,at:.15,vib:4,vibD:3,hold:.7});
+const ANIMAL_SFX={
+  chicken(){for(let i=0;i<3;i++)voice(rr(650,800),rr(450,550),.08,{wave:'square',f:1400,q:3,vol:.07,at:.005,delay:i*.12,hold:.2});voice(900,600,.22,{wave:'square',f:1600,q:3,vol:.06,at:.01,delay:.4,hold:.3})},
+  duck(){for(let i=0;i<2;i++)voice(rr(380,420),260,.16,{wave:'sawtooth',f:1300,q:5,vol:.12,at:.008,delay:i*.22,hold:.3})},
+  sheep(){voice(rr(380,420),340,.8,{wave:'sawtooth',f:1100,fEnd:900,q:3,vol:.11,at:.04,trem:28,tremD:.9,hold:.6})},
+  goat(){voice(rr(480,520),420,.6,{wave:'sawtooth',f:1300,q:3,vol:.1,at:.03,trem:34,tremD:.95,hold:.6})},
+  cow:MOO,
+  pig(){for(let i=0;i<2;i++){voice(rr(160,200),120,.14,{wave:'sawtooth',f:500,q:2,vol:.15,at:.01,delay:i*.2,hold:.3});nz(.13,{brown:1,type:'lowpass',f:500,vol:.3,delay:i*.2})}},
+  horse(){voice(900,520,.9,{wave:'sawtooth',f:1500,fEnd:900,q:2,vol:.09,at:.04,vib:14,vibD:60,hold:.5});nz(.3,{f:900,q:.8,vol:.08,delay:.85})},
+  rabbit(){nz(.05,{brown:1,type:'lowpass',f:300,vol:.4});nz(.05,{brown:1,type:'lowpass',f:300,vol:.35,delay:.12});voice(1500,1200,.05,{wave:'sine',ft:'lowpass',f:3000,vol:.03,delay:.2,hold:.3})},
+  turkey(){for(let i=0;i<7;i++)voice(rr(380,460),rr(300,340),.05,{wave:'square',f:1000,q:3,vol:.07,at:.004,delay:i*.055,hold:.3})},
+  llama(){voice(300,340,.7,{wave:'triangle',ft:'lowpass',f:900,q:1,vol:.12,at:.1,vib:5,vibD:6,hold:.6})}
+};
+function animalSfx(id){(ANIMAL_SFX[id]||SFX.collect)()}
 
 /* ================= canvas + camera ================= */
 const cv=document.getElementById('farm');
@@ -2189,6 +2403,20 @@ function drawDeco(x,y,o,now){
       for(const[a,b,r,c]of[[-8,-2,7,'#f28a26'],[7,-1,8,'#e8771a'],[0,-6,6,'#f2a21e'],[-1,3,6,'#d96a12']]){ball(px+a,py+b-r*.6,r,r*.8,c,shade(c,-.35),.8);g.strokeStyle=shade(c,-.25);g.lineWidth=.7;line([px+a,py+b-r*1.3],[px+a,py+b]);poly([[px+a-1,py+b-r*1.4],[px+a+1,py+b-r*1.4],[px+a+1.4,py+b-r*1.9],[px+a-.6,py+b-r*1.9]],'#6b8a2a')}
       leaf(px+10,py-12,4,1.8,.5,'#4f9a32');
       break;
+    case'champion':{
+      // the Level 99 prize: a gold cup with a star on a marble plinth
+      shadow(px,py,22,8);isoBox(x+.16,y+.16,.68,.68,14,'#e8e2d6','#cfc8ba','#f6f2ea','#6e685e');
+      const by=py-14,gd=g.createLinearGradient(px-16,0,px+16,0);gd.addColorStop(0,'#b8860b');gd.addColorStop(.35,'#ffe680');gd.addColorStop(.6,'#f2c230');gd.addColorStop(1,'#9a6a00');
+      poly([[px-6,by],[px+6,by],[px+4,by-4],[px-4,by-4]],gd,'#6b4400',1.2);poly([[px-2.4,by-4],[px+2.4,by-4],[px+2,by-14],[px-2,by-14]],gd,'#6b4400',1);
+      g.beginPath();g.moveTo(px-15,by-36);g.quadraticCurveTo(px-15,by-14,px,by-13);g.quadraticCurveTo(px+15,by-14,px+15,by-36);g.closePath();g.fillStyle=gd;g.fill();g.strokeStyle='#6b4400';g.lineWidth=1.4;g.stroke();
+      ell(px,by-36,15,4,'#ffe680','#6b4400',1.2);ell(px,by-36,11,2.6,'#c8961e');
+      g.strokeStyle='#d9a521';g.lineWidth=3;for(const sd of[-1,1]){g.beginPath();g.arc(px+sd*15,by-29,6,sd<0?Math.PI*.5:-Math.PI*.5,sd<0?Math.PI*1.5:Math.PI*.5,sd>0);g.stroke()}
+      g.strokeStyle='#6b4400';g.lineWidth=.8;for(const sd of[-1,1]){g.beginPath();g.arc(px+sd*15,by-29,7.4,sd<0?Math.PI*.5:-Math.PI*.5,sd<0?Math.PI*1.5:Math.PI*.5,sd>0);g.stroke()}
+      ell(px-6,by-27,2.6,6,'rgba(255,255,255,.45)',null,0,.2);
+      g.beginPath();for(let k=0;k<10;k++){const r=k%2?3:7,a=-Math.PI/2+k*Math.PI/5;g.lineTo(px+Math.cos(a)*r,by-47+Math.sin(a)*r)}g.closePath();g.fillStyle='#fff3a0';g.fill();g.strokeStyle='#9a6400';g.lineWidth=1;g.stroke();
+      poly([[px-9,by-24],[px+9,by-24],[px+9,by-18],[px-9,by-18]],'#d9402f','#7a1c12',.8);g.font='700 6px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('99',px,by-19.3);
+      if(!reduce&&!ICON_MODE){const k=(Math.sin((now||0)/300)+1)/2;star4(px+13,by-44,2+k*3,'rgba(255,245,170,.95)');star4(px-12,by-14,1.5+(1-k)*2.5,'rgba(255,245,170,.9)')}
+      break;}
     case'goldcow':{
       // draw the cow, gild it, then slip the plinth and shadow in behind it
       g.save();g.translate(px,py-12);g.scale(.85,.85);ANIMAL_DRAW.cow(0,0,0,0);g.restore();
@@ -2218,6 +2446,26 @@ function drawDeco(x,y,o,now){
         g.strokeStyle='#fff';g.lineWidth=1.2;for(let k=1;k<4;k++){line(P(x+.2+k*.4,y+1.8,6),P(x+.2+k*.4,y+1.8,36));line(P(x+1.8,y+.2+k*.4,6),P(x+1.8,y+.2+k*.4,36))}
         for(let k=0;k<6;k++){const[qx,qy]=P(x+.45+(k%3)*.5,y+.6+Math.floor(k/3)*.7,8);ell(qx,qy-4,5,4,k%2?'#4fae3a':'#3f9a3c');ell(qx+1,qy-6,1.6,1.6,['#e0352b','#ffd23f','#ff8fb5'][k%3])}
       }
+      break;}
+    case'sprinkler':{
+      // a rain barrel with a funnel on top, a glass gauge and a spinning sprinkler head
+      const w=ICON_MODE?.7:Math.max(0,Math.min(1,(o.w??60)/SPR_MAX)),on=!ICON_MODE&&o.sprayT>Date.now(),t=(now||0)/1000;
+      shadow(px,py,16,6);
+      const cyl=(y0,h,rx,ry,c1,c2)=>{poly([[px-rx,py-y0],[px+rx,py-y0],[px+rx,py-y0-h],[px-rx,py-y0-h]],c1);ell(px,py-y0,rx,ry,c1);g.strokeStyle='#3a2310';g.lineWidth=1.3;line([px-rx,py-y0],[px-rx,py-y0-h]);line([px+rx,py-y0],[px+rx,py-y0-h]);g.beginPath();g.ellipse(px,py-y0,rx,ry,0,0,Math.PI);g.stroke();ell(px,py-y0-h,rx,ry,c2,'#3a2310',1.3)};
+      const gr=g.createLinearGradient(px-12,0,px+12,0);gr.addColorStop(0,'#c08048');gr.addColorStop(.45,'#9a5e2c');gr.addColorStop(1,'#5e3618');
+      cyl(0,24,12,5,gr,'#a86a34');
+      g.strokeStyle='#5a5f66';g.lineWidth=2.2;for(const hy of[5,18]){g.beginPath();g.ellipse(px,py-hy,12.3,5,0,0,Math.PI);g.stroke()}
+      g.strokeStyle='rgba(60,30,10,.35)';g.lineWidth=.7;for(const sx of[-6,0,6])line([px+sx,py-1+Math.abs(sx)*.2],[px+sx,py-23+Math.abs(sx)*.2]);
+      // gauge window
+      poly([[px+3,py-6],[px+8,py-7],[px+8,py-20],[px+3,py-19]],'#e8f4ff','#3a2310',1);
+      const gh=13*w;poly([[px+3,py-6],[px+8,py-7],[px+8,py-7-gh],[px+3,py-6-gh]],'#3f9ad8');
+      // funnel and water surface
+      ell(px,py-24,10,4.2,'#4fa6d8');ell(px-3,py-25,4,1.2,'rgba(255,255,255,.55)');
+      poly([[px-13,py-29],[px+13,py-29],[px+9,py-25],[px-9,py-25]],'rgba(200,210,220,.85)','#4a5560',1);ell(px,py-29,13,4.6,null,'#4a5560',1.2);
+      // pipe and head
+      g.strokeStyle='#4a5560';g.lineWidth=2.4;line([px+8,py-22],[px+8,py-40]);ell(px+8,py-41,3.4,1.6,'#c9ced2','#3a4650',1);
+      const ang=on?t*9:0;g.strokeStyle='#d9402f';g.lineWidth=1.8;line([px+8-Math.cos(ang)*6,py-43-Math.sin(ang)*1.6],[px+8+Math.cos(ang)*6,py-43+Math.sin(ang)*1.6]);ball(px+8,py-43,1.8,1.8,'#ffc72c');
+      if(on&&!reduce){g.strokeStyle='rgba(150,205,255,.75)';g.lineWidth=1.1;for(let i=0;i<8;i++){const a=ang+i*Math.PI/4,r=14+((t*30+i*7)%14);g.beginPath();g.arc(px+8+Math.cos(a)*r,py-40+Math.sin(a)*r*.45+r*.4,.9,0,Math.PI*2);g.stroke()}}
       break;}
     case'well':
       shadow(px,py,20,7);ell(px,py-4,15,7,'#9a948a','#6e685e',1.2);poly([[px-15,py-4],[px+15,py-4],[px+15,py-14],[px-15,py-14]],'#a8a296');
@@ -2355,7 +2603,7 @@ function fenceRun(a,b,col){
   const n=Math.max(2,Math.round(Math.hypot(b[0]-a[0],b[1]-a[1])/18));
   for(let i=0;i<=n;i++){const t=i/n,x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t;poly([[x-1.6,y],[x+1.6,y],[x+1.6,y-13],[x-1.6,y-13]],col,shade(col,-.35),.8)}
 }
-function drawHome(x,y,id,lv){
+function drawHome(x,y,id,lv,noSign){
   lv=lv||1;
   const H=HOMES[id],st=H.style,[cx,cy]=P(x+1,y+1);shadow(cx,cy+6,58,18);
   const bx=x+.22,by=y+.14,bw=1.56,bd=.92,yy=by+bd;
@@ -2382,7 +2630,7 @@ function drawHome(x,y,id,lv){
   if(st==='lodge'){g.strokeStyle='#ffd23f';g.lineWidth=1.4;line(P(bx,yy,wh+rh*.3),P(bx+bw,yy,wh+rh*.3));for(let i=0;i<6;i++){const t=bx+.1+i*.28;poly([P(t,yy,wh+rh*.3),P(t+.14,yy,wh+rh*.3),P(t+.07,yy,wh+rh*.3-5)],['#e0457b','#2ba0a0','#ffd23f'][i%3])}}
   if(st==='pen'||st==='mud'||st==='stable'||st==='lodge'){const col=st==='mud'?'#a8804e':'#f4f0e6';fenceRun(P(x+.08,y+1.92),P(x+1.92,y+1.92),col);fenceRun(P(x+1.92,y+1.14),P(x+1.92,y+1.92),col)}
   // the breed that lives here, standing out front
-  const[ax,ay]=P(x+1.42,y+1.5);g.save();g.translate(ax,ay);g.scale(.62,.62);ANIMAL_DRAW[id](0,0,0,0);g.restore();
+  if(!noSign){const[ax,ay]=P(x+1.42,y+1.5);g.save();g.translate(ax,ay);g.scale(.62,.62);ANIMAL_DRAW[id](0,0,0,0);g.restore()}
   // name board
   const[sx,sy]=P(bx+bw*.8,yy,z+wh*.55);poly([[sx-9,sy-4],[sx+9,sy-4],[sx+9,sy+4],[sx-9,sy+4]],'#f6e2b4','#6b3c15',.8);
   g.save();g.translate(sx,sy+1.6);g.scale(.32,.32);ANIMAL_DRAW[id](0,4,0,0);g.restore();
@@ -2583,7 +2831,7 @@ function makerJobs(o,now){
   const q=o.q||[],done=q.filter(j=>j.end<=now),cur=q.find(j=>j.end>now)||null;return{q,done,cur};
 }
 const SMOKE={feedmill:[1.5,.5,64],press:[1.38,1.26,42],kitchen:[1.32,.54,58],beehive:[1,1,30],fishpond:[1,1,10],cider:[1.3,.6,44]};
-const LIVE_DECO=new Set(['gate','windmill','balloon','fountain','pond','goldcan']);
+const LIVE_DECO=new Set(['gate','windmill','balloon','fountain','pond','goldcan','sprinkler']);
 function drawObj(x,y,o,now){
   if(o.k==='plot'){
     if(!o.crop)return;
@@ -2596,10 +2844,10 @@ function drawObj(x,y,o,now){
     return;
   }
   if(o.k==='animal'){
-    const seed=x*3+y,b=bob(now,seed),rr=ICON_MODE?{x:0,y:0,f:1}:roamOf(x+','+y),wx=(rr.x-rr.y)*W/2,wy=(rr.x+rr.y)*H/2;
-    {const s=sprite('a:'+o.id,BOX1,()=>ANIMAL_DRAW[o.id](0,18,0,0)),[ox,oy]=P(x,y);g.save();g.translate(ox+wx,oy+wy+b);if(rr.f<0)g.scale(-1,1);if(isBaby(o,now)){g.translate(0,18);g.scale(.6,.6);g.translate(0,-18)}g.drawImage(s.c,s.box[0],s.box[1],s.w,s.h);g.restore()}
+    const seed=x*3+y,b=bob(now,seed),rr=ICON_MODE?{x:0,y:0,f:1}:roamOf(x+','+y),wx=(rr.x-rr.y)*W/2,wy=(rr.x+rr.y)*H/2,sc=x<=HX?YARD_SCALE:1;
+    {const s=sprite('a:'+o.id,BOX1,()=>ANIMAL_DRAW[o.id](0,18,0,0)),[ox,oy]=P(x,y);g.save();g.translate(ox+wx,oy+wy+b);if(rr.f<0)g.scale(-1,1);if(sc!==1){g.translate(0,18);g.scale(sc,sc);g.translate(0,-18)}if(isBaby(o,now)){g.translate(0,18);g.scale(.6,.6);g.translate(0,-18)}g.drawImage(s.c,s.box[0],s.box[1],s.w,s.h);g.restore()}
     const homeless=!ICON_MODE&&!hasHome(o.id);
-    if(homeless||readyIn(o,ANIMALS[o.id],now)<=0){const[px,py]=P(x+.5,y+.5);bubble(px+wx,py+wy-(o.id==='horse'||o.id==='llama'?56:o.id==='cow'?40:o.id==='rabbit'?28:36),homeless?'home':GLYPH[o.id],now)}
+    if(homeless||readyIn(o,ANIMALS[o.id],now)<=0){const[px,py]=P(x+.5,y+.5);bubble(px+wx,py+wy-(o.id==='horse'||o.id==='llama'?56:o.id==='cow'?40:o.id==='rabbit'?28:36)*sc,homeless?'home':GLYPH[o.id],now)}
     return;
   }
   if(o.k==='tree'){
@@ -2632,7 +2880,7 @@ function drawObj(x,y,o,now){
     return;
   }
   if(o.k==='home'){
-    blit(sprite('h:'+o.id+':'+(o.lv||1),BOX2,()=>drawHome(0,0,o.id,o.lv||1)),x,y);
+    const ns=!ICON_MODE&&!!(HOUSED[o.id]&&HOUSED[o.id].length);blit(sprite('h:'+o.id+':'+(o.lv||1)+(ns?':e':''),BOX2,()=>drawHome(0,0,o.id,o.lv||1,ns)),x,y);
     const[px,py]=P(x+1,y+1),c=ANC[o.id]||0;
     g.font='600 10px Fredoka, sans-serif';g.textAlign='center';const t=c+'/'+homeCap(o.id),w=g.measureText(t).width+10;
     poly([[px-w/2,py+10],[px+w/2,py+10],[px+w/2,py+22],[px-w/2,py+22]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText(t,px,py+19.5);
@@ -2959,6 +3207,8 @@ function standFor(job){
   return[x+1.02,y+.55];
 }
 function enqueue(job){
+  for(let i=queue.length-1;i>=0;i--)if(queue[i].kind==='walk')queue.splice(i,1);
+  if(farmer.job&&farmer.job.kind==='walk'){farmer.job=null;farmer.state='idle';walkMark=null}
   for(const[x,y]of job.tiles){const k=x+','+y;(pend[k]=pend[k]||[]).push(job.kind)}
   queue.push(job);
 }
@@ -2975,11 +3225,11 @@ function updateFarmer(dt,now){
   if(!farmer.job){
     if(!queue.length){if(farmer.state!=='idle'){farmer.state='idle'}return}
     const j=farmer.job=queue.shift();farmer.state='walk';
-    if(j.vehicle){j.path=snake(j.tiles);j.i=0;j.stand=[j.path[0][0]+.5,j.path[0][1]+.5];SFX.engine()}else j.stand=standFor(j);
+    if(j.vehicle){j.path=snake(j.tiles);j.i=0;j.stand=[j.path[0][0]+.5,j.path[0][1]+.5];SFX.engine()}else if(j.kind!=='walk')j.stand=standFor(j);
   }
   const j=farmer.job,rush=queue.length>4?1.8:1;fxT-=dt;
   if(farmer.state==='walk'){
-    const working=j.vehicle&&j.i>0,[tx,ty]=j.stand,dx=tx-farmer.x,dy=ty-farmer.y,d=Math.hypot(dx,dy),sp=(j.vehicle?(working?2.8:7):6.5)*rush*dt;
+    const working=j.vehicle&&j.i>0,[tx,ty]=j.stand,dx=tx-farmer.x,dy=ty-farmer.y,d=Math.hypot(dx,dy),sp=(j.vehicle?(working?2.8:7):j.kind==='walk'?3.6:6.5)*rush*dt;
     const sdx=dx-dy;if(Math.abs(sdx)>.05)farmer.dir=sdx>0?1:-1;
     if(j.vehicle&&fxT<=0){fxT=.06;vehicleFx(j.vehicle,working||d<.6,now)}
     if(d<=sp){farmer.x=tx;farmer.y=ty;
@@ -2987,7 +3237,7 @@ function updateFarmer(dt,now){
         const t=j.path[j.i];finishJob(Object.assign({},j,{tiles:[t]}),now);unpend({tiles:[t]});j.i++;
         if(j.i>=j.path.length){farmer.job=null;farmer.state='idle';return}
         j.stand=[j.path[j.i][0]+.5,j.path[j.i][1]+.5];
-      }else{farmer.state='work';farmer.t=0}
+      }else if(j.kind==='walk'){farmer.job=null;farmer.state='idle';walkMark=null}else{farmer.state='work';farmer.t=0}
     }
     else{farmer.x+=dx/d*sp;farmer.y+=dy/d*sp;farmer.walk+=dt*14}
   }else if(farmer.state==='work'){
@@ -3129,7 +3379,18 @@ function crosses(ax,ay,bx,by){
 function roamOf(k){return ROAM[k]||(ROAM[k]={x:0,y:0,tx:0,ty:0,wait:Math.random()*4,f:1})}
 function updateAnimals(dt){
   for(const k in S.tiles){
-    const o=S.tiles[k];if(o.k!=='animal')continue;const r=roamOf(k);if(reduce)continue;
+    const o=S.tiles[k];if(o.k!=='animal')continue;const r=roamOf(k);
+    if(isHoused(k)){const h=yardOf(k,o.id);if(!h)continue;const bx=parseFloat(k)+.5,by=.5,cx=bx+r.x,cy=by+r.y;
+      const out=cx<h[0]+.1||cx>h[0]+1.9||cy<h[1]+1.1||cy>h[1]+1.9;
+      if(out&&!r.walkIn){const p=yardSpot(h);r.x=r.tx=p[0]-bx;r.y=r.ty=p[1]-by}
+      if(reduce||pend[k]){if(pend[k])r.wait=Math.max(r.wait,1);continue}
+      if(r.wait>0){r.wait-=dt;continue}
+      const dx=r.tx-r.x,dy=r.ty-r.y,d=Math.hypot(dx,dy),sp=(r.walkIn?1.4:.22)*dt;
+      if(d>sp){r.x+=dx/d*sp;r.y+=dy/d*sp;if(Math.abs(dx-dy)>.01)r.f=dx-dy>0?1:-1;continue}
+      r.x=r.tx;r.y=r.ty;r.wait=r.walkIn?0:1.5+Math.random()*4;
+      if(r.walkIn&&!out)r.walkIn=false;
+      const p=yardSpot(h);r.tx=p[0]-bx;r.ty=p[1]-by;continue}
+    if(reduce)continue;
     if(pend[k]){r.wait=Math.max(r.wait,1);continue}
     if(r.wait>0){r.wait-=dt;continue}
     const dx=r.tx-r.x,dy=r.ty-r.y,d=Math.hypot(dx,dy),sp=.35*dt;
@@ -3144,6 +3405,35 @@ function updateAnimals(dt){
   }
 }
 function animalPos(k){const[x,y]=k.split(',').map(Number),r=roamOf(k);return[x+.5+r.x,y+.5+r.y]}
+// Animals either stay home (the default) or roam the farm (Settings > Animals).
+// An animal at home is kept under a key off the grid (x <= HX) and walks around the yard in front of its home.
+const HX=-1000,YARD_SCALE=.72;
+function animalsHome(){return!S||S.animalMode!=='free'}
+function isHoused(k){return parseFloat(k)<=HX}
+function freeHousedKey(){let n=0;while(S.tiles[(HX-n)+',0'])n++;return(HX-n)+',0'}
+// effects aimed at a housed animal's key land where the animal really is
+function vis(x,y){if(x<=HX+.5){const r=ROAM[Math.round(x)+',0'];if(r)return[x+r.x,y+r.y]}return[x,y]}
+let HOMEPOS={},HOUSED={};
+// which home's yard a housed animal lives in: homes fill up 7 at a time, in order
+function yardOf(k,id){const hs=HOMEPOS[id],list=HOUSED[id];if(!hs||!hs.length||!list)return null;const i=list.indexOf(k);return hs[Math.min(hs.length-1,Math.floor(Math.max(0,i)/HOMES[id].cap))]}
+function yardSpot(h){return[h[0]+.22+Math.random()*1.56,h[1]+1.2+Math.random()*.62]}
+// move animals in or out of their homes to match the setting (and homes being built or removed)
+function syncHousing(){
+  if(!S||VIS||placing)return false;let moved=false;const home=animalsHome();
+  for(const k of Object.keys(S.tiles)){const o=S.tiles[k];if(o.k!=='animal'||pend[k])continue;
+    const h=isHoused(k);
+    if(home&&!h&&hasHome(o.id)){const[wx,wy]=animalPos(k),nk=freeHousedKey(),nx=+nk.split(',')[0];S.tiles[nk]=o;delete S.tiles[k];delete ROAM[k];
+      ROAM[nk]={x:wx-(nx+.5),y:wy-.5,tx:wx-(nx+.5),ty:wy-.5,wait:Math.random(),f:1,walkIn:true};moved=true}
+    else if(h&&(!home||!hasHome(o.id))){const[wx,wy]=animalPos(k),spot=freeTileNear(Math.floor(wx),Math.floor(wy));if(!spot)continue;
+      const gk=spot[0]+','+spot[1];S.tiles[gk]=o;delete S.tiles[k];delete ROAM[k];occ[gk]=gk;moved=true}
+  }
+  return moved;
+}
+function freeTileNear(x,y){
+  x=Math.max(0,Math.min(N-1,isFinite(x)?x:N>>1));y=Math.max(0,Math.min(N-1,isFinite(y)?y:N>>1));
+  for(let r=0;r<N;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){if(Math.max(Math.abs(dx),Math.abs(dy))!==r)continue;const a=x+dx,b=y+dy,k=a+','+b;if(inGrid(a,b)&&!occ[k]&&!pend[k])return[a,b]}
+  return null;
+}
 function animalAt(cx,cy){
   let best=null,bd=1e9;
   for(const k in S.tiles){if(S.tiles[k].k!=='animal')continue;const[wx,wy]=animalPos(k),[px,py]=P(wx,wy),sx=px*cam.z+cam.x,sy=py*cam.z+cam.y;
@@ -3156,9 +3446,9 @@ function gateOpen(x,y){
   if(!want)for(const a in S.tiles)if(S.tiles[a].k==='animal'){const[wx,wy]=animalPos(a);if(near(wx,wy)){want=true;break}}
   const v=GATE[k]||0;return GATE[k]=v+((want?1:0)-v)*.12;
 }
-function floatText(x,y,text,color,delay){floats.push({x,y,text,color,t0:performance.now()+(delay||0)})}
+function floatText(x,y,text,color,delay){[x,y]=vis(x,y);floats.push({x,y,text,color,t0:performance.now()+(delay||0)})}
 function burst(x,y,colors){
-  const[px,py]=P(x+.5,y+.5);
+  [x,y]=vis(x,y);const[px,py]=P(x+.5,y+.5);
   for(let i=0;i<10;i++){const a=Math.random()*Math.PI*2,v=1+Math.random()*2;parts.push({x:px,y:py-8,vx:Math.cos(a)*v,vy:-1.5-Math.random()*2.5,c:colors[i%colors.length],t0:performance.now()})}
 }
 function drawEffects(t){
@@ -3210,8 +3500,9 @@ function drawLight(){
   g.setTransform(1,0,0,1,0,0);g.drawImage(LIGHT,0,0);
 }
 function drawPending(now){
+  if(walkMark&&!VIS){const[px,py]=P(walkMark.x+.5,walkMark.y+.5),k=((performance.now()-walkMark.t)/700)%1;ell(px,py,10+k*8,5+k*4,null,'rgba(255,255,255,'+(.8*(1-k)).toFixed(2)+')',2);ell(px,py,4,2,'rgba(255,255,255,.7)')}
   for(const k in pend){
-    const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5),kind=pend[k][pend[k].length-1],b=reduce?0:Math.sin(now/180+x)*1.5;
+    const[x,y]=vis(...k.split(',').map(Number)),[px,py]=P(x+.5,y+.5),kind=pend[k][pend[k].length-1],b=reduce?0:Math.sin(now/180+x)*1.5;
     const col={plow:'#8b5a2e',plant:'#3f9a3c',harvest:'#f2a21e',clear:'#a5793a',collect:'#2d8fe3'}[kind]||'#888';
     ell(px,py-18+b,7.5,7.5,'#fff','#6b3c15',1.5);ell(px,py-18+b,4.5,4.5,col);
     if(pend[k].length>1){ell(px+7,py-24+b,4,4,'#d9402f','#fff',1);g.fillStyle='#fff';g.font='8px Fredoka, sans-serif';g.textAlign='center';g.fillText(String(pend[k].length),px+7,py-21+b)}
@@ -3291,7 +3582,9 @@ function frame(t){
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
   drawHover();
   const list=[];
-  for(const k in S.tiles){const[x,y]=k.split(',').map(Number),o=S.tiles[k],n=size(o);list.push([x+y+1+(n-1)*2+(o.k==='plot'?-.4:0)+(o.k==='animal'?roamOf(k).x+roamOf(k).y:0),x,y,o])}
+  for(const k in S.tiles){const[x,y]=k.split(',').map(Number),o=S.tiles[k],n=size(o);let d=x+y+1+(n-1)*2+(o.k==='plot'?-.4:0)+(o.k==='animal'?roamOf(k).x+roamOf(k).y:0);
+    if(o.k==='animal'&&x<=HX){const h=yardOf(k,o.id),r=roamOf(k);if(h&&!r.walkIn)d=h[0]+h[1]+3.02+(x+.5+r.x+.5+r.y-h[0]-h[1])*.004}
+    list.push([d,x,y,o])}
   list.push([farmer.x+farmer.y,0,0,null]);
   for(const v of visitors)list.push([v.x+v.y,0,0,v]);
   if(S.pet)list.push([pet.x+pet.y,0,0,{pet:1}]);
@@ -3347,9 +3640,11 @@ function hud(){
   if(shownLvl!==null&&S.level>shownLvl){const l=$('lvl').closest('.lvl');l.classList.remove('up');void l.offsetWidth;l.classList.add('up')}
   const xpTot=S.level*1e7+S.xp;if(shownXP!==null&&xpTot>shownXP)delta($('xptext').closest('.xpbox'),S.level>shownLvl?'Level up!':'+'+(S.xp-shownXPv)+' XP','xp');
   shownLvl=S.level;shownXP=xpTot;shownXPv=S.xp;
-  $('lvl').textContent=S.level;$('lvlnext').textContent=S.level+1;$('xpleft').textContent=(need(S.level)-S.xp).toLocaleString()+' to go';
-  $('xpfill').style.width=Math.min(100,S.xp/need(S.level)*100)+'%';$('xptext').textContent=S.xp.toLocaleString()+' / '+need(S.level).toLocaleString()+' XP';
-  const c=CROPS[S.seed];$('seedchip').innerHTML='<span>Seeds to plant</span><b></b>';$('seedchip').lastChild.textContent=c.name;
+  $('lvl').textContent=S.level;
+  if(S.level>=MAX_LVL){$('lvlnext').textContent=MAX_LVL;$('xpleft').textContent='Top level!';$('xpfill').style.width='100%';$('xptext').textContent='Max level'}
+  else{$('lvlnext').textContent=S.level+1;$('xpleft').textContent=(need(S.level)-S.xp).toLocaleString()+' to go';
+  $('xpfill').style.width=Math.min(100,S.xp/need(S.level)*100)+'%';$('xptext').textContent=S.xp.toLocaleString()+' / '+need(S.level).toLocaleString()+' XP'}
+  const c=CROPS[S.seed];$('seedchip').innerHTML='<span>Seeds to plant</span><b></b>';$('seedchip').lastChild.textContent=c.name+(have(S.seed)?' ('+have(S.seed)+' in barn)':'');
   updateFuel();
   const tot=storeTotal(),cap=barnCap();$('barntext').textContent=tot+' / '+cap;$('btnBarn').classList.toggle('full',tot>=cap);$('barnBadge').hidden=tot<cap;
   $('btnOrders').classList.toggle('locked',!nbOpen());$('btnNbrs').classList.toggle('locked',!nbOpen());
@@ -3367,11 +3662,26 @@ function updateFuel(){
   const anyV=Object.keys(S.veh).length>0;$('fuelchip').hidden=!anyV;
   if(anyV){const f=fuelNow();$('fueltext').textContent=f+' / '+FUEL_MAX;$('fuelfill').style.width=(f/FUEL_MAX*100)+'%'}
 }
-function changed(){buildOcc();buildBars();syncGround();hud();save();if(S.q)renderQuest()}
+function changed(){buildOcc();if(syncHousing())buildOcc();buildBars();syncGround();hud();save();if(S.q)renderQuest()}
+// The top level is 99. Reaching it brings the Champion prize; XP stops counting after that.
+const MAX_LVL=99,CHAMP={coins:50000,cash:50};
 function addXP(n){
+  if(S.level>=MAX_LVL){S.xp=0;return}
   S.xp+=n;const l0=S.level;
-  while(S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=20*S.level;S.cash+=1}
-  if(S.level>l0){SFX.level();showLevelUp(l0);setTimeout(nextQuest,800)}
+  while(S.level<MAX_LVL&&S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=20*S.level;S.cash+=1}
+  if(S.level>=MAX_LVL)S.xp=0;
+  if(S.level>l0){SFX.level();showLevelUp(l0);if(S.level>=MAX_LVL&&!S.champ)setTimeout(championGift,600);else setTimeout(nextQuest,800)}
+}
+function championGift(){
+  if(S.champ)return;S.champ=Date.now();S.coins+=CHAMP.coins;S.cash+=CHAMP.cash;S.inv['deco:champion']=(S.inv['deco:champion']||0)+1;changed();
+  confetti();setTimeout(confetti,700);SFX.golden();
+  modal({title:'Champion Farmer!',color:'gold',small:true,noClose:true,render(b){
+    const p=el('div','body-pad'),im=el('img');if(!ICONS['decor:champion'])ICONS['decor:champion']=renderIcon('decor','champion');im.src=ICONS['decor:champion'];im.alt='';im.style.cssText='width:150px;height:auto;display:block;margin:0 auto';p.appendChild(im);
+    p.appendChild(el('p',null,(S.farmerName?S.farmerName+', you':'You')+' reached Level 99, the highest level in Farm Village!'));
+    p.appendChild(el('p',null,'Your special gift: the Champion Trophy, '+CHAMP.coins.toLocaleString()+' coins and '+CHAMP.cash+' Farm Cash. Place the trophy from your Gift Box.'));
+    p.appendChild(rewardRow([['coins',CHAMP.coins],['cash',CHAMP.cash]]));
+    const go=el('button','go','Thank you!');go.dataset.focus='1';go.onclick=closeModal;p.appendChild(go);b.appendChild(p);
+  }});
 }
 function unlockedAt(l){const out=[];for(const cat of[CROPS,ANIMALS,TREES,DECOR,FARM])for(const id in cat)if(cat[id].lvl===l&&!cat[id].cash)out.push(cat[id].name);return out}
 
@@ -3388,7 +3698,7 @@ function openTop(){
   $('sheetClose').hidden=!!spec.noClose;
   const body=$('sheetBody');body.innerHTML='';body.scrollTop=0;spec.render(body);
   $('modal').hidden=false;
-  const f=body.querySelector('[data-focus]')||(spec.noClose?body.querySelector('button'):$('sheetClose'));if(f)f.focus();
+  const f=body.querySelector('[data-focus]')||(spec.noClose?body.querySelector('button'):$('sheetClose'));if(f)f.focus({preventScroll:true});
 }
 function closeModal(){const spec=mq.shift();if(spec&&spec.onClose)spec.onClose();if(mq.length)openTop();else{hideModal();hud()}}
 // The sheet shrinks and fades before the modal hides; opening another sheet meanwhile cancels it.
@@ -3495,7 +3805,7 @@ function showTitle(){
     g=prev;raf=requestAnimationFrame(loop);
   }
   raf=requestAnimationFrame(loop);
-  const play=()=>{if(t.hidden)return;SFX.click();wakeAudio();t.classList.add('out');setTimeout(()=>{t.hidden=true;cancelAnimationFrame(raf);checkTut();renderWx();setTimeout(nextQuest,2500);heldToasts.splice(0).forEach((m,i)=>setTimeout(()=>toast(m),i*700))},520)};
+  const play=()=>{if(t.hidden)return;SFX.click();wakeAudio();lockOrient();t.classList.add('out');setTimeout(()=>{t.hidden=true;cancelAnimationFrame(raf);checkTut();renderWx();setTimeout(nextQuest,2500);heldToasts.splice(0).forEach((m,i)=>setTimeout(()=>toast(m),i*700))},520)};
   $('tplay').onclick=play;$('tplay').focus();
 }
 
@@ -3509,7 +3819,7 @@ const MATS={
 const BARN_CAP=[0,50,100,180,280,400,600];
 const BARN_UP=[null,{coins:400,mats:{board:2,nail:2}},{coins:2000,mats:{board:14,nail:14,brick:6}},{coins:4500,mats:{board:20,nail:20,brick:12,paint:6}},
   {coins:9000,mats:{board:28,nail:28,brick:20,paint:12}},{coins:16000,mats:{board:36,nail:36,brick:30,paint:20}}];
-const HOME_MULT=[0,1,1.5,2],HOME_BONUS=[0,0,.2,.4];
+const HOME_MULT=[0,1,1,1],HOME_BONUS=[0,0,.2,.4];
 function homeUp(id,lv){const c=HOMES[id].cost;return lv===1?{coins:c,mats:{board:6,nail:6,paint:2}}:lv===2?{coins:c*2,mats:{board:12,nail:12,brick:8,paint:6}}:null}
 function barnLv(){return S.barnLvl||1}
 // The farmhouse improves after the 1st, 2nd, 4th, 6th and 8th quest.
@@ -3605,7 +3915,7 @@ function showHome(key){
     const p=el('div','store'),top=el('div','home-top'),img=el('img');
     const ik='homes:'+o.id+':'+lv;if(!ICONS[ik])ICONS[ik]=renderIcon('homes',o.id,lv);img.src=ICONS[ik];img.alt='';top.appendChild(img);
     const info=el('div');info.appendChild(el('strong',null,'Level '+lv+' '+H.name));
-    info.appendChild(el('p',null,'Room for '+Math.floor(H.cap*HOME_MULT[lv])+' '+plural(A.name).toLowerCase()+(HOME_BONUS[lv]?', with a '+HOME_BONUS[lv]*100+'% chance of double '+A.product.toLowerCase():'')+'. Each one eats '+feedNeed(o.id)+' feed per batch. Spots used: '+(ANC[o.id]||0)+' of '+homeCap(o.id)+'.'));
+    info.appendChild(el('p',null,'Room for '+H.cap+' '+plural(A.name).toLowerCase()+(HOME_BONUS[lv]?', with a '+HOME_BONUS[lv]*100+'% chance of double '+A.product.toLowerCase():'')+'. Each one eats '+feedNeed(o.id)+' feed per batch. Spots used: '+(ANC[o.id]||0)+' of '+homeCap(o.id)+'.'));
     const row=el('div','wdrow');
     const col=el('button','go',ready.length?'Collect from '+ready.length:'Nothing ready'+(next<Infinity?' ('+fmt(next)+')':''));col.disabled=!ready.length;
     col.onclick=()=>{if(!room()){barnFull();return}for(const t of ready)enqueue({kind:'collect',tiles:[t]});closeModal();toast(H.name+': collecting from '+ready.length+'.')};row.appendChild(col);
@@ -3614,7 +3924,7 @@ function showHome(key){
     info.appendChild(el('p','hint','Feed in your barn: '+have('feed')+'. Make more at a Feed Mill.'));
     top.appendChild(info);p.appendChild(top);
     const up=homeUp(o.id,lv);
-    if(up)p.appendChild(upgradeBox('Upgrade to level '+(lv+1)+': room for '+Math.floor(H.cap*HOME_MULT[lv+1])+', '+HOME_BONUS[lv+1]*100+'% chance of double '+A.product.toLowerCase(),up,'Upgrade '+H.name,()=>{o.lv=lv+1;toast(H.name+' upgraded to level '+(lv+1)+'!')}));
+    if(up)p.appendChild(upgradeBox('Upgrade to level '+(lv+1)+': '+HOME_BONUS[lv+1]*100+'% chance of double '+A.product.toLowerCase()+' and more babies',up,'Upgrade '+H.name,()=>{o.lv=lv+1;toast(H.name+' upgraded to level '+(lv+1)+'!')}));
     else p.appendChild(el('p','hint','This home is fully upgraded.'));
     b.appendChild(p);
   }});
@@ -4064,7 +4374,7 @@ function planAt(x,y,kindWanted){
     if(e.pending==='harvest'||e.pending==='clear')return'plow';
     return null;
   }
-  if(e.grass)return'plow';
+  if(e.grass)return kindWanted==='plow'||tool==='plow'||tool==='tractor'||S.tapGrass==='plow'?'plow':'walk';
   const o=e.o;
   if(o.k==='plot'){
     if(o.fallow)return'plow';
@@ -4103,6 +4413,8 @@ function clickMulti(hx,hy){
     hx=x;hy=y;
   }
   const kind=planAt(hx,hy);
+  if(kind==='walk'){walkTo(hx,hy);return}
+  if(tool==='plow'&&kind!=='plow'){toast('The hoe turns grass into new farmland. Switch to the Multi-tool to plant and harvest.');return}
   if(!kind){
     const e=effective(hx,hy);
     if(e.o&&e.o.k==='plot'&&e.o.crop){const s=cropState(e.o,Date.now());
@@ -4116,16 +4428,30 @@ function clickMulti(hx,hy){
   if(kind==='harvest'&&!room()){barnFull();return}
   queueKind(kind,[[hx,hy]],null);
 }
-function costFor(kind){if(kind==='plow')return PLOW_COST;if(kind==='plant')return CROPS[S.seed].cost;return 0}
+// Plowing grass makes new farmland (NEW_PLOT coins); plowing a harvested plot again costs PLOW_COST.
+function plowCost(x,y){const e=effective(x,y);return e.grass?NEW_PLOT:PLOW_COST}
+function costFor(kind,x,y){if(kind==='plow')return plowCost(x,y);if(kind==='plant')return CROPS[S.seed].cost;return 0}
+// Seeds come from the barn first: a crop you have in storage is planted for free.
 function queueKind(kind,tiles,vehicle){
   const c=CROPS[S.seed];
   if(kind==='plant'&&S.level<c.lvl){SFX.error();toast(c.name+' unlock at Level '+c.lvl+'.');return false}
-  const cost=costFor(kind)*tiles.length;
-  if(S.coins<cost){SFX.error();toast(kind==='plow'?'Plowing costs '+PLOW_COST+' coins. Sell some goods from the barn first.':'You need '+cost+' coins to plant '+c.name.toLowerCase()+'.');return false}
-  S.coins-=cost;
-  const job={kind,tiles,vehicle,seed:S.seed,paid:costFor(kind)};
+  const costs={},free=new Set();let cost=0,fromBarn=0;
+  if(kind==='plant'){fromBarn=Math.min(tiles.length,have(S.seed));for(let i=0;i<tiles.length;i++){const k=tiles[i][0]+','+tiles[i][1];if(i<fromBarn){free.add(k);costs[k]=0}else{costs[k]=c.cost;cost+=c.cost}}}
+  else for(const[x,y]of tiles){const k=x+','+y,v=costFor(kind,x,y);costs[k]=v;cost+=v}
+  if(S.coins<cost){SFX.error();toast(kind==='plow'?(cost>=NEW_PLOT?'New farmland costs '+NEW_PLOT+' coins a plot. Sell some goods from the barn first.':'Plowing costs '+PLOW_COST+' coins. Sell some goods from the barn first.'):'You need '+cost+' coins to plant '+c.name.toLowerCase()+'.');return false}
+  S.coins-=cost;if(fromBarn){takeGood(S.seed,fromBarn);floatText(tiles[0][0],tiles[0][1]-.4,'-'+fromBarn+' '+c.name+' from the barn','#e8f5c8')}
+  const job={kind,tiles,vehicle,seed:S.seed,costs,free:kind==='plant'?free:null};
   enqueue(job);hud();return true;
 }
+// Free roam: tapping empty grass sends the farmer for a walk there.
+function walkTo(x,y){
+  for(let i=queue.length-1;i>=0;i--)if(queue[i].kind==='walk')queue.splice(i,1);
+  walkMark={x,y,t:performance.now()};
+  if(farmer.job&&farmer.job.kind==='walk'){farmer.job.stand=[x+.5,y+.5];return}
+  queue.push({kind:'walk',tiles:[[x,y]],stand:[x+.5,y+.5]});
+}
+let walkMark=null;
+function refund(j,k){if(j.free&&j.free.has(k)){S.goods[j.seed]=(S.goods[j.seed]||0)+1}else S.coins+=(j.costs&&j.costs[k])||0}
 function fuelCost(v){return Math.max(1,vlvl(v))}
 function refuel(quiet){
   fuelNow();let n=0;
@@ -4150,11 +4476,11 @@ function finishJob(j,now){
   for(const[x,y]of j.tiles){
     const k=x+','+y,o=S.tiles[k];
     if(j.kind==='plow'){
-      if((!occ[k]||(o&&o.k==='plot'&&o.fallow))){S.tiles[k]={k:'plot',crop:null,t:0};xp+=1;stat('plow');burst(x,y,['#8b5a2e','#a87a4c'])}
-      else S.coins+=j.paid;
+      if((!occ[k]||(o&&o.k==='plot'&&o.fallow))){S.tiles[k]={k:'plot',crop:null,t:0};xp+=1;stat('plow');burst(x,y,['#8b5a2e','#a87a4c']);spent+=(j.costs&&j.costs[k])||0}
+      else refund(j,k);
     }else if(j.kind==='plant'){
       if(o&&o.k==='plot'&&!o.fallow&&!o.crop){o.crop=j.seed;o.t=now;if(inSeason(j.seed))o.t-=CROPS[j.seed].grow*250;else if(season().id==='winter')o.t+=CROPS[j.seed].grow*200;if(Math.random()<.03)o.gold=true;xp+=CROPS[j.seed].xp;stat('plant');burst(x,y,['#3f9a3c','#8b5a2e'])}
-      else S.coins+=j.paid;
+      else refund(j,k);
     }else if(j.kind==='harvest'||j.kind==='clear'){
       if(o&&o.k==='plot'&&o.crop){
         const s=cropState(o,now);
@@ -4181,17 +4507,21 @@ function finishJob(j,now){
   }
   const[cx,cy]=j.tiles[0];let line2=0;
   for(const id in got){floatText(cx,cy-line2*.55,'+'+got[id]+' '+ITEMS[id].name,'#fff3b0',line2*160);line2++}
-  if(line2){SFX.harvest();setTimeout(SFX.collect,110)}
+  if(line2){if(j.kind==='collect'){const o=S.tiles[cx+','+cy];if(o&&o.k==='animal'){animalSfx(o.id);setTimeout(SFX.collect,250)}else SFX.pick()}else SFX.harvest()}
   if(full)floatText(cx,cy-line2*.55,'Barn full!','#ff9a8a');
-  if(spent){floatText(cx,cy,'-'+spent+' feed','#ffe0b0');SFX.plant()}
+  if(spent&&j.kind==='feed'){floatText(cx,cy,'-'+spent+' feed','#ffe0b0');nz(.25,{f:2200,q:.7,vol:.08,at:.03});const o=S.tiles[cx+','+cy];if(o&&o.k==='animal')setTimeout(()=>animalSfx(o.id),200)}
   if(xp){floatText(cx,cy-.6-line2*.55,'+'+xp+' XP','#7cc8ff',line2?200:0);addXP(xp)}
   if(j.kind==='plow')SFX.plow();else if(j.kind==='plant')SFX.plant();else if(j.kind==='collect'&&!line2)SFX.click();
-  if(j.kind==='plow'&&xp)floatText(cx,cy,'-'+j.paid*j.tiles.length,'#ffb3a8');
+  if(j.kind==='plow'&&spent)floatText(cx,cy,'-'+spent,'#ffb3a8');
   changed();
 }
 // Happy animals sometimes have a baby: it appears next to its parent if their home has room, and grows up over a few cycles.
 function babyBorn(id,x,y,now){
   buildOcc();if((ANC[id]||0)>=homeCap(id))return;
+  if(x<=HX){const grow=Math.max(180,ANIMALS[id].every*3),k=freeHousedKey(),pk=x+','+y,r0=roamOf(pk),nx=+k.split(',')[0],wx=x+.5+r0.x,wy=y+.5+r0.y;
+    S.tiles[k]={k:'animal',id,t:now,fed:true,baby:now+grow*1000};ROAM[k]={x:wx-(nx+.5)+.15,y:wy-.5+.1,tx:wx-(nx+.5)+.15,ty:wy-.5+.1,wait:2,f:1};buildOcc();
+    stat('baby');setTimeout(()=>{SFX.baby();floatText(nx,0-1,'♥ Baby '+ANIMALS[id].name.toLowerCase()+'!','#ffb3d0');burst(nx,0,['#ffb3d0','#fff','#ffd23f']);toast('A baby '+ANIMALS[id].name.toLowerCase()+' was born! It grows up in '+fmt(grow)+'.')},400);
+    return}
   for(let r=1;r<=2;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){
     const bx=x+dx,by=y+dy,k=bx+','+by;if(!inGrid(bx,by)||occ[k]||pend[k])continue;
     const grow=Math.max(180,ANIMALS[id].every*3);S.tiles[k]={k:'animal',id,t:now,fed:true,baby:now+grow*1000};occ[k]=k;ANC[id]=(ANC[id]||0)+1;
@@ -4308,11 +4638,13 @@ function infoCard(key){
   let line='',k=null;
   if(o.k==='animal'){if(isBaby(o,now)){line='Growing up: '+fmt((o.baby-now)/1000)+' to go.';k=1-(o.baby-now)/(Math.max(180,def.every*3)*1000)}else{const l=readyIn(o,def,now);line=def.product+' in '+fmt(l)+'. Sells for '+ITEMS['a_'+o.id].sell+'.';k=1-l/def.every}}
   else if(o.k==='tree'){const l=readyIn(o,def,now);line=def.product+' in '+fmt(l)+'. Sells for '+ITEMS['t_'+o.id].sell+'.';k=1-l/def.every}
+  else if(o.k==='deco'&&o.id==='sprinkler'){line='Water: '+Math.floor(o.w??60)+' / '+SPR_MAX+'. Fills up when it rains or snows and waters growing crops up to '+SPR_R+' plots away.';k=(o.w??60)/SPR_MAX}
   else if(o.k==='deco')line=isWall(o)?'Joins up with its neighbors.':'A little something to make the farm cozy.';
   else{const hl=houseLv(),nxt=HOUSE_AT[hl-1];line='Farmhouse level '+hl+' of 5.'+(nxt?' Finish '+(nxt-(S.qdone||[]).length)+' more quest'+(nxt-(S.qdone||[]).length>1?'s':'')+' to improve it.':' Fully upgraded!')}
   c.appendChild(el('p',null,line));
   if(k!=null){const b=el('div','pbar');b.innerHTML='<i style="width:'+Math.max(0,Math.min(100,k*100))+'%"></i>';c.appendChild(b)}
   const row=el('div','row'),mv=el('button','btn2','Move');mv.onclick=()=>{c.hidden=true;startMove(key)};row.appendChild(mv);
+  if(o.k==='deco'&&o.id==='sprinkler'&&(o.w??60)<SPR_MAX-1){const fl=el('button','btn2','Fill · '+SPR_FILL+' coins');fl.onclick=()=>{if(S.coins<SPR_FILL){SFX.error();toast('You need '+SPR_FILL+' coins to fill it with well water.');return}S.coins-=SPR_FILL;o.w=SPR_MAX;SFX.water();c.hidden=true;toast('The Auto Waterer is full.');changed()};row.appendChild(fl)}
   if(o.k!=='bld'){const rm=el('button','btn2','Remove');rm.onclick=()=>{if(rm.dataset.sure){c.hidden=true;removeAt(key)}else{rm.dataset.sure='1';rm.textContent='Sure?';rm.classList.add('danger')}};row.appendChild(rm)}
   c.appendChild(row);c.hidden=false;
   const r=c.getBoundingClientRect(),x=Math.min(Math.max(8,lastPtr.x+14),innerWidth-r.width-8),y=Math.min(Math.max(70,lastPtr.y-r.height-14),innerHeight-r.height-110);
@@ -4320,6 +4652,7 @@ function infoCard(key){
 }
 function startMove(key){
   const o=S.tiles[key];if(!o)return;if(pend[key]){toast('Wait for the farmer to finish there.');return}
+  if(isHoused(key)){toast('Animals live in their home. Switch Animals to Free roam in Settings to move them around.');return}
   delete S.tiles[key];buildOcc();const def=defOf(o);
   startPlacing({move:key,ghost:o,name:o.k==='bld'?(o.id==='house'?'Farmhouse':'Barn'):o.k==='plot'?'Plot':def.name});
 }
@@ -4331,7 +4664,9 @@ function removeAt(key){
 /* ================= placement ================= */
 function rotatePlacing(){placing.ghost.r=placing.ghost.r?0:1;SFX.click()}
 function startPlacing(o){
-  const n=size(o.ghost);placing=Object.assign({n},o);$('rotBtn').hidden=!ROTATABLE.has(o.ghost.id);
+  const n=size(o.ghost);placing=Object.assign({n},o);
+  if(o.ghost.k==='animal'&&!o.move&&animalsHome()){placing.home=true;const h=(HOMEPOS[o.ghost.id]||[])[0];place(h?h[0]+1:N>>1,h?h[1]+1:N>>1);return}
+  $('rotBtn').hidden=!ROTATABLE.has(o.ghost.id);
   toast(o.move?'Pick a new spot for the '+o.name.toLowerCase()+'.':'Click empty grass to place the '+o.name.toLowerCase()+'. Press Escape to stop.');
 }
 function stopPlacing(){
@@ -4341,7 +4676,7 @@ function stopPlacing(){
 }
 function place(x,y){
   const p=placing;
-  if(!fits(x,y,p.n)){SFX.error();toast('That spot is taken. Pick empty grass.');return}
+  if(!p.home&&!fits(x,y,p.n)){SFX.error();toast('That spot is taken. Pick empty grass.');return}
   if(p.move){S.tiles[x+','+y]=p.ghost;placing=null;$('rotBtn').hidden=true;SFX.place();changed();return}
   if(p.ghost.k==='animal'){const id=p.ghost.id;
     if(!hasHome(id)){SFX.error();toast('Build a '+HOMES[id].name+' first. Find it in Market > Homes.');placing=null;return}
@@ -4351,17 +4686,20 @@ function place(x,y){
   }else if(p.def.cash){if(S.cash<p.def.cash){SFX.error();toast('Not enough Farm Cash.');placing=null;return}S.cash-=p.def.cash}
   else{if(S.coins<p.def.cost){SFX.error();toast('You need '+p.def.cost+' coins for this.');placing=null;return}S.coins-=p.def.cost;floatText(x,y,'-'+p.def.cost,'#ffb3a8')}
   const o=Object.assign({},p.ghost);if(o.k==='animal'||o.k==='tree')o.t=Date.now();if(!ROTATABLE.has(o.id))delete o.r;
-  S.tiles[x+','+y]=o;burst(x,y,['#fff','#ffe066','#79c43d']);SFX.place();stat('decor');
+  if(p.home){const nk=freeHousedKey();x=+nk.split(',')[0];y=0;S.tiles[nk]=o;buildOcc();const h=yardOf(nk,o.id),sp=h?yardSpot(h):[N/2,N/2];ROAM[nk]={x:sp[0]-(x+.5),y:sp[1]-.5,tx:sp[0]-(x+.5),ty:sp[1]-.5,wait:1,f:1};
+    animalSfx(o.id);toast('A new '+ANIMALS[o.id].name.toLowerCase()+' moved into your '+HOMES[o.id].name+'.')}
+  else S.tiles[x+','+y]=o;
+  burst(x,y,['#fff','#ffe066','#79c43d']);SFX.place();stat('decor');
   const xp=p.def.buyxp||p.def.xp||0;if(xp){floatText(x,y-.6,'+'+xp+' XP','#7cc8ff',180);addXP(xp)}
   changed();
   const again=p.fromInv?(S.inv[p.cat+':'+p.id]||0)>0:p.def.cash?S.cash>=p.def.cash:S.coins>=p.def.cost;
-  if(!(again&&(o.k==='deco'||p.fromInv))){placing=null;$('rotBtn').hidden=true}
+  if(p.home||!(again&&(o.k==='deco'||p.fromInv))){placing=null;$('rotBtn').hidden=true}
 }
 
 /* ================= actions ================= */
 function act(hx,hy){
   if(placing){place(hx,hy);return}
-  if(!inGrid(hx,hy))return;
+  if(!inGrid(hx,hy)&&!(hx<=HX&&S.tiles[hx+','+hy]))return;
   if(VIS){actVisit(hx,hy);return}
   if(tutLocked()){const t=TUT[S.tut],key=target(hx,hy),o=key&&S.tiles[key];if(!(t.btn==='btnBarn'&&o&&o.k==='bld'&&o.id==='barn')&&(!t.find||!o||!t.find(o)||pend[key])){SFX.error();tutNudge=performance.now();toast('Follow the tip: '+t.txt);return}}
   if(tool==='delete'){
@@ -4374,6 +4712,7 @@ function act(hx,hy){
   if(tool==='move'){
     const key=target(hx,hy);if(!key)return;const o=S.tiles[key];
     if(pend[key]){toast('Wait for the farmer to finish there.');return}
+    if(isHoused(key)){toast('Animals live in their home. Switch Animals to Free roam in Settings to move them around.');return}
     delete S.tiles[key];buildOcc();
     const def=defOf(o);startPlacing({move:key,ghost:o,name:o.k==='bld'?(o.id==='house'?'Farmhouse':'Barn'):o.k==='plot'?'Plot':def.name});return;
   }
@@ -4420,16 +4759,16 @@ function tipText(hx,hy){
   if(!inGrid(hx,hy))return'';
   if(VIS)return visitTip(hx,hy);
   if(placing)return(fits(hx,hy,placing.n)?'Place here':'Spot taken')+(ROTATABLE.has(placing.ghost.id)?' (R to turn)':'');
-  if(VEH[tool]){const n=vsize(tool)**2;return{tractor:'Plow '+n+' plots ('+PLOW_COST*n+' coins)',seeder:'Plant '+n+' plots of '+CROPS[S.seed].name.toLowerCase(),harvester:'Harvest '+n+' plots'}[tool]}
+  if(VEH[tool]){const n=vsize(tool)**2;let pc=0;if(tool==='tractor')for(const[x,y]of vehicleArea(hx,hy))if(planAt(x,y)==='plow')pc+=plowCost(x,y);return{tractor:'Plow '+n+' plots ('+pc+' coins)',seeder:'Plant '+n+' plots of '+CROPS[S.seed].name.toLowerCase(),harvester:'Harvest '+n+' plots'}[tool]}
   const key=target(hx,hy),now=Date.now();
   if(pend[key||(hx+','+hy)])return'Farmer is on the way';
-  if(!key)return tool==='multi'?'Plow for '+PLOW_COST+' coins':'';
+  if(!key)return tool==='plow'||(tool==='multi'&&S.tapGrass==='plow')?'New farmland for '+NEW_PLOT+' coins':tool==='multi'?'Walk here':'';
   const o=S.tiles[key];
   if(tool==='delete')return o.k==='bld'?'Buildings stay':'Remove';
   if(tool==='move')return'Move';
   if(o.k==='plot'){
     if(o.fallow)return'Plow for '+PLOW_COST+' coins';
-    if(!o.crop){const c=CROPS[S.seed];return'Plant '+c.name.toLowerCase()+' for '+c.cost+' coins'}
+    if(!o.crop){const c=CROPS[S.seed];return have(S.seed)?'Plant '+c.name.toLowerCase()+' from your barn ('+have(S.seed)+' left)':'Plant '+c.name.toLowerCase()+' for '+c.cost+' coins'}
     const s=cropState(o,now);
     if(s.st==='ripe')return(o.gold?'Golden ':'')+s.c.name+': ready! Withers in '+fmt(s.left);
     if(s.st==='withered')return s.c.name+': withered. Click to clear';
@@ -4443,6 +4782,7 @@ function tipText(hx,hy){
   if(o.k==='bld'&&o.id==='barn')return'Barn ('+storeTotal()+'/'+barnCap()+' stored). Click to open';
   if(isBaby(o,now))return'Baby '+ANIMALS[o.id].name.toLowerCase()+': grows up in '+fmt((o.baby-now)/1000);
   if(o.k==='animal'||o.k==='tree'){const def=defOf(o),l=readyIn(o,def,now);return def.name+(l>0?': '+def.product.toLowerCase()+' in '+fmt(l):': collect '+def.product.toLowerCase()+'!')}
+  if(o.k==='deco'&&o.id==='sprinkler')return'Auto Waterer: '+Math.floor(o.w??60)+' / '+SPR_MAX+' water';
   if(o.k==='deco')return DECOR[o.id].name;
   return o.id==='house'?'Farmhouse':'Barn';
 }
@@ -4464,7 +4804,7 @@ function setTool(tl){
 }
 document.querySelectorAll('.tool[data-tool]').forEach(b=>b.addEventListener('click',()=>{
   SFX.click();setTool(b.dataset.tool);
-  const msg={multi:'Multi-tool: plow, plant, harvest and collect.',move:'Move tool: click something, then click its new spot.',delete:'Remove tool: click anything you want to clear away.',tractor:'Tractor: click to plow a 2 by 2 area.',seeder:'Seeder: click to plant a 2 by 2 area.',harvester:'Harvester: click to harvest a 2 by 2 area.'}[tool];
+  const msg={multi:'Multi-tool: plant, harvest and collect. Tap grass to walk.',plow:'Hoe: tap grass to make new farmland for '+NEW_PLOT+' coins a plot.',move:'Move tool: click something, then click its new spot.',delete:'Remove tool: click anything you want to clear away.',tractor:'Tractor: click to plow a 2 by 2 area.',seeder:'Seeder: click to plant a 2 by 2 area.',harvester:'Harvester: click to harvest a 2 by 2 area.'}[tool];
   toast(msg);
 }));
 $('seedchip').onclick=()=>{SFX.click();closePops();openMarket('seeds')};
@@ -4492,8 +4832,15 @@ function showSettings(){
     const toggle=(label,on,fn)=>{const r=el('div','setrow');r.appendChild(el('span',null,label));const t=el('button','btn2 tog'+(on?' on':''),on?'On':'Off');t.setAttribute('aria-pressed',String(on));t.onclick=()=>{fn();SFX.click();save();hud();rerender()};r.appendChild(t);p.appendChild(r)};
     const slider=(label,val,fn)=>{const r=el('label','setrow');r.appendChild(el('span',null,label));const i=document.createElement('input');i.type='range';i.min=0;i.max=100;i.value=Math.round(val*100);i.setAttribute('aria-label',label);i.oninput=()=>fn(i.value/100);i.onchange=()=>{save();SFX.click()};r.appendChild(i);p.appendChild(r)};
     const lr=el('div','setrow');lr.appendChild(el('span',null,'Language'));const lg=el('div','seg');
-    for(const[c,n]of LANGS){const bt=el('button','btn2 tog'+(LANG===c?' on':''),n);bt.lang=c;bt.setAttribute('aria-pressed',String(LANG===c));bt.onclick=()=>{if(LANG!==c){SFX.click();save();setLang(c)}};lg.appendChild(bt)}
+    {const sel=document.createElement('select');sel.className='langsel';sel.setAttribute('aria-label','Language');sel.setAttribute('translate','no');for(const[c,n]of LANGS){const o=document.createElement('option');o.value=c;o.textContent=n;o.lang=c;if(c===LANG)o.selected=true;sel.appendChild(o)}sel.onchange=()=>{if(sel.value!==LANG){SFX.click();save();setLang(sel.value)}};lg.appendChild(sel)}
     lr.appendChild(lg);p.appendChild(lr);
+    const seg=(label,opts,cur,fn)=>{const r=el('div','setrow');r.appendChild(el('span',null,label));const sg=el('div','seg');
+      for(const[v,n]of opts){const bt=el('button','btn2 tog'+(cur===v?' on':''),n);bt.setAttribute('aria-pressed',String(cur===v));bt.onclick=()=>{if(cur!==v){fn(v);SFX.click();save();hud();rerender()}};sg.appendChild(bt)}
+      r.appendChild(sg);p.appendChild(r)};
+    seg('Screen',[['auto','Auto'],['portrait','Portrait'],['landscape','Landscape']],orientPref()||'auto',v=>setOrient(v,true));
+    seg('Animals',[['home','Stay home'],['free','Free roam']],S.animalMode==='free'?'free':'home',v=>{S.animalMode=v;changed();toast(v==='free'?'Your animals can roam the farm now. Fences keep them in.':'Your animals are heading home.')});
+    seg('Tapping grass',[['walk','Walk there'],['plow','Plow it']],S.tapGrass==='plow'?'plow':'walk',v=>{S.tapGrass=v});
+    if(S.pet){const r=el('div','setrow');r.appendChild(el('span',null,'Pet name'));const nb=el('button','btn2',S.pet.name||PET_NAME[S.pet.kind]);nb.setAttribute('aria-label','Rename your pet');nb.onclick=()=>{SFX.click();renamePet()};r.appendChild(nb);p.appendChild(r)}
     toggle('Music',S.music,()=>{S.music=!S.music;wakeAudio();musicSync()});
     slider('Music volume',S.musicVol??1,v=>{S.musicVol=v;const a=AC;if(a&&MUSIC.master&&MUSIC.on)MUSIC.master.gain.setTargetAtTime(.55*v,a.currentTime,.1)});
     toggle('Sound effects',S.sound,()=>{S.sound=!S.sound});
@@ -4551,8 +4898,11 @@ function unlockList(l){const out=[];for(const[cat,src]of[['seeds',CROPS],['anima
 function unlockGrid(list){const g2=el('div','unlocks');for(const[cat,id,d]of list){const ik=cat+':'+id;if(!ICONS[ik])ICONS[ik]=renderIcon(cat,id);const c=el('div','unl'),im=el('img');im.src=ICONS[ik];im.alt='';c.appendChild(im);c.appendChild(el('span',null,d.name));g2.appendChild(c)}return g2}
 function showNextUnlocks(){
   modal({title:'Level '+S.level,color:'gold',render(b){
-    const p=el('div','store');p.appendChild(el('p',null,(need(S.level)-S.xp)+' XP to Level '+(S.level+1)+'. Deliveries with Dale give the most XP, then quests and neighbor orders.'));
-    for(const l of[S.level+1,S.level+2]){const list=unlockList(l);if(!list.length)continue;p.appendChild(el('h3',null,'Level '+l+' unlocks'));p.appendChild(unlockGrid(list))}
+    const p=el('div','store');
+    if(S.level>=MAX_LVL){p.appendChild(el('p',null,'You reached Level 99, the top level. Well done, champion!'));b.appendChild(p);return}
+    p.appendChild(el('p',null,(need(S.level)-S.xp)+' XP to Level '+(S.level+1)+' of '+MAX_LVL+'. Deliveries with Dale give the most XP, then quests and neighbor orders.'));
+    if(S.level>=MAX_LVL-10)p.appendChild(el('p','hint','At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.'));
+    for(const l of[S.level+1,S.level+2]){if(l>MAX_LVL)continue;const list=unlockList(l);if(!list.length)continue;p.appendChild(el('h3',null,'Level '+l+' unlocks'));p.appendChild(unlockGrid(list))}
     b.appendChild(p);
   }});
 }
@@ -4646,8 +4996,8 @@ function renderShop(body){
     if(marketCat==='seeds'&&id===hotItem())card.appendChild(el('span','newtag hot','Hot today'));
     card.appendChild(el('strong',null,d.name));
     let info;
-    if(marketCat==='seeds')info=(inSeason(id)?'In season now! ':CROP_SEASON[id]?'Best in '+CROP_SEASON[id]+'. ':'')+'Ready in '+fmt(d.grow)+'. Sells for '+ITEMS[id].sell+'. +'+d.xp+' XP';
-    else if(marketCat==='decor'||marketCat==='specials')info=(d.size===2?'Takes 2 by 2 tiles. ':'')+'+'+d.xp+' XP';
+    if(marketCat==='seeds')info=(inSeason(id)?'In season now! ':CROP_SEASON[id]?'Best in '+CROP_SEASON[id]+'. ':'')+'Ready in '+fmt(d.grow)+'. Sells for '+ITEMS[id].sell+'. +'+d.xp+' XP'+(have(id)?'. In your barn: '+have(id)+' (planted for free)':'');
+    else if(marketCat==='decor'||marketCat==='specials')info=(id==='sprinkler'?'Waters growing crops up to 2 plots away and fills up when it rains. ':'')+(d.size===2?'Takes 2 by 2 tiles. ':'')+'+'+d.xp+' XP';
     else if(marketCat==='farm')info=d.kind==='vehicle'?d.verb+' '+(vsize(id)**2)+' plots per trip'+(vlvl(id)?' (level '+vlvl(id)+')':'')+'. Uses 1 fuel.':d.desc;
     else if(marketCat==='buildings')info=d.desc+' '+d.recipes.length+' recipes. You own '+Object.values(S.tiles).filter(o=>o.k==='mk'&&o.id===id).length+'.';
     else if(marketCat==='homes')info='Home for up to '+d.cap+' '+plural(ANIMALS[id].name).toLowerCase()+'. Click it to collect from all of them. You own '+(HC[id]||0)+'.';
@@ -4676,7 +5026,7 @@ function renderShop(body){
     else if(marketCat==='animals'&&(ANC[id]||0)>=homeCap(id)){btn.textContent=HOMES[id].name+' full: build another';btn.classList.add('needhome');btn.onclick=()=>{SFX.click();marketCat='homes';rerender()}}
     else{
       const price=d.cash?'<span class="bill">$</span>'+d.cash:'<span class="coin"></span>'+d.cost.toLocaleString();
-      btn.innerHTML=(marketCat==='seeds'?(S.seed===id?'Selected':'Plant')+' &middot; ':'Buy &middot; ')+price;
+      btn.innerHTML=(marketCat==='seeds'?(S.seed===id?'Selected':'Plant')+' &middot; ':'Buy &middot; ')+(marketCat==='seeds'&&have(id)?'<span class="bfree">Barn</span>':price);
       btn.onclick=()=>buyItem(marketCat,id,d);
     }
     card.appendChild(btn);grid.appendChild(card);
@@ -4692,7 +5042,7 @@ function buyItem(cat,id,d){
     if(d.kind==='supply'&&room()<d.n){barnFull();return}
     if(d.cash)S.cash-=d.cash;else S.coins-=d.cost;
     const now=Date.now();let n=0;
-    if(d.kind==='pet'){const had=S.pet;S.pet={kind:d.pet,name:PET_NAME[d.pet]};placePet();d.pet==='dog'?SFX.bark():SFX.meow();closeModal();toast((had?'Swapped pets! ':'')+'Meet '+S.pet.name+', your new '+(d.pet==='dog'?'farm dog':'barn cat')+'! Rename it in the Wardrobe.');changed();return}
+    if(d.kind==='pet'){const had=S.pet;S.pet={kind:d.pet,name:PET_NAME[d.pet]};placePet();d.pet==='dog'?SFX.bark():SFX.meow();closeModal();toast((had?'Swapped pets! ':'')+'Meet '+S.pet.name+', your new '+(d.pet==='dog'?'farm dog':'barn cat')+'! Tap your pet to give it a name.');changed();setTimeout(renamePet,500);return}
     if(d.kind==='vehicle'){S.veh[id]=true;toast('Your new '+d.name.toLowerCase()+' is ready! Pick it from the tools.');SFX.engine()}
     else if(d.kind==='expand'){S.size=d.to;N=S.size;buildBorder();fit();toast('Your farm grew to '+d.to+' by '+d.to+'!');SFX.level()}
     else if(d.kind==='fuel'){S.fuel=FUEL_MAX;S.fuelT=now;toast('Fuel tank full.')}
@@ -4982,8 +5332,24 @@ function petAt(cx,cy){
 }
 function petPet(){
   const name=S.pet.name||PET_NAME[S.pet.kind];pet.heartT=2.4;if(pet.state==='walk'){pet.state='sit';pet.t=0}
-  S.pet.kind==='dog'?SFX.bark():SFX.meow();floatText(pet.x,pet.y-.9,'♥','#ff6f9a');
-  if(Math.random()<.4)toast(name+(S.pet.kind==='dog'?' wags happily.':' purrs.'));stat('petted');
+  S.pet.kind==='dog'?SFX.bark():SFX.meow();floatText(pet.x,pet.y-.9,'♥','#ff6f9a');stat('petted');
+  // a little card with the pet's name and a Rename button
+  const c=$('ocard');c.innerHTML='';c.appendChild(el('strong',null,name));
+  c.appendChild(el('p',null,(S.pet.kind==='dog'?'Your farm dog wags happily.':'Your barn cat purrs.')+' Pets find coins and materials.'));
+  const row=el('div','row'),rn=el('button','btn2','Rename');rn.onclick=()=>{c.hidden=true;renamePet()};row.appendChild(rn);c.appendChild(row);c.hidden=false;
+  const r=c.getBoundingClientRect(),x=Math.min(Math.max(8,lastPtr.x+14),innerWidth-r.width-8),y=Math.min(Math.max(70,lastPtr.y-r.height-14),innerHeight-r.height-110);
+  c.style.left=x+'px';c.style.top=y+'px';
+}
+function renamePet(){
+  if(!S.pet)return;const kind=S.pet.kind;
+  modal({title:'Name your '+(kind==='dog'?'dog':'cat'),color:'pink',small:true,render(b){
+    const p=el('div','body-pad setp'),i=document.createElement('input');i.type='text';i.maxLength=16;i.value=S.pet.name||PET_NAME[kind];i.className='petname';i.setAttribute('aria-label','Pet name');i.placeholder=PET_NAME[kind];
+    p.appendChild(el('p',null,'What should your '+(kind==='dog'?'farm dog':'barn cat')+' be called?'));p.appendChild(i);
+    const ideas=el('div','seg petideas');for(const n of(kind==='dog'?['Biscuit','Rusty','Daisy','Max','Pepper','Scout']:['Mittens','Ginger','Luna','Socks','Pumpkin','Oliver'])){const bt=el('button','btn2',n);bt.onclick=()=>{i.value=n;i.focus()};ideas.appendChild(bt)}
+    p.appendChild(ideas);
+    const go=el('button','go','Save name');const done=()=>{S.pet.name=(i.value.trim()||PET_NAME[kind]).slice(0,16);SFX.click();kind==='dog'?SFX.bark():SFX.meow();closeModal();toast('Say hi to '+S.pet.name+'!');changed()};
+    go.onclick=done;i.onkeydown=e=>{if(e.key==='Enter')done()};p.appendChild(go);b.appendChild(p);setTimeout(()=>{i.focus();i.select()},60);
+  }});
 }
 
 /* ================= day and night ================= */
@@ -5063,9 +5429,28 @@ function showSeason(){
   }});
 }
 let lastRainWater=0,rainToldSlot=-1,flashT=0,nextBolt=0,curSeason=null;
+// Auto Waterers (Level 10) collect rain and snowmelt in their barrel and water growing crops within SPR_R plots.
+const SPR_MAX=100,SPR_USE=10,SPR_R=2,SPR_FILL=40;
+function sprinklerTick(now,w){
+  if(VIS)return;
+  for(const k in S.tiles){const o=S.tiles[k];if(o.k!=='deco'||o.id!=='sprinkler')continue;
+    if(o.w==null)o.w=60;
+    o.w=Math.min(SPR_MAX,o.w+(w==='rain'||w==='storm'?6:w==='snow'?2:w==='cloudy'?.12:.06));
+    if(o.w<SPR_USE)continue;
+    const[x,y]=k.split(',').map(Number);
+    for(let dy=-SPR_R;dy<=SPR_R;dy++)for(let dx=-SPR_R;dx<=SPR_R;dx++){
+      const q=S.tiles[(x+dx)+','+(y+dy)];if(!q||q.k!=='plot'||!q.crop||q.wet)continue;
+      const st=cropState(q,now);if(st.st==='ripe'||st.st==='withered')continue;
+      q.wet=true;q.t-=st.left*300;o.w-=SPR_USE;o.sprayT=now+1600;stat('water');
+      const[px,py]=P(x+dx+.5,y+dy+.5);spray(px,py-6,10,{c:['#bfe6ff','#8fd0f5','#fff'],v:1.4,r:1.5,gr:.1,life:.6});
+      if(Math.random()<.5)nz(.4,{f:3000,q:.6,vol:.04,at:.05});
+      dx=dy=99;
+    }
+  }
+}
 function weatherTick(){
   if(!S)return;renderWx();
-  const now=Date.now(),w=weather();
+  const now=Date.now(),w=weather();sprinklerTick(now,w);
   if((w==='rain'||w==='storm')&&!VIS&&now-lastRainWater>4000){
     lastRainWater=now;let n=0;
     for(const k in S.tiles){const o=S.tiles[k];if(o.k==='plot'&&o.crop&&!o.wet){const s2=cropState(o,now);if(s2.st!=='ripe'&&s2.st!=='withered'){o.wet=true;o.t-=s2.left*300;n++}}}
@@ -5144,7 +5529,7 @@ function drawTutArrow(now){
   let best=null;for(const k in S.tiles){if(pend[k])continue;const o=S.tiles[k];if(t.find(o)){const[x,y]=k.split(',').map(Number);if(!best||x+y<best[0]+best[1])best=[x,y,k]}}
   if(!best)return;
   const o=S.tiles[best[2]],n=size(o),pulse=reduce?.5:(Math.sin(now/220)+1)/2,nud=Math.max(0,1-(performance.now()-tutNudge)/700);
-  poly([P(best[0],best[1]),P(best[0]+n,best[1]),P(best[0]+n,best[1]+n),P(best[0],best[1]+n)],'rgba(255,226,90,'+(.18+pulse*.2).toFixed(2)+')','rgba(255,210,40,'+(.7+pulse*.3).toFixed(2)+')',3+nud*3);
+  if(best[0]>HX)poly([P(best[0],best[1]),P(best[0]+n,best[1]),P(best[0]+n,best[1]+n),P(best[0],best[1]+n)],'rgba(255,226,90,'+(.18+pulse*.2).toFixed(2)+')','rgba(255,210,40,'+(.7+pulse*.3).toFixed(2)+')',3+nud*3);
   const ax=o.k==='animal'?roamOf(best[2]):{x:0,y:0},[px,py]=P(best[0]+n/2+ax.x,best[1]+n/2+ax.y),b=reduce?0:Math.abs(Math.sin(now/240))*-10,y0=py-(o.k==='animal'?62:50)+b,s2=1.25+nud*.6;
   g.save();g.translate(px,y0);g.scale(s2,s2);poly([[-7,-16],[7,-16],[7,-4],[13,-4],[0,9],[-13,-4],[-7,-4]],'#ffd23f','#6b3c15',2);g.restore();
 }
@@ -5302,12 +5687,41 @@ function dailyBonus(){
   }});
 }
 
+/* ================= screen orientation ================= */
+// The player picks portrait, landscape or auto (on the title screen or in Settings). Where the browser allows it
+// (installed app, or full screen on Android) the screen is locked; elsewhere a card asks to turn the phone.
+const ORIENT_KEY='farm-village-orient';
+function orientPref(){try{return localStorage.getItem(ORIENT_KEY)}catch(e){return null}}
+function isPhone(){return matchMedia('(pointer: coarse)').matches&&Math.min(screen.width,screen.height)<900}
+function setOrient(v,apply){try{localStorage.setItem(ORIENT_KEY,v)}catch(e){}renderOrientPick();if(apply)lockOrient();checkOrient()}
+async function lockOrient(){
+  const v=orientPref();if(!isPhone()||!screen.orientation)return;
+  if(!v||v==='auto'){try{screen.orientation.unlock()}catch(e){}return}
+  try{if(!document.fullscreenElement&&!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches&&document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen({navigationUI:'hide'})}catch(e){}
+  try{await screen.orientation.lock(v)}catch(e){}
+  checkOrient();
+}
+let rotKept=false;
+function checkOrient(){
+  const v=orientPref(),r=$('rotate');if(!r)return;
+  const port=matchMedia('(orientation: portrait)').matches,wrong=isPhone()&&!rotKept&&(v==='portrait'&&!port||v==='landscape'&&port);
+  if(wrong){$('rotTitle').textContent=v==='portrait'?'Turn your phone upright':'Turn your phone sideways';$('rotText').textContent=v==='portrait'?'You chose to play in portrait.':'You chose to play in landscape.'}
+  r.hidden=!wrong;
+}
+$('rotKeep').onclick=()=>{SFX.click();setOrient(matchMedia('(orientation: portrait)').matches?'portrait':'landscape',false);rotKept=true;checkOrient()};
+addEventListener('resize',()=>setTimeout(checkOrient,120));
+function renderOrientPick(){
+  const t=$('torient');if(!t)return;const v=orientPref()||'auto';t.querySelectorAll('button').forEach(b=>b.remove());
+  for(const[c,n]of[['portrait','Portrait'],['landscape','Landscape'],['auto','Auto']]){const b=document.createElement('button');b.textContent=n;b.setAttribute('aria-pressed',String(v===c));b.onclick=()=>{SFX.click();setOrient(c,false)};t.appendChild(b)}
+}
+renderOrientPick();
+
 /* ================= boot ================= */
 function start(data){
   S=norm(valid(data&&data.S)?data.S:(load()||fresh()));
   N=S.size;
   for(const k in S.tiles){const o=S.tiles[k];if(o.k==='bld'){farmer.x=+k.split(',')[0]+2.4;farmer.y=+k.split(',')[1]+2.6;break}}
-  resize();buildBorder();buildOcc();buildBars();renderNeighbors();hud();save();placePet();setTool('multi');
+  resize();buildBorder();buildOcc();if(syncHousing())buildOcc();buildBars();renderNeighbors();hud();save();placePet();setTool('multi');
   window.claude?.hot?.snapshot?.(()=>({S}));
   requestAnimationFrame(frame);
   setInterval(save,10000);
