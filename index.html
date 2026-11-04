@@ -4111,7 +4111,8 @@ const TOWNS=[
   {name:'Harbor Cannery',km:4,likes:['crops','fruit','animal']}
 ];
 const TRUCK_CAP=[0,20,35,60],TRUCK_UP=[null,{coins:1500,mats:{board:10,nail:10}},{coins:5000,mats:{board:20,nail:20,paint:8}}];
-const DRIVE=2000; // ms to drive off screen or back in
+const DRIVE=5000; // ms to drive off screen or back in: an easy, unhurried pace
+function tripSecs(c){return Math.max(12,Math.min(20,c.time*2))}
 function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
 function truckCap(){return TRUCK_CAP[dv().lv||1]}
 // Dale's first job on a new farm is a small wheat run you can fill right after the first harvest.
@@ -4144,8 +4145,8 @@ function sendDelivery(c){
   if(!canFill(c)){SFX.error();toast('You do not have everything for this delivery yet.');return}
   if(contractCount(c)>truckCap()){SFX.error();toast('That is more than the truck can carry. Upgrade the truck to load '+TRUCK_CAP[Math.min(3,(d.lv||1)+1)]+'.');return}
   for(const[id,n]of c.items)takeGood(id,n);
-  d.jobs=d.jobs.filter(x=>x!==c);const now=Date.now(),trip=Math.max(5,Math.min(10,c.time));d.run={job:c,start:now,end:now+trip*1000};d.next=Math.min(d.next,now+90000);
-  SFX.horn();setTimeout(SFX.engine,350);setTimeout(SFX.engine,900);dale.say=['Off to '+c.to+'!','See you soon!','Back before you know it!'][Math.floor(Math.random()*3)];dale.sayT=2.2;stat('delivSent');toast('Dale loaded the truck and is heading to '+c.to+'. Back in '+fmt(Math.max(5,Math.min(10,c.time)))+'.');
+  d.jobs=d.jobs.filter(x=>x!==c);const now=Date.now(),trip=tripSecs(c);d.run={job:c,start:now,end:now+trip*1000};d.next=Math.min(d.next,now+90000);
+  SFX.horn();setTimeout(SFX.engine,350);setTimeout(SFX.engine,900);dale.say=['Off to '+c.to+'!','See you soon!','Back before you know it!'][Math.floor(Math.random()*3)];dale.sayT=2.2;stat('delivSent');toast('Dale loaded the truck and is heading to '+c.to+'. Back in '+fmt(tripSecs(c))+'.');
   closeModal();changed();
 }
 function payDelivery(){
@@ -4171,7 +4172,7 @@ function showDelivery(){
       const row=el('div','order'),pic=el('img');pic.className='nbface';pic.src=itemIcon(c.items[0][0]);pic.alt='';pic.style.background='#fff4dc';row.appendChild(pic);
       const mid=el('div');mid.appendChild(el('strong',null,c.to));
       const want=el('div','want');for(const[id,n]of c.items)want.appendChild(goodReq(id,n));mid.appendChild(want);
-      const pay=el('div','pay');pay.innerHTML='<span><span class="coin"></span> <b>'+c.coins.toLocaleString()+'</b></span><span>+'+c.xp+' XP</span><span>'+fmt(c.time)+' trip</span><span>'+contractCount(c)+' / '+truckCap()+' load</span>';mid.appendChild(pay);
+      const pay=el('div','pay');pay.innerHTML='<span><span class="coin"></span> <b>'+c.coins.toLocaleString()+'</b></span><span>+'+c.xp+' XP</span><span>'+fmt(tripSecs(c))+' trip</span><span>'+contractCount(c)+' / '+truckCap()+' load</span>';mid.appendChild(pay);
       row.appendChild(mid);
       const acts=el('div','acts'),go=el('button','go','Send');go.disabled=!!d.run||!canFill(c)||contractCount(c)>truckCap();go.onclick=()=>sendDelivery(c);acts.appendChild(go);
       const x=el('button','btn2','Discard');x.onclick=()=>discardContract(c);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
