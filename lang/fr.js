@@ -809,7 +809,8 @@ Sell 20 goods from the barn|Vends 20 produits de la grange
 Complete 8 deliveries|Termine 8 livraisons
 Make 10 goods in your buildings|Fabrique 10 produits dans tes bâtiments
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Tu peux planter d'autres cultures. Ouvre le Marché, va dans Graines et touche Planter sur le Soja.
-Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Le soja est ta graine maintenant. Touche une parcelle labourée pour le planter. Change de graine quand tu veux dans Marché > Graines.`,
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Le soja est ta graine maintenant. Touche une parcelle labourée pour le planter. Change de graine quand tu veux dans Marché > Graines.
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Toucher l'herbe fait marcher ton fermier jusque-là. L'interrupteur Marcher / Labourer crée de la terre cultivable. Touche Labourer pour essayer, puis Marcher pour revenir.`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1

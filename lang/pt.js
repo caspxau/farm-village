@@ -809,7 +809,8 @@ Sell 20 goods from the barn|Venda 20 produtos do celeiro
 Complete 8 deliveries|Complete 8 entregas
 Make 10 goods in your buildings|Faça 10 produtos nas suas construções
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Você pode plantar outras culturas também. Abra o Mercado, vá em Sementes e toque em Plantar na Soja.
-Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Agora sua semente é a soja. Toque num lote arado para plantar. Troque de semente quando quiser em Mercado > Sementes.`,
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Agora sua semente é a soja. Toque num lote arado para plantar. Troque de semente quando quiser em Mercado > Sementes.
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Tocar na grama faz seu fazendeiro andar até lá. O botão Andar / Arar cria terra de plantio. Toque em Arar para testar e depois em Andar para voltar.`,
 p:`0|$1 {p1:moeda|moedas}
 1|$1 / $2 XP
 2|faltam $1

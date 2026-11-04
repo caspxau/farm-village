@@ -817,7 +817,8 @@ Sell 20 goods from the barn|从谷仓卖出20件物品
 Complete 8 deliveries|完成8次送货
 Make 10 goods in your buildings|在建筑里制作10件物品
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|你也可以种别的作物。打开市场，进入种子，在大豆上点"种植"。
-Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|现在你的种子是大豆。点击耕好的地块来种。随时可以在 市场 > 种子 里更换。`,
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|现在你的种子是大豆。点击耕好的地块来种。随时可以在 市场 > 种子 里更换。
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|点击草地时，农夫会走过去。"走路 / 耕地"开关可以改为开垦新农田。点"耕地"试试，再点"走路"切换回来。`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1

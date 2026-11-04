@@ -817,7 +817,8 @@ Sell 20 goods from the barn|खलिहान से 20 चीज़ें ब�
 Complete 8 deliveries|8 डिलीवरी पूरी करें
 Make 10 goods in your buildings|अपनी इमारतों में 10 चीज़ें बनाएँ
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|आप दूसरी फ़सलें भी बो सकते हैं। बाज़ार खोलें, बीज में जाएँ और सोयाबीन पर बोएँ दबाएँ।
-Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|अब आपका बीज सोयाबीन है। बोने के लिए जुते खेत पर टैप करें। बीज कभी भी बाज़ार > बीज में बदलें।`,
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|अब आपका बीज सोयाबीन है। बोने के लिए जुते खेत पर टैप करें। बीज कभी भी बाज़ार > बीज में बदलें।
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|घास पर टैप करने से किसान वहाँ चलता है। चलें / जोतें स्विच से नया खेत बनता है। आज़माने के लिए जोतें दबाएँ, फिर वापस आने के लिए चलें।`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी

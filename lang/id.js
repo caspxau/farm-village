@@ -809,7 +809,8 @@ Sell 20 goods from the barn|Jual 20 barang dari lumbung
 Complete 8 deliveries|Selesaikan 8 kiriman
 Make 10 goods in your buildings|Buat 10 barang di bangunanmu
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Kamu juga bisa menanam tanaman lain. Buka Pasar, pilih Benih, lalu ketuk Tanam pada Kedelai.
-Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Sekarang benihmu kedelai. Ketuk petak yang dibajak untuk menanamnya. Ganti benih kapan saja di Pasar > Benih.`,
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Sekarang benihmu kedelai. Ketuk petak yang dibajak untuk menanamnya. Ganti benih kapan saja di Pasar > Benih.
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Mengetuk rumput membuat petanimu berjalan ke sana. Tombol Jalan / Bajak membuat lahan baru. Ketuk Bajak untuk mencoba, lalu Jalan untuk kembali.`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1

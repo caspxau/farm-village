@@ -827,6 +827,26 @@ body.visiting .modesw{display:none}
 
 .qskip{display:block;margin:8px auto 2px;font:inherit;font-size:12px;font-weight:700;color:#6b3c15;background:none;border:1.5px dashed #c9a46a;border-radius:999px;padding:2px 12px;cursor:pointer}
 .qskip.danger{border-style:solid}
+
+/* while a tutorial tip is showing, messages pop up above it instead of covering it */
+body.tutshow .toast{bottom:calc(240px + env(safe-area-inset-bottom,0px))}
+@media (max-width:640px){body.tutshow .toast{bottom:calc(206px + env(safe-area-inset-bottom,0px))}}
+@media (max-height:520px) and (orientation:landscape){body.tutshow .toast{top:64px;bottom:auto}}
+
+/* phones held sideways: the tip card sits small in the bottom-left corner, off the field and the dock */
+@media (max-height:520px) and (orientation:landscape){
+  body .tut{top:auto;left:max(8px,env(safe-area-inset-left,0px));right:auto;transform:none;bottom:max(8px,env(safe-area-inset-bottom,0px));width:min(250px,calc(50vw - 300px));min-width:200px;padding:6px 8px;gap:6px;flex-wrap:wrap}
+  body .tut strong{font-size:12.5px;line-height:1.25}body .tut small{font-size:10.5px}
+  body .tut button{min-height:30px;padding:2px 10px;font-size:12px}
+}
+
+/* phones held sideways: a tighter barn header so the goods are in view */
+@media (max-height:520px) and (orientation:landscape){
+  .store{padding:6px 12px}.store-head{margin:0 0 4px}.store-head strong,.store-head h3{font-size:15px}
+  .hotbar{padding:3px 10px;margin:2px 0 4px;font-size:13px}.hotbar img{width:28px;height:28px}
+  .barnbar{margin:2px 0 6px;gap:8px}.barnbar .go{min-height:34px;font-size:15px;padding:3px 12px}
+  .sheet .grid{gap:8px}
+}
 </style>
 </head>
 <body>
@@ -1107,7 +1127,7 @@ const PL_EXACT={
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
 'Neighbor trades: swap goods for materials':'Wymiana z sąsiadami: towary za materiały','Trades':'Wymiana','Trade with neighbors for materials':'Wymień się z sąsiadami na materiały','Neighbor Trades':'Wymiana z sąsiadami','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.':'Sąsiedzi wymieniają materiały budowlane na towary z farmy. Użyj ich do rozbudowy stodoły i domów zwierząt.','In return for':'W zamian za','Trade':'Wymień','Traded':'Wymienione','You do not have everything for this trade yet.':'Nie masz jeszcze wszystkiego do tej wymiany.','Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.':'Multi-narzędzie: sadzi, zbiera i odbiera, a traktor, siewnik i kombajn włącza samo.','Graphics':'Grafika','Sharpest':'Najostrzej','Smoothest':'Najpłynniej','Machines':'Maszyny','Use by themselves':'Same','By hand':'Ręcznie',
-'Raw Bacon':'Surowy boczek','Bacon and Eggs':'Jajka na boczku',
+'Raw Bacon':'Surowy boczek','Bacon and Eggs':'Jajka na boczku','Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.':'Dotknięcie trawy wysyła tam farmera. Przełącznik Chodzenie / Orka robi zamiast tego nowe pole. Dotknij Orki, by spróbować, a potem Chodzenia, by wrócić.',
 'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.':'Możesz sadzić też inne rośliny. Otwórz targ, przejdź do Nasion i dotknij Posadź przy Soi.','Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.':'Teraz sadzisz soję. Kliknij zaorane pole, by ją posadzić. Nasiona zmienisz w każdej chwili w: Targ > Nasiona.',
 'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.':'Dale wozi towary do miasta za monety i mnóstwo XP. Otwórz tablicę dostaw i wyślij go z pszenicą.','Everything you harvest goes to the barn. Open the Barn and sell something.':'Wszystko, co zbierzesz, trafia do stodoły. Otwórz stodołę i coś sprzedaj.','Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.':'Rozbudowy wymagają desek, gwoździ, cegieł i farby. Znajdujesz je podczas pracy, a sąsiedzi wymieniają je w: Więcej > Wymiana.','Skip quest':'Pomiń zadanie','Sure? Skip it':'Na pewno? Pomiń','Quest skipped. A new one will come along.':'Zadanie pominięte. Wkrótce pojawi się nowe.','Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.':'Stodoła jest pełna, więc nadmiar sprzedano po cenie targowej. Rozbuduj stodołę, by mieścić więcej.','Dairy Days':'Dni nabiału','The Orchard Fair':'Jarmark sadowniczy','Sunday Breakfast':'Niedzielne śniadanie','Across the Valley':'Przez całą dolinę','Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.':'Krowy to serce farmy. Trzymaj kilka, daj im dobry dom i pokaż mi ser na stole.','The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.':'Zbliża się jarmark sadowniczy i chcę, żeby dolina spróbowała najlepszych owoców. Powiększ sad i wyciśnij sok wiśniowy.','Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!':'Nic nie mówi „niedziela” jak wiejskie śniadanie. Wyhoduj parę świń i usmaż mi jajka na boczku!','Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!':'Wieść o twojej farmie się rozeszła. Każde miasto chce od ciebie ładunek. Niech ciężarówka jeździ!','Have 3 cows':'Miej 3 krowy','Bring Hank 3 cheese wheels':'Przynieś Hankowi 3 koła sera','Have 6 fruit trees':'Miej 6 drzew owocowych','Pick fruit 25 times':'Zbierz owoce 25 razy','Bring Otis 3 cherry juices':'Przynieś Otisowi 3 soki wiśniowe','Have 2 pigs':'Miej 2 świnie','Bring Rosa 2 bacon and eggs':'Przynieś Rosie 2 porcje jajek na boczku','Sell 20 goods from the barn':'Sprzedaj 20 towarów ze stodoły','Complete 8 deliveries':'Wykonaj 8 dostaw','Make 10 goods in your buildings':'Zrób 10 towarów w budynkach'
 };
@@ -3505,9 +3525,11 @@ function freeTileNear(x,y){
   return null;
 }
 function animalAt(cx,cy){
+  // during the tutorial, the animal the tip points at wins when animals stand close together
+  const tf=typeof tutOn==='function'&&tutOn()&&TUT[S.tut].find;
   let best=null,bd=1e9;
-  for(const k in S.tiles){if(S.tiles[k].k!=='animal')continue;const[wx,wy]=animalPos(k),[px,py]=P(wx,wy),sx=px*cam.z+cam.x,sy=py*cam.z+cam.y;
-    if(Math.abs(cx-sx)<17*cam.z&&cy<sy+6*cam.z&&cy>sy-34*cam.z){const dd=Math.abs(cx-sx)+Math.abs(cy-sy);if(dd<bd){bd=dd;best=k}}}
+  for(const k in S.tiles){const o=S.tiles[k];if(o.k!=='animal')continue;const[wx,wy]=animalPos(k),[px,py]=P(wx,wy),sx=px*cam.z+cam.x,sy=py*cam.z+cam.y;
+    if(Math.abs(cx-sx)<17*cam.z&&cy<sy+6*cam.z&&cy>sy-34*cam.z){let dd=Math.abs(cx-sx)+Math.abs(cy-sy);if(tf&&tf(o))dd-=1e6;if(dd<bd){bd=dd;best=k}}}
   return best;
 }
 function gateOpen(x,y){
@@ -5702,7 +5724,7 @@ function sprinklerTick(now,w){
 function weatherTick(){
   if(!S)return;renderWx();
   const now=Date.now(),w=weather();sprinklerTick(now,w);
-  if((w==='rain'||w==='storm')&&!VIS&&now-lastRainWater>4000){
+  if((w==='rain'||w==='storm')&&!VIS&&!tutOn()&&now-lastRainWater>4000){ // no free watering while the tutorial teaches it
     lastRainWater=now;let n=0;
     for(const k in S.tiles){const o=S.tiles[k];if(o.k==='plot'&&o.crop&&!o.wet){const s2=cropState(o,now);if(s2.st!=='ripe'&&s2.st!=='withered'){o.wet=true;o.t-=s2.left*300;n++}}}
     if(n){changed();const slot=Math.floor(now/WX_SLOT);if(rainToldSlot!==slot){rainToldSlot=slot;toast('Rain is watering your crops!')}}
@@ -5747,7 +5769,7 @@ const TUT=[
   {txt:'Click the plowed plot to plant wheat.',done:()=>tst('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
   {txt:'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.',done:()=>tst('seedPick')>=1,btn:'openMarket'},
   {txt:'Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.',done:()=>tst('plant')>=2,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
-  {txt:'Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.',done:()=>tst('modeSwitch')>=1,btn:'modeSw'},
+  {txt:'Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.',done:()=>tst('modeSwitch')>=2&&S.tapGrass!=='plow',btn:'modeSw'},
   {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow'].includes(cropState(o,Date.now()).st)},
   {txt:'A chicken laid an egg. Click it to collect.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
   {txt:'Now that chicken is hungry. Click it to give it feed.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
@@ -5767,11 +5789,20 @@ function checkTut(){
   }
   renderTut();
 }
+let tutNoTarget=0;
+function tutWatch(){
+  if(!tutOn()||!$('title').hidden)return;const t=TUT[S.tut];
+  if(!t.find||farmer.job||queue.length){tutNoTarget=0;return}
+  if(Object.values(S.tiles).some(o=>t.find(o))){tutNoTarget=0;return}
+  if(++tutNoTarget>=6){tutNoTarget=0;S.tut++;checkTut()}
+}
+setInterval(()=>{if(S)tutWatch()},1000);
 function tutLocked(){return tutOn()&&$('title').hidden}
 function renderTut(){
   const b=$('tut');if(!b)return;
   document.querySelectorAll('.tutpulse').forEach(e=>e.classList.remove('tutpulse'));
   document.body.classList.toggle('tutlock',tutLocked());
+  document.body.classList.toggle('tutshow',tutOn()&&$('title').hidden);
   if(!tutOn()||!$('title').hidden){b.hidden=true;return}
   if(tool!=='multi')setTool('multi');closePops();if(S.tut<=2&&S.seed!=='wheat')S.seed='wheat';
   const t=TUT[S.tut];b.hidden=false;$('tutStep').textContent='Tip '+(S.tut+1)+' of '+TUT.length;$('tutText').textContent=t.txt;

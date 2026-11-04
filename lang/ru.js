@@ -817,7 +817,8 @@ Sell 20 goods from the barn|Продай 20 товаров из амбара
 Complete 8 deliveries|Выполни 8 доставок
 Make 10 goods in your buildings|Сделай 10 товаров в постройках
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Можно сажать и другие культуры. Открой рынок, перейди в «Семена» и нажми «Посадить» у сои.
-Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Теперь у тебя семена сои. Нажми на вспаханную грядку, чтобы посадить. Сменить семена можно в любой момент: «Рынок > Семена».`,
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Теперь у тебя семена сои. Нажми на вспаханную грядку, чтобы посадить. Сменить семена можно в любой момент: «Рынок > Семена».
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|При нажатии на траву фермер идёт туда. Переключатель «Идти / Пахать» делает новые грядки. Нажми «Пахать», чтобы попробовать, потом «Идти», чтобы вернуться.`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1

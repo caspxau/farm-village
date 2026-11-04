@@ -817,7 +817,8 @@ Sell 20 goods from the barn|গোলাঘর থেকে ২০টি জি�
 Complete 8 deliveries|৮টি ডেলিভারি শেষ করো
 Make 10 goods in your buildings|ভবনে ১০টি জিনিস বানাও
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|তুমি অন্য ফসলও বুনতে পারো। বাজার খুলে বীজে যাও আর সয়াবিনে বোনো চাপো।
-Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|এখন তোমার বীজ সয়াবিন। বুনতে চাষ করা জমিতে ট্যাপ করো। যেকোনো সময় বাজার > বীজ-এ বীজ বদলাও।`,
+Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|এখন তোমার বীজ সয়াবিন। বুনতে চাষ করা জমিতে ট্যাপ করো। যেকোনো সময় বাজার > বীজ-এ বীজ বদলাও।
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|ঘাসে ট্যাপ করলে কৃষক সেখানে হাঁটে। হাঁটো / চাষ সুইচে নতুন জমি হয়। চেষ্টা করতে চাষ চাপো, তারপর ফিরতে হাঁটো চাপো।`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
