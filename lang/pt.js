@@ -810,7 +810,75 @@ Complete 8 deliveries|Complete 8 entregas
 Make 10 goods in your buildings|Faça 10 produtos nas suas construções
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Você pode plantar outras culturas também. Abra o Mercado, vá em Sementes e toque em Plantar na Soja.
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Agora sua semente é a soja. Toque num lote arado para plantar. Troque de semente quando quiser em Mercado > Sementes.
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Tocar na grama faz seu fazendeiro andar até lá. O botão Andar / Arar cria terra de plantio. Toque em Arar para testar e depois em Andar para voltar.`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Tocar na grama faz seu fazendeiro andar até lá. O botão Andar / Arar cria terra de plantio. Toque em Arar para testar e depois em Andar para voltar.
+Farm|Cultivar
+What a tap does: walk, farm or plow|O que um toque faz: andar, cultivar ou arar
+Change the seed you are planting|Troque a semente que você planta
+Planting|Plantando
+Your farmer's food and drink. Tap to go home|Comida e bebida do fazendeiro. Toque para ir para casa
+Plow: tapping grass makes new farmland.|Arar: tocar na grama cria terra de plantio.
+Walk: tapping the ground just walks your farmer there.|Andar: tocar no chão só leva o fazendeiro até lá.
+Farm: tap plots to plant and harvest. Tapping grass walks.|Cultivar: toque nos lotes para plantar e colher. Tocar na grama é andar.
+Tapping the ground|Tocar no chão
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|Este botão decide o que um toque faz. Andar só anda, Cultivar planta e colhe, Arar cria terra de plantio. Toque em Andar para testar e depois em Cultivar para voltar.
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|Seu fazendeiro precisa comer e beber de vez em quando. Toque na casa para entrar: lá você come, toma banho e tira um cochilo.
+Inside the farmhouse|Dentro de casa
+Food|Comida
+Drink|Bebida
+Comfort|Conforto
+Fresh +10% XP|Revigorado +10% XP
+Go outside|Sair
+Kitchen|Cozinha
+Cook and eat|Cozinhar e comer
+Water|Água
++30 drink|+30 bebida
+Shower|Chuveiro
++10% XP|+10% XP
+Nap|Cochilo
+Skip 5 min|Pular 5 min
+Furniture|Móveis
+Make it cozy|Deixe aconchegante
+Bed|Cama
+Stove|Fogão
+Kitchen Sink|Pia
+Kitchen Table|Mesa da cozinha
+Dining Chairs|Cadeiras
+House Plant|Planta
+Cozy Rug|Tapete aconchegante
+Floor Lamp|Luminária
+Bookshelf|Estante
+Fridge|Geladeira
+Sofa|Sofá
+Television|Televisão
+Fireplace|Lareira
+Comfy Double Bed|Cama de casal confortável
+Meals eaten at the table fill you up 20% more.|Refeições na mesa enchem 20% mais.
+Keeps food fresh: every meal fills you up 20% more.|Mantém a comida fresca: cada refeição enche 20% mais.
+Replaces the old bed. Naps also give you the Fresh bonus.|Substitui a cama velha. Cochilos também dão o bônus Revigorado.
+Glass of Water|Copo de água
+Wheat Porridge|Mingau de trigo
+Scrambled Eggs|Ovos mexidos
+Fruit Bowl|Tigela de frutas
+Glass of Milk|Copo de leite
+Veggie Stew|Ensopado de legumes
+Slice of Bread|Fatia de pão
+Slice of Pie|Fatia de torta
+Your farmer is getting hungry. Go into the farmhouse to eat.|Seu fazendeiro está com fome. Entre em casa para comer.
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|Seu fazendeiro está com sede. Entre em casa para beber.
+food|comida
+drink|bebida
+Cook|Cozinhar
+Eat|Comer
+Free from the tap|Grátis da torneira
+Cooking|Cozinhando
+Drinking|Bebendo
+Eating|Comendo
+Showering|Tomando banho
+Napping|Cochilando
+You need the ingredients in your barn first.|Primeiro você precisa dos ingredientes no celeiro.
+You are full!|Você está satisfeito!
+Cook and eat with goods from your barn. A full farmer works at full speed.|Cozinhe e coma com produtos do celeiro. Um fazendeiro satisfeito trabalha a toda velocidade.
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cozinhe e coma com produtos do celeiro. Um fazendeiro satisfeito trabalha a toda velocidade. Sua geladeira melhora cada refeição em 20%.`,
 p:`0|$1 {p1:moeda|moedas}
 1|$1 / $2 XP
 2|faltam $1
@@ -1001,4 +1069,13 @@ p:`0|$1 {p1:moeda|moedas}
 187|$1 trocou com você: {l2}.
 188|Seu {1} está pronto! A multiferramenta usa sozinha.
 189|{1}: $2 lotes
-190|Sai em {t1}`};
+190|Sai em {t1}
+191|{1}: +$2 {3}[[, +$4 bebida]].
+192|Você ainda está revigorado. Novo banho em {t1}.
+193|Limpo e revigorado! +10% XP por $1 minutos.
+194|Você ainda não está com sono. Próximo cochilo em {t1}.
+195|Que cochilo! Tudo na fazenda avançou 5 minutos. -$1 de comida e bebida.
+196|{1} foi para a sua casa!
+197|Móveis confortáveis deixam a casa mais aconchegante: cada ponto de conforto faz o cochilo voltar mais cedo. Conforto: $1. Espera do cochilo: {t2}.
+198|[[{1} ]]+$2 de conforto
+199|{1} ($2)`};

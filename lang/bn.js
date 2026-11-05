@@ -818,7 +818,75 @@ Complete 8 deliveries|৮টি ডেলিভারি শেষ করো
 Make 10 goods in your buildings|ভবনে ১০টি জিনিস বানাও
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|তুমি অন্য ফসলও বুনতে পারো। বাজার খুলে বীজে যাও আর সয়াবিনে বোনো চাপো।
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|এখন তোমার বীজ সয়াবিন। বুনতে চাষ করা জমিতে ট্যাপ করো। যেকোনো সময় বাজার > বীজ-এ বীজ বদলাও।
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|ঘাসে ট্যাপ করলে কৃষক সেখানে হাঁটে। হাঁটো / চাষ সুইচে নতুন জমি হয়। চেষ্টা করতে চাষ চাপো, তারপর ফিরতে হাঁটো চাপো।`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|ঘাসে ট্যাপ করলে কৃষক সেখানে হাঁটে। হাঁটো / চাষ সুইচে নতুন জমি হয়। চেষ্টা করতে চাষ চাপো, তারপর ফিরতে হাঁটো চাপো।
+Farm|চাষ
+What a tap does: walk, farm or plow|ট্যাপ কী করবে: হাঁটা, চাষ বা জমি বানানো
+Change the seed you are planting|যে বীজ বুনছ তা বদলাও
+Planting|বুনছ
+Your farmer's food and drink. Tap to go home|কৃষকের খাবার ও পানীয়। বাড়ি যেতে ট্যাপ করো
+Plow: tapping grass makes new farmland.|জমি বানাও: ঘাসে ট্যাপ করলে নতুন জমি হয়।
+Walk: tapping the ground just walks your farmer there.|হাঁটো: মাটিতে ট্যাপ করলে কৃষক শুধু সেখানে হাঁটে।
+Farm: tap plots to plant and harvest. Tapping grass walks.|চাষ: বুনতে আর ফসল তুলতে জমিতে ট্যাপ করো। ঘাসে ট্যাপ করলে হাঁটে।
+Tapping the ground|মাটিতে ট্যাপ
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|এই সুইচ ঠিক করে ট্যাপ কী করবে। হাঁটো শুধু হাঁটে, চাষ বোনে আর ফসল তোলে, জমি বানাও নতুন জমি করে। চেষ্টা করতে হাঁটো চাপো, তারপর চাষে ফেরো।
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|কৃষকের মাঝে মাঝে খাবার আর পানীয় লাগে। ভেতরে যেতে খামারবাড়িতে ট্যাপ করো: সেখানে খাও, গোসল করো আর একটু ঘুমাও।
+Inside the farmhouse|খামারবাড়ির ভেতরে
+Food|খাবার
+Drink|পানীয়
+Comfort|আরাম
+Fresh +10% XP|তাজা +10% XP
+Go outside|বাইরে যাও
+Kitchen|রান্নাঘর
+Cook and eat|রাঁধো আর খাও
+Water|পানি
++30 drink|+30 পানীয়
+Shower|শাওয়ার
++10% XP|+10% XP
+Nap|ঘুম
+Skip 5 min|5 মিনিট এগোও
+Furniture|আসবাব
+Make it cozy|ঘর সাজাও
+Bed|বিছানা
+Stove|চুলা
+Kitchen Sink|সিঙ্ক
+Kitchen Table|রান্নাঘরের টেবিল
+Dining Chairs|চেয়ার
+House Plant|টবের গাছ
+Cozy Rug|আরামের কার্পেট
+Floor Lamp|দাঁড়ানো বাতি
+Bookshelf|বইয়ের তাক
+Fridge|ফ্রিজ
+Sofa|সোফা
+Television|টেলিভিশন
+Fireplace|ফায়ারপ্লেস
+Comfy Double Bed|আরামের ডাবল বিছানা
+Meals eaten at the table fill you up 20% more.|টেবিলে খেলে ২০% বেশি পেট ভরে।
+Keeps food fresh: every meal fills you up 20% more.|খাবার তাজা রাখে: প্রতি খাবারে ২০% বেশি পেট ভরে।
+Replaces the old bed. Naps also give you the Fresh bonus.|পুরোনো বিছানার বদলে। ঘুমালে তাজা বোনাসও মেলে।
+Glass of Water|এক গ্লাস পানি
+Wheat Porridge|গমের জাউ
+Scrambled Eggs|ডিম ভাজি
+Fruit Bowl|ফলের বাটি
+Glass of Milk|এক গ্লাস দুধ
+Veggie Stew|সবজির স্টু
+Slice of Bread|এক টুকরো রুটি
+Slice of Pie|এক টুকরো পাই
+Your farmer is getting hungry. Go into the farmhouse to eat.|কৃষকের খিদে পাচ্ছে। খেতে খামারবাড়িতে যাও।
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|কৃষকের তেষ্টা পাচ্ছে। পানি খেতে খামারবাড়িতে যাও।
+food|খাবার
+drink|পানীয়
+Cook|রাঁধো
+Eat|খাও
+Free from the tap|কল থেকে বিনা খরচে
+Cooking|রাঁধছে
+Drinking|পান করছে
+Eating|খাচ্ছে
+Showering|গোসল করছে
+Napping|ঘুমাচ্ছে
+You need the ingredients in your barn first.|আগে গোলাঘরে উপকরণ লাগবে।
+You are full!|পেট ভরে গেছে!
+Cook and eat with goods from your barn. A full farmer works at full speed.|গোলাঘরের জিনিস দিয়ে রাঁধো আর খাও। পেট ভরা কৃষক পুরো গতিতে কাজ করে।
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|গোলাঘরের জিনিস দিয়ে রাঁধো আর খাও। পেট ভরা কৃষক পুরো গতিতে কাজ করে। ফ্রিজ প্রতিটি খাবার ২০% ভালো করে।`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -1009,4 +1077,13 @@ p:`0|$1 কয়েন
 187|{1} তোমার সাথে বিনিময় করেছে: {l2}।
 188|তোমার নতুন {1} তৈরি! মাল্টি-টুল নিজেই সেটা চালায়।
 189|{1}: $2টি জমি
-190|{t1} পরে চলে যাবে`};
+190|{t1} পরে চলে যাবে
+191|{1}: +$2 {3}[[, +$4 পানীয়]]।
+192|তুমি এখনো তাজা। {t1} পরে আবার গোসল।
+193|পরিষ্কার আর তাজা! $1 মিনিট +10% XP।
+194|এখনো ঘুম পাচ্ছে না। পরের ঘুম {t1} পরে।
+195|দারুণ ঘুম! খামারের সবকিছু ৫ মিনিট এগিয়ে গেল। -$1 খাবার ও পানীয়।
+196|{1} তোমার খামারবাড়িতে যোগ হলো!
+197|আরামের আসবাব ঘরকে সুন্দর করে: প্রতি আরাম পয়েন্টে ঘুম আগে ফেরে। আরাম: $1। ঘুমের বিরতি: {t2}।
+198|[[{1} ]]+$2 আরাম
+199|{1} ($2)`};

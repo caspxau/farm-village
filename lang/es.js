@@ -810,7 +810,75 @@ Complete 8 deliveries|Completa 8 entregas
 Make 10 goods in your buildings|Fabrica 10 productos en tus edificios
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|También puedes plantar otros cultivos. Abre el Mercado, ve a Semillas y toca Plantar en Soja.
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Ahora tu semilla es la soja. Toca una parcela arada para plantarla. Cambia de semilla cuando quieras en Mercado > Semillas.
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Al tocar la hierba, tu granjero camina hasta allí. El interruptor Caminar / Arar crea tierra de cultivo. Toca Arar para probarlo y luego Caminar para volver.`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Al tocar la hierba, tu granjero camina hasta allí. El interruptor Caminar / Arar crea tierra de cultivo. Toca Arar para probarlo y luego Caminar para volver.
+Farm|Cultivar
+What a tap does: walk, farm or plow|Qué hace un toque: caminar, cultivar o arar
+Change the seed you are planting|Cambia la semilla que plantas
+Planting|Plantando
+Your farmer's food and drink. Tap to go home|Comida y bebida de tu granjero. Toca para ir a casa
+Plow: tapping grass makes new farmland.|Arar: tocar la hierba crea tierra de cultivo.
+Walk: tapping the ground just walks your farmer there.|Caminar: tocar el suelo solo lleva a tu granjero allí.
+Farm: tap plots to plant and harvest. Tapping grass walks.|Cultivar: toca parcelas para plantar y cosechar. Tocar la hierba es caminar.
+Tapping the ground|Al tocar el suelo
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|Este interruptor decide qué hace un toque. Caminar solo camina, Cultivar planta y cosecha, Arar crea tierra de cultivo. Toca Caminar para probar y luego Cultivar para volver.
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|Tu granjero necesita comer y beber de vez en cuando. Toca la casa para entrar: allí puedes comer, ducharte y echar la siesta.
+Inside the farmhouse|Dentro de la casa
+Food|Comida
+Drink|Bebida
+Comfort|Comodidad
+Fresh +10% XP|Fresco +10% XP
+Go outside|Salir
+Kitchen|Cocina
+Cook and eat|Cocinar y comer
+Water|Agua
++30 drink|+30 bebida
+Shower|Ducha
++10% XP|+10% XP
+Nap|Siesta
+Skip 5 min|Saltar 5 min
+Furniture|Muebles
+Make it cozy|Hazla acogedora
+Bed|Cama
+Stove|Cocina de gas
+Kitchen Sink|Fregadero
+Kitchen Table|Mesa de cocina
+Dining Chairs|Sillas
+House Plant|Planta de interior
+Cozy Rug|Alfombra
+Floor Lamp|Lámpara de pie
+Bookshelf|Estantería
+Fridge|Nevera
+Sofa|Sofá
+Television|Televisor
+Fireplace|Chimenea
+Comfy Double Bed|Cama doble cómoda
+Meals eaten at the table fill you up 20% more.|Las comidas en la mesa llenan un 20% más.
+Keeps food fresh: every meal fills you up 20% more.|Mantiene la comida fresca: cada comida llena un 20% más.
+Replaces the old bed. Naps also give you the Fresh bonus.|Sustituye la cama vieja. Las siestas también dan el bono Fresco.
+Glass of Water|Vaso de agua
+Wheat Porridge|Gachas de trigo
+Scrambled Eggs|Huevos revueltos
+Fruit Bowl|Cuenco de fruta
+Glass of Milk|Vaso de leche
+Veggie Stew|Guiso de verduras
+Slice of Bread|Rebanada de pan
+Slice of Pie|Porción de tarta
+Your farmer is getting hungry. Go into the farmhouse to eat.|Tu granjero tiene hambre. Entra en casa a comer.
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|Tu granjero tiene sed. Entra en casa a beber.
+food|comida
+drink|bebida
+Cook|Cocinar
+Eat|Comer
+Free from the tap|Gratis del grifo
+Cooking|Cocinando
+Drinking|Bebiendo
+Eating|Comiendo
+Showering|Duchándose
+Napping|Durmiendo la siesta
+You need the ingredients in your barn first.|Primero necesitas los ingredientes en el granero.
+You are full!|¡Estás lleno!
+Cook and eat with goods from your barn. A full farmer works at full speed.|Cocina y come con productos del granero. Un granjero lleno trabaja a toda velocidad.
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cocina y come con productos del granero. Un granjero lleno trabaja a toda velocidad. Tu nevera mejora cada comida un 20%.`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1
@@ -1001,4 +1069,13 @@ p:`0|$1 {p1:moneda|monedas}
 187|$1 hizo un cambio contigo: {l2}.
 188|¡Tu {1} está listo! La multiherramienta lo usa sola.
 189|{1}: $2 parcelas
-190|Se va en {t1}`};
+190|Se va en {t1}
+191|{1}: +$2 {3}[[, +$4 bebida]].
+192|Aún estás fresco. Ducha de nuevo en {t1}.
+193|¡Limpio y fresco! +10% XP durante $1 minutos.
+194|Aún no tienes sueño. Próxima siesta en {t1}.
+195|¡Qué siesta! Todo en la granja avanzó 5 minutos. -$1 de comida y bebida.
+196|¡{1} añadido a tu casa!
+197|Los muebles cómodos hacen tu casa más acogedora: cada punto de comodidad hace que la siesta vuelva antes. Comodidad: $1. Espera de la siesta: {t2}.
+198|[[{1} ]]+$2 de comodidad
+199|{1} ($2)`};

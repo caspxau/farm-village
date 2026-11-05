@@ -818,7 +818,75 @@ Complete 8 deliveries|أكمل 8 شحنات
 Make 10 goods in your buildings|اصنع 10 بضائع في مبانيك
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|يمكنك زراعة محاصيل أخرى أيضًا. افتح السوق، واذهب إلى البذور واضغط ازرع على فول الصويا.
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|بذورك الآن فول الصويا. انقر على قطعة محروثة لزراعتها. غيّر البذور متى شئت من السوق > البذور.
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|الضغط على العشب يجعل مزارعك يمشي إليه. مفتاح مشي / حرث يصنع أرضًا زراعية جديدة. اضغط حرث للتجربة، ثم مشي للرجوع.`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|الضغط على العشب يجعل مزارعك يمشي إليه. مفتاح مشي / حرث يصنع أرضًا زراعية جديدة. اضغط حرث للتجربة، ثم مشي للرجوع.
+Farm|زراعة
+What a tap does: walk, farm or plow|ماذا يفعل الضغط: مشي أو زراعة أو حرث
+Change the seed you are planting|غيّر البذور التي تزرعها
+Planting|تزرع
+Your farmer's food and drink. Tap to go home|طعام وشراب مزارعك. اضغط للذهاب إلى البيت
+Plow: tapping grass makes new farmland.|حرث: الضغط على العشب يصنع أرضًا زراعية جديدة.
+Walk: tapping the ground just walks your farmer there.|مشي: الضغط على الأرض يجعل مزارعك يمشي إليها فقط.
+Farm: tap plots to plant and harvest. Tapping grass walks.|زراعة: اضغط على القطع لتزرع وتحصد. الضغط على العشب للمشي.
+Tapping the ground|الضغط على الأرض
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|هذا المفتاح يحدد ماذا يفعل الضغط. مشي للمشي فقط، زراعة للزرع والحصاد، حرث لصنع أرض جديدة. اضغط مشي للتجربة ثم زراعة للرجوع.
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|يحتاج مزارعك إلى الطعام والشراب بين حين وآخر. اضغط على بيت المزرعة للدخول: هناك تأكل وتستحم وتأخذ قيلولة.
+Inside the farmhouse|داخل بيت المزرعة
+Food|الطعام
+Drink|الشراب
+Comfort|الراحة
+Fresh +10% XP|منتعش +10% خبرة
+Go outside|اخرج
+Kitchen|المطبخ
+Cook and eat|اطبخ وكُل
+Water|ماء
++30 drink|+30 شراب
+Shower|الدش
++10% XP|+10% خبرة
+Nap|قيلولة
+Skip 5 min|تخطَّ 5 دقائق
+Furniture|الأثاث
+Make it cozy|اجعله مريحًا
+Bed|سرير
+Stove|موقد
+Kitchen Sink|حوض المطبخ
+Kitchen Table|طاولة المطبخ
+Dining Chairs|كراسي الطعام
+House Plant|نبتة منزلية
+Cozy Rug|سجادة مريحة
+Floor Lamp|مصباح أرضي
+Bookshelf|رف كتب
+Fridge|ثلاجة
+Sofa|أريكة
+Television|تلفاز
+Fireplace|مدفأة
+Comfy Double Bed|سرير مزدوج مريح
+Meals eaten at the table fill you up 20% more.|الوجبات على الطاولة تشبع 20% أكثر.
+Keeps food fresh: every meal fills you up 20% more.|تحفظ الطعام طازجًا: كل وجبة تشبع 20% أكثر.
+Replaces the old bed. Naps also give you the Fresh bonus.|يحل محل السرير القديم. القيلولة تمنح أيضًا مكافأة الانتعاش.
+Glass of Water|كوب ماء
+Wheat Porridge|عصيدة القمح
+Scrambled Eggs|بيض مخفوق
+Fruit Bowl|وعاء فاكهة
+Glass of Milk|كوب حليب
+Veggie Stew|يخنة خضار
+Slice of Bread|شريحة خبز
+Slice of Pie|قطعة فطيرة
+Your farmer is getting hungry. Go into the farmhouse to eat.|مزارعك يشعر بالجوع. ادخل البيت لتأكل.
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|مزارعك يشعر بالعطش. ادخل البيت لتشرب.
+food|طعام
+drink|شراب
+Cook|اطبخ
+Eat|كُل
+Free from the tap|مجانًا من الصنبور
+Cooking|يطبخ
+Drinking|يشرب
+Eating|يأكل
+Showering|يستحم
+Napping|في قيلولة
+You need the ingredients in your barn first.|تحتاج المكونات في الحظيرة أولًا.
+You are full!|أنت شبعان!
+Cook and eat with goods from your barn. A full farmer works at full speed.|اطبخ وكُل من بضائع الحظيرة. المزارع الشبعان يعمل بكامل سرعته.
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|اطبخ وكُل من بضائع الحظيرة. المزارع الشبعان يعمل بكامل سرعته. ثلاجتك تحسّن كل وجبة بنسبة 20%.`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -1009,4 +1077,13 @@ p:`0|$1 عملة
 187|{1} قايضك: {l2}.
 188|{1} الجديد جاهز! الأداة المتعددة تستخدمه وحدها.
 189|{1}: $2 قطعة
-190|يغادر بعد {t1}`};
+190|يغادر بعد {t1}
+191|{1}: +$2 {3}[[، +$4 شراب]].
+192|ما زلت منتعشًا. استحم مجددًا بعد {t1}.
+193|نظيف ومنتعش! +10% خبرة لمدة $1 دقيقة.
+194|لست نعسانًا بعد. القيلولة التالية بعد {t1}.
+195|يا لها من قيلولة! تقدم كل شيء في المزرعة 5 دقائق. -$1 طعام وشراب.
+196|أُضيف {1} إلى بيتك!
+197|الأثاث المريح يجعل بيتك أدفأ: كل نقطة راحة تعيد القيلولة أسرع. الراحة: $1. انتظار القيلولة: {t2}.
+198|[[{1} ]]+$2 راحة
+199|{1} ($2)`};

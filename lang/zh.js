@@ -818,7 +818,75 @@ Complete 8 deliveries|完成8次送货
 Make 10 goods in your buildings|在建筑里制作10件物品
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|你也可以种别的作物。打开市场，进入种子，在大豆上点"种植"。
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|现在你的种子是大豆。点击耕好的地块来种。随时可以在 市场 > 种子 里更换。
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|点击草地时，农夫会走过去。"走路 / 耕地"开关可以改为开垦新农田。点"耕地"试试，再点"走路"切换回来。`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|点击草地时，农夫会走过去。"走路 / 耕地"开关可以改为开垦新农田。点"耕地"试试，再点"走路"切换回来。
+Farm|耕作
+What a tap does: walk, farm or plow|点击的作用：走路、耕作或开垦
+Change the seed you are planting|更换要种的种子
+Planting|正在种
+Your farmer's food and drink. Tap to go home|农夫的食物和饮水。点击回家
+Plow: tapping grass makes new farmland.|开垦：点击草地开出新农田。
+Walk: tapping the ground just walks your farmer there.|走路：点击地面只会让农夫走过去。
+Farm: tap plots to plant and harvest. Tapping grass walks.|耕作：点击地块来播种和收获。点击草地会走过去。
+Tapping the ground|点击地面
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|这个开关决定点击的作用。走路只走路，耕作负责播种和收获，开垦会开出新农田。先点"走路"试试，再点"耕作"切换回来。
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|农夫时不时需要吃喝。点击农舍进屋，可以吃饭、洗澡和打个盹。
+Inside the farmhouse|农舍里
+Food|食物
+Drink|饮水
+Comfort|舒适度
+Fresh +10% XP|清爽 +10% 经验
+Go outside|出门
+Kitchen|厨房
+Cook and eat|做饭吃饭
+Water|水
++30 drink|+30 饮水
+Shower|淋浴
++10% XP|+10% 经验
+Nap|打盹
+Skip 5 min|跳过5分钟
+Furniture|家具
+Make it cozy|布置温馨
+Bed|床
+Stove|炉灶
+Kitchen Sink|水槽
+Kitchen Table|餐桌
+Dining Chairs|餐椅
+House Plant|盆栽
+Cozy Rug|温馨地毯
+Floor Lamp|落地灯
+Bookshelf|书架
+Fridge|冰箱
+Sofa|沙发
+Television|电视
+Fireplace|壁炉
+Comfy Double Bed|舒适双人床
+Meals eaten at the table fill you up 20% more.|在餐桌吃饭多饱20%。
+Keeps food fresh: every meal fills you up 20% more.|保持食物新鲜：每顿饭多饱20%。
+Replaces the old bed. Naps also give you the Fresh bonus.|替换旧床。打盹也会获得清爽加成。
+Glass of Water|一杯水
+Wheat Porridge|小麦粥
+Scrambled Eggs|炒鸡蛋
+Fruit Bowl|水果碗
+Glass of Milk|一杯牛奶
+Veggie Stew|蔬菜炖菜
+Slice of Bread|一片面包
+Slice of Pie|一块派
+Your farmer is getting hungry. Go into the farmhouse to eat.|农夫饿了。进农舍吃点东西吧。
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|农夫渴了。进农舍喝点水吧。
+food|食物
+drink|饮水
+Cook|烹饪
+Eat|吃
+Free from the tap|水龙头免费
+Cooking|做饭中
+Drinking|喝水中
+Eating|吃饭中
+Showering|洗澡中
+Napping|打盹中
+You need the ingredients in your barn first.|先得在谷仓里备好食材。
+You are full!|吃饱啦！
+Cook and eat with goods from your barn. A full farmer works at full speed.|用谷仓里的食材做饭吃饭。吃饱的农夫干活全速。
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|用谷仓里的食材做饭吃饭。吃饱的农夫干活全速。冰箱让每顿饭效果提高20%。`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -1009,4 +1077,13 @@ p:`0|$1金币
 187|{1} 和你交换了：{l2}。
 188|你的新{1}准备好了！多用工具会自动使用它。
 189|{1}：$2块地
-190|{t1}后离开`};
+190|{t1}后离开
+191|{1}：+$2 {3}[[，+$4 饮水]]。
+192|你还很清爽。{t1}后可以再洗。
+193|洗得干干净净！$1分钟内经验+10%。
+194|还不困。下次打盹在{t1}后。
+195|睡得真香！农场上的一切都前进了5分钟。食物和饮水各 -$1。
+196|{1}已放进你的农舍！
+197|舒适的家具让家更温馨：每点舒适度都会让打盹更快恢复。当前舒适度：$1。打盹冷却：{t2}。
+198|[[{1} ]]+$2 舒适度
+199|{1}（$2）`};

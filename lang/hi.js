@@ -818,7 +818,75 @@ Complete 8 deliveries|8 डिलीवरी पूरी करें
 Make 10 goods in your buildings|अपनी इमारतों में 10 चीज़ें बनाएँ
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|आप दूसरी फ़सलें भी बो सकते हैं। बाज़ार खोलें, बीज में जाएँ और सोयाबीन पर बोएँ दबाएँ।
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|अब आपका बीज सोयाबीन है। बोने के लिए जुते खेत पर टैप करें। बीज कभी भी बाज़ार > बीज में बदलें।
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|घास पर टैप करने से किसान वहाँ चलता है। चलें / जोतें स्विच से नया खेत बनता है। आज़माने के लिए जोतें दबाएँ, फिर वापस आने के लिए चलें।`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|घास पर टैप करने से किसान वहाँ चलता है। चलें / जोतें स्विच से नया खेत बनता है। आज़माने के लिए जोतें दबाएँ, फिर वापस आने के लिए चलें।
+Farm|खेती
+What a tap does: walk, farm or plow|टैप क्या करे: चलना, खेती या जुताई
+Change the seed you are planting|बोने का बीज बदलें
+Planting|बो रहे हैं
+Your farmer's food and drink. Tap to go home|किसान का खाना-पानी। घर जाने के लिए टैप करें
+Plow: tapping grass makes new farmland.|जुताई: घास पर टैप करने से नया खेत बनता है।
+Walk: tapping the ground just walks your farmer there.|चलना: ज़मीन पर टैप करने से किसान बस वहाँ चलता है।
+Farm: tap plots to plant and harvest. Tapping grass walks.|खेती: बोने और काटने के लिए खेतों पर टैप करें। घास पर टैप करने से चलता है।
+Tapping the ground|ज़मीन पर टैप
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|यह स्विच तय करता है कि टैप क्या करे। चलना बस चलता है, खेती बोती और काटती है, जुताई नया खेत बनाती है। आज़माने के लिए चलना दबाएँ, फिर खेती पर लौटें।
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|किसान को कभी-कभी खाना और पानी चाहिए। अंदर जाने के लिए फ़ार्महाउस पर टैप करें: वहाँ खाएँ, नहाएँ और झपकी लें।
+Inside the farmhouse|फ़ार्महाउस के अंदर
+Food|खाना
+Drink|पानी
+Comfort|आराम
+Fresh +10% XP|ताज़गी +10% XP
+Go outside|बाहर जाएँ
+Kitchen|रसोई
+Cook and eat|पकाएँ और खाएँ
+Water|पानी
++30 drink|+30 पानी
+Shower|शावर
++10% XP|+10% XP
+Nap|झपकी
+Skip 5 min|5 मिनट आगे
+Furniture|फ़र्नीचर
+Make it cozy|घर सजाएँ
+Bed|बिस्तर
+Stove|चूल्हा
+Kitchen Sink|सिंक
+Kitchen Table|रसोई की मेज़
+Dining Chairs|कुर्सियाँ
+House Plant|गमले का पौधा
+Cozy Rug|आरामदायक दरी
+Floor Lamp|खड़ा लैंप
+Bookshelf|किताबों की अलमारी
+Fridge|फ़्रिज
+Sofa|सोफ़ा
+Television|टीवी
+Fireplace|अंगीठी
+Comfy Double Bed|आरामदायक डबल बेड
+Meals eaten at the table fill you up 20% more.|मेज़ पर खाने से 20% ज़्यादा पेट भरता है।
+Keeps food fresh: every meal fills you up 20% more.|खाना ताज़ा रखता है: हर भोजन से 20% ज़्यादा पेट भरता है।
+Replaces the old bed. Naps also give you the Fresh bonus.|पुराने बिस्तर की जगह लेता है। झपकी से ताज़गी बोनस भी मिलता है।
+Glass of Water|पानी का गिलास
+Wheat Porridge|गेहूँ का दलिया
+Scrambled Eggs|भुर्जी अंडे
+Fruit Bowl|फलों का कटोरा
+Glass of Milk|दूध का गिलास
+Veggie Stew|सब्ज़ी का स्टू
+Slice of Bread|ब्रेड का टुकड़ा
+Slice of Pie|पाई का टुकड़ा
+Your farmer is getting hungry. Go into the farmhouse to eat.|किसान को भूख लग रही है। खाने के लिए फ़ार्महाउस में जाएँ।
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|किसान को प्यास लग रही है। पानी पीने के लिए फ़ार्महाउस में जाएँ।
+food|खाना
+drink|पानी
+Cook|पकाएँ
+Eat|खाएँ
+Free from the tap|नल से मुफ़्त
+Cooking|पका रहे हैं
+Drinking|पी रहे हैं
+Eating|खा रहे हैं
+Showering|नहा रहे हैं
+Napping|झपकी ले रहे हैं
+You need the ingredients in your barn first.|पहले खलिहान में सामग्री चाहिए।
+You are full!|पेट भर गया!
+Cook and eat with goods from your barn. A full farmer works at full speed.|खलिहान के सामान से पकाएँ और खाएँ। भरे पेट वाला किसान पूरी रफ़्तार से काम करता है।
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|खलिहान के सामान से पकाएँ और खाएँ। भरे पेट वाला किसान पूरी रफ़्तार से काम करता है। फ़्रिज हर भोजन को 20% बेहतर बनाता है।`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -1009,4 +1077,13 @@ p:`0|$1 सिक्के
 187|{1} ने आपसे अदला-बदली की: {l2}।
 188|आपका नया {1} तैयार है! मल्टी-टूल उसे ख़ुद इस्तेमाल करता है।
 189|{1}: $2 खेत
-190|{t1} में चला जाएगा`};
+190|{t1} में चला जाएगा
+191|{1}: +$2 {3}[[, +$4 पानी]]।
+192|आप अभी ताज़ा हैं। {t1} में फिर नहाएँ।
+193|साफ़ और ताज़ा! $1 मिनट तक +10% XP।
+194|अभी नींद नहीं आ रही। अगली झपकी {t1} में।
+195|क्या झपकी थी! फ़ार्म पर सब कुछ 5 मिनट आगे बढ़ गया। -$1 खाना और पानी।
+196|{1} आपके फ़ार्महाउस में आ गया!
+197|आरामदायक फ़र्नीचर घर को सुहाना बनाता है: हर आराम अंक से झपकी जल्दी लौटती है। आराम: $1। झपकी का इंतज़ार: {t2}।
+198|[[{1} ]]+$2 आराम
+199|{1} ($2)`};

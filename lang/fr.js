@@ -810,7 +810,75 @@ Complete 8 deliveries|Termine 8 livraisons
 Make 10 goods in your buildings|Fabrique 10 produits dans tes bâtiments
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Tu peux planter d'autres cultures. Ouvre le Marché, va dans Graines et touche Planter sur le Soja.
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Le soja est ta graine maintenant. Touche une parcelle labourée pour le planter. Change de graine quand tu veux dans Marché > Graines.
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Toucher l'herbe fait marcher ton fermier jusque-là. L'interrupteur Marcher / Labourer crée de la terre cultivable. Touche Labourer pour essayer, puis Marcher pour revenir.`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Toucher l'herbe fait marcher ton fermier jusque-là. L'interrupteur Marcher / Labourer crée de la terre cultivable. Touche Labourer pour essayer, puis Marcher pour revenir.
+Farm|Cultiver
+What a tap does: walk, farm or plow|Ce que fait une touche : marcher, cultiver ou labourer
+Change the seed you are planting|Change la graine que tu plantes
+Planting|Je plante
+Your farmer's food and drink. Tap to go home|Nourriture et boisson de ton fermier. Touche pour rentrer
+Plow: tapping grass makes new farmland.|Labourer : toucher l'herbe crée de la terre cultivable.
+Walk: tapping the ground just walks your farmer there.|Marcher : toucher le sol fait juste marcher ton fermier.
+Farm: tap plots to plant and harvest. Tapping grass walks.|Cultiver : touche les parcelles pour planter et récolter. Toucher l'herbe fait marcher.
+Tapping the ground|Toucher le sol
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|Cet interrupteur décide ce que fait une touche. Marcher fait seulement marcher, Cultiver plante et récolte, Labourer crée de la terre. Touche Marcher pour essayer, puis Cultiver pour revenir.
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|Ton fermier a besoin de manger et de boire de temps en temps. Touche la maison pour entrer : tu peux y manger, te doucher et faire la sieste.
+Inside the farmhouse|Dans la maison
+Food|Nourriture
+Drink|Boisson
+Comfort|Confort
+Fresh +10% XP|Frais +10 % XP
+Go outside|Sortir
+Kitchen|Cuisine
+Cook and eat|Cuisiner et manger
+Water|Eau
++30 drink|+30 boisson
+Shower|Douche
++10% XP|+10 % XP
+Nap|Sieste
+Skip 5 min|Passer 5 min
+Furniture|Meubles
+Make it cozy|Rends-la douillette
+Bed|Lit
+Stove|Cuisinière
+Kitchen Sink|Évier
+Kitchen Table|Table de cuisine
+Dining Chairs|Chaises
+House Plant|Plante verte
+Cozy Rug|Tapis douillet
+Floor Lamp|Lampadaire
+Bookshelf|Bibliothèque
+Fridge|Frigo
+Sofa|Canapé
+Television|Télévision
+Fireplace|Cheminée
+Comfy Double Bed|Grand lit douillet
+Meals eaten at the table fill you up 20% more.|Les repas à table rassasient 20 % de plus.
+Keeps food fresh: every meal fills you up 20% more.|Garde les aliments frais : chaque repas rassasie 20 % de plus.
+Replaces the old bed. Naps also give you the Fresh bonus.|Remplace l'ancien lit. Les siestes donnent aussi le bonus Frais.
+Glass of Water|Verre d'eau
+Wheat Porridge|Bouillie de blé
+Scrambled Eggs|Œufs brouillés
+Fruit Bowl|Bol de fruits
+Glass of Milk|Verre de lait
+Veggie Stew|Ragoût de légumes
+Slice of Bread|Tranche de pain
+Slice of Pie|Part de tarte
+Your farmer is getting hungry. Go into the farmhouse to eat.|Ton fermier a faim. Entre dans la maison pour manger.
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|Ton fermier a soif. Entre dans la maison pour boire.
+food|nourriture
+drink|boisson
+Cook|Cuisiner
+Eat|Manger
+Free from the tap|Gratuit au robinet
+Cooking|Cuisine
+Drinking|Boit
+Eating|Mange
+Showering|Douche
+Napping|Sieste
+You need the ingredients in your barn first.|Il te faut d'abord les ingrédients dans la grange.
+You are full!|Tu es rassasié !
+Cook and eat with goods from your barn. A full farmer works at full speed.|Cuisine et mange avec les produits de ta grange. Un fermier rassasié travaille à pleine vitesse.
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cuisine et mange avec les produits de ta grange. Un fermier rassasié travaille à pleine vitesse. Ton frigo améliore chaque repas de 20 %.`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -1001,4 +1069,13 @@ p:`0|$1 {p1:pièce|pièces}
 187|$1 a échangé avec toi : {l2}.
 188|Ton {1} est prêt ! Le multi-outil l'utilise tout seul.
 189|{1} : $2 parcelles
-190|Part dans {t1}`};
+190|Part dans {t1}
+191|{1} : +$2 {3}[[, +$4 boisson]].
+192|Tu es encore frais. Nouvelle douche dans {t1}.
+193|Propre et frais ! +10 % d'XP pendant $1 minutes.
+194|Tu n'as pas encore sommeil. Prochaine sieste dans {t1}.
+195|Quelle sieste ! Tout à la ferme a avancé de 5 minutes. -$1 nourriture et boisson.
+196|{1} ajouté à ta maison !
+197|Les meubles confortables rendent ta maison plus douillette : chaque point de confort fait revenir la sieste plus vite. Confort : $1. Attente de la sieste : {t2}.
+198|[[{1} ]]+$2 confort
+199|{1} ($2)`};

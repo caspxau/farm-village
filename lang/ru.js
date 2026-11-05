@@ -818,7 +818,75 @@ Complete 8 deliveries|Выполни 8 доставок
 Make 10 goods in your buildings|Сделай 10 товаров в постройках
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Можно сажать и другие культуры. Открой рынок, перейди в «Семена» и нажми «Посадить» у сои.
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Теперь у тебя семена сои. Нажми на вспаханную грядку, чтобы посадить. Сменить семена можно в любой момент: «Рынок > Семена».
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|При нажатии на траву фермер идёт туда. Переключатель «Идти / Пахать» делает новые грядки. Нажми «Пахать», чтобы попробовать, потом «Идти», чтобы вернуться.`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|При нажатии на траву фермер идёт туда. Переключатель «Идти / Пахать» делает новые грядки. Нажми «Пахать», чтобы попробовать, потом «Идти», чтобы вернуться.
+Farm|Ферма
+What a tap does: walk, farm or plow|Что делает нажатие: идти, работать или пахать
+Change the seed you are planting|Сменить семена для посадки
+Planting|Сажаем
+Your farmer's food and drink. Tap to go home|Еда и питьё фермера. Нажми, чтобы пойти домой
+Plow: tapping grass makes new farmland.|Пахать: нажатие на траву делает новую грядку.
+Walk: tapping the ground just walks your farmer there.|Идти: нажатие на землю просто ведёт туда фермера.
+Farm: tap plots to plant and harvest. Tapping grass walks.|Ферма: нажимай на грядки, чтобы сажать и собирать. Нажатие на траву — прогулка.
+Tapping the ground|Нажатие на землю
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|Этот переключатель решает, что делает нажатие. «Идти» — только ходьба, «Ферма» — посадка и сбор, «Пахать» — новые грядки. Нажми «Идти», а потом вернись на «Ферму».
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|Фермеру иногда нужно есть и пить. Нажми на дом, чтобы войти: там можно поесть, принять душ и вздремнуть.
+Inside the farmhouse|В доме
+Food|Еда
+Drink|Питьё
+Comfort|Уют
+Fresh +10% XP|Свежесть +10% XP
+Go outside|Выйти
+Kitchen|Кухня
+Cook and eat|Готовить и есть
+Water|Вода
++30 drink|+30 питья
+Shower|Душ
++10% XP|+10% XP
+Nap|Вздремнуть
+Skip 5 min|Пропустить 5 мин
+Furniture|Мебель
+Make it cozy|Сделать уютнее
+Bed|Кровать
+Stove|Плита
+Kitchen Sink|Раковина
+Kitchen Table|Кухонный стол
+Dining Chairs|Стулья
+House Plant|Комнатное растение
+Cozy Rug|Уютный ковёр
+Floor Lamp|Торшер
+Bookshelf|Книжный шкаф
+Fridge|Холодильник
+Sofa|Диван
+Television|Телевизор
+Fireplace|Камин
+Comfy Double Bed|Большая мягкая кровать
+Meals eaten at the table fill you up 20% more.|Еда за столом насыщает на 20% больше.
+Keeps food fresh: every meal fills you up 20% more.|Сохраняет еду свежей: каждое блюдо насыщает на 20% больше.
+Replaces the old bed. Naps also give you the Fresh bonus.|Заменяет старую кровать. Сон тоже даёт бонус Свежести.
+Glass of Water|Стакан воды
+Wheat Porridge|Пшеничная каша
+Scrambled Eggs|Омлет
+Fruit Bowl|Миска фруктов
+Glass of Milk|Стакан молока
+Veggie Stew|Овощное рагу
+Slice of Bread|Ломтик хлеба
+Slice of Pie|Кусок пирога
+Your farmer is getting hungry. Go into the farmhouse to eat.|Фермер проголодался. Зайди в дом поесть.
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|Фермеру хочется пить. Зайди в дом попить.
+food|еды
+drink|питья
+Cook|Готовить
+Eat|Съесть
+Free from the tap|Бесплатно из крана
+Cooking|Готовит
+Drinking|Пьёт
+Eating|Ест
+Showering|Душ
+Napping|Дремлет
+You need the ingredients in your barn first.|Сначала нужны ингредиенты в амбаре.
+You are full!|Ты сыт!
+Cook and eat with goods from your barn. A full farmer works at full speed.|Готовь и ешь из продуктов амбара. Сытый фермер работает в полную силу.
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Готовь и ешь из продуктов амбара. Сытый фермер работает в полную силу. Холодильник делает каждое блюдо на 20% лучше.`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -1009,4 +1077,13 @@ p:`0|$1 {p1:монета|монеты|монет}
 187|{1} обменялся с тобой: {l2}.
 188|{1}: готово! Мультиинструмент использует его сам.
 189|{1}: $2 {p2:грядка|грядки|грядок}
-190|Уйдёт через {t1}`};
+190|Уйдёт через {t1}
+191|{1}: +$2 {3}[[, +$4 питья]].
+192|Ты ещё свежий. Душ снова через {t1}.
+193|Чистота и свежесть! +10% XP на $1 мин.
+194|Пока не хочется спать. Следующий сон через {t1}.
+195|Отличный сон! Всё на ферме продвинулось на 5 минут. -$1 еды и питья.
+196|{1}: теперь в твоём доме!
+197|Удобная мебель делает дом уютнее: каждое очко уюта ускоряет возвращение дрёмы. Уют: $1. Перерыв между снами: {t2}.
+198|[[{1} ]]+$2 уюта
+199|{1} ($2)`};

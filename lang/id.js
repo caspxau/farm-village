@@ -810,7 +810,75 @@ Complete 8 deliveries|Selesaikan 8 kiriman
 Make 10 goods in your buildings|Buat 10 barang di bangunanmu
 You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.|Kamu juga bisa menanam tanaman lain. Buka Pasar, pilih Benih, lalu ketuk Tanam pada Kedelai.
 Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.|Sekarang benihmu kedelai. Ketuk petak yang dibajak untuk menanamnya. Ganti benih kapan saja di Pasar > Benih.
-Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Mengetuk rumput membuat petanimu berjalan ke sana. Tombol Jalan / Bajak membuat lahan baru. Ketuk Bajak untuk mencoba, lalu Jalan untuk kembali.`,
+Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.|Mengetuk rumput membuat petanimu berjalan ke sana. Tombol Jalan / Bajak membuat lahan baru. Ketuk Bajak untuk mencoba, lalu Jalan untuk kembali.
+Farm|Bertani
+What a tap does: walk, farm or plow|Fungsi ketukan: jalan, bertani, atau bajak
+Change the seed you are planting|Ganti benih yang kamu tanam
+Planting|Menanam
+Your farmer's food and drink. Tap to go home|Makan dan minum petanimu. Ketuk untuk pulang
+Plow: tapping grass makes new farmland.|Bajak: mengetuk rumput membuat lahan baru.
+Walk: tapping the ground just walks your farmer there.|Jalan: mengetuk tanah hanya membuat petanimu berjalan ke sana.
+Farm: tap plots to plant and harvest. Tapping grass walks.|Bertani: ketuk petak untuk menanam dan memanen. Mengetuk rumput berarti jalan.
+Tapping the ground|Mengetuk tanah
+This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.|Tombol ini menentukan fungsi ketukan. Jalan hanya berjalan, Bertani menanam dan memanen, Bajak membuat lahan baru. Ketuk Jalan untuk mencoba, lalu Bertani untuk kembali.
+Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.|Petanimu sesekali butuh makan dan minum. Ketuk rumah untuk masuk: di sana kamu bisa makan, mandi, dan tidur siang.
+Inside the farmhouse|Di dalam rumah
+Food|Makan
+Drink|Minum
+Comfort|Kenyamanan
+Fresh +10% XP|Segar +10% XP
+Go outside|Keluar
+Kitchen|Dapur
+Cook and eat|Masak dan makan
+Water|Air
++30 drink|+30 minum
+Shower|Mandi
++10% XP|+10% XP
+Nap|Tidur siang
+Skip 5 min|Lewati 5 mnt
+Furniture|Perabot
+Make it cozy|Buat nyaman
+Bed|Tempat tidur
+Stove|Kompor
+Kitchen Sink|Wastafel
+Kitchen Table|Meja dapur
+Dining Chairs|Kursi makan
+House Plant|Tanaman hias
+Cozy Rug|Karpet nyaman
+Floor Lamp|Lampu berdiri
+Bookshelf|Rak buku
+Fridge|Kulkas
+Sofa|Sofa
+Television|Televisi
+Fireplace|Perapian
+Comfy Double Bed|Kasur ganda empuk
+Meals eaten at the table fill you up 20% more.|Makan di meja 20% lebih mengenyangkan.
+Keeps food fresh: every meal fills you up 20% more.|Menjaga makanan tetap segar: setiap makanan 20% lebih mengenyangkan.
+Replaces the old bed. Naps also give you the Fresh bonus.|Mengganti kasur lama. Tidur siang juga memberi bonus Segar.
+Glass of Water|Segelas air
+Wheat Porridge|Bubur gandum
+Scrambled Eggs|Telur orak-arik
+Fruit Bowl|Semangkuk buah
+Glass of Milk|Segelas susu
+Veggie Stew|Sup sayur
+Slice of Bread|Sepotong roti
+Slice of Pie|Sepotong pai
+Your farmer is getting hungry. Go into the farmhouse to eat.|Petanimu mulai lapar. Masuk ke rumah untuk makan.
+Your farmer is getting thirsty. Go into the farmhouse for a drink.|Petanimu mulai haus. Masuk ke rumah untuk minum.
+food|makan
+drink|minum
+Cook|Masak
+Eat|Makan
+Free from the tap|Gratis dari keran
+Cooking|Memasak
+Drinking|Minum
+Eating|Makan
+Showering|Mandi
+Napping|Tidur siang
+You need the ingredients in your barn first.|Kamu butuh bahannya di lumbung dulu.
+You are full!|Kamu sudah kenyang!
+Cook and eat with goods from your barn. A full farmer works at full speed.|Masak dan makan dengan barang dari lumbung. Petani yang kenyang bekerja dengan cepat.
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Masak dan makan dengan barang dari lumbung. Petani yang kenyang bekerja dengan cepat. Kulkasmu membuat setiap makanan 20% lebih baik.`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -1001,4 +1069,13 @@ p:`0|$1 koin
 187|$1 bertukar denganmu: {l2}.
 188|{1} barumu siap! Alat serba guna memakainya sendiri.
 189|{1}: $2 petak
-190|Pergi dalam {t1}`};
+190|Pergi dalam {t1}
+191|{1}: +$2 {3}[[, +$4 minum]].
+192|Kamu masih segar. Mandi lagi dalam {t1}.
+193|Bersih dan segar! +10% XP selama $1 menit.
+194|Kamu belum mengantuk. Tidur siang lagi dalam {t1}.
+195|Tidur siang yang nyenyak! Semua di kebun maju 5 menit. -$1 makan dan minum.
+196|{1} ditambahkan ke rumahmu!
+197|Perabot nyaman membuat rumah lebih hangat: setiap poin kenyamanan membuat tidur siang lebih cepat tersedia. Kenyamanan: $1. Jeda tidur siang: {t2}.
+198|[[{1} ]]+$2 kenyamanan
+199|{1} ($2)`};

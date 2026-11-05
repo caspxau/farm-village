@@ -46,6 +46,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible{outline:3px solid var(--xp);outline-offset:2px}
 #farm{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:pointer}
 #farm.grab{cursor:grabbing}
+/* static sunlight and vignette as one CSS layer, and a low-resolution night layer the browser scales up: no per-frame full-screen drawing */
+.farmfx,#nightCv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.farmfx{background:radial-gradient(ellipse at 12% -10%,rgba(255,240,180,.26),rgba(255,230,160,.07) 45%,rgba(255,230,160,0) 75%),radial-gradient(ellipse at 50% 46%,rgba(20,40,8,0) 52%,rgba(20,40,8,.1) 75%,rgba(20,40,8,.36) 100%)}
+#nightCv{display:block}
+body.inhouse .farmfx,body.inhouse #nightCv{display:none}
 .outline{color:#fff;text-shadow:2px 0 0 var(--ink),-2px 0 0 var(--ink),0 2px 0 var(--ink),0 -2px 0 var(--ink),2px 2px 0 var(--ink),-2px 2px 0 var(--ink),2px -2px 0 var(--ink),-2px -2px 0 var(--ink),0 4px 0 var(--ink)}
 .outline-s{color:#fff;text-shadow:0 1px 0 var(--ink),1px 0 0 var(--ink),-1px 0 0 var(--ink),0 -1px 0 var(--ink),0 2px 0 var(--ink)}
 
@@ -847,10 +852,49 @@ body.tutshow .toast{bottom:calc(240px + env(safe-area-inset-bottom,0px))}
   .barnbar{margin:2px 0 6px;gap:8px}.barnbar .go{min-height:34px;font-size:15px;padding:3px 12px}
   .sheet .grid{gap:8px}
 }
+
+/* right column: tap mode, seed, needs */
+.rightcol{position:fixed;right:max(14px,env(safe-area-inset-right,0px));top:calc(max(14px,env(safe-area-inset-top,0px)) + 84px);z-index:21;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.rightcol .modesw{position:static}
+.seedpill,.needpill{display:flex;align-items:center;gap:6px;font:inherit;color:#3a2310;background:var(--grain,none),var(--parch,#fff7e6);border:3px solid var(--wood-d);border-radius:14px;box-shadow:0 3px 0 var(--wood-d);padding:3px 10px 3px 4px;cursor:pointer;min-height:44px}
+.seedpill img{width:38px;height:38px;object-fit:contain}
+.seedpill span{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05}.seedpill small{font-size:10.5px;color:#7a5a3a;font-weight:700;text-transform:uppercase;letter-spacing:.4px}.seedpill b{font-size:15px}
+.seedpill i{font-style:normal;color:#7a5a3a;font-size:12px}
+.needpill{flex-direction:column;align-items:stretch;gap:3px;padding:5px 8px;min-width:112px}
+.needpill .nrow{display:flex;align-items:center;gap:5px}.needpill svg{width:16px;height:16px;flex:none}
+.needpill em{flex:1;height:9px;border-radius:5px;background:#e6d8bd;border:1.5px solid #8a6a3a;overflow:hidden}.needpill em i{display:block;height:100%;width:50%;background:linear-gradient(#9be06a,#3f9a3c);transition:width .4s}
+.needpill .nrow:last-child em i{background:linear-gradient(#9fdcff,#2d8fe3)}
+.needpill.low{animation:tutpulse 1.4s ease-in-out infinite}.needpill em i.low{background:linear-gradient(#ffb08a,#d9402f)!important}
+body.visiting .rightcol{display:none}
+@media (max-width:640px){.rightcol{top:calc(max(8px,env(safe-area-inset-top,0px)) + 66px);right:10px;gap:6px}.seedpill{min-height:38px;padding:2px 8px 2px 3px}.seedpill img{width:30px;height:30px}.seedpill b{font-size:13px}.needpill{min-width:96px}}
+@media (max-width:460px){.seedpill small{display:none}}
+@media (max-height:520px) and (orientation:landscape){.rightcol{top:calc(max(6px,env(safe-area-inset-top,0px)) + 62px);gap:5px}.seedpill{min-height:34px}.seedpill img{width:26px;height:26px}.seedpill small{display:none}.needpill{min-width:90px;padding:3px 6px}}
+
+/* inside the farmhouse */
+.house{position:fixed;inset:0;z-index:34;display:flex;flex-direction:column;background:#2e1d10}
+.house[hidden]{display:none}
+.house canvas{flex:1;min-height:0;width:100%}
+.htop{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:max(10px,env(safe-area-inset-top,0px)) 12px 8px;background:var(--wood-bg,#8a5530);border-bottom:3px solid var(--wood-d)}
+.hneeds{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;color:#fff7e6;font-weight:700;font-size:13px}
+.hneeds span{display:flex;align-items:center;gap:5px}.hneeds svg{width:18px;height:18px}
+.hneeds em{width:80px;height:10px;border-radius:5px;background:#e6d8bd;border:1.5px solid #3a2310;overflow:hidden}.hneeds em i{display:block;height:100%;background:linear-gradient(#9be06a,#3f9a3c)}
+.hneeds span:nth-child(2) em i{background:linear-gradient(#9fdcff,#2d8fe3)}
+.hneeds [hidden]{display:none!important}.hfresh{background:#e8f5c8;color:#2f6b1e;border-radius:999px;padding:1px 8px}
+.hleave{font-size:15px;padding:6px 14px;min-height:40px}
+.hbar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:10px 10px max(12px,env(safe-area-inset-bottom,0px));background:var(--wood-bg,#8a5530);border-top:3px solid var(--wood-d)}
+.hbtn{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:92px;min-height:56px;font:inherit;color:#3a2310;background:var(--grain,none),var(--parch,#fff7e6);border:3px solid var(--wood-d);border-radius:14px;box-shadow:0 3px 0 var(--wood-d);cursor:pointer;padding:4px 8px}
+.hbtn span{font-family:var(--f-display);font-size:16px}.hbtn small{font-size:11px;color:#7a5a3a;font-weight:700}
+.hbtn:disabled{opacity:.55}
+.req.gain{background:#e8f5c8;border-color:#8ac86a}.req.gain.drink{background:#e2f2ff;border-color:#7ab8e8}
+body.inhouse .tut,body.inhouse .rightcol{display:none}
+.toast{z-index:45}
+@media (max-width:640px){.hneeds em{width:56px}.hbtn{min-width:66px;min-height:50px;padding:3px 4px}.hbtn span{font-size:13.5px}.hbtn small{font-size:9.5px}.hleave{font-size:13px;padding:4px 10px}}
+@media (max-height:520px) and (orientation:landscape){.house{flex-direction:row;flex-wrap:wrap}.htop{width:100%;padding:4px 10px}.house canvas{flex:1;height:calc(100dvh - 52px)}.hbar{flex-direction:column;flex-wrap:nowrap;width:150px;border-top:0;border-left:3px solid var(--wood-d);padding:6px;gap:5px;justify-content:flex-start}.hbtn{min-height:40px;width:100%}}
 </style>
 </head>
 <body>
 <canvas id="farm" aria-label="Your farm. Click tiles to plow, plant and harvest."></canvas>
+<canvas id="nightCv" aria-hidden="true"></canvas><div class="farmfx" aria-hidden="true"></div>
 
 <header class="hud">
   <div class="lvl" title="Your level">
@@ -938,9 +982,14 @@ body.tutshow .toast{bottom:calc(240px + env(safe-area-inset-bottom,0px))}
       <em aria-hidden="true">Settings</em></button>
   </div>
 </div>
-<div class="modesw" id="modeSw" role="group" aria-label="Tapping grass: walk or plow">
+<div class="rightcol" id="rightCol">
+<div class="modesw" id="modeSw" role="group" aria-label="What a tap does: walk, farm or plow">
   <button id="modeWalk" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2.4" fill="#f2c6a0" stroke="#6b3c15" stroke-width="1.6"/><path d="M12 8l-3 5 3 2-1 6M12 8l3 4 3 1M12 8l1 5 3 3 1 5M9 13l-3 1" fill="none" stroke="#6b3c15" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Walk</span></button>
+  <button id="modeFarm" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21V11a2 2 0 0 1 4 0V8a2 2 0 0 1 4 0v2a2 2 0 0 1 4 0v5c0 4-3 6-6 6z" fill="#ffd9b0" stroke="#6b3c15" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 14l-2-2a2 2 0 0 0-3 3l5 6" fill="#ffd9b0" stroke="#6b3c15" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Farm</span></button>
   <button id="modePlow" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3L8 16" stroke="#a8642a" stroke-width="3" stroke-linecap="round"/><path d="M5 13l6 4-2 3-6-4z" fill="#c9ced2" stroke="#3a4650" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 21h18" stroke="#8b5a2e" stroke-width="2.4" stroke-linecap="round"/></svg><span>Plow</span></button>
+</div>
+<button class="seedpill" id="seedPill" aria-label="Change the seed you are planting"><img id="seedPillImg" alt=""><span><small>Planting</small><b id="seedPillName">Wheat</b></span><i aria-hidden="true">&#9662;</i></button>
+<button class="needpill" id="needPill" aria-label="Your farmer's food and drink. Tap to go home"><span class="nrow"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 2v7a2 2 0 0 0 4 0V2M8 2v16M14 2c-2 2-2 6 0 8v8" fill="none" stroke="#6b3c15" stroke-width="1.8" stroke-linecap="round"/></svg><em><i id="needFood"></i></em></span><span class="nrow"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z" fill="#5bb8f0" stroke="#1f5f9a" stroke-width="1.6"/></svg><em><i id="needDrink"></i></em></span></button>
 </div>
 <footer class="dock">
   <button class="mbtn" id="btnTool" aria-label="Tools" aria-expanded="false"><span class="toolic" id="toolIcon"></span><em aria-hidden="true" id="toolLabel">Multi</em></button>
@@ -984,6 +1033,19 @@ body.tutshow .toast{bottom:calc(240px + env(safe-area-inset-bottom,0px))}
   <h2 class="outline" id="rotTitle"></h2>
   <p id="rotText"></p>
   <button class="btn2" id="rotKeep">Play this way instead</button>
+</div>
+<div class="house" id="house" hidden role="dialog" aria-label="Inside the farmhouse">
+  <div class="htop"><div class="hneeds"><span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 2v7a2 2 0 0 0 4 0V2M8 2v16M14 2c-2 2-2 6 0 8v8" fill="none" stroke="#6b3c15" stroke-width="1.8" stroke-linecap="round"/></svg><b>Food</b><em><i id="hFood"></i></em></span><span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z" fill="#5bb8f0" stroke="#1f5f9a" stroke-width="1.6"/></svg><b>Drink</b><em><i id="hDrink"></i></em></span>
+    <span class="hcomf"><b>Comfort</b> <strong id="hComfort">0</strong></span><span class="hfresh" id="hFresh" hidden>Fresh +10% XP</span></div>
+    <button class="go hleave" id="hLeave">Go outside</button></div>
+  <canvas id="hcv" aria-hidden="true"></canvas>
+  <div class="hbar">
+    <button class="hbtn" id="hEat"><span>Kitchen</span><small>Cook and eat</small></button>
+    <button class="hbtn" id="hDrinkBtn"><span>Water</span><small>+30 drink</small></button>
+    <button class="hbtn" id="hShower"><span>Shower</span><small>+10% XP</small></button>
+    <button class="hbtn" id="hNap"><span>Nap</span><small>Skip 5 min</small></button>
+    <button class="hbtn" id="hShop"><span>Furniture</span><small>Make it cozy</small></button>
+  </div>
 </div>
 <div class="modal" id="modal" hidden>
   <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
@@ -1127,7 +1189,8 @@ const PL_EXACT={
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
 'Neighbor trades: swap goods for materials':'Wymiana z sąsiadami: towary za materiały','Trades':'Wymiana','Trade with neighbors for materials':'Wymień się z sąsiadami na materiały','Neighbor Trades':'Wymiana z sąsiadami','Your neighbors swap building materials for farm goods. Use them to upgrade your barn and animal homes.':'Sąsiedzi wymieniają materiały budowlane na towary z farmy. Użyj ich do rozbudowy stodoły i domów zwierząt.','In return for':'W zamian za','Trade':'Wymień','Traded':'Wymienione','You do not have everything for this trade yet.':'Nie masz jeszcze wszystkiego do tej wymiany.','Multi-tool: plants, harvests and collects, and uses your tractor, seeder and harvester by itself.':'Multi-narzędzie: sadzi, zbiera i odbiera, a traktor, siewnik i kombajn włącza samo.','Graphics':'Grafika','Sharpest':'Najostrzej','Smoothest':'Najpłynniej','Machines':'Maszyny','Use by themselves':'Same','By hand':'Ręcznie',
-'Raw Bacon':'Surowy boczek','Bacon and Eggs':'Jajka na boczku','Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.':'Dotknięcie trawy wysyła tam farmera. Przełącznik Chodzenie / Orka robi zamiast tego nowe pole. Dotknij Orki, by spróbować, a potem Chodzenia, by wrócić.',
+'Raw Bacon':'Surowy boczek','Bacon and Eggs':'Jajka na boczku',
+'Farm':'Farma','What a tap does: walk, farm or plow':'Co robi dotknięcie: chodzenie, farma albo orka','Change the seed you are planting':'Zmień nasiona, które sadzisz','Planting':'Sadzisz','Your farmer\'s food and drink. Tap to go home':'Jedzenie i picie farmera. Dotknij, by wejść do domu','Plow: tapping grass makes new farmland.':'Orka: dotknięcie trawy robi nowe pole.','Walk: tapping the ground just walks your farmer there.':'Chodzenie: dotknięcie ziemi tylko prowadzi tam farmera.','Farm: tap plots to plant and harvest. Tapping grass walks.':'Farma: dotykaj pól, by sadzić i zbierać. Dotknięcie trawy to spacer.','Tapping the ground':'Dotknięcie ziemi','This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.':'Ten przełącznik decyduje, co robi dotknięcie. Chodzenie tylko chodzi, Farma sadzi i zbiera, Orka robi nowe pole. Dotknij Chodzenia, a potem wróć do Farmy.','Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.':'Farmer co jakiś czas potrzebuje jedzenia i picia. Dotknij domu, by wejść do środka: tam zjesz, weźmiesz prysznic i się zdrzemniesz.','Inside the farmhouse':'Wnętrze domu','Food':'Jedzenie','Drink':'Picie','Comfort':'Komfort','Fresh +10% XP':'Świeżość +10% XP','Go outside':'Wyjdź na zewnątrz','Kitchen':'Kuchnia','Cook and eat':'Gotuj i jedz','Water':'Woda','+30 drink':'+30 picia','Shower':'Prysznic','+10% XP':'+10% XP','Nap':'Drzemka','Skip 5 min':'Pomiń 5 min','Furniture':'Meble','Make it cozy':'Urządź przytulnie','Bed':'Łóżko','Stove':'Kuchenka','Kitchen Sink':'Zlew','Kitchen Table':'Stół kuchenny','Dining Chairs':'Krzesła','House Plant':'Roślina doniczkowa','Cozy Rug':'Przytulny dywan','Floor Lamp':'Lampa stojąca','Bookshelf':'Regał na książki','Fridge':'Lodówka','Sofa':'Kanapa','Television':'Telewizor','Fireplace':'Kominek','Comfy Double Bed':'Wygodne podwójne łóżko','Meals eaten at the table fill you up 20% more.':'Posiłki przy stole sycą o 20% bardziej.','Keeps food fresh: every meal fills you up 20% more.':'Trzyma jedzenie świeże: każdy posiłek syci o 20% bardziej.','Replaces the old bed. Naps also give you the Fresh bonus.':'Zastępuje stare łóżko. Drzemka daje też premię Świeżości.','Glass of Water':'Szklanka wody','Wheat Porridge':'Owsianka z pszenicy','Scrambled Eggs':'Jajecznica','Fruit Bowl':'Miska owoców','Glass of Milk':'Szklanka mleka','Veggie Stew':'Gulasz warzywny','Slice of Bread':'Kromka chleba','Slice of Pie':'Kawałek ciasta','Your farmer is getting hungry. Go into the farmhouse to eat.':'Farmer robi się głodny. Wejdź do domu coś zjeść.','Your farmer is getting thirsty. Go into the farmhouse for a drink.':'Farmer robi się spragniony. Wejdź do domu się napić.','food':'jedzenia','drink':'picia','Cook':'Gotuj','Eat':'Zjedz','Free from the tap':'Za darmo z kranu','Cooking':'Gotowanie','Drinking':'Picie','Eating':'Jedzenie','Showering':'Prysznic','Napping':'Drzemka','You need the ingredients in your barn first.':'Najpierw potrzebujesz składników w stodole.','You are full!':'Jesteś najedzony!','Cook and eat with goods from your barn. A full farmer works at full speed.':'Gotuj i jedz z towarów ze stodoły. Najedzony farmer pracuje pełną parą.','Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.':'Gotuj i jedz z towarów ze stodoły. Najedzony farmer pracuje pełną parą. Lodówka ulepsza każdy posiłek o 20%.','Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.':'Dotknięcie trawy wysyła tam farmera. Przełącznik Chodzenie / Orka robi zamiast tego nowe pole. Dotknij Orki, by spróbować, a potem Chodzenia, by wrócić.',
 'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.':'Możesz sadzić też inne rośliny. Otwórz targ, przejdź do Nasion i dotknij Posadź przy Soi.','Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.':'Teraz sadzisz soję. Kliknij zaorane pole, by ją posadzić. Nasiona zmienisz w każdej chwili w: Targ > Nasiona.',
 'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.':'Dale wozi towary do miasta za monety i mnóstwo XP. Otwórz tablicę dostaw i wyślij go z pszenicą.','Everything you harvest goes to the barn. Open the Barn and sell something.':'Wszystko, co zbierzesz, trafia do stodoły. Otwórz stodołę i coś sprzedaj.','Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.':'Rozbudowy wymagają desek, gwoździ, cegieł i farby. Znajdujesz je podczas pracy, a sąsiedzi wymieniają je w: Więcej > Wymiana.','Skip quest':'Pomiń zadanie','Sure? Skip it':'Na pewno? Pomiń','Quest skipped. A new one will come along.':'Zadanie pominięte. Wkrótce pojawi się nowe.','Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.':'Stodoła jest pełna, więc nadmiar sprzedano po cenie targowej. Rozbuduj stodołę, by mieścić więcej.','Dairy Days':'Dni nabiału','The Orchard Fair':'Jarmark sadowniczy','Sunday Breakfast':'Niedzielne śniadanie','Across the Valley':'Przez całą dolinę','Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.':'Krowy to serce farmy. Trzymaj kilka, daj im dobry dom i pokaż mi ser na stole.','The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.':'Zbliża się jarmark sadowniczy i chcę, żeby dolina spróbowała najlepszych owoców. Powiększ sad i wyciśnij sok wiśniowy.','Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!':'Nic nie mówi „niedziela” jak wiejskie śniadanie. Wyhoduj parę świń i usmaż mi jajka na boczku!','Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!':'Wieść o twojej farmie się rozeszła. Każde miasto chce od ciebie ładunek. Niech ciężarówka jeździ!','Have 3 cows':'Miej 3 krowy','Bring Hank 3 cheese wheels':'Przynieś Hankowi 3 koła sera','Have 6 fruit trees':'Miej 6 drzew owocowych','Pick fruit 25 times':'Zbierz owoce 25 razy','Bring Otis 3 cherry juices':'Przynieś Otisowi 3 soki wiśniowe','Have 2 pigs':'Miej 2 świnie','Bring Rosa 2 bacon and eggs':'Przynieś Rosie 2 porcje jajek na boczku','Sell 20 goods from the barn':'Sprzedaj 20 towarów ze stodoły','Complete 8 deliveries':'Wykonaj 8 dostaw','Make 10 goods in your buildings':'Zrób 10 towarów w budynkach'
 };
@@ -1329,7 +1392,16 @@ const PL_PATS=[
 [/^(.+) traded with you: (.+)\.$/,m=>m[1]+' wymienia się z tobą: '+m[2].split(', ').map(L_w).join(', ')+'.'],
 [/^Your new (.+) is ready! The Multi-tool uses it by itself\.$/,m=>L_w(m[1])+' gotowy! Multi-narzędzie używa go samo.']
 ,[/^(Tractor|Seeder|Harvester): (\d+) plots$/,m=>L_w(m[1])+': '+m[2]+' '+p3(m[2],'pole','pola','pól')]
-,[/^Leaves in (.+)$/,m=>'Odejdzie za '+L_t(m[1])]
+,[/^Leaves in (.+)$/,m=>'Odejdzie za '+L_t(m[1])],
+[/^(.+): \+(\d+) (food|drink)(?:, \+(\d+) drink)?\.$/,m=>L_w(m[1])+': +'+m[2]+' '+(m[3]==='food'?'jedzenia':'picia')+(m[4]?', +'+m[4]+' picia':'')+'.'],
+[/^You are still fresh\. Shower again in (.+)\.$/,m=>'Wciąż jesteś świeży. Kolejny prysznic za '+L_t(m[1])+'.'],
+[/^Fresh and clean! \+10% XP for (\d+) minutes\.$/,m=>'Czysto i świeżo! +10% XP przez '+m[1]+' min.'],
+[/^You are not sleepy yet\. Next nap in (.+)\.$/,m=>'Jeszcze nie chce ci się spać. Następna drzemka za '+L_t(m[1])+'.'],
+[/^What a nap! Everything on the farm moved 5 minutes ahead\. -(\d+) food and drink\.$/,m=>'Ale drzemka! Wszystko na farmie przesunęło się o 5 minut. -'+m[1]+' jedzenia i picia.'],
+[/^(.+) added to your farmhouse!$/,m=>L_w(m[1])+' trafia do twojego domu!'],
+[/^Comfy furniture makes your home cozier: each comfort point makes naps come back sooner\. Comfort now: (\d+)\. Next nap cooldown: (.+)\.$/,m=>'Wygodne meble czynią dom przytulniejszym: każdy punkt komfortu skraca czekanie na drzemkę. Komfort: '+m[1]+'. Czekanie na drzemkę: '+L_t(m[2])+'.'],
+[/^(?:(.+) )?\+(\d+) comfort$/,m=>(m[1]?L_w(m[1])+' ':'')+'+'+m[2]+' komfortu'],
+[/^(.+) \((\d+)\)$/,m=>L_w(m[1])+' ('+m[2]+')']
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -1436,28 +1508,28 @@ const CROP_SEASON={strawberry:'spring',carrot:'spring',daisy:'spring',daffodil:'
   soybean:'winter',rice:'winter',barley:'winter',rose:'winter'};
 const ANIMALS={
   chicken:{name:'Chicken',lvl:1,cost:100,every:60,give:17,feed:1,xp:1,product:'Eggs',buyxp:5},
-  duck:{name:'Duck',lvl:4,cost:260,every:90,give:29,feed:1,xp:1,product:'Feathers',buyxp:9},
-  sheep:{name:'Sheep',lvl:5,cost:380,every:120,give:35,feed:1,xp:2,product:'Wool',buyxp:12},
+  duck:{name:'Duck',lvl:14,cost:900,every:90,give:59,feed:1,xp:1,product:'Feathers',buyxp:9},
+  sheep:{name:'Sheep',lvl:15,cost:1000,every:120,give:65,feed:1,xp:2,product:'Wool',buyxp:12},
   cow:{name:'Cow',lvl:5,cost:650,every:150,give:43,feed:2,xp:3,product:'Milk',buyxp:12},
-  goat:{name:'Goat',lvl:7,cost:520,every:140,give:48,feed:2,xp:3,product:'Goat milk',buyxp:16},
+  goat:{name:'Goat',lvl:17,cost:1300,every:140,give:78,feed:2,xp:3,product:'Goat milk',buyxp:16},
   pig:{name:'Pig',lvl:13,cost:1400,every:200,give:71,feed:2,xp:4,product:'Raw Bacon',buyxp:16},
-  horse:{name:'Horse',lvl:11,cost:1300,every:300,give:78,feed:3,xp:6,product:'Horse hair',buyxp:35},
-  rabbit:{name:'Rabbit',lvl:6,cost:420,every:110,give:37,feed:1,xp:2,product:'Angora fur',buyxp:13},
-  turkey:{name:'Turkey',lvl:8,cost:560,every:160,give:53,feed:2,xp:3,product:'Turkey feathers',buyxp:17},
-  llama:{name:'Llama',lvl:13,cost:1600,every:320,give:86,feed:3,xp:7,product:'Llama wool',buyxp:40}
+  horse:{name:'Horse',lvl:19,cost:2200,every:300,give:102,feed:3,xp:6,product:'Horse hair',buyxp:35},
+  rabbit:{name:'Rabbit',lvl:16,cost:1100,every:110,give:67,feed:1,xp:2,product:'Angora fur',buyxp:13},
+  turkey:{name:'Turkey',lvl:18,cost:1400,every:160,give:83,feed:2,xp:3,product:'Turkey feathers',buyxp:17},
+  llama:{name:'Llama',lvl:20,cost:2600,every:320,give:107,feed:3,xp:7,product:'Llama wool',buyxp:40}
 };
 // Every animal breed lives in its own home. You need the home before you can buy that animal; each home holds up to 7 animals.
 const HOMES={
   chicken:{name:'Chicken Coop',cost:100,cap:7,xp:10,wall:'#d9402f',wall2:'#b8322a',roof:'#f4efe2',roof2:'#d8d0bf',style:'stilts'},
-  duck:{name:'Duck House',cost:200,cap:7,xp:12,wall:'#4fa6d8',wall2:'#3a88b8',roof:'#f2a21e',roof2:'#c97a10',style:'pond'},
-  sheep:{name:'Sheep Pen',cost:320,cap:7,xp:15,wall:'#c9a06a',wall2:'#a8804e',roof:'#6a8a4a',roof2:'#4f6a36',style:'pen'},
-  goat:{name:'Goat Shed',cost:380,cap:7,xp:18,wall:'#bdb7ab',wall2:'#9a948a',roof:'#8a5a32',roof2:'#6b4122',style:'stone'},
+  duck:{name:'Duck House',cost:640,cap:7,xp:12,wall:'#4fa6d8',wall2:'#3a88b8',roof:'#f2a21e',roof2:'#c97a10',style:'pond'},
+  sheep:{name:'Sheep Pen',cost:700,cap:7,xp:15,wall:'#c9a06a',wall2:'#a8804e',roof:'#6a8a4a',roof2:'#4f6a36',style:'pen'},
+  goat:{name:'Goat Shed',cost:900,cap:7,xp:18,wall:'#bdb7ab',wall2:'#9a948a',roof:'#8a5a32',roof2:'#6b4122',style:'stone'},
   cow:{name:'Dairy Barn',cost:450,cap:7,xp:25,wall:'#f6f2e8',wall2:'#ddd6c6',roof:'#3a3434',roof2:'#252020',style:'barn'},
   pig:{name:'Pig Sty',cost:900,cap:7,xp:25,wall:'#e0a0aa',wall2:'#c88090',roof:'#8a5a32',roof2:'#6b4122',style:'mud'},
-  horse:{name:'Horse Stable',cost:900,cap:7,xp:40,wall:'#8a5530',wall2:'#6e4424',roof:'#3f6fc0',roof2:'#2d55a0',style:'stable'},
-  rabbit:{name:'Rabbit Hutch',cost:300,cap:7,xp:15,wall:'#f0d9a8',wall2:'#d8bf88',roof:'#3f9a3c',roof2:'#2f7a2c',style:'hutch'},
-  turkey:{name:'Turkey Roost',cost:400,cap:7,xp:18,wall:'#a8642a',wall2:'#8a4e1e',roof:'#e0a040',roof2:'#b8802a',style:'stilts'},
-  llama:{name:'Llama Lodge',cost:1000,cap:7,xp:45,wall:'#f2e6cf',wall2:'#d8c8a8',roof:'#e0457b',roof2:'#b8305e',style:'lodge'}
+  horse:{name:'Horse Stable',cost:1500,cap:7,xp:40,wall:'#8a5530',wall2:'#6e4424',roof:'#3f6fc0',roof2:'#2d55a0',style:'stable'},
+  rabbit:{name:'Rabbit Hutch',cost:760,cap:7,xp:15,wall:'#f0d9a8',wall2:'#d8bf88',roof:'#3f9a3c',roof2:'#2f7a2c',style:'hutch'},
+  turkey:{name:'Turkey Roost',cost:980,cap:7,xp:18,wall:'#a8642a',wall2:'#8a4e1e',roof:'#e0a040',roof2:'#b8802a',style:'stilts'},
+  llama:{name:'Llama Lodge',cost:1800,cap:7,xp:45,wall:'#f2e6cf',wall2:'#d8c8a8',roof:'#e0457b',roof2:'#b8305e',style:'lodge'}
 };
 for(const id in HOMES)HOMES[id].lvl=ANIMALS[id].lvl;
 const TREES={
@@ -1546,8 +1618,8 @@ for(const id in TREES)ITEMS['t_'+id]={name:TREES[id].product,sell:TREES[id].give
 Object.assign(ITEMS,{
   feed:{name:'Animal Feed',sell:3,cat:'supply',lvl:1},fert:{name:'Fertilizer',sell:6,cat:'supply',lvl:2},diesel:{name:'Diesel',sell:40,cat:'supply',lvl:3},
   jam:{name:'Strawberry Jam',sell:255,cat:'made',lvl:4},juice:{name:'Apple Juice',sell:110,cat:'made',lvl:4},bread:{name:'Country Bread',sell:255,cat:'made',lvl:4},
-  cheese:{name:'Cheese Wheel',sell:190,cat:'made',lvl:4},sweater:{name:'Wool Sweater',sell:200,cat:'made',lvl:4},pie:{name:'Pumpkin Pie',sell:325,cat:'made',lvl:4},
-  baconeggs:{name:'Bacon and Eggs',sell:165,cat:'made',lvl:13},honey:{name:'Honey',sell:60,cat:'animal',lvl:5},fish:{name:'Fresh Fish',sell:70,cat:'animal',lvl:6},
+  cheese:{name:'Cheese Wheel',sell:225,cat:'made',lvl:4},sweater:{name:'Wool Sweater',sell:320,cat:'made',lvl:4},pie:{name:'Pumpkin Pie',sell:325,cat:'made',lvl:4},
+  baconeggs:{name:'Bacon and Eggs',sell:175,cat:'made',lvl:13},honey:{name:'Honey',sell:60,cat:'animal',lvl:5},fish:{name:'Fresh Fish',sell:70,cat:'animal',lvl:6},
   honeycake:{name:'Honey Cake',sell:355,cat:'made',lvl:5},fishpie:{name:'Fish Pie',sell:605,cat:'made',lvl:6},
   applecider:{name:'Apple Cider',sell:160,cat:'made',lvl:8},cherryjuice:{name:'Cherry Juice',sell:240,cat:'made',lvl:8},grapejuice:{name:'Grape Juice',sell:630,cat:'made',lvl:8}
 });
@@ -1590,7 +1662,7 @@ function need(l){return Math.round(30+25*l+5*l*l)} // XP for the next level: gro
 let S,occ={},N=16,VIS=null;
 function fresh(){
   const now=Date.now();
-  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,tutV:4,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
+  const s={coins:250,xp:0,level:1,size:16,seed:'wheat',tiles:{},homesV:1,v2:true,tut:0,tutV:5,goods:{feed:30,wheat:2},mats:{board:1,nail:1}};
   const put=(x,y,o)=>{s.tiles[x+','+y]=o};
   put(1,2,{k:'bld',id:'house'});put(1,6,{k:'bld',id:'barn'});
   for(let x=6;x<=10;x++)for(let y=5;y<=8;y++){
@@ -1627,12 +1699,14 @@ function norm(s){
   if(!s.born)s.born=Date.now();if(s.farmName==='Clover Hollow')s.farmName='Farm Village';if(s.pet&&!['dog','cat'].includes(s.pet.kind))s.pet=null;
   s.barnLvl=Math.min(6,Math.max(1,s.barnLvl|0));
   if(s.level>99){s.level=99;s.xp=0}
+  if(!s.tapMode)s.tapMode=s.tapGrass==='plow'?'plow':'farm';
   // the Walk / Plow step was added as tutorial step 4: older saves past step 3 move up one
   if(s.tutV!==2&&s.tutV!==3){if(typeof s.tut==='number'&&s.tut>=3)s.tut++;s.tutV=2}
   // v3: the Delivery step moved before Sell and a Trades tip was added at the end
   if(s.tutV===2){if(typeof s.tut==='number'){if(s.tut>=9)s.tut=99;else if(s.tut>=7)s.tut=7}s.tutV=3}
   // v4: two seed-choosing tips were added after the first planting
-  if(s.tutV===3){if(typeof s.tut==='number'&&s.tut>=3&&s.tut<10)s.tut+=2;else if(s.tut>=10)s.tut=99;s.tutV=4}
+  if(s.tutV===4){if(typeof s.tut==='number'&&s.tut>=11)s.tut=s.tut>=12?99:s.tut+1;s.tutV=5}
+  if(s.tutV===3){if(typeof s.tut==='number'&&s.tut>=3&&s.tut<10)s.tut+=2;else if(s.tut>=10)s.tut=99;s.tutV=5}
   s.orders=(s.orders||[]).filter(o=>o&&o.items&&o.items.every(([id])=>ITEMS[id])&&NEIGHBORS.some(n=>n.id===o.who));
   for(const k in s.goods)if(!ITEMS[k]||!(s.goods[k]>0))delete s.goods[k];
   return s;
@@ -1692,7 +1766,10 @@ function fuelNow(){
   if(gain>0){S.fuel=Math.min(FUEL_MAX,S.fuel+gain);S.fuelT+=gain*FUEL_EVERY*1000}
   return S.fuel;
 }
-function stat(k,n){S.stats[k]=(S.stats[k]||0)+(n||1);checkRibbons();if(S.goals)renderGoals();checkTut();checkQuest()}
+// counting is instant; the goal, tutorial and quest checks that follow run once per frame
+let statQueued=false;
+function stat(k,n){S.stats[k]=(S.stats[k]||0)+(n||1);if(statQueued)return;statQueued=true;requestAnimationFrame(statFlush);setTimeout(statFlush,250)}
+function statFlush(){if(!statQueued||!S)return;statQueued=false;checkRibbons();if(S.goals)renderGoals();checkTut();checkQuest()}
 
 /* ================= sound ================= */
 let AC=null;
@@ -1868,7 +1945,7 @@ function animalSfx(id){(ANIMAL_SFX[id]||SFX.collect)()}
 
 /* ================= canvas + camera ================= */
 const cv=document.getElementById('farm');
-let g=cv.getContext('2d',{alpha:false,desynchronized:true}),dpr=1,vw=0,vh=0;
+let g=cv.getContext('2d',{alpha:false,desynchronized:true}),dpr=1,vw=0,vh=0;const MAIN_G=g;
 // Graphics quality. 'auto' starts sharp and steps down (resolution, outline passes, particles) if frames run slow.
 const GFX_KEY='farm-village-gfx';
 function gfxPref(){try{return localStorage.getItem(GFX_KEY)||'auto'}catch(e){return'auto'}}
@@ -1877,7 +1954,7 @@ const QL_DPR=[1,1.5,2],INK_DIRS_HI=[[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[
 const perf={sum:0,n:0,t0:0,stable:0};
 function perfTick(dt){
   if(gfxPref()!=='auto'||document.hidden)return;perf.sum+=dt;perf.n++;
-  if(perf.n<90)return;const avg=perf.sum/perf.n*1000;perf.sum=perf.n=0;
+  if(perf.n<(QL>=2?45:90))return;const avg=perf.sum/perf.n*1000;perf.sum=perf.n=0;
   if(avg>24&&QL>0){QL--;perf.stable=0;applyQuality()}
   else if(avg<15&&QL<2){if(++perf.stable>=12){QL++;perf.stable=0;applyQuality()}}else perf.stable=0;
 }
@@ -1949,7 +2026,7 @@ function inkOutline(c,r){
 const INK_OFF=[0,0],INK=document.createElement('canvas'),INK2=document.createElement('canvas'),INK_DIRS=[[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[.7,-.7],[-.7,-.7]];
 if(QL<2){INK_DIRS.length=0;INK_DIRS.push(...INK_DIRS_LO)}
 function inkLive(ax,ay,rw,up,down,fn){
-  if(ICON_MODE)return fn();
+  if(ICON_MODE||QL===0)return fn();
   const T=g.getTransform(),[wx,wy]=P(ax,ay),s=Math.hypot(T.a,T.b),sx=T.a*wx+T.c*wy+T.e,sy=T.b*wx+T.d*wy+T.f,r=Math.max(1,Math.min(4,s*.65));
   const x0=Math.max(0,Math.floor(sx-rw*s/2)),y0=Math.max(0,Math.floor(sy-up*s)),x1=Math.min(cv.width,Math.ceil(sx+rw*s/2)),y1=Math.min(cv.height,Math.ceil(sy+down*s)),w=x1-x0,h=y1-y0;
   if(w<=0||h<=0)return;
@@ -1957,13 +2034,21 @@ function inkLive(ax,ay,rw,up,down,fn){
   const ix=INK.getContext('2d'),sx2=INK2.getContext('2d');
   ix.setTransform(1,0,0,1,0,0);ix.clearRect(0,0,w,h);ix.setTransform(T.a,T.b,T.c,T.d,T.e-x0,T.f-y0);
   const prev=g;INKING=prev;INK_OFF[0]=x0;INK_OFF[1]=y0;g=ix;try{fn()}finally{g=prev;INKING=null}
-  sx2.setTransform(1,0,0,1,0,0);sx2.globalCompositeOperation='copy';sx2.drawImage(INK,0,0,w,h,0,0,w,h);
+  sx2.setTransform(1,0,0,1,0,0);sx2.globalCompositeOperation='source-over';sx2.clearRect(0,0,w,h);sx2.drawImage(INK,0,0,w,h,0,0,w,h); // clear only the part in use
   sx2.globalCompositeOperation='source-in';sx2.fillStyle='rgba(38,20,8,.82)';sx2.fillRect(0,0,w,h);sx2.globalCompositeOperation='source-over';
   g.save();g.setTransform(1,0,0,1,0,0);
   for(const[dx,dy]of INK_DIRS)g.drawImage(INK2,0,0,w,h,x0+dx*r,y0+dy*r,w,h);
   g.drawImage(INK,0,0,w,h,x0,y0,w,h);g.restore();
 }
-function blit(s,x,y,dx,dy){const[ox,oy]=P(x,y);g.drawImage(s.c,ox+s.box[0]+(dx||0),oy+s.box[1]+(dy||0),s.w,s.h)}
+// Sprites are painted at 2.5x; when the farm is zoomed out, a pre-shrunk copy close to screen size is used instead,
+// so the browser never has to scale a big picture down every frame.
+function spriteAt(s){
+  if(ICON_MODE||g!==MAIN_G)return s.c;
+  const want=Math.abs(g.getTransform().a);let c=s.c,k=SPR_SCALE;
+  while(k/2>=want*1.15&&k>.6){k/=2;const key='m'+k;if(!s[key]){const m=document.createElement('canvas');m.width=Math.max(1,Math.ceil(s.w*k));m.height=Math.max(1,Math.ceil(s.h*k));const x=m.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(c,0,0,m.width,m.height);s[key]=m}c=s[key]}
+  return c;
+}
+function blit(s,x,y,dx,dy){const[ox,oy]=P(x,y);g.drawImage(spriteAt(s),ox+s.box[0]+(dx||0),oy+s.box[1]+(dy||0),s.w,s.h)}
 function isoBox(x,y,w,d,h,left,right,top,stroke,z0){
   z0=z0||0;
   const T=P(x,y,h+z0),R=P(x+w,y,h+z0),B=P(x+w,y+d,h+z0),L=P(x,y+d,h+z0),Rg=P(x+w,y,z0),Bg=P(x+w,y+d,z0),Lg=P(x,y+d,z0);
@@ -2935,7 +3020,7 @@ function drawObj(x,y,o,now){
   }
   if(o.k==='animal'){
     const seed=x*3+y,b=bob(now,seed),rr=ICON_MODE?{x:0,y:0,f:1}:roamOf(x+','+y),wx=(rr.x-rr.y)*W/2,wy=(rr.x+rr.y)*H/2,sc=x<=HX?YARD_SCALE:1;
-    {const s=sprite('a:'+o.id,BOX1,()=>ANIMAL_DRAW[o.id](0,18,0,0)),[ox,oy]=P(x,y);g.save();g.translate(ox+wx,oy+wy+b);if(rr.f<0)g.scale(-1,1);if(sc!==1){g.translate(0,18);g.scale(sc,sc);g.translate(0,-18)}if(isBaby(o,now)){g.translate(0,18);g.scale(.6,.6);g.translate(0,-18)}g.drawImage(s.c,s.box[0],s.box[1],s.w,s.h);g.restore()}
+    {const s=sprite('a:'+o.id,BOX1,()=>ANIMAL_DRAW[o.id](0,18,0,0)),[ox,oy]=P(x,y);g.save();g.translate(ox+wx,oy+wy+b);if(rr.f<0)g.scale(-1,1);if(sc!==1){g.translate(0,18);g.scale(sc,sc);g.translate(0,-18)}if(isBaby(o,now)){g.translate(0,18);g.scale(.6,.6);g.translate(0,-18)}g.drawImage(spriteAt(s),s.box[0],s.box[1],s.w,s.h);g.restore()}
     const homeless=!ICON_MODE&&!hasHome(o.id);
     if(homeless||readyIn(o,ANIMALS[o.id],now)<=0){const[px,py]=P(x+.5,y+.5);bubble(px+wx,py+wy-(o.id==='horse'||o.id==='llama'?56:o.id==='cow'?40:o.id==='rabbit'?28:36)*sc,homeless?'home':GLYPH[o.id],now)}
     return;
@@ -3319,7 +3404,7 @@ function updateFarmer(dt,now){
   }
   const j=farmer.job,rush=queue.length>4?1.8:1;fxT-=dt;
   if(farmer.state==='walk'){
-    const working=j.vehicle&&j.i>0,[tx,ty]=j.stand,dx=tx-farmer.x,dy=ty-farmer.y,d=Math.hypot(dx,dy),sp=(j.vehicle?(working?2.8:7):j.kind==='walk'?3.6:6.5)*rush*dt;
+    const working=j.vehicle&&j.i>0,[tx,ty]=j.stand,dx=tx-farmer.x,dy=ty-farmer.y,d=Math.hypot(dx,dy),sp=(j.vehicle?(working?2.8:7):j.kind==='walk'?3.6:6.5)*rush*needFactor()*dt;
     const sdx=dx-dy;if(Math.abs(sdx)>.05)farmer.dir=sdx>0?1:-1;
     if(j.vehicle&&fxT<=0){fxT=.06;vehicleFx(j.vehicle,working||d<.6,now)}
     if(d<=sp){farmer.x=tx;farmer.y=ty;
@@ -3333,7 +3418,7 @@ function updateFarmer(dt,now){
   }else if(farmer.state==='work'){
     farmer.t+=dt;
     if(fxT<=0){fxT=.07;handFx(j)}
-    if(farmer.t>=.5/rush){finishJob(j,now);unpend(j);farmer.job=null;farmer.state='idle'}
+    if(farmer.t>=.5/rush/needFactor()){finishJob(j,now);unpend(j);farmer.job=null;farmer.state='idle'}
   }
 }
 function spray(x,y,n,o){for(let i=0;i<n;i++){const a=(o.a??-Math.PI/2)+(Math.random()-.5)*(o.spread??2.4),v=(o.v||1.6)*(.5+Math.random());parts.push({x:x+(Math.random()-.5)*(o.w||8),y:y+(Math.random()-.5)*(o.h||4),vx:Math.cos(a)*v+(o.vx||0),vy:Math.sin(a)*v,c:o.c[i%o.c.length],t0:performance.now(),life:o.life||.6,r:o.r||1.8,gr:o.gr??.14,kind:o.kind})}}
@@ -3650,14 +3735,20 @@ function renderLayers(s){
   gcScale=s;gcN=N;dirty.clear();gstate={};syncGround();dirty.clear();
 }
 function syncLayers(t){
-  const b=gBounds(),cap=Math.min(3600/(b[2]-b[0]),3600/(b[3]-b[1])),want=Math.min(cam.z*dpr,cap);
+  const b=gBounds(),lim=QL>=2?3600:QL?2600:1800,cap=Math.min(lim/(b[2]-b[0]),lim/(b[3]-b[1])),want=Math.min(cam.z*dpr,cap);
   if(!GC||gcN!==N||(Math.abs(want/gcScale-1)>.2&&t-lastZoomT>250)){renderLayers(want);return}
   if(!dirty.size)return;
   const prev=g;g=GC.getContext('2d');g.setTransform(gcScale,0,0,gcScale,-b[0]*gcScale,-b[1]*gcScale);
   for(const k of dirty){const[x,y]=k.split(',').map(Number);if(!inGrid(x,y))continue;g.save();poly(quad(x,y));g.clip();drawTile(x,y);g.restore()}
   dirty.clear();g=prev;
 }
-function blitLayer(c){const b=gBounds();g.setTransform(dpr,0,0,dpr,0,0);g.drawImage(c,cam.x+b[0]*cam.z,cam.y+b[1]*cam.z,(b[2]-b[0])*cam.z,(b[3]-b[1])*cam.z)}
+function blitLayer(c){
+  const b=gBounds(),bw=b[2]-b[0],bh=b[3]-b[1],kx=c.width/bw,ky=c.height/bh;
+  // the world rectangle on screen, clipped to the layer
+  const wx0=Math.max(b[0],-cam.x/cam.z),wy0=Math.max(b[1],-cam.y/cam.z),wx1=Math.min(b[2],(vw-cam.x)/cam.z),wy1=Math.min(b[3],(vh-cam.y)/cam.z);
+  if(wx1<=wx0||wy1<=wy0)return;
+  g.setTransform(dpr,0,0,dpr,0,0);
+  g.drawImage(c,(wx0-b[0])*kx,(wy0-b[1])*ky,(wx1-wx0)*kx,(wy1-wy0)*ky,cam.x+wx0*cam.z,cam.y+wy0*cam.z,(wx1-wx0)*cam.z,(wy1-wy0)*cam.z)}
 let last=performance.now();
 // A soft darkening toward the screen edges keeps the eye on the farm in the middle.
 function drawVignette(){
@@ -3665,9 +3756,13 @@ function drawVignette(){
     gr.addColorStop(0,'rgba(20,30,8,0)');gr.addColorStop(.6,'rgba(20,30,8,.06)');gr.addColorStop(1,'rgba(20,30,8,.34)');x.fillStyle=gr;x.fillRect(0,0,256,256)}
   g.setTransform(1,0,0,1,0,0);g.drawImage(VIG,0,0,cv.width,cv.height);
 }
+let skipFrame=false;
 function frame(t){
+  // on the lowest quality, draw every other frame (30 per second) to save battery on weak phones
+  if(QL===0&&!HV){skipFrame=!skipFrame;if(skipFrame){requestAnimationFrame(frame);return}}
   const rawDt=(t-last)/1000,dt=Math.min(.05,rawDt);last=t;if(rawDt>0&&rawDt<.5)perfTick(rawDt);
   const now=Date.now();
+  if(HV){updateFarmer(dt,now);requestAnimationFrame(frame);return}
   seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
   g.setTransform(1,0,0,1,0,0);
   if(!BG){const sb=season().bg;BG=g.createLinearGradient(0,0,0,cv.height);BG.addColorStop(0,sb[0]);BG.addColorStop(1,sb[1])}
@@ -3697,8 +3792,6 @@ function frame(t){
   drawAmbient(now);
   drawWeather(now,dt);
   drawNight(now);
-  drawLight();
-  drawVignette();
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
   drawEffects(t);
   requestAnimationFrame(frame);
@@ -3744,7 +3837,7 @@ function hud(){
   if(S.level>=MAX_LVL){$('lvlnext').textContent=MAX_LVL;$('xpleft').textContent='Top level!';$('xpfill').style.width='100%';$('xptext').textContent='Max level'}
   else{$('lvlnext').textContent=S.level+1;$('xpleft').textContent=(need(S.level)-S.xp).toLocaleString()+' to go';
   $('xpfill').style.width=Math.min(100,S.xp/need(S.level)*100)+'%';$('xptext').textContent=S.xp.toLocaleString()+' / '+need(S.level).toLocaleString()+' XP'}
-  const c=CROPS[S.seed];$('seedchip').innerHTML='<span>Seeds to plant</span><b></b>';$('seedchip').lastChild.textContent=c.name+(have(S.seed)?' ('+have(S.seed)+' in barn)':'');
+  renderSeedPill();const c=CROPS[S.seed];$('seedchip').innerHTML='<span>Seeds to plant</span><b></b>';$('seedchip').lastChild.textContent=c.name+(have(S.seed)?' ('+have(S.seed)+' in barn)':'');
   updateFuel();
   const tot=storeTotal(),cap=barnCap();$('barntext').textContent=tot+' / '+cap;$('btnBarn').classList.toggle('full',tot>=cap);$('barnBadge').hidden=tot<cap;
   $('btnOrders').classList.toggle('locked',!nbOpen());$('btnNbrs').classList.toggle('locked',!nbOpen());
@@ -3762,11 +3855,19 @@ function updateFuel(){
   const anyV=Object.keys(S.veh).length>0;$('fuelchip').hidden=!anyV;
   if(anyV){const f=fuelNow();$('fueltext').textContent=f+' / '+FUEL_MAX;$('fuelfill').style.width=(f/FUEL_MAX*100)+'%'}
 }
-function changed(){buildOcc();if(syncHousing())buildOcc();buildBars();syncGround();hud();save();if(S.q)renderQuest()}
+// The HUD and quest panel redraw at most once per frame, however many plots change at once.
+let uiQueued=false;
+function uiSoon(){if(uiQueued)return;uiQueued=true;requestAnimationFrame(()=>{uiQueued=false;hud();if(S.q)renderQuest()})}
+let saveQueued=0;
+function saveSoon(){if(saveQueued)return;saveQueued=setTimeout(()=>{saveQueued=0;save()},400)}
+addEventListener('pagehide',()=>{if(saveQueued){clearTimeout(saveQueued);saveQueued=0;save()}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&saveQueued){clearTimeout(saveQueued);saveQueued=0;save()}});
+function changed(){buildOcc();if(syncHousing())buildOcc();buildBars();syncGround();uiSoon();saveSoon()}
 // The top level is 99. Reaching it brings the Champion prize; XP stops counting after that.
 const MAX_LVL=99,CHAMP={coins:50000,cash:50};
 function addXP(n){
   if(S.level>=MAX_LVL){S.xp=0;return}
+  if(S.home&&isFresh()){S.xpCarry=(S.xpCarry||0)+n*.1;const extra=Math.floor(S.xpCarry);S.xpCarry-=extra;n+=extra}
   S.xp+=n;const l0=S.level;
   while(S.level<MAX_LVL&&S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=20*S.level;S.cash+=1}
   if(S.level>=MAX_LVL)S.xp=0;
@@ -4553,7 +4654,7 @@ function planAt(x,y,kindWanted){
     if(e.pending==='harvest'||e.pending==='clear')return'plow';
     return null;
   }
-  if(e.grass)return kindWanted==='plow'||tool==='plow'||tool==='tractor'||S.tapGrass==='plow'?'plow':'walk';
+  if(e.grass)return kindWanted==='plow'||tool==='plow'||tool==='tractor'||S.tapMode==='plow'?'plow':'walk';
   const o=e.o;
   if(o.k==='plot'){
     if(o.fallow)return'plow';
@@ -4587,9 +4688,10 @@ function clickMulti(hx,hy){
       if(ROTATABLE.has(o.id)){if(o.id==='gate'||!wallLinks(x,y,o)){o.r=o.r?0:1;SFX.place();changed()}else toast('Connected fences and hedges line up on their own. Use Move to shift a piece.');return}
       infoCard(key);return;
     }
-    if(o.k==='bld'){if(o.id==='barn'){SFX.click();showBarn()}else infoCard(key);return}
+    if(o.k==='bld'){if(o.id==='barn'){SFX.click();showBarn()}else if(o.id==='house'&&!VIS)enterHouse();else infoCard(key);return}
     hx=x;hy=y;
   }
+  if(S.tapMode==='walk'&&tool==='multi'){walkTo(hx,hy);return}
   const kind=planAt(hx,hy);
   if(kind==='walk'){walkTo(hx,hy);return}
   if(tool==='plow'&&kind!=='plow'){toast('The hoe turns grass into new farmland. Switch to the Multi-tool to plant and harvest.');return}
@@ -4656,7 +4758,7 @@ const AUTO_VEH={plow:'tractor',plant:'seeder',harvest:'harvester',clear:'harvest
 // What the Multi-tool would do with a machine at this tile: the machine and the exact plots it would work.
 const VEH_NAME={tractor:'Tractor',seeder:'Seeder',harvester:'Harvester'};
 function autoPlan(hx,hy){
-  if(tool!=='multi'||VIS||placing||!S||S.autoVeh===false||!inGrid(hx,hy))return null;
+  if(tool!=='multi'||VIS||placing||!S||S.autoVeh===false||S.tapMode==='walk'||!inGrid(hx,hy))return null;
   const key=target(hx,hy);if(key&&S.tiles[key].k!=='plot')return null;
   const kind=planAt(hx,hy),v=AUTO_VEH[kind];if(!v||!S.veh[v])return null;
   if(fuelNow()<fuelCost(v)&&!have('diesel'))return null;
@@ -4968,7 +5070,8 @@ function tipText(hx,hy){
   const key=target(hx,hy),now=Date.now();
   if(pend[key||(hx+','+hy)])return'Farmer is on the way';
   {const pl=autoPlan(hx,hy);if(pl)return VEH_NAME[pl.v]+': '+pl.tiles.length+' plots'}
-  if(!key)return tool==='plow'||(tool==='multi'&&S.tapGrass==='plow')?'New farmland for '+NEW_PLOT+' coins':tool==='multi'?'Walk here':'';
+  if(tool==='multi'&&S.tapMode==='walk'&&(!key||S.tiles[key].k==='plot'))return'Walk here';
+  if(!key)return tool==='plow'||(tool==='multi'&&S.tapMode==='plow')?'New farmland for '+NEW_PLOT+' coins':tool==='multi'?'Walk here':'';
   const o=S.tiles[key];
   if(tool==='delete')return o.k==='bld'?'Buildings stay':'Remove';
   if(tool==='move')return'Move';
@@ -5021,10 +5124,15 @@ addEventListener('keydown',e=>{
 });
 $('rotBtn').onclick=()=>{if(placing)rotatePlacing()};
 // the on-screen Walk / Plow switch (same setting as Settings > Tapping grass)
-function renderModeSw(){const p=S&&S.tapGrass==='plow';$('modeWalk').setAttribute('aria-pressed',String(!p));$('modePlow').setAttribute('aria-pressed',String(p))}
-function setTapGrass(v){S.tapGrass=v;if(tool!=='multi')setTool('multi');renderModeSw();SFX.click();stat('modeSwitch');save();
-  toast(v==='plow'?'Tapping grass now plows it into new farmland.':'Tapping grass now walks your farmer there.')}
-$('modeWalk').onclick=()=>setTapGrass('walk');$('modePlow').onclick=()=>setTapGrass('plow');
+// Walk: a tap on the ground only walks. Farm: plots are planted, harvested and plowed; grass walks. Plow: grass becomes new farmland.
+function renderModeSw(){const m=S&&S.tapMode||'farm';for(const[id,v]of[['modeWalk','walk'],['modeFarm','farm'],['modePlow','plow']])$(id).setAttribute('aria-pressed',String(m===v))}
+function setTapMode(v){S.tapMode=v;if(tool!=='multi')setTool('multi');renderModeSw();SFX.click();stat('modeSwitch');save();
+  toast(v==='plow'?'Plow: tapping grass makes new farmland.':v==='walk'?'Walk: tapping the ground just walks your farmer there.':'Farm: tap plots to plant and harvest. Tapping grass walks.')}
+const setTapGrass=v=>setTapMode(v==='walk'?'farm':v);
+$('modeWalk').onclick=()=>setTapMode('walk');$('modeFarm').onclick=()=>setTapMode('farm');$('modePlow').onclick=()=>setTapMode('plow');
+let seedPillKey='';
+function renderSeedPill(){if(!S)return;const c=CROPS[S.seed],t=c.name+(have(S.seed)?' ('+have(S.seed)+')':''),k=S.seed+'|'+t;if(k===seedPillKey)return;seedPillKey=k;$('seedPillImg').src=itemIcon(S.seed);$('seedPillName').textContent=t}
+$('seedPill').onclick=()=>{SFX.click();closePops();openMarket('seeds')};
 $('cashPlus').onclick=()=>{SFX.click();openMarket('specials')};
 $('btnMusic').onclick=()=>{S.music=!S.music;save();hud();SFX.click();wakeAudio();musicSync();toast(S.music?'Music on':'Music off')};
 $('btnSound').onclick=()=>{S.sound=!S.sound;const a=ac();if(a&&a.state==='suspended')a.resume();save();hud();SFX.click()};
@@ -5053,14 +5161,14 @@ function showSettings(){
     seg('Animals',[['home','Stay home'],['free','Free roam']],S.animalMode==='free'?'free':'home',v=>{S.animalMode=v;changed();toast(v==='free'?'Your animals can roam the farm now. Fences keep them in.':'Your animals are heading home.')});
     seg('Graphics',[['auto','Auto'],['high','Sharpest'],['smooth','Smoothest']],gfxPref(),v=>{try{localStorage.setItem(GFX_KEY,v)}catch(e){}QL=v==='smooth'?0:2;applyQuality()});
     seg('Machines',[['on','Use by themselves'],['off','By hand']],S.autoVeh===false?'off':'on',v=>{S.autoVeh=v!=='off'});
-    seg('Tapping grass',[['walk','Walk there'],['plow','Plow it']],S.tapGrass==='plow'?'plow':'walk',v=>{S.tapGrass=v;renderModeSw()});
+    seg('Tapping the ground',[['walk','Walk'],['farm','Farm'],['plow','Plow']],S.tapMode||'farm',v=>{S.tapMode=v;renderModeSw()});
     if(S.pet){const r=el('div','setrow');r.appendChild(el('span',null,'Pet name'));const nb=el('button','btn2',S.pet.name||PET_NAME[S.pet.kind]);nb.setAttribute('aria-label','Rename your pet');nb.onclick=()=>{SFX.click();renamePet()};r.appendChild(nb);p.appendChild(r)}
     toggle('Music',S.music,()=>{S.music=!S.music;wakeAudio();musicSync()});
     slider('Music volume',S.musicVol??1,v=>{S.musicVol=v;const a=AC;if(a&&MUSIC.master&&MUSIC.on)MUSIC.master.gain.setTargetAtTime(.55*v,a.currentTime,.1)});
     toggle('Sound effects',S.sound,()=>{S.sound=!S.sound});
     slider('Effects volume',S.sfxVol??1,v=>{S.sfxVol=v});
     toggle('Rain, snow and falling leaves',S.fx!==false,()=>{S.fx=S.fx===false});
-    const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','seedPick','modeSwitch','water','delivSent','tradesSeen','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
+    const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','seedPick','houseIn','modeSwitch','water','delivSent','tradesSeen','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
     const nf=el('button','btn2 danger','Start a new farm');nf.onclick=()=>{closeModal();confirmNewFarm()};r2.appendChild(tut);r2.appendChild(nf);p.appendChild(r2);
     if(!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches&&!navigator.standalone){
       const ins=el('button','go','Install app');ins.style.fontSize='18px';
@@ -5642,24 +5750,23 @@ function nightLights(){
   out.push([...P(farmer.x,farmer.y,16),48]);
   return out;
 }
+let nightKey='';
 function drawNight(now){
   const d=darkness(),night=d>.6;
   if(night&&!wasNight&&!VIS)toast('Night falls over '+S.farmName+'. Fireflies are out!');wasNight=night;
-  if(d<=.01)return;
-  if(!NIGHT||NIGHT.width!==cv.width||NIGHT.height!==cv.height){NIGHT=document.createElement('canvas');NIGHT.width=cv.width;NIGHT.height=cv.height}
-  const x=NIGHT.getContext('2d'),w=NIGHT.width,h=NIGHT.height,L=nightLights(),sc=s=>s*cam.z*dpr;
+  const nc=$('nightCv');
+  if(d<=.01){if(nightKey!=='day'){nightKey='day';nc.width=1;nc.height=1}return}
+  // quarter resolution, redrawn only when the light level or the camera moves
+  const q=.25,w=Math.max(1,Math.round(vw*q)),h=Math.max(1,Math.round(vh*q)),L=nightLights();
+  const key=[w,h,d.toFixed(2),Math.round(cam.x),Math.round(cam.y),cam.z.toFixed(3),L.length].join();if(key===nightKey)return;nightKey=key;
+  if(nc.width!==w||nc.height!==h){nc.width=w;nc.height=h}
+  const x=nc.getContext('2d'),sc=s2=>s2*cam.z*q;
   x.globalCompositeOperation='source-over';x.clearRect(0,0,w,h);
   const dusk=Math.max(0,1-Math.abs(dayPhase()-.67)/.05);
   x.fillStyle='rgba('+Math.round(40+50*dusk)+','+Math.round(60+5*dusk)+','+Math.round(120-40*dusk)+','+(.3*d).toFixed(3)+')';x.fillRect(0,0,w,h);
   x.globalCompositeOperation='destination-out';
-  for(const[wx,wy,r]of L){const sx=(wx*cam.z+cam.x)*dpr,sy=(wy*cam.z+cam.y)*dpr,R=sc(r),gr=x.createRadialGradient(sx,sy,0,sx,sy,R);gr.addColorStop(0,'rgba(0,0,0,.9)');gr.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=gr;x.fillRect(sx-R,sy-R,R*2,R*2)}
-  g.setTransform(1,0,0,1,0,0);g.drawImage(NIGHT,0,0);
-  g.globalCompositeOperation='lighter';
-  {const[cx2,cy2]=P(N/2,N/2),sx=(cx2*cam.z+cam.x)*dpr,sy=(cy2*cam.z+cam.y)*dpr,R=sc(N*W*.62),mg=g.createRadialGradient(sx,sy,0,sx,sy,R);mg.addColorStop(0,'rgba(120,140,190,'+(.16*d).toFixed(3)+')');mg.addColorStop(1,'rgba(120,140,190,0)');g.fillStyle=mg;g.fillRect(sx-R,sy-R,R*2,R*2)}
-  for(const[wx,wy,r]of L){const sx=(wx*cam.z+cam.x)*dpr,sy=(wy*cam.z+cam.y)*dpr,R=sc(r*.55),gr=g.createRadialGradient(sx,sy,0,sx,sy,R);gr.addColorStop(0,'rgba(255,180,80,'+(.28*d).toFixed(3)+')');gr.addColorStop(1,'rgba(255,180,80,0)');g.fillStyle=gr;g.fillRect(sx-R,sy-R,R*2,R*2)}
-  for(const f of fireflies){const b=reduce?.8:(Math.sin(now/260+f.p)+1)/2;if(b<.35)continue;const[wx,wy]=P(f.x,f.y,18+Math.sin(now/700+f.p)*8),sx=(wx*cam.z+cam.x)*dpr,sy=(wy*cam.z+cam.y)*dpr,R=sc(7);
-    const gr=g.createRadialGradient(sx,sy,0,sx,sy,R);gr.addColorStop(0,'rgba(230,255,140,'+(.9*d*b).toFixed(3)+')');gr.addColorStop(.25,'rgba(200,255,90,'+(.45*d*b).toFixed(3)+')');gr.addColorStop(1,'rgba(200,255,90,0)');g.fillStyle=gr;g.fillRect(sx-R,sy-R,R*2,R*2)}
-  g.globalCompositeOperation='source-over';
+  for(const[wx,wy,r]of L){const sx=(wx*cam.z+cam.x)*q,sy=(wy*cam.z+cam.y)*q,R=sc(r),gr=x.createRadialGradient(sx,sy,0,sx,sy,R);gr.addColorStop(0,'rgba(0,0,0,.9)');gr.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=gr;x.fillRect(sx-R,sy-R,R*2,R*2)}
+  x.globalCompositeOperation='source-over';
 }
 function updateFireflies(dt){if(reduce||darkness()<.2)return;for(const f of fireflies){f.a+=(Math.random()-.5)*dt*3;f.x+=Math.cos(f.a)*dt*.5;f.y+=Math.sin(f.a)*dt*.5;if(f.x<0||f.y<0||f.x>N||f.y>N){f.x=Math.random()*N;f.y=Math.random()*N}}}
 
@@ -5769,12 +5876,13 @@ const TUT=[
   {txt:'Click the plowed plot to plant wheat.',done:()=>tst('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
   {txt:'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.',done:()=>tst('seedPick')>=1,btn:'openMarket'},
   {txt:'Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.',done:()=>tst('plant')>=2,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
-  {txt:'Tapping grass makes your farmer walk there. The Walk / Plow switch makes new farmland instead. Tap Plow to try it, then Walk to switch back.',done:()=>tst('modeSwitch')>=2&&S.tapGrass!=='plow',btn:'modeSw'},
+  {txt:'This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.',done:()=>tst('modeSwitch')>=2&&S.tapMode==='farm',btn:'modeSw'},
   {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow'].includes(cropState(o,Date.now()).st)},
   {txt:'A chicken laid an egg. Click it to collect.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
   {txt:'Now that chicken is hungry. Click it to give it feed.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
   {txt:'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.',done:()=>tst('delivSent')>=1,btn:'btnDeliv'},
   {txt:'Everything you harvest goes to the barn. Open the Barn and sell something.',done:()=>tst('sell')>=1,btn:'btnBarn'},
+  {txt:'Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.',done:()=>tst('houseIn')>=1,find:o=>o.k==='bld'&&o.id==='house'},
   {txt:'Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.',done:()=>tst('tradesSeen')>=1,btn:'btnMore',btn2:'btnTrade'}
 ];
 function st(k){return S.stats[k]||0}
@@ -5789,7 +5897,7 @@ function checkTut(){
   }
   renderTut();
 }
-let tutNoTarget=0;
+let tutNoTarget=0,tutShown=-1;
 function tutWatch(){
   if(!tutOn()||!$('title').hidden)return;const t=TUT[S.tut];
   if(!t.find||farmer.job||queue.length){tutNoTarget=0;return}
@@ -5804,7 +5912,8 @@ function renderTut(){
   document.body.classList.toggle('tutlock',tutLocked());
   document.body.classList.toggle('tutshow',tutOn()&&$('title').hidden);
   if(!tutOn()||!$('title').hidden){b.hidden=true;return}
-  if(tool!=='multi')setTool('multi');closePops();if(S.tut<=2&&S.seed!=='wheat')S.seed='wheat';
+  // only a new tip resets the tools and closes menus; redraws of the same tip leave open menus alone
+  if(tutShown!==S.tut){tutShown=S.tut;if(tool!=='multi')setTool('multi');closePops()}if(S.tut<=2&&S.seed!=='wheat')S.seed='wheat';
   const t=TUT[S.tut];b.hidden=false;$('tutStep').textContent='Tip '+(S.tut+1)+' of '+TUT.length;$('tutText').textContent=t.txt;
   if(t.btn)$(t.btn).classList.add('tutpulse');if(t.btn2)$(t.btn2).classList.add('tutpulse');
 }
@@ -6015,12 +6124,250 @@ function renderOrientPick(){
 }
 renderOrientPick();
 
+/* ================= the farmhouse inside: needs, meals, shower, nap and furniture ================= */
+// The farmer has two slow needs, food and drink. They drop about one point every few minutes (a full bar lasts hours),
+// much more slowly while you are away. Low needs make the farmer slow. Inside the farmhouse you cook and eat,
+// drink, shower (a Fresh bonus: +10% XP for a while) and nap: a nap moves every crop, animal, tree, building and
+// Dale's truck 5 minutes ahead, costs some food and drink, and has a cooldown that comfy furniture makes shorter.
+const FURN={
+  bed:{name:'Bed',comfort:2,starter:true},shower:{name:'Shower',comfort:1,starter:true},stove:{name:'Stove',comfort:1,starter:true},sink:{name:'Kitchen Sink',comfort:1,starter:true},
+  table:{name:'Kitchen Table',cost:150,comfort:2,lvl:1,desc:'Meals eaten at the table fill you up 20% more.'},
+  chairs:{name:'Dining Chairs',cost:140,comfort:2,lvl:1},
+  plant:{name:'House Plant',cost:60,comfort:1,lvl:1},
+  rug:{name:'Cozy Rug',cost:120,comfort:1,lvl:2},
+  lamp:{name:'Floor Lamp',cost:90,comfort:1,lvl:2},
+  bookshelf:{name:'Bookshelf',cost:300,comfort:2,lvl:4},
+  fridge:{name:'Fridge',cost:600,comfort:2,lvl:5,desc:'Keeps food fresh: every meal fills you up 20% more.'},
+  sofa:{name:'Sofa',cost:450,comfort:3,lvl:6},
+  tv:{name:'Television',cost:900,comfort:3,lvl:9},
+  fireplace:{name:'Fireplace',cost:1500,comfort:4,lvl:12},
+  bigbed:{name:'Comfy Double Bed',cost:2000,comfort:4,lvl:15,desc:'Replaces the old bed. Naps also give you the Fresh bonus.'}
+};
+const MEALS=[
+  {id:'water',name:'Glass of Water',drink:30,need:{},at:'sink'},
+  {id:'porridge',name:'Wheat Porridge',food:25,need:{wheat:1},at:'stove'},
+  {id:'eggs',name:'Scrambled Eggs',food:35,need:{a_chicken:2},at:'stove'},
+  {id:'fruit',name:'Fruit Bowl',food:25,drink:15,need:{t_apple:2},at:'table'},
+  {id:'milk',name:'Glass of Milk',food:5,drink:40,need:{a_cow:1},at:'sink'},
+  {id:'stew',name:'Veggie Stew',food:45,drink:10,need:{carrot:1,potato:1},at:'stove'},
+  {id:'bread',name:'Slice of Bread',food:30,need:{bread:1},at:'table'},
+  {id:'juice',name:'Apple Juice',drink:45,need:{juice:1},at:'table'},
+  {id:'pie',name:'Slice of Pie',food:50,need:{pie:1},at:'table'},
+  {id:'breakfast',name:'Bacon and Eggs',food:60,need:{baconeggs:1},at:'table'}
+];
+const NAP_SECS=300,NAP_COST=12,FRESH_MIN=20,SHOWER_CD=30*60e3;
+function houseSt(){if(!S.home)S.home={};const h=S.home;if(!h.furn)h.furn={bed:1,shower:1,stove:1,sink:1};if(h.food==null)h.food=85;if(h.drink==null)h.drink=85;if(!h.t)h.t=Date.now();return h}
+function comfort(){const h=houseSt();let c=0;for(const k in h.furn)if(h.furn[k]&&FURN[k])c+=FURN[k].comfort;return c}
+function napCooldown(){return Math.max(45,120-4*comfort())*60e3}
+function napLeft(){return Math.max(0,(houseSt().napT||0)+napCooldown()-Date.now())}
+function isFresh(){return Date.now()<(houseSt().freshUntil||0)}
+function needFactor(){if(!S||!S.home)return 1;const h=S.home;return h.food<15||h.drink<15?.6:1}
+let needTold={};
+function needsTick(){
+  if(!S)return;const h=houseSt(),now=Date.now();let dt=(now-h.t)/1000;h.t=now;if(dt<=0)return;
+  const away=dt>120;if(away)dt=120+(dt-120)*.25;          // time away counts much less
+  const f0=h.food,d0=h.drink;
+  h.food=Math.max(away?Math.min(f0,20):0,h.food-dt/240);h.drink=Math.max(away?Math.min(d0,20):0,h.drink-dt/180);
+  for(const[k,v,w]of[['food',h.food,'hungry'],['drink',h.drink,'thirsty']]){
+    if(v<25&&!needTold[k]&&$('title').hidden&&!tutOn()){needTold[k]=1;toast(k==='food'?'Your farmer is getting hungry. Go into the farmhouse to eat.':'Your farmer is getting thirsty. Go into the farmhouse for a drink.')}
+    if(v>40)needTold[k]=0;
+  }
+  renderNeeds();
+}
+function renderNeeds(){
+  if(!S)return;const h=houseSt(),f=$('needFood'),d=$('needDrink');if(!f)return;
+  f.style.width=Math.round(h.food)+'%';d.style.width=Math.round(h.drink)+'%';f.classList.toggle('low',h.food<25);d.classList.toggle('low',h.drink<25);
+  $('needPill').classList.toggle('low',h.food<15||h.drink<15);$('needPill').setAttribute('translate','no');$('needPill').title=tr('Food')+' '+Math.round(h.food)+' · '+tr('Drink')+' '+Math.round(h.drink);
+  if(!$('house').hidden)renderHouseBar();
+}
+setInterval(needsTick,5000);
+// fast-forward everything on the farm (a nap)
+function advanceFarm(sec){
+  const ms=sec*1000;
+  for(const k in S.tiles){const o=S.tiles[k];
+    if(o.k==='plot'&&o.crop)o.t-=ms;
+    else if(o.k==='animal'){if(!hungry(o))o.t-=ms;if(o.baby)o.baby-=ms}
+    else if(o.k==='tree')o.t-=ms;
+    else if(o.k==='mk'&&o.q)for(const j of o.q){j.start-=ms;j.end-=ms}}
+  const d=dv();if(d.run){d.run.start-=ms;d.run.end-=ms}
+  S.fuelT-=ms;changed();
+}
+
+// ---- the room: a 6 by 6 floor with two walls, drawn with the farm's own iso helpers
+const ROOM=6,WALL=104;
+const SPOT={bed:[1.95,1.55],bigbed:[2.4,1.7],shower:[5.45,.6],stove:[2.45,1.3],sink:[3.5,1.3],table:[3.25,4.15],idle:[4.3,3.3],door:[5.4,5.4]};
+let HV=null; // the house view while it is open
+function enterHouse(){
+  if(VIS||!S)return;closePops();stat('houseIn');SFX.click();nz(.2,{brown:1,type:'lowpass',f:500,vol:.3});
+  const el2=$('house');el2.hidden=false;document.body.classList.add('inhouse');
+  HV={x:SPOT.door[0],y:SPOT.door[1],tx:SPOT.idle[0],ty:SPOT.idle[1],dir:-1,walk:0,anim:null,last:performance.now(),raf:0};
+  houseResize();renderHouseBar();HV.raf=requestAnimationFrame(houseFrame);
+}
+function leaveHouse(){const e=$('house');if(e.hidden)return;SFX.click();e.hidden=true;document.body.classList.remove('inhouse');if(HV)cancelAnimationFrame(HV.raf);HV=null;hud()}
+function houseResize(){const c=$('hcv'),r=c.getBoundingClientRect(),pd=Math.min(window.devicePixelRatio||1,2);c.width=Math.max(1,r.width*pd);c.height=Math.max(1,r.height*pd)}
+addEventListener('resize',()=>{if(HV)houseResize()});
+function houseDo(spot,secs,label,fn){
+  if(!HV||HV.anim)return;const p=SPOT[spot]||SPOT.idle;HV.tx=p[0];HV.ty=p[1];HV.anim={spot,secs,label,fn,t:-1};
+}
+function houseFrame(t){
+  if(!HV)return;const dt=Math.min(.05,(t-HV.last)/1000);HV.last=t;
+  // walk to the target, then play the action
+  const dx=HV.tx-HV.x,dy=HV.ty-HV.y,d=Math.hypot(dx,dy),sp=2.6*dt;
+  if(d>sp){HV.x+=dx/d*sp;HV.y+=dy/d*sp;HV.walk+=dt*14;if(Math.abs(dx-dy)>.02)HV.dir=dx-dy>0?1:-1}
+  else{HV.x=HV.tx;HV.y=HV.ty;if(HV.anim){if(HV.anim.t<0){HV.anim.t=0;if(HV.anim.spot==='shower')nz(HV.anim.secs,{f:3200,f2:2400,q:.5,vol:.08,at:.2});else if(HV.anim.spot==='stove')nz(HV.anim.secs,{brown:1,type:'lowpass',f:900,vol:.1,at:.3})}
+    HV.anim.t+=dt;if(HV.anim.t>=HV.anim.secs){const a=HV.anim;HV.anim=null;a.fn();if(!HV.anim){HV.tx=SPOT.idle[0];HV.ty=SPOT.idle[1]}renderHouseBar()}}}
+  drawHouse(t);HV.raf=requestAnimationFrame(houseFrame);
+}
+function drawHouse(t){
+  const c=$('hcv'),prev=g;g=c.getContext('2d');const cw=c.width,ch=c.height,now=Date.now();
+  g.setTransform(1,0,0,1,0,0);const bg=g.createLinearGradient(0,0,0,ch);bg.addColorStop(0,'#5a3a22');bg.addColorStop(1,'#2e1d10');g.fillStyle=bg;g.fillRect(0,0,cw,ch);
+  const rw=ROOM*W,rh=ROOM*H+WALL+30,sc=Math.min(cw/(rw*1.08),ch/(rh*1.1));g.setTransform(sc,0,0,sc,cw/2,(ch-rh*sc)/2+(WALL+12)*sc);
+  const F=houseSt().furn,napping=HV.anim&&HV.anim.spot==='nap';
+  // walls
+  const wallL=[P(0,0,0),P(0,ROOM,0),P(0,ROOM,WALL),P(0,0,WALL)],wallR=[P(0,0,0),P(ROOM,0,0),P(ROOM,0,WALL),P(0,0,WALL)];
+  poly(wallL,'#f2dfb8','#6b3c15',2);poly(wallR,'#e8cf9e','#6b3c15',2);
+  g.strokeStyle='rgba(160,110,60,.18)';g.lineWidth=5;for(let i=.5;i<ROOM;i+=.5){line(P(0,i,4),P(0,i,WALL-4));line(P(i,0,4),P(i,0,WALL-4))}
+  for(const[a,b]of[[P(0,0,10),P(0,ROOM,10)],[P(0,0,10),P(ROOM,0,10)]]){g.strokeStyle='#8a5530';g.lineWidth=5;line(a,b)}
+  // window on the left wall, with the sky outside following the farm's day and night
+  const dk=darkness(),sky=dk>.5?'#24305a':'#9fd8ff';poly([P(0,3.7,44),P(0,5,44),P(0,5,92),P(0,3.7,92)],sky,'#6b3c15',3);
+  g.strokeStyle='#fff7e6';g.lineWidth=2.5;line(P(0,4.35,44),P(0,4.35,92));line(P(0,3.7,68),P(0,5,68));
+  if(dk>.5){const[sx2,sy2]=P(0,4.7,84);ell(sx2,sy2,3,3,'#fff6c0')}
+  // a picture on the right wall
+  poly([P(2.1,0,58),P(3,0,58),P(3,0,88),P(2.1,0,88)],'#9fd06a','#6b3c15',2.5);{const[a,b]=P(2.55,0,70);ell(a,b,7,4,'#3f9a3c');ell(a+4,b-8,4,4,'#ffc72c')}
+  // floor planks
+  for(let y=0;y<ROOM;y++)for(let x=0;x<ROOM;x++)poly(quad(x,y,0),(x+y)%2?'#c48a52':'#b97f48','rgba(90,50,20,.35)',.8);
+  if(F.rug){poly([P(1.7,2.1),P(4.7,2.1),P(4.7,4.6),P(1.7,4.6)],'#c8463c','#7a1c12',1.5);poly([P(1.95,2.35),P(4.45,2.35),P(4.45,4.35),P(1.95,4.35)],null,'#ffd23f',1.5)}
+  // furniture, back to front
+  const items=[];const add=(id,x,y,fn)=>items.push([x+y,fn]);
+  if(F.bigbed)add('bigbed',1,1.7,()=>drawBed(0,.4,2.1,2.5,'#4a7fd0',napping));else if(F.bed)add('bed',.7,1.6,()=>drawBed(0,.6,1.4,2,'#d9402f',napping));
+  if(F.shower)add('shower',5.5,.5,()=>drawShower(HV.anim&&HV.anim.spot==='shower'&&HV.anim.t>=0,t));
+  if(F.stove)add('stove',2.4,.4,()=>drawStove(HV.anim&&HV.anim.spot==='stove'&&HV.anim.t>=0,t));
+  if(F.sink)add('sink',3.5,.4,()=>drawSink());
+  if(F.fridge)add('fridge',4.4,.4,()=>drawFridge());
+  if(F.bookshelf)add('bookshelf',1.45,.2,()=>drawShelf());
+  if(F.tv)add('tv',.6,.3,()=>drawTV(t));
+  if(F.fireplace)add('fireplace',.3,3.2,()=>drawFireplace(t));
+  if(F.sofa)add('sofa',.45,4.5,()=>drawSofa());
+  if(F.table)add('table',3.2,3.1,()=>drawTable());
+  if(F.chairs){add('chair',3.2,2.35,()=>drawChair(3.0,2.35));add('chair2',3.2,4.0,()=>drawChair(3.0,3.85))}
+  if(F.lamp)add('lamp',.4,5.6,()=>drawLamp(dk));
+  if(F.plant)add('plant',5.4,4.9,()=>drawPlant(5.4,4.9));
+  if(!napping)items.push([HV.x+HV.y,()=>{const[px,py]=P(HV.x,HV.y);g.save();g.translate(px,py);g.scale(.9*HV.dir,.9);drawAvatar(S.look,{kind:Math.hypot(HV.tx-HV.x,HV.ty-HV.y)>.05?'walk':HV.anim&&HV.anim.spot!=='shower'?'work':null,t:t/1000});g.restore()}]);
+  items.sort((a,b)=>a[0]-b[0]);for(const[,fn]of items)fn();
+  // action effects
+  if(HV.anim&&HV.anim.t>=0){const k=HV.anim.t/HV.anim.secs,[px,py]=P(HV.x,HV.y);
+    if(HV.anim.spot==='nap'){g.setTransform(1,0,0,1,0,0);g.fillStyle='rgba(10,10,40,'+(.55*Math.sin(Math.PI*k)).toFixed(3)+')';g.fillRect(0,0,cw,ch);g.setTransform(sc,0,0,sc,cw/2,(ch-rh*sc)/2+(WALL+12)*sc);
+      const[bx,by]=P(.7,1.4,40);g.font='bold 16px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';for(let i=0;i<3;i++){const q=(k*3+i/3)%1;g.globalAlpha=1-q;g.fillText('z',bx+q*30,by-q*40);g.globalAlpha=1}}
+    else{g.font='bold 11px Fredoka, sans-serif';g.textAlign='center';const lb=tr(HV.anim.label),w2=g.measureText(lb).width+16;poly([[px-w2/2,py-92],[px+w2/2,py-92],[px+w2/2,py-74],[px-w2/2,py-74]],'rgba(255,250,240,.95)','#6b3c15',1.2);g.fillStyle='#3a2310';g.fillText(lb,px,py-79);
+      const bw=w2-12;poly([[px-bw/2,py-70],[px+bw/2,py-70],[px+bw/2,py-66],[px-bw/2,py-66]],'#e6d8bd');poly([[px-bw/2,py-70],[px-bw/2+bw*k,py-70],[px-bw/2+bw*k,py-66],[px-bw/2,py-66]],'#3f9a3c')}}
+  g.setTransform(1,0,0,1,0,0);g=prev;
+}
+// furniture art (bold outlines, top-lit like the farm)
+function drawBed(x,y,w,d,col,sleeping){
+  isoBox(x,y,w,d,12,'#8a5530','#6e4424','#a8642a','#3a2010');isoBox(x+.05,y+.05,w-.1,d-.1,8,'#fffaf0','#e8e0d0','#ffffff','#8a7a60',12);
+  isoBox(x+.05,y+d*.42,w-.1,d*.55,3,col,shade(col,-.2),shade(col,.12),shade(col,-.45),20);
+  const[hx,hy]=P(x+w*.5,y+.35,22);ell(hx,hy,w*14,6,'#ffffff','#8a7a60',1);
+  poly([P(x,y,0),P(x,y+d,0),P(x,y+d,40),P(x,y,40)],'#8a5530','#3a2010',1.5);
+  if(sleeping){const[sx3,sy3]=P(x+w*.5,y+.45,26);ell(sx3,sy3,7,6,S.look.skin,'#3a2010',1);ell(sx3,sy3-3,7.5,4,S.look.hairColor)}
+}
+function drawShower(on,t){const x=5,y=0;isoBox(x,y,1,1,5,'#f4f6f8','#d8dde2','#ffffff','#6b7a88');
+  g.strokeStyle='#8a96a0';g.lineWidth=2.5;line(P(x+.5,y,90),P(x+.5,y+.45,90));ell(...P(x+.5,y+.45,88),5,2,'#c9ced2','#6b7a88',1);
+  if(on){g.strokeStyle='rgba(150,205,255,.8)';g.lineWidth=1.2;for(let i=0;i<10;i++){const q=((t/400)+i/10)%1,[a,b]=P(x+.35+(i%5)*.08,y+.4+(i%3)*.06,86-q*80);line([a,b],[a,b+5])}}
+  poly([P(x,y+1,5),P(x+1,y+1,5),P(x+1,y+1,95),P(x,y+1,95)],'rgba(200,235,255,.28)','#9ab0c0',1.4);poly([P(x,y,5),P(x,y+1,5),P(x,y+1,95),P(x,y,95)],'rgba(200,235,255,.22)','#9ab0c0',1.2)}
+function drawStove(on,t){const x=2,y=0;isoBox(x,y,.9,.8,30,'#f0f0f0','#d8d8d8','#3a3a3a','#4a4a4a');for(const[a,b]of[[.25,.25],[.65,.25],[.25,.6],[.65,.6]]){const[px,py]=P(x+a,y+b,30);ell(px,py,6,3,on?'#ff6a3a':'#222','#111',.8)}
+  poly([P(x+.15,y+.8,4),P(x+.75,y+.8,4),P(x+.75,y+.8,20),P(x+.15,y+.8,20)],'#2b2b2b','#111',1);
+  if(on){const[px,py]=P(x+.45,y+.4,34);for(let i=0;i<3;i++){const q=((t/900)+i/3)%1;ell(px+i*3-3,py-q*26,3+q*4,2+q*3,'rgba(240,240,240,'+(.6*(1-q)).toFixed(2)+')')}}}
+function drawSink(){const x=3,y=0;isoBox(x,y,1,.8,30,'#c98a4b','#a8692f','#e8e2d6','#5e3a1c');const[px,py]=P(x+.5,y+.4,30);ell(px,py,11,5,'#b8c4cc','#6b7a88',1);g.strokeStyle='#8a96a0';g.lineWidth=2.4;line(P(x+.5,y+.1,30),P(x+.5,y+.1,42));line(P(x+.5,y+.1,42),P(x+.5,y+.3,40))}
+function drawFridge(){const x=4,y=0;isoBox(x,y,.8,.8,66,'#f6f8fa','#dde2e6','#ffffff','#6b7a88');g.strokeStyle='#6b7a88';g.lineWidth=1.2;line(P(x,y+.8,40),P(x+.8,y+.8,40));g.lineWidth=2.2;g.strokeStyle='#9aa6b0';line(P(x+.12,y+.8,46),P(x+.12,y+.8,60));line(P(x+.12,y+.8,20),P(x+.12,y+.8,34))}
+function drawShelf(){const x=1.05,y=0;isoBox(x,y,.9,.35,72,'#8a5530','#6e4424','#a8642a','#3a2010');const cols=['#d9402f','#2d6fd0','#3f9a3c','#ffc72c','#7a3ea0'];for(let r=0;r<3;r++)for(let i=0;i<6;i++){const a=x+.08+i*.13;poly([P(a,y+.35,10+r*22),P(a+.1,y+.35,10+r*22),P(a+.1,y+.35,26+r*22),P(a,y+.35,26+r*22)],cols[(i+r)%5],'#3a2010',.6)}}
+function drawTV(t){const x=.2,y=0;isoBox(x,y,1,.45,16,'#6e4424','#5a3418','#8a5530','#3a2010');poly([P(x+.1,y+.3,18),P(x+.9,y+.3,18),P(x+.9,y+.3,48),P(x+.1,y+.3,48)],'#1e2430','#111',1.5);
+  const k=(Math.sin(t/700)+1)/2;poly([P(x+.15,y+.3,21),P(x+.85,y+.3,21),P(x+.85,y+.3,45),P(x+.15,y+.3,45)],'rgba(110,190,255,'+(.35+k*.25).toFixed(2)+')')}
+function drawFireplace(t){const x=0,y=2.8;isoBox(x,y,.4,.9,52,'#b8b2a6','#9a948a','#d4d0c6','#5e584e');poly([P(x+.4,y+.2,4),P(x+.4,y+.7,4),P(x+.4,y+.7,30),P(x+.4,y+.2,30)],'#2b1a10','#111',1.2);
+  if(!reduce){const k=(Math.sin(t/120)+1)/2;const[px,py]=P(x+.42,y+.45,12);ell(px,py,7,8+k*3,'#ff8a2a');ell(px,py+2,4,5+k*2,'#ffd23f')}}
+function drawSofa(){const x=0,y=3.7,col='#3f6fc0';isoBox(x+.05,y,.85,1.8,14,shade(col,-.1),shade(col,-.25),col,shade(col,-.5));isoBox(x,y,.3,1.8,34,shade(col,-.15),shade(col,-.3),shade(col,.1),shade(col,-.5));
+  isoBox(x+.05,y,.85,.25,24,shade(col,-.12),shade(col,-.28),shade(col,.08),shade(col,-.5));isoBox(x+.05,y+1.55,.85,.25,24,shade(col,-.12),shade(col,-.28),shade(col,.08),shade(col,-.5))}
+function drawTable(){const x=2.6,y=2.6;g.strokeStyle='#5e3418';g.lineWidth=3;for(const[a,b]of[[.08,.08],[1.12,.08],[.08,.92],[1.12,.92]])line(P(x+a,y+b,0),P(x+a,y+b,24));isoBox(x,y,1.2,1,4,'#a8642a','#8a5530','#c98a4b','#3a2010',24)}
+function drawChair(x,y){g.strokeStyle='#5e3418';g.lineWidth=2;for(const[a,b]of[[.05,.05],[.35,.05],[.05,.35],[.35,.35]])line(P(x+a,y+b,0),P(x+a,y+b,14));isoBox(x,y,.4,.4,3,'#c98a4b','#a8692f','#e0a868','#3a2010',14);isoBox(x,y,.06,.4,22,'#c98a4b','#a8692f','#e0a868','#3a2010',17)}
+function drawLamp(dk){const[px,py]=P(.4,5.6);dk=dk||0;g.strokeStyle='#3a3a3a';g.lineWidth=2;line([px,py],[px,py-60]);ell(px,py,6,2.5,'#3a3a3a');poly([[px-9,py-58],[px+9,py-58],[px+6,py-72],[px-6,py-72]],dk>.3?'#fff1b0':'#f4e6c4','#8a6a3a',1);if(dk>.3)ell(px,py-50,26,12,'rgba(255,230,140,.18)')}
+function drawPlant(x,y){const[px,py]=P(x,y);poly([[px-7,py-12],[px+7,py-12],[px+5,py],[px-5,py]],'#c8603a','#7a2a14',1);for(const[a,b,r]of[[0,-24,8],[-7,-18,6],[7,-19,6],[-3,-30,5],[4,-29,5]])ball(px+a,py+b,r,r*.9,'#4f9a32','#2f5a1e',.8)}
+
+// ---- the bar of actions and the menus
+function renderHouseBar(){
+  if(!S||$('house').hidden)return;const h=houseSt(),F=h.furn,nl=napLeft(),sl=Math.max(0,(h.showerT||0)+SHOWER_CD-Date.now());
+  $('hFood').style.width=Math.round(h.food)+'%';$('hDrink').style.width=Math.round(h.drink)+'%';
+  $('hComfort').textContent=comfort();$('hFresh').hidden=!isFresh();
+  $('hNap').querySelector('small').textContent=nl?'Ready in '+fmt(nl/1000):'Skip 5 min';
+  $('hShower').querySelector('small').textContent=sl?'Ready in '+fmt(sl/1000):'+10% XP';
+  for(const b of['hEat','hDrinkBtn','hShower','hNap','hShop'])$(b).disabled=!!(HV&&HV.anim);
+}
+setInterval(()=>{if(HV)renderHouseBar()},1000);
+function mealFactor(m){let f=1;const F=houseSt().furn;if(F.fridge)f+=.2;if(m.at==='table'&&F.table)f+=.2;return f}
+function canMeal(m){for(const id in m.need)if(have(id)<m.need[id])return false;return true}
+function mealOpen(m){for(const id in m.need)if(ITEMS[id]&&ITEMS[id].lvl>S.level)return false;return true}
+function eatMeal(m){
+  if(!canMeal(m)){SFX.error();toast('You need the ingredients in your barn first.');return}
+  const h=houseSt();if((m.food||0)&&h.food>=99&&!m.drink){toast('You are full!');return}
+  for(const id in m.need)takeGood(id,m.need[id]);closeModal();
+  const spot=m.at==='table'&&!houseSt().furn.table?'idle':m.at;
+  houseDo(spot,m.at==='stove'?2.2:1.3,m.at==='stove'?'Cooking':(m.drink||0)>(m.food||0)?'Drinking':'Eating',()=>{
+    const f=mealFactor(m);h.food=Math.min(100,h.food+Math.round((m.food||0)*f));h.drink=Math.min(100,h.drink+Math.round((m.drink||0)*f));
+    stat('meals');SFX.collect();toast(m.name+': '+[m.food?'+'+Math.round(m.food*f)+' food':'',m.drink?'+'+Math.round(m.drink*f)+' drink':''].filter(Boolean).join(', ')+'.');renderNeeds();changed()});
+}
+function showMeals(){
+  modal({title:'Kitchen',color:'gold',wide:true,render(b){
+    const p=el('div','store');p.appendChild(el('p','hint','Cook and eat with goods from your barn. A full farmer works at full speed.'+(houseSt().furn.fridge?' Your fridge makes every meal 20% better.':'')));
+    const grid=el('div','grid');
+    for(const m of MEALS){if(!mealOpen(m))continue;const card=el('div','card');card.appendChild(el('strong',null,m.name));
+      const gain=el('div','want');if(m.food)gain.appendChild(chipTxt('+'+Math.round(m.food*mealFactor(m))+' '+tr('food'),'food'));if(m.drink)gain.appendChild(chipTxt('+'+Math.round(m.drink*mealFactor(m))+' '+tr('drink'),'drink'));card.appendChild(gain);
+      const need=el('div','want');const ks=Object.keys(m.need);if(!ks.length)need.appendChild(el('small',null,'Free from the tap'));for(const id of ks)need.appendChild(goodReq(id,m.need[id]));card.appendChild(need);
+      const go=el('button','buy',m.at==='stove'?'Cook':(m.drink||0)>(m.food||0)?'Drink':'Eat');go.disabled=!canMeal(m);go.onclick=()=>eatMeal(m);card.appendChild(go);grid.appendChild(card)}
+    p.appendChild(grid);b.appendChild(p);
+  }});
+}
+function chipTxt(t,kind){const r=el('span','req ok gain '+kind);r.setAttribute('translate','no');r.appendChild(el('b',null,t));return r}
+function doShower(){
+  const h=houseSt(),left=(h.showerT||0)+SHOWER_CD-Date.now();if(left>0){toast('You are still fresh. Shower again in '+fmt(left/1000)+'.');return}
+  houseDo('shower',2.4,'Showering',()=>{h.showerT=Date.now();h.freshUntil=Date.now()+(FRESH_MIN+comfort())*60e3;stat('showers');SFX.find();toast('Fresh and clean! +10% XP for '+(FRESH_MIN+comfort())+' minutes.');renderHouseBar()});
+}
+function doNap(){
+  const h=houseSt(),left=napLeft();if(left>0){toast('You are not sleepy yet. Next nap in '+fmt(left/1000)+'.');return}
+  houseDo(h.furn.bigbed?'bigbed':'bed',.01,'Napping',()=>{HV.anim={spot:'nap',secs:2.6,label:'Napping',t:0,fn:()=>{
+    h.napT=Date.now();h.food=Math.max(0,h.food-NAP_COST);h.drink=Math.max(0,h.drink-NAP_COST);if(h.furn.bigbed)h.freshUntil=Math.max(h.freshUntil||0,Date.now()+(FRESH_MIN+comfort())*60e3);
+    advanceFarm(NAP_SECS);stat('naps');SFX.level();toast('What a nap! Everything on the farm moved 5 minutes ahead. -'+NAP_COST+' food and drink.');renderNeeds()}};HV.tx=HV.x;HV.ty=HV.y});
+}
+const FURN_REF={bed:[.7,1.6],bigbed:[1,1.7],table:[3.2,3.1],chairs:[3.2,2.55],plant:[5.4,4.7],rug:[3.2,3.35],lamp:[.4,5.4],bookshelf:[1.5,.25],fridge:[4.4,.5],sofa:[.45,4.6],tv:[.7,.3],fireplace:[.2,3.25]};
+const FURN_DRAW={bed:()=>drawBed(0,.6,1.4,2,'#d9402f'),bigbed:()=>drawBed(0,.4,2.1,2.5,'#4a7fd0'),table:()=>drawTable(),chairs:()=>drawChair(3.0,2.35),plant:()=>drawPlant(5.4,4.9),
+  rug:()=>{poly([P(1.7,2.1),P(4.7,2.1),P(4.7,4.6),P(1.7,4.6)],'#c8463c','#7a1c12',1.5);poly([P(1.95,2.35),P(4.45,2.35),P(4.45,4.35),P(1.95,4.35)],null,'#ffd23f',1.5)},
+  lamp:()=>drawLamp(0),bookshelf:()=>drawShelf(),fridge:()=>drawFridge(),sofa:()=>drawSofa(),tv:()=>drawTV(0),fireplace:()=>drawFireplace(0)};
+function furnIcon(id){const k='furn:'+id;if(ICONS[k])return ICONS[k];const c=document.createElement('canvas');c.width=c.height=120;const prev=g;g=c.getContext('2d');const pv=ICON_MODE;ICON_MODE=true;
+  const big={rug:.55,bigbed:.8,bed:.95,sofa:.95}[id]||1.25,[rx,ry]=P(...FURN_REF[id]);g.setTransform(big,0,0,big,60,78);g.translate(-rx,-ry);try{FURN_DRAW[id]()}catch(e){}
+  ICON_MODE=pv;g=prev;return ICONS[k]=c.toDataURL()}
+function showFurniture(){
+  modal({title:'Furniture',color:'pink',wide:true,live:true,render(b){
+    const p=el('div','store'),F=houseSt().furn;p.appendChild(el('p','hint','Comfy furniture makes your home cozier: each comfort point makes naps come back sooner. Comfort now: '+comfort()+'. Next nap cooldown: '+fmt(napCooldown()/1000)+'.'));
+    const grid=el('div','grid');
+    for(const id in FURN){const d=FURN[id];if(d.starter)continue;const card=el('div','card'),im=el('img');im.src=furnIcon(id);im.alt='';card.appendChild(im);card.appendChild(el('strong',null,d.name));
+      card.appendChild(el('small',null,(d.desc?d.desc+' ':'')+'+'+d.comfort+' comfort'));
+      const btn=el('button','buy');if(F[id]){btn.textContent='Owned';btn.disabled=true}else if(d.lvl>S.level){btn.textContent='Unlocks at Level '+d.lvl;btn.disabled=true}
+      else{btn.innerHTML='Buy &middot; <span class="coin"></span>'+d.cost.toLocaleString();btn.onclick=()=>{if(S.coins<d.cost){SFX.error();toast('You need '+d.cost.toLocaleString()+' coins for this.');return}S.coins-=d.cost;F[id]=1;if(id==='bigbed')F.bed=0;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
+      card.appendChild(btn);grid.appendChild(card)}
+    p.appendChild(grid);b.appendChild(p);
+  }});
+}
+$('hEat').onclick=()=>{SFX.click();showMeals()};
+$('hDrinkBtn').onclick=()=>{SFX.click();eatMeal(MEALS[0])};
+$('hShower').onclick=()=>{SFX.click();doShower()};
+$('hNap').onclick=()=>{SFX.click();doNap()};
+$('hShop').onclick=()=>{SFX.click();showFurniture()};
+$('hLeave').onclick=leaveHouse;
+$('needPill').onclick=()=>{if(VIS)return;enterHouse()};
+
 /* ================= boot ================= */
 function start(data){
   S=norm(valid(data&&data.S)?data.S:(load()||fresh()));
   N=S.size;
   for(const k in S.tiles){const o=S.tiles[k];if(o.k==='bld'){farmer.x=+k.split(',')[0]+2.4;farmer.y=+k.split(',')[1]+2.6;break}}
-  resize();buildBorder();buildOcc();if(syncHousing())buildOcc();buildBars();renderModeSw();renderNeighbors();hud();save();placePet();setTool('multi');
+  resize();buildBorder();buildOcc();if(syncHousing())buildOcc();buildBars();renderModeSw();houseSt();renderNeeds();renderNeighbors();hud();save();placePet();setTool('multi');
   window.claude?.hot?.snapshot?.(()=>({S}));
   requestAnimationFrame(frame);
   setInterval(save,10000);
