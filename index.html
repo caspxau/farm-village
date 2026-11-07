@@ -4434,6 +4434,8 @@ let lastFull=0;
 function barnFull(){const t=performance.now();if(t-lastFull>5000){lastFull=t;SFX.error();toast('Your barn is full! Sell goods or upgrade the barn to store more.')}}
 // Harvests never go to waste: what does not fit in the barn is sold straight away at the market price.
 let overSold=0,overTold=0;
+// Each ripe plot gives this many crops (double with fertilizer); a golden plot gives 1 golden crop plus the rest as normal ones.
+const CROP_YIELD=3;
 function stash(id,n){const k=Math.max(0,Math.min(n,room()));if(k>0)S.goods[id]=(S.goods[id]||0)+k;const over=n-k;
   if(over>0){const c=sellPrice(id)*over;S.coins+=c;stat('earned',c);overSold+=c;const t=performance.now();if(t-overTold>25000){overTold=t;toast('Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.')}}
   return n}
@@ -5189,7 +5191,8 @@ function finishJob(j,now){
     }else if(j.kind==='harvest'||j.kind==='clear'){
       if(o&&o.k==='plot'&&o.crop){
         const s=cropState(o,now);
-        if(s.st==='ripe'){const id=o.gold?'g_'+o.crop:o.crop,n=stash(id,o.fert&&!o.gold?2:1);
+        if(s.st==='ripe'){const id=o.gold?'g_'+o.crop:o.crop,n=stash(id,o.gold?1:o.fert?CROP_YIELD*2:CROP_YIELD);
+          if(o.gold){const e=stash(o.crop,CROP_YIELD-1);got[o.crop]=(got[o.crop]||0)+e}
           if(n){got[id]=(got[id]||0)+n;harvested(o.crop,x,y);burst(x,y,o.gold?['#ffd23f','#fff7c0','#ffe066']:[s.c.fruit,'#ffe066']);
             if(o.gold){stat('golden');SFX.golden();floatText(x,y-1.7,'Golden '+s.c.name+'!','#ffd23f',350)}
             S.tiles[k]={k:'plot',fallow:true}}else full=true}
@@ -5776,7 +5779,7 @@ function buyItem(cat,id,d){
       for(const k in S.tiles){
         if(pend[k]||full)continue;
         const o=S.tiles[k],[x,y]=k.split(',').map(Number);
-        if(d.kind==='farmhand'&&o.k==='plot'&&o.crop){const s=cropState(o,now);if(s.st==='ripe'){if(!stash(o.crop,1)){full=true;continue}got[o.crop]=(got[o.crop]||0)+1;n++;harvested(o.crop,x,y);S.tiles[k]={k:'plot',fallow:true};burst(x,y,[s.c.fruit])}}
+        if(d.kind==='farmhand'&&o.k==='plot'&&o.crop){const s=cropState(o,now);if(s.st==='ripe'){if(!stash(o.crop,CROP_YIELD)){full=true;continue}got[o.crop]=(got[o.crop]||0)+CROP_YIELD;n++;harvested(o.crop,x,y);S.tiles[k]={k:'plot',fallow:true};burst(x,y,[s.c.fruit])}}
         if((d.kind==='arborist'&&o.k==='tree')||(d.kind==='feed'&&o.k==='animal'&&hasHome(o.id)&&!hungry(o))){const def=defOf(o);if(readyIn(o,def,now)<=0){const id=(o.k==='animal'?'a_':'t_')+o.id;if(!stash(id,1)){full=true;continue}got[id]=(got[id]||0)+1;o.t=now;if(o.k==='animal')o.fed=false;xp+=def.xp;n++;stat(o.k==='animal'?'animal':'tree');burst(x,y,['#fff',def.fruit||'#ffe066'])}}
       }
       if(!n){S.cash+=d.cash;toast(full?'Your barn is full. Your Farm Cash was refunded.':'Nothing was ready. Your Farm Cash was refunded.')}
