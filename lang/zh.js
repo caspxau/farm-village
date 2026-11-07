@@ -1,7 +1,42 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Dale|戴尔
+x:`Drink water|喝水
+Relax|放松
+Watch TV|看电视
+Read|读书
+Warm up|烤火
+Water the plant|给植物浇水
+Switch the lamp|开关台灯
+Give a pat|摸摸
+Reading|读书中
+Watching TV|看电视中
+Relaxing|放松中
+Warming up|烤火中
+Watering|浇水中
+Tap things in the house to use them.|点击屋里的东西就能使用。
+You read a good farming book.|你读了一本很棒的农业书。
+You just finished a book. Try again a bit later.|你刚读完一本书，过一会儿再来吧。
+You put your feet up for a moment.|你把脚翘起来休息了一会儿。
+Nice and warm by the fire.|炉火旁暖暖的，很舒服。
+The plant looks happier.|植物看起来更开心了。
+On TV: watered crops grow faster.|电视上说：浇过水的作物长得更快。
+On TV: fertilizer doubles your next harvest.|电视上说：肥料能让下次收成翻倍。
+On TV: a Diesel Press turns soybeans into fuel for your machines.|电视上说：柴油压榨机能把大豆变成机器的燃料。
+On TV: comfy furniture brings your next nap sooner.|电视上说：舒适的家具能让下次小睡来得更快。
+Walls and floors|墙面和地板
+Cream Plaster|奶油灰泥
+Sage Stripes|鼠尾草条纹
+Blue Floral|蓝色碎花
+Log Cabin|原木小屋
+Oak Planks|橡木地板
+Walnut Planks|胡桃木地板
+Whitewashed Pine|白漆松木
+Use this style|使用这个风格
+In use|使用中
+Wallpaper|墙纸
+Flooring|地板
+Dale|戴尔
 Hank|汉克
 Mabel|梅布尔
 Otis|奥蒂斯

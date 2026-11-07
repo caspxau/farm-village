@@ -1,6 +1,41 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Multi|Multi
+x:`Drink water|Beber agua
+Relax|Descansar
+Watch TV|Ver la tele
+Read|Leer
+Warm up|Calentarse
+Water the plant|Regar la planta
+Switch the lamp|Encender o apagar la lámpara
+Give a pat|Acariciar
+Reading|Leyendo
+Watching TV|Viendo la tele
+Relaxing|Descansando
+Warming up|Calentándose
+Watering|Regando
+Tap things in the house to use them.|Toca las cosas de la casa para usarlas.
+You read a good farming book.|Leíste un buen libro sobre el campo.
+You just finished a book. Try again a bit later.|Acabas de terminar un libro. Prueba un poco más tarde.
+You put your feet up for a moment.|Pones los pies en alto un momento.
+Nice and warm by the fire.|Calentito junto al fuego.
+The plant looks happier.|La planta parece más contenta.
+On TV: watered crops grow faster.|En la tele: los cultivos regados crecen más rápido.
+On TV: fertilizer doubles your next harvest.|En la tele: el fertilizante duplica tu próxima cosecha.
+On TV: a Diesel Press turns soybeans into fuel for your machines.|En la tele: una prensa de diésel convierte la soja en combustible para tus máquinas.
+On TV: comfy furniture brings your next nap sooner.|En la tele: los muebles cómodos adelantan tu próxima siesta.
+Walls and floors|Paredes y suelos
+Cream Plaster|Yeso crema
+Sage Stripes|Rayas salvia
+Blue Floral|Flores azules
+Log Cabin|Troncos
+Oak Planks|Tarima de roble
+Walnut Planks|Tarima de nogal
+Whitewashed Pine|Pino blanqueado
+Use this style|Usar este estilo
+In use|En uso
+Wallpaper|Papel pintado
+Flooring|Suelo
+Multi|Multi
 Barn|Granero
 Orders|Pedidos
 Market|Mercado

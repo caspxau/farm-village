@@ -1,7 +1,42 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Dale|Дейл
+x:`Drink water|Выпить воды
+Relax|Отдохнуть
+Watch TV|Смотреть ТВ
+Read|Читать
+Warm up|Погреться
+Water the plant|Полить растение
+Switch the lamp|Включить или выключить лампу
+Give a pat|Погладить
+Reading|Чтение
+Watching TV|Смотрит ТВ
+Relaxing|Отдых
+Warming up|Греется
+Watering|Полив
+Tap things in the house to use them.|Нажимай на вещи в доме, чтобы ими пользоваться.
+You read a good farming book.|Ты прочитал хорошую книгу о фермерстве.
+You just finished a book. Try again a bit later.|Ты только что дочитал книгу. Попробуй чуть позже.
+You put your feet up for a moment.|Ты ненадолго закидываешь ноги и отдыхаешь.
+Nice and warm by the fire.|Тепло и уютно у камина.
+The plant looks happier.|Растение выглядит счастливее.
+On TV: watered crops grow faster.|По ТВ: политые посевы растут быстрее.
+On TV: fertilizer doubles your next harvest.|По ТВ: удобрение удваивает следующий урожай.
+On TV: a Diesel Press turns soybeans into fuel for your machines.|По ТВ: дизельный пресс превращает сою в топливо для машин.
+On TV: comfy furniture brings your next nap sooner.|По ТВ: удобная мебель приближает следующий сон.
+Walls and floors|Стены и полы
+Cream Plaster|Кремовая штукатурка
+Sage Stripes|Шалфейные полоски
+Blue Floral|Голубые цветы
+Log Cabin|Бревенчатый сруб
+Oak Planks|Дубовые доски
+Walnut Planks|Ореховые доски
+Whitewashed Pine|Белёная сосна
+Use this style|Выбрать этот стиль
+In use|Используется
+Wallpaper|Обои
+Flooring|Пол
+Dale|Дейл
 Hank|Хэнк
 Mabel|Мейбл
 Otis|Отис

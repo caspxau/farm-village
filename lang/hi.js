@@ -1,7 +1,42 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Dale|डेल
+x:`Drink water|पानी पियो
+Relax|आराम करो
+Watch TV|टीवी देखो
+Read|पढ़ो
+Warm up|आग तापो
+Water the plant|पौधे को पानी दो
+Switch the lamp|लैंप जलाओ या बुझाओ
+Give a pat|सहलाओ
+Reading|पढ़ रहे हैं
+Watching TV|टीवी देख रहे हैं
+Relaxing|आराम
+Warming up|आग ताप रहे हैं
+Watering|पानी दे रहे हैं
+Tap things in the house to use them.|घर की चीज़ों को छूकर इस्तेमाल करो।
+You read a good farming book.|तुमने खेती पर एक अच्छी किताब पढ़ी।
+You just finished a book. Try again a bit later.|तुमने अभी एक किताब खत्म की है। थोड़ी देर बाद फिर कोशिश करो।
+You put your feet up for a moment.|तुम थोड़ी देर पैर ऊपर करके आराम करते हो।
+Nice and warm by the fire.|आग के पास गरम और आरामदायक।
+The plant looks happier.|पौधा ज़्यादा खुश दिख रहा है।
+On TV: watered crops grow faster.|टीवी पर: पानी दी गई फसलें जल्दी बढ़ती हैं।
+On TV: fertilizer doubles your next harvest.|टीवी पर: खाद तुम्हारी अगली फसल दोगुनी करती है।
+On TV: a Diesel Press turns soybeans into fuel for your machines.|टीवी पर: डीज़ल प्रेस सोयाबीन को तुम्हारी मशीनों के ईंधन में बदलता है।
+On TV: comfy furniture brings your next nap sooner.|टीवी पर: आरामदायक फ़र्नीचर अगली झपकी जल्दी लाता है।
+Walls and floors|दीवारें और फ़र्श
+Cream Plaster|क्रीम प्लास्टर
+Sage Stripes|सेज धारियाँ
+Blue Floral|नीले फूल
+Log Cabin|लकड़ी का केबिन
+Oak Planks|ओक के तख़्ते
+Walnut Planks|अखरोट के तख़्ते
+Whitewashed Pine|सफ़ेद चीड़
+Use this style|यह स्टाइल लगाओ
+In use|इस्तेमाल में
+Wallpaper|वॉलपेपर
+Flooring|फ़र्श
+Dale|डेल
 Hank|हैंक
 Mabel|मेबल
 Otis|ओटिस

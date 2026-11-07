@@ -1,7 +1,42 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Dale|ديل
+x:`Drink water|اشرب الماء
+Relax|استرخِ
+Watch TV|شاهد التلفاز
+Read|اقرأ
+Warm up|تدفّأ
+Water the plant|اسقِ النبتة
+Switch the lamp|شغّل المصباح أو أطفئه
+Give a pat|ربّت عليه
+Reading|قراءة
+Watching TV|مشاهدة التلفاز
+Relaxing|استرخاء
+Warming up|تدفئة
+Watering|سقي
+Tap things in the house to use them.|المس الأشياء في البيت لتستخدمها.
+You read a good farming book.|قرأت كتابًا جيدًا عن الزراعة.
+You just finished a book. Try again a bit later.|أنهيت كتابًا للتو. حاول بعد قليل.
+You put your feet up for a moment.|ترفع قدميك وترتاح قليلًا.
+Nice and warm by the fire.|دافئ ومريح بجانب المدفأة.
+The plant looks happier.|تبدو النبتة أسعد.
+On TV: watered crops grow faster.|في التلفاز: المحاصيل المسقية تنمو أسرع.
+On TV: fertilizer doubles your next harvest.|في التلفاز: السماد يضاعف حصادك القادم.
+On TV: a Diesel Press turns soybeans into fuel for your machines.|في التلفاز: معصرة الديزل تحوّل فول الصويا إلى وقود لآلاتك.
+On TV: comfy furniture brings your next nap sooner.|في التلفاز: الأثاث المريح يقرّب قيلولتك القادمة.
+Walls and floors|الجدران والأرضيات
+Cream Plaster|جص كريمي
+Sage Stripes|خطوط مريمية
+Blue Floral|زهور زرقاء
+Log Cabin|كوخ خشبي
+Oak Planks|ألواح بلوط
+Walnut Planks|ألواح جوز
+Whitewashed Pine|صنوبر مبيّض
+Use this style|استخدم هذا الطراز
+In use|قيد الاستخدام
+Wallpaper|ورق جدران
+Flooring|أرضية
+Dale|ديل
 Hank|هانك
 Mabel|مابل
 Otis|أوتيس

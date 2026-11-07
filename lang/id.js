@@ -1,6 +1,41 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Multi|Multi
+x:`Drink water|Minum air
+Relax|Bersantai
+Watch TV|Nonton TV
+Read|Baca
+Warm up|Menghangatkan diri
+Water the plant|Siram tanaman
+Switch the lamp|Nyalakan atau matikan lampu
+Give a pat|Elus
+Reading|Membaca
+Watching TV|Nonton TV
+Relaxing|Bersantai
+Warming up|Menghangatkan diri
+Watering|Menyiram
+Tap things in the house to use them.|Ketuk barang di rumah untuk memakainya.
+You read a good farming book.|Kamu membaca buku bertani yang bagus.
+You just finished a book. Try again a bit later.|Kamu baru saja selesai membaca buku. Coba lagi nanti.
+You put your feet up for a moment.|Kamu selonjoran sebentar.
+Nice and warm by the fire.|Hangat dan nyaman di dekat perapian.
+The plant looks happier.|Tanamannya terlihat lebih senang.
+On TV: watered crops grow faster.|Di TV: tanaman yang disiram tumbuh lebih cepat.
+On TV: fertilizer doubles your next harvest.|Di TV: pupuk menggandakan panen berikutnya.
+On TV: a Diesel Press turns soybeans into fuel for your machines.|Di TV: Mesin Pres Diesel mengubah kedelai menjadi bahan bakar mesinmu.
+On TV: comfy furniture brings your next nap sooner.|Di TV: perabot yang nyaman membuat tidur siang berikutnya lebih cepat.
+Walls and floors|Dinding dan lantai
+Cream Plaster|Plester krem
+Sage Stripes|Garis sage
+Blue Floral|Bunga biru
+Log Cabin|Kabin kayu
+Oak Planks|Papan ek
+Walnut Planks|Papan walnut
+Whitewashed Pine|Pinus putih
+Use this style|Pakai gaya ini
+In use|Dipakai
+Wallpaper|Kertas dinding
+Flooring|Lantai
+Multi|Multi
 Barn|Lumbung
 Orders|Pesanan
 Market|Pasar

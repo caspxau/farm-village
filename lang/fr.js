@@ -1,6 +1,41 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Multi|Multi
+x:`Drink water|Boire de l'eau
+Relax|Se détendre
+Watch TV|Regarder la télé
+Read|Lire
+Warm up|Se réchauffer
+Water the plant|Arroser la plante
+Switch the lamp|Allumer ou éteindre la lampe
+Give a pat|Caresser
+Reading|Lecture
+Watching TV|Devant la télé
+Relaxing|Détente
+Warming up|Au chaud
+Watering|Arrosage
+Tap things in the house to use them.|Touche les objets de la maison pour les utiliser.
+You read a good farming book.|Tu as lu un bon livre sur l'agriculture.
+You just finished a book. Try again a bit later.|Tu viens de finir un livre. Réessaie un peu plus tard.
+You put your feet up for a moment.|Tu te poses un moment, les pieds en l'air.
+Nice and warm by the fire.|Bien au chaud près du feu.
+The plant looks happier.|La plante a l'air plus heureuse.
+On TV: watered crops grow faster.|À la télé : les cultures arrosées poussent plus vite.
+On TV: fertilizer doubles your next harvest.|À la télé : l'engrais double ta prochaine récolte.
+On TV: a Diesel Press turns soybeans into fuel for your machines.|À la télé : une presse à diesel transforme le soja en carburant pour tes machines.
+On TV: comfy furniture brings your next nap sooner.|À la télé : des meubles confortables rapprochent ta prochaine sieste.
+Walls and floors|Murs et sols
+Cream Plaster|Plâtre crème
+Sage Stripes|Rayures sauge
+Blue Floral|Fleurs bleues
+Log Cabin|Rondins
+Oak Planks|Parquet en chêne
+Walnut Planks|Parquet en noyer
+Whitewashed Pine|Pin blanchi
+Use this style|Choisir ce style
+In use|Utilisé
+Wallpaper|Papier peint
+Flooring|Sol
+Multi|Multi
 Barn|Grange
 Orders|Commandes
 Market|Marché

@@ -1,6 +1,41 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Multi|Multi
+x:`Drink water|Beber água
+Relax|Relaxar
+Watch TV|Ver TV
+Read|Ler
+Warm up|Aquecer-se
+Water the plant|Regar a planta
+Switch the lamp|Ligar ou desligar o candeeiro
+Give a pat|Fazer festinhas
+Reading|Lendo
+Watching TV|Vendo TV
+Relaxing|Relaxando
+Warming up|Aquecendo
+Watering|Regando
+Tap things in the house to use them.|Toque nas coisas da casa para usá-las.
+You read a good farming book.|Você leu um bom livro sobre o campo.
+You just finished a book. Try again a bit later.|Você acabou de terminar um livro. Tente um pouco mais tarde.
+You put your feet up for a moment.|Você descansa um pouco com os pés para cima.
+Nice and warm by the fire.|Quentinho perto da lareira.
+The plant looks happier.|A planta parece mais feliz.
+On TV: watered crops grow faster.|Na TV: plantações regadas crescem mais rápido.
+On TV: fertilizer doubles your next harvest.|Na TV: o fertilizante dobra a sua próxima colheita.
+On TV: a Diesel Press turns soybeans into fuel for your machines.|Na TV: uma prensa de diesel transforma soja em combustível para suas máquinas.
+On TV: comfy furniture brings your next nap sooner.|Na TV: móveis confortáveis trazem a próxima soneca mais cedo.
+Walls and floors|Paredes e pisos
+Cream Plaster|Reboco creme
+Sage Stripes|Listras sálvia
+Blue Floral|Florais azuis
+Log Cabin|Troncos
+Oak Planks|Tábuas de carvalho
+Walnut Planks|Tábuas de nogueira
+Whitewashed Pine|Pinho caiado
+Use this style|Usar este estilo
+In use|Em uso
+Wallpaper|Papel de parede
+Flooring|Piso
+Multi|Multi
 Barn|Celeiro
 Orders|Pedidos
 Market|Mercado

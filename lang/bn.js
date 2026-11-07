@@ -1,7 +1,42 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Dale|ডেল
+x:`Drink water|জল খাও
+Relax|বিশ্রাম নাও
+Watch TV|টিভি দেখো
+Read|পড়ো
+Warm up|আগুন পোহাও
+Water the plant|গাছে জল দাও
+Switch the lamp|বাতি জ্বালাও বা নেভাও
+Give a pat|আদর করো
+Reading|পড়ছে
+Watching TV|টিভি দেখছে
+Relaxing|বিশ্রাম
+Warming up|আগুন পোহাচ্ছে
+Watering|জল দিচ্ছে
+Tap things in the house to use them.|ঘরের জিনিসে ছুঁয়ে সেগুলো ব্যবহার করো।
+You read a good farming book.|তুমি চাষবাস নিয়ে একটা ভালো বই পড়লে।
+You just finished a book. Try again a bit later.|তুমি এইমাত্র একটা বই শেষ করলে। একটু পরে আবার চেষ্টা করো।
+You put your feet up for a moment.|তুমি একটু পা তুলে বিশ্রাম নিচ্ছ।
+Nice and warm by the fire.|আগুনের পাশে আরামদায়ক উষ্ণতা।
+The plant looks happier.|গাছটাকে আরও খুশি দেখাচ্ছে।
+On TV: watered crops grow faster.|টিভিতে: জল দেওয়া ফসল তাড়াতাড়ি বাড়ে।
+On TV: fertilizer doubles your next harvest.|টিভিতে: সার তোমার পরের ফসল দ্বিগুণ করে।
+On TV: a Diesel Press turns soybeans into fuel for your machines.|টিভিতে: ডিজেল প্রেস সয়াবিনকে তোমার যন্ত্রের জ্বালানিতে বদলায়।
+On TV: comfy furniture brings your next nap sooner.|টিভিতে: আরামদায়ক আসবাব পরের ঘুম তাড়াতাড়ি আনে।
+Walls and floors|দেয়াল ও মেঝে
+Cream Plaster|ক্রিম প্লাস্টার
+Sage Stripes|সেজ ডোরা
+Blue Floral|নীল ফুল
+Log Cabin|কাঠের গুঁড়ির কেবিন
+Oak Planks|ওক কাঠের তক্তা
+Walnut Planks|আখরোট কাঠের তক্তা
+Whitewashed Pine|সাদা পাইন
+Use this style|এই স্টাইল নাও
+In use|ব্যবহার হচ্ছে
+Wallpaper|ওয়ালপেপার
+Flooring|মেঝে
+Dale|ডেল
 Hank|হ্যাঙ্ক
 Mabel|মেবল
 Otis|ওটিস
