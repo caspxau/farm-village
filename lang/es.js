@@ -1,6 +1,24 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Your farm|Tu granja
+x:`Hungry and thirsty: working slower|Con hambre y sed: trabaja más lento
+Too hungry: working slower|Demasiada hambre: trabaja más lento
+Too thirsty: working slower|Demasiada sed: trabaja más lento
+Getting hungry and thirsty|Empieza a tener hambre y sed
+Getting hungry|Empieza a tener hambre
+Getting thirsty|Empieza a tener sed
+Fresh and clean|Fresco y limpio
+Feeling great|Se siente genial
+Spiky|De punta
+Side part|Raya al lado
+Flower crown|Corona de flores
+Hoodie|Sudadera con capucha
+Denim jacket|Chaqueta vaquera
+Quick looks|Looks rápidos
+Classic|Clásico
+Rancher|Ranchero
+Gardener|Jardinero
+Weekend|Fin de semana
+Your farm|Tu granja
 Town|Pueblo
 Drink water|Beber agua
 Relax|Descansar

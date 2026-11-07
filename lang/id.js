@@ -1,6 +1,24 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Your farm|Pertanianmu
+x:`Hungry and thirsty: working slower|Lapar dan haus: kerja lebih lambat
+Too hungry: working slower|Terlalu lapar: kerja lebih lambat
+Too thirsty: working slower|Terlalu haus: kerja lebih lambat
+Getting hungry and thirsty|Mulai lapar dan haus
+Getting hungry|Mulai lapar
+Getting thirsty|Mulai haus
+Fresh and clean|Segar dan bersih
+Feeling great|Merasa hebat
+Spiky|Jabrik
+Side part|Belah samping
+Flower crown|Mahkota bunga
+Hoodie|Hoodie
+Denim jacket|Jaket denim
+Quick looks|Gaya cepat
+Classic|Klasik
+Rancher|Koboi
+Gardener|Tukang kebun
+Weekend|Akhir pekan
+Your farm|Pertanianmu
 Town|Kota
 Drink water|Minum air
 Relax|Bersantai

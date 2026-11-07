@@ -1,7 +1,25 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Your farm|你的农场
+x:`Hungry and thirsty: working slower|又饿又渴：干活变慢
+Too hungry: working slower|太饿了：干活变慢
+Too thirsty: working slower|太渴了：干活变慢
+Getting hungry and thirsty|有点饿也有点渴
+Getting hungry|有点饿了
+Getting thirsty|有点渴了
+Fresh and clean|清爽干净
+Feeling great|感觉棒极了
+Spiky|刺猬头
+Side part|侧分
+Flower crown|花环
+Hoodie|连帽衫
+Denim jacket|牛仔夹克
+Quick looks|快速搭配
+Classic|经典
+Rancher|牧场主
+Gardener|园丁
+Weekend|周末
+Your farm|你的农场
 Town|小镇
 Drink water|喝水
 Relax|放松

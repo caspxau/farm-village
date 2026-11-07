@@ -1,7 +1,25 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Your farm|তোমার খামার
+x:`Hungry and thirsty: working slower|ক্ষুধার্ত ও তৃষ্ণার্ত: ধীরে কাজ করছে
+Too hungry: working slower|খুব ক্ষুধার্ত: ধীরে কাজ করছে
+Too thirsty: working slower|খুব তৃষ্ণার্ত: ধীরে কাজ করছে
+Getting hungry and thirsty|খিদে ও তেষ্টা পাচ্ছে
+Getting hungry|খিদে পাচ্ছে
+Getting thirsty|তেষ্টা পাচ্ছে
+Fresh and clean|তাজা ও পরিষ্কার
+Feeling great|দারুণ লাগছে
+Spiky|খাড়া চুল
+Side part|পাশে সিঁথি
+Flower crown|ফুলের মুকুট
+Hoodie|হুডি
+Denim jacket|ডেনিম জ্যাকেট
+Quick looks|দ্রুত সাজ
+Classic|ক্লাসিক
+Rancher|র‍্যাঞ্চার
+Gardener|মালি
+Weekend|সপ্তাহান্ত
+Your farm|তোমার খামার
 Town|শহর
 Drink water|জল খাও
 Relax|বিশ্রাম নাও

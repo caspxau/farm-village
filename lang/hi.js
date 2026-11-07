@@ -1,7 +1,25 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Your farm|तुम्हारा खेत
+x:`Hungry and thirsty: working slower|भूखा और प्यासा: धीरे काम कर रहा है
+Too hungry: working slower|बहुत भूखा: धीरे काम कर रहा है
+Too thirsty: working slower|बहुत प्यासा: धीरे काम कर रहा है
+Getting hungry and thirsty|भूख और प्यास लग रही है
+Getting hungry|भूख लग रही है
+Getting thirsty|प्यास लग रही है
+Fresh and clean|ताज़ा और साफ़
+Feeling great|बहुत अच्छा लग रहा है
+Spiky|खड़े बाल
+Side part|साइड माँग
+Flower crown|फूलों का मुकुट
+Hoodie|हुडी
+Denim jacket|डेनिम जैकेट
+Quick looks|झटपट लुक
+Classic|क्लासिक
+Rancher|रैंचर
+Gardener|माली
+Weekend|वीकेंड
+Your farm|तुम्हारा खेत
 Town|शहर
 Drink water|पानी पियो
 Relax|आराम करो

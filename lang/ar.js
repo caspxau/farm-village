@@ -1,7 +1,25 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Your farm|مزرعتك
+x:`Hungry and thirsty: working slower|جائع وعطشان: يعمل أبطأ
+Too hungry: working slower|جائع جدًا: يعمل أبطأ
+Too thirsty: working slower|عطشان جدًا: يعمل أبطأ
+Getting hungry and thirsty|بدأ يجوع ويعطش
+Getting hungry|بدأ يجوع
+Getting thirsty|بدأ يعطش
+Fresh and clean|منتعش ونظيف
+Feeling great|يشعر بحال رائعة
+Spiky|شعر شائك
+Side part|فرق جانبي
+Flower crown|إكليل زهور
+Hoodie|هودي
+Denim jacket|سترة جينز
+Quick looks|إطلالات سريعة
+Classic|كلاسيكي
+Rancher|راعي مزرعة
+Gardener|بستاني
+Weekend|عطلة نهاية الأسبوع
+Your farm|مزرعتك
 Town|المدينة
 Drink water|اشرب الماء
 Relax|استرخِ

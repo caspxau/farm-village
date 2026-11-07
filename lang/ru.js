@@ -1,7 +1,25 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Your farm|Твоя ферма
+x:`Hungry and thirsty: working slower|Голоден и хочет пить: работает медленнее
+Too hungry: working slower|Слишком голоден: работает медленнее
+Too thirsty: working slower|Слишком хочет пить: работает медленнее
+Getting hungry and thirsty|Проголодался и хочет пить
+Getting hungry|Проголодался
+Getting thirsty|Хочет пить
+Fresh and clean|Свежий и чистый
+Feeling great|Отличное самочувствие
+Spiky|Ёжик
+Side part|Пробор сбоку
+Flower crown|Венок из цветов
+Hoodie|Худи
+Denim jacket|Джинсовая куртка
+Quick looks|Готовые образы
+Classic|Классика
+Rancher|Ранчеро
+Gardener|Садовник
+Weekend|Выходные
+Your farm|Твоя ферма
 Town|Город
 Drink water|Выпить воды
 Relax|Отдохнуть

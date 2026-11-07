@@ -1,6 +1,24 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Your farm|Ta ferme
+x:`Hungry and thirsty: working slower|Affamé et assoiffé : travaille plus lentement
+Too hungry: working slower|Trop faim : travaille plus lentement
+Too thirsty: working slower|Trop soif : travaille plus lentement
+Getting hungry and thirsty|Commence à avoir faim et soif
+Getting hungry|Commence à avoir faim
+Getting thirsty|Commence à avoir soif
+Fresh and clean|Frais et propre
+Feeling great|En pleine forme
+Spiky|Hérissés
+Side part|Raie sur le côté
+Flower crown|Couronne de fleurs
+Hoodie|Sweat à capuche
+Denim jacket|Veste en jean
+Quick looks|Looks rapides
+Classic|Classique
+Rancher|Cow-boy
+Gardener|Jardinier
+Weekend|Week-end
+Your farm|Ta ferme
 Town|Ville
 Drink water|Boire de l'eau
 Relax|Se détendre

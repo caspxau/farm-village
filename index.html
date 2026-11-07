@@ -873,6 +873,8 @@ body.visiting .rightcol{display:none}
 /* inside the farmhouse */
 .house{position:fixed;inset:0;z-index:34;display:flex;flex-direction:column;background:#2e1d10}
 .house[hidden]{display:none}
+.wdpresets{display:flex;flex-direction:column;gap:5px;margin:4px 0 2px}.wdpresets>span{font-size:12px;font-weight:800;color:#5a3f24}.wdpgrid{display:flex;flex-wrap:wrap;gap:5px}.wdpgrid .chip{min-height:32px;padding:4px 10px;font-size:12px}
+.hneeds .hv{font-size:12px;font-weight:800;color:#fff3dc;min-width:20px;font-variant-numeric:tabular-nums}.hneeds em i.mid{background:linear-gradient(90deg,#f6c64a,#e39a1f)!important}.hneeds em i.low{background:linear-gradient(90deg,#f58a6a,#d9402f)!important}
 .route{display:block;width:100%;height:auto;aspect-ratio:640/96;border-radius:14px;margin:2px 0 10px;box-shadow:inset 0 0 0 1px rgba(60,40,20,.15),0 2px 6px rgba(60,40,20,.12)}
 .house canvas{flex:1;min-height:0;width:100%}
 .htop{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:max(10px,env(safe-area-inset-top,0px)) 12px 8px;background:var(--wood-bg,#8a5530);border-bottom:3px solid var(--wood-d)}
@@ -1285,6 +1287,35 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 .needpill .nhead b{font-size:12px;font-weight:800;color:#3a2310;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px}
 .needpill .nhead small{font-size:9.5px;font-weight:700;color:#7a5a3a;white-space:nowrap}
 @media (max-width:640px){.needpill .nhead small{display:none}.needpill .nhead img{width:20px;height:20px}}
+/* needs card: icon badges, thick bars with a value, colors that follow the level, a mood line and the Fresh badge */
+.needpill [hidden]{display:none!important}
+.needpill{min-width:150px;gap:4px;padding:6px 9px 7px}
+.needpill .nface{position:relative;flex:none;display:block}
+.needpill .nhead img{width:30px;height:30px;box-shadow:0 1px 3px rgba(60,40,20,.25)}
+.needpill .nmood{position:absolute;right:-5px;bottom:-4px;width:16px;height:16px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:10px;line-height:1;color:#fff;background:#d9402f;border:1.5px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.needpill .nmood.drink{background:#2d8fe3}
+.needpill .nhead small{font-size:10px;max-width:104px;overflow:hidden;text-overflow:ellipsis;transition:color .3s}
+.needpill .nhead small.warn{color:#b8571a}.needpill .nhead small.bad{color:#c0392b}
+.needpill .nfresh{margin-left:auto;align-self:flex-start;font-size:9.5px;font-weight:800;color:#fff;background:linear-gradient(#5fc0f0,#2d8fe3);border-radius:8px;padding:2px 5px;box-shadow:0 1px 0 #1f5f9a;white-space:nowrap}
+.needpill .nrow{gap:6px}
+.needpill .nico{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;flex:none;box-shadow:inset 0 -2px 0 rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.2)}
+.needpill .nico svg{width:11px;height:11px}
+.needpill .nico.food{background:linear-gradient(#f6a14a,#e07b1f)}.needpill .nico.drink{background:linear-gradient(#5fc0f0,#2d8fe3)}
+.needpill em{height:10px!important;border-radius:6px!important;background:rgba(90,62,32,.16)!important;border:0!important;box-shadow:inset 0 1px 2px rgba(60,40,20,.25);position:relative}
+.needpill em i{border-radius:6px;position:relative;transition:width .6s cubic-bezier(.3,1.3,.5,1),background .4s}
+.needpill em i::after{content:'';position:absolute;inset:1px 3px auto 3px;height:3px;border-radius:3px;background:rgba(255,255,255,.45)}
+.needpill em i.ok{background:linear-gradient(90deg,#7cc35a,#4e9a3a)!important}
+.needpill .nrow:last-child em i.ok{background:linear-gradient(90deg,#7cc4f2,#3d86c8)!important}
+.needpill em i.mid{background:linear-gradient(90deg,#f6c64a,#e39a1f)!important}
+.needpill em i.low{background:linear-gradient(90deg,#f58a6a,#d9402f)!important}
+.needpill em i.fill{animation:needfill 1s ease-out}
+@keyframes needfill{0%{filter:brightness(1.6) saturate(1.3)}100%{filter:none}}
+.needpill .nval{min-width:22px;text-align:right;font-size:11px;font-weight:800;color:#5a3f24;font-variant-numeric:tabular-nums}
+.needpill.low{animation:needwarn 1.6s ease-in-out infinite}
+@keyframes needwarn{0%,100%{box-shadow:var(--sh-2)}50%{box-shadow:0 0 0 3px rgba(217,64,47,.45),var(--sh-2)}}
+@media (max-width:640px){.needpill{min-width:118px;padding:4px 7px 5px}.needpill .nhead img{width:24px;height:24px}.needpill .nfresh{display:none}}
+@media (max-height:520px) and (orientation:landscape){.needpill{min-width:112px}.needpill .nhead small{display:none}}
+@media (prefers-reduced-motion:reduce){.needpill.low,.needpill em i.fill{animation:none}}
 .v5anims{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin:12px 0 6px}
 .v5anim{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 4px 9px;min-height:44px;border-radius:12px;border:1.5px solid rgba(120,90,50,.3);background:linear-gradient(#fffdf6,#f4ead6);font:inherit;color:#3a2310;cursor:pointer;overflow:hidden}
 .v5anim img{width:64px;height:48px;object-fit:cover;object-position:50% 58%;margin:-4px 0 -2px}
@@ -1403,7 +1434,7 @@ body{font-family:var(--f-body);letter-spacing:.1px}
   <button id="modePlow" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3L8 16" stroke="#a8642a" stroke-width="3" stroke-linecap="round"/><path d="M5 13l6 4-2 3-6-4z" fill="#c9ced2" stroke="#3a4650" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 21h18" stroke="#8b5a2e" stroke-width="2.4" stroke-linecap="round"/></svg><span>Plow</span></button>
 </div>
 <button class="seedpill" id="seedPill" aria-label="Change the seed you are planting"><img id="seedPillImg" alt=""><span><small>Planting</small><b id="seedPillName">Wheat</b></span><i aria-hidden="true">&#9662;</i></button>
-<button class="needpill" id="needPill" aria-label="Your farmer's food and drink. Eat and drink at home to refill. Tap to go home"><span class="nhead"><img id="needFace" alt=""><span><b id="needWho">Farmer</b><small>Eat &amp; drink at home</small></span></span><span class="nrow"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 2v7a2 2 0 0 0 4 0V2M8 2v16M14 2c-2 2-2 6 0 8v8" fill="none" stroke="#6b3c15" stroke-width="1.8" stroke-linecap="round"/></svg><em><i id="needFood"></i></em></span><span class="nrow"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z" fill="#5bb8f0" stroke="#1f5f9a" stroke-width="1.6"/></svg><em><i id="needDrink"></i></em></span></button>
+<button class="needpill" id="needPill" aria-label="Your farmer's food and drink. Eat and drink at home to refill. Tap to go home"><span class="nhead"><span class="nface"><img id="needFace" alt=""><i class="nmood" id="needEmo" hidden></i></span><span><b id="needWho">Farmer</b><small id="needMood">Eat &amp; drink at home</small></span><span class="nfresh" id="needFresh" hidden>+10%</span></span><span class="nrow"><span class="nico food"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 2v7a2 2 0 0 0 4 0V2M8 2v16M14 2c-2 2-2 6 0 8v8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span><em><i id="needFood"></i></em><b class="nval" id="needFoodV">0</b></span><span class="nrow"><span class="nico drink"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z" fill="#fff"/></svg></span><em><i id="needDrink"></i></em><b class="nval" id="needDrinkV">0</b></span></button>
 </div>
 <footer class="dock">
   <button class="mbtn" id="btnTool" aria-label="Tools" aria-expanded="false"><span class="toolic" id="toolIcon"></span><em aria-hidden="true" id="toolLabel">Multi</em></button>
@@ -1452,7 +1483,7 @@ body{font-family:var(--f-body);letter-spacing:.1px}
   <button class="btn2" id="rotKeep">Play this way instead</button>
 </div>
 <div class="house" id="house" hidden role="dialog" aria-label="Inside the farmhouse">
-  <div class="htop"><div class="hneeds"><span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 2v7a2 2 0 0 0 4 0V2M8 2v16M14 2c-2 2-2 6 0 8v8" fill="none" stroke="#6b3c15" stroke-width="1.8" stroke-linecap="round"/></svg><b>Food</b><em><i id="hFood"></i></em></span><span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z" fill="#5bb8f0" stroke="#1f5f9a" stroke-width="1.6"/></svg><b>Drink</b><em><i id="hDrink"></i></em></span>
+  <div class="htop"><div class="hneeds"><span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 2v7a2 2 0 0 0 4 0V2M8 2v16M14 2c-2 2-2 6 0 8v8" fill="none" stroke="#6b3c15" stroke-width="1.8" stroke-linecap="round"/></svg><b>Food</b><em><i id="hFood"></i></em><small class="hv" id="hFoodV"></small></span><span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z" fill="#5bb8f0" stroke="#1f5f9a" stroke-width="1.6"/></svg><b>Drink</b><em><i id="hDrink"></i></em><small class="hv" id="hDrinkV"></small></span>
     <span class="hcomf"><b>Comfort</b> <strong id="hComfort">0</strong></span><span class="hfresh" id="hFresh" hidden>Fresh +10% XP</span></div>
     <button class="go hleave" id="hLeave">Go outside</button></div>
   <canvas id="hcv" aria-hidden="true"></canvas>
@@ -1491,7 +1522,7 @@ const PACK=LANG!=='en'&&LANG!=='pl'?window.FV_PACK:null;
 function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.reload()}
 // Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
 // Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
-const PL_EXACT={'Your farm':'Twoja farma','Town':'Miasto','Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
+const PL_EXACT={'Hungry and thirsty: working slower':'Głodny i spragniony: pracuje wolniej','Too hungry: working slower':'Za głodny: pracuje wolniej','Too thirsty: working slower':'Za spragniony: pracuje wolniej','Getting hungry and thirsty':'Robi się głodny i spragniony','Getting hungry':'Robi się głodny','Getting thirsty':'Robi się spragniony','Fresh and clean':'Świeży i czysty','Feeling great':'Świetne samopoczucie','Spiky':'Na jeża','Side part':'Z przedziałkiem','Flower crown':'Wianek z kwiatów','Hoodie':'Bluza z kapturem','Denim jacket':'Kurtka dżinsowa','Quick looks':'Szybkie stylizacje','Classic':'Klasyczny','Rancher':'Ranczer','Gardener':'Ogrodnik','Weekend':'Weekend','Your farm':'Twoja farma','Town':'Miasto','Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
 // ---- HUD, dock, menus
 'Multi':'Multi','Barn':'Stodoła','Orders':'Zamówienia','Market':'Targ','Delivery':'Dostawy','More':'Więcej','Neighbors':'Sąsiedzi','Wardrobe':'Garderoba','Gifts':'Prezenty','Album':'Album','Ribbons':'Wstęgi','Music':'Muzyka','Sound':'Dźwięk','Settings':'Ustawienia',
 'Your level':'Twój poziom','Coins':'Monety','Farm Cash':'Farmdolary','Season guide':'Przewodnik po porach roku','Tools':'Narzędzia','Barn: your stored goods':'Stodoła: twoje zapasy','Neighbor orders and advertising':'Zamówienia sąsiadów i reklama','Open the market':'Otwórz targ','Delivery Board: send goods to town':'Tablica dostaw: wyślij towary do miasta','More buttons':'Więcej przycisków','Close':'Zamknij','Quest':'Zadanie','Daily':'Codziennie',"Today's Goals":'Cele na dziś',"Today's goals":'Cele na dziś','Change seed':'Zmień nasiona','Seeds to plant':'Nasiona do sadzenia',
@@ -1735,7 +1766,7 @@ const PL_PATS=[
 [/^Click empty grass to place the (.+)\. Press Escape to stop\.$/,m=>'Kliknij pustą trawę, by postawić: '+L_w(m[1])+'. Esc kończy.'],
 [/^(\d+) (.+) added to your barn\.$/,m=>'Do stodoły trafiło: '+L_w(m[2])+' ×'+m[1]+'.'],
 [/^(.+) brought in (\d+) goods( until the barn filled up)?\. They are in your barn\.$/,m=>L_w(m[1])+' zebrał '+m[2]+' '+p3(m[2],'towar','towary','towarów')+(m[3]?', aż stodoła się zapełniła':'')+'. Są w stodole.'],
-[/^You found a (.+) for your (.+) collection!$/,m=>'Znaleziono: '+L_w(m[1])+' do kolekcji „'+L_w(m[2])+'”!'],
+[/^You found (?:an? )?(.+) for your (.+) collection!$/,m=>'Znaleziono: '+L_w(m[1])+' do kolekcji „'+L_w(m[2])+'”!'],
 [/^(.+) complete! \+(\d+) coins, \+(\d+) XP and a (.+) in your Gift Box\.$/,m=>'Kolekcja „'+L_w(m[1])+'” ukończona! +'+m[2]+' monet, +'+m[3]+' XP i '+L_w(m[4])+' w pudełku z prezentami.'],
 [/^Reward: (\d+) coins, (\d+) XP and a (.+)\.$/,m=>'Nagroda: '+m[1]+' monet, '+m[2]+' XP i '+L_w(m[3])+'.'],
 [/^Found by (.+)\. Traded in (\d+) times\.$/,m=>'Znajdują: '+m[1].split(', ').map(L_w).join(', ')+'. Wymieniono '+m[2]+' '+p3(m[2],'raz','razy','razy')+'.'],
@@ -4440,7 +4471,7 @@ const LOOK_OPTS={
   gender:[['male','Male'],['female','Female']],
   build:[['broad','Broad'],['slim','Slim']],
   freckles:[[false,'No freckles'],[true,'Freckles']],
-  hair:[['short','Short'],['pixie','Pixie'],['bob','Bob'],['long','Long'],['wavy','Wavy'],['braid','Side braid'],['ponytail','Ponytail'],['pigtails','Pigtails'],['bun','Bun'],['curly','Curly'],['afro','Afro puff'],['buzz','Buzz cut'],['none','Bald']],
+  hair:[['short','Short'],['pixie','Pixie'],['bob','Bob'],['long','Long'],['wavy','Wavy'],['braid','Side braid'],['ponytail','Ponytail'],['pigtails','Pigtails'],['bun','Bun'],['curly','Curly'],['afro','Afro puff'],['buzz','Buzz cut'],['spiky','Spiky'],['sidepart','Side part'],['none','Bald']],
   mouth:[['smile','Smile'],['grin','Big grin'],['calm','Calm']],
   eyeShape:[['almond','Almond'],['round','Round'],['sleepy','Sleepy']],
   brows:[['natural','Natural'],['thick','Thick'],['thin','Thin'],['arched','Arched'],['none','None']],
@@ -4450,8 +4481,8 @@ const LOOK_OPTS={
   acc:[['none','None'],['flower','Hair flower'],['earrings','Earrings'],['necklace','Necklace',{coins:80}],['scarf','Scarf',{coins:100}]],
   face:[['none','Clean shaven'],['mustache','Mustache'],['beard','Beard']],
   glasses:[['none','No glasses'],['round','Round glasses'],['shades','Sunglasses']],
-  hat:[['straw','Straw hat'],['cap','Ball cap'],['sunhat','Sun hat'],['bandana','Bandana'],['beanie','Beanie'],['none','No hat'],['cowboy','Cowboy hat',{coins:150}],['tophat','Top hat',{coins:400}],['crown','Golden crown',{cash:5}]],
-  top:[['plaid','Plaid shirt'],['tee','T-shirt'],['stripes','Striped shirt'],['sweater','Sweater'],['vest','Farmer vest',{coins:120}]],
+  hat:[['straw','Straw hat'],['cap','Ball cap'],['sunhat','Sun hat'],['bandana','Bandana'],['beanie','Beanie'],['none','No hat'],['cowboy','Cowboy hat',{coins:150}],['flowercrown','Flower crown',{coins:120}],['tophat','Top hat',{coins:400}],['crown','Golden crown',{cash:5}]],
+  top:[['plaid','Plaid shirt'],['tee','T-shirt'],['stripes','Striped shirt'],['sweater','Sweater'],['vest','Farmer vest',{coins:120}],['hoodie','Hoodie',{coins:150}],['jacket','Denim jacket',{coins:220}]],
   bottom:[['overalls','Overalls'],['jeans','Jeans'],['shorts','Shorts'],['skirt','Skirt'],['patched','Patched overalls',{coins:200}]]
 };
 function defaultLook(){return{gender:'male',build:'broad',skin:'#f2c6a0',eyes:'#3f8fe0',freckles:false,hair:'short',hairColor:'#4a2e1a',face:'none',glasses:'none',hat:'straw',hatColor:'#d9402f',top:'plaid',topColor:'#d9402f',bottom:'overalls',bottomColor:'#3f6fc0',shoes:'#5a3418',mouth:'smile',lips:'#d8454c',blush:true,acc:'none',accColor:'#e0457b',eyeShape:'almond',brows:'natural',nose:'button',ears:'normal'}}
@@ -4499,7 +4530,7 @@ function blush(x,y){const gr=g.createRadialGradient(x,y,0,x,y,2.1);gr.addColorSt
 function drawHead(L){
   const Hc=L.hairColor,hair=L.hair,skin=L.skin,sd=shade(skin,-.2);
   // hair behind the head
-  const noBack=hair==='none'||hair==='buzz'||hair==='curly'||hair==='afro';
+  const noBack=hair==='none'||hair==='buzz'||hair==='curly'||hair==='afro'||hair==='spiky';
   if(hair==='long'||hair==='wavy')backHair(15,hair==='wavy'?11.4:10.4);
   else if(hair==='bob')backHair(7.6,10.2);
   else if(!noBack)backHair(1,hair==='pixie'?9:9.4);
@@ -4551,7 +4582,7 @@ function drawHead(L){
     g.beginPath();g.moveTo(-7.9,.8);g.quadraticCurveTo(-7.4,9.2,0,10);g.quadraticCurveTo(7.4,9.2,7.9,.8);g.quadraticCurveTo(5.4,6.4,0,6.6);g.quadraticCurveTo(-5.4,6.4,-7.9,.8);g.closePath();paintHair(Hc);
   }
   // soft lips
-  const lip=L.lips||'#d8454c';
+  const lip=fem?(L.lips||'#d8454c'):mixC(shade(skin,-.28),L.lips||'#d8454c',.28);
   if(L.mouth==='grin'){
     g.beginPath();g.moveTo(-2.4,6);g.quadraticCurveTo(0,6.5,2.4,6);g.quadraticCurveTo(1.6,9,0,9.1);g.quadraticCurveTo(-1.6,9,-2.4,6);g.closePath();g.fillStyle='#6a1e22';g.fill();
     g.save();g.clip();ell(0,6.4,2.6,1.1,'#fff');ell(0,9.2,1.4,.9,'#e0707a');g.restore();
@@ -4593,19 +4624,32 @@ function drawHead(L){
   }
   if(hair==='curly')for(let i=0;i<=9;i++){const a=Math.PI*1.04+i/9*Math.PI*.92;ball(Math.cos(a)*7.4,-2+Math.sin(a)*8,2.9,2.9,Hc,shade(Hc,-.32),.3)}
   if(hair==='buzz'){g.beginPath();g.moveTo(-8.2,-.4);g.bezierCurveTo(-8.6,-7.8,-4.6,-9.9,0,-9.9);g.bezierCurveTo(4.6,-9.9,8.6,-7.8,8.2,-.4);g.quadraticCurveTo(7.6,-4.8,5.6,-6.2);g.quadraticCurveTo(0,-7.6,-5.6,-6.2);g.quadraticCurveTo(-7.6,-4.8,-8.2,-.4);g.closePath();g.save();g.globalAlpha=.75;paintHair(Hc);g.restore()}
+  if(hair==='spiky'){g.beginPath();g.moveTo(-8.3,-.2);g.bezierCurveTo(-8.7,-7.9,-4.6,-10,0,-10);g.bezierCurveTo(4.6,-10,8.7,-7.9,8.3,-.2);g.quadraticCurveTo(7.4,-4.6,5.4,-6);g.quadraticCurveTo(0,-7.4,-5.4,-6);g.quadraticCurveTo(-7.4,-4.6,-8.3,-.2);g.closePath();paintHair(Hc);
+    for(const[bx0,tx,ty]of[[-7.4,-10.6,-9.8],[-5,-7.4,-14],[-2,-2.6,-15.6],[1.2,1.6,-16],[4,5.6,-14.6],[6.6,10,-11]]){g.beginPath();g.moveTo(bx0-2.2,-6.4);g.lineTo(tx,ty);g.lineTo(bx0+2.4,-7.4);g.closePath();paintHair(Hc)}}
+  if(hair==='sidepart'){g.save();g.scale(-1,1);fringe(Hc);g.restore();lock(-2.6,-11.4,2.6,-14.6,8.2,-7.6,2.4);paintHair(Hc);lock(-1,-10.6,4,-12.4,8.8,-3.6,1.2);paintHair(Hc)}
   if(hair!=='none'&&hair!=='buzz'&&hair!=='afro')hairShine(Hc);
   if(L.acc==='flower'&&L.hat!=='tophat'&&L.hat!=='cowboy'){const fx=-7.4,fy=-6.4,fc=L.accColor||'#e0457b';for(let k=0;k<5;k++){const an=k/5*Math.PI*2;ball(fx+Math.cos(an)*1.7,fy+Math.sin(an)*1.7,1.5,1.5,fc)}ball(fx,fy,1,1,'#ffd23f')}
   // hats (drawn in the old head's units, scaled up to this bigger head)
   const hc=L.hatColor;
   g.save();g.translate(0,-.8);g.scale(1.65,1.65);
   switch(L.hat){
-    case'straw':ell(0,-4,9,2.4,'#e6c24a','#a8895a',.7);poly([[-4.5,-4],[4.5,-4],[3.5,-9],[-3.5,-9]],'#e6c24a','#a8895a',.7);poly([[-4.3,-5.5],[4.3,-5.5],[4.1,-4.2],[-4.1,-4.2]],hc);g.strokeStyle='rgba(168,137,90,.6)';g.lineWidth=.4;for(let i=-3;i<=3;i+=1.5)line([i,-4.3],[i*.8,-8.8]);break;
+    case'straw':{ell(0,-3.5,9.6,2.7,'#b8913a');const bg=g.createLinearGradient(0,-6.4,0,-1.6);bg.addColorStop(0,'#f6dc78');bg.addColorStop(1,'#d9b247');ell(0,-4,9.4,2.5,bg,'#9a7a3a',.6);
+      g.strokeStyle='rgba(150,115,50,.45)';g.lineWidth=.3;for(const r of[.55,.78])g.beginPath(),g.ellipse(0,-4,9.4*r,2.5*r,0,Math.PI*.05,Math.PI*.95),g.stroke();
+      g.beginPath();g.moveTo(-4.7,-4.1);g.bezierCurveTo(-4.9,-7.4,-3.9,-9.6,0,-9.7);g.bezierCurveTo(3.9,-9.6,4.9,-7.4,4.7,-4.1);g.closePath();const cg=g.createLinearGradient(-4.8,0,4.8,0);cg.addColorStop(0,'#f8e08a');cg.addColorStop(.5,'#e8c458');cg.addColorStop(1,'#c9a03e');g.fillStyle=cg;g.fill();g.strokeStyle='#9a7a3a';g.lineWidth=.6;g.stroke();
+      g.save();g.clip();g.strokeStyle='rgba(150,115,50,.5)';g.lineWidth=.3;for(let y=-9;y<-4;y+=1.1)line([-5,y],[5,y]);for(let x=-4;x<=4;x+=1.6)line([x,-10],[x*1.05,-4]);g.restore();
+      poly([[-4.75,-5.7],[4.75,-5.7],[4.7,-4.3],[-4.7,-4.3]],hc,shade(hc,-.35),.3);ell(-3.4,-5,.6,.6,shade(hc,.3));break}
     case'cowboy':
       g.beginPath();g.moveTo(-11.5,-5.5);g.quadraticCurveTo(-9,-2,0,-1.8);g.quadraticCurveTo(9,-2,11.5,-5.5);g.quadraticCurveTo(8,-3.6,0,-4.2);g.quadraticCurveTo(-8,-3.6,-11.5,-5.5);g.closePath();
       g.fillStyle='#8a5a32';g.fill();g.strokeStyle='#5e3a1c';g.lineWidth=.7;g.stroke();
       g.beginPath();g.moveTo(-4.8,-4);g.lineTo(-4.4,-9.6);g.quadraticCurveTo(-2.2,-11.2,0,-9.8);g.quadraticCurveTo(2.2,-11.2,4.4,-9.6);g.lineTo(4.8,-4);g.closePath();
       g.fillStyle='#9a6a3a';g.fill();g.stroke();poly([[-4.9,-5.6],[4.9,-5.6],[4.8,-4.2],[-4.8,-4.2]],hc);break;
-    case'cap':dome(0,-1.6,5.5,5.2,hc,shade(hc,-.35));ell(0,-1.8,5.6,1.7,shade(hc,-.2),shade(hc,-.4),.5);ell(0,-6.8,.9,.6,shade(hc,-.3));break;
+    case'cap':{const cg=g.createRadialGradient(-1.6,-5,0,0,-2,6.4);cg.addColorStop(0,shade(hc,.25));cg.addColorStop(1,shade(hc,-.15));dome(0,-1.6,5.6,5.3,cg,shade(hc,-.35));
+      g.strokeStyle=shade(hc,-.3);g.lineWidth=.3;for(const x of[-2.6,0,2.6]){g.beginPath();g.moveTo(x*.4,-6.8);g.quadraticCurveTo(x,-4.6,x*1.4,-1.7);g.stroke()}
+      g.beginPath();g.moveTo(-5.4,-2.3);g.quadraticCurveTo(0,-3.3,5.4,-2.3);g.quadraticCurveTo(5.9,-.9,0,-.7);g.quadraticCurveTo(-5.9,-.9,-5.4,-2.3);g.closePath();g.fillStyle=shade(hc,-.18);g.fill();g.strokeStyle=shade(hc,-.42);g.lineWidth=.45;g.stroke();
+      ell(0,-1.2,4.4,.5,'rgba(255,255,255,.12)');ell(0,-6.85,.95,.6,shade(hc,-.3));break}
+    case'flowercrown':{g.strokeStyle='#4f8a3a';g.lineWidth=.6;g.beginPath();g.ellipse(0,-3.4,5.8,1.7,0,Math.PI,Math.PI*2);g.stroke();
+      const fc=[L.accColor||'#e0457b',hc,'#fff6d0'];for(let k=0;k<7;k++){const a=Math.PI+k/6*Math.PI,x=Math.cos(a)*5.8,y=-3.4+Math.sin(a)*1.7;ell(x+1,y-.2,1,.5,'#5fa84a',null,0,.6);
+        for(let p=0;p<5;p++){const pa=p/5*Math.PI*2;ball(x+Math.cos(pa)*.85,y+Math.sin(pa)*.8,.75,.75,fc[k%3])}ball(x,y,.5,.5,'#ffd23f')}break}
     case'sunhat':ell(0,-4,12.5,3,'#f0dca0','#b8a060',.7);ell(0,-6,5,3.6,'#f0dca0','#b8a060',.7);poly([[-4.8,-5.8],[4.8,-5.8],[4.9,-4.4],[-4.9,-4.4]],hc);
       for(let k=0;k<5;k++){const a=k/5*Math.PI*2;ell(-4.4+Math.cos(a)*1.5,-5.2+Math.sin(a)*1.3,1.1,1.1,'#fff')}ell(-4.4,-5.2,.8,.8,'#ffd23f');break;
     case'bandana':dome(0,-.9,5.5,5.4,hc,shade(hc,-.35));for(const[a,b]of[[-2,-3],[1.5,-4],[3.4,-1.6],[-.4,-1.4],[-3.6,-1.2]])ell(a,b,.6,.6,'#fff');ell(5.4,-1.4,1.6,1.1,hc);g.strokeStyle=hc;g.lineWidth=1.2;line([5.8,-1],[7.6,2.2]);line([5.4,-.8],[6.4,3]);break;
@@ -4624,6 +4668,7 @@ function limb(x1,y1,x2,y2,w,col){
 function torsoPath(bw,fem){g.beginPath();
   if(fem){g.moveTo(-bw+.2,-10.4);g.quadraticCurveTo(-bw+1.5,-14.8,-bw+.3,-18.6);g.quadraticCurveTo(-bw+.2,-21.4,-bw+2.8,-21.5);g.lineTo(bw-2.8,-21.5);g.quadraticCurveTo(bw-.2,-21.4,bw-.3,-18.6);g.quadraticCurveTo(bw-1.5,-14.8,bw-.2,-10.4);g.closePath();return}
   g.moveTo(-bw+.8,-10.4);g.quadraticCurveTo(-bw-.1,-15,-bw,-18.4);g.quadraticCurveTo(-bw,-21.4,-bw+3,-21.5);g.lineTo(bw-3,-21.5);g.quadraticCurveTo(bw,-21.4,bw,-18.4);g.quadraticCurveTo(bw+.1,-15,bw-.8,-10.4);g.closePath()}
+function hand(x,y,skin){ball(x,y,1.55,1.7,skin,shade(skin,-.25),.3);ball(x-.95,y-.55,.6,.75,shade(skin,.04),shade(skin,-.25),.25);g.strokeStyle=shade(skin,-.22);g.lineWidth=.22;line([x-.2,y+.3],[x+.7,y+.25])}
 function sideGrad(col,bw){const gr=g.createLinearGradient(-bw,0,bw,0);gr.addColorStop(0,shade(col,.2));gr.addColorStop(.45,col);gr.addColorStop(1,shade(col,-.22));return gr}
 function drawAvatar(L,p){
   const fem=L.gender==='female',slim=L.build==='slim',bw=(slim?4:4.8)+(fem?-.3:.35),walking=p.walking&&!reduce,ph=walking?Math.sin(p.walk):0;
@@ -4632,10 +4677,12 @@ function drawAvatar(L,p){
   const l1=walking?Math.max(0,ph)*1.9:0,l2=walking?Math.max(0,-ph)*1.9:0;
   // taller, storybook proportions: long legs, everything above the hips sits LG higher
   const LG=3,bob=walking?Math.abs(ph)*.5:0;
-  limb(-1.9,-10-LG,-2,-2.6-l1,2.7,bare?L.skin:BC);limb(1.9,-10-LG,2,-2.6-l2,2.7,bare?L.skin:BC);
+  for(const[s2,d]of[[-1,l1],[1,l2]]){const lc=bare?L.skin:BC,kx=s2*2.05,ky=-6.6-LG*.5-d*.55;
+    limb(s2*1.95,-10.4-LG,kx,ky,3.3,lc);limb(kx,ky,s2*2.1,-3-d,2.9,lc);if(!bare){ell(kx+s2*.3,ky,.9,.4,shade(BC,-.18));poly([[s2*2.1-1.65,-4.6-d],[s2*2.1+1.65,-4.6-d],[s2*2.1+1.6,-3.6-d],[s2*2.1-1.6,-3.6-d]],shade(BC,-.12),shade(BC,-.35),.3)}}
   if(L.bottom==='shorts'){limb(-2.3,-10.5-LG,-2.3,-7-LG,3.6,BC);limb(2.3,-10.5-LG,2.3,-7-LG,3.6,BC)}
   if(!bare){g.strokeStyle=shade(BC,-.22);g.lineWidth=.5;line([-2.2,-3.6-l1],[-2.2,-9-LG]);line([2.2,-3.6-l2],[2.2,-9-LG])}
-  for(const[x,d]of[[-2.2,l1],[2.2,l2]]){poly([[x-1.5,-4.4-d],[x+1.5,-4.4-d],[x+1.6,-1.8-d],[x-1.6,-1.8-d]],shade(L.shoes,-.08));ball(x,-1.6-d,2.4,1.6,L.shoes,shade(L.shoes,-.35),.35);ell(x,-4.4-d,1.6,.5,shade(L.shoes,.15))}
+  for(const[x,d]of[[-2.2,l1],[2.2,l2]]){const sh=L.shoes;ell(x,-.75-d,2.75,1,shade(sh,-.55));poly([[x-1.6,-4.3-d],[x+1.6,-4.3-d],[x+1.75,-1.6-d],[x-1.75,-1.6-d]],sideGrad(sh,1.7),shade(sh,-.4),.3);
+    ball(x,-1.5-d,2.5,1.55,sh,shade(sh,-.38),.35);ell(x,-4.3-d,1.6,.45,shade(sh,.18));g.strokeStyle=shade(sh,.35);g.lineWidth=.25;for(const yy of[-3.6,-2.9])line([x-.7,yy-d],[x+.7,yy-d])}
   ell(-3.2,-2.3-l1,1,.5,'rgba(255,255,255,.35)');ell(2,-2.3-l2,1,.5,'rgba(255,255,255,.35)');
   g.save();g.translate(0,-LG-bob);
   // torso and pattern
@@ -4645,9 +4692,17 @@ function drawAvatar(L,p){
   if(L.top==='stripes'){g.strokeStyle='rgba(255,255,255,.8)';g.lineWidth=1.1;for(const y of[-19,-16.5,-14,-11.5])line([-bw,y],[bw,y])}
   if(L.top==='sweater'){poly([[-bw,-12.2],[bw,-12.2],[bw,-10.6],[-bw,-10.6]],shade(TC,-.15));g.strokeStyle=shade(TC,-.12);g.lineWidth=.4;for(let x=-bw;x<bw;x+=1.2)line([x,-21],[x,-12.4])}
   if(L.top==='vest'){poly([[-bw,-21.2],[-1.1,-21.2],[-1.6,-10.6],[-bw,-10.6]],'#8a5a32');poly([[1.1,-21.2],[bw,-21.2],[bw,-10.6],[1.6,-10.6]],'#7a4e2a');ell(3.2,-15,.8,.6,'#5e3a1c');ell(-3.2,-15,.8,.6,'#5e3a1c')}
+  if(L.top==='hoodie'){poly([[-3.4,-14.2],[3.4,-14.2],[3.9,-11.2],[-3.9,-11.2]],shade(TC,-.08),shade(TC,-.32),.4);g.strokeStyle=shade(TC,-.3);g.lineWidth=.35;line([-2.6,-13.6],[-3,-11.6]);line([2.6,-13.6],[3,-11.6]);
+    poly([[-bw,-11.6],[bw,-11.6],[bw,-10.4],[-bw,-10.4]],shade(TC,-.16));g.strokeStyle=shade(TC,-.3);g.lineWidth=.25;for(let x=-bw+.6;x<bw;x+=.9)line([x,-11.5],[x,-10.5])}
+  if(L.top==='jacket'){poly([[-1.3,-21.4],[1.3,-21.4],[1.5,-10.4],[-1.5,-10.4]],'#f4f0e6');g.strokeStyle=shade(TC,.35);g.lineWidth=.3;g.setLineDash([.5,.5]);for(const x of[-1.6,1.6])line([x,-21],[x*1.15,-10.6]);g.setLineDash([]);
+    for(const sx of[-1,1]){poly([[sx*1.4,-15.6],[sx*3.6,-15.6],[sx*3.6,-17.8],[sx*1.5,-17.8]],shade(TC,-.1),shade(TC,-.35),.3);ell(sx*2.5,-17.2,.35,.35,'#c9a04a')}
+    poly([[-bw,-11.4],[-1.5,-11.4],[-1.5,-10.4],[-bw,-10.4]],shade(TC,-.15));poly([[1.5,-11.4],[bw,-11.4],[bw,-10.4],[1.5,-10.4]],shade(TC,-.15))}
   if(fem){g.strokeStyle=shade(TC,-.3);g.lineWidth=.4;g.lineCap='round';for(const sx of[-1,1]){g.beginPath();g.moveTo(sx*2.9,-17.6);g.quadraticCurveTo(sx*1.7,-16.2,sx*.5,-17.2);g.stroke()}ell(-1.7,-18.6,1.5,.9,'rgba(255,255,255,.12)');ell(1.7,-18.6,1.5,.9,'rgba(255,255,255,.08)')}
   g.restore();
   if(L.top==='tee'||L.top==='sweater')ell(0,-21,2.6,1.1,shade(L.skin,-.08),shade(TC,-.3),.5);
+  if(L.top==='hoodie'){g.beginPath();g.moveTo(-4.6,-20.6);g.quadraticCurveTo(0,-24.2,4.6,-20.6);g.quadraticCurveTo(0,-19.2,-4.6,-20.6);g.closePath();g.fillStyle=shade(TC,-.2);g.fill();g.strokeStyle=shade(TC,-.4);g.lineWidth=.35;g.stroke();
+    g.strokeStyle='#f4f0e6';g.lineWidth=.35;line([-1,-20.4],[-1.2,-16.8]);line([1,-20.4],[1.2,-17.4]);ell(-1.2,-16.6,.35,.45,'#f4f0e6');ell(1.2,-17.2,.35,.45,'#f4f0e6')}
+  if(L.top==='jacket'){for(const sx of[-1,1])poly([[sx*1.3,-21.6],[sx*4.4,-21.4],[sx*2.6,-18.6],[sx*1.4,-19.4]],shade(TC,-.12),shade(TC,-.38),.35)}
   if(L.top==='plaid'||L.top==='stripes'){poly([[-2.8,-21.2],[0,-19.4],[-.5,-21.6]],'#fff',shade(TC,-.3),.4);poly([[2.8,-21.2],[0,-19.4],[.5,-21.6]],'#fff',shade(TC,-.3),.4)}
   // bottoms
   if(L.bottom==='overalls'||L.bottom==='patched'){
@@ -4659,13 +4714,15 @@ function drawAvatar(L,p){
   else{g.beginPath();g.moveTo(-bw,-12.6);g.lineTo(bw,-12.6);g.lineTo(bw,-9.4);g.quadraticCurveTo(0,-8.6,-bw,-9.4);g.closePath();g.fillStyle=sideGrad(BC,bw);g.fill();g.strokeStyle=BD;g.lineWidth=.6;g.stroke();poly([[-bw,-12.6],[bw,-12.6],[bw,-11.5],[-bw,-11.5]],'#5e3a1c');ell(0,-12,.9,.7,'#ffd23f')}
   // arms
   const tee=L.top==='tee',sleeve=TC,armL=walking?ph*.9:0,hx=-bw-.9+armL*.4,hy=-11.4-Math.abs(armL)*.4;
-  limb(-bw+.5,-19.8,hx,hy,2.3,tee?L.skin:sleeve);if(tee)limb(-bw+.5,-19.8,-bw-.1,-17.2,3,TC);
-  ball(hx,hy+.5,1.45,1.65,L.skin,shade(L.skin,-.25),.3);
+  ball(-bw+.6,-19.7,1.7,1.5,tee?TC:shade(sleeve,.05));limb(-bw+.5,-19.8,hx,hy,2.6,tee?L.skin:sleeve);if(tee)limb(-bw+.5,-19.8,-bw-.1,-17.2,3.2,TC);
+  else{const cx2=-bw+.5+(hx+bw-.5)*.82,cy2=-19.8+(hy+19.8)*.82;limb(cx2,cy2,-bw+.5+(hx+bw-.5)*.93,-19.8+(hy+19.8)*.93,2.9,shade(sleeve,-.14))}
+  hand(hx,hy+.6,L.skin);
   const working=p.working&&!reduce,swing=working?Math.sin(p.t*24):(walking?-ph*.2:0);
   g.save();g.translate(bw-.5,-19.8);
-  if(p.kind==='wave'){g.rotate(-2.6+Math.sin(p.t*8)*.35);limb(0,0,0,7.4,2.6,tee?L.skin:sleeve);if(tee)limb(0,0,0,2.6,3.2,TC);ball(0,8,1.6,1.7,L.skin,shade(L.skin,-.25),.3)}
+  ball(-.1,.1,1.7,1.5,tee?TC:shade(sleeve,.05));
+  if(p.kind==='wave'){g.rotate(-2.6+Math.sin(p.t*8)*.35);limb(0,0,0,7.4,2.7,tee?L.skin:sleeve);if(tee)limb(0,0,0,2.6,3.3,TC);else limb(0,6,0,6.9,3,shade(sleeve,-.14));hand(0,8.1,L.skin)}
   else{
-    g.rotate((p.kind&&p.kind!=='wave'?-.3:-.1)+swing*.9);limb(0,0,0,7.6,2.3,tee?L.skin:sleeve);if(tee)limb(0,0,0,2.6,3,TC);
+    g.rotate((p.kind&&p.kind!=='wave'?-.3:-.1)+swing*.9);limb(0,0,0,7.6,2.6,tee?L.skin:sleeve);if(tee)limb(0,0,0,2.6,3.2,TC);else limb(0,6.2,0,7.1,2.9,shade(sleeve,-.14));
     const kind=p.kind;
     if(kind==='plow'){g.strokeStyle='#8a5a32';g.lineWidth=1.8;line([0,15],[0,-7]);poly([[-1,15],[5,15],[4,18],[-1,17]],'#9aa6b0','#3a4650',.8)}
     else if(kind==='plant'){ball(0,11.6,3.6,3.2,'#e8d5a8','#a8895a',.8);if(working)ell(2,16.5+((p.t*40)%4),1,1,'#5a3418')}
@@ -4675,7 +4732,7 @@ function drawAvatar(L,p){
       if(working)for(let i=0;i<3;i++){const k=((p.t*3)+i/3)%1;ell(9+k*2,9.5+k*7,.7,1,'#8fd0f5')}}
     else if(kind==='fertilize'){poly([[-3.6,9.4],[3.6,9.4],[2.8,16],[-2.8,16]],'#4f9a3c','#1f5a1e',.7);ell(0,9.4,3.6,1,'#2f7a2c');if(working)ell(2,17+((p.t*40)%4),1,1,'#8fe05a')}
     else if(kind==='collect'){poly([[-4,10],[4,10],[3,16],[-3,16]],'#c98a4b','#7a4e2a',.8);g.strokeStyle='#7a4e2a';g.lineWidth=1;g.beginPath();g.arc(0,10,4,Math.PI,0);g.stroke()}
-    ball(0,8.3,1.45,1.65,L.skin,shade(L.skin,-.25),.3);
+    hand(0,8.4,L.skin);
   }
   g.restore();
   limb(0,-20.8,0,-22.6,fem?2.2:2.8,shade(L.skin,-.1));ell(0,-21.4,2.4,.8,'rgba(60,30,20,.12)');
@@ -6373,7 +6430,7 @@ function drop(collId,x,y){
   if(Math.random()>.12)return;
   const c=COLLECTIONS.find(c=>c.id===collId),it=c.items[Math.floor(Math.random()*c.items.length)];
   S.coll[it]=(S.coll[it]||0)+1;
-  setTimeout(()=>{SFX.find();floatText(x,y-1.2,CITEM[it]+'!','#ffb3ff');toast('You found a '+CITEM[it]+' for your '+c.name+' collection!');hud()},350);
+  setTimeout(()=>{SFX.find();floatText(x,y-1.2,CITEM[it]+'!','#ffb3ff');toast('You found '+(/[^s]s$/i.test(CITEM[it])?'':/^[AEIOU]/i.test(CITEM[it])?'an ':'a ')+CITEM[it]+' for your '+c.name+' collection!');hud()},350);
 }
 
 /* ================= ribbons ================= */
@@ -7271,6 +7328,15 @@ function showWardrobe(first){
     const tagBox=el('div','pricetag'),tagNums=el('div','pnums');tagBox.appendChild(el('span',null,'Total price'));tagBox.appendChild(tagNums);side.appendChild(tagBox);
     const row=el('div','wdrow'),reset=el('button','btn2','Reset'),buy=el('button','go buynow','Buy now');row.appendChild(reset);row.appendChild(buy);side.appendChild(row);
     const row2=el('div','wdrow'),undo=el('button','btn2','Undo'),rnd=el('button','btn2','Surprise me');row2.appendChild(undo);row2.appendChild(rnd);side.appendChild(row2);
+    // whole outfits in one tap; the price tag shows anything not owned yet
+    const pre=el('div','wdpresets');pre.appendChild(el('span',null,'Quick looks'));const pgr=el('div','wdpgrid');
+    for(const[name,o]of[['Classic',{hat:'straw',hatColor:'#d9402f',top:'plaid',topColor:'#d9402f',bottom:'overalls',bottomColor:'#3f6fc0',shoes:'#5a3418',acc:'none'}],
+      ['Rancher',{hat:'cowboy',hatColor:'#2b2b2b',top:'jacket',topColor:'#3f6fc0',bottom:'jeans',bottomColor:'#3a4650',shoes:'#8a5a32',acc:'scarf',accColor:'#d9402f'}],
+      ['Gardener',{hat:'sunhat',hatColor:'#3f9a3c',top:'tee',topColor:'#3f9a3c',bottom:'overalls',bottomColor:'#f2a21e',shoes:'#3f9a3c',acc:'flower',accColor:'#e0457b'}],
+      ['Winter',{hat:'beanie',hatColor:'#d9402f',top:'sweater',topColor:'#f4f0e6',bottom:'jeans',bottomColor:'#3a4650',shoes:'#5a3418',acc:'scarf',accColor:'#3f6fc0'}],
+      ['Weekend',{hat:'cap',hatColor:'#2ba0a0',top:'hoodie',topColor:'#7a4ec0',bottom:'shorts',bottomColor:'#3a4650',shoes:'#f4f0e6',acc:'none'}]]){
+      const b2=el('button','chip',name);b2.onclick=()=>{SFX.click();hist.push(Object.assign({},draft));Object.assign(draft,o);drawPanel();updateFoot()};pgr.appendChild(b2)}
+    pre.appendChild(pgr);side.appendChild(pre);
     side.appendChild(field('Farmer name','fName',fname,20,'Your name',v=>{fname=v}));
     side.appendChild(field('Farm name','fFarm',farmN,22,'Farm Village',v=>{farmN=v}));
     if(S.pet)side.appendChild(field('Pet name','fPet',petN,16,PET_NAME[S.pet.kind],v=>{petN=v}));
@@ -7857,12 +7923,33 @@ function needsTick(){
   }
   renderNeeds();
 }
-let needFaceKey='';
+function needMood(h){
+  const f=h.food,d=h.drink;
+  if(f<15&&d<15)return['Hungry and thirsty: working slower','bad','!','food'];
+  if(f<15)return['Too hungry: working slower','bad','!','food'];
+  if(d<15)return['Too thirsty: working slower','bad','!','drink'];
+  if(f<35&&d<35)return['Getting hungry and thirsty','warn','!','food'];
+  if(f<35)return['Getting hungry','warn','!','food'];
+  if(d<35)return['Getting thirsty','warn','!','drink'];
+  if(isFresh())return['Fresh and clean','',null];
+  if(f>75&&d>75)return['Feeling great','',null];
+  return['Eat & drink at home','',null];
+}
+let needFaceKey='',needPrev={f:-1,d:-1};
 function renderNeeds(){
   if(!S)return;const h=houseSt(),f=$('needFood'),d=$('needDrink');if(!f)return;
-  {const fk=JSON.stringify(S.look||{});if(fk!==needFaceKey&&S.look){needFaceKey=fk;try{$('needFace').src=lookThumb(S.look,'face').toDataURL()}catch(e){}}$('needWho').textContent=S.farmerName||'Farmer'}
-  f.style.width=Math.round(h.food)+'%';d.style.width=Math.round(h.drink)+'%';f.classList.toggle('low',h.food<25);d.classList.toggle('low',h.drink<25);
-  $('needPill').classList.toggle('low',h.food<15||h.drink<15);$('needPill').setAttribute('translate','no');$('needPill').title=tr('Food')+' '+Math.round(h.food)+' · '+tr('Drink')+' '+Math.round(h.drink);
+  const mood=needMood(h),low=h.food<15||h.drink<15;
+  // the face follows how the farmer feels
+  {const face=Object.assign({},S.look||{},low?{mouth:'calm',brows:S.look&&S.look.brows==='none'?'none':'natural'}:{}),fk=JSON.stringify(face);
+    if(fk!==needFaceKey&&S.look){needFaceKey=fk;try{$('needFace').src=lookThumb(face,'face').toDataURL()}catch(e){}}$('needWho').textContent=S.farmerName||'Farmer'}
+  const lvl=v=>v<20?'low':v<45?'mid':'ok';
+  for(const[el2,v,key,vEl]of[[f,h.food,'f','needFoodV'],[d,h.drink,'d','needDrinkV']]){
+    el2.style.width=Math.max(3,Math.round(v))+'%';el2.className=lvl(v);$(vEl).textContent=Math.round(v);
+    if(needPrev[key]>=0&&v>needPrev[key]+4){el2.classList.remove('fill');void el2.offsetWidth;el2.classList.add('fill')}needPrev[key]=v}
+  const m=$('needMood');m.textContent=tr(mood[0]);m.className=mood[1];
+  const emo=$('needEmo');emo.hidden=!mood[2];if(mood[2]){emo.textContent=mood[2];emo.className='nmood'+(mood[3]==='drink'?' drink':'')}
+  const fr=$('needFresh');fr.hidden=!isFresh();if(isFresh())fr.textContent='+10% · '+fmt(Math.max(0,(h.freshUntil-Date.now())/1000));
+  $('needPill').classList.toggle('low',low);$('needPill').setAttribute('translate','no');$('needPill').title=tr('Food')+' '+Math.round(h.food)+' · '+tr('Drink')+' '+Math.round(h.drink);
   if(!$('house').hidden)renderHouseBar();
 }
 setInterval(needsTick,5000);
@@ -8308,7 +8395,8 @@ function doWarm(){houseDo('fireplace',2.4,'Warming up',()=>{stat('warm');toast('
 // ---- the bar of actions and the menus
 function renderHouseBar(){
   if(!S||$('house').hidden)return;const h=houseSt(),F=h.furn,nl=napLeft(),sl=Math.max(0,(h.showerT||0)+SHOWER_CD-Date.now());
-  $('hFood').style.width=Math.round(h.food)+'%';$('hDrink').style.width=Math.round(h.drink)+'%';
+  $('hFood').style.width=Math.round(h.food)+'%';$('hDrink').style.width=Math.round(h.drink)+'%';$('hFoodV').textContent=Math.round(h.food);$('hDrinkV').textContent=Math.round(h.drink);
+  $('hFood').className=h.food<20?'low':h.food<45?'mid':'';$('hDrink').className=h.drink<20?'low':h.drink<45?'mid':'';
   $('hComfort').textContent=comfort();$('hFresh').hidden=!isFresh();
   $('hNap').querySelector('small').textContent=nl?'Ready in '+fmt(nl/1000):'Skip 5 min';
   $('hShower').querySelector('small').textContent=sl?'Ready in '+fmt(sl/1000):'+10% XP';

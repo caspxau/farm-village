@@ -1,6 +1,24 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Your farm|Sua fazenda
+x:`Hungry and thirsty: working slower|Com fome e sede: trabalha mais devagar
+Too hungry: working slower|Fome demais: trabalha mais devagar
+Too thirsty: working slower|Sede demais: trabalha mais devagar
+Getting hungry and thirsty|Ficando com fome e sede
+Getting hungry|Ficando com fome
+Getting thirsty|Ficando com sede
+Fresh and clean|Fresco e limpo
+Feeling great|Sentindo-se ótimo
+Spiky|Espetado
+Side part|Risca ao lado
+Flower crown|Coroa de flores
+Hoodie|Moletom com capuz
+Denim jacket|Jaqueta jeans
+Quick looks|Visuais rápidos
+Classic|Clássico
+Rancher|Rancheiro
+Gardener|Jardineiro
+Weekend|Fim de semana
+Your farm|Sua fazenda
 Town|Cidade
 Drink water|Beber água
 Relax|Relaxar
