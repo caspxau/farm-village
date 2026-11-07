@@ -1,7 +1,9 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Drink water|اشرب الماء
+x:`Your farm|مزرعتك
+Town|المدينة
+Drink water|اشرب الماء
 Relax|استرخِ
 Watch TV|شاهد التلفاز
 Read|اقرأ

@@ -1,6 +1,8 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Drink water|Beber agua
+x:`Your farm|Tu granja
+Town|Pueblo
+Drink water|Beber agua
 Relax|Descansar
 Watch TV|Ver la tele
 Read|Leer

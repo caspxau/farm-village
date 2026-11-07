@@ -1,7 +1,9 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Drink water|জল খাও
+x:`Your farm|তোমার খামার
+Town|শহর
+Drink water|জল খাও
 Relax|বিশ্রাম নাও
 Watch TV|টিভি দেখো
 Read|পড়ো

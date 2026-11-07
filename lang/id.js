@@ -1,6 +1,8 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Drink water|Minum air
+x:`Your farm|Pertanianmu
+Town|Kota
+Drink water|Minum air
 Relax|Bersantai
 Watch TV|Nonton TV
 Read|Baca

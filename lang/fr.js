@@ -1,6 +1,8 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Drink water|Boire de l'eau
+x:`Your farm|Ta ferme
+Town|Ville
+Drink water|Boire de l'eau
 Relax|Se détendre
 Watch TV|Regarder la télé
 Read|Lire

@@ -1,7 +1,9 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Drink water|पानी पियो
+x:`Your farm|तुम्हारा खेत
+Town|शहर
+Drink water|पानी पियो
 Relax|आराम करो
 Watch TV|टीवी देखो
 Read|पढ़ो

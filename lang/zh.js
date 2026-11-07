@@ -1,7 +1,9 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Drink water|喝水
+x:`Your farm|你的农场
+Town|小镇
+Drink water|喝水
 Relax|放松
 Watch TV|看电视
 Read|读书

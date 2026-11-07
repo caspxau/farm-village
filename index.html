@@ -873,6 +873,7 @@ body.visiting .rightcol{display:none}
 /* inside the farmhouse */
 .house{position:fixed;inset:0;z-index:34;display:flex;flex-direction:column;background:#2e1d10}
 .house[hidden]{display:none}
+.route{display:block;width:100%;height:auto;aspect-ratio:640/96;border-radius:14px;margin:2px 0 10px;box-shadow:inset 0 0 0 1px rgba(60,40,20,.15),0 2px 6px rgba(60,40,20,.12)}
 .house canvas{flex:1;min-height:0;width:100%}
 .htop{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:max(10px,env(safe-area-inset-top,0px)) 12px 8px;background:var(--wood-bg,#8a5530);border-bottom:3px solid var(--wood-d)}
 .hneeds{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;color:#fff7e6;font-weight:700;font-size:13px}
@@ -1490,7 +1491,7 @@ const PACK=LANG!=='en'&&LANG!=='pl'?window.FV_PACK:null;
 function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.reload()}
 // Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
 // Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
-const PL_EXACT={'Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
+const PL_EXACT={'Your farm':'Twoja farma','Town':'Miasto','Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
 // ---- HUD, dock, menus
 'Multi':'Multi','Barn':'Stodoła','Orders':'Zamówienia','Market':'Targ','Delivery':'Dostawy','More':'Więcej','Neighbors':'Sąsiedzi','Wardrobe':'Garderoba','Gifts':'Prezenty','Album':'Album','Ribbons':'Wstęgi','Music':'Muzyka','Sound':'Dźwięk','Settings':'Ustawienia',
 'Your level':'Twój poziom','Coins':'Monety','Farm Cash':'Farmdolary','Season guide':'Przewodnik po porach roku','Tools':'Narzędzia','Barn: your stored goods':'Stodoła: twoje zapasy','Neighbor orders and advertising':'Zamówienia sąsiadów i reklama','Open the market':'Otwórz targ','Delivery Board: send goods to town':'Tablica dostaw: wyślij towary do miasta','More buttons':'Więcej przycisków','Close':'Zamknij','Quest':'Zadanie','Daily':'Codziennie',"Today's Goals":'Cele na dziś',"Today's goals":'Cele na dziś','Change seed':'Zmień nasiona','Seeds to plant':'Nasiona do sadzenia',
@@ -5771,6 +5772,32 @@ function payDelivery(){
   addXP(c.xp);changed();if(mq[0]&&mq[0].deliv)rerender();
 }
 function discardContract(c){const d=dv();d.jobs=d.jobs.filter(x=>x!==c);d.next=Math.min(d.next,Date.now()+120000);SFX.click();toast(c.to+' will find another farm. A new contract comes soon.');changed();rerender()}
+// A little live map for the board: the farm, the road, the town and Dale's truck somewhere between them.
+function routeStrip(d,now){
+  const c=document.createElement('canvas'),W2=640,H2=96;c.className='route';c.width=W2*2;c.height=H2*2;c.setAttribute('aria-hidden','true');
+  const prev=g,pv=ICON_MODE;g=c.getContext('2d');ICON_MODE=true;g.scale(2,2);
+  try{
+    const sky=g.createLinearGradient(0,0,0,H2);sky.addColorStop(0,'#cfe9f8');sky.addColorStop(.55,'#eaf5fb');sky.addColorStop(.56,'#9cc86a');sky.addColorStop(1,'#7fb055');g.fillStyle=sky;g.fillRect(0,0,W2,H2);
+    g.fillStyle='rgba(120,170,90,.55)';g.beginPath();g.moveTo(0,54);g.quadraticCurveTo(160,30,330,50);g.quadraticCurveTo(480,64,W2,40);g.lineTo(W2,56);g.lineTo(0,56);g.fill();
+    // the road
+    g.fillStyle='#d9bd88';g.beginPath();g.moveTo(40,70);g.bezierCurveTo(220,58,420,86,W2-40,70);g.lineTo(W2-40,82);g.bezierCurveTo(420,98,220,70,40,82);g.closePath();g.fill();
+    g.strokeStyle='rgba(255,250,235,.8)';g.setLineDash([8,8]);g.lineWidth=1.4;g.beginPath();g.moveTo(44,76);g.bezierCurveTo(220,64,420,92,W2-44,76);g.stroke();g.setLineDash([]);
+    const roadY=t=>{const u=1-t;return u*u*u*76+3*u*u*t*64+3*u*t*t*92+t*t*t*76},roadX=t=>96+t*(W2-196);
+    // the farm: a red barn and a silo
+    g.fillStyle='#b8392b';g.fillRect(18,40,30,24);g.fillStyle='#8a2a1e';g.beginPath();g.moveTo(14,42);g.lineTo(33,28);g.lineTo(52,42);g.fill();g.fillStyle='#f4efe6';g.fillRect(28,50,10,14);
+    g.fillStyle='#c9ced3';g.fillRect(52,32,10,32);g.beginPath();g.arc(57,32,5,Math.PI,0);g.fill();
+    // the town: a few shopfronts
+    for(const[x,w,h,col]of[[W2-78,22,30,'#e8c27a'],[W2-56,20,40,'#d9e4ef'],[W2-36,24,26,'#e0a08a']]){g.fillStyle=col;g.fillRect(x,64-h,w,h);g.fillStyle='rgba(60,40,20,.25)';for(let yy=64-h+5;yy<60;yy+=9)for(let xx=x+4;xx<x+w-4;xx+=7)g.fillRect(xx,yy,4,5);g.fillStyle=shade(col,-.3);g.fillRect(x-1,64-h-3,w+2,3)}
+    g.font='600 10px Fredoka, sans-serif';g.textAlign='left';g.fillStyle='#2e4a1e';g.fillText(tr('Your farm'),12,92);
+    g.textAlign='right';g.fillText(d.run?tr(d.run.job.to):tr('Town'),W2-10,92);
+    // where the truck is: out to town in the first half of the trip, home in the second
+    let t=0,back=false,cargo=null,moving=false;
+    if(d.run){const k=Math.max(0,Math.min(1,(now-d.run.start)/(d.run.end-d.run.start)));back=k>.5;t=back?2-2*k:2*k;moving=k>0&&k<1;cargo=back?'money':d.run.job.items}
+    const px=roadX(t),py=roadY(t)+3;g.save();g.translate(px,py);g.scale(back?-.5:.5,.5);const[ax,ay]=P(1.3,.4);g.translate(-ax,-ay);
+    drawTruck(0,0,now,moving,cargo,!!d.run,0,0,{lv:d.lv||1});g.restore();
+  }catch(e){}
+  ICON_MODE=pv;g=prev;return c;
+}
 function showDelivery(){
   if(VIS)return;tickDeliv();stat('delivSeen');
   modal({title:'Delivery Board',color:'blue',wide:true,live:true,deliv:true,render(b){
@@ -5780,7 +5807,7 @@ function showDelivery(){
     const ph=truckPhase(now);
     info.appendChild(el('p','hint',!d.run?'The truck is parked by the board and ready to load. It carries up to '+truckCap()+' goods.':ph==='back'?'Dale is pulling in now!':'Dale is driving to '+d.run.job.to+'. Back in '+fmt((d.run.end-now)/1000)+'.'));
     if(d.run){const bar=el('div','pbar');bar.innerHTML='<i style="width:'+Math.min(100,(now-d.run.start)/(d.run.end-d.run.start)*100)+'%"></i>';info.appendChild(bar)}
-    top.appendChild(info);w.appendChild(top);
+    top.appendChild(info);w.appendChild(top);w.appendChild(routeStrip(d,now));
     if(!d.jobs.length)w.appendChild(el('p','empty','No contracts pinned up right now. New ones arrive every few minutes.'));
     for(const c of d.jobs){
       const row=el('div','order'),pic=el('img');pic.className='nbface';pic.src=itemIcon(c.items[0][0]);pic.alt='';pic.style.background='#fff4dc';row.appendChild(pic);
@@ -6834,7 +6861,7 @@ function shopIds(cat){
 function tabHasNew(cat){const src=shopSrc(cat);return S.level>1&&shopIds(cat).some(id=>src[id].lvl===S.level&&!src[id].cash)}
 // coins (or Farm Cash) an item costs, the time it takes, and what it earns per minute; null when it does not apply
 function shopCost(cat,d){return d.cash?0:(d.cost||0)}
-function canPay(d){return d.cash?S.cash>=d.cash:S.coins>=(d.cost||0)}
+function canBuy(d){return d.cash?S.cash>=d.cash:S.coins>=(d.cost||0)}
 function shopTime(cat,d){return cat==='seeds'?d.grow:(cat==='trees'||cat==='animals')?d.every:null}
 function shopProfit(cat,id,d){
   if(cat==='seeds')return(ITEMS[id].sell*CROP_YIELD-(have(id)?0:d.cost))/(d.grow/60);
@@ -6875,7 +6902,7 @@ function renderShop(body){
   if(grid.classList.contains('in'))setTimeout(()=>grid.classList.remove('in'),1300); // the entrance animation never leaves cards hidden
   const src=shopSrc(cat),iconCat=cat==='specials'?'decor':cat;
   let ids=shopIds(cat);
-  if(mFilter.afford)ids=ids.filter(id=>S.level>=src[id].lvl&&(canPay(src[id])||(cat==='seeds'&&have(id))));
+  if(mFilter.afford)ids=ids.filter(id=>S.level>=src[id].lvl&&(canBuy(src[id])||(cat==='seeds'&&have(id))));
   if(mFilter.season&&cat==='seeds')ids=ids.filter(id=>inSeason(id));
   if(timed&&mFilter.sort==='fast')ids.sort((a,b)=>(S.level<src[a].lvl)-(S.level<src[b].lvl)||shopTime(cat,src[a])-shopTime(cat,src[b]));
   if(timed&&mFilter.sort==='profit')ids.sort((a,b)=>(S.level<src[a].lvl)-(S.level<src[b].lvl)||shopProfit(cat,b,src[b])-shopProfit(cat,a,src[a]));
@@ -6953,7 +6980,7 @@ function shopButton(cat,id,d,locked,owned,card){
   const free=cat==='seeds'&&have(id),price=d.cash?'<span class="bill">$</span>'+d.cash:'<span class="coin"></span>'+d.cost.toLocaleString();
   if(cat==='seeds')btn.innerHTML=free?'Plant free':(S.seed===id?'Selected':'Plant')+' &middot; '+price;
   else btn.innerHTML='Buy &middot; '+price;
-  const poor=!free&&!canPay(d);if(poor)btn.classList.add('poor');
+  const poor=!free&&!canBuy(d);if(poor)btn.classList.add('poor');
   btn.onclick=()=>{
     if(poor){SFX.error();haptic();shakeEl(btn);toast(d.cash?'You need '+d.cash+' Farm Cash. You earn 1 every level up and from the daily bonus.':'You need '+d.cost.toLocaleString()+' coins for '+(cat==='seeds'?d.name.toLowerCase():'the '+d.name.toLowerCase())+'.');return}
     shopPay(btn,card,()=>buyItem(cat,id,d));
@@ -8364,6 +8391,8 @@ $('needPill').onclick=()=>{if(VIS)return;enterHouse()};
 function start(data){
   S=norm(valid(data&&data.S)?data.S:(load()||fresh()));
   N=S.size;migrateHomes();
+  // an old bug let upgrades go through without enough coins or materials; never keep a negative balance
+  if(S.coins<0)S.coins=0;if(S.mats)for(const k in S.mats)if(S.mats[k]<0)S.mats[k]=0;
   for(const k in S.tiles){const o=S.tiles[k];if(o.k==='bld'){farmer.x=+k.split(',')[0]+2.4;farmer.y=+k.split(',')[1]+2.6;break}}
   resize();buildBorder();buildOcc();if(syncHousing())buildOcc();buildBars();renderModeSw();houseSt();renderNeeds();renderNeighbors();hud();save();placePet();setTool('multi');
   window.claude?.hot?.snapshot?.(()=>({S}));

@@ -1,7 +1,9 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Drink water|Выпить воды
+x:`Your farm|Твоя ферма
+Town|Город
+Drink water|Выпить воды
 Relax|Отдохнуть
 Watch TV|Смотреть ТВ
 Read|Читать
