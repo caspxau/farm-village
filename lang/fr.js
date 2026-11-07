@@ -1,6 +1,12 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Hungry and thirsty: working slower|Affamé et assoiffé : travaille plus lentement
+x:`Level|Niveau
+All job slots are full. Collect finished goods to make room.|Tous les emplacements sont pleins. Récupère les produits finis pour libérer de la place.
+Upgraded: more job slots and faster work.|Amélioré : plus d’emplacements et un travail plus rapide.
+Upgrade this building|Améliorer ce bâtiment
+Upgrade building|Améliorer le bâtiment
+Building upgraded!|Bâtiment amélioré !
+Hungry and thirsty: working slower|Affamé et assoiffé : travaille plus lentement
 Too hungry: working slower|Trop faim : travaille plus lentement
 Too thirsty: working slower|Trop soif : travaille plus lentement
 Getting hungry and thirsty|Commence à avoir faim et soif

@@ -1,6 +1,12 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Hungry and thirsty: working slower|Lapar dan haus: kerja lebih lambat
+x:`Level|Level
+All job slots are full. Collect finished goods to make room.|Semua slot kerja penuh. Ambil barang yang sudah jadi untuk memberi ruang.
+Upgraded: more job slots and faster work.|Ditingkatkan: lebih banyak slot kerja dan kerja lebih cepat.
+Upgrade this building|Tingkatkan bangunan ini
+Upgrade building|Tingkatkan bangunan
+Building upgraded!|Bangunan ditingkatkan!
+Hungry and thirsty: working slower|Lapar dan haus: kerja lebih lambat
 Too hungry: working slower|Terlalu lapar: kerja lebih lambat
 Too thirsty: working slower|Terlalu haus: kerja lebih lambat
 Getting hungry and thirsty|Mulai lapar dan haus

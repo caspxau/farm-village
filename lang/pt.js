@@ -1,6 +1,12 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Hungry and thirsty: working slower|Com fome e sede: trabalha mais devagar
+x:`Level|Nível
+All job slots are full. Collect finished goods to make room.|Todos os espaços estão cheios. Recolha os produtos prontos para liberar espaço.
+Upgraded: more job slots and faster work.|Melhorado: mais espaços de trabalho e mais rapidez.
+Upgrade this building|Melhorar este prédio
+Upgrade building|Melhorar prédio
+Building upgraded!|Prédio melhorado!
+Hungry and thirsty: working slower|Com fome e sede: trabalha mais devagar
 Too hungry: working slower|Fome demais: trabalha mais devagar
 Too thirsty: working slower|Sede demais: trabalha mais devagar
 Getting hungry and thirsty|Ficando com fome e sede

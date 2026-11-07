@@ -1,7 +1,13 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Hungry and thirsty: working slower|جائع وعطشان: يعمل أبطأ
+x:`Level|المستوى
+All job slots are full. Collect finished goods to make room.|كل خانات العمل ممتلئة. اجمع المنتجات الجاهزة لتفريغ مكان.
+Upgraded: more job slots and faster work.|تمت الترقية: خانات عمل أكثر وعمل أسرع.
+Upgrade this building|رقِّ هذا المبنى
+Upgrade building|ترقية المبنى
+Building upgraded!|تمت ترقية المبنى!
+Hungry and thirsty: working slower|جائع وعطشان: يعمل أبطأ
 Too hungry: working slower|جائع جدًا: يعمل أبطأ
 Too thirsty: working slower|عطشان جدًا: يعمل أبطأ
 Getting hungry and thirsty|بدأ يجوع ويعطش

@@ -1,7 +1,13 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Hungry and thirsty: working slower|又饿又渴：干活变慢
+x:`Level|等级
+All job slots are full. Collect finished goods to make room.|所有工作位都满了。收取完成的商品来腾出位置。
+Upgraded: more job slots and faster work.|已升级：更多工作位，生产更快。
+Upgrade this building|升级这座建筑
+Upgrade building|升级建筑
+Building upgraded!|建筑已升级！
+Hungry and thirsty: working slower|又饿又渴：干活变慢
 Too hungry: working slower|太饿了：干活变慢
 Too thirsty: working slower|太渴了：干活变慢
 Getting hungry and thirsty|有点饿也有点渴

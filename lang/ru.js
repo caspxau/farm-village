@@ -1,7 +1,13 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Hungry and thirsty: working slower|Голоден и хочет пить: работает медленнее
+x:`Level|Уровень
+All job slots are full. Collect finished goods to make room.|Все места в очереди заняты. Заберите готовые товары.
+Upgraded: more job slots and faster work.|Улучшено: больше мест в очереди и быстрее работа.
+Upgrade this building|Улучшить это здание
+Upgrade building|Улучшить здание
+Building upgraded!|Здание улучшено!
+Hungry and thirsty: working slower|Голоден и хочет пить: работает медленнее
 Too hungry: working slower|Слишком голоден: работает медленнее
 Too thirsty: working slower|Слишком хочет пить: работает медленнее
 Getting hungry and thirsty|Проголодался и хочет пить

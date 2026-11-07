@@ -1,7 +1,13 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Hungry and thirsty: working slower|ক্ষুধার্ত ও তৃষ্ণার্ত: ধীরে কাজ করছে
+x:`Level|লেভেল
+All job slots are full. Collect finished goods to make room.|সব কাজের জায়গা ভরা। জায়গা খালি করতে তৈরি জিনিস তুলে নাও।
+Upgraded: more job slots and faster work.|উন্নত: বেশি কাজের জায়গা আর দ্রুত কাজ।
+Upgrade this building|এই ভবনটি উন্নত করো
+Upgrade building|ভবন উন্নত করো
+Building upgraded!|ভবন উন্নত হয়েছে!
+Hungry and thirsty: working slower|ক্ষুধার্ত ও তৃষ্ণার্ত: ধীরে কাজ করছে
 Too hungry: working slower|খুব ক্ষুধার্ত: ধীরে কাজ করছে
 Too thirsty: working slower|খুব তৃষ্ণার্ত: ধীরে কাজ করছে
 Getting hungry and thirsty|খিদে ও তেষ্টা পাচ্ছে

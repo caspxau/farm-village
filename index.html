@@ -1334,6 +1334,30 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 @keyframes v5deny{0%,100%{transform:none}20%{transform:translateX(-5px) rotate(-4deg)}40%{transform:translateX(5px) rotate(4deg)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
 #tip{border-radius:14px!important;padding:6px 12px!important;background:rgba(255,252,244,.96)!important;color:#3a2a1a!important;border:1px solid rgba(120,90,50,.28)!important;box-shadow:0 6px 16px rgba(40,25,10,.22)!important;font-weight:700;letter-spacing:.1px;transition:opacity .15s}
 @media (prefers-reduced-motion:reduce){#btnBarn.v5bump,#btnBarn.v5deny{animation:none}}
+
+/* ---- realistic currency icons and a crisper HUD ---- */
+/* the HUD sits above the weather and night overlay (z-index 1), which used to tint it */
+.hud{z-index:21}
+:root{--ico-coin:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='f' cx='38%25' cy='30%25' r='75%25'%3E%3Cstop offset='0' stop-color='%23fff7cf'/%3E%3Cstop offset='.3' stop-color='%23f9d96f'/%3E%3Cstop offset='.72' stop-color='%23dca42a'/%3E%3Cstop offset='1' stop-color='%23a9700f'/%3E%3C/radialGradient%3E%3ClinearGradient id='r' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23ffeaa3'/%3E%3Cstop offset='.5' stop-color='%23e2ad35'/%3E%3Cstop offset='1' stop-color='%239a640c'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a46b10'/%3E%3Cstop offset='1' stop-color='%23fff0b0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cellipse cx='32' cy='35' rx='29' ry='28' fill='%236e4506'/%3E%3Ccircle cx='32' cy='31' r='29' fill='url(%23r)' stroke='%237a4e08' stroke-width='1.4'/%3E%3Ccircle cx='32' cy='31' r='26.6' fill='none' stroke='%238a5a0a' stroke-width='2.4' stroke-dasharray='1.1 1.5' opacity='.55'/%3E%3Ccircle cx='32' cy='31' r='22.5' fill='url(%23f)'/%3E%3Ccircle cx='32' cy='31' r='22.5' fill='none' stroke='url(%23b)' stroke-width='2.2'/%3E%3Cg transform='translate(.7 .8)' fill='%23a8730f' stroke='%23a8730f'%3E%3Cpath d='M32 45V21' stroke-width='2.2' stroke-linecap='round' fill='none'/%3E%3Cellipse cx='32' cy='18.5' rx='2.3' ry='4'/%3E%3Cg id='w'%3E%3Cellipse cx='28.6' cy='24.5' rx='2.2' ry='3.9' transform='rotate(-32 28.6 24.5)'/%3E%3Cellipse cx='28.6' cy='30' rx='2.2' ry='3.9' transform='rotate(-32 28.6 30)'/%3E%3Cellipse cx='28.6' cy='35.5' rx='2.2' ry='3.9' transform='rotate(-32 28.6 35.5)'/%3E%3C/g%3E%3Cuse href='%23w' transform='matrix(-1 0 0 1 64 0)'/%3E%3C/g%3E%3Cg fill='%23fff1b8' stroke='%23fff1b8' opacity='.9'%3E%3Cpath d='M32 45V21' stroke-width='1.6' stroke-linecap='round' fill='none'/%3E%3Cellipse cx='32' cy='18.5' rx='1.7' ry='3.4'/%3E%3Cg id='v'%3E%3Cellipse cx='28.6' cy='24.5' rx='1.6' ry='3.3' transform='rotate(-32 28.6 24.5)'/%3E%3Cellipse cx='28.6' cy='30' rx='1.6' ry='3.3' transform='rotate(-32 28.6 30)'/%3E%3Cellipse cx='28.6' cy='35.5' rx='1.6' ry='3.3' transform='rotate(-32 28.6 35.5)'/%3E%3C/g%3E%3Cuse href='%23v' transform='matrix(-1 0 0 1 64 0)'/%3E%3C/g%3E%3Cpath d='M13.5 22.5A20.5 20.5 0 0 1 33 10.5' fill='none' stroke='%23fff' stroke-opacity='.75' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M50 14l1.4 3.6 3.6 1.4-3.6 1.4L50 24l-1.4-3.6-3.6-1.4 3.6-1.4z' fill='%23fff'/%3E%3C/svg%3E");--ico-bill:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23d6f2c4'/%3E%3Cstop offset='.45' stop-color='%238fd07e'/%3E%3Cstop offset='1' stop-color='%233f8f46'/%3E%3C/linearGradient%3E%3CradialGradient id='m' cx='45%25' cy='40%25' r='60%25'%3E%3Cstop offset='0' stop-color='%23f7fff0'/%3E%3Cstop offset='1' stop-color='%23cde9bf'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect x='3' y='6' width='67' height='39' rx='4' fill='%231e4f26' opacity='.55'/%3E%3Crect x='2' y='3' width='67' height='39' rx='4' fill='url(%23g)' stroke='%231f5a28' stroke-width='1.4'/%3E%3Crect x='5.5' y='6.5' width='60' height='32' rx='2.5' fill='none' stroke='%231f5a28' stroke-width='1.1' stroke-dasharray='2.2 1.4' opacity='.8'/%3E%3Cpath d='M9 15q6-4 12 0t12 0 12 0 12 0 6 0M9 31q6-4 12 0t12 0 12 0 12 0 6 0' fill='none' stroke='%232f7a3a' stroke-width='.7' opacity='.5'/%3E%3Cellipse cx='35.5' cy='22.5' rx='11' ry='12.5' fill='url(%23m)' stroke='%231f5a28' stroke-width='1.4'/%3E%3Cpath d='M35.5 31v-9' stroke='%232f7a3a' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M35.5 23c-5 0-8-3-8-7 4 0 8 2.5 8 7zM35.5 22c4.5 0 7.5-2.6 7.5-6.4-3.8 0-7.5 2.3-7.5 6.4z' fill='%233f9a3c' stroke='%231f5a28' stroke-width='.8'/%3E%3Ctext x='10.5' y='15' font-family='Georgia,serif' font-weight='700' font-size='8.5' fill='%231f5a28' text-anchor='middle'%3E%24%3C/text%3E%3Ctext x='60.5' y='36.5' font-family='Georgia,serif' font-weight='700' font-size='8.5' fill='%231f5a28' text-anchor='middle'%3E%24%3C/text%3E%3Cpath d='M4 5l18 0-14 34-4 0z' fill='%23fff' opacity='.18'/%3E%3C/svg%3E")}
+span.coin{background:var(--ico-coin) center/contain no-repeat!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:drop-shadow(0 1px 1px rgba(60,30,0,.25))}
+span.bill{background:var(--ico-bill) center/contain no-repeat!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:transparent!important;text-shadow:none!important;overflow:hidden;filter:drop-shadow(0 1px 1px rgba(20,50,20,.25))}
+.hud span.coin{width:32px!important;height:32px!important;flex-basis:32px!important}
+.hud span.bill{width:38px!important;height:26px!important;flex-basis:38px!important}
+.hud .pill{background:linear-gradient(rgba(74,52,30,.82),rgba(52,36,20,.86))!important;border:1px solid rgba(255,232,190,.28)!important;box-shadow:inset 0 1px 0 rgba(255,240,210,.22),0 3px 8px rgba(0,0,0,.28)!important}
+.hud .pill b{color:#fff8e8;text-shadow:0 1px 0 rgba(0,0,0,.45);font-variant-numeric:tabular-nums;letter-spacing:.2px}
+.hud .xpbox{background:linear-gradient(rgba(74,52,30,.82),rgba(52,36,20,.86))!important;border:1px solid rgba(255,232,190,.28)!important}
+.hud .xplabel{color:#f6e6c6!important}.hud .xplabel b{color:#ffd54a!important}
+.hud .xpbar{background:rgba(0,0,0,.38)!important;border:0!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.45)!important;height:15px!important}
+.hud .xpbar i{background:linear-gradient(#ffe27a,#f2b51e 55%,#c9850c)!important;border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.55)}
+.hud .xptext{color:#fff!important;text-shadow:0 1px 1px rgba(0,0,0,.7)!important;font-variant-numeric:tabular-nums}
+.hud .star svg{filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
+.hud .star span{color:#fff;text-shadow:0 1.5px 0 #7a4806,0 0 4px rgba(122,72,6,.6)}
+.fuelpill .fuelico{width:22px;height:22px;flex:none}
+.fuelpill .fuelbar{background:rgba(0,0,0,.38)!important;border:0!important;height:8px!important;border-radius:5px!important;overflow:hidden}
+.fuelpill .fuelbar i{border-radius:5px}
+.hud .plus{background:linear-gradient(#8fd07e,#3f8f46)!important;border:1px solid #1f5a28!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 1px 2px rgba(0,0,0,.35)!important;color:#fff!important}
+.mat svg,.req svg{filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+@media (max-width:640px){.hud span.coin{width:24px!important;height:24px!important;flex-basis:24px!important}.hud span.bill{width:28px!important;height:19px!important;flex-basis:28px!important}.fuelpill .fuelico{width:18px;height:18px}}
 </style>
 </head>
 <body>
@@ -1344,7 +1368,7 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 <header class="hud">
   <div class="lvl" title="Your level">
     <div class="star">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3l8.6 18.3 20 2.4-14.8 13.7 4 19.8L32 47.3 14.2 57.2l4-19.8L3.4 23.7l20-2.4z" fill="#ffc72c" stroke="#6b3c15" stroke-width="3.5" stroke-linejoin="round"/><path d="M32 11l5.8 12.4 13.4 1.6" fill="none" stroke="#fff3b0" stroke-width="3" stroke-linecap="round"/></svg>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="hst" cx="40%" cy="30%" r="75%"><stop offset="0" stop-color="#fff6c8"/><stop offset=".35" stop-color="#ffd54a"/><stop offset=".8" stop-color="#e09a14"/><stop offset="1" stop-color="#b06e08"/></radialGradient><linearGradient id="hsb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2b0"/><stop offset="1" stop-color="#9a5e06"/></linearGradient></defs><path d="M32 5l8.4 17.6 19.4 2.4-14.3 13.3 3.8 19.2L32 48 14.7 57.5l3.8-19.2L4.2 25l19.4-2.4z" transform="translate(0 2.4)" fill="#6e3f06" opacity=".55"/><path d="M32 3l8.6 18.3 20 2.4-14.8 13.7 4 19.8L32 47.3 14.2 57.2l4-19.8L3.4 23.7l20-2.4z" fill="url(#hst)" stroke="#7a4806" stroke-width="2.4" stroke-linejoin="round"/><path d="M32 11.5l6.2 13.2 14.4 1.8-10.6 9.8 2.9 14.2L32 43.4l-12.9 7.1L22 36.3l-10.6-9.8 14.4-1.8z" fill="none" stroke="url(#hsb)" stroke-width="1.6" stroke-linejoin="round" opacity=".9"/><path d="M32 9l5 10.8 11.6 1.4" fill="none" stroke="#fffbe0" stroke-width="2.4" stroke-linecap="round" opacity=".85"/></svg>
       <span class="outline" id="lvl">1</span>
     </div>
     <div class="xpbox"><span class="xplabel"><span>To level <b id="lvlnext">2</b></span><span id="xpleft">30 to go</span></span><div class="xpbar"><i id="xpfill" style="width:0%"></i><span class="xptext" id="xptext">0 / 30 XP</span></div></div>
@@ -1352,7 +1376,7 @@ body{font-family:var(--f-body);letter-spacing:.1px}
   <div class="pill coins" title="Coins"><span class="coin"></span><b id="coins">0</b></div>
   <div class="pill cashp" title="Farm Cash"><span class="bill">$</span><b id="cash">0</b><button class="plus" id="cashPlus" aria-label="Spend Farm Cash in the market">+</button></div>
   <button class="pill wxchip" id="wxchip" aria-label="Season guide"></button>
-<button class="pill fuelpill" id="fuelchip" hidden aria-label="Fuel tank: refuel with diesel from the barn"><span id="fuellabel">Fuel</span><b id="fueltext">50 / 50</b><div class="fuelbar"><i id="fuelfill"></i></div></button>
+<button class="pill fuelpill" id="fuelchip" hidden aria-label="Fuel tank: refuel with diesel from the barn"><svg viewBox="0 0 32 32" aria-hidden="true" class="fuelico"><defs><linearGradient id="fcg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f26a4a"/><stop offset=".45" stop-color="#d9402f"/><stop offset="1" stop-color="#8f1f16"/></linearGradient></defs><path d="M8 7h9l7 6v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z" fill="url(#fcg)" stroke="#5a120c" stroke-width="1.3"/><path d="M9.5 7V4.5h5V7" fill="none" stroke="#5a120c" stroke-width="1.6"/><path d="M19 9l4-5 3 2.4-3.6 4.6" fill="#c4ccd4" stroke="#4a5058" stroke-width="1.1"/><path d="M9 13l11 11M20 13L9 24" stroke="#8f1f16" stroke-width="2" opacity=".7"/><rect x="8.6" y="12" width="12" height="13" rx="1.5" fill="none" stroke="#ff9a7a" stroke-width=".8" opacity=".6"/><path d="M8 9.5h1.6v16H8z" fill="#fff" opacity=".35"/></svg><span id="fuellabel">Fuel</span><b id="fueltext">50 / 50</b><div class="fuelbar"><i id="fuelfill"></i></div></button>
 </header>
 
 <div class="toast" id="toast" aria-live="polite"></div>
@@ -1522,7 +1546,7 @@ const PACK=LANG!=='en'&&LANG!=='pl'?window.FV_PACK:null;
 function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.reload()}
 // Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
 // Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
-const PL_EXACT={'Hungry and thirsty: working slower':'Głodny i spragniony: pracuje wolniej','Too hungry: working slower':'Za głodny: pracuje wolniej','Too thirsty: working slower':'Za spragniony: pracuje wolniej','Getting hungry and thirsty':'Robi się głodny i spragniony','Getting hungry':'Robi się głodny','Getting thirsty':'Robi się spragniony','Fresh and clean':'Świeży i czysty','Feeling great':'Świetne samopoczucie','Spiky':'Na jeża','Side part':'Z przedziałkiem','Flower crown':'Wianek z kwiatów','Hoodie':'Bluza z kapturem','Denim jacket':'Kurtka dżinsowa','Quick looks':'Szybkie stylizacje','Classic':'Klasyczny','Rancher':'Ranczer','Gardener':'Ogrodnik','Weekend':'Weekend','Your farm':'Twoja farma','Town':'Miasto','Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
+const PL_EXACT={'Level':'Poziom','All job slots are full. Collect finished goods to make room.':'Wszystkie miejsca w kolejce są zajęte. Odbierz gotowe towary.','Upgraded: more job slots and faster work.':'Ulepszony: więcej miejsc w kolejce i szybsza praca.','Upgrade this building':'Ulepsz ten budynek','Upgrade building':'Ulepsz budynek','Building upgraded!':'Budynek ulepszony!','Hungry and thirsty: working slower':'Głodny i spragniony: pracuje wolniej','Too hungry: working slower':'Za głodny: pracuje wolniej','Too thirsty: working slower':'Za spragniony: pracuje wolniej','Getting hungry and thirsty':'Robi się głodny i spragniony','Getting hungry':'Robi się głodny','Getting thirsty':'Robi się spragniony','Fresh and clean':'Świeży i czysty','Feeling great':'Świetne samopoczucie','Spiky':'Na jeża','Side part':'Z przedziałkiem','Flower crown':'Wianek z kwiatów','Hoodie':'Bluza z kapturem','Denim jacket':'Kurtka dżinsowa','Quick looks':'Szybkie stylizacje','Classic':'Klasyczny','Rancher':'Ranczer','Gardener':'Ogrodnik','Weekend':'Weekend','Your farm':'Twoja farma','Town':'Miasto','Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
 // ---- HUD, dock, menus
 'Multi':'Multi','Barn':'Stodoła','Orders':'Zamówienia','Market':'Targ','Delivery':'Dostawy','More':'Więcej','Neighbors':'Sąsiedzi','Wardrobe':'Garderoba','Gifts':'Prezenty','Album':'Album','Ribbons':'Wstęgi','Music':'Muzyka','Sound':'Dźwięk','Settings':'Ustawienia',
 'Your level':'Twój poziom','Coins':'Monety','Farm Cash':'Farmdolary','Season guide':'Przewodnik po porach roku','Tools':'Narzędzia','Barn: your stored goods':'Stodoła: twoje zapasy','Neighbor orders and advertising':'Zamówienia sąsiadów i reklama','Open the market':'Otwórz targ','Delivery Board: send goods to town':'Tablica dostaw: wyślij towary do miasta','More buttons':'Więcej przycisków','Close':'Zamknij','Quest':'Zadanie','Daily':'Codziennie',"Today's Goals":'Cele na dziś',"Today's goals":'Cele na dziś','Change seed':'Zmień nasiona','Seeds to plant':'Nasiona do sadzenia',
@@ -2060,7 +2084,16 @@ const MAKERS={
 };
 // Everything the barn can hold. Crops keep their crop id; animal goods are a_<animal>, fruit is t_<tree>.
 const ITEMS={};
-const SELL=.75,sellOf=v=>Math.max(1,Math.round(v*SELL));
+/* Economy pacing. The tables above are the design values; these knobs set the pace of the whole game in one place.
+   Crops, animals and trees take PACE times longer than the tables say and buildings MAKER_PACE times longer, so a full
+   field turns over every few minutes instead of every minute. Crops and made goods are worth less than listed, and the
+   barn pays BARN_RATE of an item's value, while neighbor orders and Dale's contracts pay the full value and more:
+   selling to people beats dumping goods in the barn. Every crop still pays back its seed and the re-plow. */
+const PACE=5,MAKER_PACE=3,CROP_VALUE=.65,MADE_VALUE=.7,BARN_RATE=.65;
+for(const id in CROPS){CROPS[id].grow*=PACE;CROPS[id].sell=Math.round(CROPS[id].sell*CROP_VALUE)}
+for(const id in ANIMALS)ANIMALS[id].every*=PACE;
+for(const id in TREES)TREES[id].every*=PACE;
+for(const id in MAKERS)for(const r of MAKERS[id].recipes)r.time*=MAKER_PACE;
 for(const id in CROPS)ITEMS[id]={name:CROPS[id].name,sell:CROPS[id].sell,cat:'crops',lvl:CROPS[id].lvl};
 for(const id in CROPS)ITEMS['g_'+id]={name:'Golden '+CROPS[id].name,sell:CROPS[id].sell*6,cat:'crops',lvl:CROPS[id].lvl,gold:true};
 for(const id in ANIMALS)ITEMS['a_'+id]={name:ANIMALS[id].product,sell:ANIMALS[id].give,cat:'animal',lvl:ANIMALS[id].lvl};
@@ -2073,6 +2106,7 @@ Object.assign(ITEMS,{
   honeycake:{name:'Honey Cake',sell:355,cat:'made',lvl:5},fishpie:{name:'Fish Pie',sell:605,cat:'made',lvl:6},
   applecider:{name:'Apple Cider',sell:160,cat:'made',lvl:8},cherryjuice:{name:'Cherry Juice',sell:240,cat:'made',lvl:8},grapejuice:{name:'Grape Juice',sell:630,cat:'made',lvl:8}
 });
+for(const id in ITEMS)if(ITEMS[id].cat==='made')ITEMS[id].sell=Math.round(ITEMS[id].sell*MADE_VALUE/5)*5;
 function recipeLvl(r){let l=1;for(const k in r.in)l=Math.max(l,ITEMS[k].lvl);return l}
 function feedNeed(id){return ANIMALS[id].feed||1}
 const ADS={
@@ -2106,7 +2140,7 @@ const NEIGHBORS=[
 ];
 for(const n of NEIGHBORS)n.look=Object.assign(defaultLook(),n.look);
 const DAILY=[{coins:50},{coins:100},{coins:150,fuel:20},{coins:250},{coins:300,cash:2}];
-function need(l){return Math.round(30+25*l+5*l*l)} // XP for the next level: grows steadily so Level 20 takes days of play, not hours
+function need(l){return Math.round(60+50*l+10*l*l)} // XP for the next level: grows steadily so Level 20 takes days of play, not hours
 
 /* ================= state ================= */
 let S,occ={},N=16,VIS=null;
@@ -2122,8 +2156,8 @@ function fresh(){
     else if(y===7){o.crop='wheat';o.t=now-CROPS.wheat.grow*1000*.3}
     put(x,y,o);
   }
-  put(12,2,{k:'home',id:'chicken',lv:1});put(12,5,{k:'animal',id:'chicken',t:now-70e3});put(14,5,{k:'animal',id:'chicken',t:now-30e3});
-  put(11,12,{k:'tree',id:'apple',t:now-130e3});put(13,12,{k:'tree',id:'apple',t:now-30e3});
+  put(12,2,{k:'home',id:'chicken',lv:1});put(12,5,{k:'animal',id:'chicken',t:now-ANIMALS.chicken.every*1000-10e3});put(14,5,{k:'animal',id:'chicken',t:now-ANIMALS.chicken.every*500});
+  put(11,12,{k:'tree',id:'apple',t:now-TREES.apple.every*1000-10e3});put(13,12,{k:'tree',id:'apple',t:now-TREES.apple.every*250});
   for(let x=5;x<=11;x++)put(x,10,{k:'deco',id:'fence'});
   put(4,5,{k:'deco',id:'hay'});put(4,8,{k:'deco',id:'scarecrow'});put(4,2,{k:'deco',id:'mailbox'});
   put(5,12,{k:'deco',id:'flowers'});put(6,12,{k:'deco',id:'flowers'});put(5,13,{k:'deco',id:'flowers'});
@@ -3833,7 +3867,232 @@ function cylinder(cx,by,rx,ry,h,col,dark,top){
   g.beginPath();g.moveTo(cx-rx,by-h);g.lineTo(cx-rx,by);g.ellipse(cx,by,rx,ry,0,Math.PI,0,true);g.lineTo(cx+rx,by-h);g.closePath();g.fillStyle=gr;g.fill();g.strokeStyle=shade(dark,-.3);g.lineWidth=1.2;g.stroke();
   ell(cx,by-h,rx,ry,top||shade(col,.25),shade(dark,-.3),1.2);
 }
-function drawMaker(x,y,id){
+/* ---- Natural style production buildings, painted to sit beside the farmhouse and barn ----
+   Each fills its 2x2 lot, drawn back to front: a yard, the buildings, then props and a hanging sign with what it makes. */
+let MK_LV=1;
+function drawMaker(x,y,id,lv){MK_LV=lv||1;try{return NATURAL?drawMakerN(x,y,id):drawMakerC(x,y,id)}finally{MK_LV=1}}
+function hullPts(p){p=p.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]),lo=[],up=[];
+  for(const q of p){while(lo.length>1&&cr(lo[lo.length-2],lo[lo.length-1],q)<=0)lo.pop();lo.push(q)}for(const q of p.slice().reverse()){while(up.length>1&&cr(up[up.length-2],up[up.length-1],q)<=0)up.pop();up.push(q)}return lo.slice(0,-1).concat(up.slice(0,-1))}
+// a gravel or dirt yard with scattered stones and grass at the edges
+function yardN(x,y,col,inset){inset=inset||.05;const q=quad(x,y,inset,2);poly(q,col);
+  for(let i=0;i<60;i++){const u=x+inset+hash(i,3.3)*(2-2*inset),v=y+inset+hash(3.3,i)*(2-2*inset),[px,py]=P(u,v);ell(px,py,.8+hash(i,1)*1.4,.5+hash(1,i)*.7,hash(i,7)>.5?'rgba(255,255,255,.22)':'rgba(60,45,25,.22)')}
+  g.strokeStyle='rgba(70,110,40,.5)';g.lineWidth=1;for(let i=0;i<26;i++){const t=hash(i,9),[px,py]=t<.5?P(x+inset+t*2*(2-2*inset),y+2-inset):P(x+2-inset,y+inset+(t-.5)*2*(2-2*inset));line([px,py],[px+(hash(i,2)-.5)*3,py-2-hash(2,i)*3])}}
+// a stone texture for walls (rows of irregular blocks)
+function stoneN(f,pts,u0,u1,z0,z1){g.save();clipPts(pts.map(p=>f(p[0],p[1])));let r=0;
+  for(let z=z0;z<z1;z+=4.2,r++){let u=u0-(r%2)*.04;while(u<u1){const w=.07+hash(u*9,z)*.08,c=mixC('#b5ad9e','#8c8476',hash(z,u*7));fp(f,[[u+.006,z+.5],[u+w-.006,z+.5],[u+w-.006,z+3.9],[u+.006,z+3.9]],c);fp(f,[[u+.006,z+3.2],[u+w-.006,z+3.2],[u+w-.006,z+3.9],[u+.006,z+3.9]],'rgba(0,0,0,.12)');u+=w}}
+  g.restore()}
+// corrugated steel: vertical ribs with a light and a dark edge
+function ribsN(f,pts,u0,u1,z0,z1,step){g.save();clipPts(pts.map(p=>f(p[0],p[1])));for(let u=u0+step/2;u<u1;u+=step){g.strokeStyle='rgba(255,255,255,.3)';g.lineWidth=.6;fl(f,[u,z0],[u,z1]);g.strokeStyle='rgba(30,34,40,.28)';g.lineWidth=.5;fl(f,[u+step*.35,z0],[u+step*.35,z1])}g.restore()}
+// a small gable building in the farmhouse's construction: footing, textured walls, gable on the right side, roof with an overhang
+function makerShedN(x0,y0,w,d,h,rh,o){
+  const yh=y0+d,ym=y0+d/2,ov=.07,zr=h+rh,ze=h-ov*rh/(d/2),base=o.base||3,F=(u,z)=>P(x0+u,yh,z),S=(v,z)=>P(x0+w,y0+v,z),rf=o.roof;
+  poly([P(x0-ov,y0-ov,ze),P(x0+w+ov,y0-ov,ze),P(x0+w+ov,ym,zr),P(x0-ov,ym,zr)],rf[2]);
+  isoBox(x0,y0,w,d,base,'#9b958a','#7f796f',null,null);
+  const fw=[[0,base],[w,base],[w,h],[0,h]],sw=[[0,base],[d,base],[d,h],[d/2,zr],[0,h]];
+  fp(F,fw,o.wallL);fp(S,sw,o.wallR);
+  if(o.wall==='batten'){battensN(F,fw,0,w,base,h,.08);battensN(S,sw,0,d,base,zr,.085)}
+  else if(o.wall==='lap'){sidingN(F,fw,0,w,base,h,2.6);sidingN(S,sw,0,d,base,zr,2.6)}
+  else if(o.wall==='stone'){stoneN(F,fw,0,w,base,h);stoneN(S,sw,0,d,base,zr)}
+  if(o.stoneTo){const a=[[0,base],[w,base],[w,o.stoneTo],[0,o.stoneTo]],b=[[0,base],[d,base],[d,o.stoneTo],[0,o.stoneTo]];stoneN(F,a,0,w,base,o.stoneTo);stoneN(S,b,0,d,base,o.stoneTo);g.strokeStyle='#e9e2d2';g.lineWidth=1.2;fl(F,[0,o.stoneTo],[w,o.stoneTo]);fl(S,[0,o.stoneTo],[d,o.stoneTo])}
+  const tr=o.trim||'#f2eee6';fp(F,[[0,base],[.04,base],[.04,h],[0,h]],tr);fp(F,[[w-.04,base],[w,base],[w,h],[w-.04,h]],tr);fp(S,[[d-.035,base],[d,base],[d,h],[d-.035,h]],shade(tr,-.12));
+  fp(F,[[0,h-4],[w,h-4],[w,h],[0,h]],'rgba(30,22,12,.18)');fp(S,[[0,h-4],[d,h-4],[d,h],[0,h]],'rgba(30,22,12,.15)');
+  if(o.decor)o.decor(F,S,{base,h,w,d,zr});
+  const R=(s,t)=>P(x0-ov+s*(w+2*ov),yh+ov-t*(yh+ov-ym),ze+t*(zr-ze));
+  poly([R(0,0),R(1,0),R(1,1),R(0,1)],lgr(R(0,1),R(0,0),[rf[0],rf[1],rf[2]]));
+  if(o.metal){for(let s=.02;s<1;s+=.04){g.strokeStyle='rgba(255,255,255,.24)';g.lineWidth=.7;line(R(s,0),R(s,1));g.strokeStyle='rgba(0,0,0,.28)';g.lineWidth=.5;line(R(s+.008,0),R(s+.008,1))}}
+  else{const rows=8,cols=Math.round(w*10);for(let r=0;r<rows;r++){const t0=r/rows,t1=(r+1)/rows;for(let k=0;k<cols;k++){const s0=(k+(r%2)*.5)/cols,s1=Math.min(1,s0+1/cols),v=hash(k+x0,r*3.1+y0);if(v>.64||v<.18)poly([R(s0,t0),R(s1,t0),R(s1,t1),R(s0,t1)],v>.64?'rgba(255,255,255,.08)':'rgba(0,0,0,.13)')}
+      g.strokeStyle='rgba(0,0,0,.38)';g.lineWidth=.55;line(R(0,t0),R(1,t0));g.strokeStyle='rgba(0,0,0,.2)';g.lineWidth=.35;for(let k=0;k<cols;k++){const s=(k+(r%2)*.5)/cols;if(s<1)line(R(s,t0),R(s,t1))}}}
+  g.strokeStyle=shade(tr,-.08);g.lineWidth=1.5;line(P(x0-ov,yh+ov,ze-1),P(x0+w+ov,yh+ov,ze-1));
+  g.strokeStyle=tr;g.lineWidth=1.5;line(P(x0+w+ov,yh+ov,ze),P(x0+w+ov,ym,zr));line(P(x0+w+ov,ym,zr),P(x0+w+ov,y0-ov,ze));
+  g.strokeStyle=rf[2];g.lineWidth=1.6;line(P(x0-ov,ym,zr+.6),P(x0+w+ov,ym,zr+.6));
+  return{F,S,base,h,zr,ym,yh,R};
+}
+// barrels, drums, sacks, crates
+function barrelN(px,py,r,h){const gr=g.createLinearGradient(px-r,0,px+r,0);gr.addColorStop(0,'#6e4424');gr.addColorStop(.35,'#b07a46');gr.addColorStop(.7,'#8a5a32');gr.addColorStop(1,'#4e2c12');
+  g.beginPath();g.moveTo(px-r*.9,py-h);g.quadraticCurveTo(px-r*1.08,py-h/2,px-r*.9,py);g.ellipse(px,py,r*.9,r*.38,0,Math.PI,0,true);g.quadraticCurveTo(px+r*1.08,py-h/2,px+r*.9,py-h);g.closePath();g.fillStyle=gr;g.fill();g.strokeStyle='#3a2010';g.lineWidth=.6;g.stroke();
+  g.strokeStyle='rgba(40,20,5,.35)';g.lineWidth=.4;for(let k=-2;k<=2;k++)line([px+k*r*.36,py-h+1],[px+k*r*.4,py-1]);
+  for(const t of[.18,.82]){g.strokeStyle='#3d3f42';g.lineWidth=1.3;g.beginPath();g.ellipse(px,py-h*t,r*(t>.5?.97:.97),r*.38,0,0,Math.PI);g.stroke()}
+  ell(px,py-h,r*.9,r*.38,'#a8743f','#3a2010',.6);ell(px,py-h,r*.6,r*.24,null,'rgba(60,30,10,.4)',.4)}
+function drumN(px,py,r,h,col){cylinder(px,py,r,r*.42,h,col,shade(col,-.45),shade(col,.25));g.strokeStyle=shade(col,-.4);g.lineWidth=.8;for(const t of[.33,.66]){g.beginPath();g.ellipse(px,py-h*t,r,r*.42,0,0,Math.PI);g.stroke()}ell(px+r*.4,py-h,r*.18,r*.08,'#2a2a2a')}
+function sackN(px,py,s,col){col=col||'#c9a96a';g.beginPath();g.moveTo(px-6*s,py);g.quadraticCurveTo(px-8*s,py-7*s,px-4.5*s,py-11*s);g.lineTo(px+4.5*s,py-11*s);g.quadraticCurveTo(px+8*s,py-7*s,px+6*s,py);g.quadraticCurveTo(px,py+2*s,px-6*s,py);g.closePath();
+  g.fillStyle=lgr([px-7*s,py],[px+7*s,py],[shade(col,.12),col,shade(col,-.28)]);g.fill();g.strokeStyle=shade(col,-.45);g.lineWidth=.5;g.stroke();
+  g.strokeStyle='rgba(80,60,30,.25)';g.lineWidth=.35;for(let k=-3;k<=3;k++)line([px+k*1.4*s,py-10*s],[px+k*1.6*s,py-.5*s]);ell(px,py-11*s,4.4*s,1.3*s,shade(col,-.12));g.strokeStyle='#7a5a2a';g.lineWidth=.8;line([px-3*s,py-10.4*s],[px+3*s,py-10.4*s])}
+function crateN(x0,y0,w,d,h,z0,good){bx(x0,y0,w,d,h,'#b88a52',z0||0,'rgba(60,35,12,.6)');g.strokeStyle='rgba(60,35,12,.45)';g.lineWidth=.5;for(const t of[.33,.66]){line(P(x0,y0+d,(z0||0)+h*t),P(x0+w,y0+d,(z0||0)+h*t));line(P(x0+w,y0,(z0||0)+h*t),P(x0+w,y0+d,(z0||0)+h*t))}
+  if(good){const[gx,gy]=P(x0+w/2,y0+d/2,(z0||0)+h);g.save();g.translate(gx,gy+1);g.scale(.5,.5);drawGood(good,0,0,1);g.restore()}}
+function signN(x,y,out){const[sx,sy]=P(x,y);g.strokeStyle='#4e331e';g.lineWidth=2;line([sx,sy],[sx,sy-30]);g.lineWidth=1.6;line([sx-1,sy-29],[sx+13,sy-29]);
+  g.strokeStyle='#3a3a3a';g.lineWidth=.5;line([sx+2,sy-29],[sx+2,sy-25]);line([sx+12,sy-29],[sx+12,sy-25]);
+  poly([[sx-1,sy-25],[sx+15,sy-25],[sx+15,sy-12],[sx-1,sy-12]],lgr([sx,sy-25],[sx,sy-12],['#e8cf9a','#c9a86a']),MK_LV>=3?'#c99a2e':'#4e331e',MK_LV>=3?1.6:1);drawGood(out,sx+7,sy-18.5,.4);
+  // upgraded buildings fly bunting from the sign; fully upgraded ones get a gold star
+  if(MK_LV>=2){g.strokeStyle='#3a3a3a';g.lineWidth=.4;g.beginPath();g.moveTo(sx,sy-30);g.quadraticCurveTo(sx+9,sy-26,sx+20,sy-31);g.stroke();for(let i=0;i<5;i++){const t=(i+.5)/5,px=sx+t*20,py=sy-30+Math.sin(t*Math.PI)*2.6-t*1;poly([[px-1.6,py],[px+1.6,py],[px,py+3.4]],['#d9402f','#ffd23f','#2d8fe3','#3f9a3c','#e0457b'][i])}}
+  if(MK_LV>=3)star4(sx+15,sy-25,3.4,'#ffd23f')}
+function drawMakerN(x,y,id){
+  const[cx,cy]=P(x+1,y+1);
+  if(id==='feedmill'){
+    shadow(cx,cy+6,62,20);yardN(x,y,'#bfae8a');
+    // corrugated steel grain bin with a cone roof, vent cap and ladder
+    const[bx2,by2]=P(x+1.42,y+.52),r=17,hh=44;ell(bx2,by2+1,r+1,7.4,'#8f8b83');
+    poly([[bx2-r,by2],[bx2+r,by2],[bx2+r,by2-hh],[bx2-r,by2-hh]],lgr([bx2-r,0],[bx2+r,0],['#9aa1a8','#e6eaed','#c4cad0','#7e858c']));g.beginPath();g.ellipse(bx2,by2,r,7,0,0,Math.PI);g.fillStyle='#a4abb2';g.fill();
+    g.save();g.beginPath();g.rect(bx2-r,by2-hh,r*2,hh+8);g.clip();for(let u=-r+1;u<r;u+=2.2){g.strokeStyle='rgba(255,255,255,.35)';g.lineWidth=.5;line([bx2+u,by2-hh],[bx2+u,by2+7*Math.sqrt(Math.max(0,1-(u/r)**2))]);g.strokeStyle='rgba(40,46,52,.22)';g.lineWidth=.45;line([bx2+u+1,by2-hh],[bx2+u+1,by2+7*Math.sqrt(Math.max(0,1-((u+1)/r)**2))])}g.restore();
+    g.strokeStyle='rgba(50,56,62,.45)';g.lineWidth=.6;for(let z=8;z<hh;z+=9){g.beginPath();g.ellipse(bx2,by2-z,r,7,0,0,Math.PI);g.stroke()}
+    g.beginPath();g.moveTo(bx2-r-1,by2-hh);g.lineTo(bx2,by2-hh-17);g.lineTo(bx2+r+1,by2-hh);g.ellipse(bx2,by2-hh,r+1,7.4,0,0,Math.PI);g.closePath();g.fillStyle=lgr([bx2-r,by2-hh],[bx2+r,by2-hh],['#c9ced3','#eef1f3','#8f969d']);g.fill();
+    g.strokeStyle='rgba(40,46,52,.3)';g.lineWidth=.45;for(const k of[-.75,-.45,-.15,.15,.45,.75])line([bx2+k*(r+1),by2-hh+7.4*Math.sqrt(1-k*k)],[bx2,by2-hh-17]);
+    cylinder(bx2,by2-hh-16,3,1.3,4,'#c9ced3','#7e858c','#eef1f3');
+    g.strokeStyle='#5a5f66';g.lineWidth=.7;const lx=bx2+r*.62;line([lx-1.5,by2+3],[lx-1.5,by2-hh+5]);line([lx+1.5,by2+3],[lx+1.5,by2-hh+5]);for(let z=2;z<hh-4;z+=3)line([lx-1.5,by2-z],[lx+1.5,by2-z]);
+    // the mill house
+    const m=makerShedN(x+.12,y+.66,1.02,1.12,27,15,{wallL:'#9b5a33',wallR:'#7d4427',wall:'batten',metal:true,roof:['#b3b9bf','#8d949b','#636970'],trim:'#efe9dc',decor:(F,S,k)=>{
+      // sliding door with a white X brace, a hay-loft hatch on the gable and a painted FEED board
+      const a=.28,b=.74;fp(F,[[a,k.base],[b,k.base],[b,k.base+18],[a,k.base+18]],'#7a3a20');g.strokeStyle='rgba(40,12,4,.45)';g.lineWidth=.45;for(let u=a+.04;u<b;u+=.04)fl(F,[u,k.base],[u,k.base+18]);
+      g.strokeStyle='#efe9dc';g.lineWidth=1.3;fl(F,[a,k.base],[b,k.base+18]);fl(F,[a,k.base+18],[b,k.base]);for(const q of[[[a,k.base],[b,k.base],[b,k.base+1.3],[a,k.base+1.3]],[[a,k.base+16.7],[b,k.base+16.7],[b,k.base+18],[a,k.base+18]],[[a,k.base],[a+.025,k.base],[a+.025,k.base+18],[a,k.base+18]],[[b-.025,k.base],[b,k.base],[b,k.base+18],[b-.025,k.base+18]]])fp(F,q,'#efe9dc');
+      fp(F,[[a-.04,k.base+19],[b+.18,k.base+19],[b+.18,k.base+20.3],[a-.04,k.base+20.3]],'#3a3632');
+      fp(S,[[k.d/2-.13,k.h+1],[k.d/2+.13,k.h+1],[k.d/2+.13,k.h+10],[k.d/2-.13,k.h+10]],'#6b3a20','#efe9dc',.9);
+      windowN(S,.22,.42,k.base+8,k.base+17,{panes:true});
+      fp(F,[[.06,k.base+20.6],[.26,k.base+20.6],[.26,k.base+24.6],[.06,k.base+24.6]],'#f2ead6','#5a3a20',.4);const[tx,ty]=F(.16,k.base+21.8);g.font='bold 3.2px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#7a2a1a';g.fillText('FEED',tx,ty)}});
+    // auger chute from the bin top down onto the mill roof
+    g.lineCap='round';g.strokeStyle='#6e757c';g.lineWidth=4.2;line(P(x+1.3,y+.5,hh+12),P(x+.82,y+1.1,40));g.strokeStyle='#b8bfc6';g.lineWidth=2;line(P(x+1.3,y+.5,hh+12),P(x+.82,y+1.1,40));
+    for(const t of[.3,.65]){const a=P(x+1.3+(-.48)*t,y+.5+.6*t,hh+12+(40-hh-12)*t);ell(a[0],a[1],2.4,2.4,'#5a6066')}
+    // feed sacks on a pallet
+    bx(x+1.38,y+1.42,.5,.42,2.6,'#a8743f',0,'rgba(60,35,12,.6)');
+    for(const[a,b,z]of[[1.5,1.56,2.6],[1.74,1.56,2.6],[1.62,1.74,2.6],[1.62,1.6,12]]){const[px,py]=P(x+a,y+b,z);sackN(px,py,.8)}
+    signN(x+.12,y+1.9,'feed');
+  }else if(id==='press'){
+    shadow(cx,cy+6,62,20);
+    // concrete pad with joints and a hazard edge
+    isoBox(x+.06,y+.06,1.88,1.88,3,'#b5b0a6','#9a958b','#c8c4bb',null);g.strokeStyle='rgba(80,76,70,.35)';g.lineWidth=.5;line(P(x+1,y+.06,3),P(x+1,y+1.94,3));line(P(x+.06,y+1,3),P(x+1.94,y+1,3));
+    for(let i=0;i<60;i++){const[px,py]=P(x+.1+hash(i,8)*1.8,y+.1+hash(8,i)*1.8,3);ell(px,py,.7,.4,hash(i,2)>.5?'rgba(255,255,255,.25)':'rgba(60,55,50,.2)')}
+    for(let k=0;k<9;k++){const a=x+.06+k*.21;poly([P(a,y+1.94,3.02),P(a+.1,y+1.94,3.02),P(a+.06,y+1.84,3.02),P(a-.04,y+1.84,3.02)],'#e8b81e')}
+    // steel canopy over the press: back posts, the machine, front posts, then the roof
+    const px0=x+.16,py0=y+.18,pw=1.1,pd=1.0,ph=40;
+    for(const[a,b]of[[px0,py0],[px0+pw,py0]]){const[p1,p2]=P(a,b,3);g.strokeStyle='#4a5058';g.lineWidth=2.2;line([p1,p2],[p1,p2-ph-4])}
+    // press machine: a steel frame with a hydraulic ram over a pressing bed, a bean hopper and a control box
+    bx(px0+.25,py0+.25,.62,.55,9,'#4f5660',3,'rgba(10,14,18,.6)');
+    for(const a of[px0+.3,px0+.82]){const[p1,p2]=P(a,py0+.78,12);g.strokeStyle='#2f353c';g.lineWidth=2.4;line([p1,p2],[p1,p2-24]);g.strokeStyle='#7a828c';g.lineWidth=.8;line([p1-.6,p2],[p1-.6,p2-24])}
+    bx(px0+.25,py0+.62,.62,.16,3.4,'#d9402f',33,'rgba(60,10,5,.6)');
+    {const[rx,ry]=P(px0+.56,py0+.7,33);g.strokeStyle='#c4ccd4';g.lineWidth=3.2;line([rx,ry],[rx,ry+11]);g.strokeStyle='#eef2f5';g.lineWidth=1;line([rx-.8,ry],[rx-.8,ry+11]);bx(px0+.42,py0+.56,.28,.28,3,'#8a929c',18,'rgba(10,14,18,.6)')}
+    bx(px0+.3,py0+.3,.4,.4,10,'#6a7380',36,'rgba(10,14,18,.6)');{const[hx,hy]=P(px0+.5,py0+.5,46);ell(hx,hy,8,3.4,'#c9b77a','#3a3f45',.6);for(let i=0;i<14;i++)ell(hx-6+hash(i,4)*12,hy-1.6+hash(4,i)*3,.9,.6,i%3?'#d8c886':'#a89a5a')}
+    bx(px0+.88,py0+.42,.14,.22,10,'#e8e2d0',8,'rgba(40,40,40,.6)');{const[kx,ky]=P(px0+1.02,py0+.5,14);ell(kx,ky,1.1,1.1,'#5bbf3a');ell(kx,ky+3,1.1,1.1,'#d9402f')}
+    for(const[a,b]of[[px0,py0+pd],[px0+pw,py0+pd]]){const[p1,p2]=P(a,b,3);g.strokeStyle='#4a5058';g.lineWidth=2.4;line([p1,p2],[p1,p2-ph]);g.strokeStyle='#8a929c';g.lineWidth=.8;line([p1-.8,p2],[p1-.8,p2-ph])}
+    {const ov=.08,q=[P(px0-ov,py0-ov,ph+7),P(px0+pw+ov,py0-ov,ph+7),P(px0+pw+ov,py0+pd+ov,ph),P(px0-ov,py0+pd+ov,ph)];poly(q,lgr(q[0],q[3],['#c4cad0','#8d949b']),'rgba(30,34,40,.6)',.7);
+      for(let s=.03;s<1;s+=.06){const a=P(px0-ov+s*(pw+2*ov),py0-ov,ph+7),b=P(px0-ov+s*(pw+2*ov),py0+pd+ov,ph);g.strokeStyle='rgba(255,255,255,.3)';g.lineWidth=.6;line(a,b);g.strokeStyle='rgba(30,34,40,.25)';g.lineWidth=.45;line([a[0]+1,a[1]+.5],[b[0]+1,b[1]+.5])}
+      poly([P(px0-ov,py0+pd+ov,ph),P(px0+pw+ov,py0+pd+ov,ph),P(px0+pw+ov,py0+pd+ov,ph-1.6),P(px0-ov,py0+pd+ov,ph-1.6)],'#6f767d')}
+    // horizontal diesel tank on two cradles, with a stripe, a ladder and a filler pipe to the press
+    {const tx0=x+1.1,ty=y+1.5,len=.74,r=11,zc=14,pts=a=>{const out=[];for(let i=0;i<24;i++){const t=i/24*Math.PI*2;out.push(P(a,ty+Math.cos(t)*r/40.25,zc+Math.sin(t)*r))}return out};
+      for(const a of[tx0+.12,tx0+len-.14])bx(a,ty-.2,.08,.4,8,'#9a958b',3,'rgba(50,46,40,.6)');
+      const far=pts(tx0),near=pts(tx0+len);poly(hullPts(far.concat(near)),lgr(P(tx0,ty,zc+r),P(tx0,ty,zc-r),['#fbf7ec','#e8e2d0','#b9b2a0']),'rgba(60,56,48,.6)',.7);
+      g.save();clipPts(hullPts(far.concat(near)));poly([P(tx0,ty-.4,zc+2),P(tx0+len,ty-.4,zc+2),P(tx0+len,ty+.4,zc-2),P(tx0,ty+.4,zc-2)],null);
+      const st=a=>P(a,ty+.3,zc+1);g.strokeStyle='#d9402f';g.lineWidth=3;line(P(tx0,ty+.3,zc+1),P(tx0+len,ty+.3,zc+1));g.restore();
+      poly(near,lgr(P(tx0+len,ty-.3,zc),P(tx0+len,ty+.3,zc),['#f4efe2','#cfc8b6']),'rgba(60,56,48,.6)',.7);ell(...P(tx0+len,ty,zc),3,3,'#c4ccd4','#5a6268',.6);
+      {const[o0,o1]=P(tx0+.4,ty+.3,0);g.save();g.translate(o0,o1);g.transform(W/2/40.25,H/2/40.25,0,1,0,0);g.font='bold 5px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#3a3a3a';g.fillText('DIESEL',0,-zc-1.5);g.restore()}
+      g.strokeStyle='#6e757c';g.lineWidth=2;line(P(tx0+.1,ty-.1,zc+r-1),P(px0+.9,py0+.6,14));cylinder(...P(tx0+.45,ty,zc+r),2,1,3,'#c4ccd4','#5a6268','#eef2f5');
+      g.strokeStyle='#4a5058';g.lineWidth=.7;const[l1,l2]=P(tx0+.66,ty+.33,3);line([l1-1.4,l2],[l1-1.4,l2-zc-r+1]);line([l1+1.4,l2],[l1+1.4,l2-zc-r+1]);for(let z=3;z<zc+r-2;z+=3)line([l1-1.4,l2-z],[l1+1.4,l2-z]);}
+    // fuel pump and drums
+    bx(x+1.72,y+.8,.16,.12,16,'#d9402f',3,'rgba(60,10,5,.6)');{const[a,b]=P(x+1.88,y+.86,14);poly([[a-1.5,b-2],[a+1.5,b-2],[a+1.5,b+2],[a-1.5,b+2]],'#f4efe2');g.strokeStyle='#2a2a2a';g.lineWidth=1;g.beginPath();g.moveTo(a+1,b+3);g.quadraticCurveTo(a+6,b+10,a+3,b+12);g.stroke()}
+    for(const[a,b,c]of[[.28,1.5,'#2d6fd0'],[.5,1.66,'#2d6fd0'],[.3,1.78,'#d9402f']]){const[px,py]=P(x+a,y+b,3);drumN(px,py,5.4,13,c)}
+    signN(x+.1,y+1.92,'diesel');
+  }else if(id==='kitchen'){
+    shadow(cx,cy+6,62,20);yardN(x,y,'#c8b896');
+    // flagstone path to the door
+    for(let i=0;i<5;i++){const[px,py]=P(x+.95+hash(i,2)*.1,y+1.52+i*.1);ell(px,py,4.2,1.8,'#b9b1a2','rgba(80,70,60,.4)',.4)}
+    const k0x=x+.16,k0yh=y+.28+1.14;
+    const k0=makerShedN(x+.16,y+.28,1.56,1.14,26,17,{wallL:'#f1e7d0',wallR:'#d8ccb2',wall:'lap',base:3,stoneTo:9,roof:['#c26a4c','#9c4c33','#6e3222'],trim:'#fbf7ee',decor:(F,S,k)=>{
+      // a wooden door with a little window, a big shop window under a striped awning, a flower box and a side window
+      fp(F,[[.9,k.base],[1.12,k.base],[1.12,k.base+18],[.9,k.base+18]],'#fbf7ee','rgba(60,50,40,.4)',.4);fp(F,[[.92,k.base],[1.1,k.base],[1.1,k.base+16.5],[.92,k.base+16.5]],'#7a4a2a');
+      fp(F,[[.95,k.base+10],[1.07,k.base+10],[1.07,k.base+15],[.95,k.base+15]],lgr(F(.95,k.base+15),F(1.07,k.base+10),['#b4cddf','#3a4d60']));{const[kx,ky]=F(1.07,k.base+8);ell(kx,ky,.8,.8,'#d9b24a')}
+      windowN(F,.18,.68,k.base+9,k.base+19,{panes:false,lit:false});
+      fp(F,[[.14,k.base+7],[.72,k.base+7],[.72,k.base+9],[.14,k.base+9]],'#7a4a2a');for(let i=0;i<9;i++){const[fx,fy]=F(.17+i*.065,k.base+10);ball(fx,fy,1.6,1.4,['#e0457b','#ffd23f','#f6f2ea','#d9402f'][i%4]);ball(fx+1,fy+.6,1.2,1,'#4f8a3c')}
+      for(let i=0;i<6;i++){const a=.13+i*.1,b=a+.1;poly([F(a,k.base+23),F(b,k.base+23),P(k0x+b,k0yh+.16,k.base+19),P(k0x+a,k0yh+.16,k.base+19)],i%2?'#fbf7ee':'#c0392b','rgba(80,20,15,.5)',.4)}
+      for(let i=0;i<6;i++){const a=.13+i*.1,[p,q]=P(k0x+a+.05,k0yh+.16,k.base+19);g.beginPath();g.arc(p,q,1.6,0,Math.PI);g.fillStyle=i%2?'#c0392b':'#fbf7ee';g.fill()}
+      windowN(S,.3,.5,k.base+8,k.base+17,{panes:true,shutters:'#5a7a8a'});windowN(S,.68,.84,k.base+8,k.base+17,{panes:true,shutters:'#5a7a8a'});
+      fp(S,[[k.d/2-.07,k.h+3],[k.d/2+.07,k.h+3],[k.d/2+.07,k.h+10],[k.d/2-.07,k.h+10]],lgr(S(k.d/2,k.h+10),S(k.d/2,k.h+3),['#fff0b8','#f2b550']),'#fbf7ee',.8)}});
+    // brick chimney through the roof with an oven glow at its foot
+    {const chx=x+1.38;isoBox(chx,y+.6,.2,.2,22,'#9c4b37','#7a3828','#4a2218',null,k0.zr-6);g.strokeStyle='rgba(235,220,200,.35)';g.lineWidth=.45;for(let z=k0.zr-4;z<k0.zr+16;z+=2.2){line(P(chx,y+.8,z),P(chx+.2,y+.8,z));line(P(chx+.2,y+.8,z),P(chx+.2,y+.6,z))}
+      isoBox(chx-.025,y+.575,.25,.25,2,'#8f8c87','#73706b','#a9a6a0',null,k0.zr+16)}
+    // a bench with pies cooling and a chalk menu board
+    {const[bx3,by3]=P(x+1.5,y+1.68);bx(x+1.32,y+1.6,.42,.16,2,'#8a5a32',9,'rgba(50,25,8,.6)');for(const[a,b]of[[1.35,1.62],[1.7,1.62],[1.35,1.73],[1.7,1.73]]){const[p,q]=P(x+a,y+b);g.strokeStyle='#5a3418';g.lineWidth=1.2;line([p,q],[p,q-9])}
+      for(const[k,a]of[['pie',1.43],['bread',1.62]]){const[p,q]=P(x+a,y+1.68,11);g.save();g.translate(p,q-2);g.scale(.42,.42);drawGood(k,0,0,1);g.restore()}void bx3;void by3}
+    {const[mx,my]=P(x+.42,y+1.72);poly([[mx-5,my],[mx-3,my-14],[mx+3,my-14],[mx+5,my]],null,'#5a3418',1);poly([[mx-4,my-4],[mx-3,my-14],[mx+3,my-14],[mx+4,my-4]],'#2f3a32','#5a3418',1);g.strokeStyle='rgba(255,255,255,.7)';g.lineWidth=.5;for(const z of[11,8.5,6])line([mx-2,my-z],[mx+2,my-z])}
+    signN(x+.1,y+1.92,'jam');
+  }else if(id==='beehive'){
+    shadow(cx,cy+6,58,18);
+    // a meadow lot with a mown path, lavender rows and daisies
+    poly(quad(x,y,.05,2),'#86ad5c');for(let i=0;i<70;i++){const[px,py]=P(x+.08+hash(i,5)*1.84,y+.08+hash(5,i)*1.84);ell(px,py,1.2,.6,hash(i,1)>.5?'rgba(255,255,255,.12)':'rgba(40,70,20,.2)')}
+    poly([P(x+.9,y+2),P(x+1.15,y+2),P(x+1.15,y+.3),P(x+.9,y+.3)],'rgba(200,180,120,.35)');
+    for(const row of[.25,.45]){for(let i=0;i<9;i++){const[px,py]=P(x+row+(i%2)*.04,y+.25+i*.17);ball(px,py-3,3,3.4,'#5f7f45');for(let k=0;k<6;k++)ell(px-2+hash(i*row,k)*4,py-5-hash(k,i)*4,.7,1.3,['#8a63c4','#a07ad8','#7a52b0'][k%3])}}
+    for(let i=0;i<22;i++){const[px,py]=P(x+1.25+hash(i,9)*.7,y+1.1+hash(9,i)*.85);for(let k=0;k<5;k++){const t=k/5*Math.PI*2;ell(px+Math.cos(t)*1.3,py-1.5+Math.sin(t)*.8,1,.7,'#fff')}ell(px,py-1.5,.6,.5,'#f2b51e')}
+    // three hives on stands: bottom board, two or three supers with hand-holds, an outer cover
+    for(const[a,b,col,n]of[[1.25,.3,'#f6f2e6',3],[1.3,.78,'#ffe9a8',2],[.62,.95,'#cfe3ee',3]]){const hx=x+a,hy=y+b,s=.4;
+      for(const[p,q]of[[0,0],[s,0],[0,s],[s,s]]){const[l1,l2]=P(hx+p+.02,hy+q+.02);g.strokeStyle='#4e331e';g.lineWidth=1.4;line([l1,l2],[l1,l2-7])}
+      bx(hx-.03,hy-.03,s+.06,s+.12,2,'#8a5a32',7,'rgba(50,25,8,.6)');
+      for(let k=0;k<n;k++){const z=9+k*8;bx(hx,hy,s,s,8,shade(col,-k*.03),z,'rgba(80,70,50,.55)');faceY(hy+s+.001,hx+.12,hx+s-.12,z+4,z+5.4,'rgba(0,0,0,.18)');g.strokeStyle='rgba(255,255,255,.4)';g.lineWidth=.4;line(P(hx,hy+s+.002,z+7.6),P(hx+s,hy+s+.002,z+7.6))}
+      faceY(hy+s+.002,hx+.08,hx+s-.08,9.6,11,'#2a1a10');
+      const zt=9+n*8;bx(hx-.04,hy-.04,s+.08,s+.08,3,'#c4cad0',zt,'rgba(40,46,52,.6)');
+      for(let k=0;k<4;k++){const[bxx,byy]=P(hx+s/2+(hash(k,a)-.5)*.5,hy+s+.1+hash(a,k)*.15,12+hash(k,b)*14);ell(bxx,byy,1.1,.8,'#f2b51e','#2a1a10',.3);ell(bxx-.6,byy-.8,.8,.5,'rgba(255,255,255,.8)')}}
+    // a little table with honey jars
+    {bx(x+.3,y+1.55,.3,.2,2,'#8a5a32',9,'rgba(50,25,8,.6)');for(const[a,b]of[[.32,1.57],[.57,1.57],[.32,1.72],[.57,1.72]]){const[p,q]=P(x+a,y+b);g.strokeStyle='#5a3418';g.lineWidth=1;line([p,q],[p,q-9])}
+      for(const a of[.38,.5]){const[p,q]=P(x+a,y+1.65,11);cylinder(p,q,2,1,4,'#f2a21e','#9a5a00','#ffcf6a');ell(p,q-4.6,2,1,'#f4efe2')}}
+    signN(x+.1,y+1.92,'honey');
+  }else if(id==='fishpond'){
+    shadow(cx,cy+4,62,18);poly(quad(x,y,.03,2),'#8aaf5e');
+    // an irregular pond: rim stones, a muddy shelf, deep water in the middle
+    const shore=(sc)=>{const out=[];for(let i=0;i<36;i++){const t=i/36*Math.PI*2,rr=.82*sc*(1+.08*Math.sin(t*3+1)+.05*Math.sin(t*5));out.push(P(x+1+Math.cos(t)*rr,y+1+Math.sin(t)*rr*.92))}return out};
+    poly(shore(1.07),'#9c8f72');poly(shore(1),'#6b6a4a');
+    const wq=shore(.94);poly(wq,'#3b7fa8');
+    g.save();clipPts(wq);const[wx,wy]=P(x+1,y+1);const dg=g.createRadialGradient(wx+4,wy+2,4,wx,wy,60);dg.addColorStop(0,'#1f5a82');dg.addColorStop(.6,'#3b86b4');dg.addColorStop(1,'#7cc0d6');g.fillStyle=dg;g.fillRect(wx-80,wy-50,160,100);
+      g.strokeStyle='rgba(255,255,255,.35)';g.lineWidth=.8;for(let i=0;i<7;i++){const[px,py]=P(x+.5+hash(i,6),y+.5+hash(6,i));line([px-6,py],[px+6,py])}
+      for(const[a,b,r]of[[.75,.85,6],[1.25,1.2,4]]){const[px,py]=P(x+a,y+b);g.strokeStyle='rgba(255,255,255,.3)';g.lineWidth=.6;g.beginPath();g.ellipse(px,py,r,r*.45,0,0,Math.PI*2);g.stroke();g.beginPath();g.ellipse(px,py,r*1.8,r*.8,0,0,Math.PI*2);g.stroke()}
+      {const[fx,fy]=P(x+1.1,y+.8);g.fillStyle='rgba(240,140,50,.55)';g.beginPath();g.ellipse(fx,fy,3.4,1.4,-.2,0,Math.PI*2);g.fill();poly([[fx+3,fy],[fx+5.5,fy-1.6],[fx+5.5,fy+1.4]],'rgba(240,140,50,.55)')}
+    g.restore();
+    for(let i=0;i<36;i++){if(i%2)continue;const p=shore(1.02)[i];ell(p[0],p[1],3.2+hash(i,3)*2,1.8+hash(3,i),mixC('#b8b0a0','#8a8274',hash(i,8)),'rgba(60,56,48,.5)',.4)}
+    // lily pads with flowers
+    for(const[a,b,f]of[[.55,1.15,1],[.7,1.3,0],[1.35,.75,1],[1.2,.62,0]]){const[px,py]=P(x+a,y+b);ell(px,py,5,2.4,'#4f9a3c','#2f6a2a',.4);poly([[px,py],[px+5,py-.6],[px+4.4,py+1.2]],'#3b86b4');if(f){for(let k=0;k<6;k++){const t=k/6*Math.PI*2;ell(px+Math.cos(t)*1.4,py-1+Math.sin(t)*.7,1.3,.7,'#f6b8cc')}ell(px,py-1,.7,.5,'#ffd23f')}}
+    // cattails and reeds at the back
+    for(let i=0;i<14;i++){const[px,py]=P(x+.3+hash(i,4)*.5,y+.3+hash(4,i)*.35);g.strokeStyle=i%3?'#5f8f3a':'#7aa84a';g.lineWidth=1;const hh=14+hash(i,1)*10;line([px,py],[px+(hash(i,2)-.5)*4,py-hh]);if(i%3===0){g.strokeStyle='#6b4423';g.lineWidth=2.4;line([px+(hash(i,2)-.5)*3.4,py-hh+5],[px+(hash(i,2)-.5)*3.7,py-hh+1])}}
+    // a wooden dock reaching in from the front right, a rowboat, a rod and a bucket
+    {const d0=x+1.45,d1=x+1.95,yA=y+1.25,yB=y+1.55;for(const[a,b]of[[d0+.02,yA],[d0+.02,yB],[d0+.25,yA],[d0+.25,yB]]){const[p,q]=P(a,b,0);g.strokeStyle='#4e331e';g.lineWidth=1.6;line([p,q+3],[p,q-4])}
+      poly([P(d0,yA,4),P(d1,yA,4),P(d1,yB,4),P(d0,yB,4)],'#b0834e','rgba(60,35,12,.6)',.6);g.strokeStyle='rgba(60,35,12,.5)';g.lineWidth=.5;for(let s=d0+.06;s<d1;s+=.06)line(P(s,yA,4),P(s,yB,4));
+      faceY(yB+.001,d0,d1,1.6,4,'#7a5430');faceX(d1+.001,yA,yB,1.6,4,'#5e4024');
+      const[bp,bq]=P(d0+.2,yA+.15,4),[wp,wq]=P(x+1.08,y+1.02);g.strokeStyle='#5e3a1c';g.lineWidth=1.4;line([bp,bq],[bp-12,bq-30]);g.strokeStyle='rgba(255,255,255,.75)';g.lineWidth=.5;g.beginPath();g.moveTo(bp-12,bq-30);g.quadraticCurveTo(wp+2,wq-16,wp,wq);g.stroke();ell(wp,wq,1.5,1.2,'#e0352b','#fff',.4);g.strokeStyle='rgba(255,255,255,.4)';g.lineWidth=.5;g.beginPath();g.ellipse(wp,wq+.5,4,1.6,0,0,Math.PI*2);g.stroke();
+      const[kp,kq]=P(d0+.38,yA+.2,4);cylinder(kp,kq,3,1.3,5,'#9aa6b0','#4a5660','#c4ccd4')}
+    {const[rp,rq]=P(x+.92,y+1.32);g.beginPath();g.moveTo(rp-14,rq-2);g.quadraticCurveTo(rp,rq+6,rp+14,rq-3);g.lineTo(rp+12,rq-6);g.quadraticCurveTo(rp,rq-1,rp-12,rq-5);g.closePath();g.fillStyle=lgr([rp,rq-6],[rp,rq+5],['#b8864e','#7a4e2a']);g.fill();g.strokeStyle='#4e2c12';g.lineWidth=.7;g.stroke();
+      g.beginPath();g.moveTo(rp-12,rq-5);g.quadraticCurveTo(rp,rq-1,rp+12,rq-6);g.quadraticCurveTo(rp,rq-3,rp-12,rq-5);g.fillStyle='#5a3418';g.fill();g.strokeStyle='#d9402f';g.lineWidth=.8;g.beginPath();g.moveTo(rp-13,rq-3.4);g.quadraticCurveTo(rp,rq+2.4,rp+13,rq-4.4);g.stroke()}
+    signN(x+.1,y+1.92,'fish');
+  }else if(id==='cider'){
+    shadow(cx,cy+6,62,20);yardN(x,y,'#b9a98a');
+    // an open timber press house: plank back and left walls, heavy posts, and a shingle roof whose open gable faces you
+    const x0=x+.15,y0=y+.15,w=1.3,d=1.15,h=27,rh=17,ov=.08,yh=y0+d,xm=x0+w/2,zr=h+rh,ze=h-ov*rh/(w/2);
+    isoBox(x0,y0,w,d,2.4,'#8a7c6b','#726656','#a99b84',null);g.strokeStyle='rgba(60,40,20,.3)';g.lineWidth=.4;for(let s2=.06;s2<w;s2+=.07)line(P(x0+s2,y0,2.4),P(x0+s2,yh,2.4));
+    const BW=(u,z)=>P(x0+u,y0,z),LW=(v,z)=>P(x0,y0+v,z);
+    fp(BW,[[0,2.4],[w,2.4],[w,h],[w/2,zr],[0,h]],'#6e4a2c');fp(LW,[[0,2.4],[d,2.4],[d,h],[0,h]],'#7d5534');
+    g.save();clipPts([[0,2.4],[w,2.4],[w,h],[w/2,zr],[0,h]].map(p=>BW(p[0],p[1])));g.strokeStyle='rgba(30,15,5,.35)';g.lineWidth=.5;for(let z=5;z<zr;z+=3.2)fl(BW,[0,z],[w,z]);g.restore();
+    g.strokeStyle='rgba(30,15,5,.35)';g.lineWidth=.5;for(let z=5;z<h;z+=3.2)fl(LW,[0,z],[d,z]);
+    fp(BW,[[0,2.4],[w,2.4],[w,h],[w/2,zr],[0,h]],'rgba(0,0,0,.2)');fp(LW,[[0,2.4],[d,2.4],[d,h],[0,h]],'rgba(0,0,0,.1)');
+    {const L=(s2,t)=>P(x0-ov+t*(xm-x0+ov),y0-ov+s2*(d+2*ov),ze+t*(zr-ze)),q=[L(0,0),L(1,0),L(1,1),L(0,1)];poly(q,lgr(L(0,0),L(0,1),['#3e342a','#55483a']));
+      g.strokeStyle='rgba(0,0,0,.3)';g.lineWidth=.5;for(let r=1;r<6;r++)line(L(0,r/6),L(1,r/6))}
+    // a rack of barrels lying on their sides against the back wall
+    for(let i=0;i<3;i++){const a2=x0+.62+i*.2,[p,q]=P(a2,y0+.16,9);ell(p,q,6.4,7.4,'#8a5a32','#3a2010',.6);ell(p,q,4.4,5.2,null,'rgba(60,30,10,.4)',.5);g.strokeStyle='#3d3f42';g.lineWidth=1;g.beginPath();g.ellipse(p,q,5.8,6.8,0,0,Math.PI*2);g.stroke();ell(p,q+2,.9,.9,'#3a2010')}
+    // the screw press: a tray, a slatted basket of pulp, an iron screw with a crossbar in a timber frame
+    {const px=x0+.42,py=y0+.68;bx(px-.25,py-.25,.5,.5,5,'#8a5a32',2.4,'rgba(50,25,8,.6)');const[c0,c1]=P(px,py,7.4);
+      const rr=10,hh=13;g.beginPath();g.moveTo(c0-rr,c1);g.lineTo(c0-rr,c1-hh);g.ellipse(c0,c1-hh,rr,rr*.42,0,Math.PI,0);g.lineTo(c0+rr,c1);g.ellipse(c0,c1,rr,rr*.42,0,0,Math.PI);g.closePath();g.fillStyle='#c9a46a';g.fill();
+      for(let k=-4;k<=4;k++){g.strokeStyle='#5a3418';g.lineWidth=1.6;const xx=c0+k*rr/4.5;line([xx,c1+rr*.42*Math.sqrt(1-(k/4.5)**2)],[xx,c1-hh+rr*.42*Math.sqrt(1-(k/4.5)**2)])}
+      ell(c0,c1-hh,rr,rr*.42,'#b8783a','#3a2010',.6);for(let i=0;i<8;i++)ell(c0-6+hash(i,2)*12,c1-hh-1.6+hash(2,i)*3,1.2,.8,i%2?'#d9402f':'#e8c25a');
+      for(const s2 of[-1,1]){g.strokeStyle='#4e331e';g.lineWidth=3;line([c0+s2*(rr+3),c1+2],[c0+s2*(rr+3),c1-hh-16])}poly([[c0-rr-5,c1-hh-18],[c0+rr+5,c1-hh-18],[c0+rr+5,c1-hh-14],[c0-rr-5,c1-hh-14]],'#6e4a2c','#3a2010',.7);
+      g.strokeStyle='#3d3f42';g.lineWidth=2.4;line([c0,c1-hh-14],[c0,c1-hh+2]);g.lineWidth=1.6;line([c0-9,c1-hh-6],[c0+9,c1-hh-4]);ell(c0,c1-hh+2,6,2.4,'#6e4a2c','#3a2010',.6)}
+    // posts, the front truss under the open gable, a lantern, and the near roof slope
+    for(const[a2,b2]of[[x0+w,y0],[x0+w,yh],[x0,yh]]){const[p,q]=P(a2,b2,2.4);g.strokeStyle='#4e331e';g.lineWidth=3.4;line([p,q],[p,q-h+2.4]);g.strokeStyle='rgba(255,220,180,.25)';g.lineWidth=1;line([p-1,q],[p-1,q-h+2.4])}
+    g.strokeStyle='#5a3a22';g.lineWidth=2.6;line(P(x0,yh,h),P(x0+w,yh,h));line(P(x0+w,yh,h),P(x0+w,y0,h));
+    g.lineWidth=2;line(P(x0,yh,h),P(xm,yh,zr-1));line(P(xm,yh,zr-1),P(x0+w,yh,h));line(P(xm,yh,zr-1),P(xm,yh,h));g.lineWidth=1.4;line(P(xm,yh,h+6),P(x0+w*.25,yh,h+.5));line(P(xm,yh,h+6),P(x0+w*.75,yh,h+.5));
+    {const[lp,lq]=P(xm,yh-.02,h-1);g.strokeStyle='#2a2a2a';g.lineWidth=.6;line([lp,lq],[lp,lq+3]);poly([[lp-2,lq+3],[lp+2,lq+3],[lp+1.6,lq+8],[lp-1.6,lq+8]],'#ffd66a','#2a2a2a',.5);ell(lp,lq+6,5,4,'rgba(255,214,106,.25)')}
+    {const R=(s2,t)=>P(xm+t*(x0+w+ov-xm),y0-ov+s2*(d+2*ov),zr-t*(zr-ze));poly([R(0,0),R(1,0),R(1,1),R(0,1)],lgr(R(0,0),R(0,1),['#7a6a58','#5a4c3e','#3e342a']));
+      for(let r=0;r<6;r++){const t0=r/6;g.strokeStyle='rgba(0,0,0,.38)';g.lineWidth=.55;line(R(0,t0),R(1,t0));g.strokeStyle='rgba(0,0,0,.2)';g.lineWidth=.35;for(let k=0;k<12;k++){const s2=(k+(r%2)*.5)/12;if(s2<1)line(R(s2,t0),R(s2,(r+1)/6))}}
+      g.strokeStyle='#3e342a';g.lineWidth=1.6;line(P(xm,y0-ov,zr+.6),P(xm,yh+ov,zr+.6));g.strokeStyle='#5a3a22';g.lineWidth=1.6;line(P(xm,yh+ov,zr),P(x0-ov,yh+ov,ze));line(P(xm,yh+ov,zr),P(x0+w+ov,yh+ov,ze))}
+    // out front: a standing barrel with a tap, crates of apples
+    {const[p,q]=P(x+1.68,y+1.25);barrelN(p,q,7,15);ell(p+2,q-5,1.2,.8,'#c9a04a')}
+    crateN(x+1.45,y+1.55,.34,.26,8,0,'t_apple');crateN(x+1.12,y+1.68,.34,.26,8,0,'t_apple');crateN(x+1.18,y+1.62,.3,.22,7,8,'t_cherry');
+    signN(x+.1,y+1.92,'applecider');
+  }else drawMakerC(x,y,id);
+}
+
+// the original cartoon-style buildings (Settings > Art style > Cartoon)
+function drawMakerC(x,y,id){
   const[cx,cy]=P(x+1,y+1);shadow(cx,cy+6,60,19);
   poly(quad(x,y,.06,2),'rgba(170,130,70,.3)');
   if(id==='feedmill'){
@@ -3904,7 +4163,10 @@ function drawMaker(x,y,id){
 function makerJobs(o,now){
   const q=o.q||[],done=q.filter(j=>j.end<=now),cur=q.find(j=>j.end>now)||null;return{q,done,cur};
 }
-const SMOKE={feedmill:[1.5,.5,64],press:[1.38,1.26,42],kitchen:[1.32,.54,58],beehive:[1,1,30],fishpond:[1,1,10],cider:[1.3,.6,44]};
+const SMOKE_C={feedmill:[1.5,.5,64],press:[1.38,1.26,42],kitchen:[1.32,.54,58],beehive:[1,1,30],fishpond:[1,1,10],cider:[1.3,.6,44]};
+// where a working building puffs: the bin vent, the press hopper, the kitchen chimney, the hive tops, the pond, the press house
+const SMOKE_N={feedmill:[1.42,.52,64],press:[.76,.68,50],kitchen:[1.48,.7,62],beehive:[1.45,.5,40],fishpond:[1,1,8],cider:[.75,.8,46]};
+const SMOKE=new Proxy({},{get:(t,k)=>(NATURAL?SMOKE_N:SMOKE_C)[k]});
 const LIVE_DECO=new Set(['gate','windmill','balloon','fountain','pond','goldcan','sprinkler']);
 function drawObj(x,y,o,now,part){
   if(o.k==='plot'){if(o.crop)drawPlot(x,y,o,now);return}
@@ -3925,7 +4187,7 @@ function drawObj(x,y,o,now,part){
   }
   if(o.k==='bld'){const lv=o.id==='barn'?(o.lv||barnLv()):(o.lv||houseLv());blit(sprite('b:'+o.id+':'+lv,BOX2,()=>drawBuilding(0,0,{id:o.id,lv})),x,y)}
   if(o.k==='mk'){
-    blit(sprite('m:'+o.id,BOX2,()=>drawMaker(0,0,o.id)),x,y);
+    blit(sprite('m:'+o.id+':'+mkLv(o),BOX2,()=>drawMaker(0,0,o.id,mkLv(o))),x,y);
     if(ICON_MODE)return;
     const{done,cur}=makerJobs(o,now),[px,py]=P(x+1,y+1);
     if(cur){
@@ -5471,10 +5733,10 @@ function showTitle(){
 
 /* ================= materials, barn storage and building upgrades ================= */
 const MATS={
-  board:{name:'Boards',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="11" width="32" height="8" rx="2" fill="#d39a5a" stroke="#6b3c15" stroke-width="2"/><rect x="6" y="21" width="30" height="8" rx="2" fill="#b4723a" stroke="#6b3c15" stroke-width="2"/><path d="M10 15h8M14 25h10" stroke="#8a5530" stroke-width="1.4"/></svg>'},
-  nail:{name:'Nails',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><g stroke="#3a4650" stroke-width="2" fill="#c4ccd4" stroke-linejoin="round"><rect x="7" y="6" width="12" height="4" rx="1"/><path d="M11 10h4v17l-2 6-2-6z"/><rect x="21" y="10" width="12" height="4" rx="1"/><path d="M25 14h4v15l-2 5-2-5z"/></g></svg>'},
-  brick:{name:'Bricks',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><g stroke="#6b2a20" stroke-width="2" fill="#cf5f4f"><rect x="3" y="21" width="16" height="9" rx="1"/><rect x="21" y="21" width="16" height="9" rx="1"/><rect x="12" y="10" width="16" height="9" rx="1"/></g></svg>'},
-  paint:{name:'Paint',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 15h22l-2 19H11z" fill="#3f9ad8" stroke="#1f4f7a" stroke-width="2" stroke-linejoin="round"/><ellipse cx="20" cy="15" rx="11" ry="3.5" fill="#8fd0f5" stroke="#1f4f7a" stroke-width="2"/><path d="M9 15q0-10 11-10t11 10" fill="none" stroke="#3a3a3a" stroke-width="2"/><path d="M14 18v7" stroke="#8fd0f5" stroke-width="2.4" stroke-linecap="round"/></svg>'}
+  board:{name:'Boards',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="mb1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8b878"/><stop offset="1" stop-color="#b47a40"/></linearGradient><linearGradient id="mb2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a060"/><stop offset="1" stop-color="#9a6230"/></linearGradient></defs><path d="M5 26l26-6 4 2-26 6z" fill="#7a4a22"/><path d="M3 22l28-7v5L3 27z" fill="url(#mb2)" stroke="#5a3418" stroke-width="1"/><path d="M31 15l4 2v5l-4-2z" fill="#c98a4b" stroke="#5a3418" stroke-width="1"/><path d="M5 14l28-7v5L5 19z" fill="url(#mb1)" stroke="#5a3418" stroke-width="1"/><path d="M33 7l3 1.6v5L33 12z" fill="#e0b070" stroke="#5a3418" stroke-width="1"/><path d="M8 15.5q8-2.6 13-3.4t10-3M7 24.5q9-3 14-3.6t9-3" fill="none" stroke="#8a5a2a" stroke-width=".7" opacity=".7"/><ellipse cx="17" cy="13" rx="1.6" ry=".9" fill="none" stroke="#8a5a2a" stroke-width=".6" transform="rotate(-14 17 13)"/></svg>'},
+  nail:{name:'Nails',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="mn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#eef2f5"/><stop offset=".5" stop-color="#a9b3bc"/><stop offset="1" stop-color="#5f6a74"/></linearGradient></defs><g stroke="#3a4650" stroke-width=".9"><path d="M11.5 9h3l-.3 20-1.2 4-1.2-4z" fill="url(#mn)"/><ellipse cx="13" cy="8.6" rx="5" ry="1.8" fill="#c4ccd4"/><path d="M23.5 13h3l-.3 17-1.2 4-1.2-4z" fill="url(#mn)" transform="rotate(14 25 23)"/><ellipse cx="25" cy="12.6" rx="5" ry="1.8" fill="#c4ccd4" transform="rotate(14 25 23)"/></g><path d="M12.2 10v17" stroke="#fff" stroke-width=".7" opacity=".7"/></svg>'},
+  brick:{name:'Bricks',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="mk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e07a62"/><stop offset="1" stop-color="#a8402e"/></linearGradient></defs><g stroke="#5a1f15" stroke-width="1"><path d="M3 22h16v8H3z" fill="url(#mk)"/><path d="M21 22h16v8H21z" fill="url(#mk)"/><path d="M12 13h16v8H12z" fill="url(#mk)"/><path d="M19 22l2-1.5M37 22l-1.5-1.5M28 13l1.5-1.5H14L12 13" fill="#8a3324"/></g><g fill="#5a1f15" opacity=".35"><circle cx="7" cy="25" r=".6"/><circle cx="13" cy="27" r=".7"/><circle cx="26" cy="26" r=".6"/><circle cx="32" cy="24.5" r=".7"/><circle cx="18" cy="16" r=".6"/><circle cx="23" cy="18" r=".7"/></g><path d="M4 23h14M22 23h14M13 14h14" stroke="#ffb09a" stroke-width=".8" opacity=".7"/></svg>'},
+  paint:{name:'Paint',svg:'<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="mp" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e8edf0"/><stop offset=".5" stop-color="#b9c2c9"/><stop offset="1" stop-color="#78828a"/></linearGradient></defs><path d="M9 14h22v18a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3z" fill="url(#mp)" stroke="#3a4650" stroke-width="1.1"/><rect x="9" y="19" width="22" height="9" fill="#3f9ad8"/><path d="M14 23.5h12" stroke="#fff" stroke-width="1.4" opacity=".8"/><ellipse cx="20" cy="14" rx="11" ry="3.2" fill="#3f9ad8" stroke="#3a4650" stroke-width="1.1"/><ellipse cx="20" cy="13.6" rx="8.4" ry="2" fill="#6fc0f0"/><path d="M26 15.5c1 3 1 5-.2 6.4" stroke="#3f9ad8" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M9 14q0-9 11-9t11 9" fill="none" stroke="#3a4650" stroke-width="1.2"/><path d="M11 16v15" stroke="#fff" stroke-width="1" opacity=".5"/></svg>'}
 };
 const BARN_CAP=[0,60,150,250,400,600,900];
 const BARN_UP=[null,{coins:400,mats:{board:2,nail:2}},{coins:2000,mats:{board:14,nail:14,brick:6}},{coins:4500,mats:{board:20,nail:20,brick:12,paint:6}},
@@ -5495,7 +5757,7 @@ function barnFull(){const t=performance.now();if(t-lastFull>5000){lastFull=t;SFX
 // Harvests never go to waste: what does not fit in the barn is sold straight away at the market price.
 let overSold=0,overTold=0;
 // Each ripe plot gives this many crops (double with fertilizer); a golden plot gives 1 golden crop plus the rest as normal ones.
-const CROP_YIELD=3;
+const CROP_YIELD=2;
 function stash(id,n){const k=Math.max(0,Math.min(n,room()));if(k>0)S.goods[id]=(S.goods[id]||0)+k;const over=n-k;
   if(over>0){const c=sellPrice(id)*over;S.coins+=c;stat('earned',c);overSold+=c;const t=performance.now();if(t-overTold>25000){overTold=t;toast('Your barn is full, so the extra goods were sold at the market price. Upgrade the barn to keep more.')}}
   return n}
@@ -5525,7 +5787,7 @@ function upgradeBox(title,c,label,onGo){
 }
 // One crop is in demand each day and sells for 50% more at the barn.
 function hotItem(){if(!S)return null;const pool=Object.keys(CROPS).filter(c=>CROPS[c].lvl<=S.level);return pool[Math.floor(hash(Math.floor(Date.now()/864e5)*.37,5.1)*pool.length)]}
-function sellPrice(id){return Math.round(ITEMS[id].sell*(id===hotItem()?1.5:1))}
+function sellPrice(id){return Math.max(1,Math.round(ITEMS[id].sell*BARN_RATE*(id===hotItem()?1.5:1)))}
 function sellGood(id,n){
   n=Math.min(n,have(id));if(n<=0)return;
   const c=sellPrice(id)*n;takeGood(id,n);S.coins+=c;stat('sell',n);stat('earned',c);SFX.coin();toast('Sold '+n+' '+ITEMS[id].name.toLowerCase()+' for '+c.toLocaleString()+' coins.');changed();rerender();
@@ -5616,14 +5878,19 @@ function feedAll(only){
   else toast('No hungry animals right now.');
 }
 /* ================= production buildings ================= */
+// Building upgrades: more job slots and quicker work for coins and materials.
+const MK_UP=[null,{slots:3,speed:1},{slots:4,speed:.85},{slots:5,speed:.7}];
+function mkLv(o){return Math.min(3,o.lv||1)}
+function mkSlots(o){return MK_UP[mkLv(o)].slots}
+function mkUpCost(o){const c=MAKERS[o.id].cost,lv=mkLv(o);return lv===1?{coins:c*2,mats:{board:8,nail:8,paint:2}}:lv===2?{coins:c*4,mats:{board:14,nail:14,brick:8,paint:6}}:null}
 function makerAdd(key,i){
   const o=S.tiles[key];if(!o)return;const M=MAKERS[o.id],r=M.recipes[i],now=Date.now();o.q=o.q||[];
   if(S.level<recipeLvl(r)){SFX.error();toast('That recipe unlocks at Level '+recipeLvl(r)+'.');return}
-  if(o.q.length>=3){SFX.error();toast('The '+M.name+' can line up 3 jobs. Collect finished goods to make room.');return}
+  if(o.q.length>=mkSlots(o)){SFX.error();toast(mkLv(o)===1?'The '+M.name+' can line up 3 jobs. Collect finished goods to make room.':'All job slots are full. Collect finished goods to make room.');return}
   for(const k in r.in)if(have(k)<r.in[k]){SFX.error();toast('You need '+r.in[k]+' '+ITEMS[k].name.toLowerCase()+' in the barn.');return}
   for(const k in r.in)takeGood(k,r.in[k]);
-  const start=Math.max(now,...o.q.map(j=>j.end));o.q.push({r:i,start,end:start+r.time*1000});
-  SFX.plant();toast(M.name+': making '+r.n+' '+ITEMS[r.out].name.toLowerCase()+', ready in '+fmt((start-now)/1000+r.time)+'.');changed();rerender();
+  const t=Math.round(r.time*MK_UP[mkLv(o)].speed),start=Math.max(now,...o.q.map(j=>j.end));o.q.push({r:i,start,end:start+t*1000});
+  SFX.plant();toast(M.name+': making '+r.n+' '+ITEMS[r.out].name.toLowerCase()+', ready in '+fmt((start-now)/1000+t)+'.');changed();rerender();
 }
 function makerCollect(key){
   const o=S.tiles[key];if(!o)return false;const M=MAKERS[o.id],now=Date.now(),[x,y]=key.split(',').map(Number),got={};let xp=0,full=false;
@@ -5647,9 +5914,10 @@ function showMaker(key){
   modal({title:M.name,color:'green',wide:true,live:true,render(b){
     const o=S.tiles[key];if(!o)return;const now=Date.now(),{q,done}=makerJobs(o,now),p=el('div','store');
     const top=el('div','home-top'),img=el('img'),ik='buildings:'+o.id;if(!ICONS[ik])ICONS[ik]=renderIcon('buildings',o.id);img.src=ICONS[ik];img.alt='';top.appendChild(img);
-    const info=el('div');info.appendChild(el('strong',null,M.name));info.appendChild(el('p',null,M.desc+' It lines up to 3 jobs and works on them one after another, even while you are away.'));
+    const info=el('div'),lvM=mkLv(o);info.appendChild(el('strong',null,M.name+(lvM>1?' · '+tr('Level')+' '+lvM:'')));
+    if(lvM===1)info.appendChild(el('p',null,M.desc+' It lines up to 3 jobs and works on them one after another, even while you are away.'));else{info.appendChild(el('p',null,M.desc));info.appendChild(el('p','hint','Upgraded: more job slots and faster work.'))}
     const qs=el('div','mqueue');
-    for(let i=0;i<3;i++){
+    for(let i=0;i<mkSlots(o);i++){
       const j=q[i];if(!j){qs.appendChild(el('div','slot empty','Empty slot'));continue}
       const r=M.recipes[j.r],ready=j.end<=now,run=!ready&&j.start<=now,s=el('div','slot'+(ready?' done':'')),im=el('img');im.src=itemIcon(r.out);im.alt='';s.appendChild(im);
       s.appendChild(el('span',null,r.n+' '+ITEMS[r.out].name));
@@ -5668,11 +5936,13 @@ function showMaker(key){
       flow.appendChild(el('span','arrow','→'));
       const out=el('span','req ok'),im=el('img');im.src=itemIcon(r.out);im.alt='';out.appendChild(im);out.appendChild(el('b',null,'×'+r.n));out.title=ITEMS[r.out].name;flow.appendChild(out);
       row.appendChild(flow);
-      const ok=!locked&&q.length<3&&Object.keys(r.in).every(k=>have(k)>=r.in[k]),go=el('button','go',locked?'Level '+lv:'Make');go.disabled=!ok;go.onclick=()=>makerAdd(key,i);row.appendChild(go);
-      row.appendChild(el('small',null,Object.keys(r.in).map(k=>ITEMS[k].name+' ×'+r.in[k]).join(' + ')+' → '+ITEMS[r.out].name+' ×'+r.n+' in '+fmt(r.time)+(ITEMS[r.out].cat==='made'?'. Sells for '+ITEMS[r.out].sell+' each.':'.')));
+      const ok=!locked&&q.length<mkSlots(o)&&Object.keys(r.in).every(k=>have(k)>=r.in[k]),go=el('button','go',locked?'Level '+lv:'Make');go.disabled=!ok;go.onclick=()=>makerAdd(key,i);row.appendChild(go);
+      row.appendChild(el('small',null,Object.keys(r.in).map(k=>ITEMS[k].name+' ×'+r.in[k]).join(' + ')+' → '+ITEMS[r.out].name+' ×'+r.n+' in '+fmt(Math.round(r.time*MK_UP[mkLv(o)].speed))+(ITEMS[r.out].cat==='made'?'. Sells for '+sellPrice(r.out)+' each.':'.')));
       list.appendChild(row);
     });
-    p.appendChild(list);b.appendChild(p);
+    p.appendChild(list);
+    {const up=mkUpCost(o);if(up)p.appendChild(upgradeBox('Upgrade this building',up,'Upgrade building',()=>{o.lv=mkLv(o)+1;stat('mkUp');toast('Building upgraded!')}));else p.appendChild(el('p','hint','Fully upgraded!'))}
+    b.appendChild(p);
   }});
 }
 
@@ -5697,7 +5967,7 @@ function newOrder(){
   const lines=Math.min(pool.length,1+(S.level>=4&&R()<.5?1:0)+(S.level>=8&&R()<.35?1:0)),items=[],used=new Set();
   while(items.length<lines){const id=pick(pool);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=60+S.level*25+R()*90;items.push([id,Math.max(1,Math.min(makeCap(id,20),Math.round(want/it.sell)))])}
   const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0),a=adOn(),mult=1.2+R()*.25+(a?ADS[a].boost:0);
-  return{id:Date.now().toString(36)+R().toString(36).slice(2,6),who:who.id,items,coins:Math.max(5,Math.round(base*mult/5)*5),xp:2+Math.round(base/80),base,made:Date.now()};
+  return{id:Date.now().toString(36)+R().toString(36).slice(2,6),who:who.id,items,coins:Math.max(5,Math.round(base*mult/5)*5),xp:3+Math.round(base/40),base,made:Date.now()};
 }
 // Orders and contracts you cannot fill do not block the board forever: after a while they leave and a new one comes.
 const POST_LIFE=30*60e3;
@@ -5776,7 +6046,7 @@ const TOWNS=[
 const TRUCK_CAP=[0,20,35,60],TRUCK_UP=[null,{coins:1500,mats:{board:10,nail:10}},{coins:5000,mats:{board:20,nail:20,paint:8}}];
 const DRIVE=5000; // ms to drive off screen or back in: an easy, unhurried pace
 const BOARD=2600; // ms for Dale to walk to the cab, climb in and shut the door
-function tripSecs(c){return Math.max(12,Math.min(20,c.time*2))}
+function tripSecs(c){return Math.max(60,Math.min(240,c.time*24))} // a real trip to town: one to four minutes
 function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
 function truckCap(){return TRUCK_CAP[dv().lv||1]}
 // Dale's first job on a new farm is a small wheat run you can fill right after the first harvest.
@@ -5794,7 +6064,7 @@ function newContract(){
   while(items.length<lines){const id=pick(src);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=80+S.level*35+R()*100;
     let n=Math.max(1,Math.min(makeCap(id,Math.floor(cap/lines)),Math.round(want/it.sell)));if(early)n=Math.min(n,Math.max(2,have(id)||(S.level<3?3:5)));items.push([id,n]);count+=n}
   const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0);
-  return{made:Date.now(),id:Date.now().toString(36)+R().toString(36).slice(2,6),to:town.name,items,coins:Math.round(base*(1.15+R()*.15)/5)*5,xp:4+Math.round(base/22),time:5+Math.floor(R()*6),base};
+  return{made:Date.now(),id:Date.now().toString(36)+R().toString(36).slice(2,6),to:town.name,items,coins:Math.round(base*(1.15+R()*.15)/5)*5,xp:6+Math.round(base/12),time:5+Math.floor(R()*6),base};
 }
 function tickDeliv(){
   if(!S||VIS)return;const d=dv(),now=Date.now();
@@ -6358,7 +6628,7 @@ function finishJob(j,now){
   for(const[x,y]of j.tiles){
     const k=x+','+y,o=S.tiles[k];
     if(j.kind==='plow'){
-      if((!occ[k]||(o&&o.k==='plot'&&o.fallow))){S.tiles[k]={k:'plot',crop:null,t:0};xp+=1;stat('plow');burst(x,y,['#8b5a2e','#a87a4c']);spent+=(j.costs&&j.costs[k])||0}
+      if((!occ[k]||(o&&o.k==='plot'&&o.fallow))){if(!occ[k])xp+=1;S.tiles[k]={k:'plot',crop:null,t:0};stat('plow');burst(x,y,['#8b5a2e','#a87a4c']);spent+=(j.costs&&j.costs[k])||0}
       else refund(j,k);
     }else if(j.kind==='plant'){
       if(o&&o.k==='plot'&&!o.fallow&&!o.crop){o.crop=j.seed;o.t=now;if(inSeason(j.seed))o.t-=CROPS[j.seed].grow*250;else if(season().id==='winter')o.t+=CROPS[j.seed].grow*200;if(Math.random()<.03)o.gold=true;xp+=CROPS[j.seed].xp;stat('plant');fxAdd({k:'seed',x,y})}
@@ -6921,8 +7191,8 @@ function shopCost(cat,d){return d.cash?0:(d.cost||0)}
 function canBuy(d){return d.cash?S.cash>=d.cash:S.coins>=(d.cost||0)}
 function shopTime(cat,d){return cat==='seeds'?d.grow:(cat==='trees'||cat==='animals')?d.every:null}
 function shopProfit(cat,id,d){
-  if(cat==='seeds')return(ITEMS[id].sell*CROP_YIELD-(have(id)?0:d.cost))/(d.grow/60);
-  if(cat==='trees'||cat==='animals')return ITEMS[(cat==='animals'?'a_':'t_')+id].sell/(d.every/60);
+  if(cat==='seeds')return(sellPrice(id)*CROP_YIELD-(have(id)?0:d.cost)-PLOW_COST)/(d.grow/60);
+  if(cat==='trees'||cat==='animals')return sellPrice((cat==='animals'?'a_':'t_')+id)/(d.every/60);
   return null;
 }
 function shakeEl(e){if(!e)return;e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');setTimeout(()=>e.classList.remove('shake'),450)}
@@ -6984,7 +7254,7 @@ function renderShop(body){
     if(cat==='seeds'||cat==='trees'||cat==='animals'){
       const sid=cat==='seeds'?id:(cat==='animals'?'a_':'t_')+id;
       stat2(MI.clock,fmt(shopTime(cat,d)),(cat==='seeds'?'Ready in ':'Every ')+fmt(shopTime(cat,d)));
-      stat2('<span class="coin"></span>',String(ITEMS[sid].sell),'Sells for '+ITEMS[sid].sell);
+      stat2('<span class="coin"></span>',String(sellPrice(sid)),'Sells for '+sellPrice(sid));
       if(d.xp)stat2(MI.xp,'+'+d.xp,'+'+d.xp+' XP');
       card.appendChild(stx);
       if(cat==='seeds'&&CROP_SEASON[id]){const on=inSeason(id),se=CROP_SEASON[id],c=el('span','mseason'+(on?' on':''));c.innerHTML=MI[se]||'';c.appendChild(document.createTextNode(on?'In season':'Best in '+SEASON_NAME[se]));card.appendChild(c)}
@@ -7072,7 +7342,7 @@ function shopDetail(cat,id,d,locked,owned){
   const dl=el('dl'),row=(k,v,html)=>{dl.appendChild(el('dt',null,k));const dd=el('dd');if(html)dd.innerHTML=v;else dd.textContent=v;dl.appendChild(dd)};
   if(locked)row('Unlocks at','Level '+d.lvl);
   const tm=shopTime(cat,d);if(tm)row(cat==='seeds'?'Grow time':'Ready every',fmt(tm));
-  if(cat==='seeds'||cat==='trees'||cat==='animals'){const sid=cat==='seeds'?id:(cat==='animals'?'a_':'t_')+id;row('Sell price','<span class="coin"></span>'+ITEMS[sid].sell+(cat==='seeds'?' &times; '+CROP_YIELD:''),true)}
+  if(cat==='seeds'||cat==='trees'||cat==='animals'){const sid=cat==='seeds'?id:(cat==='animals'?'a_':'t_')+id;row('Sell price','<span class="coin"></span>'+sellPrice(sid)+(cat==='seeds'?' &times; '+CROP_YIELD:''),true)}
   if(cat==='seeds')row('Seeds per plot',have(id)?'Free from barn':'<span class="coin"></span>'+d.cost,!have(id));
   else if(!owned&&(d.cost||d.cash))row('Price',d.cash?'<span class="bill">$</span> '+d.cash:'<span class="coin"></span>'+d.cost.toLocaleString(),true);
   const pf=shopProfit(cat,id,d);if(pf!=null)row('Profit per minute','<span class="coin"></span>'+(Math.round(pf*10)/10).toLocaleString(),true);
