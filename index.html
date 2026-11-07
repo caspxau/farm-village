@@ -21,7 +21,7 @@
 if(!l){var n=(navigator.language||'en').toLowerCase().split('-')[0];if(L.indexOf(n)>=0)l=n}
 if(l&&L.indexOf(l)>=0)document.write('<script src="lang/'+l+'.js"><\/script>')})();
 </script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@500;600;700&family=Fraunces:opsz,wght@9..144,600..800&family=Nunito:wght@500..800&display=swap">
 <style>
 /* Layout: full-screen isometric farm canvas. Level/XP/coins/cash float top-left, farm menus top-right, neighbors bottom-left, tools bottom-right; every panel opens in one shared modal. One committed sunny-meadow world. */
 :root{
@@ -890,6 +890,189 @@ body.inhouse .tut,body.inhouse .rightcol{display:none}
 .toast{z-index:45}
 @media (max-width:640px){.hneeds em{width:56px}.hbtn{min-width:66px;min-height:50px;padding:3px 4px}.hbtn span{font-size:13.5px}.hbtn small{font-size:9.5px}.hleave{font-size:13px;padding:4px 10px}}
 @media (max-height:520px) and (orientation:landscape){.house{flex-direction:row;flex-wrap:wrap}.htop{width:100%;padding:4px 10px}.house canvas{flex:1;height:calc(100dvh - 52px)}.hbar{flex-direction:column;flex-wrap:nowrap;width:150px;border-top:0;border-left:3px solid var(--wood-d);padding:6px;gap:5px;justify-content:flex-start}.hbtn{min-height:40px;width:100%}}
+
+/* =====================================================================
+   DESIGN v3 — natural. Frosted cream glass over the farm, walnut-dark translucent bars, soft layered depth in place
+   of hard wooden lips, Fraunces (a warm serif) for titles and numbers, Nunito for everything else.
+   Only colour, type, borders, radius and shadow change here; sizes and layout stay with the rules above.
+   ===================================================================== */
+:root{
+  --f-display:'Fraunces',Georgia,'Times New Roman',serif;
+  --f-body:'Nunito','Fredoka','Trebuchet MS',system-ui,sans-serif;
+  --glass:rgba(253,250,243,.88);--glass-2:rgba(246,240,227,.93);
+  --bar:linear-gradient(rgba(46,36,24,.72),rgba(28,22,14,.76));--bar-line:rgba(255,255,255,.13);
+  --line:rgba(90,62,32,.15);--line-2:rgba(90,62,32,.26);
+  --ink:#2c2217;--ink-soft:#6a5a48;
+  --leaf:#4e8a3a;--leaf-hi:#6aa650;--leaf-d:#3a6b2a;
+  --sky:#3d7fbf;--sky-hi:#8cc0ea;--sky-d:#2a5f94;
+  --gold:#d9a53a;--gold-hi:#f1cf7a;--gold-d:#8a6216;
+  --berry:#c2557a;--danger:#c4513e;--danger-d:#8a3122;
+  --wood-d:rgba(74,52,28,.26);
+  --sh-1:0 1px 2px rgba(30,20,10,.12),0 2px 8px rgba(30,20,10,.1);
+  --sh-2:0 2px 6px rgba(30,20,10,.14),0 10px 28px rgba(30,20,10,.22);
+  --sh-3:0 6px 16px rgba(20,12,4,.22),0 24px 60px rgba(20,12,4,.34);
+  --blur:saturate(1.3) blur(12px);
+  --sh-press:var(--sh-1);--sh-float:var(--sh-2);--sh-inset:inset 0 1px 0 rgba(255,255,255,.7);
+  --grain:linear-gradient(transparent,transparent);
+  --parch:linear-gradient(#fdfaf3,#f5eedd);
+  --wood-bg:var(--bar);--paper-bg:linear-gradient(var(--glass),var(--glass-2));
+  --btn:linear-gradient(#fdfaf3,#efe6d3);
+  --btn-sh:inset 0 1px 0 rgba(255,255,255,.7),0 1px 0 rgba(0,0,0,.18),0 4px 12px rgba(20,12,4,.18);
+}
+body{font-family:var(--f-body);letter-spacing:.1px}
+.outline{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.42),0 0 1px rgba(0,0,0,.3)}
+.outline-s{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.farmfx{background:radial-gradient(ellipse at 10% -12%,rgba(255,236,190,.3),rgba(255,226,170,.08) 45%,rgba(255,226,170,0) 72%),radial-gradient(ellipse at 50% 46%,rgba(16,26,8,0) 55%,rgba(16,26,8,.12) 78%,rgba(16,26,8,.38) 100%)}
+/* glass surfaces floating over the farm */
+.qtrack,.goals,.pop,.ocard,.tut,.visitbar,.seedpill,.needpill,.tsub{background:linear-gradient(var(--glass),var(--glass-2));-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid rgba(255,255,255,.65);box-shadow:var(--sh-2)}
+.hud,.dock,.modesw{background:var(--bar);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--bar-line);box-shadow:var(--sh-2),inset 0 1px 0 rgba(255,255,255,.08)}
+/* ---- top bar ---- */
+.hud{border-radius:18px}
+.hud .pill{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);color:#fff}
+.hud .pill.coins,.hud .pill.cashp,.wxchip.s-winter,.wxchip.s-autumn,.wxchip.s-spring{background:rgba(255,255,255,.09)}
+.hud .pill b{color:#fbf6ea;font-family:var(--f-display);font-weight:700;letter-spacing:0}
+.hud .coin{border:1px solid #7a560f;background:radial-gradient(circle at 34% 30%,#fff7da 0 9%,#f1cf7a 28%,#d9a53a 62%,#a2741a 96%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.35)}
+.hud .bill{border:1px solid #2f5e22;background:linear-gradient(#8fc77c,#4e8a3a);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 1px 2px rgba(0,0,0,.35)}
+.hud .pill .plus{border:0;background:linear-gradient(#7fbd63,#4e8a3a);box-shadow:0 1px 2px rgba(0,0,0,.35);font-family:var(--f-body);font-weight:800}
+.hud .xpbox{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+.xpbox .xplabel{color:rgba(251,246,234,.72)}.xpbox .xplabel b{color:#cfe6ff}
+.hud .xpbar{border:0;background:rgba(0,0,0,.34);box-shadow:inset 0 1px 2px rgba(0,0,0,.45)}
+.hud .xpbar i{background:linear-gradient(90deg,#5ea4e2,#9fd0ff)}
+.hud .xptext{text-shadow:0 1px 1px rgba(0,0,0,.6);font-weight:800}
+.star{filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.star svg path:first-child{fill:#e3b04b;stroke:#6e4c14;stroke-width:2.2}.star svg path:nth-child(2){stroke:#fff2c4;opacity:.65}
+.star span{font-family:var(--f-display);font-weight:800;letter-spacing:0}
+.star::before{opacity:.3}
+.hud .wxchip b{color:#fbf6ea;font-family:var(--f-body);font-weight:800;font-size:13px}.hud .wxchip small{color:rgba(251,246,234,.7)}
+.fuelpill span{color:#f1cf7a}.fuelbar{background:rgba(0,0,0,.3)}
+.delta{font-family:var(--f-body);font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+/* ---- side cards ---- */
+.qtrack,.goals{border-radius:16px}
+.qhead,.goals-head{border-bottom:1px solid var(--line);font-family:var(--f-body);font-weight:800;color:var(--ink)}
+.qhead{background:linear-gradient(rgba(61,127,191,.16),rgba(61,127,191,.04))}
+.goals-head{background:linear-gradient(rgba(217,165,58,.24),rgba(217,165,58,.06))}
+.qhead small,.goals-head small{color:var(--ink-soft)}
+.qhead .nbface{border:1px solid var(--line-2)}
+.qhead i,.goals-head i{border:1px solid var(--line-2);background:#fff;color:var(--ink)}
+.qhead::after,.goals-head::after{border-right:2px solid var(--ink-soft);border-bottom:2px solid var(--ink-soft)}
+.goal{background:rgba(255,255,255,.6);border:1px solid transparent}
+.goal .chk{border:1.5px solid var(--line-2);border-radius:50%}
+.goal.done .chk{background:var(--leaf);border-color:var(--leaf-d)}
+.goal.ready{border-color:rgba(217,165,58,.55);background:#fff8e4}
+.goal .grew{color:var(--gold-d)}
+.claim{border:0;color:#3a2a10;background:linear-gradient(#f4d78a,#d9a53a)!important;box-shadow:0 1px 0 #8a6216,0 3px 8px rgba(138,98,22,.25)!important;font-family:var(--f-body)}
+.gbar,.qbody .gbar,.goal .gbar{background:rgba(90,62,32,.12)}
+.goal .gbar b{background:linear-gradient(90deg,#86bd64,#4e8a3a)}.qbody .gbar b{background:linear-gradient(90deg,#8cc0ea,#3d7fbf)}
+.qsteplist li::before{border:1.5px solid var(--line-2)}
+.rchip{border:1px solid var(--line)}
+.qskip{border:1px dashed var(--line-2);color:var(--ink-soft)}
+/* ---- bottom dock and its pop-ups ---- */
+.dock{border-radius:22px}
+.dock .mbtn,.popgrid .mbtn,.pop .tool,.poptools .tool,.mbtn{background:var(--btn);border:1px solid rgba(255,255,255,.55);box-shadow:var(--btn-sh)}
+.dock .mbtn:active,.pop .tool:active{box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(0,0,0,.25)}
+.dock .mbtn>em{color:rgba(251,246,234,.92);font-family:var(--f-body);font-weight:800;font-size:10.5px;letter-spacing:.2px;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+.dock .mbtn.full{background:linear-gradient(#ffe9e2,#f2c3b5)}
+.dock .mbtn.on,.dock .mbtn[aria-expanded="true"]{background:linear-gradient(#fff6dc,#f1cf7a);box-shadow:0 0 0 2px rgba(241,207,122,.8),0 6px 16px rgba(0,0,0,.3)}
+.dock .mbtn.on>em,.dock .mbtn[aria-expanded="true"]>em{background:#f1cf7a;color:#3a2a10;text-shadow:none;box-shadow:none}
+.dock .tool.market{border:1px solid rgba(255,255,255,.6);background:radial-gradient(circle at 40% 28%,#fff9e8,#f1cf7a 52%,#cf972e);box-shadow:0 0 0 4px rgba(34,27,19,.7),0 0 0 5px rgba(255,255,255,.2),0 12px 26px rgba(0,0,0,.38)}
+.dock .tool.market.on{background:radial-gradient(circle at 40% 28%,#ffffff,#fff0c4 55%,#f1cf7a)}
+.tool>span,.dock .tool.market>span{font-family:var(--f-body);font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+.pop .tool>span{color:var(--ink);text-shadow:none}
+.tool[aria-pressed="true"]{background:linear-gradient(#fff6dc,#f1cf7a);box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(217,165,58,.75),var(--sh-1)}
+#btnTool.alt{background:linear-gradient(#f0f7ff,#cfe4f7)}
+.pop{border-radius:20px;box-shadow:var(--sh-3)}
+.popgrid .mbtn>em{color:var(--ink-soft);font-weight:800;font-family:var(--f-body)}
+.badge{background:var(--danger);border:2px solid #fff;font-family:var(--f-body);font-weight:800;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.mbtn svg [stroke="#6b3c15"],.tool svg [stroke="#6b3c15"],.modesw svg [stroke="#6b3c15"],.needpill svg [stroke="#6b3c15"],.hneeds svg [stroke="#6b3c15"]{stroke:#5a3f24;stroke-width:1.5px}
+.mbtn.locked::after{background-color:#4a3420}
+/* ---- right column ---- */
+.modesw button{background:#fbf6ea;border:1px solid transparent;color:var(--ink);font-family:var(--f-body);font-weight:800}
+.modesw button[aria-pressed="true"]{background:linear-gradient(#6fab55,#4a8436);border-color:#3a6b2a;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.3)}
+.seedpill,.needpill{border-radius:14px}
+.seedpill b{font-weight:800}.seedpill small,.seedpill i{color:var(--ink-soft)}
+.needpill em{border:0;background:rgba(90,62,32,.14);height:7px}
+.needpill em i{background:linear-gradient(90deg,#86bd64,#4e8a3a)}.needpill .nrow:last-child em i{background:linear-gradient(90deg,#8cc0ea,#3d7fbf)}
+/* ---- toasts, tooltips, small cards ---- */
+.toast span{background:rgba(30,24,16,.86);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);color:#fbf6ea;border:1px solid rgba(255,255,255,.12);box-shadow:var(--sh-2);font-weight:700}
+.toast span::before{border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 1px 3px rgba(0,0,0,.4)}
+.toast span.k-warn{background:rgba(122,40,26,.9);border-color:rgba(255,190,170,.28)}
+.tip{background:rgba(30,24,16,.9);border-radius:10px;font-weight:700;box-shadow:var(--sh-1);padding:6px 11px}
+.ocard{border-radius:16px}.ocard strong{font-family:var(--f-display);font-weight:700}.ocard p{color:var(--ink-soft)}
+.tut{border-radius:16px}.tut small{color:var(--gold-d)}
+.visitbar strong{font-family:var(--f-display);font-weight:700}
+.rotbtn{border:1px solid rgba(255,255,255,.6);background:linear-gradient(#f4d78a,#d9a53a);box-shadow:var(--sh-2);font-family:var(--f-body);font-weight:800}
+/* ---- windows ---- */
+.modal{background:radial-gradient(circle at 50% 40%,rgba(18,12,4,.26),rgba(18,12,4,.56));-webkit-backdrop-filter:blur(4px) saturate(.9);backdrop-filter:blur(4px) saturate(.9)}
+.sheet{background:linear-gradient(#fdfaf3,#f6efe0);border:1px solid rgba(255,255,255,.75);border-radius:22px;box-shadow:var(--sh-3)}
+.sheet-head{background:linear-gradient(#4b88c2,#386c9f);border-bottom:0;box-shadow:inset 0 -1px 0 rgba(0,0,0,.14)}
+.sheet-head::before{background:linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,0))}
+.sheet-head.green{background:linear-gradient(#6a9e50,#4c8037)}
+.sheet-head.gold{background:linear-gradient(#ddb052,#bf8b2b)}
+.sheet-head.pink{background:linear-gradient(#cd7690,#a95470)}
+.sheet-head.red{background:linear-gradient(#c96b52,#a44a35)}
+.sheet-head h2{font-family:var(--f-display);font-weight:700;letter-spacing:.2px;filter:none}
+.close{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:#fff;font-family:var(--f-body);font-weight:800;font-size:16px;box-shadow:none}
+.close:hover{background:rgba(255,255,255,.32)}
+.tabs{background:rgba(90,62,32,.05);border-bottom:1px solid var(--line);padding:10px 12px}
+.tab{border:1px solid transparent;border-radius:999px;background:transparent;min-height:36px;padding:6px 14px;margin-bottom:0;color:var(--ink-soft);font-weight:800}
+.tab:hover{background:rgba(255,255,255,.75);transform:none}
+.tab[aria-selected="true"]{background:#fff;border-color:var(--line);color:var(--ink);box-shadow:var(--sh-1);transform:none;padding-bottom:6px}
+.card,.item,.order,.recipe,.statc,.nbcard,.cset,.rib,.mat,.slot,.unl,.seasonrow,.icard,.day,.reward,.citem,.adon{border:1px solid var(--line);border-radius:14px}
+.card,.item,.mat,.order,.recipe,.statc,.nbcard,.cset,.rib,.unl,.icard,.slot{background:#fff;box-shadow:var(--sh-1)}
+.card:not(.locked):hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+.card strong,.item strong{font-weight:800}
+.card small,.item small,.cset-head small,.rib small,.statc span,.hint,.empty{color:var(--ink-soft)}
+.card .owned{background:var(--leaf)}
+.go{font-family:var(--f-body);font-weight:800;letter-spacing:.2px;border-radius:12px;background:linear-gradient(#67a54d,#4a8436);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #335e24,0 4px 12px rgba(58,107,42,.28)}
+.go:not([disabled]):active{box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.25)}
+.go[disabled],.buy[disabled]{background:#d2c9b8;color:#fff;box-shadow:none}
+.buy{border-radius:10px;font-weight:800;background:linear-gradient(#67a54d,#4a8436);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 1px 0 #335e24,0 3px 8px rgba(58,107,42,.22)}
+.buy.cashbuy{background:linear-gradient(#4f9a6c,#377a50)}
+.buy.needhome{background:linear-gradient(#e0b352,#c08c2c);box-shadow:0 1px 0 #8a6216}
+.btn2{background:#fff;border:1px solid var(--line-2);box-shadow:var(--sh-1);font-weight:800;color:var(--ink)}
+.btn2:active{box-shadow:0 1px 1px rgba(0,0,0,.15)}
+.danger{background:linear-gradient(#d56a55,#b04a36)!important;border-color:#8a3122!important}
+.chip{background:#fff;border:1px solid var(--line-2);font-weight:800}
+.chip[aria-pressed="true"]{background:#f6dc95;border-color:#c48f2c}
+.opt{border:1px solid var(--line-2)}.opt[aria-pressed="true"]{border-color:var(--sky);box-shadow:0 0 0 2px rgba(61,127,191,.35);background:#eef6ff}
+.sw{box-shadow:0 0 0 1px var(--line-2)}
+.req{border:1px solid rgba(196,81,62,.35)}.req.ok{border-color:rgba(78,138,58,.4);background:#f2f9ec}
+.pbar{background:rgba(90,62,32,.12)}.pbar i{background:linear-gradient(90deg,#8cc0ea,#3d7fbf)}
+.upbox{border:1px dashed rgba(196,143,44,.6);background:#fffaf0}
+.hotbar{border:1px dashed rgba(196,143,44,.6);background:#fff7e6}
+.ad{border:1px dashed rgba(196,143,44,.6)}
+.newtag{border:1.5px solid #fff;box-shadow:var(--sh-1);background:linear-gradient(#d97a99,#b9546f)}
+.newtag.hot{background:linear-gradient(#e7a45a,#c87a2e)}
+.item .cnt,.citem i{background:var(--sky)}
+.statc b,.mat b,.big{font-family:var(--f-display);font-weight:700}
+.day.today{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-hi)}
+.order .nbface,.nbcard .nbface,.vface .nbface{border:1px solid var(--line-2)}
+.wdside{background:linear-gradient(#e7f1f9,#f8f3e6 38%);border-left:1px solid var(--line)}
+.wdstage{border:1px solid var(--line);background:radial-gradient(circle at 70% 18%,#fff6c8 0,#fff6c8 16px,transparent 18px),linear-gradient(#a7cfeb,#dcefff 58%,#8db35c 58%,#6f9a45)}
+.wdsubs{background:rgba(90,62,32,.04);border-bottom:1px solid var(--line)}
+.wfoot{border-top:1px solid var(--line);background:rgba(255,251,242,.92)}
+.icard.on{border-color:var(--sky);box-shadow:0 0 0 2px rgba(61,127,191,.4)}
+.icard .use{background:var(--sky);font-weight:800}.icard .use[aria-pressed="true"]{background:var(--leaf)}
+.pricetag{border:1px dashed rgba(196,143,44,.6)}
+.field input,.petname,.codebox,.langsel,.torient button{border:1px solid var(--line-2)}
+.setrow{border-bottom:1px solid var(--line)}
+.tog.on{background:linear-gradient(#6fab55,#4a8436);border-color:#3a6b2a}
+/* ---- farmhouse inside ---- */
+.htop,.hbar{border-color:var(--bar-line)}
+.hbtn{background:var(--btn);border:1px solid rgba(255,255,255,.55);box-shadow:var(--btn-sh)}
+.hbtn span{font-family:var(--f-display);font-weight:700}
+.hneeds em{border:0;background:rgba(255,255,255,.2)}
+/* ---- title screen ---- */
+.title{background:radial-gradient(ellipse 62% 42% at 50% 112%,#5c8b38 60%,transparent 61%),radial-gradient(ellipse 70% 38% at 12% 108%,#6c9c42 60%,transparent 61%),radial-gradient(ellipse 70% 38% at 90% 110%,#64953f 60%,transparent 61%),radial-gradient(circle at 82% 16%,rgba(255,247,214,.95) 0 40px,rgba(255,236,186,.32) 41px 92px,transparent 93px),linear-gradient(#86b8dc,#cbe3f1 55%,#ecf4ee)}
+.tlogo{font-family:var(--f-display);font-weight:800;letter-spacing:-1px;filter:drop-shadow(0 6px 16px rgba(24,34,14,.35))}
+.tlogo span{color:#fffaf0;-webkit-text-stroke:0;text-shadow:0 2px 0 rgba(70,48,24,.4),0 10px 24px rgba(40,30,10,.25)}
+.tlogo span:last-child{color:#f4d58a}
+.tlogo .leaf{border:0;background:radial-gradient(circle at 30% 30%,#acd583,#4e8a3a);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.tsub{border-radius:14px;color:var(--ink)}
+.title small{color:#2f4a22;font-weight:700}
+.cl{opacity:.6}
+@media (max-width:640px){.sheet,.sheet.small,.sheet.wide{border-radius:22px 22px 0 0}}
+@media (max-height:520px) and (orientation:landscape){.sheet,.sheet.small,.sheet.wide{border-radius:16px}}
 </style>
 </head>
 <body>
@@ -1184,7 +1367,8 @@ const PL_EXACT={
 'You reached Level 99, the top level. Well done, champion!':'Masz poziom 99, najwyższy w grze. Brawo, mistrzu!',
 'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
-'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.'
+'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.',
+'Art style':'Styl grafiki','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
 ,
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
@@ -1453,10 +1637,11 @@ if(I18N){
   document.documentElement.lang=LANG;
   // Luckiest Guy only has plain Latin letters. Polish and the Latin-script packs use Lilita One, a close chunky match;
   // other scripts bring their own fonts (and Arabic reads right to left).
-  const font=PACK&&PACK.font||{css:'family=Lilita+One',display:"'Lilita One'"};
-  const f=document.createElement('link');f.rel='stylesheet';f.href='https://fonts.googleapis.com/css2?'+font.css+'&display=swap';document.head.appendChild(f);
-  document.documentElement.style.setProperty('--f-display',font.display+",'Luckiest Guy','Arial Black',sans-serif");
-  if(font.body)document.documentElement.style.setProperty('--f-body',font.body+",'Fredoka','Trebuchet MS',system-ui,sans-serif");
+  // Fraunces and Nunito cover Polish and the other Latin-script packs; only packs with their own script bring a font.
+  const font=PACK&&PACK.font;
+  if(font){const f=document.createElement('link');f.rel='stylesheet';f.href='https://fonts.googleapis.com/css2?'+font.css+'&display=swap';document.head.appendChild(f);
+    document.documentElement.style.setProperty('--f-display',font.display+",'Fraunces',Georgia,serif");
+    if(font.body)document.documentElement.style.setProperty('--f-body',font.body+",'Nunito','Fredoka',system-ui,sans-serif")}
   if(PACK&&PACK.rtl)document.documentElement.classList.add('rtl');
   const TR_ATTRS=['aria-label','title','placeholder','alt'],TR_DONE=new WeakMap();
   const skip=n=>{const p=n.parentElement;return!p||/^(TEXTAREA|SCRIPT|STYLE|INPUT)$/.test(p.tagName)||!!p.closest('[translate="no"]')};
@@ -1949,6 +2134,10 @@ let g=cv.getContext('2d',{alpha:false,desynchronized:true}),dpr=1,vw=0,vh=0;cons
 // Graphics quality. 'auto' starts sharp and steps down (resolution, outline passes, particles) if frames run slow.
 const GFX_KEY='farm-village-gfx';
 function gfxPref(){try{return localStorage.getItem(GFX_KEY)||'auto'}catch(e){return'auto'}}
+// Art style: 'natural' (soft light, painted textures, a fine edge) or 'cartoon' (the original bold outlines).
+const ART_KEY='farm-village-art';
+function artPref(){try{return localStorage.getItem(ART_KEY)||'natural'}catch(e){return'natural'}}
+let NATURAL=artPref()!=='cartoon';
 let QL=gfxPref()==='smooth'?0:gfxPref()==='high'?2:((navigator.hardwareConcurrency||4)<=4&&(window.devicePixelRatio||1)>2?1:2);
 const QL_DPR=[1,1.5,2],INK_DIRS_HI=[[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[.7,-.7],[-.7,-.7]],INK_DIRS_LO=[[1,0],[-1,0],[0,1],[0,-1]];
 const perf={sum:0,n:0,t0:0,stable:0};
@@ -1990,10 +2179,14 @@ function shade(hex,amt){
 }
 const SHADOW=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),gr=x.createRadialGradient(32,32,0,32,32,32);
   gr.addColorStop(0,'rgba(20,30,6,.55)');gr.addColorStop(.62,'rgba(20,30,6,.46)');gr.addColorStop(.78,'rgba(20,30,6,.2)');gr.addColorStop(1,'rgba(20,30,6,0)');x.fillStyle=gr;x.fillRect(0,0,64,64);return c})();
+// natural style: a softer contact shadow with a long falloff
+const SHADOW_N=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),gr=x.createRadialGradient(32,32,0,32,32,32);
+  gr.addColorStop(0,'rgba(16,24,8,.5)');gr.addColorStop(.35,'rgba(16,24,8,.4)');gr.addColorStop(.7,'rgba(16,24,8,.14)');gr.addColorStop(1,'rgba(16,24,8,0)');x.fillStyle=gr;x.fillRect(0,0,64,64);return c})();
 // While a moving thing is being outlined, its ground shadow goes straight onto the farm so the shadow is not outlined.
 let INKING=null;
-function shadow(px,py,rx,ry){(INKING&&g!==INKING?inkShadow(px,py,rx,ry):g.drawImage(SHADOW,px-rx*1.3,py-ry*1.3,rx*2.6,ry*2.6))}
-function inkShadow(px,py,rx,ry){const m=g.getTransform(),o=INK_OFF;INKING.save();INKING.setTransform(m.a,m.b,m.c,m.d,m.e+o[0],m.f+o[1]);INKING.drawImage(SHADOW,px-rx*1.3,py-ry*1.3,rx*2.6,ry*2.6);INKING.restore()}
+// In the natural style the sun sits at the top left, so shadows fall a little to the lower right.
+function shadow(px,py,rx,ry){const S0=NATURAL?SHADOW_N:SHADOW;if(NATURAL){px+=rx*.16;py+=ry*.12;rx*=1.14;ry*=1.05}(INKING&&g!==INKING?inkShadow(px,py,rx,ry,S0):g.drawImage(S0,px-rx*1.3,py-ry*1.3,rx*2.6,ry*2.6))}
+function inkShadow(px,py,rx,ry,S0){const m=g.getTransform(),o=INK_OFF;INKING.save();INKING.setTransform(m.a,m.b,m.c,m.d,m.e+o[0],m.f+o[1]);INKING.drawImage(S0||SHADOW,px-rx*1.3,py-ry*1.3,rx*2.6,ry*2.6);INKING.restore()}
 function ball(x,y,rx,ry,col,stroke,lw,rot){
   const r=Math.max(rx,ry),gr=g.createRadialGradient(x-rx*.35,y-ry*.42,r*.08,x,y,r*1.08);
   gr.addColorStop(0,shade(col,.42));gr.addColorStop(.22,shade(col,.12));gr.addColorStop(.62,col);gr.addColorStop(1,shade(col,-.36));ell(x,y,rx,ry,gr,stroke,lw,rot);
@@ -2005,8 +2198,52 @@ function sprite(key,box,draw){
   const c=document.createElement('canvas'),w=box[2]-box[0],h=box[3]-box[1];
   c.width=Math.ceil(w*SPR_SCALE);c.height=Math.ceil(h*SPR_SCALE);
   const prev=g;g=c.getContext('2d');g.setTransform(SPR_SCALE,0,0,SPR_SCALE,-box[0]*SPR_SCALE,-box[1]*SPR_SCALE);draw();g=prev;
-  inkOutline(c,4);
+  if(NATURAL)naturalFinish(c);else inkOutline(c,4);
   return SPR[key]={c,box,w,h};
+}
+/* ---- Natural art style ----
+   Each sprite is painted once, then finished: a painterly grain, slightly calmer colours, warm light from the
+   top left fading to cool shade toward the ground, and a fine soft edge in place of the bold cartoon outline. */
+// tileable value noise (0..1) on a size x size grid with `cells` lattice cells across
+function tileNoise(size,cells,seed){
+  const v=[];for(let j=0;j<cells;j++)for(let i=0;i<cells;i++)v.push(hash(i*1.7+seed,j*2.3-seed));
+  const at=(i,j)=>v[(j%cells)*cells+(i%cells)],out=new Float32Array(size*size),k=cells/size;
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++){const fx=x*k,fy=y*k,i=Math.floor(fx),j=Math.floor(fy),u=fx-i,w=fy-j,su=u*u*(3-2*u),sw=w*w*(3-2*w);
+    out[y*size+x]=(at(i,j)*(1-su)+at(i+1,j)*su)*(1-sw)+(at(i,j+1)*(1-su)+at(i+1,j+1)*su)*sw}
+  return out;
+}
+// shade a canvas's pixels by a noise field: k in -1..1 darkens or lightens
+function mottle(x,n,field,amt,jitter){
+  const im=x.getImageData(0,0,n,n),d=im.data;
+  for(let i=0;i<n*n;i++){const k=(field[i]-.5)*amt+(Math.random()-.5)*jitter;for(let ch=0;ch<3;ch++){const v=d[i*4+ch];d[i*4+ch]=k>0?v+(255-v)*k*.6:v*(1+k)}}
+  x.putImageData(im,0,0);
+}
+const GRAIN=(()=>{const n=128,c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d'),im=x.createImageData(n,n),d=im.data,a=tileNoise(n,8,3.1),b=tileNoise(n,32,7.7);
+  for(let i=0;i<n*n;i++){const v=128+(a[i]-.5)*70+(b[i]-.5)*56+(Math.random()-.5)*34;d[i*4]=d[i*4+1]=d[i*4+2]=Math.max(0,Math.min(255,v));d[i*4+3]=255}
+  x.putImageData(im,0,0);return c})();
+function naturalFinish(c){
+  const w=c.width,h=c.height,x=c.getContext('2d'),d=x.getImageData(0,0,w,h).data;
+  // the solid part of the art (soft shadows stay as they are)
+  const solid=document.createElement('canvas');solid.width=w;solid.height=h;const sx=solid.getContext('2d'),sd=sx.createImageData(w,h),o=sd.data;
+  for(let i=3;i<d.length;i+=4)if(d[i]>=170)o[i]=255;
+  sx.putImageData(sd,0,0);
+  const t=document.createElement('canvas');t.width=w;t.height=h;const tx=t.getContext('2d');
+  tx.drawImage(c,0,0);
+  tx.globalCompositeOperation='soft-light';tx.globalAlpha=.5;tx.fillStyle=tx.createPattern(GRAIN,'repeat');tx.fillRect(0,0,w,h);
+  tx.globalCompositeOperation='saturation';tx.globalAlpha=.14;tx.fillStyle='#808080';tx.fillRect(0,0,w,h);
+  tx.globalCompositeOperation='soft-light';tx.globalAlpha=1;
+  const lg=tx.createLinearGradient(0,0,w*.55,h);lg.addColorStop(0,'rgba(255,236,190,.75)');lg.addColorStop(.45,'rgba(128,128,128,0)');lg.addColorStop(1,'rgba(28,34,72,.6)');
+  tx.fillStyle=lg;tx.fillRect(0,0,w,h);
+  tx.globalCompositeOperation='destination-in';tx.drawImage(solid,0,0);
+  x.save();x.setTransform(1,0,0,1,0,0);x.drawImage(t,0,0);
+  const rim=document.createElement('canvas');rim.width=w;rim.height=h;const rx=rim.getContext('2d');
+  for(const[dx,dy]of INK_DIRS_HI)rx.drawImage(solid,dx*1.6,dy*1.6);
+  rx.globalCompositeOperation='source-in';rx.fillStyle='rgba(34,24,12,.42)';rx.fillRect(0,0,w,h);
+  x.globalCompositeOperation='destination-over';x.drawImage(rim,0,0);x.restore();
+}
+function setArt(v){
+  try{localStorage.setItem(ART_KEY,v)}catch(e){}NATURAL=v!=='cartoon';
+  for(const k in SPR)delete SPR[k];for(const k in ICONS)delete ICONS[k];GC=null;BG=null;
 }
 /* Art style: every piece of art gets a bold, dark outline that takes on a deep shade of the colour it borders.
    Soft shadows (low alpha) are left out of the silhouette so only solid shapes are outlined. */
@@ -2027,7 +2264,7 @@ const INK_OFF=[0,0],INK=document.createElement('canvas'),INK2=document.createEle
 if(QL<2){INK_DIRS.length=0;INK_DIRS.push(...INK_DIRS_LO)}
 function inkLive(ax,ay,rw,up,down,fn){
   if(ICON_MODE||QL===0)return fn();
-  const T=g.getTransform(),[wx,wy]=P(ax,ay),s=Math.hypot(T.a,T.b),sx=T.a*wx+T.c*wy+T.e,sy=T.b*wx+T.d*wy+T.f,r=Math.max(1,Math.min(4,s*.65));
+  const T=g.getTransform(),[wx,wy]=P(ax,ay),s=Math.hypot(T.a,T.b),sx=T.a*wx+T.c*wy+T.e,sy=T.b*wx+T.d*wy+T.f,r=NATURAL?Math.max(.6,Math.min(1.4,s*.22)):Math.max(1,Math.min(4,s*.65));
   const x0=Math.max(0,Math.floor(sx-rw*s/2)),y0=Math.max(0,Math.floor(sy-up*s)),x1=Math.min(cv.width,Math.ceil(sx+rw*s/2)),y1=Math.min(cv.height,Math.ceil(sy+down*s)),w=x1-x0,h=y1-y0;
   if(w<=0||h<=0)return;
   if(INK.width<w||INK.height<h){INK.width=INK2.width=Math.max(INK.width,w);INK.height=INK2.height=Math.max(INK.height,h)}
@@ -2035,7 +2272,7 @@ function inkLive(ax,ay,rw,up,down,fn){
   ix.setTransform(1,0,0,1,0,0);ix.clearRect(0,0,w,h);ix.setTransform(T.a,T.b,T.c,T.d,T.e-x0,T.f-y0);
   const prev=g;INKING=prev;INK_OFF[0]=x0;INK_OFF[1]=y0;g=ix;try{fn()}finally{g=prev;INKING=null}
   sx2.setTransform(1,0,0,1,0,0);sx2.globalCompositeOperation='source-over';sx2.clearRect(0,0,w,h);sx2.drawImage(INK,0,0,w,h,0,0,w,h); // clear only the part in use
-  sx2.globalCompositeOperation='source-in';sx2.fillStyle='rgba(38,20,8,.82)';sx2.fillRect(0,0,w,h);sx2.globalCompositeOperation='source-over';
+  sx2.globalCompositeOperation='source-in';sx2.fillStyle=NATURAL?'rgba(34,24,12,.42)':'rgba(38,20,8,.82)';sx2.fillRect(0,0,w,h);sx2.globalCompositeOperation='source-over';
   g.save();g.setTransform(1,0,0,1,0,0);
   for(const[dx,dy]of INK_DIRS)g.drawImage(INK2,0,0,w,h,x0+dx*r,y0+dy*r,w,h);
   g.drawImage(INK,0,0,w,h,x0,y0,w,h);g.restore();
@@ -2053,6 +2290,8 @@ function isoBox(x,y,w,d,h,left,right,top,stroke,z0){
   z0=z0||0;
   const T=P(x,y,h+z0),R=P(x+w,y,h+z0),B=P(x+w,y+d,h+z0),L=P(x,y+d,h+z0),Rg=P(x+w,y,z0),Bg=P(x+w,y+d,z0),Lg=P(x,y+d,z0);
   poly([L,B,Bg,Lg],left,stroke,1.4);poly([B,R,Rg,Bg],right,stroke,1.4);if(top)poly([T,R,B,L],top,stroke,1.4);
+  // natural style: walls catch a little sky at the top and sink into soft shade where they meet the ground
+  if(NATURAL&&h>=6){const ao=g.createLinearGradient(0,B[1],0,Bg[1]);ao.addColorStop(0,'rgba(255,246,222,.08)');ao.addColorStop(.55,'rgba(0,0,0,0)');ao.addColorStop(1,'rgba(22,14,6,.2)');poly([L,B,Bg,Lg],ao);poly([B,R,Rg,Bg],ao)}
 }
 function hash(a,b){const s=Math.sin(a*127.1+b*311.7)*43758.5453;return s-Math.floor(s)}
 function sparkle(x,y,r,a){
@@ -2062,6 +2301,73 @@ function sparkle(x,y,r,a){
 }
 
 /* ================= ground ================= */
+/* Natural ground: a painted grass texture anchored to the world (so any tile can be repainted on its own and still
+   match), soft lush and dry patches laid over it, and textured, furrowed soil. */
+const GTEX=2; // texture pixels per world unit
+const GROUND_PAL={
+  spring:{base:'#6c9e3e',dk:['#4b7b2a','#3c6922','#567e2e'],lt:['#88b850','#9cc460','#b2cd70'],dry:'#a9b25a',fl:['#f4f1e6','#f0d34a','#d6b4e0']},
+  summer:{base:'#68973a',dk:['#487627','#3a6420','#53782b'],lt:['#83af4a','#97bd58','#adc366'],dry:'#b5ab56',fl:['#f4f1e6','#f0d34a','#e9a24a']},
+  autumn:{base:'#87903f',dk:['#67712f','#586226','#77682c'],lt:['#a5a654','#b9ab5a','#c8a04c'],dry:'#c2984a',fl:['#f0e6d0','#e2b046','#c96a3a']},
+  winter:{base:'#8c977b',dk:['#6d7a61','#5d6a53','#788268'],lt:['#a4ae94','#b6bea8','#c6ccba'],dry:'#a6a486',fl:[]}
+};
+const GTEX_C={},PAT_C=new WeakMap();
+function grassTex(se){
+  let t=GTEX_C[se];if(t)return t;
+  const n=256,c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d'),P0=GROUND_PAL[se];
+  x.fillStyle=P0.base;x.fillRect(0,0,n,n);mottle(x,n,tileNoise(n,8,se.length*1.37),.34,.07);
+  x.lineCap='round';
+  const wrap=(bx,by,fn)=>{for(const ox of[-n,0,n])for(const oy of[-n,0,n]){const X=bx+ox,Y=by+oy;if(X>-12&&X<n+12&&Y>-4&&Y<n+14)fn(X,Y)}};
+  for(let i=0;i<900;i++)wrap(Math.random()*n,Math.random()*n,(X,Y)=>{x.fillStyle='rgba(20,38,8,.2)';x.beginPath();x.ellipse(X,Y,1.5,.7,0,0,7);x.fill()});
+  for(let i=0;i<2800;i++){const r=Math.random(),col=r<.42?P0.dk[i%3]:r<.93?P0.lt[i%3]:P0.dry,len=3+Math.random()*6,lean=(Math.random()-.5)*4,lw=.75+Math.random()*.7;
+    wrap(Math.random()*n,Math.random()*n,(X,Y)=>{x.strokeStyle=col;x.lineWidth=lw;x.beginPath();x.moveTo(X,Y);x.quadraticCurveTo(X+lean*.3,Y-len*.6,X+lean,Y-len);x.stroke()})}
+  if(se==='winter'){x.globalAlpha=.42;x.fillStyle='#eef3fa';x.fillRect(0,0,n,n);x.globalAlpha=1;for(let i=0;i<500;i++)wrap(Math.random()*n,Math.random()*n,(X,Y)=>{x.fillStyle='rgba(255,255,255,.75)';x.beginPath();x.ellipse(X,Y,1.6+Math.random()*2,.8+Math.random(),0,0,7);x.fill()})}
+  // the average colour, for the background beyond the painted meadow
+  const d=x.getImageData(0,0,n,n).data;let r=0,gg=0,b=0;for(let i=0;i<d.length;i+=16){r+=d[i];gg+=d[i+1];b+=d[i+2]}const k=d.length/16;
+  c.avg='#'+((1<<24)|(Math.round(r/k)<<16)|(Math.round(gg/k)<<8)|Math.round(b/k)).toString(16).slice(1);
+  return GTEX_C[se]=c;
+}
+const SOILTEX=(()=>{const n=128,c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d');x.fillStyle='#6b4629';x.fillRect(0,0,n,n);mottle(x,n,tileNoise(n,8,4.4),.38,.16);
+  for(let i=0;i<650;i++){const px=Math.random()*n,py=Math.random()*n,r=.6+Math.random()*1.7,l=Math.random(),col=l<.5?'rgba(38,22,9,.5)':l<.9?'rgba(152,110,72,.5)':'rgba(196,186,170,.75)';
+    for(const ox of[-n,0,n])for(const oy of[-n,0,n]){x.fillStyle=col;x.beginPath();x.ellipse(px+ox,py+oy,r*1.3,r,0,0,7);x.fill()}}
+  return c})();
+// patterns belong to the canvas they are made on, so each canvas keeps its own
+function pat(key,tex,scale){
+  let m=PAT_C.get(g);if(!m){m={};PAT_C.set(g,m)}
+  if(!m[key]){const p=g.createPattern(tex,'repeat');p.setTransform(new DOMMatrix([scale,0,0,scale,0,0]));m[key]=p}return m[key];
+}
+function grassPat(){const se=season().id;return pat('g:'+se,grassTex(se),1/GTEX)}
+function soilPat(){return pat('soil',SOILTEX,1/GTEX)}
+function groundBg(){const c=grassTex(season().id).avg;return[shade(c,.04),shade(c,-.07)]}
+const BLOB=(()=>{const mk=(r,gg,b)=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),gr=x.createRadialGradient(32,32,0,32,32,32);
+    gr.addColorStop(0,'rgba('+r+','+gg+','+b+',1)');gr.addColorStop(.5,'rgba('+r+','+gg+','+b+',.55)');gr.addColorStop(1,'rgba('+r+','+gg+','+b+',0)');x.fillStyle=gr;x.fillRect(0,0,64,64);return c};
+  return{dk:mk(28,60,12),lt:mk(200,192,98),snow:mk(248,250,255)}})();
+// soft patches of lush and sun-dried grass (snow in winter), placed on a world grid so they look the same however they are repainted
+function patchesAt(x0,y0,x1,y1){
+  const se=season().id;
+  for(let j=Math.floor((y0-4)/2);j<=Math.ceil((y1+4)/2);j++)for(let i=Math.floor((x0-4)/2);i<=Math.ceil((x1+4)/2);i++){
+    const h=hash(i*1.31+.7,j*2.17+.3),cx=i*2+hash(i,j+5)*2,cy=j*2+hash(j+9,i)*2,r=1.3+hash(i+3,j*3)*2.2;
+    if(cx+r<x0||cx-r>x1||cy+r<y0||cy-r>y1)continue;
+    const[px,py]=P(cx,cy),rx=r*W*.72,ry=rx*.5,kind=se==='winter'?(h<.55?'snow':'dk'):h<.5?'dk':h<.82?'lt':'dk';
+    g.globalAlpha=kind==='snow'?.7:kind==='lt'?.22+hash(j,i)*.18:.18+hash(j,i)*.16;
+    g.drawImage(BLOB[kind],px-rx,py-ry,rx*2,ry*2);
+  }
+  g.globalAlpha=1;
+}
+// upright tufts, a few fallen leaves in autumn and the odd wildflower, drawn over the base on each tile
+function tuft(px,py,P0,seed,sc){
+  ell(px+.6,py+.3,4.4*sc,1.5*sc,'rgba(18,34,6,.2)');g.lineCap='round';
+  for(let k=0;k<6;k++){const a=(k-2.5)*.3+(hash(k,seed)-.5)*.3,len=(4+hash(seed+k,k)*4.6)*sc,bx=px+(k-2.5)*.7*sc;
+    g.strokeStyle=k%2?P0.dk[k%3]:P0.lt[k%3];g.lineWidth=.9;g.beginPath();g.moveTo(bx,py);g.quadraticCurveTo(bx+Math.sin(a)*len*.3,py-len*.6,bx+Math.sin(a)*len,py-len*Math.cos(a));g.stroke()}
+}
+function wildflower(px,py,col){g.strokeStyle='#4e7a2c';g.lineWidth=.7;g.lineCap='round';line([px,py],[px+.4,py-4.4]);for(let k=0;k<5;k++){const a=k/5*Math.PI*2;ell(px+.4+Math.cos(a)*1.3,py-4.8+Math.sin(a)*.8,1,.7,col)}ell(px+.4,py-4.8,.6,.5,'#c8841a')}
+function grassDetail(x,y){
+  const se=season().id,P0=GROUND_PAL[se];
+  // under snow only the odd tuft pokes through
+  for(let i=0;i<4;i++){if(hash(x*7+i,y*3)<(se==='winter'?.88:.4))continue;const[px,py]=P(x+.15+hash(x,y+i*9)*.7,y+.15+hash(y,x+i*9)*.7);tuft(px,py,P0,x*31+y*7+i,se==='winter'?.7:1)}
+  if(se==='autumn')for(let i=0;i<3;i++){if(hash(x*5+i,y)<.5)continue;const[px,py]=P(x+.15+hash(x*5+i,y)*.7,y+.15+hash(y*5,x+i)*.7);ell(px,py,1.9,.9,['#b8702a','#a24a26','#c98e36'][i],null,0,hash(i,x))}
+  const f=hash(x*13,y*17);
+  if(P0.fl.length&&(f>.95||(se==='spring'&&f>.88))){const[px,py]=P(x+.3+hash(y,x*2)*.4,y+.3+hash(x*2,y)*.4);wildflower(px,py,P0.fl[Math.floor(hash(x,y*3)*P0.fl.length)])}
+}
 function lowNoise(x,y){return(Math.sin(x*.55+1.3)+Math.sin(y*.7+.4)+Math.sin((x+y)*.31+2.1)+Math.sin((x-y)*.43))/4}
 function drawGrass(x,y){
   const n=lowNoise(x,y),base=shade((x+y)%2?'#7ac53d':'#76c03a',n*.09+(hash(x,y)-.5)*.03);
@@ -2086,6 +2392,7 @@ function drawGrass(x,y){
   if(f>.93||(se==='spring'&&f>.86)){const[px,py]=P(x+.3+hash(y,x*2)*.4,y+.3+hash(x*2,y)*.4),col=f>.965?'#fff':'#ffe14a';for(let k=0;k<5;k++){const a=k/5*Math.PI*2;ell(px+Math.cos(a)*1.6,py-1.5+Math.sin(a)*1,1.2,1,col)}ell(px,py-1.5,.8,.7,'#f2a21e')}
 }
 function drawSoil(x,y,fallow){
+  if(NATURAL)return drawSoilN(x,y,fallow);
   poly(quad(x,y,.025),'rgba(70,40,15,.55)');
   const a=P(x,y),b=P(x+1,y+1),gr=g.createLinearGradient(a[0],a[1],b[0],b[1]);
   gr.addColorStop(0,fallow?'#a77546':'#94603a');gr.addColorStop(1,fallow?'#8c5c32':'#7a4a26');
@@ -2099,13 +2406,41 @@ function drawSoil(x,y,fallow){
   }
   for(let i=0;i<5;i++){const[px,py]=P(x+.15+hash(x*3+i,y)*.7,y+.15+hash(y*3,x+i)*.7);ell(px,py,1.2,.7,'#a87a4c')}
 }
-function drawTile(x,y){const o=S.tiles[x+','+y];drawGrass(x,y);if(o&&o.k==='plot')drawSoil(x,y,!!o.fallow)}
+// natural soil: a sunken bed of crumbly earth; planted beds have lit ridges and shaded furrows, harvested ones stubble and clods
+function drawSoilN(x,y,fallow){
+  poly(quad(x,y,.012),'rgba(36,22,8,.42)');
+  poly(quad(x,y,.04),soilPat());
+  const a=P(x,y),b=P(x+1,y+1),gr=g.createLinearGradient(a[0],a[1],b[0],b[1]);
+  gr.addColorStop(0,fallow?'rgba(255,232,196,.2)':'rgba(255,226,186,.08)');gr.addColorStop(1,fallow?'rgba(30,16,4,.12)':'rgba(24,12,2,.24)');poly(quad(x,y,.04),gr);
+  g.lineCap='round';
+  g.lineWidth=1.8;g.strokeStyle='rgba(28,14,4,.5)';line(P(x+.05,y+.95),P(x+.05,y+.05));line(P(x+.05,y+.05),P(x+.95,y+.05));
+  g.lineWidth=1;g.strokeStyle='rgba(255,226,184,.2)';line(P(x+.95,y+.07),P(x+.95,y+.95));line(P(x+.95,y+.95),P(x+.07,y+.95));
+  if(fallow){
+    for(let i=0;i<22;i++){const[px,py]=P(x+.1+hash(x+i,y*1.3)*.8,y+.1+hash(y+i,x*1.7)*.8);g.strokeStyle=i%3?'rgba(210,180,112,.8)':'rgba(150,118,66,.75)';g.lineWidth=.8;line([px,py],[px+(hash(i,x)-.5)*1.6,py-2-hash(x,i)*2.4])}
+    for(let i=0;i<6;i++){const[px,py]=P(x+.15+hash(x+i,y)*.7,y+.15+hash(y,x+i)*.7);ell(px+.4,py+.6,2.1,1,'rgba(26,14,4,.35)');ell(px,py,1.9,1.1,i%2?'#5c3c20':'#8a6440')}
+    return;
+  }
+  for(const t of[.2,.41,.62,.83]){
+    g.strokeStyle='rgba(28,14,4,.55)';g.lineWidth=3.4;line(P(x+.1,y+t),P(x+.9,y+t));
+    g.strokeStyle='rgba(118,82,50,.95)';g.lineWidth=2.3;line(P(x+.1,y+t-.085),P(x+.9,y+t-.085));
+    g.strokeStyle='rgba(198,152,106,.55)';g.lineWidth=.9;line(P(x+.1,y+t-.115),P(x+.9,y+t-.115));
+  }
+  for(let i=0;i<5;i++){const[px,py]=P(x+.15+hash(x*3+i,y)*.7,y+.15+hash(y*3,x+i)*.7);ell(px,py,1.1,.65,i%2?'#a27a50':'#4e321a')}
+}
+// `base` is set when one tile is repainted on its own (the caller clips to it): the grass under it is laid down again first
+function drawTile(x,y,base){
+  const o=S.tiles[x+','+y];
+  if(NATURAL){if(base){g.fillStyle=grassPat();const a=P(x,y),b=P(x+1,y+1);g.fillRect(a[0]-W/2-2,a[1]-2,W+4,b[1]-a[1]+4);patchesAt(x,y,x+1,y+1);if(season().id==='winter'){g.fillStyle='rgba(238,243,250,.18)';g.fillRect(a[0]-W/2-2,a[1]-2,W+4,b[1]-a[1]+4)}}grassDetail(x,y)}
+  else drawGrass(x,y);
+  if(o&&o.k==='plot')drawSoil(x,y,!!o.fallow);
+}
 function drawFarmEdge(){
   // the farm sits on a low bank: a grassy lip over layered earth with pebbles and roots
   const L=P(0,N),B=P(N,N),R=P(N,0),d=24;
   const face=(a,b,lit,seed)=>{
     const dn=(p,k)=>[p[0],p[1]+k];
     const gr=g.createLinearGradient(0,Math.min(a[1],b[1]),0,Math.max(a[1],b[1])+d);gr.addColorStop(0,lit?'#9a6a3c':'#7e532c');gr.addColorStop(1,lit?'#6e4526':'#563419');
+    if(NATURAL){gr.addColorStop(0,lit?'#8a6444':'#6c4c32');gr.addColorStop(1,lit?'#5a3c26':'#432c1a')}
     poly([dn(a,4),dn(b,4),dn(b,d),dn(a,d)],gr);
     g.lineCap='round';
     for(const[k,col,w]of[[11,'rgba(60,32,12,.35)',2],[17,'rgba(255,220,170,.14)',1.2],[20,'rgba(50,28,10,.3)',1.6]]){g.strokeStyle=col;g.lineWidth=w;line(dn(a,k),dn(b,k))}
@@ -2113,8 +2448,10 @@ function drawFarmEdge(){
     for(let i=0;i<n;i++){const t=(i+hash(i,seed))/n,x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,k=7+hash(seed,i)*14;
       if(hash(i*3,seed)>.55)ell(x,y+k,2.2+hash(i,seed*2)*2,1.5+hash(seed*2,i),lit?'#b49a7a':'#8f7a60','rgba(40,25,10,.4)',.6);
       else if(hash(i*5,seed)>.82){g.strokeStyle='rgba(60,35,15,.55)';g.lineWidth=.9;line([x,y+5],[x+2,y+10])}}
-    poly([a,b,dn(b,5),dn(a,5)],lit?'#68a832':'#589428');
-    for(let i=0;i<n*2;i++){const t=(i+.5)/(n*2),x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,h=3+hash(i,seed+7)*4;poly([[x-2.4,y+4],[x+2.4,y+4],[x+.3,y+4+h]],lit?'#5d9a2c':'#4e8624')}
+    if(NATURAL){g.fillStyle=soilPat();g.globalAlpha=.35;poly([dn(a,4),dn(b,4),dn(b,d),dn(a,d)]);g.fill();g.globalAlpha=1}
+    const P0=GROUND_PAL[season().id];
+    poly([a,b,dn(b,5),dn(a,5)],NATURAL?(lit?P0.dk[2]:P0.dk[0]):lit?'#68a832':'#589428');
+    for(let i=0;i<n*2;i++){const t=(i+.5)/(n*2),x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,h=3+hash(i,seed+7)*4;poly([[x-2.4,y+4],[x+2.4,y+4],[x+.3,y+4+h]],NATURAL?(lit?P0.dk[0]:P0.dk[1]):lit?'#5d9a2c':'#4e8624')}
   };
   ell((L[0]+R[0])/2,B[1]+d+8,(R[0]-L[0])*.52,22,'rgba(30,60,10,.16)');
   face(L,B,true,3);face(B,R,false,9);
@@ -2124,7 +2461,9 @@ function drawRoad(){
   const y0=N+1.3,y1=N+2.3,x0=-10,x1=N+10;
   poly([P(x0,y0-.12),P(x1,y0-.12),P(x1,y1+.12),P(x0,y1+.12)],'rgba(70,110,30,.35)');
   const a=P(0,y0),b=P(0,y1),gr=g.createLinearGradient(a[0],a[1],b[0],b[1]);gr.addColorStop(0,'#e2c38a');gr.addColorStop(.5,'#d6b277');gr.addColorStop(1,'#c9a466');
+  if(NATURAL){gr.addColorStop(0,'#c9ac7a');gr.addColorStop(.5,'#bd9f6c');gr.addColorStop(1,'#ad8d5c')}
   poly([P(x0,y0),P(x1,y0),P(x1,y1),P(x0,y1)],gr);
+  if(NATURAL){g.globalAlpha=.3;g.fillStyle=soilPat();g.fill();g.globalAlpha=1}
   for(const t of[.27,.73])poly([P(x0,y0+t-.08),P(x1,y0+t-.08),P(x1,y0+t+.08),P(x0,y0+t+.08)],'rgba(140,100,55,.32)');
   g.lineCap='round';
   for(let x=x0;x<x1;x+=.22){const h=hash(x*7,3),[px,py]=P(x,y0+.5+(hash(x,5)-.5)*.1);if(h<.45)continue;g.strokeStyle=h>.8?'#8fbf4a':'#7aaa3c';g.lineWidth=1.1;line([px,py],[px-1+h*2,py-2.4-h*2])}
@@ -2142,7 +2481,41 @@ function buildBorder(){
   }
   BORDER.sort((a,b)=>(a.x+a.y)-(b.x+b.y));
 }
+// A leafy crown: a dark inner mass covered in clusters of leaves, lit from the top left; the lit clusters land last.
+function foliage(cx,cy,rx,ry,col,seed){
+  ell(cx+rx*.06,cy+ry*.12,rx,ry*.96,shade(col,-.5));
+  const n=Math.round(rx*ry*.3)+22,dabs=[];
+  for(let i=0;i<n;i++){const a=hash(i,seed)*Math.PI*2,d=Math.sqrt(hash(seed,i*1.3)),dx=Math.cos(a)*d*rx*.9,dy=Math.sin(a)*d*ry*.88;
+    dabs.push([dx,dy,(-dx/rx*.5-dy/ry*.8)*.5+(1-d)*.12+(hash(i,seed*3)-.5)*.16,1.5+hash(i*3,seed)*2.3,hash(i,9)*3])}
+  dabs.sort((p,q)=>p[2]-q[2]);
+  for(const[dx,dy,l,r,rot]of dabs)ell(cx+dx,cy+dy,r*1.3,r,shade(col,Math.max(-.42,Math.min(.36,l*.8))),null,0,rot);
+}
+function bareBranches(x0,y0,a,len,w,d,seed){
+  const x1=x0+Math.cos(a)*len,y1=y0+Math.sin(a)*len;g.strokeStyle='#5a4838';g.lineWidth=w;g.lineCap='round';line([x0,y0],[x1,y1]);
+  if(d>0){bareBranches(x1,y1,a-.42-hash(d,seed)*.25,len*.72,w*.62,d-1,seed+1);bareBranches(x1,y1,a+.38+hash(seed,d)*.25,len*.7,w*.62,d-1,seed+2)}
+}
+function drawWildTreeN(t){
+  const[px,py]=P(t.x,t.y),se=season().id;shadow(px,py,20,7);
+  if(t.v>.5){
+    poly([[px-2.6,py],[px+2.6,py],[px+2,py-14],[px-2,py-14]],'#4e3824');
+    const tiers=[[py-10,23,24],[py-22,19,22],[py-34,15,20],[py-45,11,18],[py-55,6.5,15]],base=se==='winter'?'#2f4c38':'#2c5a30';
+    tiers.forEach(([cy,w,h],k)=>{
+      g.beginPath();g.moveTo(px,cy-h);const n=8;for(let i=0;i<=n;i++){const tt=i/n;g.lineTo(px-w+2*w*tt,cy+(i%2?-2.4:1.4)+Math.sin(tt*Math.PI)*2.6)}g.closePath();
+      const gr=g.createLinearGradient(px-w,0,px+w,0),c=shade(base,k*.05);gr.addColorStop(0,shade(c,.2));gr.addColorStop(.5,c);gr.addColorStop(1,shade(c,-.34));g.fillStyle=gr;g.fill();
+      for(let i=0;i<7;i++){const tt=hash(i,k+t.v*9),xx=px-w*.8+tt*w*.9,yy=cy-h*.35+hash(k,i)*h*.4;g.strokeStyle=shade(c,.26);g.lineWidth=.8;line([xx,yy],[xx-2.2,yy+2.6])}
+      if(se==='winter'){ell(px-w*.35,cy-h*.3,w*.42,2.2,'rgba(246,249,255,.95)');ell(px+w*.2,cy-1,w*.3,1.6,'rgba(246,249,255,.85)')}
+    });
+    return;
+  }
+  const tg=g.createLinearGradient(px-3,0,px+3,0);tg.addColorStop(0,'#7c5a3e');tg.addColorStop(1,'#42301f');
+  poly([[px-3.4,py],[px+3.4,py],[px+2.4,py-22],[px-2.4,py-22]],tg);
+  if(se==='winter'){bareBranches(px,py-18,-Math.PI/2,15,3,4,t.v*40);ell(px-2,py-42,7,1.6,'rgba(246,249,255,.8)');return}
+  const AU=[['#b4542a','#d08a3a','#c26a2c','#e0a94a'],['#a6402a','#c47a34','#b45a2c','#d49640'],['#c99a3a','#dcb24e','#c8a03a','#ecc565']][Math.floor(t.v*6)%3];
+  const C=se==='autumn'?AU:['#3a7330','#467f37','#3f7833','#4f8a3c'],s=Math.floor(t.v*97);
+  foliage(px+10,py-30,12,11,C[0],s+1);foliage(px-10,py-28,12,11,C[1],s+2);foliage(px,py-37,18,16,C[2],s+3);foliage(px-3,py-46,10,9,C[3],s+4);
+}
 function drawWildTree(t){
+  if(NATURAL)return drawWildTreeN(t);
   const[px,py]=P(t.x,t.y);shadow(px,py,20,7);
   if(t.v>.5){
     poly([[px-3,py],[px+3,py],[px+3,py-14],[px-3,py-14]],'#7a4e2a');
@@ -2429,7 +2802,8 @@ const ANIMAL_DRAW={chicken:drawChicken,duck:drawDuck,sheep:drawSheep,goat:drawGo
 const GLYPH={chicken:'egg',duck:'feather',sheep:'wool',goat:'milk',cow:'milk',pig:'bacon',horse:'hair',rabbit:'wool',turkey:'feather',llama:'wool'};
 function bubble(px,py,kind,now){
   py+=reduce?0:Math.sin(now/240)*2;
-  poly([[px-3,py+8],[px+3,py+8],[px,py+13]],'#fff','#6b3c15',1.5);ell(px,py,11,10,'#fff','#6b3c15',2);
+  if(NATURAL){ell(px+1.2,py+2.4,11,10,'rgba(20,16,8,.2)');poly([[px-3,py+8],[px+3,py+8],[px,py+13]],'#fffdf6','rgba(70,50,28,.45)',1);ell(px,py,11,10,'#fffdf6','rgba(70,50,28,.45)',1);ell(px-3,py-4,5,2.4,'rgba(255,255,255,.9)')}
+  else{poly([[px-3,py+8],[px+3,py+8],[px,py+13]],'#fff','#6b3c15',1.5);ell(px,py,11,10,'#fff','#6b3c15',2)}
   glyph(px,py,kind);
 }
 function glyph(px,py,kind){
@@ -2449,6 +2823,18 @@ function glyph(px,py,kind){
 function drawTreeArt(x,y,id,ready){
   const def=TREES[id],[px,py]=P(x+.5,y+.5),tone=def.tone;
   shadow(px+4,py,22,8);
+  if(NATURAL){
+    // bark-textured trunk, a few limbs, then four leafy clusters back to front
+    const tg=g.createLinearGradient(px-4,0,px+4,0);tg.addColorStop(0,'#8a6242');tg.addColorStop(.5,'#684830');tg.addColorStop(1,'#3e2c1c');
+    g.beginPath();g.moveTo(px-4.2,py);g.quadraticCurveTo(px-2.4,py-12,px-2.4,py-26);g.lineTo(px+2.4,py-26);g.quadraticCurveTo(px+2.4,py-12,px+4.2,py);g.closePath();g.fillStyle=tg;g.fill();
+    g.strokeStyle='rgba(28,18,8,.35)';g.lineWidth=.6;for(let i=0;i<4;i++)line([px-1.8+i*1.2,py-1.5],[px-1.5+i*1.05,py-22]);
+    g.strokeStyle='#4a3220';g.lineWidth=2;g.lineCap='round';line([px,py-19],[px-8,py-29]);line([px+.6,py-21],[px+9,py-30]);
+    const lt=shade(tone,-.08),s=id.length*7;
+    foliage(px+11,py-31,12.5,10.5,shade(lt,-.1),s+1);foliage(px-11,py-31,12.5,10.5,lt,s+2);foliage(px,py-39,18,15,lt,s+3);foliage(px-3,py-48,11.5,9.5,shade(lt,.08),s+4);
+    if(!ready&&(id==='cherry'||id==='peach'||id==='plum'))for(const[dx,dy]of[[-8,-40],[6,-44],[10,-32],[-12,-30],[0,-30],[-4,-50],[12,-38]]){ell(px+dx,py+dy,1.8,1.6,id==='plum'?'#f1e4fb':'#ffdbe6');ell(px+dx,py+dy,.6,.6,'#e7a63f')}
+    if(ready)for(const[dx,dy]of[[-9,-36],[7,-42],[11,-30],[-3,-28],[-12,-28],[2,-48],[4,-34],[-6,-44]]){ell(px+dx+.6,py+dy+1,3.3,2.6,'rgba(20,30,8,.35)');ball(px+dx,py+dy,3.2,3.3,def.fruit);ell(px+dx-1,py+dy-1.3,.9,.8,'rgba(255,255,255,.65)');g.strokeStyle='#4a3220';g.lineWidth=.6;line([px+dx,py+dy-3.2],[px+dx+.6,py+dy-4.6])}
+    return;
+  }
   const tg=g.createLinearGradient(px-4,0,px+4,0);tg.addColorStop(0,'#a06a3c');tg.addColorStop(1,'#6e4422');
   poly([[px-3.6,py],[px+3.6,py],[px+2.6,py-24],[px-2.6,py-24]],tg,'#5e3a1c',1);
   g.strokeStyle='#5e3a1c';g.lineWidth=1.6;line([px,py-20],[px-6,py-28]);line([px+1,py-22],[px+7,py-29]);
@@ -2927,7 +3313,9 @@ function itemIcon(id){
 }
 function goodBubble(px,py,id,now){
   py+=reduce?0:Math.sin(now/240)*2;
-  poly([[px-3,py+9],[px+3,py+9],[px,py+14]],'#fff','#6b3c15',1.5);ell(px,py,12.5,11.5,'#fff','#6b3c15',2);drawGood(id,px,py+.5,.78);
+  if(NATURAL){ell(px+1.2,py+2.6,12.5,11.5,'rgba(20,16,8,.2)');poly([[px-3,py+9],[px+3,py+9],[px,py+14]],'#fffdf6','rgba(70,50,28,.45)',1);ell(px,py,12.5,11.5,'#fffdf6','rgba(70,50,28,.45)',1)}
+  else{poly([[px-3,py+9],[px+3,py+9],[px,py+14]],'#fff','#6b3c15',1.5);ell(px,py,12.5,11.5,'#fff','#6b3c15',2)}
+  drawGood(id,px,py+.5,.78);
 }
 function cylinder(cx,by,rx,ry,h,col,dark,top){
   const gr=g.createLinearGradient(cx-rx,0,cx+rx,0);gr.addColorStop(0,shade(col,.18));gr.addColorStop(.55,col);gr.addColorStop(1,dark);
@@ -3640,11 +4028,11 @@ function drawEffects(t){
     else{g.globalAlpha=1-k;ell(p.x,p.y,p.r||2.4,p.r||2.4,p.c)}
     g.globalAlpha=1;
   }
-  g.textAlign='center';g.font='22px "Luckiest Guy", Impact, sans-serif';g.lineJoin='round';
+  g.textAlign='center';g.font=NATURAL?'800 18px Nunito, Fredoka, sans-serif':'22px "Luckiest Guy", Impact, sans-serif';g.lineJoin='round';
   for(let i=floats.length-1;i>=0;i--){
     const f=floats[i],age=(t-f.t0)/1000;if(age<0)continue;if(age>1.1){floats.splice(i,1);continue}
     const[px,py]=P(f.x+.5,f.y+.5),yy=py-34-age*38;
-    g.globalAlpha=age<.8?1:1-(age-.8)/.3;g.lineWidth=5;g.strokeStyle='#3a2310';g.strokeText(f.text,px,yy);g.fillStyle=f.color;g.fillText(f.text,px,yy);g.globalAlpha=1;
+    g.globalAlpha=age<.8?1:1-(age-.8)/.3;g.lineWidth=NATURAL?4:5;g.strokeStyle=NATURAL?'rgba(34,24,14,.82)':'#3a2310';g.strokeText(f.text,px,yy);g.fillStyle=f.color;g.fillText(f.text,px,yy);g.globalAlpha=1;
   }
 }
 const clouds=[{x:-6,y:2,s:1.2},{x:4,y:-6,s:1},{x:10,y:8,s:1.4}];
@@ -3712,10 +4100,12 @@ function syncGround(){
   gstate=ns;
 }
 function drawMeadow(b){
+  const P0=GROUND_PAL[season().id];
   for(let i=0;i<420;i++){
     const tx=-8+hash(i,1.7)*(N+16),ty=-8+hash(2.3,i)*(N+16);
     if(tx>-.5&&ty>-.5&&tx<N+.5&&ty<N+3)continue;
     const[px,py]=P(tx,ty);if(px<b[0]||px>b[2]||py<b[1]||py>b[3])continue;
+    if(NATURAL){if(i%9===0&&P0.fl.length)wildflower(px,py,P0.fl[i%P0.fl.length]);else if(season().id!=='winter'||i%4===0)tuft(px,py,P0,i,.9+hash(i,4)*.5);continue}
     if(i%9===0){const col=['#fff','#ffe14a','#ff9ec0'][i%3];for(let k=0;k<5;k++){const a=k/5*Math.PI*2;ell(px+Math.cos(a)*1.6,py-1.5+Math.sin(a)*1,1.2,1,col)}continue}
     g.strokeStyle=i%2?'rgba(60,120,30,.45)':'rgba(190,230,120,.45)';g.lineWidth=1.3;g.lineCap='round';
     line([px-2.5,py],[px-3.8,py-4.2]);line([px,py],[px+.3,py-5.4]);line([px+2.5,py],[px+3.8,py-4])
@@ -3727,6 +4117,15 @@ function renderLayers(s){
     const c=document.createElement('canvas');c.width=Math.ceil(bw*s);c.height=Math.ceil(bh*s);
     const prev=g;g=c.getContext('2d');g.setTransform(s,0,0,s,-b[0]*s,-b[1]*s);
     if(which==='ground'){
+      if(NATURAL){
+        // one continuous painted meadow under everything, fading out at the far edges into the background colour
+        g.fillStyle=grassPat();g.fillRect(b[0],b[1],bw,bh);patchesAt(-16,-16,N+16,N+16);
+        if(season().id==='winter'){g.fillStyle='rgba(238,243,250,.18)';g.fillRect(b[0],b[1],bw,bh)}
+        g.globalCompositeOperation='destination-out';const m=170,fade=(x0,y0,x1,y1)=>{const gr=g.createLinearGradient(x0,y0,x1,y1);gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(1,'rgba(0,0,0,0)');return gr};
+        g.fillStyle=fade(b[0],0,b[0]+m,0);g.fillRect(b[0],b[1],m,bh);g.fillStyle=fade(b[2],0,b[2]-m,0);g.fillRect(b[2]-m,b[1],m,bh);
+        g.fillStyle=fade(0,b[1],0,b[1]+m*.8);g.fillRect(b[0],b[1],bw,m*.8);g.fillStyle=fade(0,b[3],0,b[3]-m*.8);g.fillRect(b[0],b[3]-m*.8,bw,m*.8);
+        g.globalCompositeOperation='source-over';
+      }
       drawMeadow(b);for(const t of BORDER)if(t.back)drawWildTree(t);
       drawFarmEdge();drawRoad();for(let y=0;y<N;y++)for(let x=0;x<N;x++)drawTile(x,y);
     }else for(const t of BORDER)if(!t.back)drawWildTree(t);
@@ -3739,7 +4138,7 @@ function syncLayers(t){
   if(!GC||gcN!==N||(Math.abs(want/gcScale-1)>.2&&t-lastZoomT>250)){renderLayers(want);return}
   if(!dirty.size)return;
   const prev=g;g=GC.getContext('2d');g.setTransform(gcScale,0,0,gcScale,-b[0]*gcScale,-b[1]*gcScale);
-  for(const k of dirty){const[x,y]=k.split(',').map(Number);if(!inGrid(x,y))continue;g.save();poly(quad(x,y));g.clip();drawTile(x,y);g.restore()}
+  for(const k of dirty){const[x,y]=k.split(',').map(Number);if(!inGrid(x,y))continue;g.save();poly(quad(x,y));g.clip();drawTile(x,y,true);g.restore()}
   dirty.clear();g=prev;
 }
 function blitLayer(c){
@@ -3765,7 +4164,7 @@ function frame(t){
   if(HV){updateFarmer(dt,now);requestAnimationFrame(frame);return}
   seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
   g.setTransform(1,0,0,1,0,0);
-  if(!BG){const sb=season().bg;BG=g.createLinearGradient(0,0,0,cv.height);BG.addColorStop(0,sb[0]);BG.addColorStop(1,sb[1])}
+  if(!BG){const sb=NATURAL?groundBg():season().bg;BG=g.createLinearGradient(0,0,0,cv.height);BG.addColorStop(0,sb[0]);BG.addColorStop(1,sb[1])}
   g.fillStyle=BG;g.fillRect(0,0,cv.width,cv.height);
   blitLayer(GC);
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
@@ -5159,6 +5558,7 @@ function showSettings(){
       r.appendChild(sg);p.appendChild(r)};
     seg('Screen',[['auto','Auto'],['portrait','Portrait'],['landscape','Landscape']],orientPref()||'auto',v=>setOrient(v,true));
     seg('Animals',[['home','Stay home'],['free','Free roam']],S.animalMode==='free'?'free':'home',v=>{S.animalMode=v;changed();toast(v==='free'?'Your animals can roam the farm now. Fences keep them in.':'Your animals are heading home.')});
+    seg('Art style',[['natural','Natural'],['cartoon','Cartoon']],NATURAL?'natural':'cartoon',v=>{setArt(v);toast(v==='natural'?'Natural look: soft light and painted textures.':'Cartoon look: bold outlines.')});
     seg('Graphics',[['auto','Auto'],['high','Sharpest'],['smooth','Smoothest']],gfxPref(),v=>{try{localStorage.setItem(GFX_KEY,v)}catch(e){}QL=v==='smooth'?0:2;applyQuality()});
     seg('Machines',[['on','Use by themselves'],['off','By hand']],S.autoVeh===false?'off':'on',v=>{S.autoVeh=v!=='off'});
     seg('Tapping the ground',[['walk','Walk'],['farm','Farm'],['plow','Plow']],S.tapMode||'farm',v=>{S.tapMode=v;renderModeSw()});
@@ -5258,9 +5658,10 @@ function renderIcon(cat,id,lv){
   const tall=cat==='trees'||(cat==='decor'&&['windmill','silo','balloon','scarecrow','lamp','arbor','towerclock'].includes(id));
   const big=(cat==='decor'&&DECOR[id].size===2)||cat==='homes'||cat==='buildings';
   const sc=big?1.25:tall?1.6:2.2;g.setTransform(sc,0,0,sc,120,big?70:tall?122:96);
-  if(cat==='farm'){g.setTransform(2,0,0,2,120,96);poly(quad(0,0),'#7cc63e','#5d9a2c',1);drawFarmIcon(id,now)}
+  const tf=NATURAL?grassPat():'#7cc63e',ts=NATURAL?'rgba(52,74,26,.35)':'#5d9a2c';
+  if(cat==='farm'){g.setTransform(2,0,0,2,120,96);poly(quad(0,0),tf,ts,1);drawFarmIcon(id,now)}
   else{
-    poly(big?[P(0,0),P(2,0),P(2,2),P(0,2)]:quad(0,0),'#7cc63e','#5d9a2c',1);
+    poly(big?[P(0,0),P(2,0),P(2,2),P(0,2)]:quad(0,0),tf,ts,1);
     if(cat==='seeds'){drawSoil(0,0,false);drawCrop(0,0,{k:'plot',crop:id,t:now-CROPS[id].grow*1000-1000},now)}
     else if(cat==='animals')drawObj(0,0,{k:'animal',id,t:now-1e9},now);
     else if(cat==='trees')drawObj(0,0,{k:'tree',id,t:now-1e9},now);
