@@ -2744,7 +2744,7 @@ function buildBorder(){
     BORDER.push({x:i+hash(i,1)*.5,y:-2.2-hash(i,2)*1.4,back:true,v:hash(i,3)});
     BORDER.push({x:-2.2-hash(i,4)*1.4,y:i+hash(i,5)*.5,back:true,v:hash(i,6)});
     BORDER.push({x:N+2+hash(i,7)*1.2,y:i+hash(i,8)*.5,back:false,v:hash(i,9)});
-    {const tx=i+hash(i,10)*.5;if(Math.abs(tx-boardSpot()[0]-.5)>2.4)BORDER.push({x:tx,y:N+3.4+hash(i,11)*1.2,back:false,v:hash(i,12)})}
+    {const tx=i+hash(i,10)*.5;{const bx0=boardSpot()[0];if(tx<bx0-1.9||tx>bx0+5.4)BORDER.push({x:tx,y:N+3.4+hash(i,11)*1.2,back:false,v:hash(i,12)})}}
   }
   BORDER.sort((a,b)=>(a.x+a.y)-(b.x+b.y));
 }
@@ -5709,7 +5709,7 @@ function showOrders(){
 /* ================= deliveries: the notice board and Dale's truck ================= */
 // Town shops pin contracts on the board by the road. Load a contract and Dale drives it to town;
 // he comes back a few minutes later with the payment. It is the best XP on the farm, but it takes time.
-const DRIVER={id:'dale',name:'Dale',look:Object.assign(defaultLook(),{gender:'male',skin:'#d9a37a',eyes:'#3f6fc0',hair:'short',hairColor:'#2a1a12',face:'beard',glasses:'none',hat:'cap',hatColor:'#2d6fd0',top:'tee',topColor:'#2d6fd0',bottom:'jeans',bottomColor:'#3a4650',acc:'none'})};
+const DRIVER={id:'dale',name:'Dale',look:Object.assign(defaultLook(),{gender:'male',skin:'#d9a37a',eyes:'#3f6fc0',hair:'short',hairColor:'#2a1a12',face:'beard',glasses:'none',hat:'cap',hatColor:'#c8392b',top:'plaid',topColor:'#3f6fc0',bottom:'jeans',bottomColor:'#3a4650',shoes:'#5a3418',acc:'none'})};
 const TOWNS=[
   {name:'Valley Grocer',km:1,likes:['crops','fruit']},{name:'Hollow Bakery',km:2,likes:['crops','animal','made']},
   {name:'Riverside Market',km:2,likes:['crops','fruit','animal']},{name:'Mill Town Café',km:3,likes:['made','animal','fruit']},
@@ -5717,7 +5717,7 @@ const TOWNS=[
 ];
 const TRUCK_CAP=[0,20,35,60],TRUCK_UP=[null,{coins:1500,mats:{board:10,nail:10}},{coins:5000,mats:{board:20,nail:20,paint:8}}];
 const DRIVE=5000; // ms to drive off screen or back in: an easy, unhurried pace
-const BOARD=1800; // ms for Dale to walk to the cab, climb in and shut the door
+const BOARD=2600; // ms for Dale to walk to the cab, climb in and shut the door
 function tripSecs(c){return Math.max(12,Math.min(20,c.time*2))}
 function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
 function truckCap(){return TRUCK_CAP[dv().lv||1]}
@@ -5807,10 +5807,10 @@ function truckPhase(now){
 }
 function truckPos(now){
   const[sx,sy]=truckSpot(),r=dv().run,ease=k=>k*k*(3-2*k);
-  if(!r)return[sx,sy,false];
-  if(now<r.start+BOARD)return[sx,sy,false];
-  if(now<r.start+BOARD+DRIVE){const k=(now-r.start-BOARD)/DRIVE;return[sx+ease(k)*(N+12-sx),sy,true]}
-  if(now>=r.end-DRIVE){const k=Math.min(1,(now-(r.end-DRIVE))/DRIVE);return[-12+ease(k)*(sx+12),sy,k<1]}
+  if(!r){const st=dale.outT?now-dale.outT:9e9;return[sx,sy,false,st<900?-Math.cos(st/900*Math.PI*2.5)*(1-st/900)*.8:0]}
+  if(now<r.start+BOARD)return[sx,sy,false,0];
+  if(now<r.start+BOARD+DRIVE){const k=(now-r.start-BOARD)/DRIVE;return[sx+k*k*(N+12-sx),sy,true,k<.6?1:.4]}
+  if(now>=r.end-DRIVE){const k=Math.min(1,(now-(r.end-DRIVE))/DRIVE),e=1-(1-k)*(1-k);void ease;return[-12+e*(sx+12),sy,k<1,k<1?(k<.35?.3:-1):0]}
   return null;
 }
 function drawBoard(x,y){
@@ -5836,40 +5836,103 @@ function moneyBag(cx,cy){
   g.font='bold 7px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#9a6400';g.fillText('$',cx,cy-5.4);
   for(const[a,b]of[[-13,1],[13,0],[9,3]]){ell(cx+a,cy+b,3,1.5,'#ffc72c','#9a6400',.8)}
 }
-function drawTruck(x,y,now,moving,cargo,inCab,door){
-  const z=6,red='#d9402f',redD='#a82c22',jig=moving&&!reduce?Math.sin(now/45)*.6:0;
-  const[sx,sy]=P(x+1.1,y+.36);shadow(sx,sy+4,62,16);
-  // wheels on the far side peek out, then chassis, bed and cab
-  const wheel=(wx,wy)=>{const[a,b]=P(wx,wy,z);ell(a,b,5.4,6.4,'#2b2b2b','#111',1);ell(a,b,2.4,2.9,'#c4ccd4');
-    if(moving&&!reduce){g.strokeStyle='#8a9098';g.lineWidth=.8;const t=now/80;line([a+Math.cos(t)*2.2,b+Math.sin(t)*2.6],[a-Math.cos(t)*2.2,b-Math.sin(t)*2.6])}};
-  wheel(x+.42,y);wheel(x+1.72,y);
-  g.save();g.translate(0,jig);
-  isoBox(x,y,2.2,.72,4,'#3a3a3a','#2b2b2b','#4a4a4a','#1a1a1a',z-1);
-  // flatbed with wooden sides
-  isoBox(x,y,1.38,.72,3,'#8a5a32','#7a4e2a','#b4783e','#4e2c12',z+3);
-  isoBox(x,y+.68,1.38,.04,9,'#c98a4b','#a8692f',null,'#5e3a1c',z+6);isoBox(x,y,.05,.72,9,'#b4783e','#a8692f',null,'#5e3a1c',z+6);
-  if(cargo==='money'){const[mx,my]=P(x+.7,y+.38,z+6);moneyBag(mx,my)}
+// Dale's pickup: hood and grille at +x, a cab with real windows (Dale shows through them), a steel bed with crates.
+// Wheels roll with the distance driven, the body bounces on its springs and pitches when it speeds up or brakes.
+const TK={len:2.6,w:.8,bed:1.45,cab0:1.45,cab1:2.08,hood1:2.6,wr:7.5,body:'#c8392b',chrome:'#d6dbe0'};
+const WRX=TK.wr/40.25;
+function circY(cx,y,cz,r,steps){g.beginPath();steps=steps||22;for(let i=0;i<=steps;i++){const a=i/steps*Math.PI*2,[px,py]=P(cx+Math.cos(a)*r/40.25,y,cz+Math.sin(a)*r);i?g.lineTo(px,py):g.moveTo(px,py)}g.closePath()}
+function truckWheel(wx,y,roll,near){
+  const r=TK.wr,t=.13,y0=near?y:y,y1=near?y+t:y-t;
+  for(let k=0;k<=4;k++){circY(wx,y0+(y1-y0)*k/4,r,r);g.fillStyle=k===4?'#2b2b2e':'#18181a';g.fill()}
+  if(!near)return;
+  circY(wx,y1,r,r);g.strokeStyle='#0d0d0e';g.lineWidth=.7;g.stroke();
+  circY(wx,y1+.001,r,r*.62);const[c0,c1]=P(wx,y1,r);const gr=g.createRadialGradient(c0-1.5,c1-2,.5,c0,c1,r*.7);gr.addColorStop(0,'#f4f6f8');gr.addColorStop(1,'#8f979e');g.fillStyle=gr;g.fill();g.strokeStyle='#5a6268';g.lineWidth=.6;g.stroke();
+  circY(wx,y1+.002,r,r*.24);g.fillStyle='#6e767c';g.fill();
+  for(let i=0;i<5;i++){const a=roll+i*Math.PI*2/5,[px,py]=P(wx+Math.cos(a)*r*.42/40.25,y1+.003,r+Math.sin(a)*r*.42);ell(px,py,.9,.9,'#3a4046')}
+}
+let tkSmokeT=0;
+function drawTruck(x,y,now,moving,cargo,inCab,door,lean){
+  const W0=TK.w,B=TK.body,BD=shade(B,-.28),BL=shade(B,.18),CH=TK.chrome,running=moving||inCab,roll=-x/WRX;
+  // the body rides on its springs: a little bounce when driving, a pitch when speeding up or braking
+  const jig=reduce?0:moving?Math.sin(now/55)*.55+Math.sin(now/23)*.25:running?Math.sin(now/40)*.18:0,pitch=(lean||0)*.022;
+  const[sx,sy]=P(x+1.3,y+.4);shadow(sx,sy+3,70,15);
+  truckWheel(x+.5,y+.06,roll,false);truckWheel(x+2.1,y+.06,roll,false);
+  const[px0,py0]=P(x+1.3,y+.4,TK.wr);g.save();g.translate(px0,py0-jig);g.rotate(-pitch);g.translate(-px0,-py0);
+  // chassis
+  bx(x+.12,y+.12,2.36,W0-.24,4,'#2a2a2c',4,'rgba(0,0,0,.6)');bx(x-.06,y-.03,.08,W0+.06,3.4,CH,5,'rgba(60,70,80,.6)');
+  // the bed: floor, the far side and tailgate seen from inside, the cargo, then the near side
+  bx(x,y,TK.bed,W0,4,'#3a3d40',8);topQ(x+.05,y+.05,x+TK.bed,y+W0-.05,12.05,'#8a5a32','rgba(40,20,5,.5)',.6);
+  g.strokeStyle='rgba(40,20,5,.45)';g.lineWidth=.5;for(let k=1;k<5;k++)line(P(x+.05,y+.05+k*.14,12.1),P(x+TK.bed,y+.05+k*.14,12.1));
+  faceY(y+.06,x+.05,x+TK.bed,12,22,BD,'rgba(40,10,5,.5)',.6);faceX(x+.06,y+.06,y+W0-.06,12,22,shade(B,-.2),'rgba(40,10,5,.5)',.6);
+  topQ(x,y,x+TK.bed,y+.06,22,BL,'rgba(40,10,5,.5)',.5);topQ(x,y,x+.06,y+W0,22,BL,'rgba(40,10,5,.5)',.5);
+  if(cargo==='money'){const[mx,my]=P(x+.72,y+.4,12);moneyBag(mx,my)}
   else if(cargo&&cargo.length){
-    // one open crate per kind of good, with the goods themselves showing on top
-    // back row first so the front crates sit in front of it; a fourth goods kind rides on top
-    const spots=[[.02,.04],[.48,.04],[.2,.36]],list=cargo.slice(0,3);
-    list.forEach(([id],i)=>{const[ox,oy]=spots[i];isoBox(x+ox,y+oy,.44,.3,6,'#d9a05a','#c98a4b','#e8b878','#7a4e2a',z+6);
-      const[gx,gy]=P(x+ox+.22,y+oy+.15,z+12);drawGood(id,gx,gy+3,.85)});
+    const spots=[[.12,.1],[.62,.1],[.36,.42]],list=cargo.slice(0,3);
+    list.forEach(([id],i)=>{const[ox,oy]=spots[i];bx(x+ox,y+oy,.44,.3,7,'#c9965a',12);faceY(y+oy+.3,x+ox+.03,x+ox+.41,14,17,'rgba(90,55,20,.35)');
+      const[gx,gy]=P(x+ox+.22,y+oy+.15,19);drawGood(id,gx,gy+3,.85)});
   }
-  // cab
-  isoBox(x+1.38,y+.02,.82,.68,13,red,redD,shade(red,.15),'#6b1c14',z+3);
-  isoBox(x+1.42,y+.06,.52,.6,11,'#bfe6ff','#8fc8ea',red,'#6b1c14',z+16);
-  const[wa,wb]=P(x+1.5,y+.66,z+19),[wc,wd]=P(x+1.88,y+.66,z+19);g.strokeStyle='rgba(255,255,255,.7)';g.lineWidth=1.4;line([wa,wb],[wa+6,wb-5]);line([wc-4,wd+1],[wc+1,wd-3]);
-  poly([P(x+2.2,y+.12,z+5),P(x+2.2,y+.6,z+5),P(x+2.2,y+.6,z+10),P(x+2.2,y+.12,z+10)],'#c4ccd4','#6e685e',.8);
-  for(const t of[.18,.54]){const[a,b]=P(x+2.2,y+t,z+12);ell(a,b,2,1.6,'#fff7c0','#9a6400',.6)}
-  // the driver behind the wheel when he is in the cab
-  if(door>0){const k=Math.min(1,door),a=P(x+1.46,y+.7,z+4),b=P(x+1.46+.34*(1-k*.75),y+.7+.34*k,z+4),c=P(x+1.46+.34*(1-k*.75),y+.7+.34*k,z+15),d2=P(x+1.46,y+.7,z+15);
-    poly([a,b,c,d2],'#d9402f','#6b1c14',1.2);poly([P(x+1.48,y+.7,z+9),P(x+1.48+.3*(1-k*.75),y+.7+.3*k,z+9),P(x+1.48+.3*(1-k*.75),y+.7+.3*k,z+14),P(x+1.48,y+.7,z+14)],'#bfe6ff','#6b1c14',.8)}
-  if(moving||inCab){const[hx,hy]=P(x+1.66,y+.36,z+19);g.save();g.translate(hx,hy+2);g.scale(.42,.42);drawHead(DRIVER.look);g.restore()}
+  // near bed side with the wheel arch cut out of it
+  const arch=(wx,Y)=>{circY(wx,Y,TK.wr,TK.wr+2.2,18)};
+  {const sideG=g.createLinearGradient(...P(x,y+W0,22),...P(x,y+W0,5));sideG.addColorStop(0,BL);sideG.addColorStop(.5,B);sideG.addColorStop(1,BD);
+    g.save();g.beginPath();const q=[P(x,y+W0,5),P(x+TK.bed,y+W0,5),P(x+TK.bed,y+W0,22),P(x,y+W0,22)];g.moveTo(...q[0]);for(const p of q.slice(1))g.lineTo(...p);g.closePath();
+    for(let i=18;i>=0;i--){const a=i/18*Math.PI*2,[ax,ay]=P(x+.5+Math.cos(a)*(TK.wr+2.2)/40.25,y+W0,TK.wr+Math.sin(a)*(TK.wr+2.2));i===18?g.moveTo(ax,ay):g.lineTo(ax,ay)}g.closePath();
+    g.fillStyle=sideG;g.fill('evenodd');g.strokeStyle='rgba(60,10,5,.6)';g.lineWidth=.7;g.stroke();g.restore()}
+  arch(x+.5,y+W0-.01);g.fillStyle='#141416';g.fill();
+  topQ(x,y+W0-.06,x+TK.bed,y+W0,22,BL,'rgba(40,10,5,.5)',.5);
+  g.strokeStyle='rgba(255,255,255,.35)';g.lineWidth=.8;line(P(x+.05,y+W0,19.5),P(x+TK.bed-.05,y+W0,19.5));
+  faceY(y+W0+.001,x+.02,x+.08,15,19,'#ff5a4a','rgba(80,0,0,.6)',.5);
+  // lettering on the bed side
+  {const[o0,o1]=P(x+1.07,y+W0+.002,0);g.save();g.translate(o0,o1);g.transform(W/2/40.25,H/2/40.25,0,1,0,0);g.font='bold 6px Fredoka, sans-serif';g.textAlign='center';g.lineWidth=1.5;g.strokeStyle='rgba(60,10,5,.8)';g.strokeText("DALE'S",0,-14.5);g.fillStyle='#fff6e0';g.fillText("DALE'S",0,-14.5);g.font='600 3.6px Fredoka, sans-serif';g.lineWidth=1.1;g.strokeText('FARM DELIVERY',0,-9.5);g.fillText('FARM DELIVERY',0,-9.5);g.restore()}
+  // cab lower body
+  bx(x+TK.cab0,y,TK.cab1-TK.cab0,W0,18,B,6,'rgba(60,10,5,.55)');
+  // cabin: dark interior first, then Dale, then glass, pillars and roof
+  const c0=x+TK.cab0+.05,cy0=y+.05,cy1=y+W0-.05;
+  faceY(cy0,c0,x+2.02,24,38,'#1c2126');faceX(c0+.01,cy0,cy1,24,38,'#262b31');faceX(c0+.03,cy0+.12,cy1-.12,24,33,'#5a3a22');
+  const[sw0,sw1]=P(x+1.9,y+.25,28);ell(sw0,sw1,3.6,2,null,'#111',1.2);
+  if(inCab||moving){g.save();g.beginPath();const wp=[P(c0,cy1,24.5),P(x+2.06,cy1,24.5),P(x+1.97,cy1,37),P(c0,cy1,37)];g.moveTo(...wp[0]);for(const p of wp.slice(1))g.lineTo(...p);g.closePath();
+    const ws=[P(x+2.07,cy0,24.5),P(x+2.07,cy1,24.5),P(x+1.97,cy1,37),P(x+1.97,cy0,37)];g.moveTo(...ws[0]);for(const p of ws.slice(1))g.lineTo(...p);g.closePath();g.clip();
+    const[hx,hy]=P(x+1.74,y+.34,21);g.translate(hx,hy);g.scale(FIG*.9,FIG*.9);
+    poly([[-8,16],[8,16],[6,4],[-6,4]],DRIVER.look.topColor,'rgba(0,0,0,.4)',.5);g.scale(1.1,1.1);drawHead(DRIVER.look);g.restore()}
+  const glassG=(a,b)=>{const gr=g.createLinearGradient(...a,...b);gr.addColorStop(0,'rgba(200,232,250,.55)');gr.addColorStop(.5,'rgba(150,200,232,.25)');gr.addColorStop(1,'rgba(200,232,250,.45)');return gr};
+  poly([P(c0,cy1,24.5),P(x+2.06,cy1,24.5),P(x+1.97,cy1,37),P(c0,cy1,37)],glassG(P(c0,cy1,37),P(x+2.06,cy1,24)),'rgba(30,40,50,.6)',.7);
+  poly([P(x+2.07,cy0,24.5),P(x+2.07,cy1,24.5),P(x+1.97,cy1,37),P(x+1.97,cy0,37)],glassG(P(x+2.07,cy0,37),P(x+2.07,cy1,24)),'rgba(30,40,50,.6)',.7);
+  g.strokeStyle='rgba(255,255,255,.6)';g.lineWidth=1.2;line(P(c0+.08,cy1,27),P(c0+.2,cy1,35));line(P(x+2.05,cy0+.15,27),P(x+2.0,cy0+.3,35));
+  faceY(cy1,c0,c0+.06,24,38,B,'rgba(60,10,5,.5)',.5);poly([P(x+2.03,cy1,24),P(x+2.08,cy1,24),P(x+1.99,cy1,38),P(x+1.95,cy1,38)],B,'rgba(60,10,5,.5)',.5);
+  faceY(cy1,c0,x+1.97,36.6,38,B);
+  topQ(c0,cy0,x+1.97,cy1,38,BL,'rgba(60,10,5,.55)',.6);poly([P(x+1.97,cy0,38),P(x+1.97,cy1,38),P(x+1.97,cy1,37),P(x+1.97,cy0,37)],B);
+  // hood, grille, lights and bumpers
+  bx(x+TK.cab1,y+.03,TK.hood1-TK.cab1,W0-.06,13,B,6,'rgba(60,10,5,.55)');
+  g.strokeStyle='rgba(60,10,5,.35)';g.lineWidth=.6;line(P(x+TK.cab1+.02,y+.4,19.1),P(x+TK.hood1-.02,y+.4,19.1));
+  const[ho0,ho1]=P(x+TK.hood1-.06,y+.4,19);ell(ho0,ho1-1,1.4,1.4,CH,'#6e767c',.5);
+  faceX(TK.hood1+x+.002,y+.2,y+W0-.2,8,17,'#2a2e33','rgba(0,0,0,.6)',.6);
+  for(let z=9;z<17;z+=1.8)faceX(TK.hood1+x+.003,y+.21,y+W0-.21,z,z+.8,CH);
+  const night=darkness(),lit=running&&night>.3;
+  for(const yy of[y+.11,y+W0-.11]){const[lx,ly]=P(x+TK.hood1+.004,yy,13);ell(lx,ly,3,3.2,CH,'#5a6268',.6);ell(lx,ly,2.1,2.3,lit?'#fffbe0':'#f4f1dc');if(lit)ell(lx,ly,1.2,1.3,'#ffffff')}
+  bx(x+TK.hood1-.02,y-.03,.08,W0+.06,3.4,CH,5,'rgba(60,70,80,.6)');
+  // door: closed seams and handle, or swung open on its front hinge
+  if(door>0){const k=Math.min(1,door),th=k*1.15,hx=x+2.02,hy=y+W0,ex=hx-.52*Math.cos(th),ey=hy+.52*Math.sin(th);
+    faceY(y+W0+.001,x+1.5,x+2.02,7,24,'#1a1d21');faceY(y+W0+.001,x+1.52,x+1.75,8,16,'#5a3a22');
+    poly([P(hx,hy,7),P(ex,ey,7),P(ex,ey,24),P(hx,hy,24)],shade(B,-.08),'rgba(60,10,5,.6)',.7);
+    poly([P(hx,hy,24.5),P(ex,ey,24.5),P(ex,ey,36),P(hx-.08*Math.cos(th),hy+.08*Math.sin(th),37)],'rgba(190,225,245,.4)','rgba(60,10,5,.6)',.7);
+  }else{g.strokeStyle='rgba(60,10,5,.6)';g.lineWidth=.6;line(P(x+1.52,y+W0+.002,7),P(x+1.52,y+W0+.002,24));line(P(x+2.02,y+W0+.002,7),P(x+2.02,y+W0+.002,24));line(P(x+1.52,y+W0+.002,7),P(x+2.02,y+W0+.002,7));
+    faceY(y+W0+.003,x+1.58,x+1.68,19,20.4,CH,'rgba(60,70,80,.6)',.4)}
+  // side mirror
+  bx(x+2.0,y+W0,.04,.09,1,'#2a2a2c',27);bx(x+1.98,y+W0+.08,.06,.04,5,'#2a2a2c',25);
   g.restore();
-  wheel(x+.42,y+.72);wheel(x+1.72,y+.72);
-  // name on the door
-  const[da,db]=P(x+1.8,y+.7,z+8);g.font='600 6px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('DALE',da,db);
+  truckWheel(x+.5,y+W0-.07,roll,true);truckWheel(x+2.1,y+W0-.07,roll,true);
+  // fender lip over the front wheel
+  {g.save();g.translate(px0,py0-jig);g.rotate(-pitch);g.translate(-px0,-py0);g.beginPath();for(let i=0;i<=10;i++){const a=i/10*Math.PI,[ax,ay]=P(x+2.1+Math.cos(a)*(TK.wr+2.6)/40.25,y+W0+.004,TK.wr+Math.sin(a)*(TK.wr+2.6));i?g.lineTo(ax,ay):g.moveTo(ax,ay)}
+    g.strokeStyle=BD;g.lineWidth=2.2;g.stroke();g.restore()}
+  // exhaust: a puff now and then while the engine runs, more when driving
+  if(running&&!reduce&&!ICON_MODE){const t=performance.now();if(t>tkSmokeT){tkSmokeT=t+(moving?70:260);const[ex,ey]=P(x-.06,y+W0-.15,5);parts.push({x:ex,y:ey-jig,vx:-.5+(Math.random()-.5)*.2,vy:-.35,c:moving?'rgba(110,110,116,.45)':'rgba(140,140,146,.35)',t0:t,life:1.2,r:2.4,gr:-.008,kind:'smoke'})}}
+}
+// headlight beams at night, drawn outside the inked truck so they glow
+function truckLights(x,y,lit){
+  if(!lit)return;g.save();g.globalCompositeOperation='lighter';
+  for(const yy of[y+.11,y+TK.w-.11]){const[a,b]=P(x+TK.hood1,yy,13),[c,d]=P(x+TK.hood1+2.2,yy-.25,0),[e,f]=P(x+TK.hood1+2.2,yy+.25,0);
+    const gr=g.createLinearGradient(a,b,(c+e)/2,(d+f)/2);gr.addColorStop(0,'rgba(255,240,180,.4)');gr.addColorStop(1,'rgba(255,240,180,0)');poly([[a,b],[c,d],[e,f]],gr)}
+  const[tx,ty]=P(x+.02,y+TK.w,17);const gr=g.createRadialGradient(tx,ty,.5,tx,ty,10);gr.addColorStop(0,'rgba(255,60,40,.5)');gr.addColorStop(1,'rgba(255,60,40,0)');g.fillStyle=gr;g.fillRect(tx-10,ty-10,20,20);
+  g.restore();
 }
 const dale={say:'',sayT:0,next:8};
 const DALE_IDLE=['Got anything for town?','The truck is ready to roll!','Nice day for a drive.','Fill a contract and I will take it to town.'];
@@ -5880,24 +5943,25 @@ function speech(px,py,text){
 }
 let lastPhase='parked',dustT=0;
 function drawDeliveryArea(now){
-  if(VIS)return;const[bx,by]=boardSpot();inkLive(bx+.5,by+.3,90,80,20,()=>drawBoard(bx,by));
+  if(VIS)return;const[bx,by]=boardSpot();
   const d=dv(),ph=truckPhase(now),tp=truckPos(now),ready=d.jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap())&&!d.run;
   if(ph==='back'&&lastPhase!=='back')setTimeout(SFX.horn,DRIVE-500);lastPhase=ph;
   // Dale's spot is beside the driver door; the door itself is where he climbs in and out
-  const[sx0,sy0]=truckSpot(),stand=[sx0+2.55,sy0+1.0],doorAt=[sx0+1.62,sy0+.9];
+  const[sx0,sy0]=truckSpot(),stand=[sx0+3.6,sy0+1.2],doorAt=[sx0+1.8,sy0+1.02];
   let dalePos=null,daleWalk=false,inCab=false,door=0;
-  if(!d.run){const k=dale.outT?(now-dale.outT)/1300:1;
+  if(!d.run){const k=dale.outT?(now-dale.outT)/2100:1;
     if(k<1){const e=Math.max(0,(k-.25)/.75);dalePos=[doorAt[0]+(stand[0]-doorAt[0])*e,doorAt[1]+(stand[1]-doorAt[1])*e];daleWalk=e>0;door=k<.25?k/.25:Math.max(0,1-(k-.25)/.4)}
     else dalePos=stand}
   else if(ph==='boarding'){const k=(now-d.run.start)/BOARD;
     if(k<.6){const e=k/.6;dalePos=[stand[0]+(doorAt[0]-stand[0])*e,stand[1]+(doorAt[1]-stand[1])*e];daleWalk=true;door=Math.min(1,Math.max(0,(k-.35)/.25))}
     else{inCab=true;door=k<.8?1:Math.max(0,1-(k-.8)/.2)}}
   if(tp){const cargo=d.run?(ph==='leaving'||ph==='boarding'?d.run.job.items:ph==='back'?'money':null):null;
-    inkLive(tp[0],tp[1],260,140,90,()=>drawTruck(tp[0],tp[1],now,tp[2],cargo,inCab||(d.run&&ph!=='boarding')||(!d.run&&dale.outT&&now-dale.outT<330),door));
-    if(tp[2]&&!reduce&&performance.now()>dustT){dustT=performance.now()+70;const back=ph==='leaving'?-.1:2.3,[ux,uy]=P(tp[0]+back,tp[1]+.4);spray(ux,uy,2,{c:['#d8c4a0','#c4ad84','#e8dcc0'],v:.6,r:2.6,gr:-.02,life:.8,a:Math.PI*(ph==='leaving'?1:0)-.3,spread:1})}
+    const cab=!!(inCab||(d.run&&ph!=='boarding')||(!d.run&&dale.outT&&now-dale.outT<520));
+    inkLive(tp[0]+1.3,tp[1]+.4,210,95,45,()=>drawTruck(tp[0],tp[1],now,tp[2],cargo,cab,door,tp[3]));truckLights(tp[0],tp[1],(tp[2]||cab)&&darkness()>.3);
+    if(tp[2]&&!reduce&&performance.now()>dustT){dustT=performance.now()+70;for(const wy of[.1,.75]){const[ux,uy]=P(tp[0]+.3,tp[1]+wy);spray(ux,uy,1,{c:['#d8c4a0','#c4ad84','#e8dcc0'],v:.7,r:2.8,gr:-.02,life:.9,a:Math.PI-.35,spread:.9})}}
     if(dalePos){const[dx,dy]=dalePos,[px,py]=P(dx,dy),wave=!daleWalk&&!d.run&&(ready?Math.sin(now/500)>-.2:Math.sin(now/1600)>.6);
-      const toDoor=!!d.run,face=daleWalk?(toDoor?1:-1):-1;
-      inkLive(dx,dy,80,85,20,()=>{g.save();g.translate(px,py);g.scale(FIG*face,FIG);drawAvatar(DRIVER.look,{kind:daleWalk?'walk':wave?'wave':null,t:now/1000});g.restore()});
+      const toDoor=!!d.run,face=daleWalk?(toDoor?-1:1):-1;
+      inkLive(dx,dy,80,85,20,()=>{g.save();g.translate(px,py);g.scale(FIG*face,FIG);drawAvatar(DRIVER.look,{walking:daleWalk,walk:now/1000*13,kind:!daleWalk&&wave?'wave':null,t:now/1000});g.restore()});
     }
     if(!d.run&&dalePos){const[px,py]=P(dalePos[0],dalePos[1]);
       g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=g.measureText('Dale').width+10,ty=py-62;poly([[px-w/2,ty-9],[px+w/2,ty-9],[px+w/2,ty+3],[px-w/2,ty+3]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText('Dale',px,ty);
@@ -5905,13 +5969,15 @@ function drawDeliveryArea(now){
       const dt=1/60;dale.next-=dt;if(dale.sayT>0)dale.sayT-=dt;
       if(dale.next<=0&&dale.sayT<=0&&$('title').hidden){dale.next=22+Math.random()*20;dale.say=ready?'I can take that to town!':DALE_IDLE[Math.floor(Math.random()*DALE_IDLE.length)];dale.sayT=3.5}
       if(dale.sayT>0)speech(px,ty-14,dale.say)}
-    else if(dale.sayT>0&&ph==='leaving'){const[hx,hy]=P(tp[0]+1.66,tp[1]+.36,40);dale.sayT-=1/60;speech(hx,hy,dale.say)}}
+    else if(dale.sayT>0&&ph==='leaving'){const[hx,hy]=P(tp[0]+1.75,tp[1]+.4,50);dale.sayT-=1/60;speech(hx,hy,dale.say)}}
+  // the board stands in front of the road, so it is drawn after the truck
+  inkLive(bx+.5,by+.3,90,80,20,()=>drawBoard(bx,by));
   if(ready){const[px,py]=P(bx+.5,by+.3);const k=reduce?0:Math.sin(now/240)*2;ell(px+26,py-70+k,8,8,'#3f9a3c','#fff',1.6);g.font='bold 10px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('!',px+26,py-66.5+k)}
 }
 function deliveryAt(cx,cy){
   if(VIS)return false;const[bx,by]=boardSpot(),[px,py]=P(bx+.5,by+.3),sx=px*cam.z+cam.x,sy=(py-34)*cam.z+cam.y;
   if(Math.abs(cx-sx)<34*cam.z&&Math.abs(cy-sy)<36*cam.z)return true;
-  const tp=truckPos(Date.now());if(tp&&!dv().run){const[tx,ty]=P(tp[0]+1.1,tp[1]+.36,14),ux=tx*cam.z+cam.x,uy=ty*cam.z+cam.y;if(Math.abs(cx-ux)<46*cam.z&&Math.abs(cy-uy)<26*cam.z)return true}
+  const tp=truckPos(Date.now());if(tp&&!dv().run){const[tx,ty]=P(tp[0]+1.3,tp[1]+.4,16),ux=tx*cam.z+cam.x,uy=ty*cam.z+cam.y;if(Math.abs(cx-ux)<58*cam.z&&Math.abs(cy-uy)<28*cam.z)return true}
   return false;
 }
 
