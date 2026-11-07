@@ -3102,7 +3102,185 @@ function gableHouse(x,y,w,d,h,rh,wallL,wallR,roofF,roofB,trim,z){
   g.strokeStyle=shade(roofF,-.2);g.lineWidth=1;for(let i=1;i<5;i++){const t=i/5;line(P(x,y+d-d/2*t,h+z+rh*t),P(x+w,y+d-d/2*t,h+z+rh*t))}
 }
 function faceQuad(x0,x1,yy,z0,z1,fill,stroke){poly([P(x0,yy,z0),P(x1,yy,z0),P(x1,yy,z1),P(x0,yy,z1)],fill,stroke,1.4)}
+/* ---- Natural style: the farmhouse and barn, painted after real ones ----
+   Farmhouse: a two-storey clapboard house on a stone footing, shingle roof (standing-seam metal from level 4), brick chimney,
+   double-hung windows, and a porch from level 2. Barn: red board-and-batten walls, a gambrel roof in ribbed metal, X-braced
+   sliding doors, a hay loft and round bales; a concrete stave silo from level 2 and a cupola from level 3. */
+function fp(f,pts,fill,stroke,lw){poly(pts.map(p=>f(p[0],p[1])),fill,stroke,lw)}
+function fl(f,a,b){line(f(a[0],a[1]),f(b[0],b[1]))}
+function lgr(a,b,cols){const gr=g.createLinearGradient(a[0],a[1],b[0],b[1]);cols.forEach((c,i)=>gr.addColorStop(i/(cols.length-1),c));return gr}
+function clipPts(pts){g.beginPath();g.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)g.lineTo(pts[i][0],pts[i][1]);g.closePath();g.clip()}
+// lap siding: thin shadow lines with a light lip above each board
+function sidingN(f,pts,u0,u1,z0,z1,step){
+  g.save();clipPts(pts.map(p=>f(p[0],p[1])));
+  for(let z=z0+step;z<z1;z+=step){g.strokeStyle='rgba(64,52,40,.24)';g.lineWidth=.6;fl(f,[u0,z],[u1,z]);g.strokeStyle='rgba(255,255,255,.3)';g.lineWidth=.45;fl(f,[u0,z+.7],[u1,z+.7])}
+  for(let i=0;i<10;i++){const u=u0+hash(i,4.2)*(u1-u0),w=.03+hash(4.2,i)*.08;fp(f,[[u,z0],[u+w,z0],[u+w,z1],[u,z1]],hash(i,2)>.5?'rgba(255,250,235,.06)':'rgba(40,30,20,.05)')}
+  g.restore();
+}
+// board-and-batten: raised battens with a lit edge, plus soft weathering streaks
+function battensN(f,pts,u0,u1,z0,z1,step){
+  g.save();clipPts(pts.map(p=>f(p[0],p[1])));
+  for(let u=u0+step;u<u1;u+=step){g.strokeStyle='rgba(60,14,8,.5)';g.lineWidth=1.1;fl(f,[u,z0],[u,z1]);g.strokeStyle='rgba(255,180,160,.2)';g.lineWidth=.45;fl(f,[u-.014,z0],[u-.014,z1])}
+  for(let i=0;i<16;i++){const u=u0+hash(i,7.3)*(u1-u0),w=.015+hash(7.3,i)*.05;fp(f,[[u,z0],[u+w,z0],[u+w,z1],[u,z1]],hash(i,9.1)>.55?'rgba(255,235,215,.08)':'rgba(30,8,4,.12)')}
+  const gr=g.createLinearGradient(0,f(u0,z0)[1],0,f(u0,z0+10)[1]);gr.addColorStop(0,'rgba(60,40,20,.28)');gr.addColorStop(1,'rgba(60,40,20,0)');fp(f,[[u0,z0],[u1,z0],[u1,z0+10],[u0,z0+10]],gr);
+  g.restore();
+}
+// a window on a wall; f maps (distance along the wall, height) to the screen
+function windowN(f,u0,u1,z0,z1,o){
+  o=o||{};const t=.03,trim=o.trim||'#f6f3ec';
+  if(o.shutters)for(const[a,b]of[[u0-t-.075,u0-t-.008],[u1+t+.008,u1+t+.075]]){fp(f,[[a,z0-1],[b,z0-1],[b,z1+1],[a,z1+1]],o.shutters,'rgba(0,0,0,.3)',.4);g.strokeStyle='rgba(0,0,0,.25)';g.lineWidth=.4;for(let z=z0;z<z1;z+=1.3)fl(f,[a+.008,z],[b-.008,z])}
+  fp(f,[[u0-t,z0-1.4],[u1+t,z0-1.4],[u1+t,z1+1.5],[u0-t,z1+1.5]],trim,'rgba(60,50,40,.4)',.4);
+  fp(f,[[u0-t*1.7,z0-1.4],[u1+t*1.7,z0-1.4],[u1+t*1.7,z0-2.5],[u0-t*1.7,z0-2.5]],'#dcd6ca');
+  const q=[f(u0,z0),f(u1,z0),f(u1,z1),f(u0,z1)];
+  poly(q,o.lit?lgr(f(u0,z1),f(u0,z0),['#fff0b8','#f2b550']):lgr(f(u0,z1),f(u1,z0),['#b4cddf','#5d7891','#273443']));
+  g.save();clipPts(q);fp(f,[[u0,z0+(z1-z0)*.55],[u0+(u1-u0)*.5,z1],[u0+(u1-u0)*.8,z1],[u0,z0+(z1-z0)*.12]],o.lit?'rgba(255,255,255,.18)':'rgba(255,255,255,.2)');
+  fp(f,[[u0,z1-1.2],[u1,z1-1.2],[u1,z1],[u0,z1]],'rgba(0,0,0,.25)');g.restore();
+  g.strokeStyle=trim;const zm=(z0+z1)/2,um=(u0+u1)/2;g.lineWidth=1.1;fl(f,[u0,zm],[u1,zm]);g.lineWidth=.55;fl(f,[um,z0],[um,z1]);
+  if(o.panes){fl(f,[u0,(zm+z1)/2],[u1,(zm+z1)/2]);fl(f,[u0,(zm+z0)/2],[u1,(zm+z0)/2])}
+}
+function drawFarmhouseN(x,y,o){
+  const lv=o.lv||1,x0=x+.14,y0=y+.1,w=1.72,dh=1.24,yh=y0+dh,ym=y0+dh/2,base=lv>=4?7:4,h=base+40,rh=24,ov=.08,zr=h+rh,ze=h-ov*rh/(dh/2);
+  const[cx,cy]=P(x+1,y+1);shadow(cx+2,cy+4,64,22);
+  const wallL=lv>=3?'#f2eee5':'#e7dec9',wallR=lv>=3?'#cfcac0':'#c2b9a4',white='#f7f5ef';
+  const roofC=lv>=4?'#40594b':'#4a494b',roofHi=lv>=4?'#64806f':'#6f6d70',roofLo=lv>=4?'#283a30':'#2e2d2f';
+  const F=(u,z)=>P(x0+u,yh,z),S=(v,z)=>P(x0+w,y0+v,z),c=w/2;
+  // back slope, footing and walls
+  poly([P(x0-ov,y0-ov,ze),P(x0+w+ov,y0-ov,ze),P(x0+w+ov,ym,zr),P(x0-ov,ym,zr)],roofLo);
+  isoBox(x0,y0,w,dh,base,'#9b958a','#7f796f',null,null);
+  for(let i=0;i<16;i++){const u=.05+hash(i,1.3)*(w-.1),[sx,sy]=F(u,base*(.3+hash(1.3,i)*.4));ell(sx,sy,2.6+hash(i,5)*1.6,1.1+hash(5,i)*.6,hash(i,8)>.5?'rgba(255,255,255,.18)':'rgba(40,36,30,.22)')}
+  const fw=[[0,base],[w,base],[w,h],[0,h]],sw=[[0,base],[dh,base],[dh,h],[dh/2,zr],[0,h]];
+  fp(F,fw,wallL);fp(S,sw,wallR);
+  sidingN(F,fw,0,w,base,h,3);sidingN(S,sw,0,dh,base,zr,3);
+  fp(F,[[0,base],[.05,base],[.05,h],[0,h]],white);fp(F,[[w-.05,base],[w,base],[w,h],[w-.05,h]],white);fp(S,[[dh-.045,base],[dh,base],[dh,h],[dh-.045,h]],'#dedad2');
+  fp(F,[[0,h-6],[w,h-6],[w,h],[0,h]],'rgba(30,22,12,.16)');fp(S,[[0,h-5],[dh,h-5],[dh,h],[0,h]],'rgba(30,22,12,.14)');
+  // windows: three up, two down beside the door; two per floor on the side and an attic window in the gable
+  const sh=lv>=3?(lv>=5?'#3d5a72':'#2f3e37'):null;
+  for(const u of[.3,c,w-.3])windowN(F,u-.095,u+.095,base+24,base+35,{shutters:sh});
+  for(const u of[.3,w-.3])windowN(F,u-.095,u+.095,base+5,base+17,{shutters:sh});
+  for(const v of[.33,.9]){windowN(S,v-.085,v+.085,base+24,base+35);windowN(S,v-.085,v+.085,base+5,base+17)}
+  windowN(S,dh/2-.06,dh/2+.06,h+5,h+12,{lit:lv>=3});
+  // front door with a transom light
+  const door=lv>=3?'#2e4a5e':'#6a2c22';
+  fp(F,[[c-.11,base],[c+.11,base],[c+.11,base+19],[c-.11,base+19]],white,'rgba(60,50,40,.4)',.4);
+  fp(F,[[c-.08,base],[c+.08,base],[c+.08,base+15],[c-.08,base+15]],door);
+  fp(F,[[c-.08,base+15.6],[c+.08,base+15.6],[c+.08,base+18],[c-.08,base+18]],lgr(F(c,base+18),F(c,base+15.6),['#b4cddf','#3a4d60']));
+  g.strokeStyle='rgba(0,0,0,.28)';g.lineWidth=.5;for(const[a,b,z0,z1]of[[c-.06,c-.01,base+8,base+13],[c+.01,c+.06,base+8,base+13],[c-.06,c-.01,base+2,base+6.5],[c+.01,c+.06,base+2,base+6.5]])fp(F,[[a,z0],[b,z0],[b,z1],[a,z1]],null,'rgba(0,0,0,.3)',.5);
+  {const[kx,ky]=F(c+.055,base+7.5);ell(kx,ky,.9,.9,'#d9b24a')}
+  g.strokeStyle='#b8b4ab';g.lineWidth=1.3;fl(F,[w-.025,base],[w-.025,h-1]);
+  // front roof slope: shingle courses, or standing seams from level 4
+  const R=(s,t)=>P(x0-ov+s*(w+2*ov),yh+ov-t*(yh+ov-ym),ze+t*(zr-ze));
+  poly([R(0,0),R(1,0),R(1,1),R(0,1)],lgr(R(0,1),R(0,0),[roofHi,roofC,roofLo]));
+  if(lv>=4){for(let s=.02;s<1;s+=.032){g.strokeStyle='rgba(255,255,255,.22)';g.lineWidth=.7;line(R(s,0),R(s,1));g.strokeStyle='rgba(0,0,0,.3)';g.lineWidth=.5;line(R(s+.006,0),R(s+.006,1))}}
+  else{const rows=11,cols=18;for(let r=0;r<rows;r++){const t0=r/rows,t1=(r+1)/rows;
+      for(let k=0;k<cols;k++){const s0=(k+(r%2)*.5)/cols,s1=Math.min(1,s0+1/cols),v=hash(k,r*3.1);if(v>.62||v<.18)poly([R(s0,t0),R(s1,t0),R(s1,t1),R(s0,t1)],v>.62?'rgba(255,255,255,.07)':'rgba(0,0,0,.12)')}
+      g.strokeStyle='rgba(0,0,0,.4)';g.lineWidth=.6;line(R(0,t0),R(1,t0));g.strokeStyle='rgba(0,0,0,.22)';g.lineWidth=.4;for(let k=0;k<cols;k++){const s=(k+(r%2)*.5)/cols;if(s<1)line(R(s,t0),R(s,t1))}}}
+  g.strokeStyle='#d6d2c9';g.lineWidth=1.7;line(P(x0-ov,yh+ov,ze-1),P(x0+w+ov,yh+ov,ze-1));
+  g.strokeStyle=white;g.lineWidth=1.7;line(P(x0+w+ov,yh+ov,ze),P(x0+w+ov,ym,zr));line(P(x0+w+ov,ym,zr),P(x0+w+ov,y0-ov,ze));
+  g.strokeStyle=roofLo;g.lineWidth=1.8;line(P(x0-ov,ym,zr+.6),P(x0+w+ov,ym,zr+.6));
+  // brick chimney through the ridge
+  const chx=x0+.26;isoBox(chx,ym-.1,.2,.2,15,'#9c4b37','#7a3828','#4a2218',null,zr-7);
+  g.strokeStyle='rgba(235,220,200,.35)';g.lineWidth=.45;for(let z=zr-5;z<zr+8;z+=2.2){line(P(chx,ym+.1,z),P(chx+.2,ym+.1,z));line(P(chx+.2,ym+.1,z),P(chx+.2,ym-.1,z))}
+  isoBox(chx-.025,ym-.125,.25,.25,2,'#8f8c87','#73706b','#a9a6a0',null,zr+8);
+  if(lv>=3){const[lx,ly]=F(c-.17,base+13);ell(lx,ly,4,4,'rgba(255,220,120,.25)');poly([[lx-1.3,ly-2],[lx+1.3,ly-2],[lx+1,ly+1.8],[lx-1,ly+1.8]],'#ffe39a','#2b2b2b',.5)}
+  // porch (level 2+) or a stone stoop with a little hood
+  const pa=x0+.04,pb=x0+w-.04,yp=yh+.4;
+  if(lv>=2){
+    isoBox(pa,yh,pb-pa,.4,base,'#8a7c6b','#726656','#b3a58e',null);
+    g.strokeStyle='rgba(70,50,30,.28)';g.lineWidth=.4;for(let s=.05;s<pb-pa;s+=.06)line(P(pa+s,yh,base),P(pa+s,yp,base));
+    isoBox(x0+c-.15,yp,.3,.12,base*.5,'#8a7c6b','#726656','#a99b84',null);
+    if(lv>=4){const[bx2,by2]=P(pa+.38,yh+.14,base);poly([[bx2-9,by2-5],[bx2+9,by2-5],[bx2+9,by2-3.6],[bx2-9,by2-3.6]],'#6e4a2c');poly([[bx2-9,by2-10],[bx2+9,by2-10],[bx2+9,by2-8.6],[bx2-9,by2-8.6]],'#7d5534');g.strokeStyle='#4e331e';g.lineWidth=1;line([bx2-7,by2-3.6],[bx2-7,by2]);line([bx2+7,by2-3.6],[bx2+7,by2])}
+    const posts=[pa+.04,x0+c-.19,x0+c+.19,pb-.04],top=base+18.5;
+    g.strokeStyle='#ebe7de';g.lineWidth=.7;
+    for(const[a,b]of[[posts[0],posts[1]],[posts[2],posts[3]]]){line(P(a,yp-.03,base+9),P(b,yp-.03,base+9));line(P(a,yp-.03,base+2),P(b,yp-.03,base+2));for(let s=a+.05;s<b;s+=.05)line(P(s,yp-.03,base+2),P(s,yp-.03,base+9))}
+    for(const p of posts){g.strokeStyle=white;g.lineWidth=2.4;line(P(p,yp-.03,base),P(p,yp-.03,top));g.strokeStyle='rgba(0,0,0,.14)';g.lineWidth=.8;const[a1,a2]=P(p,yp-.03,base),[b1,b2]=P(p,yp-.03,top);line([a1+.9,a2],[b1+.9,b2])}
+    const pr=[P(pa-.03,yh,base+23),P(pb+.03,yh,base+23),P(pb+.03,yp+.05,base+19.5),P(pa-.03,yp+.05,base+19.5)];
+    poly(pr,lgr(pr[0],pr[3],[roofHi,roofC]));g.strokeStyle='rgba(0,0,0,.25)';g.lineWidth=.45;for(let s=pa;s<pb;s+=.055)line(P(s,yh,base+23),P(s,yp+.05,base+19.5));
+    poly([P(pa-.03,yp+.05,base+19.5),P(pb+.03,yp+.05,base+19.5),P(pb+.03,yp+.05,base+17.6),P(pa-.03,yp+.05,base+17.6)],white);
+    poly([P(pb+.03,yh,base+23),P(pb+.03,yp+.05,base+19.5),P(pb+.03,yp+.05,base+17.6),P(pb+.03,yh,base+21)],'#dcd8cf');
+    for(let i=0;i<4;i++){const[sx,sy]=P(x0+c-.06+hash(i,2)*.12,yp+.16+i*.08);ell(sx,sy,4.2,1.8,'#bdb6a8','rgba(80,70,60,.35)',.4)}
+  }else{
+    isoBox(x0+c-.16,yh,.32,.14,base,'#a39d92','#878176','#b9b3a8',null);isoBox(x0+c-.13,yh+.14,.26,.1,base*.5,'#a39d92','#878176','#b9b3a8',null);
+    poly([F(c-.15,base+20),F(c+.15,base+20),P(x0+c+.15,yh+.14,base+20),P(x0+c-.15,yh+.14,base+20)],roofC);
+    poly([P(x0+c-.15,yh+.14,base+20),P(x0+c+.15,yh+.14,base+20),P(x0+c,yh+.14,base+25)],white,'rgba(0,0,0,.2)',.4);
+  }
+  // boxwood shrubs at the corners, potted plants and a weathervane as the house grows
+  for(const[u,v]of[[x0+.12,yh+.1],[x0+w-.12,yh+.1]]){if(lv>=2)continue;const[sx,sy]=P(u,v);ball(sx,sy-4,6,5,'#4f7a3a')}
+  if(lv>=2)for(const[u,v]of[[x0+.06,yp+.12],[x0+w+.1,yh-.05]]){const[sx,sy]=P(u,v);ball(sx-3,sy-4,5.5,4.6,'#4a7536');ball(sx+3,sy-3.5,5,4.2,'#57843f')}
+  if(lv>=4)for(const u of[x0+c-.24,x0+c+.24]){const[px2,py2]=P(u,yp+.1);poly([[px2-2.6,py2],[px2+2.6,py2],[px2+3.4,py2-5],[px2-3.4,py2-5]],'#a8583a');ball(px2,py2-8.5,4.4,4.4,'#4f8a3c')}
+  if(lv>=5){
+    const[vx,vy]=P(x0+w*.72,ym,zr);g.strokeStyle='#2b2b2b';g.lineWidth=1.2;line([vx,vy],[vx,vy-15]);line([vx-5,vy-9],[vx+5,vy-9]);
+    poly([[vx-8,vy-13.5],[vx+5,vy-13.5],[vx+8,vy-12],[vx+5,vy-10.5],[vx-8,vy-10.5],[vx-5.5,vy-12]],'#2b2b2b');ball(vx,vy-16,1.6,1.6,'#c99a2e');
+    const fy=y0+1.86;for(let i=0;i<=18;i++){const t=x0-.04+i*.1;if(Math.abs(t-(x0+c))<.12)continue;const[px2,py2]=P(t,fy);poly([[px2-1.2,py2],[px2+1.2,py2],[px2+1.2,py2-8],[px2,py2-9.5],[px2-1.2,py2-8]],'#f4f2ec','rgba(90,85,75,.5)',.4)}
+    g.strokeStyle='#f4f2ec';g.lineWidth=1.1;line(P(x0-.04,fy,5),P(x0+c-.13,fy,5));line(P(x0+c+.13,fy,5),P(x0+w+.04,fy,5));
+    for(let i=0;i<14;i++){const u=x0+.02+hash(i,3)*(w-.04);if(Math.abs(u-(x0+c))<.16)continue;const[fx,fy2]=P(u,fy-.08-hash(3,i)*.1);ell(fx,fy2-1.5,1.6,1.3,['#d8476e','#f2c94c','#f6f2ea','#8a63c4'][i%4])}
+  }
+}
+function drawBarnN(x,y,o){
+  const lv=o.lv||1,x0=x+.1,y0=y+.1,bw=1.48,d=1.6,yy=y0+d,base=4,h=30,b=.24,r1=17,r2=11,ov=.07,xm=x0+bw/2,zp=h+r1+r2;
+  const[cx,cy]=P(x+1,y+1);shadow(cx-4,cy+4,60,21);
+  const prof=[[0,h],[b,h+r1],[bw/2,zp],[bw-b,h+r1],[bw,h]],rp=[[-ov,h-2],[b,h+r1],[bw/2,zp+.6],[bw-b,h+r1],[bw+ov,h-2]];
+  const F=(u,z)=>P(x0+u,yy,z),S=(v,z)=>P(x0+bw,y0+v,z),white='#f2eee6';
+  const mHi=lv>=3?'#b3b9bf':'#a1a7ac',mMid=lv>=3?'#959ca3':'#878d92',mLo=lv>=3?'#737a82':'#666c71';
+  const slope=(i,ya,yb,fill)=>{const[a,za]=rp[i],[c,zc]=rp[i+1];poly([P(x0+a,ya,za),P(x0+c,ya,zc),P(x0+c,yb,zc),P(x0+a,yb,za)],fill)};
+  const seams=(i,ya,yb)=>{const[a,za]=rp[i],[c,zc]=rp[i+1];for(let v=ya+.035;v<yb;v+=.07){g.strokeStyle='rgba(255,255,255,.26)';g.lineWidth=.7;line(P(x0+a,v,za),P(x0+c,v,zc));g.strokeStyle='rgba(30,34,40,.35)';g.lineWidth=.5;line(P(x0+a,v+.012,za),P(x0+c,v+.012,zc))}
+    if(lv<3)for(let k=0;k<4;k++){const v=ya+hash(k,i*2.7)*(yb-ya),ww=.02+hash(i,k)*.03;poly([P(x0+a,v,za),P(x0+c,v,zc),P(x0+c,v+ww,zc),P(x0+a,v+ww,za)],'rgba(140,72,30,.18)')}};
+  // back slopes, then the long side wall
+  slope(0,y0-ov,yy,mLo);slope(1,y0-ov,yy,mMid);
+  fp(S,[[0,0],[d,0],[d,base],[0,base]],'#a29e95');
+  const sw=[[0,base],[d,base],[d,h],[0,h]];fp(S,sw,'#7c271f');battensN(S,sw,0,d,base,h,.085);
+  for(const v of[.3,.8,1.3])windowN(S,v-.075,v+.075,base+11,base+19,{panes:true,lit:lv>=3});
+  fp(S,[[0,h-5],[d,h-5],[d,h],[0,h]],'rgba(20,6,4,.22)');
+  // gable end: concrete footing, red boards, white corner boards and an eave band
+  fp(F,[[0,0],[bw,0],[bw,base],[0,base]],'#bab6ad');
+  const gw=[[0,base],[bw,base],[bw,h],[bw-b,h+r1],[bw/2,zp],[b,h+r1],[0,h]];fp(F,gw,'#a2342a');battensN(F,gw,0,bw,base,zp,.08);
+  fp(F,[[0,base],[.045,base],[.045,h],[0,h]],white);fp(F,[[bw-.045,base],[bw,base],[bw,h],[bw-.045,h]],white);fp(S,[[d-.04,base],[d,base],[d,h],[d-.04,h]],'#d9d4ca');
+  fp(F,[[0,h-1.2],[bw,h-1.2],[bw,h+.4],[0,h+.4]],white);
+  // sliding doors on a track: the right leaf stands a little open on the dark, hay-strewn inside
+  const d0=bw*.25,d1=bw*.75,dm=bw/2,dz=base+21;
+  fp(F,[[d0-.06,dz+1],[d1+.2,dz+1],[d1+.2,dz+2.6],[d0-.06,dz+2.6]],'#38332f');
+  fp(F,[[dm,base],[dm+.11,base],[dm+.11,dz],[dm,dz]],'#1b1510');fp(F,[[dm,base],[dm+.11,base],[dm+.11,base+3],[dm,base+3]],'#b8983e');
+  const leaf=(a,c2)=>{fp(F,[[a,base],[c2,base],[c2,dz],[a,dz]],'#8f2b22');g.strokeStyle='rgba(50,10,6,.45)';g.lineWidth=.5;for(let u=a+.04;u<c2;u+=.04)fl(F,[u,base],[u,dz]);
+    const t=.024;for(const q of[[[a,base],[c2,base],[c2,base+1.5],[a,base+1.5]],[[a,dz-1.5],[c2,dz-1.5],[c2,dz],[a,dz]],[[a,base],[a+t,base],[a+t,dz],[a,dz]],[[c2-t,base],[c2,base],[c2,dz],[c2-t,dz]],[[a,(base+dz)/2-.7],[c2,(base+dz)/2-.7],[c2,(base+dz)/2+.7],[a,(base+dz)/2+.7]]])fp(F,q,white);
+    g.strokeStyle=white;g.lineWidth=1.5;fl(F,[a+t,base+1.5],[c2-t,dz-1.5]);fl(F,[a+t,dz-1.5],[c2-t,base+1.5]);
+    const[r1x,r1y]=F(a+.05,dz+1.8),[r2x,r2y]=F(c2-.05,dz+1.8);ell(r1x,r1y,1,1,'#222');ell(r2x,r2y,1,1,'#222')};
+  leaf(d0,dm);leaf(dm+.11,d1+.11);
+  // hay loft door with a pulley beam under the peak
+  const l0=bw*.41,l1=bw*.59,lz0=h+3,lz1=h+14;
+  fp(F,[[l0,lz0],[l1,lz0],[l1,lz1],[l0,lz1]],'#8f2b22');
+  for(const q of[[[l0,lz0],[l1,lz0],[l1,lz0+1.3],[l0,lz0+1.3]],[[l0,lz1-1.3],[l1,lz1-1.3],[l1,lz1],[l0,lz1]],[[l0,lz0],[l0+.022,lz0],[l0+.022,lz1],[l0,lz1]],[[l1-.022,lz0],[l1,lz0],[l1,lz1],[l1-.022,lz1]]])fp(F,q,white);
+  g.strokeStyle=white;g.lineWidth=1.3;fl(F,[l0+.022,lz0+1.3],[l1-.022,lz1-1.3]);fl(F,[l0+.022,lz1-1.3],[l1-.022,lz0+1.3]);
+  g.strokeStyle='#4a3a2c';g.lineWidth=2;line(P(xm,yy,zp-3.5),P(xm,yy+.2,zp-3.5));{const[px2,py2]=P(xm,yy+.18,zp-5);ell(px2,py2,1.4,1.4,'#2a2a2a');g.strokeStyle='rgba(120,100,70,.8)';g.lineWidth=.5;line([px2,py2],[px2,py2+9])}
+  // the near roof slopes in ribbed metal, then the overhang over the gable and the white fascia
+  slope(2,y0-ov,yy+ov,lgr(P(xm,y0,zp),P(x0+bw-b,yy,h+r1),[mHi,mMid]));seams(2,y0-ov,yy+ov);
+  slope(3,y0-ov,yy+ov,lgr(P(x0+bw-b,y0,h+r1),P(x0+bw,yy,h),[mMid,mLo]));seams(3,y0-ov,yy+ov);
+  slope(0,yy,yy+ov,mLo);slope(1,yy,yy+ov,mMid);
+  g.strokeStyle=white;g.lineWidth=2;g.lineJoin='round';g.beginPath();rp.forEach(([u,z],i)=>{const[sx,sy]=P(x0+u,yy+ov,z);i?g.lineTo(sx,sy):g.moveTo(sx,sy)});g.stroke();
+  g.strokeStyle='#5e646a';g.lineWidth=1.5;line(P(xm,y0-ov,zp+.9),P(xm,yy+ov,zp+.9));
+  g.strokeStyle='#e4dfd6';g.lineWidth=1.2;line(P(x0+bw+ov,y0-ov,h-2),P(x0+bw+ov,yy+ov,h-2));
+  // cupola with louvres and a weathervane (level 3+)
+  if(lv>=3){const yc=y0+d/2,q=.1;isoBox(xm-q,yc-q,q*2,q*2,9,'#f0ece4','#cfc9bf',null,null,zp-2);
+    g.strokeStyle='rgba(60,50,40,.45)';g.lineWidth=.5;for(let z=zp;z<zp+6.5;z+=1.3){line(P(xm-q+.03,yc+q,z),P(xm+q-.03,yc+q,z));line(P(xm+q,yc+q-.03,z),P(xm+q,yc-q+.03,z))}
+    const ap=P(xm,yc,zp+15),e=q+.035;poly([P(xm-e,yc+e,zp+7),P(xm+e,yc+e,zp+7),ap],mHi);poly([P(xm+e,yc+e,zp+7),P(xm+e,yc-e,zp+7),ap],mLo);
+    const[vx,vy]=ap;g.strokeStyle='#2b2b2b';g.lineWidth=1.1;line([vx,vy],[vx,vy-12]);line([vx-4,vy-7],[vx+4,vy-7]);
+    poly([[vx-7,vy-11.5],[vx+4,vy-11.5],[vx+7,vy-10],[vx+4,vy-8.5],[vx-7,vy-8.5],[vx-4.5,vy-10]],'#2b2b2b');ball(vx,vy-13,1.4,1.4,'#c99a2e')}
+  // round hay bales by the side wall
+  const bale=(u,v)=>{const a=P(u,v-.11,7),c2=P(u,v+.11,7);ell(a[0],a[1],6,7,'#a58a45');poly([[a[0],a[1]-7],[c2[0],c2[1]-7],[c2[0],c2[1]+7],[a[0],a[1]+7]],lgr([a[0],a[1]-7],[a[0],a[1]+7],['#d9bf72','#b39549','#8a6f30']));
+    g.strokeStyle='rgba(110,85,35,.45)';g.lineWidth=.45;for(let k=-5;k<=5;k+=2.5)line([a[0],a[1]+k],[c2[0],c2[1]+k]);
+    ell(c2[0],c2[1],6,7,'#d6bb6a','rgba(120,95,40,.6)',.5);g.strokeStyle='rgba(130,100,40,.55)';g.lineWidth=.5;for(const r of[1.6,3.2,4.8]){g.beginPath();g.ellipse(c2[0],c2[1],r*.86,r,0,0,Math.PI*1.7);g.stroke()}};
+  bale(x0+bw+.2,y0+1.22);bale(x0+bw+.12,y0+1.58);
+  // concrete stave silo with a metal dome (level 2+)
+  if(lv>=2){const[sx,sy]=P(x0+bw+.2,y0+.32),r=11,hh=76;
+    ell(sx,sy,r,4.6,'#8f8b83');poly([[sx-r,sy],[sx+r,sy],[sx+r,sy-hh],[sx-r,sy-hh]],lgr([sx-r,0],[sx+r,0],['#b9b5ac','#e4e0d7','#cdc9c0','#97938a']));
+    ell(sx,sy,r,4.6,null,null);g.beginPath();g.ellipse(sx,sy,r,4.6,0,0,Math.PI);g.fillStyle='#b4b0a7';g.fill();
+    g.strokeStyle='rgba(60,56,50,.38)';g.lineWidth=.55;for(let z=5;z<hh;z+=4.4){g.beginPath();g.ellipse(sx,sy-z,r,4.6,0,0,Math.PI);g.stroke()}
+    for(let i=0;i<8;i++){const t=hash(i,6)*1.6-.8;poly([[sx+t*r,sy-hh+2],[sx+t*r+1.2,sy-hh+2],[sx+t*r+1.5,sy-hh*(.4+hash(6,i)*.5)],[sx+t*r+.3,sy-hh*(.4+hash(6,i)*.5)]],'rgba(90,80,60,.12)')}
+    g.beginPath();g.ellipse(sx,sy-hh,r,12,0,Math.PI,0);g.closePath();g.fillStyle=lgr([sx-r,sy-hh-10],[sx+r,sy-hh],['#d4d8dc','#9ea4aa','#6f757b']);g.fill();
+    g.strokeStyle='rgba(40,44,50,.3)';g.lineWidth=.5;for(const k of[-.6,-.2,.2,.6]){g.beginPath();g.moveTo(sx+k*r,sy-hh);g.quadraticCurveTo(sx+k*r*.6,sy-hh-11,sx,sy-hh-12);g.stroke()}
+    ball(sx,sy-hh-12,2,1.6,'#9ea4aa');
+    g.strokeStyle='#5a5650';g.lineWidth=.7;const lx=sx-r*.55;line([lx-1.6,sy-2],[lx-1.6,sy-hh+1]);line([lx+1.6,sy-2],[lx+1.6,sy-hh+1]);for(let z=4;z<hh;z+=3)line([lx-1.6,sy-z],[lx+1.6,sy-z])}
+}
 function drawBuilding(x,y,o){
+  if(NATURAL)return o.id==='house'?drawFarmhouseN(x,y,o):drawBarnN(x,y,o);
   const x0=x+.12,y0=y+.12,w=1.76,d=1.76,yy=y0+d,[cx,cy]=P(x+1,y+1);shadow(cx,cy+8,60,20);
   if(o.id==='house'){
     // the farmhouse grows nicer as you finish quests: porch and flower boxes, shutters and paint, a stone base and slate roof, then a garden and weathervane
