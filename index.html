@@ -1591,7 +1591,7 @@ const PACK=LANG!=='en'&&LANG!=='pl'?window.FV_PACK:null;
 function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.reload()}
 // Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
 // Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
-const PL_EXACT={'A new version is ready. Tap to reload.':'Nowa wersja jest gotowa. Dotknij, by odświeżyć.','Level':'Poziom','All job slots are full. Collect finished goods to make room.':'Wszystkie miejsca w kolejce są zajęte. Odbierz gotowe towary.','Upgraded: more job slots and faster work.':'Ulepszony: więcej miejsc w kolejce i szybsza praca.','Upgrade this building':'Ulepsz ten budynek','Upgrade building':'Ulepsz budynek','Building upgraded!':'Budynek ulepszony!','Hungry and thirsty: working slower':'Głodny i spragniony: pracuje wolniej','Too hungry: working slower':'Za głodny: pracuje wolniej','Too thirsty: working slower':'Za spragniony: pracuje wolniej','Getting hungry and thirsty':'Robi się głodny i spragniony','Getting hungry':'Robi się głodny','Getting thirsty':'Robi się spragniony','Fresh and clean':'Świeży i czysty','Feeling great':'Świetne samopoczucie','Spiky':'Na jeża','Side part':'Z przedziałkiem','Flower crown':'Wianek z kwiatów','Hoodie':'Bluza z kapturem','Denim jacket':'Kurtka dżinsowa','Quick looks':'Szybkie stylizacje','Classic':'Klasyczny','Rancher':'Ranczer','Gardener':'Ogrodnik','Weekend':'Weekend','Your farm':'Twoja farma','Town':'Miasto','Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
+const PL_EXACT={'Homestead':'Gospodarstwo','Ranch':'Ranczo','Country Estate':'Majątek ziemski','Grand Estate':'Wielki majątek','Valley Estate':'Majątek doliny','Next':'Dalej','This is the biggest farm in the valley.':'To największa farma w dolinie.','You need more building materials. You find them while farming, or trade with neighbors.':'Potrzebujesz więcej materiałów budowlanych. Znajdziesz je podczas pracy na farmie albo wymienisz z sąsiadami.','Grow your land to 25 by 25.':'Powiększ ziemię do 25 na 25.','Grow your land to 30 by 30.':'Powiększ ziemię do 30 na 30.','Grow your land to 35 by 35.':'Powiększ ziemię do 35 na 35.','Grow your land to 40 by 40.':'Powiększ ziemię do 40 na 40.','Grow your land to 45 by 45.':'Powiększ ziemię do 45 na 45.','Grow your land to 50 by 50.':'Powiększ ziemię do 50 na 50.','A new version is ready. Tap to reload.':'Nowa wersja jest gotowa. Dotknij, by odświeżyć.','Level':'Poziom','All job slots are full. Collect finished goods to make room.':'Wszystkie miejsca w kolejce są zajęte. Odbierz gotowe towary.','Upgraded: more job slots and faster work.':'Ulepszony: więcej miejsc w kolejce i szybsza praca.','Upgrade this building':'Ulepsz ten budynek','Upgrade building':'Ulepsz budynek','Building upgraded!':'Budynek ulepszony!','Hungry and thirsty: working slower':'Głodny i spragniony: pracuje wolniej','Too hungry: working slower':'Za głodny: pracuje wolniej','Too thirsty: working slower':'Za spragniony: pracuje wolniej','Getting hungry and thirsty':'Robi się głodny i spragniony','Getting hungry':'Robi się głodny','Getting thirsty':'Robi się spragniony','Fresh and clean':'Świeży i czysty','Feeling great':'Świetne samopoczucie','Spiky':'Na jeża','Side part':'Z przedziałkiem','Flower crown':'Wianek z kwiatów','Hoodie':'Bluza z kapturem','Denim jacket':'Kurtka dżinsowa','Quick looks':'Szybkie stylizacje','Classic':'Klasyczny','Rancher':'Ranczer','Gardener':'Ogrodnik','Weekend':'Weekend','Your farm':'Twoja farma','Town':'Miasto','Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
 // ---- HUD, dock, menus
 'Multi':'Multi','Barn':'Stodoła','Orders':'Zamówienia','Market':'Targ','Delivery':'Dostawy','More':'Więcej','Neighbors':'Sąsiedzi','Wardrobe':'Garderoba','Gifts':'Prezenty','Album':'Album','Ribbons':'Wstęgi','Music':'Muzyka','Sound':'Dźwięk','Settings':'Ustawienia',
 'Your level':'Twój poziom','Coins':'Monety','Farm Cash':'Farmdolary','Season guide':'Przewodnik po porach roku','Tools':'Narzędzia','Barn: your stored goods':'Stodoła: twoje zapasy','Neighbor orders and advertising':'Zamówienia sąsiadów i reklama','Open the market':'Otwórz targ','Delivery Board: send goods to town':'Tablica dostaw: wyślij towary do miasta','More buttons':'Więcej przycisków','Close':'Zamknij','Quest':'Zadanie','Daily':'Codziennie',"Today's Goals":'Cele na dziś',"Today's goals":'Cele na dziś','Change seed':'Zmień nasiona','Seeds to plant':'Nasiona do sadzenia',
@@ -2096,8 +2096,6 @@ const FARM={
   tractor:{name:'Tractor',lvl:3,cost:1500,kind:'vehicle',verb:'Plows',up:[{lvl:7,cost:4000},{lvl:12,cost:10000}]},
   seeder:{name:'Seeder',lvl:5,cost:2500,kind:'vehicle',verb:'Plants',up:[{lvl:9,cost:6000},{lvl:14,cost:14000}]},
   harvester:{name:'Harvester',lvl:6,cost:3500,kind:'vehicle',verb:'Harvests',up:[{lvl:10,cost:8000},{lvl:15,cost:18000}]},
-  expand20:{name:'Bigger Farm',lvl:4,cost:2000,kind:'expand',to:20,desc:'Grow your land to 20 by 20.'},
-  expand24:{name:'Huge Farm',lvl:8,cost:6000,kind:'expand',to:24,desc:'Grow your land to 24 by 24.'},
   fuel:{name:'Fuel Refill',lvl:1,cash:1,kind:'fuel',desc:'Fills the fuel tank to the top.'},
   farmhand:{name:'Farmhand',lvl:1,cash:2,kind:'farmhand',desc:'Harvests every ripe crop right now.'},
   arborist:{name:'Arborist',lvl:1,cash:2,kind:'arborist',desc:'Picks every ready fruit tree right now.'},
@@ -2109,6 +2107,15 @@ const FARM={
   dog:{name:'Farm Dog',lvl:2,cost:600,kind:'pet',pet:'dog',desc:'A loyal pup that follows your farmer around and sniffs out coins and materials.'},
   cat:{name:'Barn Cat',lvl:2,cost:600,kind:'pet',pet:'cat',desc:'A curious cat that follows your farmer around and finds coins and materials.'}
 };
+// Land grows in steps up to 50 by 50. Each step needs the one before it, a higher level, and coins plus fencing materials
+// (boards, nails, bricks, paint from harvests and neighbor trades), so a bigger farm arrives once you can fill it.
+const LAND=[[20,4,2000,{}],[25,8,6000,{board:4,nail:4}],[30,14,15000,{board:10,nail:10,brick:4}],[35,20,30000,{board:16,nail:16,brick:8,paint:4}],
+  [40,28,55000,{board:24,nail:24,brick:14,paint:8}],[45,36,90000,{board:32,nail:32,brick:20,paint:12}],[50,45,140000,{board:40,nail:40,brick:28,paint:18}]];
+const LAND_MATS_MSG='You need more building materials. You find them while farming, or trade with neighbors.';
+const LAND_NAME={20:'Bigger Farm',25:'Huge Farm',30:'Homestead',35:'Ranch',40:'Country Estate',45:'Grand Estate',50:'Valley Estate'},LAND_MAX=50;
+for(const[to,lvl,cost,mats]of LAND)FARM['expand'+to]={name:LAND_NAME[to],lvl,cost,mats,kind:'expand',to,desc:'Grow your land to '+to+' by '+to+'.'};
+function nextLand(){const t=LAND.find(l=>l[0]>S.size);return t?t[0]:0}
+function matsMissing(m){return Object.keys(m||{}).some(k=>(S.mats[k]||0)<m[k])}
 // Production buildings turn what you grow into feed, diesel and treats. Each runs up to three jobs, one after another.
 const MAKERS={
   feedmill:{name:'Feed Mill',lvl:1,cost:350,xp:20,desc:'Grinds crops into animal feed and fertilizer.',recipes:[
@@ -2512,7 +2519,7 @@ function applyQuality(){INK_DIRS.length=0;INK_DIRS.push(...(QL>=2?INK_DIRS_HI:IN
 const cam={x:0,y:0,z:1};
 function P(x,y,z){return[(x-y)*W/2,(x+y)*H/2-(z||0)]}
 function fit(){
-  const z=Math.max(.4,Math.min(1.5,Math.min(vw/(N*W*1.08),(vh-190)/(N*H*1.08))));
+  const z=Math.max(N>24?.3:.4,Math.min(1.5,Math.min(vw/(N*W*1.08),(vh-190)/(N*H*1.08))));
   cam.z=z;cam.x=vw/2;cam.y=Math.max(70,90+((vh-90-120)-N*H*z)/2);
   // on a phone held upright the whole grid is far wider than the screen: frame the part that is actually farmed
   if(vw<700&&vh>vw&&S&&S.tiles){let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
@@ -3218,23 +3225,51 @@ function drawLlama(px,py,now,seed){
 }
 const ANIMAL_DRAW={chicken:drawChicken,duck:drawDuck,sheep:drawSheep,goat:drawGoat,cow:drawCow,pig:drawPig,horse:drawHorse,rabbit:drawRabbit,turkey:drawTurkey,llama:drawLlama};
 const GLYPH={chicken:'egg',duck:'feather',sheep:'wool',goat:'milk',cow:'milk',pig:'bacon',horse:'hair',rabbit:'wool',turkey:'feather',llama:'wool'};
+// Every status bubble shares one look: a cream disc with a coloured rim that says what it wants. Gold: ready to collect.
+// Orange with a red pip: hungry. Blue: needs a home. Ready bubbles breathe; hungry ones wobble. They stay readable when zoomed out.
+const BUB_RIM={ready:['#ffe27a','#d99a12','#8a5a06'],feed:['#ffb27a','#e0642a','#8a2e0c'],home:['#a8dcff','#3d8fd6','#1d4f80']};
+function bubK(){return Math.max(1,Math.min(1.7,1.05/cam.z))}
+function bubbleBase(px,py,r,state,now,seed){
+  const c=BUB_RIM[state]||BUB_RIM.ready,t=reduce?0:now/1000+(seed||0);
+  ell(px+1.2,py+r*.28+2,r*1.02,r*.92,'rgba(20,14,6,.24)');
+  poly([[px-r*.3,py+r*.78],[px+r*.3,py+r*.78],[px,py+r*1.32]],c[1],c[2],.8);
+  const rim=g.createLinearGradient(0,py-r,0,py+r);rim.addColorStop(0,c[0]);rim.addColorStop(1,c[1]);
+  ell(px,py,r+2.1,r*.94+2.1,rim,c[2],.9);
+  const fill=g.createRadialGradient(px-r*.3,py-r*.4,r*.1,px,py,r*1.05);fill.addColorStop(0,'#ffffff');fill.addColorStop(.7,'#fdf8ec');fill.addColorStop(1,'#efe4cc');
+  ell(px,py,r,r*.94,fill);
+  ell(px-r*.32,py-r*.52,r*.42,r*.2,'rgba(255,255,255,.85)');
+  if(state==='feed'){const qx=px+r*.78,qy=py-r*.7,k=reduce?1:1+Math.max(0,Math.sin(t*5))*.12;ell(qx,qy,4.4*k,4.4*k,'#e0352b','#fff',1.2);
+    g.fillStyle='#fff';g.fillRect(qx-.75,qy-2.8,1.5,3.4);g.fillRect(qx-.75,qy+1.2,1.5,1.4)}
+}
+function bubbleWrap(px,py,r,state,now,seed,draw,gs){
+  const t=reduce?0:now/1000+(seed||0),k=bubK();
+  py+=reduce?0:Math.sin(t*2.6)*1.6;
+  g.save();g.translate(px,py);
+  const pulse=state==='ready'&&!reduce?1+Math.sin(t*4)*.045:1;g.scale(k*pulse,k*pulse);
+  if(state==='feed'&&!reduce)g.rotate(Math.sin(t*3.2)*.06);
+  bubbleBase(0,0,r,state,now,seed);g.save();g.scale(gs,gs);draw();g.restore();g.restore();
+  return py;
+}
 function bubble(px,py,kind,now){
-  py+=reduce?0:Math.sin(now/240)*2;
-  if(NATURAL){ell(px+1.2,py+2.4,11,10,'rgba(20,16,8,.2)');poly([[px-3,py+8],[px+3,py+8],[px,py+13]],'#fffdf6','rgba(70,50,28,.45)',1);ell(px,py,11,10,'#fffdf6','rgba(70,50,28,.45)',1);ell(px-3,py-4,5,2.4,'rgba(255,255,255,.9)')}
-  else{poly([[px-3,py+8],[px+3,py+8],[px,py+13]],'#fff','#6b3c15',1.5);ell(px,py,11,10,'#fff','#6b3c15',2)}
-  glyph(px,py,kind);
+  bubbleWrap(px,py,11,kind==='home'?'home':'ready',now,px*.01,()=>glyph(0,0,kind),1);
 }
 function glyph(px,py,kind){
-  if(kind==='egg')ell(px,py+1,4.5,5.6,'#fbf1dc','#c9b48a',1);
-  else if(kind==='wool')for(const[dx,dy]of[[-3,0],[3,0],[0,-3],[0,3],[0,0]])ell(px+dx,py+dy,3.4,3.2,'#f4f0e6','#c9c2b0',.8);
+  if(kind==='egg'){const gr=g.createRadialGradient(px-1.6,py-1.6,.5,px,py+1,6.4);gr.addColorStop(0,'#fffaf0');gr.addColorStop(.6,'#f6e6c6');gr.addColorStop(1,'#d9bf8e');
+    g.beginPath();g.moveTo(px,py-5.6);g.bezierCurveTo(px+4.4,py-5.6,px+5,py+2,px+4.6,py+3);g.bezierCurveTo(px+3.8,py+6.4,px-3.8,py+6.4,px-4.6,py+3);g.bezierCurveTo(px-5,py+2,px-4.4,py-5.6,px,py-5.6);g.closePath();
+    g.fillStyle=gr;g.fill();g.strokeStyle='#a88a58';g.lineWidth=.8;g.stroke();ell(px-1.7,py-2.4,1.2,2,'rgba(255,255,255,.9)',null,0,-.3);ell(px+1.8,py+2.2,.5,.4,'#c9a978');ell(px+.6,py+3.6,.4,.35,'#c9a978')}
+  else if(kind==='wool'){ell(px,py+1.2,6.6,4.6,'#d6cfbf');for(const[dx,dy,r]of[[-3.6,.8,3],[3.6,.8,3],[-1.8,-2.2,3.2],[1.9,-2.4,3.1],[0,.4,3.4]])ell(px+dx,py+dy,r,r*.92,'#f7f3ea','#bdb5a2',.6);
+    for(const[dx,dy]of[[-2.4,-3.2],[1,-3.6],[-4.2,-.2]])ell(px+dx,py+dy,1,.6,'#fff')}
   else if(kind==='milk'){poly([[px-3,py-4],[px+3,py-4],[px+4,py+6],[px-4,py+6]],'#fff','#7a8a99',1.2);poly([[px-3,py-7],[px+3,py-7],[px+3,py-4],[px-3,py-4]],'#2d8fe3')}
   else if(kind==='truffle'){ell(px,py+1,5,4.2,'#6b4a2a');ell(px-2,py,1.2,1,'#8d6a45')}
   else if(kind==='bacon'){g.lineCap='round';for(const o of[-2.6,2.6]){g.beginPath();g.moveTo(px-6,py+o);g.quadraticCurveTo(px-3,py+o-2.6,px,py+o);g.quadraticCurveTo(px+3,py+o+2.6,px+6,py+o);
     g.lineWidth=3.6;g.strokeStyle='#7a2418';g.stroke();g.lineWidth=2.6;g.strokeStyle='#d24a3c';g.stroke();g.lineWidth=.9;g.strokeStyle='#f8dccd';g.stroke()}}
-  else if(kind==='feather'){ell(px,py,2.6,7,'#f4f6ff','#9aa6c0',1,.6);g.strokeStyle='#9aa6c0';line([px-4,py+5],[px+3,py-4])}
+  else if(kind==='feather'){g.save();g.translate(px,py);g.rotate(.55);g.beginPath();g.moveTo(0,-7.4);g.quadraticCurveTo(4,-3,2.6,4);g.lineTo(0,5.4);g.lineTo(-2.6,4);g.quadraticCurveTo(-4,-3,0,-7.4);
+    const gr=g.createLinearGradient(-3,0,3,0);gr.addColorStop(0,'#ffffff');gr.addColorStop(1,'#cdd6ea');g.fillStyle=gr;g.fill();g.strokeStyle='#8a96b4';g.lineWidth=.7;g.stroke();
+    g.strokeStyle='#8a96b4';g.lineWidth=.8;line([0,-6.5],[0,7.6]);g.lineWidth=.45;for(let i=-4;i<4;i+=1.6){line([0,i],[2.2,i-1.4]);line([0,i],[-2.2,i-1.4])}g.restore()}
   else if(kind==='home'){poly([[px-6,py-1],[px,py-6.5],[px+6,py-1]],'#d9402f','#7a1c12',1);poly([[px-4.4,py-1],[px+4.4,py-1],[px+4.4,py+5.5],[px-4.4,py+5.5]],'#f6ecd6','#7a1c12',1);poly([[px-1.4,py+1.6],[px+1.4,py+1.6],[px+1.4,py+5.5],[px-1.4,py+5.5]],'#8a5a32')}
   else if(kind==='hair'){g.strokeStyle='#5e3418';g.lineWidth=1.6;for(let i=-3;i<=3;i+=1.5)line([px+i,py+5],[px+i*1.4,py-5])}
-  else{ell(px-2,py+1,3.6,3.6,kind);ell(px+3,py-1,3.6,3.6,kind);ell(px-3,py,1,1,'#fff')}
+  else{g.strokeStyle='#4a6a2a';g.lineWidth=1;g.beginPath();g.moveTo(px-2.2,py);g.quadraticCurveTo(px,py-6,px+2.4,py-6.6);g.moveTo(px+3,py-1.6);g.quadraticCurveTo(px+3,py-5,px+2.4,py-6.6);g.stroke();
+    leaf(px+3.6,py-6.4,3,1.4,-.3,'#5aa83a');ball(px-2.4,py+1.4,3.5,3.5,kind);ball(px+3,py,3.3,3.3,kind);ell(px-3.5,py,1,.8,'rgba(255,255,255,.75)');ell(px+2,py-1.2,.9,.7,'rgba(255,255,255,.75)')}
 }
 
 /* ================= trees ================= */
@@ -4559,14 +4594,21 @@ function homeStats(now){
   return HSTAT;
 }
 let HBUB=[];// tappable bubbles this frame, in screen space
-function feedGlyph(px,py,s){s=s||1;poly([[px-5*s,py-5*s],[px+5*s,py-5*s],[px+6*s,py+6*s],[px-6*s,py+6*s]],'#d8c08a','#7a5a2a',.8);poly([[px-5*s,py-5*s],[px+5*s,py-5*s],[px+3*s,py-8*s],[px-3*s,py-8*s]],'#c4a870','#7a5a2a',.6);for(let i=0;i<3;i++)ell(px-2*s+i*2*s,py-8.5*s,1*s,.8*s,'#e8c25a')}
-function bigBubble(px,py,now,draw,count,tint){
-  const b=reduce?0:Math.sin(now/260)*2.2;py+=b;const s=1.3;
-  ell(px+1.6,py+3,15*s,14*s,'rgba(20,16,8,.22)');poly([[px-4,py+12*s],[px+4,py+12*s],[px,py+18*s]],'#fffdf6','rgba(70,50,28,.5)',1.2);
-  ell(px,py,15*s,14*s,tint||'#fffdf6','rgba(70,50,28,.5)',1.2);ell(px-5,py-8,7,3,'rgba(255,255,255,.9)');
-  g.save();g.translate(px,py);g.scale(1.55,1.55);draw();g.restore();
-  if(count>1){const cx=px+16,cy=py-14;ell(cx,cy,9,8,'#e0352b','#fff',1.6);g.font='800 10px Nunito, Fredoka, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.fillText('×'+count,cx,cy+.5);g.textBaseline='alphabetic'}
-  return py;
+function feedGlyph(px,py,s){s=s||1;g.save();g.translate(px,py);g.scale(s,s);
+  const gr=g.createLinearGradient(-6,0,6,0);gr.addColorStop(0,'#e8d29c');gr.addColorStop(.55,'#d2b274');gr.addColorStop(1,'#a8854a');
+  g.beginPath();g.moveTo(-3.4,-4.6);g.quadraticCurveTo(-7,-1,-6.2,5.2);g.quadraticCurveTo(0,7.6,6.2,5.2);g.quadraticCurveTo(7,-1,3.4,-4.6);g.closePath();g.fillStyle=gr;g.fill();g.strokeStyle='#6e4c1e';g.lineWidth=.8;g.stroke();
+  g.strokeStyle='rgba(110,76,30,.35)';g.lineWidth=.45;for(let i=-4;i<=4;i+=2)line([i,-2.6],[i*1.15,5.6]);
+  poly([[-3.6,-4.8],[3.6,-4.8],[2.4,-6.6],[-2.4,-6.6]],'#c9a868','#6e4c1e',.6);poly([[-2.4,-6.6],[2.4,-6.6],[3.4,-8.6],[0,-7.6],[-3.4,-8.6]],'#dcc088','#6e4c1e',.6);
+  g.strokeStyle='#8a2e0c';g.lineWidth=1.2;line([-3.4,-5.3],[3.4,-5.3]);
+  g.strokeStyle='#b08a3a';g.lineWidth=.7;line([-1.6,3],[0,-1.4]);line([0,-1.4],[1.6,3]);line([0,-1.4],[0,3.6]);
+  for(const[dx,dy]of[[-1.6,-8.8],[.2,-9.6],[1.8,-8.6],[-.6,-10.6],[1.2,-10.8]])ell(dx,dy,.95,.7,'#f0c84a','#a8801a',.3);
+  g.restore()}
+function bigBubble(px,py,now,draw,count,state){
+  const k=bubK(),y=bubbleWrap(px,py,15,state||'ready',now,0,draw,1.5);
+  if(count>1){const cx=px+19*k,cy=y-15*k;g.save();g.translate(cx,cy);g.scale(k,k);
+    const w=count>9?12:9.5;ell(.6,1.4,w,8,'rgba(20,10,4,.3)');ell(0,0,w,8,state==='feed'?'#e0352b':'#3f9a3c','#fff',1.6);
+    g.font='800 10.5px Nunito, Fredoka, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.fillText('×'+count,0,.6);g.textBaseline='alphabetic';g.restore()}
+  return y;
 }
 function homeOverlay(x,y,o,now){
   if(ICON_MODE||VIS)return;const G=homeGeo(o.id),hk=x+','+y,st=homeStats(now)[hk]||{keys:[],ready:[],hungry:[]},cap=Math.floor(HOMES[o.id].cap*HOME_MULT[o.lv||1]);
@@ -4575,8 +4617,8 @@ function homeOverlay(x,y,o,now){
   g.drawImage(sg.c,sx-sg.w*ss/2,sy-sg.h*ss,sg.w*ss,sg.h*ss);
   // bubbles: ready goods (tap to collect all) and a feed sack (tap to feed all)
   const items=[];if(st.ready.length)items.push(['ready',st.ready.length]);if(st.hungry.length)items.push(['feed',st.hungry.length]);
-  items.forEach(([kind,n],i)=>{const bx=sx+(i-(items.length-1)/2)*48,by0=sy-sg.h*ss-30,by=bigBubble(bx,by0,now+i*400,kind==='ready'?()=>bigGlyph(o.id):()=>feedGlyph(0,0,1),n);
-    const[scx,scy]=[bx*cam.z+cam.x,by*cam.z+cam.y],r=Math.max(24,21*cam.z);HBUB.push({x:scx,y:scy,r,kind,home:hk,id:o.id})});
+  items.forEach(([kind,n],i)=>{const bx=sx+(i-(items.length-1)/2)*50*bubK(),by0=sy-sg.h*ss-30*bubK(),by=bigBubble(bx,by0,now+i*400,kind==='ready'?()=>bigGlyph(o.id):()=>feedGlyph(0,1,1),n,kind==='ready'?'ready':'feed');
+    const[scx,scy]=[bx*cam.z+cam.x,by*cam.z+cam.y],r=Math.max(24,21*cam.z*bubK());HBUB.push({x:scx,y:scy,r,kind,home:hk,id:o.id})});
 }
 function bigGlyph(id){
   const k=GLYPH[id];
@@ -4694,7 +4736,7 @@ const NAMES={cow:['Bessie','Daisy','Clover','Buttercup','Mabel','Rosie','Hazel',
   turkey:['Gobbles','Chestnut','Tom','Acorn'],llama:['Dolly','Karma','Fuzz','Andes']};
 function animalName(k,id){const L=NAMES[id]||['Buddy'];let h=0;for(const c of k)h=(h*31+c.charCodeAt(0))>>>0;return L[h%L.length]}
 function happiness(o,now){if(hungry(o))return 35;const lv=HLV[o.id]||1;return Math.min(100,78+lv*6+(readyIn(o,ANIMALS[o.id],now)<=0?4:0))}
-function smallBubble(px,py,now,draw){const b=reduce?0:Math.sin(now/240)*1.5;py+=b;ell(px+.8,py+1.6,8,7.4,'rgba(20,16,8,.2)');poly([[px-2.4,py+6],[px+2.4,py+6],[px,py+10]],'#fffdf6','rgba(70,50,28,.45)',.8);ell(px,py,8,7.4,'#fffdf6','rgba(70,50,28,.45)',.8);g.save();g.translate(px,py);g.scale(.7,.7);draw();g.restore()}
+function smallBubble(px,py,now,draw,state){bubbleWrap(px,py,9.5,state||'ready',now,0,draw,.85)}
 function drawAnimal(x,y,o,now){
   const k=x+','+y,r=ICON_MODE?{x:0,y:0,f:1}:roamOf(k),[ox,oy]=P(x,y),px=ox+(r.x-r.y)*W/2,py=oy+(r.x+r.y)*H/2+18;
   let sc=ICON_MODE?1:(SPEC_SC[o.id]||1);const baby=isBaby(o,now);if(baby)sc*=.62;
@@ -4710,8 +4752,8 @@ function drawAnimal(x,y,o,now){
   if(ICON_MODE)return;
   const top=py-((o.id==='horse'||o.id==='llama'?52:o.id==='cow'?38:o.id==='rabbit'?26:32)*sc)-10;
   if(homeless)bubble(px,top-6,'home',now);
-  else if(ready&&(cam.z>1.9||x>HX))smallBubble(px,top,now+(r.seed||0)*300,()=>glyph(0,0,GLYPH[o.id]));
-  else if(hn&&(cam.z>1.9||x>HX))smallBubble(px,top,now+(r.seed||0)*300,()=>feedGlyph(0,1,.9));
+  else if(ready&&(cam.z>1.9||x>HX))smallBubble(px,top,now+(r.seed||0)*300,()=>glyph(0,0,GLYPH[o.id]),'ready');
+  else if(hn&&(cam.z>1.9||x>HX))smallBubble(px,top,now+(r.seed||0)*300,()=>feedGlyph(0,1,.9),'feed');
 }
 // tapping an animal: it hops, says something, and a heart floats up
 function animalReact(key){
@@ -5389,7 +5431,10 @@ function vehicleArea(x,y,v){const n=vsize(v||tool),out=[];for(let i=0;i<n;i++)fo
 /* ================= main loop ================= */
 /* Ground layers: the grass, soil, road and wild trees are drawn once into two canvases
    (behind and in front of the farm) and only touched again for tiles that change or after a zoom. */
-let GC=null,GF=null,gcScale=1,gcN=0,lastZoomT=0,gstate={},BG=null,VIG=null;const dirty=new Set();
+let GC=null,GF=null,lastZoomT=0,gstate={},BG=null,VIG=null;const dirty=new Set();
+// The painted ground (and the tree line in front of the farm) is cached in square chunks, CHW world pixels a side, painted only
+// when they come on screen. That keeps a 50 by 50 farm sharp at any zoom without one giant canvas. GC=null throws every chunk away.
+const CHW=560,CHUNK={ground:new Map(),front:new Map()};let chS=1,chN=0,chTick=0;
 function gBounds(){return[-(N+11)*W/2,-240,(N+11)*W/2,(2*N+13)*H/2]}
 function syncGround(){
   const ns={};for(const k in S.tiles){const o=S.tiles[k];if(o.k==='plot'){const[x,y]=k.split(',').map(Number);ns[k]=plotState(o)+plotMask(x,y)}}
@@ -5398,8 +5443,8 @@ function syncGround(){
   gstate=ns;
 }
 function drawMeadow(b){
-  const P0=GROUND_PAL[season().id];
-  for(let i=0;i<420;i++){
+  const P0=GROUND_PAL[season().id],cnt=Math.round(420*Math.pow((N+16)/32,2));
+  for(let i=0;i<cnt;i++){
     const tx=-8+hash(i,1.7)*(N+16),ty=-8+hash(2.3,i)*(N+16);
     if(tx>-.5&&ty>-.5&&tx<N+.5&&ty<N+3)continue;
     const[px,py]=P(tx,ty);if(px<b[0]||px>b[2]||py<b[1]||py>b[3])continue;
@@ -5409,43 +5454,65 @@ function drawMeadow(b){
     line([px-2.5,py],[px-3.8,py-4.2]);line([px,py],[px+.3,py-5.4]);line([px+2.5,py],[px+3.8,py-4])
   }
 }
-function renderLayers(s){
-  const b=gBounds(),bw=b[2]-b[0],bh=b[3]-b[1];
-  for(const which of['ground','front']){
-    const c=document.createElement('canvas');c.width=Math.ceil(bw*s);c.height=Math.ceil(bh*s);
-    const prev=g;g=c.getContext('2d');g.setTransform(s,0,0,s,-b[0]*s,-b[1]*s);
-    if(which==='ground'){
-      if(NATURAL){
-        // one continuous painted meadow under everything, fading out at the far edges into the background colour
-        g.fillStyle=grassPat();g.fillRect(b[0],b[1],bw,bh);patchesAt(-16,-16,N+16,N+16);
-        if(season().id==='winter'){g.fillStyle='rgba(238,243,250,.18)';g.fillRect(b[0],b[1],bw,bh)}
-        g.globalCompositeOperation='destination-out';const m=170,fade=(x0,y0,x1,y1)=>{const gr=g.createLinearGradient(x0,y0,x1,y1);gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(1,'rgba(0,0,0,0)');return gr};
-        g.fillStyle=fade(b[0],0,b[0]+m,0);g.fillRect(b[0],b[1],m,bh);g.fillStyle=fade(b[2],0,b[2]-m,0);g.fillRect(b[2]-m,b[1],m,bh);
-        g.fillStyle=fade(0,b[1],0,b[1]+m*.8);g.fillRect(b[0],b[1],bw,m*.8);g.fillStyle=fade(0,b[3],0,b[3]-m*.8);g.fillRect(b[0],b[3]-m*.8,bw,m*.8);
-        g.globalCompositeOperation='source-over';
-      }
-      drawMeadow(b);for(const t of BORDER)if(t.back)drawWildTree(t);
-      drawFarmEdge();drawRoad();for(let y=0;y<N;y++)for(let x=0;x<N;x++)drawTile(x,y);
-    }else for(const t of BORDER)if(!t.back)drawWildTree(t);
-    g=prev;if(which==='ground')GC=c;else GF=c;
-  }
-  gcScale=s;gcN=N;dirty.clear();gstate={};syncGround();dirty.clear();
+// world pixels -> tile coordinates, and the tile range that covers a world rectangle
+function toTile(px,py){return[(px/(W/2)+py/(H/2))/2,(py/(H/2)-px/(W/2))/2]}
+function rectTiles(x0,y0,x1,y1){const c=[toTile(x0,y0),toTile(x1,y0),toTile(x0,y1),toTile(x1,y1)],xs=c.map(p=>p[0]),ys=c.map(p=>p[1]);return[Math.floor(Math.min(...xs)),Math.floor(Math.min(...ys)),Math.ceil(Math.max(...xs)),Math.ceil(Math.max(...ys))]}
+function overlaps(r,x0,y0,x1,y1){return x1>r[0]&&x0<r[2]&&y1>r[1]&&y0<r[3]}
+function treeNear(t,r){const[px,py]=P(t.x,t.y);return overlaps(r,px-60,py-120,px+60,py+20)}
+function paintChunk(which,i,j){
+  const b=gBounds(),bw=b[2]-b[0],bh=b[3]-b[1],x0=b[0]+i*CHW,y0=b[1]+j*CHW,x1=x0+CHW,y1=y0+CHW,r=[x0,y0,x1,y1];
+  if(which==='front'&&!BORDER.some(t=>!t.back&&treeNear(t,r)))return{c:null,used:chTick,s:chS};
+  const c=document.createElement('canvas');c.width=c.height=Math.ceil(CHW*chS);
+  const prev=g;g=c.getContext('2d');g.setTransform(chS,0,0,chS,-x0*chS,-y0*chS);
+  if(which==='ground'){
+    if(NATURAL){
+      // one continuous painted meadow under everything, fading out at the far edges into the background colour
+      g.fillStyle=grassPat();g.fillRect(x0,y0,CHW,CHW);
+      {const t=rectTiles(x0-90,y0-60,x1+90,y1+60);patchesAt(Math.max(-16,t[0]),Math.max(-16,t[1]),Math.min(N+16,t[2]),Math.min(N+16,t[3]))}
+      if(season().id==='winter'){g.fillStyle='rgba(238,243,250,.18)';g.fillRect(x0,y0,CHW,CHW)}
+      g.globalCompositeOperation='destination-out';const m=170,fade=(a0,b0,a1,b1)=>{const gr=g.createLinearGradient(a0,b0,a1,b1);gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(1,'rgba(0,0,0,0)');return gr};
+      g.fillStyle=fade(b[0],0,b[0]+m,0);g.fillRect(b[0],b[1],m,bh);g.fillStyle=fade(b[2],0,b[2]-m,0);g.fillRect(b[2]-m,b[1],m,bh);
+      g.fillStyle=fade(0,b[1],0,b[1]+m*.8);g.fillRect(b[0],b[1],bw,m*.8);g.fillStyle=fade(0,b[3],0,b[3]-m*.8);g.fillRect(b[0],b[3]-m*.8,bw,m*.8);
+      g.globalCompositeOperation='source-over';
+    }
+    drawMeadow([x0-20,y0-20,x1+20,y1+20]);for(const t of BORDER)if(t.back&&treeNear(t,r))drawWildTree(t);
+    {const L=P(0,N),B=P(N,N),R=P(N,0);if(overlaps(r,L[0]-10,R[1]-10,R[0]+10,B[1]+60))drawFarmEdge()}
+    {const a=P(-10,N+1.2),z=P(N+10,N+2.4);if(overlaps(r,a[0]-20,Math.min(a[1],z[1])-80,z[0]+20,Math.max(a[1],z[1])+80))drawRoad()}
+    const t=rectTiles(x0-W,y0-H,x1+W,y1+H*3);
+    for(let y=Math.max(0,t[1]);y<Math.min(N,t[3]);y++)for(let x=Math.max(0,t[0]);x<Math.min(N,t[2]);x++)drawTile(x,y);
+  }else for(const t of BORDER)if(!t.back&&treeNear(t,r))drawWildTree(t);
+  g=prev;return{c,used:chTick,s:chS};
 }
 function syncLayers(t){
-  const b=gBounds(),lim=QL>=2?3600:QL?2600:1800,cap=Math.min(lim/(b[2]-b[0]),lim/(b[3]-b[1])),want=Math.min(cam.z*dpr,cap);
-  if(!GC||gcN!==N||(Math.abs(want/gcScale-1)>.2&&t-lastZoomT>250)){renderLayers(want);return}
+  const want=Math.min(cam.z*dpr,QL>=2?2:QL?1.5:1);
+  if(!GC||chN!==N){CHUNK.ground.clear();CHUNK.front.clear();chS=want;chN=N;GC=GF=true;gstate={};syncGround();dirty.clear();return}
+  // after a zoom the old chunks stay up (a little soft) and blitLayer repaints them sharp, one per frame, so zooming never stalls
+  if(Math.abs(want/chS-1)>.2&&t-lastZoomT>250)chS=want;
   if(!dirty.size)return;
-  const prev=g;g=GC.getContext('2d');g.setTransform(gcScale,0,0,gcScale,-b[0]*gcScale,-b[1]*gcScale);
-  for(const k of dirty){const[x,y]=k.split(',').map(Number);if(!inGrid(x,y))continue;g.save();poly(quad(x,y));g.clip();drawTile(x,y,true);g.restore()}
+  const b=gBounds(),prev=g;
+  for(const k of dirty){const[x,y]=k.split(',').map(Number);if(!inGrid(x,y))continue;
+    const a=P(x,y),c=P(x+1,y+1);
+    for(const[key,ch]of CHUNK.ground){if(!ch.c)continue;const[i,j]=key.split(',').map(Number),x0=b[0]+i*CHW,y0=b[1]+j*CHW;
+      if(!overlaps([x0,y0,x0+CHW,y0+CHW],a[0]-W/2-4,a[1]-4,a[0]+W/2+4,c[1]+4))continue;
+      g=ch.c.getContext('2d');g.setTransform(ch.s,0,0,ch.s,-x0*ch.s,-y0*ch.s);g.save();poly(quad(x,y));g.clip();drawTile(x,y,true);g.restore()}}
   dirty.clear();g=prev;
 }
-function blitLayer(c){
-  const b=gBounds(),bw=b[2]-b[0],bh=b[3]-b[1],kx=c.width/bw,ky=c.height/bh;
-  // the world rectangle on screen, clipped to the layer
-  const wx0=Math.max(b[0],-cam.x/cam.z),wy0=Math.max(b[1],-cam.y/cam.z),wx1=Math.min(b[2],(vw-cam.x)/cam.z),wy1=Math.min(b[3],(vh-cam.y)/cam.z);
-  if(wx1<=wx0||wy1<=wy0)return;
-  g.setTransform(dpr,0,0,dpr,0,0);
-  g.drawImage(c,(wx0-b[0])*kx,(wy0-b[1])*ky,(wx1-wx0)*kx,(wy1-wy0)*ky,cam.x+wx0*cam.z,cam.y+wy0*cam.z,(wx1-wx0)*cam.z,(wy1-wy0)*cam.z)}
+function blitLayer(which){
+  const m=CHUNK[which],b=gBounds(),nI=Math.ceil((b[2]-b[0])/CHW),nJ=Math.ceil((b[3]-b[1])/CHW);
+  const i0=Math.max(0,Math.floor((-cam.x/cam.z-b[0])/CHW)),i1=Math.min(nI-1,Math.floor(((vw-cam.x)/cam.z-b[0])/CHW));
+  const j0=Math.max(0,Math.floor((-cam.y/cam.z-b[1])/CHW)),j1=Math.min(nJ-1,Math.floor(((vh-cam.y)/cam.z-b[1])/CHW));
+  // chunk edges land on whole device pixels so neighbours meet without a hairline
+  const X=x=>Math.round((cam.x+x*cam.z)*dpr),Y=y=>Math.round((cam.y+y*cam.z)*dpr);
+  g.setTransform(1,0,0,1,0,0);chTick++;let redo=1;
+  for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){const key=i+','+j;let ch=m.get(key);if(!ch||(ch.s!==chS&&redo-->0)){ch=paintChunk(which,i,j);m.set(key,ch)}ch.used=chTick;
+    if(!ch.c)continue;const x0=b[0]+i*CHW,y0=b[1]+j*CHW,dx=X(x0),dy=Y(y0),dw=X(x0+CHW)-dx,dh=Y(y0+CHW)-dy;
+    // copy only the part of the chunk that is on screen
+    const ax=Math.max(dx,0),ay=Math.max(dy,0),bx=Math.min(dx+dw,cv.width),by=Math.min(dy+dh,cv.height);if(bx<=ax||by<=ay)continue;
+    const kx=ch.c.width/dw,ky=ch.c.height/dh;g.drawImage(ch.c,(ax-dx)*kx,(ay-dy)*ky,(bx-ax)*kx,(by-ay)*ky,ax,ay,bx-ax,by-ay)}
+  // keep the chunks on screen plus a generous margin of recently seen ones
+  const keep=Math.max(24,(i1-i0+1)*(j1-j0+1)*3);
+  if(m.size>keep){const old=[...m].sort((p,q)=>p[1].used-q[1].used);for(let k=0;k<m.size-keep;k++)m.delete(old[k][0])}
+}
 let last=performance.now();
 // A soft darkening toward the screen edges keeps the eye on the farm in the middle.
 function drawVignette(){
@@ -5464,7 +5531,7 @@ function frame(t){
   g.setTransform(1,0,0,1,0,0);
   if(!BG){const sb=NATURAL?groundBg():season().bg;BG=g.createLinearGradient(0,0,0,cv.height);BG.addColorStop(0,sb[0]);BG.addColorStop(1,sb[1])}
   g.fillStyle=BG;g.fillRect(0,0,cv.width,cv.height);HBUB=[];
-  blitLayer(GC);
+  blitLayer('ground');
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
   drawHover();
   const list=[];
@@ -5486,7 +5553,7 @@ function frame(t){
   if(VIS)for(const k in S.tiles){const o=S.tiles[k];if(o.helped){const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5);ell(px,py-4,6,6,'#5bbf3a','#fff',1.4);g.strokeStyle='#fff';g.lineWidth=1.6;line([px-2.6,py-4],[px-.6,py-2]);line([px-.6,py-2],[px+2.8,py-6.4])}}
   if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);g.globalAlpha=1}}
   drawPending(now);drawTutArrow(now);
-  blitLayer(GF);
+  blitLayer('front');
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
   drawAmbient(now);
   drawWeather(now,dt);
@@ -6962,7 +7029,7 @@ function endPointer(e){
 }
 cv.addEventListener('pointerup',endPointer);cv.addEventListener('pointercancel',endPointer);
 cv.addEventListener('pointerleave',()=>{if(!down){hover=null;$('tip').hidden=true}});
-function zoomAt(cx,cy,f){lastZoomT=performance.now();const nz=Math.max(.35,Math.min(2.2,cam.z*f));f=nz/cam.z;cam.x=cx-(cx-cam.x)*f;cam.y=cy-(cy-cam.y)*f;cam.z=nz}
+function zoomAt(cx,cy,f){lastZoomT=performance.now();const nz=Math.max(Math.min(.35,Math.max(.16,Math.min(vw/(N*W*1.1),(vh-150)/(N*H*1.1)))),Math.min(2.2,cam.z*f));f=nz/cam.z;cam.x=cx-(cx-cam.x)*f;cam.y=cy-(cy-cam.y)*f;cam.z=nz}
 cv.addEventListener('wheel',e=>{e.preventDefault();
   if(e.ctrlKey){zoomAt(e.clientX,e.clientY,Math.exp(-e.deltaY*.012));return}
   if(e.deltaMode===0&&(Math.abs(e.deltaX)>0||Math.abs(e.deltaY)<40)){cam.x-=e.deltaX;cam.y-=e.deltaY;return}
@@ -7233,13 +7300,13 @@ let marketAnim=true,mFilter={afford:false,season:false,sort:null};
 function shopSrc(cat){return{seeds:CROPS,trees:TREES,animals:ANIMALS,homes:HOMES,buildings:MAKERS,decor:DECOR,farm:FARM,specials:DECOR}[cat]}
 function shopIds(cat){
   const src=shopSrc(cat);
-  return Object.keys(src).filter(id=>{const d=src[id];return !d.special&&!(cat==='decor'&&d.cash)&&!(cat==='specials'&&!d.cash)})
-    .sort((a,b)=>(S.level<src[a].lvl)-(S.level<src[b].lvl)||(src[a].lvl||0)-(src[b].lvl||0));
+  return Object.keys(src).filter(id=>{const d=src[id];if(cat==='farm'&&d.kind==='expand')return d.to===(nextLand()||LAND_MAX);return !d.special&&!(cat==='decor'&&d.cash)&&!(cat==='specials'&&!d.cash)})
+    .sort((a,b)=>(cat==='farm'?(src[b].kind==='expand')-(src[a].kind==='expand'):0)||(S.level<src[a].lvl)-(S.level<src[b].lvl)||(src[a].lvl||0)-(src[b].lvl||0));
 }
 function tabHasNew(cat){const src=shopSrc(cat);return S.level>1&&shopIds(cat).some(id=>src[id].lvl===S.level&&!src[id].cash)}
 // coins (or Farm Cash) an item costs, the time it takes, and what it earns per minute; null when it does not apply
 function shopCost(cat,d){return d.cash?0:(d.cost||0)}
-function canBuy(d){return d.cash?S.cash>=d.cash:S.coins>=(d.cost||0)}
+function canBuy(d){return d.cash?S.cash>=d.cash:S.coins>=(d.cost||0)&&!matsMissing(d.mats)}
 function shopTime(cat,d){return cat==='seeds'?d.grow:(cat==='trees'||cat==='animals')?d.every:null}
 function shopProfit(cat,id,d){
   if(cat==='seeds')return(sellPrice(id)*CROP_YIELD-(have(id)?0:d.cost)-PLOW_COST)/(d.grow/60);
@@ -7318,6 +7385,7 @@ function renderShop(body){
       else if(cat==='buildings')info=d.desc+' '+d.recipes.length+' recipes. You own '+Object.values(S.tiles).filter(o=>o.k==='mk'&&o.id===id).length+'.';
       else info='Home for up to '+d.cap+' '+plural(ANIMALS[id].name).toLowerCase()+'. You own '+(HC[id]||0)+'.';
       card.appendChild(el('p','mdesc',info));
+      if(cat==='farm'&&d.kind==='expand'&&S.size<d.to&&Object.keys(d.mats).length){const cv=costView({coins:d.cost,mats:d.mats});cv.firstChild.remove();cv.classList.add('landmats');card.appendChild(cv)}
     }
     if(cat==='seeds'){
       const st=el('div','stars'),ml=S.mlvl[id]||0;
@@ -7352,7 +7420,6 @@ function shopButton(cat,id,d,locked,owned,card){
         S.coins-=u.cost;S.veh[id]=lv+1;SFX.engine();confetti();toast('Your '+d.name.toLowerCase()+' now works '+VSIZE[lv+1]+' by '+VSIZE[lv+1]+' plots per trip!');changed();rerender()})}
     return btn}
   if(owned){btn.textContent=d.kind==='pet'?'Your pet':'Done';btn.disabled=true;return btn}
-  if(cat==='farm'&&d.kind==='expand'&&d.to===24&&S.size<20){btn.textContent='Get Bigger Farm first';btn.disabled=true;return btn}
   if(cat==='animals'&&!hasHome(id)){btn.textContent='Build a '+HOMES[id].name+' first';btn.classList.add('needhome');btn.onclick=()=>{SFX.click();shopCat('homes')};return btn}
   if(cat==='animals'&&(ANC[id]||0)>=homeCap(id)){btn.textContent=HOMES[id].name+' full: build another';btn.classList.add('needhome');btn.onclick=()=>{SFX.click();shopCat('homes')};return btn}
   const free=cat==='seeds'&&have(id),price=d.cash?'<span class="bill">$</span>'+d.cash:'<span class="coin"></span>'+d.cost.toLocaleString();
@@ -7360,7 +7427,7 @@ function shopButton(cat,id,d,locked,owned,card){
   else btn.innerHTML='Buy &middot; '+price;
   const poor=!free&&!canBuy(d);if(poor)btn.classList.add('poor');
   btn.onclick=()=>{
-    if(poor){SFX.error();haptic();shakeEl(btn);toast(d.cash?'You need '+d.cash+' Farm Cash. You earn 1 every level up and from the daily bonus.':'You need '+d.cost.toLocaleString()+' coins for '+(cat==='seeds'?d.name.toLowerCase():'the '+d.name.toLowerCase())+'.');return}
+    if(poor){SFX.error();haptic();shakeEl(btn);if(matsMissing(d.mats)&&S.coins>=d.cost){toast(LAND_MATS_MSG);return}toast(d.cash?'You need '+d.cash+' Farm Cash. You earn 1 every level up and from the daily bonus.':'You need '+d.cost.toLocaleString()+' coins for '+(cat==='seeds'?d.name.toLowerCase():'the '+d.name.toLowerCase())+'.');return}
     shopPay(btn,card,()=>buyItem(cat,id,d));
   };
   return btn;
@@ -7400,6 +7467,8 @@ function shopDetail(cat,id,d,locked,owned){
   if(d.xp)row('XP','+'+d.xp);
   if(cat==='seeds'&&CROP_SEASON[id])row('Best season',(inSeason(id)?'In season now':SEASON_NAME[CROP_SEASON[id]]));
   if(d.desc&&cat!=='seeds')row('About',d.desc);
+  if(cat==='farm'&&d.kind==='expand'&&!owned&&Object.keys(d.mats).length){const cv=costView({coins:d.cost,mats:d.mats});cv.firstChild.remove();dl.appendChild(el('dt',null,'Materials'));const dd=el('dd');dd.appendChild(cv);dl.appendChild(dd)}
+  if(cat==='farm'&&d.kind==='expand'){const nx=LAND[LAND.findIndex(l=>l[0]===d.to)+1];if(nx)row('Next','<b>'+LAND_NAME[nx[0]]+'</b> · <span>Level '+nx[1]+'</span>',true);else row('Next','This is the biggest farm in the valley.')}
   cd.appendChild(dl);
   if(cat==='farm'&&d.kind==='supply'&&!locked){
     let q=1;const maxQ=()=>Math.max(1,Math.min(Math.floor(S.coins/d.cost),Math.floor(room()/d.n)));
@@ -7421,13 +7490,14 @@ function buyItem(cat,id,d){
   if(cat==='seeds'){S.seed=id;stat('seedPick');setTool('multi');closeModal();toast(d.name+' selected. Click plowed plots to plant them.');changed();return}
   if(d.cash&&S.cash<d.cash){SFX.error();toast('You need '+d.cash+' Farm Cash. You earn 1 every level up and from the daily bonus.');return}
   if(!d.cash&&S.coins<d.cost){SFX.error();toast('You need '+d.cost.toLocaleString()+' coins for the '+d.name.toLowerCase()+'.');return}
+  if(matsMissing(d.mats)){SFX.error();toast(LAND_MATS_MSG);return}
   if(cat==='farm'){
     if(d.kind==='supply'&&room()<d.n){barnFull();return}
     if(d.cash)S.cash-=d.cash;else S.coins-=d.cost;
     const now=Date.now();let n=0;
     if(d.kind==='pet'){const had=S.pet;S.pet={kind:d.pet,name:PET_NAME[d.pet]};placePet();d.pet==='dog'?SFX.bark():SFX.meow();closeModal();toast((had?'Swapped pets! ':'')+'Meet '+S.pet.name+', your new '+(d.pet==='dog'?'farm dog':'barn cat')+'! Tap your pet to give it a name.');changed();setTimeout(renamePet,500);return}
     if(d.kind==='vehicle'){S.veh[id]=true;toast('Your new '+d.name.toLowerCase()+' is ready! The Multi-tool uses it by itself.');SFX.engine()}
-    else if(d.kind==='expand'){S.size=d.to;N=S.size;buildBorder();fit();toast('Your farm grew to '+d.to+' by '+d.to+'!');SFX.level()}
+    else if(d.kind==='expand'){for(const k in d.mats)S.mats[k]-=d.mats[k];S.size=d.to;N=S.size;buildBorder();fit();closeModal();confetti();toast('Your farm grew to '+d.to+' by '+d.to+'!');SFX.level()}
     else if(d.kind==='fuel'){S.fuel=FUEL_MAX;S.fuelT=now;toast('Fuel tank full.')}
     else if(d.kind==='supply'){addGood(d.item,d.n);SFX.coin();toast(d.n+' '+ITEMS[d.item].name.toLowerCase()+' added to your barn.')}
     else if(d.kind==='grow'){for(const k in S.tiles){const o=S.tiles[k];if(o.k==='plot'&&o.crop){const s=cropState(o,now);if(s.st!=='ripe'&&s.st!=='withered'){o.t=now-CROPS[o.crop].grow*1000;n++}}}toast(n?n+' plots are ready to harvest!':'Nothing was growing. Your Farm Cash was refunded.');if(!n)S.cash+=d.cash;else SFX.find()}
@@ -8799,7 +8869,7 @@ $('needPill').onclick=()=>{if(VIS)return;enterHouse()};
 /* ================= boot ================= */
 function start(data){
   S=norm(valid(data&&data.S)?data.S:(load()||fresh()));
-  N=S.size;migrateHomes();
+  if(S.size===24)S.size=25;N=S.size;migrateHomes();
   // an old bug let upgrades go through without enough coins or materials; never keep a negative balance
   if(S.coins<0)S.coins=0;if(S.mats)for(const k in S.mats)if(S.mats[k]<0)S.mats[k]=0;
   for(const k in S.tiles){const o=S.tiles[k];if(o.k==='bld'){farmer.x=+k.split(',')[0]+2.4;farmer.y=+k.split(',')[1]+2.6;break}}

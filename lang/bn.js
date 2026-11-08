@@ -1,7 +1,21 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`A new version is ready. Tap to reload.|নতুন সংস্করণ তৈরি। আবার লোড করতে ছোঁও।
+x:`Homestead|খামারবাড়ি
+Ranch|র‍্যাঞ্চ
+Country Estate|গ্রামীণ জমিদারি
+Grand Estate|বড় জমিদারি
+Valley Estate|উপত্যকার জমিদারি
+Next|পরবর্তী
+This is the biggest farm in the valley.|এটাই উপত্যকার সবচেয়ে বড় খামার।
+You need more building materials. You find them while farming, or trade with neighbors.|আরও নির্মাণ উপকরণ দরকার। চাষ করার সময় পাবে, বা প্রতিবেশীদের সঙ্গে বদল করো।
+Grow your land to 25 by 25.|তোমার জমি 25 বাই 25 করো।
+Grow your land to 30 by 30.|তোমার জমি 30 বাই 30 করো।
+Grow your land to 35 by 35.|তোমার জমি 35 বাই 35 করো।
+Grow your land to 40 by 40.|তোমার জমি 40 বাই 40 করো।
+Grow your land to 45 by 45.|তোমার জমি 45 বাই 45 করো।
+Grow your land to 50 by 50.|তোমার জমি 50 বাই 50 করো।
+A new version is ready. Tap to reload.|নতুন সংস্করণ তৈরি। আবার লোড করতে ছোঁও।
 Level|লেভেল
 All job slots are full. Collect finished goods to make room.|সব কাজের জায়গা ভরা। জায়গা খালি করতে তৈরি জিনিস তুলে নাও।
 Upgraded: more job slots and faster work.|উন্নত: বেশি কাজের জায়গা আর দ্রুত কাজ।

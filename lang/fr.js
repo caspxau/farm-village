@@ -1,6 +1,20 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`A new version is ready. Tap to reload.|Une nouvelle version est prête. Touche pour recharger.
+x:`Homestead|Domaine
+Ranch|Ranch
+Country Estate|Propriété de campagne
+Grand Estate|Grand domaine
+Valley Estate|Domaine de la vallée
+Next|Ensuite
+This is the biggest farm in the valley.|C’est la plus grande ferme de la vallée.
+You need more building materials. You find them while farming, or trade with neighbors.|Il te faut plus de matériaux de construction. Tu en trouves en cultivant ou en échangeant avec tes voisins.
+Grow your land to 25 by 25.|Agrandis ton terrain à 25 sur 25.
+Grow your land to 30 by 30.|Agrandis ton terrain à 30 sur 30.
+Grow your land to 35 by 35.|Agrandis ton terrain à 35 sur 35.
+Grow your land to 40 by 40.|Agrandis ton terrain à 40 sur 40.
+Grow your land to 45 by 45.|Agrandis ton terrain à 45 sur 45.
+Grow your land to 50 by 50.|Agrandis ton terrain à 50 sur 50.
+A new version is ready. Tap to reload.|Une nouvelle version est prête. Touche pour recharger.
 Level|Niveau
 All job slots are full. Collect finished goods to make room.|Tous les emplacements sont pleins. Récupère les produits finis pour libérer de la place.
 Upgraded: more job slots and faster work.|Amélioré : plus d’emplacements et un travail plus rapide.

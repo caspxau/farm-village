@@ -1,7 +1,21 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`A new version is ready. Tap to reload.|नया संस्करण तैयार है। रीलोड करने के लिए छुओ।
+x:`Homestead|होमस्टेड
+Ranch|रैंच
+Country Estate|देहाती जागीर
+Grand Estate|बड़ी जागीर
+Valley Estate|घाटी की जागीर
+Next|अगला
+This is the biggest farm in the valley.|यह घाटी का सबसे बड़ा फ़ार्म है।
+You need more building materials. You find them while farming, or trade with neighbors.|आपको और निर्माण सामग्री चाहिए। खेती करते समय मिलती है, या पड़ोसियों से बदल लें।
+Grow your land to 25 by 25.|अपनी ज़मीन 25 गुणा 25 तक बढ़ाएँ।
+Grow your land to 30 by 30.|अपनी ज़मीन 30 गुणा 30 तक बढ़ाएँ।
+Grow your land to 35 by 35.|अपनी ज़मीन 35 गुणा 35 तक बढ़ाएँ।
+Grow your land to 40 by 40.|अपनी ज़मीन 40 गुणा 40 तक बढ़ाएँ।
+Grow your land to 45 by 45.|अपनी ज़मीन 45 गुणा 45 तक बढ़ाएँ।
+Grow your land to 50 by 50.|अपनी ज़मीन 50 गुणा 50 तक बढ़ाएँ।
+A new version is ready. Tap to reload.|नया संस्करण तैयार है। रीलोड करने के लिए छुओ।
 Level|लेवल
 All job slots are full. Collect finished goods to make room.|सभी काम की जगहें भरी हैं। जगह बनाने के लिए तैयार सामान उठाओ।
 Upgraded: more job slots and faster work.|अपग्रेड हुआ: ज़्यादा काम की जगहें और तेज़ काम।

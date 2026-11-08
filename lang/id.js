@@ -1,6 +1,20 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`A new version is ready. Tap to reload.|Versi baru sudah siap. Ketuk untuk memuat ulang.
+x:`Homestead|Wisma Tani
+Ranch|Peternakan
+Country Estate|Tanah Pedesaan
+Grand Estate|Tanah Luas
+Valley Estate|Tanah Lembah
+Next|Berikutnya
+This is the biggest farm in the valley.|Ini pertanian terbesar di lembah.
+You need more building materials. You find them while farming, or trade with neighbors.|Kamu butuh lebih banyak bahan bangunan. Temukan saat bertani, atau tukar dengan tetangga.
+Grow your land to 25 by 25.|Perluas lahanmu jadi 25 kali 25.
+Grow your land to 30 by 30.|Perluas lahanmu jadi 30 kali 30.
+Grow your land to 35 by 35.|Perluas lahanmu jadi 35 kali 35.
+Grow your land to 40 by 40.|Perluas lahanmu jadi 40 kali 40.
+Grow your land to 45 by 45.|Perluas lahanmu jadi 45 kali 45.
+Grow your land to 50 by 50.|Perluas lahanmu jadi 50 kali 50.
+A new version is ready. Tap to reload.|Versi baru sudah siap. Ketuk untuk memuat ulang.
 Level|Level
 All job slots are full. Collect finished goods to make room.|Semua slot kerja penuh. Ambil barang yang sudah jadi untuk memberi ruang.
 Upgraded: more job slots and faster work.|Ditingkatkan: lebih banyak slot kerja dan kerja lebih cepat.

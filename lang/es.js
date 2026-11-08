@@ -1,6 +1,20 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`A new version is ready. Tap to reload.|Hay una versión nueva. Toca para recargar.
+x:`Homestead|Hacienda
+Ranch|Rancho
+Country Estate|Finca de campo
+Grand Estate|Gran finca
+Valley Estate|Finca del valle
+Next|Siguiente
+This is the biggest farm in the valley.|Es la granja más grande del valle.
+You need more building materials. You find them while farming, or trade with neighbors.|Necesitas más materiales de construcción. Los encuentras al cultivar o intercambiando con vecinos.
+Grow your land to 25 by 25.|Amplía tu terreno a 25 por 25.
+Grow your land to 30 by 30.|Amplía tu terreno a 30 por 30.
+Grow your land to 35 by 35.|Amplía tu terreno a 35 por 35.
+Grow your land to 40 by 40.|Amplía tu terreno a 40 por 40.
+Grow your land to 45 by 45.|Amplía tu terreno a 45 por 45.
+Grow your land to 50 by 50.|Amplía tu terreno a 50 por 50.
+A new version is ready. Tap to reload.|Hay una versión nueva. Toca para recargar.
 Level|Nivel
 All job slots are full. Collect finished goods to make room.|Todas las ranuras están llenas. Recoge los productos terminados para hacer sitio.
 Upgraded: more job slots and faster work.|Mejorado: más ranuras de trabajo y más rapidez.

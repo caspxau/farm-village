@@ -1,7 +1,21 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`A new version is ready. Tap to reload.|Новая версия готова. Нажмите, чтобы обновить.
+x:`Homestead|Усадьба
+Ranch|Ранчо
+Country Estate|Загородное поместье
+Grand Estate|Большое поместье
+Valley Estate|Поместье долины
+Next|Дальше
+This is the biggest farm in the valley.|Это самая большая ферма в долине.
+You need more building materials. You find them while farming, or trade with neighbors.|Нужно больше стройматериалов. Их можно найти, работая на ферме, или выменять у соседей.
+Grow your land to 25 by 25.|Расширь землю до 25 на 25.
+Grow your land to 30 by 30.|Расширь землю до 30 на 30.
+Grow your land to 35 by 35.|Расширь землю до 35 на 35.
+Grow your land to 40 by 40.|Расширь землю до 40 на 40.
+Grow your land to 45 by 45.|Расширь землю до 45 на 45.
+Grow your land to 50 by 50.|Расширь землю до 50 на 50.
+A new version is ready. Tap to reload.|Новая версия готова. Нажмите, чтобы обновить.
 Level|Уровень
 All job slots are full. Collect finished goods to make room.|Все места в очереди заняты. Заберите готовые товары.
 Upgraded: more job slots and faster work.|Улучшено: больше мест в очереди и быстрее работа.

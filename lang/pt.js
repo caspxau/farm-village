@@ -1,6 +1,20 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`A new version is ready. Tap to reload.|Uma nova versão está pronta. Toque para recarregar.
+x:`Homestead|Sítio
+Ranch|Rancho
+Country Estate|Quinta
+Grand Estate|Grande quinta
+Valley Estate|Quinta do vale
+Next|Próximo
+This is the biggest farm in the valley.|É a maior fazenda do vale.
+You need more building materials. You find them while farming, or trade with neighbors.|Você precisa de mais materiais de construção. Encontre-os cultivando ou troque com vizinhos.
+Grow your land to 25 by 25.|Aumente seu terreno para 25 por 25.
+Grow your land to 30 by 30.|Aumente seu terreno para 30 por 30.
+Grow your land to 35 by 35.|Aumente seu terreno para 35 por 35.
+Grow your land to 40 by 40.|Aumente seu terreno para 40 por 40.
+Grow your land to 45 by 45.|Aumente seu terreno para 45 por 45.
+Grow your land to 50 by 50.|Aumente seu terreno para 50 por 50.
+A new version is ready. Tap to reload.|Uma nova versão está pronta. Toque para recarregar.
 Level|Nível
 All job slots are full. Collect finished goods to make room.|Todos os espaços estão cheios. Recolha os produtos prontos para liberar espaço.
 Upgraded: more job slots and faster work.|Melhorado: mais espaços de trabalho e mais rapidez.

@@ -1,7 +1,21 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`A new version is ready. Tap to reload.|新版本已就绪，点击刷新。
+x:`Homestead|家园农场
+Ranch|大牧场
+Country Estate|乡村庄园
+Grand Estate|宏伟庄园
+Valley Estate|山谷庄园
+Next|下一步
+This is the biggest farm in the valley.|这是山谷里最大的农场。
+You need more building materials. You find them while farming, or trade with neighbors.|你需要更多建筑材料。耕作时可以找到，也可以和邻居交换。
+Grow your land to 25 by 25.|把土地扩大到 25×25。
+Grow your land to 30 by 30.|把土地扩大到 30×30。
+Grow your land to 35 by 35.|把土地扩大到 35×35。
+Grow your land to 40 by 40.|把土地扩大到 40×40。
+Grow your land to 45 by 45.|把土地扩大到 45×45。
+Grow your land to 50 by 50.|把土地扩大到 50×50。
+A new version is ready. Tap to reload.|新版本已就绪，点击刷新。
 Level|等级
 All job slots are full. Collect finished goods to make room.|所有工作位都满了。收取完成的商品来腾出位置。
 Upgraded: more job slots and faster work.|已升级：更多工作位，生产更快。

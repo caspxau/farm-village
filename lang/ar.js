@@ -1,7 +1,21 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`A new version is ready. Tap to reload.|إصدار جديد جاهز. المس لإعادة التحميل.
+x:`Homestead|المزرعة العائلية
+Ranch|المزرعة الكبيرة
+Country Estate|الضيعة الريفية
+Grand Estate|الضيعة الكبرى
+Valley Estate|ضيعة الوادي
+Next|التالي
+This is the biggest farm in the valley.|هذه أكبر مزرعة في الوادي.
+You need more building materials. You find them while farming, or trade with neighbors.|تحتاج إلى مزيد من مواد البناء. تجدها أثناء الزراعة أو بالمقايضة مع الجيران.
+Grow your land to 25 by 25.|وسّع أرضك إلى 25 في 25.
+Grow your land to 30 by 30.|وسّع أرضك إلى 30 في 30.
+Grow your land to 35 by 35.|وسّع أرضك إلى 35 في 35.
+Grow your land to 40 by 40.|وسّع أرضك إلى 40 في 40.
+Grow your land to 45 by 45.|وسّع أرضك إلى 45 في 45.
+Grow your land to 50 by 50.|وسّع أرضك إلى 50 في 50.
+A new version is ready. Tap to reload.|إصدار جديد جاهز. المس لإعادة التحميل.
 Level|المستوى
 All job slots are full. Collect finished goods to make room.|كل خانات العمل ممتلئة. اجمع المنتجات الجاهزة لتفريغ مكان.
 Upgraded: more job slots and faster work.|تمت الترقية: خانات عمل أكثر وعمل أسرع.
