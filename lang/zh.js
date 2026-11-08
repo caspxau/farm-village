@@ -1,7 +1,8 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Level|等级
+x:`A new version is ready. Tap to reload.|新版本已就绪，点击刷新。
+Level|等级
 All job slots are full. Collect finished goods to make room.|所有工作位都满了。收取完成的商品来腾出位置。
 Upgraded: more job slots and faster work.|已升级：更多工作位，生产更快。
 Upgrade this building|升级这座建筑

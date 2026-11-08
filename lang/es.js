@@ -1,6 +1,7 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Level|Nivel
+x:`A new version is ready. Tap to reload.|Hay una versión nueva. Toca para recargar.
+Level|Nivel
 All job slots are full. Collect finished goods to make room.|Todas las ranuras están llenas. Recoge los productos terminados para hacer sitio.
 Upgraded: more job slots and faster work.|Mejorado: más ranuras de trabajo y más rapidez.
 Upgrade this building|Mejorar este edificio

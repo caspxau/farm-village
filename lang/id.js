@@ -1,6 +1,7 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Level|Level
+x:`A new version is ready. Tap to reload.|Versi baru sudah siap. Ketuk untuk memuat ulang.
+Level|Level
 All job slots are full. Collect finished goods to make room.|Semua slot kerja penuh. Ambil barang yang sudah jadi untuk memberi ruang.
 Upgraded: more job slots and faster work.|Ditingkatkan: lebih banyak slot kerja dan kerja lebih cepat.
 Upgrade this building|Tingkatkan bangunan ini

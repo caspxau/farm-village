@@ -1,7 +1,8 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Level|লেভেল
+x:`A new version is ready. Tap to reload.|নতুন সংস্করণ তৈরি। আবার লোড করতে ছোঁও।
+Level|লেভেল
 All job slots are full. Collect finished goods to make room.|সব কাজের জায়গা ভরা। জায়গা খালি করতে তৈরি জিনিস তুলে নাও।
 Upgraded: more job slots and faster work.|উন্নত: বেশি কাজের জায়গা আর দ্রুত কাজ।
 Upgrade this building|এই ভবনটি উন্নত করো

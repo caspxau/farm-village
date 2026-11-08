@@ -1,6 +1,7 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Level|Niveau
+x:`A new version is ready. Tap to reload.|Une nouvelle version est prête. Touche pour recharger.
+Level|Niveau
 All job slots are full. Collect finished goods to make room.|Tous les emplacements sont pleins. Récupère les produits finis pour libérer de la place.
 Upgraded: more job slots and faster work.|Amélioré : plus d’emplacements et un travail plus rapide.
 Upgrade this building|Améliorer ce bâtiment

@@ -1,7 +1,8 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Level|लेवल
+x:`A new version is ready. Tap to reload.|नया संस्करण तैयार है। रीलोड करने के लिए छुओ।
+Level|लेवल
 All job slots are full. Collect finished goods to make room.|सभी काम की जगहें भरी हैं। जगह बनाने के लिए तैयार सामान उठाओ।
 Upgraded: more job slots and faster work.|अपग्रेड हुआ: ज़्यादा काम की जगहें और तेज़ काम।
 Upgrade this building|इस इमारत को अपग्रेड करो
