@@ -1371,6 +1371,38 @@ body:has(#modal:not([hidden])) .toast,body:has(#house:not([hidden])) .toast{top:
   .nbcard button{font-size:14px}
 }
 @media (max-width:420px){.side{width:min(200px,calc(100vw - 186px))!important}.side .goals,.side .qtrack{font-size:12px}}
+
+/* ---- phones held sideways: a slim HUD. One 40px top bar, a narrow right column and a low dock leave the farm in view ---- */
+@media (max-height:520px) and (orientation:landscape){
+  body .hud{top:max(4px,env(safe-area-inset-top,0px));left:max(8px,env(safe-area-inset-left,0px));padding:3px 8px 3px 3px;gap:5px;border-radius:14px}
+  body .hud .star{width:36px;height:36px;flex-basis:36px;margin:-4px 0 -4px -1px}body .hud .star span{font-size:15px}
+  body .hud .xpbox{min-width:96px;margin-left:-12px;padding:3px 8px 3px 15px}
+  body .hud .xplabel{display:none}body .hud .xpbar{height:12px!important}body .hud .xptext{font-size:9px}
+  body .hud .pill{height:28px;padding:0 9px 0 3px;gap:4px}body .hud .pill b{font-size:14.5px}
+  body .hud span.coin{width:20px!important;height:20px!important;flex-basis:20px!important}
+  body .hud span.bill{width:24px!important;height:16px!important;flex-basis:24px!important;font-size:9px}
+  body .hud .pill .plus{width:19px;height:19px;font-size:14px;margin-right:-6px}
+  body .hud .wxchip{padding:0 8px 0 3px}body .hud .wxchip svg,body .hud .wxchip img{width:20px;height:20px}
+  body .hud .wxchip b{font-size:11.5px}body .hud .wxchip small{display:none}
+  body .fuelpill .fuelico{width:16px;height:16px}body .fuelpill #fuellabel{display:none}
+  body .side{top:calc(max(4px,env(safe-area-inset-top,0px)) + 44px)!important;width:184px!important;gap:5px}
+  body .side .goals,body .side .qtrack{font-size:12px;padding:4px 8px}
+  body .goals-head{font-size:14px;gap:4px;min-height:0;padding:1px 0}body .goals-head small{font-size:9.5px}body .goals-head>span{white-space:nowrap}body .goals-head i{font-size:11px;padding:1px 7px}
+  body .rightcol{top:calc(max(4px,env(safe-area-inset-top,0px)) + 44px);right:max(8px,env(safe-area-inset-right,0px));gap:4px}
+  body .modesw{padding:2px;gap:2px}
+  body .modesw button{min-height:28px;font-size:12px;padding:2px 8px 2px 5px;gap:3px}body .modesw button svg{width:17px;height:17px}
+  body .seedpill{min-height:30px;padding:1px 8px 1px 2px;border-radius:12px}body .seedpill img{width:24px;height:24px}body .seedpill b{font-size:12.5px}
+  body .needpill{min-width:100px;padding:3px 6px 4px;gap:2px;border-radius:12px}
+  body .needpill .nhead img{width:20px;height:20px}body .needpill .nhead b{font-size:11px}
+  body .needpill em{height:8px!important}body .needpill .nico{width:15px;height:15px}body .needpill .nico svg{width:9px;height:9px}body .needpill .nval{font-size:10px}
+  body .dock{bottom:max(4px,env(safe-area-inset-bottom,0px));padding:4px 7px 17px;gap:4px;border-radius:16px}
+  body .dock .mbtn{width:38px;height:38px;border-radius:11px}body .dock .mbtn svg{width:23px;height:23px}
+  body .dock .mbtn>em{font-size:9px;bottom:-15px;padding:0 3px}
+  body .dock .tool.market{width:48px;height:48px;margin:-12px 2px 0}body .dock .tool.market svg{width:29px;height:29px}
+  body .dock .tool.market>span{font-size:10px;bottom:-15px}
+  body .tut{width:178px!important;min-width:0!important;bottom:max(4px,env(safe-area-inset-bottom,0px))!important;padding:5px 7px!important}
+  body .tut strong{font-size:11.5px!important}body .tut button{min-height:26px!important;font-size:11px!important}
+}
 </style>
 </head>
 <body>
