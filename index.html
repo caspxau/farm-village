@@ -1372,6 +1372,60 @@ body:has(#modal:not([hidden])) .toast,body:has(#house:not([hidden])) .toast{top:
 }
 @media (max-width:420px){.side{width:min(200px,calc(100vw - 186px))!important}.side .goals,.side .qtrack{font-size:12px}}
 
+/* ---- Orders and Delivery Board cards: request tiles with progress, reward pills, a timer chip, ready cards glow ---- */
+.obrd{padding:12px 14px 16px;display:flex;flex-direction:column;gap:10px}
+.oc{position:relative;display:grid;grid-template-columns:68px 1fr auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px;box-shadow:var(--sh-1);transition:box-shadow .2s}
+.oc .nbface,.oc .town{width:64px;height:64px;border-radius:14px;display:block;border:1px solid var(--line-2);align-self:start}
+.oc.ready{border-color:rgba(78,138,58,.5);background:linear-gradient(100deg,#f3fbec,#fff 45%);box-shadow:0 0 0 3px rgba(108,190,92,.16),var(--sh-1)}
+.oc-m{min-width:0}
+.oc-h{display:flex;align-items:center;gap:8px;margin-bottom:6px;min-height:22px}
+.oc-h strong{font-size:16px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tag{flex:none;font-size:11.5px;font-weight:800;letter-spacing:.3px;padding:2px 9px;border-radius:999px}
+.tag.ok{background:linear-gradient(#6aa650,#4e8a3a);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.tmr{flex:none;margin-left:auto;display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--ink-soft);background:#f4eee2;border-radius:999px;padding:2px 9px 2px 4px;font-variant-numeric:tabular-nums}
+.tmr svg{width:15px;height:15px}.tmr.low{color:#a33b28;background:#fbe6df}
+.rqs{display:flex;flex-wrap:wrap;gap:6px}
+.rqt{display:grid;grid-template-columns:38px minmax(0,1fr);grid-template-rows:auto auto;column-gap:7px;align-items:center;background:#faf6ee;border:1px solid var(--line);border-radius:12px;padding:4px 10px 4px 4px;min-width:124px;max-width:190px}
+.rqt img{grid-row:1/3;width:38px;height:38px;display:block}
+.rqt>span{font-size:12.5px;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.25}
+.rqt em{font-style:normal;display:flex;align-items:center;gap:6px;font-size:12.5px;color:#a33b28;font-variant-numeric:tabular-nums;line-height:1.2}
+.rqt em i{flex:1;min-width:26px;height:5px;border-radius:3px;background:rgba(90,62,32,.12);overflow:hidden}
+.rqt em i::before{content:'';display:block;height:100%;width:var(--p);background:linear-gradient(90deg,#efa48a,#d9694c);border-radius:3px}
+.rqt.ok{background:#f1f9ea;border-color:rgba(78,138,58,.32)}.rqt.ok em{color:#3a6b2a}.rqt.ok em i::before{background:linear-gradient(90deg,#9fd37e,#5a9a40)}
+.rwd{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}
+.rwd>span{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:2px 10px 2px 4px;font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.5}
+.rwd .rc{background:linear-gradient(#fff7da,#fbe5a0);color:#6b4a06;border:1px solid rgba(180,130,30,.32)}
+.rwd .rc .coin{width:19px;height:19px;flex:none}
+.rwd .rx{background:linear-gradient(#ebf5fd,#d2e6f8);color:#1f4f7d;border:1px solid rgba(61,127,191,.28);padding-left:10px}
+.rwd .rb{background:#e4f3d4;color:#3a6b2a;font-size:12px;padding:2px 8px;cursor:help}
+.rwd .rm{background:#f4eee2;color:var(--ink-soft);font-size:12.5px;font-weight:700;padding:2px 9px 2px 5px}
+.rwd .rm svg{width:16px;height:15px}.rwd .rm.over{background:#fbe6df;color:#a33b28}
+.oc .acts{display:flex;flex-direction:column;align-items:stretch;gap:2px;min-width:112px}
+.oc .acts .go{font-size:16px;padding:6px 16px;min-height:44px}
+.oc .lnk{background:none;border:0;box-shadow:none;color:var(--ink-soft);font:inherit;font-size:12.5px;font-weight:700;min-height:30px;cursor:pointer;border-radius:8px}
+.oc .lnk:hover{color:var(--danger);background:rgba(196,81,62,.07)}
+.oc.ready .go{animation:ocpulse 1.8s ease-in-out infinite}
+@keyframes ocpulse{0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #335e24,0 4px 12px rgba(58,107,42,.28),0 0 0 0 rgba(108,190,92,0)}50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #335e24,0 4px 12px rgba(58,107,42,.28),0 0 0 6px rgba(108,190,92,.3)}}
+@media (prefers-reduced-motion:reduce){.oc.ready .go{animation:none}}
+.onext{display:flex;align-items:center;justify-content:center;gap:8px;border:2px dashed var(--line-2);border-radius:16px;padding:13px;color:var(--ink-soft);font-size:13.5px;font-weight:700;background:rgba(255,255,255,.4)}
+.onext svg{width:18px;height:18px;flex:none}
+.ads2{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.adc{display:grid;grid-template-columns:48px 1fr;grid-template-rows:auto 1fr auto;gap:3px 10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px 12px;box-shadow:var(--sh-1)}
+.adc .adi{width:48px;height:48px;grid-row:1/3}
+.adc strong{font-size:15px;align-self:end}
+.adc small{color:var(--ink-soft);font-size:12px;line-height:1.4}
+.adc .buy{grid-column:1/-1;min-height:38px;margin-top:6px}
+.adc.on{background:linear-gradient(100deg,#f3fbec,#fff 55%);border-color:rgba(78,138,58,.4)}
+.adc.on .pbar{grid-column:1/-1;margin-top:6px;height:8px}.adc.on .pbar i{background:linear-gradient(90deg,#9fd37e,#5a9a40)}
+@media (max-width:640px){
+  .obrd{padding:10px 10px 14px}
+  .oc{grid-template-columns:50px minmax(0,1fr);gap:8px 10px;padding:9px 10px}
+  .oc .nbface,.oc .town{width:50px;height:50px;border-radius:12px}
+  .oc .acts{grid-column:1/-1;flex-direction:row-reverse;align-items:center;gap:8px}.oc .acts .go{flex:1;min-height:42px}
+  .oc .lnk{padding:0 10px}
+  .rqt{min-width:0;flex:1 1 130px;max-width:none}
+}
+
 /* ---- phones held sideways: a slim HUD. One 40px top bar, a narrow right column and a low dock leave the farm in view ---- */
 @media (max-height:520px) and (orientation:landscape){
   body .hud{top:max(4px,env(safe-area-inset-top,0px));left:max(8px,env(safe-area-inset-left,0px));padding:3px 8px 3px 3px;gap:5px;border-radius:14px}
@@ -6027,6 +6081,49 @@ function goodReq(id,need){
   const r=el('span','req'+(have(id)>=need?' ok':'')),img=el('img');img.src=itemIcon(id);img.alt='';r.appendChild(img);
   r.appendChild(el('b',null,have(id)+'/'+need));r.title=ITEMS[id].name;r.setAttribute('aria-label',ITEMS[id].name+': '+have(id)+' of '+need);return r;
 }
+/* ---- order and contract cards: request tiles, reward pills, timers, town shopfronts ---- */
+const CLOCK_SVG='<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.4" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.6V8l2.3 1.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>';
+const TRUCK_SVG='<svg viewBox="0 0 20 14" aria-hidden="true"><path d="M1 3h10v7H1z" fill="#c8392b" stroke="#6e1c12" stroke-width="1"/><path d="M11 5h4.5l3 3v2H11z" fill="#c8392b" stroke="#6e1c12" stroke-width="1"/><path d="M12.4 6h2.6l1.8 1.9h-4.4z" fill="#bfe0f0"/><circle cx="4.5" cy="11" r="2" fill="#2b2b2e"/><circle cx="15" cy="11" r="2" fill="#2b2b2e"/></svg>';
+// one tile per good asked for: its picture and name, then how many you have of how many, with a small bar
+function reqTile(id,need){
+  const h=have(id),ok=h>=need,t=el('span','rqt'+(ok?' ok':'')),img=el('img');img.src=itemIcon(id);img.alt='';t.appendChild(img);
+  t.appendChild(el('span',null,ITEMS[id].name));
+  const m=el('em');m.appendChild(el('b',null,(ok?'✓ ':'')+Math.min(h,need)+'/'+need));const bar=el('i');bar.style.setProperty('--p',Math.min(100,h/need*100)+'%');m.appendChild(bar);t.appendChild(m);
+  t.title=ITEMS[id].name;t.setAttribute('aria-label',ITEMS[id].name+': '+h+' of '+need);return t;
+}
+function payRow(coins,xp,base){
+  const r=el('div','rwd');r.innerHTML='<span class="rc"><span class="coin"></span><b>'+coins.toLocaleString()+'</b></span><span class="rx">+'+xp+' XP</span>';
+  if(base&&coins>base){const b=el('span','rb','+'+Math.round((coins/base-1)*100)+'%');b.title='Market pays '+base.toLocaleString();r.appendChild(b)}
+  return r;
+}
+function timerChip(ms){const c=el('span','tmr'+(ms<5*60e3?' low':''));c.innerHTML=CLOCK_SVG;c.appendChild(el('b',null,fmt(ms/1000)));c.title='Leaves in '+fmt(ms/1000);return c}
+// keeps a repeating animation smooth although the live popup is rebuilt every second
+function steadyAnim(e,ms){e.style.animationDelay=-(Date.now()%ms)+'ms'}
+function nextSlot(txt){const s=el('div','onext');s.innerHTML=CLOCK_SVG;s.appendChild(el('span',null,txt));return s}
+const TOWN_LOOK={'Valley Grocer':['#4e8a3a','apple'],'Hollow Bakery':['#c27a2c','bread'],'Riverside Market':['#3d7fbf','basket'],'Mill Town Café':['#b8392b','cup'],'Harbor Cannery':['#2f5577','can']};
+const TOWN_ICONS={};
+function townIcon(name){
+  if(TOWN_ICONS[name])return TOWN_ICONS[name];
+  const[c,gl]=TOWN_LOOK[name]||['#8a6216','basket'],d=shade(c,-.35);
+  const glyph={apple:'<circle cx="32" cy="13.5" r="4.6" fill="#e0352b" stroke="#8a1c12" stroke-width=".8"/><path d="M32 9q.6-2.6 2.8-3" stroke="#3a6b2a" stroke-width="1.4" fill="none" stroke-linecap="round"/>',
+    bread:'<ellipse cx="32" cy="13.5" rx="7" ry="4" fill="#e0a04a" stroke="#8a5a1c" stroke-width=".9"/><path d="M28.6 11.6l1.4 3M32 11.2l1.4 3M35.4 11.6l1.4 3" stroke="#8a5a1c" stroke-width=".9"/>',
+    basket:'<path d="M25.5 12h13l-2 6h-9z" fill="#c98a4b" stroke="#6e4420" stroke-width=".9"/><path d="M27.6 12q4.4-6.4 8.8 0" stroke="#6e4420" stroke-width="1.3" fill="none"/><circle cx="30" cy="11.4" r="1.7" fill="#e0352b"/><circle cx="33.6" cy="11" r="1.7" fill="#f2b51e"/>',
+    cup:'<path d="M27 10h9v5a3.6 3.6 0 0 1-3.6 3.6h-1.8A3.6 3.6 0 0 1 27 15z" fill="#fff" stroke="#5a3a20" stroke-width=".9"/><path d="M36 11.4h1.6a1.9 1.9 0 0 1 0 3.8H36" stroke="#5a3a20" stroke-width=".9" fill="none"/><path d="M30 8.4q-1-1.4 0-2.8M33 8.4q-1-1.4 0-2.8" stroke="#a08060" stroke-width=".8" fill="none"/>',
+    can:'<rect x="27.5" y="8" width="9" height="11" rx="1.6" fill="#d6dbe0" stroke="#4a5560" stroke-width=".9"/><rect x="27.5" y="11" width="9" height="5" fill="'+c+'"/>'}[gl];
+  let aw='';for(let i=0;i<8;i++){const x=8+i*6;aw+='<path d="M'+x+' 27h6v6a3 3 0 0 1-6 0z" fill="'+(i%2?'#fffaf0':c)+'" stroke="'+d+'" stroke-width=".7"/>'}
+  const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="tw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf3e2"/><stop offset="1" stop-color="#ead9b8"/></linearGradient></defs>'+
+    '<rect x="0" y="0" width="64" height="64" fill="#e6f1f8"/><rect x="0" y="54" width="64" height="10" fill="#9cc86a"/>'+
+    '<rect x="9" y="26" width="46" height="32" fill="url(#tw)" stroke="#6b4a2a" stroke-width="1.2"/><rect x="6" y="22" width="52" height="6" rx="1.5" fill="'+d+'"/>'+aw+
+    '<rect x="13" y="38" width="17" height="12" rx="1" fill="#bfe0f0" stroke="#6b4a2a" stroke-width="1"/><path d="M21.5 38v12M13 44h17" stroke="#6b4a2a" stroke-width=".8"/>'+
+    '<rect x="36" y="37" width="13" height="21" rx="1" fill="'+c+'" stroke="'+d+'" stroke-width="1"/><circle cx="46" cy="48" r="1" fill="#ffd54a"/>'+
+    '<rect x="20" y="4" width="24" height="17" rx="3.5" fill="#fffaf0" stroke="#6b4a2a" stroke-width="1.2"/>'+glyph+'</svg>';
+  return TOWN_ICONS[name]='data:image/svg+xml,'+encodeURIComponent(svg);
+}
+const AD_SVG={
+  flyer:'<svg class="adi" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="6" width="40" height="38" rx="5" fill="#c98a4b"/><g transform="rotate(-6 24 25)"><rect x="12" y="9" width="24" height="31" rx="1.5" fill="#fffaf0" stroke="#a8895a"/><rect x="15" y="13" width="18" height="9" rx="1" fill="#9cc86a"/><path d="M17 21l4-5 3 3 2-2 5 4z" fill="#4e8a3a"/><path d="M15 26h18M15 29.5h14M15 33h16" stroke="#b9a27a" stroke-width="1.6" stroke-linecap="round"/></g><circle cx="24" cy="10" r="2.6" fill="#e0352b" stroke="#8a1c12"/></svg>',
+  paper:'<svg class="adi" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="8" width="38" height="32" rx="3" fill="#f6f2ea" stroke="#5a5048" stroke-width="1.2"/><rect x="9" y="12" width="30" height="5" rx="1" fill="#3a3430"/><rect x="9" y="20" width="13" height="10" fill="#d8cfc2"/><path d="M25 21h14M25 24.5h14M25 28h10M9 33.5h30M9 36.5h24" stroke="#9a9086" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  radio:'<svg class="adi" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 16L34 7" stroke="#5a5048" stroke-width="1.6" stroke-linecap="round"/><circle cx="34" cy="7" r="1.8" fill="#5a5048"/><rect x="5" y="16" width="38" height="25" rx="6" fill="#c8392b" stroke="#6e1c12" stroke-width="1.2"/><circle cx="17" cy="28.5" r="7.5" fill="#3a2a22"/><g fill="#7a6456"><circle cx="14.5" cy="26" r="1"/><circle cx="19.5" cy="26" r="1"/><circle cx="17" cy="28.5" r="1"/><circle cx="14.5" cy="31" r="1"/><circle cx="19.5" cy="31" r="1"/></g><rect x="28" y="21" width="11" height="6" rx="1.5" fill="#fff4c8"/><path d="M33 21v6" stroke="#c8392b"/><circle cx="30.5" cy="33" r="2.2" fill="#f1cf7a"/><circle cx="36.5" cy="33" r="2.2" fill="#f1cf7a"/></svg>'
+};
 function showMaker(key){
   const o0=S.tiles[key];if(!o0)return;const M=MAKERS[o0.id];
   modal({title:M.name,color:'green',wide:true,live:true,render(b){
@@ -6124,27 +6221,30 @@ function buyAd(id){
 function showOrders(){
   if(VIS)return;tickOrders();stat('ordersSeen');
   modal({title:'Orders',color:'gold',wide:true,live:true,orders:true,render(b){
-    const now=Date.now(),w=el('div','orders');
+    const now=Date.now(),w=el('div','obrd');
     w.appendChild(el('p','hint','Neighbors pay well above the market price. Deliver from your barn to fill an order.'));
     if(!S.orders.length)w.appendChild(el('p','empty','No orders right now. New ones arrive every few minutes, and advertising brings them faster.'));
-    for(const o of S.orders){
-      const n=NEIGHBORS.find(x=>x.id===o.who),row=el('div','order');row.innerHTML=avatar(n);
-      const mid=el('div');mid.appendChild(el('strong',null,n.name+' wants'));
-      const want=el('div','want');for(const[id,k]of o.items)want.appendChild(goodReq(id,k));mid.appendChild(want);
-      const pay=el('div','pay');pay.innerHTML='<span><span class="coin"></span> <b>'+o.coins.toLocaleString()+'</b></span><span>+'+o.xp+' XP</span>';
-      if(o.base)pay.appendChild(el('small',null,'Market pays '+o.base.toLocaleString()));
-      if(!canFill(o))pay.appendChild(el('small',null,'Leaves in '+fmt(postLeft(o,Date.now())/1000)));
-      mid.appendChild(pay);row.appendChild(mid);
-      const acts=el('div','acts'),d=el('button','go','Deliver');d.disabled=!canFill(o);d.onclick=()=>deliver(o);acts.appendChild(d);
-      const x=el('button','btn2','Decline');x.onclick=()=>decline(o);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
+    // orders you can fill right now come first
+    for(const o of S.orders.slice().sort((a,b)=>canFill(b)-canFill(a))){
+      const n=NEIGHBORS.find(x=>x.id===o.who),ok=canFill(o),row=el('div','oc'+(ok?' ready':''));row.innerHTML=avatar(n);
+      const mid=el('div','oc-m'),head=el('div','oc-h');head.appendChild(el('strong',null,n.name+' wants'));
+      if(ok)head.appendChild(el('span','tag ok','Ready!'));else head.appendChild(timerChip(postLeft(o,now)));
+      mid.appendChild(head);
+      const want=el('div','rqs');for(const[id,k]of o.items)want.appendChild(reqTile(id,k));mid.appendChild(want);
+      mid.appendChild(payRow(o.coins,o.xp,o.base));row.appendChild(mid);
+      const acts=el('div','acts'),d=el('button','go','Deliver');d.disabled=!ok;d.onclick=()=>deliver(o);if(ok)steadyAnim(d,1800);acts.appendChild(d);
+      const x=el('button','lnk','Decline');x.onclick=()=>decline(o);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
     }
-    w.appendChild(el('p','hint',S.orders.length>=ORDER_MAX?'The board is full. Fill or decline an order to make room.':'Next order in about '+fmt(Math.max(1,(S.orderT-now)/1000))+'.'));
+    if(S.orders.length>=ORDER_MAX)w.appendChild(el('p','hint','The board is full. Fill or decline an order to make room.'));
+    else w.appendChild(nextSlot('Next order in about '+fmt(Math.max(1,(S.orderT-now)/1000))+'.'));
     w.appendChild(el('h3',null,'Advertise'));
     const a=adOn();
-    if(a){const A=ADS[a];w.appendChild(el('div','adon',A.name+' running: an order every '+fmt(A.every)+', paying '+Math.round(A.boost*100)+'% more. '+fmt((S.ad.until-now)/1000)+' left.'))}
+    if(a){const A=ADS[a],c=el('div','adc on');c.innerHTML=AD_SVG[a]||'';c.appendChild(el('strong',null,A.name));
+      c.appendChild(el('small',null,A.name+' running: an order every '+fmt(A.every)+', paying '+Math.round(A.boost*100)+'% more. '+fmt((S.ad.until-now)/1000)+' left.'));
+      const bar=el('div','pbar');bar.innerHTML='<i style="width:'+Math.max(0,Math.min(100,(S.ad.until-now)/(A.mins*60000)*100))+'%"></i>';c.appendChild(bar);w.appendChild(c)}
     else{
-      const ads=el('div','ads');
-      for(const id in ADS){const A=ADS[id],c=el('div','ad');c.appendChild(el('strong',null,A.name));c.appendChild(el('small',null,A.desc+' For '+A.mins+' minutes, an order every '+fmt(A.every)+' paying '+Math.round(A.boost*100)+'% more.'));
+      const ads=el('div','ads2');
+      for(const id in ADS){const A=ADS[id],c=el('div','adc');c.innerHTML=AD_SVG[id]||'';c.appendChild(el('strong',null,A.name));c.appendChild(el('small',null,A.desc+' For '+A.mins+' minutes, an order every '+fmt(A.every)+' paying '+Math.round(A.boost*100)+'% more.'));
         const bt=el('button','buy'+(A.cash?' cashbuy':''));bt.innerHTML='Run it &middot; '+(A.cash?'<span class="bill">$</span>'+A.cash:'<span class="coin"></span>'+A.cost);bt.onclick=()=>buyAd(id);c.appendChild(bt);ads.appendChild(c)}
       w.appendChild(ads);
     }
@@ -6254,16 +6354,19 @@ function showDelivery(){
     if(d.run){const bar=el('div','pbar');bar.innerHTML='<i style="width:'+Math.min(100,(now-d.run.start)/(d.run.end-d.run.start)*100)+'%"></i>';info.appendChild(bar)}
     top.appendChild(info);w.appendChild(top);w.appendChild(routeStrip(d,now));
     if(!d.jobs.length)w.appendChild(el('p','empty','No contracts pinned up right now. New ones arrive every few minutes.'));
-    for(const c of d.jobs){
-      const row=el('div','order'),pic=el('img');pic.className='nbface';pic.src=itemIcon(c.items[0][0]);pic.alt='';pic.style.background='#fff4dc';row.appendChild(pic);
-      const mid=el('div');mid.appendChild(el('strong',null,c.to));
-      const want=el('div','want');for(const[id,n]of c.items)want.appendChild(goodReq(id,n));mid.appendChild(want);
-      const pay=el('div','pay');pay.innerHTML='<span><span class="coin"></span> <b>'+c.coins.toLocaleString()+'</b></span><span>+'+c.xp+' XP</span><span>'+fmt(tripSecs(c))+' trip</span>'+(!c.starter&&!canFill(c)?'<span>Leaves in '+fmt(postLeft(c,now)/1000)+'</span>':'')+'<span>'+contractCount(c)+' / '+truckCap()+' load</span>';mid.appendChild(pay);
-      row.appendChild(mid);
-      const acts=el('div','acts'),go=el('button','go','Send');go.disabled=!!d.run||!canFill(c)||contractCount(c)>truckCap();go.onclick=()=>sendDelivery(c);acts.appendChild(go);
-      const x=el('button','btn2','Discard');x.onclick=()=>discardContract(c);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
+    for(const c of d.jobs.slice().sort((a,b)=>canFill(b)-canFill(a))){
+      const fits=contractCount(c)<=truckCap(),ok=canFill(c)&&fits,row=el('div','oc'+(ok&&!d.run?' ready':'')),pic=el('img');pic.className='town';pic.src=townIcon(c.to);pic.alt='';row.appendChild(pic);
+      const mid=el('div','oc-m'),head=el('div','oc-h');head.appendChild(el('strong',null,c.to));
+      if(ok)head.appendChild(el('span','tag ok','Ready!'));else if(!c.starter)head.appendChild(timerChip(postLeft(c,now)));
+      mid.appendChild(head);
+      const want=el('div','rqs');for(const[id,n]of c.items)want.appendChild(reqTile(id,n));mid.appendChild(want);
+      const rw=payRow(c.coins,c.xp,c.base),trip=el('span','rm');trip.innerHTML=CLOCK_SVG;trip.appendChild(el('b',null,fmt(tripSecs(c))));trip.title=fmt(tripSecs(c))+' trip';
+      const load=el('span','rm'+(fits?'':' over'));load.innerHTML=TRUCK_SVG;load.appendChild(el('b',null,contractCount(c)+'/'+truckCap()));load.title=contractCount(c)+' / '+truckCap()+' load';
+      rw.appendChild(trip);rw.appendChild(load);mid.appendChild(rw);row.appendChild(mid);
+      const acts=el('div','acts'),go=el('button','go','Send');go.disabled=!!d.run||!ok;go.onclick=()=>sendDelivery(c);if(ok&&!d.run)steadyAnim(go,1800);acts.appendChild(go);
+      const x=el('button','lnk','Discard');x.onclick=()=>discardContract(c);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
     }
-    if(d.jobs.length<3)w.appendChild(el('p','hint','Next contract in about '+fmt(Math.max(1,(d.next-now)/1000))+'.'));
+    if(d.jobs.length<3)w.appendChild(nextSlot('Next contract in about '+fmt(Math.max(1,(d.next-now)/1000))+'.'));
     const up=TRUCK_UP[d.lv||1];
     if(up)w.appendChild(upgradeBox('Upgrade the truck to carry '+TRUCK_CAP[(d.lv||1)+1]+' goods',up,'Upgrade truck',()=>{d.lv=(d.lv||1)+1;toast('Truck upgraded! It now carries '+TRUCK_CAP[d.lv]+' goods.')}));
     b.appendChild(w);
