@@ -1461,6 +1461,51 @@ body:has(#modal:not([hidden])) .toast,body:has(#house:not([hidden])) .toast{top:
   body .tut{width:178px!important;min-width:0!important;bottom:max(4px,env(safe-area-inset-bottom,0px))!important;padding:5px 7px!important}
   body .tut strong{font-size:11.5px!important}body .tut button{min-height:26px!important;font-size:11px!important}
 }
+/* celebration screens: Level Up and Ribbon Earned */
+.sheet.celeS{overflow:hidden}
+.sheet.celeS .sheet-head{overflow:hidden}
+.sheet.celeS .sheet-head::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 45%,transparent 60%);transform:translateX(-120%);animation:celeShine 2.6s 0.6s ease-in-out infinite}
+.sheet.celeS .sheet-head h2{letter-spacing:.5px;text-shadow:0 2px 0 rgba(0,0,0,.25),0 0 14px rgba(255,255,255,.35)}
+.cele{position:relative;overflow:hidden;padding:4px 16px 16px;text-align:center;--c1:#ffd23f;--c2:#f2a21e;--ink:#5a3400}
+.cele.pink{--c1:#ff9ec0;--c2:#e0457b;--ink:#6a1838}
+.cele.white{--c1:#ffe9a8;--c2:#8a9aac;--ink:#3a4652}.cele.red{--c1:#ff8a7a;--c2:#e0352b;--ink:#6a1410}.cele.blue{--c1:#8ac4ff;--c2:#2d6fd0;--ink:#123a6a}
+.cele::before{content:"";position:absolute;inset:-20px -20px auto;height:260px;background:radial-gradient(closest-side,color-mix(in srgb,var(--c1) 55%,transparent),transparent);pointer-events:none}
+.cele-stage{position:relative;height:200px;display:grid;place-items:center;margin:0 -16px}
+.cele-rays{position:absolute;left:50%;top:50%;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--c1) 70%,#fff) 0 9deg,transparent 9deg 22.5deg);
+  -webkit-mask:radial-gradient(closest-side,#000 18%,rgba(0,0,0,.6) 45%,transparent 72%);mask:radial-gradient(closest-side,#000 18%,rgba(0,0,0,.6) 45%,transparent 72%);
+  opacity:.75;animation:celeSpin 22s linear infinite}
+.cele-glow{position:absolute;width:170px;height:170px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,240,.95),color-mix(in srgb,var(--c1) 60%,transparent) 55%,transparent);animation:celePulse 2.2s ease-in-out infinite}
+.cele-emblem{position:relative;height:178px;width:auto;filter:drop-shadow(0 8px 10px rgba(60,30,0,.35));animation:celePop .8s cubic-bezier(.2,1.6,.4,1) both,celeFloat 3s 1s ease-in-out infinite}
+.cele-spark{position:absolute;width:16px;height:16px;margin:-8px;background:#fff;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);filter:drop-shadow(0 0 4px var(--c1));transform:scale(0);animation:celeTwinkle 1.6s ease-in-out infinite}
+.cele-kicker{display:inline-block;margin-top:-6px;padding:3px 14px;border-radius:99px;background:var(--c2);color:#fff;font:800 12px/1.4 var(--f-body);letter-spacing:2px;text-transform:uppercase;box-shadow:0 2px 0 rgba(0,0,0,.2);animation:celeUp .5s .25s both}
+.cele-big{font:36px/1.1 "Luckiest Guy",Impact,sans-serif;color:#fff;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:0 4px 0 var(--ink),0 6px 12px rgba(0,0,0,.25);margin:8px 0 2px;animation:celeUp .5s .35s both}
+.cele-sub{margin:6px auto 12px;max-width:34ch;color:#4a3420;font-size:15px;animation:celeUp .5s .45s both}
+.cele-rewards{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0 14px}
+.cele-rw{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:14px;background:linear-gradient(#fffdf6,#fbeed0);border:2px solid #e0c48a;box-shadow:0 3px 0 #d0b070,0 6px 12px rgba(80,50,10,.12);font:800 19px var(--f-body);color:#3a2310;animation:celePop .55s cubic-bezier(.2,1.6,.4,1) both}
+.cele-rw b{min-width:3.2ch;text-align:left}
+.cele-rw.done{animation:celeBump .35s ease-out}
+.cele-rw .coin{width:26px;height:26px}
+.cele-rw .xpdot{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8fd0ff,#2d6fd0);color:#fff;font:800 11px var(--f-body);border:2px solid #123a6a}
+.cele-prog{margin:0 auto 14px;max-width:320px;text-align:left;animation:celeUp .5s .7s both}
+.cele-pl{font:700 13px var(--f-body);color:#6a4a2a;margin-bottom:4px}
+.cele-pn{font:700 12px var(--f-body);color:#8a6a4a;text-align:right;margin-top:3px}
+.cele-bar{height:14px;border-radius:99px;background:#eadcbc;box-shadow:inset 0 2px 3px rgba(0,0,0,.18);overflow:hidden}
+.cele-bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(#ffe27a,#f2a21e);box-shadow:inset 0 -3px 0 rgba(0,0,0,.12),inset 0 2px 0 rgba(255,255,255,.6);transition:width 1.1s cubic-bezier(.3,1,.4,1)}
+.cele .unlocks{animation:celeUp .5s .9s both}
+.cele .hint{animation:celeUp .5s .8s both}
+.cele-go{min-width:200px;font-size:22px;animation:celeUp .5s 1s both,celeNudge 2.4s 2.4s ease-in-out infinite}
+@keyframes celeSpin{to{transform:rotate(360deg)}}
+@keyframes celePulse{50%{transform:scale(1.12);opacity:.85}}
+@keyframes celePop{0%{transform:scale(.2) rotate(-14deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes celeFloat{50%{transform:translateY(-6px) rotate(1.5deg)}}
+@keyframes celeTwinkle{0%,100%{transform:scale(0) rotate(0)}50%{transform:scale(var(--s)) rotate(90deg)}}
+@keyframes celeUp{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+@keyframes celeBump{40%{transform:scale(1.14)}}
+@keyframes celeNudge{0%,88%,100%{transform:none}92%{transform:scale(1.06)}96%{transform:scale(.98)}}
+@keyframes celeShine{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+@media (prefers-reduced-motion:reduce){.cele *,.sheet.celeS .sheet-head::after{animation:none!important}.cele-spark{transform:scale(.7)}}
+@media (max-height:520px) and (orientation:landscape){.cele-stage{height:120px}.cele-emblem{height:110px}.cele-big{font-size:26px}.cele-rays{width:280px;height:280px;margin:-140px 0 0 -140px}}
 </style>
 </head>
 <body>
@@ -6402,7 +6447,7 @@ function openTop(){
   const spec=mq[0];if(!spec){$('modal').hidden=true;return}
   clearTimeout(modalOut);$('modal').classList.remove('closing');
   if(mq.length===1&&dockPick){for(const b of document.querySelectorAll('.dock .on'))b.classList.remove('on');dockPick.classList.add('on')}
-  $('sheet').className='sheet'+(spec.small?' small':'')+(spec.wide?' wide':'');
+  $('sheet').className='sheet'+(spec.small?' small':'')+(spec.wide?' wide':'')+(spec.cls?' '+spec.cls:'');
   $('sheetHead').className='sheet-head'+(spec.color?' '+spec.color:'');
   $('sheetTitle').textContent=spec.title;
   $('sheetClose').hidden=!!spec.noClose;
@@ -7378,15 +7423,15 @@ function showLevelUp(l0){
   const names=[];let bonus=0;for(let l=l0+1;l<=S.level;l++){names.push(...unlockedAt(l));bonus+=20*l}
   const lv=S.level;
   confetti();
-  modal({title:'Level Up!',color:'gold',small:true,noClose:true,render(b){
-    const p=el('div','body-pad');
-    const star=el('div','star');star.style.cssText='width:110px;height:110px;flex-basis:110px';
-    star.innerHTML='<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3l8.6 18.3 20 2.4-14.8 13.7 4 19.8L32 47.3 14.2 57.2l4-19.8L3.4 23.7l20-2.4z" fill="#ffc72c" stroke="#6b3c15" stroke-width="3.5" stroke-linejoin="round"/></svg><span class="outline" style="font-size:36px">'+lv+'</span>';
-    p.appendChild(star);p.appendChild(el('p',null,(S.farmerName?'Way to go, '+S.farmerName+'! ':'')+'You reached Level '+lv+'!'));
-    p.appendChild(rewardRow([['coins',bonus],['cash',lv-l0]]));
-    if(l0<NB_LVL&&lv>=NB_LVL)p.appendChild(el('p','hint nbnews','Your neighbors have moved in! Check the Orders board, and visit their farms from More > Neighbors.'));
-    {const list=[];for(let l=l0+1;l<=lv;l++)list.push(...unlockList(l));if(list.length){p.appendChild(el('p',null,'New in the market:'));p.appendChild(unlockGrid(list.slice(0,8)))}}
-    const go=el('button','go','Keep farming');go.dataset.focus='1';go.onclick=closeModal;p.appendChild(go);b.appendChild(p);
+  modal({title:'Level Up!',color:'gold',small:true,noClose:true,cls:'celeS',render(b){
+    const list=[];for(let l=l0+1;l<=lv;l++)list.push(...unlockList(l));
+    celebrate(b,{tone:'gold',emblem:levelStarArt(lv),kicker:'New level',big:'Level '+lv+'!',
+      sub:(S.farmerName?'Way to go, '+S.farmerName+'! ':'Way to go! ')+(list.length?list.length+' new thing'+(list.length>1?'s':'')+' in the Market.':'Your farm keeps growing.'),
+      rewards:[['coins',bonus],['cash',lv-l0]],
+      progress:lv<MAX_LVL?[S.xp,need(lv),'On the way to Level '+(lv+1)]:null,
+      extra:w=>{if(l0<NB_LVL&&lv>=NB_LVL)w.appendChild(el('p','hint nbnews','Your neighbors have moved in! Check the Orders board, and visit their farms from More > Neighbors.'));
+        if(list.length){const h=el('div','cele-pl','New in the Market');h.style.cssText='text-align:center;animation:celeUp .5s .85s both';w.appendChild(h);w.appendChild(unlockGrid(list.slice(0,8)))}},
+      btn:'Keep farming'});
   }});
 }
 
@@ -7617,12 +7662,74 @@ function checkRibbons(){
     if(tier<4&&v>=r.tiers[tier]){
       S.ribbons[r.id]=tier+1;S.coins+=RIB_COINS[tier];
       const t=tier;
-      setTimeout(()=>{addXP(RIB_XP[t]);SFX.ribbon();modal({title:'Ribbon Earned!',color:'pink',small:true,render(b){
-        const p=el('div','body-pad');const s=el('div');s.innerHTML=ribbonSvg(RIB_COL[t],t+1);s.firstChild.style.cssText='width:90px;height:110px';p.appendChild(s);
-        p.appendChild(el('p',null,RIB_NAME[t]+' ribbon for '+r.name+': '+r.tiers[t]+' '+r.what+'.'));p.appendChild(rewardRow([['coins',RIB_COINS[t]],['xp',RIB_XP[t]]]));
-        const go=el('button','go','Hooray!');go.dataset.focus='1';go.onclick=closeModal;p.appendChild(go);b.appendChild(p)}});hud()},500);
+      setTimeout(()=>{addXP(RIB_XP[t]);SFX.ribbon();confetti();modal({title:'Ribbon Earned!',color:'pink',small:true,cls:'celeS',render(b){
+        const nx=t<3?r.tiers[t+1]:0,v2=S.stats[r.stat]||0;
+        celebrate(b,{tone:['gold','white','red','blue'][t],emblem:rosetteArt(RIB_COL[t],t+1),kicker:RIB_NAME[t]+' ribbon',big:r.name,
+          sub:r.tiers[t].toLocaleString()+' '+r.what+'. '+(t<3?'Can you earn the '+RIB_NAME[t+1]+' ribbon next?':'That is the top ribbon. Legendary!'),
+          rewards:[['coins',RIB_COINS[t]],['xp',RIB_XP[t]]],progress:nx?[v2,nx,RIB_NAME[t+1]+' ribbon at '+nx.toLocaleString()+' '+r.what]:null,btn:'Hooray!'})}});hud()},500);
     }
   }
+}
+/* ---- celebration screens (Level Up, Ribbon Earned): spinning rays, a painted emblem that pops in,
+   sparkles, rewards that count up one by one, and a bar towards the next goal ---- */
+const CELE_ART={};
+function celeArt(key,w,h,fn){
+  if(CELE_ART[key])return CELE_ART[key];
+  const c=document.createElement('canvas');c.width=w*2;c.height=h*2;const prev=g;g=c.getContext('2d');g.scale(2,2);g.lineCap='round';g.lineJoin='round';
+  try{fn(w,h)}catch(e){console.error(e)}g=prev;return CELE_ART[key]=c.toDataURL();
+}
+// a prize rosette: notched tails, pleated ring, gold rim and a cream centre with the tier number
+function rosetteArt(col,n){
+  return celeArt('ros:'+col+':'+n,140,172,()=>{
+    const cx=70,cy=58,dk=shade(col,-.4),lt=shade(col,.35);
+    for(const s of[-1,1]){g.save();g.translate(cx+s*14,cy+22);g.rotate(s*.36);
+      g.beginPath();g.moveTo(-15,0);g.lineTo(15,0);g.lineTo(16,90);g.lineTo(0,76);g.lineTo(-16,90);g.closePath();
+      g.fillStyle=pvL(-16,0,16,0,[dk,lt,col,dk]);g.fill();g.strokeStyle=shade(col,-.6);g.lineWidth=1;g.stroke();
+      g.strokeStyle='rgba(255,255,255,.55)';g.lineWidth=1.2;g.beginPath();g.moveTo(-10,4);g.lineTo(-10.6,80);g.moveTo(10,4);g.lineTo(10.6,80);g.stroke();
+      g.fillStyle='rgba(0,0,0,.18)';g.fillRect(-12,0,24,8);g.restore()}
+    const N=30;for(let i=0;i<N;i++){const a0=i/N*Math.PI*2,a1=(i+1)/N*Math.PI*2;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a0)*50,cy+Math.sin(a0)*50);g.quadraticCurveTo(cx+Math.cos((a0+a1)/2)*55,cy+Math.sin((a0+a1)/2)*55,cx+Math.cos(a1)*50,cy+Math.sin(a1)*50);g.closePath();
+      g.fillStyle=i%2?shade(col,-.12):lt;g.fill()}
+    g.beginPath();g.arc(cx,cy,52,0,7);g.strokeStyle=shade(col,-.55);g.lineWidth=1;g.stroke();
+    g.fillStyle=pvR(cx,cy,52,['rgba(255,255,255,0)','rgba(255,255,255,0)','rgba(0,0,0,.22)']);g.beginPath();g.arc(cx,cy,52,0,7);g.fill();
+    g.beginPath();g.arc(cx,cy,34,0,7);g.fillStyle=pvL(cx-34,cy-34,cx+34,cy+34,['#fff3a0','#e8b020','#a8700a','#f2c53a']);g.fill();g.strokeStyle='#6a4400';g.lineWidth=1.2;g.stroke();
+    for(let i=0;i<36;i++){const a=i/36*Math.PI*2;g.beginPath();g.arc(cx+Math.cos(a)*31,cy+Math.sin(a)*31,.9,0,7);g.fillStyle='rgba(255,250,210,.8)';g.fill()}
+    g.beginPath();g.arc(cx,cy,26,0,7);g.fillStyle=pvR(cx-6,cy-8,30,['#ffffff','#fff6dc','#e8d4a8']);g.fill();g.strokeStyle='#a8700a';g.lineWidth=1;g.stroke();
+    g.font='34px "Luckiest Guy", Impact';g.textAlign='center';g.lineWidth=5;g.strokeStyle='#fffaf0';g.strokeText(n,cx,cy+12);g.fillStyle='#4a2a10';g.fillText(n,cx,cy+12);
+    g.beginPath();g.ellipse(cx-12,cy-14,10,5,-.6,0,7);g.fillStyle='rgba(255,255,255,.55)';g.fill();pvSpark(cx+30,cy-34,5);
+  });
+}
+// a bevelled gold star with the level number
+function levelStarArt(lv){
+  return celeArt('star:'+lv,150,150,()=>{
+    const cx=75,cy=78,R=68,r=30,pt=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r:R;pt.push([cx+Math.cos(a)*rr,cy+Math.sin(a)*rr])}
+    g.save();g.translate(3,5);g.beginPath();pt.forEach((q,i)=>i?g.lineTo(...q):g.moveTo(...q));g.closePath();g.fillStyle='rgba(90,50,0,.35)';g.fill();g.restore();
+    for(let i=0;i<10;i++){const a=pt[i],b=pt[(i+1)%10];g.beginPath();g.moveTo(cx,cy);g.lineTo(...a);g.lineTo(...b);g.closePath();
+      const lit=Math.cos(Math.atan2((a[1]+b[1])/2-cy,(a[0]+b[0])/2-cx)+2.3);g.fillStyle=lit>.2?(i%2?'#ffe470':'#fff1a8'):lit>-.4?(i%2?'#f2b020':'#f8c838'):(i%2?'#c88408':'#d89a10');g.fill()}
+    g.beginPath();pt.forEach((q,i)=>i?g.lineTo(...q):g.moveTo(...q));g.closePath();g.strokeStyle='#7a4a00';g.lineWidth=3;g.stroke();g.strokeStyle='rgba(255,250,200,.7)';g.lineWidth=1;g.stroke();
+    g.font=(lv>99?34:lv>9?44:52)+'px "Luckiest Guy", Impact';g.textAlign='center';g.lineWidth=7;g.strokeStyle='#7a4a00';g.strokeText(lv,cx,cy+17);g.fillStyle='#fffaf0';g.fillText(lv,cx,cy+17);
+    pvSpark(cx-30,cy-38,6);pvSpark(cx+44,cy-6,4);
+  });
+}
+function countUp(node,to,fmt,delay){
+  if(reduce){node.textContent=fmt(to);return}
+  node.textContent=fmt(0);setTimeout(()=>{const t0=performance.now(),d=Math.min(1100,350+to*2);const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);node.textContent=fmt(Math.round(to*e));if(k<1)requestAnimationFrame(step);else{node.parentNode.classList.add('done');SFX.coin()}};requestAnimationFrame(step)},delay)
+}
+function celebrate(b,o){
+  const wrap=el('div','cele '+(o.tone||'gold'));
+  const stage=el('div','cele-stage');stage.appendChild(el('div','cele-rays'));stage.appendChild(el('div','cele-glow'));
+  for(let i=0;i<9;i++){const s=el('i','cele-spark');const a=i/9*Math.PI*2+.3,d=78+(i%3)*18;s.style.cssText='left:calc(50% + '+Math.cos(a)*d+'px);top:calc(50% + '+Math.sin(a)*d*.72+'px);animation-delay:'+(i*.17).toFixed(2)+'s;--s:'+(.6+(i%3)*.25);stage.appendChild(s)}
+  const im=el('img','cele-emblem');im.src=o.emblem;im.alt='';stage.appendChild(im);wrap.appendChild(stage);
+  if(o.kicker)wrap.appendChild(el('div','cele-kicker',o.kicker));
+  wrap.appendChild(el('div','cele-big',o.big));
+  if(o.sub)wrap.appendChild(el('p','cele-sub',o.sub));
+  if(o.rewards&&o.rewards.length){const r=el('div','cele-rewards');o.rewards.forEach(([kind,val],i)=>{if(!val)return;const c=el('div','cele-rw '+kind);c.style.animationDelay=(.45+i*.18)+'s';
+      c.innerHTML=kind==='coins'?'<span class="coin"></span>':kind==='cash'?'<span class="bill">$</span>':'<span class="xpdot">XP</span>';const n=el('b');c.appendChild(n);r.appendChild(c);
+      countUp(n,val,v=>'+'+v.toLocaleString(),650+i*220)});wrap.appendChild(r)}
+  if(o.progress){const[p0,p1,label]=o.progress,pr=el('div','cele-prog'),bar=el('div','cele-bar'),fill=el('i');bar.appendChild(fill);pr.appendChild(el('div','cele-pl',label));pr.appendChild(bar);pr.appendChild(el('div','cele-pn',p0.toLocaleString()+' / '+p1.toLocaleString()));
+    const f=Math.max(.03,Math.min(1,p0/p1));if(reduce)fill.style.width=f*100+'%';else setTimeout(()=>fill.style.width=f*100+'%',900);wrap.appendChild(pr)}
+  if(o.extra)o.extra(wrap);
+  const go=el('button','go cele-go',o.btn);go.dataset.focus='1';go.onclick=()=>{SFX.click();closeModal()};wrap.appendChild(go);
+  b.appendChild(wrap);
 }
 function ribbonSvg(col,n){
   return'<svg viewBox="0 0 46 56" aria-hidden="true"><path d="M15 30l-6 22 7-4 5 6 2-22zM31 30l6 22-7-4-5 6-2-22z" fill="'+col+'" stroke="#6b3c15" stroke-width="1.5" stroke-linejoin="round"/><circle cx="23" cy="20" r="17" fill="'+col+'" stroke="#6b3c15" stroke-width="2"/><circle cx="23" cy="20" r="11" fill="#fff" stroke="#6b3c15" stroke-width="1.2" opacity=".85"/><text x="23" y="26" text-anchor="middle" font-family="Luckiest Guy, Impact" font-size="16" fill="#3a2310">'+(n||'')+'</text></svg>';
