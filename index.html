@@ -1566,6 +1566,28 @@ body header.hud .pill:hover{filter:brightness(1.03)}
 .plowchip:hover{filter:brightness(1.04)}.plowchip:active{transform:translate(-50%,-100%) scale(.95)}
 @keyframes chipIn{from{transform:translate(-50%,-80%) scale(.6);opacity:0}}
 @media (prefers-reduced-motion:reduce){.plowchip{animation:none}}
+.modesw[hidden]{display:none!important}
+.req.freereq{font-weight:800;color:#3f7a24;padding:4px 10px}
+.rib .ribimg{width:44px;height:54px;object-fit:contain;flex:none;filter:drop-shadow(0 2px 2px rgba(60,30,5,.3))}.rib.none .ribimg{filter:grayscale(1) opacity(.55)}
+
+/* landscape phones: the Market header shrinks to a slim awning, wallet beside the tabs, one row of chips */
+@media (max-height:520px) and (orientation:landscape){
+  body .sheet-head.market{min-height:38px;padding:3px 12px 6px}
+  body .sheet-head.market::after{bottom:-7px;height:8px;background-size:64px 8px}
+  body .sheet-head.market h2{font-size:17px;padding:1px 14px 2px;-webkit-text-stroke:4px #4a2810;border-radius:9px}
+  body .sheet-head.market h2::before,body .sheet-head.market h2::after{top:-8px;height:8px}
+  body .sheet-head.market .close{width:30px;height:30px;margin-top:0;font-size:14px}
+  body .sheet.market .mtop{display:flex;flex-wrap:wrap;align-items:flex-end}
+  body .sheet.market .mtabs-wrap{flex:1 1 0;min-width:0;order:1}
+  body .sheet.market .mwallet{order:2;flex-direction:column;align-items:flex-end;gap:3px;padding:4px 10px 4px 6px}
+  body .sheet.market .mpill{font-size:12px;padding:1px 8px 1px 2px}body .sheet.market .mpill .coin{width:16px;height:16px;flex-basis:16px}body .sheet.market .mpill .bill{width:20px;height:13px;flex-basis:20px;font-size:8px}
+  body .sheet.market .mchips{order:3;flex-basis:100%;padding-top:4px;padding-bottom:4px}
+  body .sheet.market .mtabs{padding:4px 8px 0}
+  body .sheet.market .mtab{min-height:40px;min-width:54px;padding:3px 6px;font-size:10px;transform:translateY(3px)}
+  body .sheet.market .mtab .mti{width:30px;height:22px}
+  body .sheet.market .mart{height:78px}body .sheet.market .mart img{width:96px;height:76px}
+  body .sheet.market .mgrid{gap:8px;padding:8px 10px 12px}
+}
 </style>
 </head>
 <body>
@@ -6428,6 +6450,8 @@ const $=id=>document.getElementById(id);
 const heldToasts=[];
 function toast(m){
   const tt=$('title');if(tt&&!tt.hidden){heldToasts.push(m);return}
+  // while the player is making their farmer (first launch), hold tips until the creator closes
+  if(mq.length&&mq[0].noClose&&/^Create Your Farmer/.test(mq[0].title)){if(!heldToasts.includes(m))heldToasts.push(m);if(!toast.wait){toast.wait=setInterval(()=>{if(!mq.length||!/^Create Your Farmer/.test(mq[0].title)){clearInterval(toast.wait);toast.wait=0;heldToasts.splice(0).forEach((x,i)=>setTimeout(()=>toast(x),400+i*900))}},400)}return}
   const el=$('toast'),s=document.createElement('span');s.textContent=m;s.className=toastKind(m);el.appendChild(s);
   while(el.children.length>(innerWidth<700?2:3))el.removeChild(el.firstChild);
   setTimeout(()=>{s.classList.add('out');setTimeout(()=>s.remove(),340)},2700);
@@ -6940,11 +6964,13 @@ function showMaker(key){
     M.recipes.forEach((r,i)=>{
       const lv=recipeLvl(r),locked=S.level<lv,row=el('div','recipe'+(locked?' locked':'')),flow=el('div','flow');
       for(const k in r.in)flow.appendChild(goodReq(k,r.in[k]));
+      // a recipe with no ingredients (the bees work for free) says so instead of showing an empty slot
+      if(!Object.keys(r.in).length)flow.appendChild(el('span','req ok freereq','Free'));
       flow.appendChild(el('span','arrow','→'));
       const out=el('span','req ok'),im=el('img');im.src=itemIcon(r.out);im.alt='';out.appendChild(im);out.appendChild(el('b',null,'×'+r.n));out.title=ITEMS[r.out].name;flow.appendChild(out);
       row.appendChild(flow);
       const ok=!locked&&q.length<mkSlots(o)&&Object.keys(r.in).every(k=>have(k)>=r.in[k]),go=el('button','go',locked?'Level '+lv:'Make');go.disabled=!ok;go.onclick=()=>makerAdd(key,i);row.appendChild(go);
-      row.appendChild(el('small',null,Object.keys(r.in).map(k=>ITEMS[k].name+' ×'+r.in[k]).join(' + ')+' → '+ITEMS[r.out].name+' ×'+r.n+' in '+fmt(Math.round(r.time*MK_UP[mkLv(o)].speed))+(ITEMS[r.out].cat==='made'?'. Sells for '+sellPrice(r.out)+' each.':'.')));
+      row.appendChild(el('small',null,(Object.keys(r.in).length?Object.keys(r.in).map(k=>ITEMS[k].name+' ×'+r.in[k]).join(' + '):'No ingredients')+' → '+ITEMS[r.out].name+' ×'+r.n+' in '+fmt(Math.round(r.time*MK_UP[mkLv(o)].speed))+(ITEMS[r.out].cat==='made'?'. Sells for '+sellPrice(r.out)+' each.':'.')));
       list.appendChild(row);
     });
     p.appendChild(list);
@@ -7816,7 +7842,7 @@ function showRibbons(){
     const g2=el('div','ribbons');
     for(const r of RIBBONS){
       const tier=S.ribbons[r.id]||0,v=S.stats[r.stat]||0,next=r.tiers[Math.min(tier,3)];
-      const c=el('div','rib');c.innerHTML=ribbonSvg(tier?RIB_COL[tier-1]:'#e5dccb',tier||'');
+      const c=el('div','rib'+(tier?'':' none')),ri=el('img','ribimg');ri.alt='';ri.src=rosetteArt(tier?RIB_COL[tier-1]:'#e5dccb',tier||'');c.appendChild(ri);
       const d=el('div');d.appendChild(el('strong',null,r.name));
       d.appendChild(el('small',null,tier>=4?'All four ribbons earned. '+v+' '+r.what+'.':(tier?RIB_NAME[tier-1]+' ribbon. ':'')+'Next: '+v+' / '+next+' '+r.what));
       const bar=el('div','pbar'),i=el('i');i.style.width=Math.min(100,v/next*100)+'%';bar.appendChild(i);d.appendChild(bar);c.appendChild(d);g2.appendChild(c);
@@ -8065,6 +8091,28 @@ addEventListener('keydown',e=>{
   if(!$('toolPop').hidden||!$('morePop').hidden)closePops();else if(mq.length&&!mq[0].noClose)closeModal();else if(placing){stopPlacing();toast('Stopped placing.')}else if(tool!=='multi')setTool('multi');
 });
 $('rotBtn').onclick=()=>{if(placing)rotatePlacing()};
+// Android Back (installed app / Play Store build): close whatever is open, one step at a time;
+// on the plain farm a first Back shows a hint and a second one within two seconds leaves the game.
+const APP_MODE=matchMedia('(display-mode: fullscreen), (display-mode: standalone), (display-mode: minimal-ui)').matches||document.referrer.startsWith('android-app://');
+function backStep(){
+  const dx=document.querySelector('.mdet-x');if(dx){dx.click();return true}
+  if(!$('toolPop').hidden||!$('morePop').hidden){closePops();return true}
+  if(mq.length){if(!mq[0].noClose){SFX.click();closeModal()}return true}
+  if(placing){stopPlacing();return true}
+  if(!$('house').hidden){leaveHouse();return true}
+  if(VIS){goHome();return true}
+  if(tool!=='multi'){setTool('multi');return true}
+  return false;
+}
+if(APP_MODE){
+  let armed=0;const guard=()=>history.pushState({fv:1},'');guard();
+  addEventListener('popstate',()=>{
+    if(!$('title').hidden){history.back();return}
+    if(backStep()){guard();return}
+    if(Date.now()-armed<2000){save();history.back();return}
+    armed=Date.now();toast('Press back again to leave Farm Village.');guard();
+  });
+}
 // the on-screen Walk / Plow switch (same setting as Settings > Tapping grass)
 // Walk: a tap on the ground only walks. Farm: plots are planted, harvested and plowed; grass walks. Plow: grass becomes new farmland.
 function renderModeSw(){const m=S&&S.tapMode||'farm';for(const[id,v]of[['modeWalk','walk'],['modeFarm','farm'],['modePlow','plow']])$(id).setAttribute('aria-pressed',String(m===v))}
@@ -8118,7 +8166,8 @@ function showSettings(){
       ins.onclick=async()=>{SFX.click();if(installEvt){installEvt.prompt();await installEvt.userChoice.catch(()=>{});installEvt=null;rerender()}else installHelp()};p.appendChild(ins)}
     const r3=el('div','setbtns'),ex=el('button','btn2','Copy save code'),im=el('button','btn2','Load save code');
     ex.onclick=()=>{SFX.click();saveCodeModal()};im.onclick=()=>{SFX.click();loadCodeModal()};r3.appendChild(ex);r3.appendChild(im);p.appendChild(r3);
-    p.appendChild(el('p','hint','Farm Village saves automatically in this browser. To move your farm to another browser, phone or the installed app, copy your save code here and load it there.'));b.appendChild(p);
+    p.appendChild(el('p','hint','Farm Village saves automatically in this browser. To move your farm to another browser, phone or the installed app, copy your save code here and load it there.'));
+    {const pv=el('p','hint');const a2=el('a',null,'Privacy policy');a2.href='privacy.html';a2.target='_blank';a2.rel='noopener';pv.appendChild(a2);p.appendChild(pv)};b.appendChild(p);
   }});
 }
 function installHelp(){
