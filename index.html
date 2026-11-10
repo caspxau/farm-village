@@ -1198,7 +1198,7 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 .sheet.market .mtabs::-webkit-scrollbar{display:none}
 .sheet.market .mtab{flex:none;scroll-snap-align:start;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:66px;min-height:56px;margin:0 0 -2px;padding:6px 8px 6px;
   border:1.5px solid #b48a52;border-bottom:0;border-radius:13px 13px 0 0;background:linear-gradient(#e6cb98,#d2ae73);color:#5a3f24;font-size:11.5px;font-weight:800;transform:translateY(5px);transition:transform .25s cubic-bezier(.34,1.6,.5,1),background .2s}
-.sheet.market .mtab svg{width:26px;height:26px;filter:drop-shadow(0 1px 0 rgba(0,0,0,.15))}
+.sheet.market .mtab .mti{width:46px;height:36px;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(60,35,10,.3))}
 .sheet.market .mtab:hover{transform:translateY(2px)}
 .sheet.market .mtab[aria-selected="true"]{transform:none;z-index:1;padding-bottom:8px;background:linear-gradient(#fffaf0,#f8ecd2);border-color:#c9a46a;color:#3a2310;box-shadow:0 -4px 8px rgba(80,50,10,.12)}
 .mtab .mdot{position:absolute;top:4px;right:6px;width:10px;height:10px;border-radius:50%;background:#e0352b;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
@@ -4607,7 +4607,7 @@ function drawObj(x,y,o,now,part){
     if(reduce||ICON_MODE)blit(ts,x,y);
     else{// trees lean gently in the breeze, each on its own rhythm; the trunk base stays put
       const[bx,by]=P(x+.5,y+.5),k=Math.sin(now/1700+x*1.3+y*.9)*.02;g.save();g.translate(bx,by);g.transform(1,0,-k,1,0,0);g.translate(-bx,-by);blit(ts,x,y);g.restore()}
-    if(ready){const[px,py]=P(x+.5,y+.5);bubbleWrap(px+20,py-56,11,'ready',now,px*.01,()=>drawGood('t_'+o.id,0,.6,.74),1)}
+    if(ready&&!ICON_BARE){const[px,py]=P(x+.5,y+.5);bubbleWrap(px+20,py-56,11,'ready',now,px*.01,()=>drawGood('t_'+o.id,0,.6,.74),1)}
     return;
   }
   if(o.k==='deco'){
@@ -7621,7 +7621,7 @@ $('fuelchip').onclick=()=>{SFX.click();refuel(false)};
 $('vbHome').onclick=goHome;
 
 /* ================= market ================= */
-const ICONS={};let ICON_MODE=false;
+const ICONS={};let ICON_MODE=false,ICON_BARE=false;
 // Market art is drawn at twice the size, then cropped to what was painted so it fills the card.
 const ICON_R=2;
 function cropIcon(c,W2,H2,pad,maxUp){
@@ -7656,26 +7656,26 @@ function seedPacket(id){
   g.restore();
   const pc2=prodCanvas(id);if(pc2)g.drawImage(pc2,118,64,118,118);
 }
-function renderIcon(cat,id,lv){
+function renderIcon(cat,id,lv,bare){
   const R=ICON_R,c=document.createElement('canvas');c.width=240*R;c.height=200*R;
-  const prev=g;g=c.getContext('2d');const now=Date.now();ICON_MODE=true;
+  const prev=g;g=c.getContext('2d');const now=Date.now();ICON_MODE=true;ICON_BARE=!!bare;
   try{
   const tall=cat==='trees'||(cat==='decor'&&['windmill','silo','balloon','scarecrow','lamp','arbor','towerclock'].includes(id));
   const big=(cat==='decor'&&DECOR[id].size===2)||cat==='homes'||cat==='buildings',pen=cat==='homes';
   const sc=pen?.9:big?1.25:tall?1.6:2.2;g.setTransform(sc*R,0,0,sc*R,120*R,(pen?72:big?70:tall?122:96)*R);
   const tf=NATURAL?grassPat():'#7cc63e',ts=NATURAL?'rgba(52,74,26,.35)':'#5d9a2c';
   if(cat==='seeds'){g.setTransform(R,0,0,R,0,0);seedPacket(id)}
-  else if(cat==='farm'){g.setTransform(2*R,0,0,2*R,120*R,96*R);poly(quad(0,0),tf,ts,1);drawFarmIcon(id,now)}
+  else if(cat==='farm'){g.setTransform(2*R,0,0,2*R,120*R,96*R);if(!bare)poly(quad(0,0),tf,ts,1);drawFarmIcon(id,now)}
   else{
-    if(cat==='animals'||cat==='trees'){ICON_PATCH=cat==='animals'?({cow:25,horse:27,llama:24,goat:22,pig:22,sheep:22}[id]||18):26;iconPatch(tf)}
-    else poly(pen?[P(0,0),P(3,0),P(3,3),P(0,3)]:big?[P(0,0),P(2,0),P(2,2),P(0,2)]:quad(0,0),tf,ts,1);
+    if(cat==='animals'||cat==='trees'){ICON_PATCH=cat==='animals'?({cow:25,horse:27,llama:24,goat:22,pig:22,sheep:22}[id]||18):26;if(!bare)iconPatch(tf)}
+    else if(!bare)poly(pen?[P(0,0),P(3,0),P(3,3),P(0,3)]:big?[P(0,0),P(2,0),P(2,2),P(0,2)]:quad(0,0),tf,ts,1);
     if(cat==='animals')drawObj(0,0,{k:'animal',id,t:now-1e9},now);
     else if(cat==='trees')drawObj(0,0,{k:'tree',id,t:now-1e9},now);
     else if(cat==='homes'){drawHome3(0,0,id,lv||1);const G=homeGeo(id),sc2=SPEC_SC[id]||1;for(const[u,v]of[[1.2,2.2],[2.1,1.9]]){const[ax,ay]=P(u,v);g.save();g.translate(ax,ay);g.scale(sc2,sc2);ANIMAL_DRAW[id](0,0,0,0);g.restore()}drawHomeFront(0,0,id)}
     else if(cat==='buildings')drawMaker(0,0,id);
     else drawObj(0,0,{k:'deco',id},now);
   }
-  }finally{g=prev;ICON_MODE=false}
+  }finally{g=prev;ICON_MODE=false;ICON_BARE=false}
   return cropIcon(c,240*R,200*R,6*R,cat==='seeds'?1:2.2).toDataURL();
 }
 function drawFarmIcon(id,now){
@@ -7706,16 +7706,9 @@ $('openMarket').onclick=()=>{SFX.click();openMarket(tutOn()&&TUT[S.tut].btn==='o
 /* ---- Market (design v4): wallet, folder tabs with icons, sort and filter chips, tiered cards, item detail sheet ----
    Only presentation changes here: prices, unlock levels and what each button does are the same as before. */
 const MCATS=[['seeds','Seeds'],['trees','Trees'],['animals','Animals'],['homes','Homes'],['decor','Decorations'],['buildings','Buildings'],['farm','Farm'],['specials','Specials']];
-const MTAB_ICON={
-  seeds:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8l2-4h6l2 4v11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" fill="#ead6a6" stroke="#6b4a26" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 4l1.5 2.5L12 4l1.5 2.5L15 4" fill="none" stroke="#6b4a26" stroke-width="1.1"/><ellipse cx="12" cy="14" rx="3" ry="3.6" fill="#7fb44e" stroke="#3f6a24"/><path d="M12 11v6" stroke="#3f6a24" stroke-width=".9"/></svg>',
-  trees:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="11" y="14" width="2.6" height="7" rx="1" fill="#8a5a32" stroke="#4e2f14" stroke-width=".8"/><circle cx="12.3" cy="9.5" r="6.6" fill="#5fa043" stroke="#2f5a22" stroke-width="1.3"/><circle cx="9.5" cy="9" r="1.3" fill="#e0352b"/><circle cx="14.6" cy="11.6" r="1.3" fill="#e0352b"/><circle cx="13.6" cy="6.8" r="1.2" fill="#e0352b"/></svg>',
-  animals:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8 3 6.5M18 8l3-1.5" stroke="#3a2a1a" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="12" cy="12" rx="7" ry="7.5" fill="#fff" stroke="#3a2a1a" stroke-width="1.3"/><ellipse cx="9" cy="8.8" rx="2.4" ry="1.8" fill="#3a2a1a"/><ellipse cx="12" cy="16.2" rx="4.6" ry="3.2" fill="#f4a6b0" stroke="#3a2a1a" stroke-width="1.1"/><circle cx="10.4" cy="16.3" r=".8" fill="#3a2a1a"/><circle cx="13.6" cy="16.3" r=".8" fill="#3a2a1a"/><circle cx="9.6" cy="11.8" r=".95" fill="#222"/><circle cx="14.4" cy="11.8" r=".95" fill="#222"/></svg>',
-  homes:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6.5 8 6.5v9H4z" fill="#e8b45a" stroke="#6b4a26" stroke-width="1.4" stroke-linejoin="round"/><path d="M2.8 11.6 12 4l9.2 7.6" fill="none" stroke="#b8402f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="10" y="14" width="4" height="6" fill="#6b4a26"/></svg>',
-  decor:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14V9" stroke="#3f8a2c" stroke-width="1.4"/><path d="M12 11c-2.5 0-3.5-1.5-3.5-3 2 0 3.5 1 3.5 3zM12 12.2c2.5 0 3.5-1.5 3.5-3-2 0-3.5 1-3.5 3z" fill="#5fa043"/><circle cx="12" cy="6.5" r="2.7" fill="#f2c94c" stroke="#b8862a"/><circle cx="12" cy="6.5" r="1" fill="#c96a2a"/><path d="M7 14h10l-1.4 7H8.4z" fill="#c9653a" stroke="#6b2f16" stroke-width="1.3" stroke-linejoin="round"/></svg>',
-  buildings:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5.5" y="7" width="7" height="14" fill="#d6d2ca" stroke="#5a564f" stroke-width="1.3"/><path d="M5.5 7a3.5 3.5 0 0 1 7 0z" fill="#9aa1a8" stroke="#5a564f" stroke-width="1.3"/><path d="M5.5 11h7M5.5 15h7" stroke="#8a867e" stroke-width=".8"/><path d="M12.5 12.5l4.5-3.5 4.5 3.5V21h-9z" fill="#c8453a" stroke="#6b1c14" stroke-width="1.3" stroke-linejoin="round"/><path d="M15.5 21v-4h3v4" fill="#fff4dc" stroke="#6b1c14" stroke-width=".9"/></svg>',
-  farm:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5h18M3 16.5h18" stroke="#a8743e" stroke-width="2.2"/><path d="M5 21V8l1.5-2L8 8v13zM11 21V8l1.5-2L14 8v13zM17 21V8l1.5-2L20 8v13z" fill="#ecca92" stroke="#6b4a26" stroke-width="1.2" stroke-linejoin="round"/></svg>',
-  specials:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.4l-5.2 2.8 1-5.9L3.5 9.2l5.9-.8z" fill="#ffd23f" stroke="#9a6400" stroke-width="1.3" stroke-linejoin="round"/><path d="M10.4 8.6l1.6-3.2" stroke="#fff7c0" stroke-width="1.2" stroke-linecap="round"/></svg>'
-};
+// each tab shows a painted item from its own shelf, drawn with the same art as the cards
+const MTAB_PICK={seeds:['seeds','wheat'],trees:['trees','apple'],animals:['animals','cow'],homes:['homes','chicken'],decor:['decor','flowerbed'],buildings:['buildings','kitchen'],farm:['farm','tractor'],specials:['decor','balloon']};
+function mtabIcon(k){const[c,id]=MTAB_PICK[k],ik='tab:'+c+':'+id;if(!ICONS[ik])ICONS[ik]=renderIcon(c,id,0,true);const im=el('img','mti');im.alt='';im.src=ICONS[ik];return im}
 const MI={
   clock:'<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.3" fill="#fff" stroke="#5a4632" stroke-width="1.5"/><path d="M8 4.4V8l2.4 1.6" fill="none" stroke="#5a4632" stroke-width="1.5" stroke-linecap="round"/></svg>',
   xp:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.2l2 4.2 4.5.6-3.3 3.1.8 4.5L8 11.4l-4 2.2.8-4.5L1.5 6l4.5-.6z" fill="#5fa8e8" stroke="#1f5a9a" stroke-width="1.1" stroke-linejoin="round"/></svg>',
@@ -7759,7 +7752,7 @@ function renderShop(body){
   const tw=el('div','mtabs-wrap'),tabs=el('div','tabs mtabs');tabs.setAttribute('role','tablist');let selTab=null;
   for(const[k,label]of MCATS){
     const t=el('button','tab mtab');t.setAttribute('role','tab');t.setAttribute('aria-selected',String(k===marketCat));
-    t.innerHTML=MTAB_ICON[k];t.appendChild(el('span',null,label));
+    t.appendChild(mtabIcon(k));t.appendChild(el('span',null,label));
     if(tabHasNew(k)){const dt=el('i','mdot');dt.setAttribute('aria-label','New items');t.appendChild(dt)}
     t.onclick=()=>shopCat(k);if(k===marketCat){t.dataset.focus='1';selTab=t}tabs.appendChild(t);
   }
