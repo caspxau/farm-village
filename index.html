@@ -1506,6 +1506,34 @@ body:has(#modal:not([hidden])) .toast,body:has(#house:not([hidden])) .toast{top:
 @keyframes celeShine{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
 @media (prefers-reduced-motion:reduce){.cele *,.sheet.celeS .sheet-head::after{animation:none!important}.cele-spark{transform:scale(.7)}}
 @media (max-height:520px) and (orientation:landscape){.cele-stage{height:120px}.cele-emblem{height:110px}.cele-big{font-size:26px}.cele-rays{width:280px;height:280px;margin:-140px 0 0 -140px}}
+
+/* compact popups: every sheet is smaller on laptops and desktops; the celebration screens are tighter everywhere */
+@media (min-width:641px) and (min-height:521px){
+  body .sheet{width:min(680px,100%);max-height:min(540px,100%)}
+  body .sheet.wide{width:min(800px,100%);max-height:min(600px,100%)}
+  body .sheet.small{width:min(340px,100%)}
+  body .sheet-head{min-height:44px;padding:5px 12px}
+  body .sheet-head h2{font-size:22px}
+  body .sheet .body-pad{padding:12px 14px}
+  body .sheet .go{font-size:17px;padding:9px 18px}
+}
+.cele{padding:2px 12px 12px}
+.cele::before{height:180px}
+.cele-stage{height:128px}
+.cele-emblem{height:112px}
+.cele-glow{width:110px;height:110px}
+.cele-rays{width:280px;height:280px;margin:-140px 0 0 -140px}
+.cele-kicker{font-size:10px;padding:2px 10px}
+.cele-big{font-size:26px;-webkit-text-stroke:1.5px var(--ink);text-shadow:0 3px 0 var(--ink),0 4px 8px rgba(0,0,0,.2);margin:5px 0 0}
+.cele-sub{font-size:13px;margin:4px auto 8px}
+.cele-rewards{gap:8px;margin:4px 0 10px}
+.cele-rw{font-size:15px;padding:4px 10px 4px 6px;border-radius:11px}
+.cele-rw .coin{width:20px;height:20px}.cele-rw .xpdot{width:22px;height:22px;font-size:9px}
+.cele-prog{max-width:260px;margin-bottom:10px}.cele-pl{font-size:11px}.cele-pn{font-size:10px}.cele-bar{height:10px}
+.cele .unlocks{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px}
+.cele .unlocks img{width:52px}.cele .unl{font-size:10px;border-width:2px}
+.cele .hint{font-size:12px;padding:6px 8px}
+.cele-go{min-width:150px;font-size:17px}
 </style>
 </head>
 <body>
