@@ -1555,6 +1555,17 @@ body header.hud .fuelpill img.fuelico{width:28px;height:28px;object-fit:contain;
 body header.hud .pill .plus{background:linear-gradient(#8fd06a,#4e8a3a)!important;border:1.5px solid #2f5e22!important;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 1px 0 rgba(0,0,0,.3)!important}
 body header.hud .pill:hover{filter:brightness(1.03)}
 @media (max-width:640px){body header.hud .pill b{font-size:16px;padding-top:2px}body header.hud .fuelpill img.fuelico{width:20px;height:20px}body header.hud .fuelpill .fuelbar{width:26px}body header.hud .fuelpill b{display:none}body header.hud .xpbox{min-width:78px!important;flex:1 1 78px}body header.hud .pill.coins{padding-right:8px}}
+
+.plowchip{position:fixed;z-index:30;transform:translate(-50%,-100%);display:flex;align-items:center;gap:6px;padding:5px 10px 5px 6px;border-radius:99px;
+  background:linear-gradient(#fffdf6,#f3e2bd);border:2px solid #c9a46a;box-shadow:inset 0 2px 0 #fff,0 3px 0 #a8824a,0 8px 16px rgba(40,20,5,.3);
+  font:800 14px var(--f-body);color:#3a2310;cursor:pointer;animation:chipIn .22s cubic-bezier(.2,1.5,.4,1)}
+.plowchip svg{width:24px;height:24px}
+.plowchip em{font-style:normal;display:flex;align-items:center;gap:3px;padding:1px 7px 1px 3px;border-radius:99px;background:#fff4d4;border:1px solid #e0c48a;font-size:12px}
+.plowchip em .coin{width:16px;height:16px;flex-basis:16px}
+.plowchip::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-6px;border:6px solid transparent;border-top-color:#c9a46a;border-bottom:0}
+.plowchip:hover{filter:brightness(1.04)}.plowchip:active{transform:translate(-50%,-100%) scale(.95)}
+@keyframes chipIn{from{transform:translate(-50%,-80%) scale(.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){.plowchip{animation:none}}
 </style>
 </head>
 <body>
@@ -1649,7 +1660,7 @@ body header.hud .pill:hover{filter:brightness(1.03)}
   </div>
 </div>
 <div class="rightcol" id="rightCol">
-<div class="modesw" id="modeSw" role="group" aria-label="What a tap does: walk, farm or plow">
+<div class="modesw" id="modeSw" hidden role="group" aria-label="What a tap does: walk, farm or plow">
   <button id="modeWalk" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2.4" fill="#f2c6a0" stroke="#6b3c15" stroke-width="1.6"/><path d="M12 8l-3 5 3 2-1 6M12 8l3 4 3 1M12 8l1 5 3 3 1 5M9 13l-3 1" fill="none" stroke="#6b3c15" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Walk</span></button>
   <button id="modeFarm" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21V11a2 2 0 0 1 4 0V8a2 2 0 0 1 4 0v2a2 2 0 0 1 4 0v5c0 4-3 6-6 6z" fill="#ffd9b0" stroke="#6b3c15" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 14l-2-2a2 2 0 0 0-3 3l5 6" fill="#ffd9b0" stroke="#6b3c15" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Farm</span></button>
   <button id="modePlow" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3L8 16" stroke="#a8642a" stroke-width="3" stroke-linecap="round"/><path d="M5 13l6 4-2 3-6-4z" fill="#c9ced2" stroke="#3a4650" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 21h18" stroke="#8b5a2e" stroke-width="2.4" stroke-linecap="round"/></svg><span>Plow</span></button>
@@ -5241,6 +5252,7 @@ function drawTapTip(){
 /* ---- hold and drag over plots to plant or harvest them all ---- */
 let SWEEP=null;
 const SWEEP_ICON={
+  plow:'<svg viewBox="0 0 48 48"><path d="M34 4L18 30" stroke="#8a5530" stroke-width="5" stroke-linecap="round"/><path d="M10 28l14 4-3 9c-5 1-10-1-13-4z" fill="#cfd6dc" stroke="#4a5058" stroke-width="2" stroke-linejoin="round"/></svg>',
   plant:'<svg viewBox="0 0 48 48"><path d="M14 16c0-4 4-6 10-6s10 2 10 6l3 22c0 4-6 6-13 6s-13-2-13-6z" fill="#d8b878" stroke="#6b4a1f" stroke-width="2"/><path d="M15 16c3 2 15 2 18 0" fill="none" stroke="#8a6a32" stroke-width="2"/><path d="M18 10c2-3 10-3 12 0" fill="none" stroke="#6b4a1f" stroke-width="2.5"/><circle cx="21" cy="29" r="2.4" fill="#7a5a2a"/><circle cx="27" cy="33" r="2.4" fill="#7a5a2a"/><circle cx="24" cy="25" r="2" fill="#7a5a2a"/><path d="M24 36c0-5 2-7 5-8" stroke="#3f9a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="30" cy="27" rx="3.5" ry="2" fill="#5bbf3a" transform="rotate(-30 30 27)"/></svg>',
   harvest:'<svg viewBox="0 0 48 48"><path d="M10 14c6-10 26-10 30 4-6-6-18-7-26 2z" fill="#cfd6dc" stroke="#4a5058" stroke-width="2" stroke-linejoin="round"/><path d="M14 20l-5 22" stroke="#8a5530" stroke-width="5" stroke-linecap="round"/><path d="M14 20l-5 22" stroke="#b07a48" stroke-width="2" stroke-linecap="round"/><path d="M15 12c6-5 16-5 21 1" fill="none" stroke="#fff" stroke-width="1.5" opacity=".7"/></svg>'
 };
@@ -5251,7 +5263,7 @@ function sweepStart(kind,cx,cy){
 function sweepMove(cx,cy){
   if(!SWEEP)return;SWEEP.el.style.transform=`translate(${cx-22}px,${cy-62}px) rotate(${SWEEP.kind==='harvest'?(-20+Math.sin(performance.now()/90)*14):0}deg)`;
   const[hx,hy]=tileAt(cx,cy),k=hx+','+hy;if(SWEEP.set.has(k)||!inGrid(hx,hy))return;
-  const kind=planAt(hx,hy),want=SWEEP.kind==='harvest'?(kind==='harvest'||kind==='clear'):kind==='plant';if(!want)return;
+  const kind=planAt(hx,hy,SWEEP.kind==='plow'?'plow':undefined),want=SWEEP.kind==='harvest'?(kind==='harvest'||kind==='clear'):SWEEP.kind==='plow'?(kind==='plow'&&!occ[k]):kind==='plant';if(!want)return;
   SWEEP.set.add(k);
   if(kind==='harvest'&&harvestBlocked(hx,hy))return;
   // owned machines still do the work while sweeping: the seeder or harvester takes the whole area under the finger
@@ -7539,7 +7551,7 @@ function clickMulti(hx,hy){
   }
   if(S.tapMode==='walk'&&tool==='multi'){walkTo(hx,hy);return}
   const kind=planAt(hx,hy);
-  if(kind==='walk'){walkTo(hx,hy);return}
+  if(kind==='walk'){walkTo(hx,hy);if(tool==='multi'&&!VIS&&inGrid(hx,hy))plowChip(hx,hy);return}
   if(tool==='plow'&&kind!=='plow'){toast('The hoe turns grass into new farmland. Switch to the Multi-tool to plant and harvest.');return}
   if(!kind){
     const e=effective(hx,hy);
@@ -7571,6 +7583,17 @@ function queueKind(kind,tiles,vehicle){
   enqueue(job);hud();return true;
 }
 // Free roam: tapping empty grass sends the farmer for a walk there.
+// tapping grass walks there and offers a one-tap "Plow here" on that tile
+let PLOW_CHIP=null;
+function hidePlowChip(){if(PLOW_CHIP){PLOW_CHIP.el.remove();clearTimeout(PLOW_CHIP.t);PLOW_CHIP=null}}
+function plowChip(x,y){
+  hidePlowChip();if(S.level<1)return;
+  const b=el('button','plowchip');b.innerHTML=SWEEP_ICON.plow+'<span>Plow here</span><em><span class="coin"></span>'+NEW_PLOT+'</em>';b.setAttribute('aria-label','Plow this tile into new farmland for '+NEW_PLOT+' coins');
+  const place=()=>{const[wx,wy]=P(x+.5,y+.5);b.style.left=(wx*cam.z+cam.x)+'px';b.style.top=(wy*cam.z+cam.y-14)+'px'};place();
+  b.onpointerdown=e=>e.stopPropagation();
+  b.onclick=e=>{e.stopPropagation();hidePlowChip();if(occ[x+','+y])return;if(queueKind('plow',[[x,y]],null)){SFX.plow&&SFX.plow()}};
+  document.body.appendChild(b);PLOW_CHIP={el:b,x,y,place,t:setTimeout(hidePlowChip,3500)};
+}
 function walkTo(x,y){
   for(let i=queue.length-1;i>=0;i--)if(queue[i].kind==='walk')queue.splice(i,1);
   walkMark={x,y,t:performance.now()};
@@ -7943,13 +7966,13 @@ const VEH={tractor:1,seeder:1,harvester:1};
 let down=null,pinch=null,lastPtr={x:innerWidth/2,y:innerHeight/2},lastMove={x:0,y:0};const pointers=new Map();
 function tileAt(cx,cy){const wx=(cx-cam.x)/cam.z,wy=(cy-cam.y)/cam.z,a=wx/(W/2),b=wy/(H/2);return[Math.floor((a+b)/2),Math.floor((b-a)/2)]}
 cv.addEventListener('pointerdown',e=>{
-  lastMove={x:e.clientX,y:e.clientY};
+  lastMove={x:e.clientX,y:e.clientY};hidePlowChip();
   const a=ac();if(a&&a.state==='suspended')a.resume();
   cv.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(pointers.size===1){down={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y,moved:false};
     // press and hold on a plot that can be planted or harvested, then drag across the field
-    if(!placing&&!VIS&&tool==='multi'&&S.tapMode!=='walk'&&!tutLocked()){const[hx,hy]=tileAt(e.clientX,e.clientY),o=S.tiles[occ[hx+','+hy]];const kind=o&&o.k==='plot'?planAt(hx,hy):null;
-      if(kind==='plant'||kind==='harvest'||kind==='clear'){const d0=down;d0.hold=setTimeout(()=>{if(down===d0&&!d0.moved&&pointers.size===1){d0.sweep=true;sweepStart(kind,lastMove.x,lastMove.y)}},230)}}}
+    if(!placing&&!VIS&&tool==='multi'&&S.tapMode!=='walk'&&!tutLocked()){const[hx,hy]=tileAt(e.clientX,e.clientY),o=S.tiles[occ[hx+','+hy]];const kind=o&&o.k==='plot'?planAt(hx,hy):(!o&&inGrid(hx,hy)&&planAt(hx,hy,'plow')==='plow'?'plow':null);
+      if(kind==='plant'||kind==='harvest'||kind==='clear'||kind==='plow'){const d0=down;d0.hold=setTimeout(()=>{if(down===d0&&!d0.moved&&pointers.size===1){d0.sweep=true;sweepStart(kind,lastMove.x,lastMove.y)}},230)}}}
   else{down=null;const[p1,p2]=[...pointers.values()];pinch={d:Math.hypot(p1.x-p2.x,p1.y-p2.y)||1,z:cam.z,mx:(p1.x+p2.x)/2,my:(p1.y+p2.y)/2}}
 });
 cv.addEventListener('pointermove',e=>{
@@ -8081,7 +8104,6 @@ function showSettings(){
     seg('Art style',[['natural','Natural'],['cartoon','Cartoon']],NATURAL?'natural':'cartoon',v=>{setArt(v);toast(v==='natural'?'Natural look: soft light and painted textures.':'Cartoon look: bold outlines.')});
     seg('Graphics',[['auto','Auto'],['high','Sharpest'],['smooth','Smoothest']],gfxPref(),v=>{try{localStorage.setItem(GFX_KEY,v)}catch(e){}QL=v==='smooth'?0:2;applyQuality()});
     seg('Machines',[['on','Use by themselves'],['off','By hand']],S.autoVeh===false?'off':'on',v=>{S.autoVeh=v!=='off'});
-    seg('Tapping the ground',[['walk','Walk'],['farm','Farm'],['plow','Plow']],S.tapMode||'farm',v=>{S.tapMode=v;renderModeSw()});
     if(S.pet){const r=el('div','setrow');r.appendChild(el('span',null,'Pet name'));const nb=el('button','btn2',S.pet.name||PET_NAME[S.pet.kind]);nb.setAttribute('aria-label','Rename your pet');nb.onclick=()=>{SFX.click();renamePet()};r.appendChild(nb);p.appendChild(r)}
     toggle('Music',S.music,()=>{S.music=!S.music;wakeAudio();musicSync()});
     slider('Music volume',S.musicVol??1,v=>{S.musicVol=v;const a=AC;if(a&&MUSIC.master&&MUSIC.on)MUSIC.master.gain.setTargetAtTime(.55*v,a.currentTime,.1)});
@@ -8991,7 +9013,7 @@ const TUT=[
   {txt:'Click the plowed plot to plant wheat.',done:()=>tst('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
   {txt:'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.',done:()=>tst('seedPick')>=1,btn:'openMarket'},
   {txt:'Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.',done:()=>tst('plant')>=2,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
-  {txt:'This switch decides what a tap does. Walk only walks, Farm plants and harvests, Plow makes new farmland. Tap Walk to try it, then Farm to go back.',done:()=>tst('modeSwitch')>=2&&S.tapMode==='farm',btn:'modeSw'},
+  {txt:'Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.',done:()=>tst('plow')>=2},
   {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow','almost'].includes(cropState(o,Date.now()).st)},
   {txt:'A chicken laid an egg. Click it to collect.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
   {txt:'Now that chicken is hungry. Click it to give it feed.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
@@ -9844,7 +9866,7 @@ $('needPill').onclick=()=>{if(VIS)return;enterHouse()};
 /* ================= boot ================= */
 function start(data){
   S=norm(valid(data&&data.S)?data.S:(load()||fresh()));
-  if(S.size===24)S.size=25;N=S.size;migrateHomes();
+  if(S.size===24)S.size=25;N=S.size;migrateHomes();S.tapMode='farm';
   // an old bug let upgrades go through without enough coins or materials; never keep a negative balance
   if(S.coins<0)S.coins=0;if(S.mats)for(const k in S.mats)if(S.mats[k]<0)S.mats[k]=0;
   for(const k in S.tiles){const o=S.tiles[k];if(o.k==='bld'){farmer.x=+k.split(',')[0]+2.4;farmer.y=+k.split(',')[1]+2.6;break}}
