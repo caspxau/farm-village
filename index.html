@@ -1534,6 +1534,27 @@ body:has(#modal:not([hidden])) .toast,body:has(#house:not([hidden])) .toast{top:
 .cele .unlocks img{width:52px}.cele .unl{font-size:10px;border-width:2px}
 .cele .hint{font-size:12px;padding:6px 8px}
 .cele-go{min-width:150px;font-size:17px}
+
+/* ---- top bar, warm theme: a wooden rail holding cream parchment slots, like the Market and popups ---- */
+body header.hud{background:linear-gradient(rgba(255,240,210,.10),rgba(0,0,0,.08)),repeating-linear-gradient(90deg,rgba(80,45,15,.08) 0 2px,transparent 2px 9px),linear-gradient(#b07a44,#8a5a2e 55%,#6e4522);
+  border:2px solid #4a2a10;border-radius:22px;box-shadow:inset 0 2px 0 rgba(255,225,180,.45),inset 0 -3px 0 rgba(40,20,5,.35),0 4px 0 #3a200a,0 10px 22px rgba(30,15,5,.35)}
+body header.hud .pill,body header.hud .xpbox{background:linear-gradient(#fffdf6,#f6e8c8 60%,#ecd6a6)!important;border:2px solid #c9a46a!important;
+  box-shadow:inset 0 2px 0 #fff,inset 0 -2px 0 rgba(160,110,40,.18),0 2px 0 rgba(50,25,5,.45)!important;color:#3a2310}
+body header.hud .pill b{color:#3a2310;font-family:"Luckiest Guy",Impact,sans-serif;font-weight:400;letter-spacing:.5px;font-size:21px;text-shadow:0 1px 0 #fff;padding-top:3px}
+body header.hud .xpbar{background:#e2cfa6!important;border:1.5px solid #b8925a!important;box-shadow:inset 0 2px 3px rgba(90,55,15,.3)!important}
+body header.hud .xpbar i{background:linear-gradient(#ffe68a,#f6bf32 55%,#e09a14)!important;box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -2px 0 rgba(150,90,0,.25)}
+body header.hud .xptext{color:#3a2310!important;text-shadow:0 1px 0 rgba(255,255,255,.85),0 0 3px rgba(255,255,255,.8)!important;font-weight:800}
+body header.hud .xpbox .xplabel,body header.hud .xpbox .xplabel span{color:#7a5a30!important;opacity:1!important;text-shadow:0 1px 0 #fff}body header.hud .xpbox .xplabel b{color:#c06a00!important}
+body header.hud .star{filter:drop-shadow(0 3px 0 rgba(60,30,5,.45)) drop-shadow(0 0 6px rgba(255,220,120,.55))}
+body header.hud .star span{color:#fffaf0;-webkit-text-stroke:1.5px #7a4a00;paint-order:stroke fill;font-family:"Luckiest Guy",Impact,sans-serif;font-weight:400;text-shadow:0 2px 0 #7a4a00}
+body header.hud .wxchip b{color:#3a2310}body header.hud .wxchip small{color:#7a5a30}
+body header.hud .fuelpill span{color:#b8700a}
+body header.hud .fuelpill .fuelbar{background:#e2cfa6!important;box-shadow:inset 0 1px 2px rgba(90,55,15,.35);border:1px solid #b8925a!important}
+body header.hud .fuelpill .fuelbar i{background:linear-gradient(#ffb05a,#e0452b)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+body header.hud .fuelpill img.fuelico{width:28px;height:28px;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(60,30,5,.35))}
+body header.hud .pill .plus{background:linear-gradient(#8fd06a,#4e8a3a)!important;border:1.5px solid #2f5e22!important;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 1px 0 rgba(0,0,0,.3)!important}
+body header.hud .pill:hover{filter:brightness(1.03)}
+@media (max-width:640px){body header.hud .pill b{font-size:16px;padding-top:2px}body header.hud .fuelpill img.fuelico{width:20px;height:20px}body header.hud .fuelpill .fuelbar{width:26px}body header.hud .fuelpill b{display:none}body header.hud .xpbox{min-width:78px!important;flex:1 1 78px}body header.hud .pill.coins{padding-right:8px}}
 </style>
 </head>
 <body>
@@ -1552,7 +1573,7 @@ body:has(#modal:not([hidden])) .toast,body:has(#house:not([hidden])) .toast{top:
   <div class="pill coins" title="Coins"><span class="coin"></span><b id="coins">0</b></div>
   <div class="pill cashp" title="Farm Cash"><span class="bill">$</span><b id="cash">0</b><button class="plus" id="cashPlus" aria-label="Spend Farm Cash in the market">+</button></div>
   <button class="pill wxchip" id="wxchip" aria-label="Season guide"></button>
-<button class="pill fuelpill" id="fuelchip" hidden aria-label="Fuel tank: refuel with diesel from the barn"><svg viewBox="0 0 32 32" aria-hidden="true" class="fuelico"><defs><linearGradient id="fcg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f26a4a"/><stop offset=".45" stop-color="#d9402f"/><stop offset="1" stop-color="#8f1f16"/></linearGradient></defs><path d="M8 7h9l7 6v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z" fill="url(#fcg)" stroke="#5a120c" stroke-width="1.3"/><path d="M9.5 7V4.5h5V7" fill="none" stroke="#5a120c" stroke-width="1.6"/><path d="M19 9l4-5 3 2.4-3.6 4.6" fill="#c4ccd4" stroke="#4a5058" stroke-width="1.1"/><path d="M9 13l11 11M20 13L9 24" stroke="#8f1f16" stroke-width="2" opacity=".7"/><rect x="8.6" y="12" width="12" height="13" rx="1.5" fill="none" stroke="#ff9a7a" stroke-width=".8" opacity=".6"/><path d="M8 9.5h1.6v16H8z" fill="#fff" opacity=".35"/></svg><span id="fuellabel">Fuel</span><b id="fueltext">50 / 50</b><div class="fuelbar"><i id="fuelfill"></i></div></button>
+<button class="pill fuelpill" id="fuelchip" hidden aria-label="Fuel tank: refuel with diesel from the barn"><img class="fuelico" alt="" id="fuelimg"><span id="fuellabel">Fuel</span><b id="fueltext">50 / 50</b><div class="fuelbar"><i id="fuelfill"></i></div></button>
 </header>
 
 <div class="toast" id="toast" aria-live="polite"></div>
@@ -8147,6 +8168,7 @@ function showNeighbors(){
     b.appendChild(w);
   }});
 }
+try{$('fuelimg').src=itemIcon('diesel')}catch(e){}
 $('fuelchip').onclick=()=>{SFX.click();refuel(false)};
 $('vbHome').onclick=goHome;
 
