@@ -2543,7 +2543,7 @@ function tone(f,d,type,vol,delay,slide){
   if(!S||!S.sound)return;const a=ac();if(!a||a.state!=='running')return;vol=(vol||.12)*(S.sfxVol??1);
   const t=a.currentTime+(delay||0),o=a.createOscillator(),gn=a.createGain();
   o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(slide,t+d);
-  gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(vol||.12,t+.01);gn.gain.exponentialRampToValueAtTime(.0001,t+d);
+  gn.gain.value=0;gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(vol||.12,t+.01);gn.gain.exponentialRampToValueAtTime(.0001,t+d);
   o.connect(gn).connect(a.destination);o.start(t);o.stop(t+d+.02);
 }
 function noise(d,vol,freq){
@@ -2643,9 +2643,9 @@ function nz(d,o){
   const t=a.currentTime+(o.delay||0),len=Math.max(1,Math.floor(a.sampleRate*d)),buf=a.createBuffer(1,len,a.sampleRate),ch=buf.getChannelData(0);
   let b=0;for(let i=0;i<len;i++){const w=Math.random()*2-1;b=o.brown?(b+.02*w)/1.02:w;ch[i]=o.brown?b*3.5:b}
   const src=a.createBufferSource(),f=a.createBiquadFilter(),gn=a.createGain();src.buffer=buf;
-  f.type=o.type||'bandpass';f.frequency.setValueAtTime(o.f||1500,t);if(o.f2)f.frequency.exponentialRampToValueAtTime(o.f2,t+d);f.Q.value=o.q||1;
+  f.type=o.type||'bandpass';f.frequency.value=o.f||1500;f.frequency.setValueAtTime(o.f||1500,t);if(o.f2)f.frequency.exponentialRampToValueAtTime(o.f2,t+d);f.Q.value=o.q||1;
   const v=(o.vol||.2)*(S.sfxVol??1),at=o.at||.004;
-  gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(v,t+at);gn.gain.exponentialRampToValueAtTime(.0001,t+d);
+  gn.gain.value=0;gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(v,t+at);gn.gain.exponentialRampToValueAtTime(.0001,t+d);
   src.connect(f).connect(gn).connect(sfxOut(a));src.start(t);src.stop(t+d+.02);
 }
 // a shaped, filtered voice with pitch glide, vibrato and tremolo: moos, baas, quacks and neighs
@@ -2654,13 +2654,40 @@ function voice(f0,f1,d,o){
   const t=a.currentTime+(o.delay||0),os=a.createOscillator(),f=a.createBiquadFilter(),gn=a.createGain(),v=(o.vol||.12)*(S.sfxVol??1);
   os.type=o.wave||'sawtooth';os.frequency.setValueAtTime(f0,t);os.frequency.exponentialRampToValueAtTime(Math.max(20,f1),t+d*(o.glide||1));
   if(o.vib){const l=a.createOscillator(),lg=a.createGain();l.frequency.value=o.vib;lg.gain.value=o.vibD||f0*.03;l.connect(lg).connect(os.frequency);l.start(t);l.stop(t+d+.05)}
-  f.type=o.ft||'bandpass';f.frequency.setValueAtTime(o.f||900,t);if(o.fEnd)f.frequency.linearRampToValueAtTime(o.fEnd,t+d);f.Q.value=o.q||2;
-  const at=o.at||.05;gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(v,t+at);gn.gain.setValueAtTime(v,t+Math.max(at,d*(o.hold||.6)));gn.gain.exponentialRampToValueAtTime(.0001,t+d);
+  f.type=o.ft||'bandpass';f.frequency.value=o.f||900;f.frequency.setValueAtTime(o.f||900,t);if(o.fEnd)f.frequency.linearRampToValueAtTime(o.fEnd,t+d);f.Q.value=o.q||2;
+  const at=o.at||.05;gn.gain.value=0;gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(v,t+at);gn.gain.setValueAtTime(v,t+Math.max(at,d*(o.hold||.6)));gn.gain.exponentialRampToValueAtTime(.0001,t+d);
   let out=gn;
   if(o.trem){const tg=a.createGain(),l=a.createOscillator(),lg=a.createGain();tg.gain.value=1-(o.tremD||.5)/2;l.frequency.value=o.trem;lg.gain.value=(o.tremD||.5)/2;l.connect(lg).connect(tg.gain);l.start(t);l.stop(t+d+.05);gn.connect(tg);out=tg}
   os.connect(f).connect(gn);out.connect(sfxOut(a));os.start(t);os.stop(t+d+.05);
 }
 const rr=(a,b)=>a+Math.random()*(b-a);
+// ---- animal voices: a buzzing source (vocal folds, or a bird's syrinx) shaped by formant filters (throat, beak, muzzle) ----
+// vox({d, f0:[[frac,Hz]..], F:[{f:Hz|[[frac,Hz]..],q,g}], amp:[[frac,level]..], rough, breath, jit, vib:[Hz,cents], trem:[Hz,depth], vol, delay, pan})
+//  rough: a half-pitch buzz for rasp; breath: noise through the same formants; jit: random pitch wobble in cents.
+const NZB=new WeakMap();
+function noiseBuf(a){let b=NZB.get(a);if(!b){const n=a.sampleRate*2;b=a.createBuffer(1,n,a.sampleRate);const c=b.getChannelData(0);for(let i=0;i<n;i++)c[i]=Math.random()*2-1;NZB.set(a,b)}return b}
+function crv(prm,t,d,pts,k){k=k||1;prm.value=pts[0][1]*k;prm.setValueAtTime(pts[0][1]*k,t);for(let i=1;i<pts.length;i++)prm.linearRampToValueAtTime(pts[i][1]*k,t+pts[i][0]*d)}
+function vox(o){
+  if(!S||!S.sound)return;const a=ac();if(!a||a.state!=='running')return;
+  const t=a.currentTime+(o.delay||0),d=o.d,end=t+d+.06,v=(o.vol||.2)*(S.sfxVol??1),src=a.createGain(),sum=a.createGain(),env=a.createGain();
+  const osc=[];const os=a.createOscillator();os.type=o.wave||'sawtooth';crv(os.frequency,t,d,o.f0);os.connect(src);osc.push(os);
+  if(o.rough){const s2=a.createOscillator(),g2=a.createGain();s2.type='sawtooth';crv(s2.frequency,t,d,o.f0,.5);g2.gain.value=o.rough;s2.connect(g2).connect(src);osc.push(s2)}
+  if(o.jit){const n=a.createBufferSource(),lp=a.createBiquadFilter(),g=a.createGain();n.buffer=noiseBuf(a);n.loop=true;lp.type='lowpass';lp.frequency.value=o.jitF||30;g.gain.value=o.jit*4;n.connect(lp).connect(g);osc.forEach(x=>g.connect(x.detune));n.start(t,Math.random()*1.5);n.stop(end)}
+  if(o.vib){const l=a.createOscillator(),g=a.createGain();l.frequency.value=o.vib[0];g.gain.value=o.vib[1];l.connect(g);osc.forEach(x=>g.connect(x.detune));l.start(t);l.stop(end)}
+  if(o.breath){const n=a.createBufferSource(),g=a.createGain();n.buffer=noiseBuf(a);g.gain.value=o.breath;n.connect(g).connect(src);n.start(t,Math.random()*1.5);n.stop(end)}
+  for(const F of o.F){const f=a.createBiquadFilter(),g=a.createGain();f.type=F.type||'bandpass';if(typeof F.f==='number')f.frequency.value=F.f;else crv(f.frequency,t,d,F.f);f.Q.value=F.q||4;g.gain.value=(F.g??1)*Math.sqrt(F.q||4);src.connect(f).connect(g).connect(sum)}
+  const amp=o.amp||[[0,0],[.08,1],[.75,.8],[1,0]];env.gain.value=0;env.gain.setValueAtTime(0,t);for(let i=1;i<amp.length;i++)env.gain.linearRampToValueAtTime(amp[i][1]*v,t+amp[i][0]*d);
+  sum.connect(env);let out=env;
+  if(o.trem){const tg=a.createGain(),l=a.createOscillator(),lg=a.createGain();tg.gain.value=1-o.trem[1]/2;l.frequency.value=o.trem[0];lg.gain.value=o.trem[1]/2;l.connect(lg).connect(tg.gain);l.start(t);l.stop(end);out.connect(tg);out=tg}
+  if(o.pan&&a.createStereoPanner){const p=a.createStereoPanner();p.pan.value=o.pan;out.connect(p);out=p}
+  out.connect(o.bus||sfxOut(a));osc.forEach(x=>{x.start(t);x.stop(end)});
+}
+// one coin: a bright metallic ping (inharmonic partials, like a struck disc) with a short tick on impact
+function clink(delay,f,vol){
+  if(!S||!S.sound)return;const a=ac();if(!a||a.state!=='running')return;const t=a.currentTime+(delay||0),v=(vol||.05)*(S.sfxVol??1);
+  for(const[m,g,dec]of[[1,1,.22],[2.76,.55,.12],[5.4,.3,.06],[8.9,.15,.04]]){const o=a.createOscillator(),gn=a.createGain();o.type='sine';o.frequency.value=f*m;gn.gain.value=0;gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(v*g,t+.002);gn.gain.exponentialRampToValueAtTime(.0001,t+dec*1.6);o.connect(gn).connect(sfxOut(a));o.start(t);o.stop(t+dec*1.6+.02)}
+  nz(.012,{type:'highpass',f:6000,vol:v*1.6,delay})
+}
 const SFX={
   // turning soil: a gritty scrape of the hoe plus a dull thud of earth
   plow(){nz(.28,{brown:1,type:'lowpass',f:900,f2:300,vol:.5,at:.03});nz(.12,{f:2600,q:.8,vol:.07,delay:.03});nz(.09,{brown:1,type:'lowpass',f:220,vol:.6,delay:.16})},
@@ -2669,7 +2696,10 @@ const SFX={
   // pulling crops: leaves and stalks rustle, a stem snaps, the crop lands in the basket
   harvest(){nz(.018,{type:'highpass',f:4200,vol:.14});nz(.02,{type:'highpass',f:3600,vol:.1,delay:.05});for(let i=0;i<5;i++)nz(rr(.05,.11),{f:rr(2400,5200),q:rr(.7,1.6),vol:rr(.05,.09),delay:i*rr(.03,.05)});
     nz(.03,{type:'highpass',f:1800,vol:.16,delay:.2});nz(.12,{brown:1,type:'lowpass',f:300,vol:.5,delay:.27});nz(.08,{f:1100,q:2,vol:.05,delay:.28})},
-  coin(){tone(1046,.07,'square',.05);tone(1568,.16,'square',.05,.06)},
+  coin(){clink(0,rr(2300,2600),.06);clink(.07,rr(2900,3200),.05)},
+  // Dale is back: a horn toot, a cascade of coins tumbling into the pouch, and a cheerful rising arpeggio
+  payday(){SFX.horn();for(let i=0;i<11;i++)clink(.45+i*rr(.045,.075)+i*i*.002,rr(2100,3400),rr(.035,.06));
+    nz(.18,{brown:1,type:'lowpass',f:500,vol:.3,delay:1.15});[784,988,1175,1568].forEach((f,i)=>tone(f,.2,'triangle',.07,1.2+i*.08))},
   // goods dropped into a wicker basket
   collect(){nz(.1,{brown:1,type:'lowpass',f:380,vol:.4});nz(.06,{f:1700,q:3,vol:.06,delay:.01});nz(.05,{f:2500,q:2,vol:.04,delay:.06})},
   // picking fruit: a branch shakes, leaves rustle, the fruit comes off with a pop
@@ -2684,26 +2714,100 @@ const SFX={
   engine(){voice(55,48,.9,{wave:'sawtooth',ft:'lowpass',f:380,q:3,vol:.16,trem:22,tremD:.8,at:.08});nz(.9,{brown:1,type:'lowpass',f:200,vol:.25,at:.1})},
   // water from a can: a splashy pour with droplets
   water(){nz(.55,{f:3200,f2:1800,q:.6,vol:.12,at:.06});nz(.5,{brown:1,type:'lowpass',f:700,vol:.2,at:.08});for(let i=0;i<4;i++)voice(rr(900,1500),rr(1800,2600),.05,{wave:'sine',ft:'lowpass',f:4000,vol:.025,at:.004,delay:.1+i*.09,hold:.2})},
-  bark(){voice(520,330,.12,{wave:'sawtooth',f:900,q:1.4,vol:.16,at:.008,hold:.3});nz(.08,{f:1300,q:1,vol:.08});voice(500,320,.13,{wave:'sawtooth',f:900,q:1.4,vol:.15,at:.008,hold:.3,delay:.2});nz(.08,{f:1300,q:1,vol:.07,delay:.2})},
-  meow(){voice(560,780,.5,{wave:'sawtooth',f:1300,fEnd:900,q:3,vol:.1,at:.06,glide:.4,vib:6,vibD:14,hold:.5})},
+  // a medium dog: two quick barks, a sharp rough attack that opens and closes
+  bark(){const k=rr(.9,1.1);for(let i=0;i<2;i++)vox({d:rr(.11,.15),delay:i*rr(.2,.26),f0:[[0,430*k],[.25,560*k],[1,360*k]],rough:.7,breath:.45,jit:60,vol:0.28,amp:[[0,0],[.04,1],[.4,.8],[1,0]],
+      F:[{f:[[0,500],[.25,950],[1,600]],q:3},{f:[[0,1300],[.25,1500],[1,1200]],q:4,g:.6},{f:2600,q:5,g:.3}]})},
+  // a cat's "mi-AOW": the mouth opens from 'ee' to 'ow' while the pitch rises and falls
+  meow(){const k=rr(.9,1.1);vox({d:rr(.55,.7),f0:[[0,560*k],[.35,740*k],[1,500*k]],jit:25,breath:.05,vol:0.21,amp:[[0,0],[.12,1],[.75,.85],[1,0]],
+      F:[{f:[[0,380],[.4,880],[1,620]],q:5},{f:[[0,2200],[.4,1500],[1,1050]],q:7,g:.6},{f:3200,q:8,g:.25}]})},
   baby(){tone(1400,.08,'sine',.08);tone(1800,.1,'sine',.08,.09);tone(2300,.16,'sine',.07,.19)},
   golden(){[1046,1318,1568,2093,2637].forEach((f,i)=>tone(f,.28,'sine',.07,i*.07))},
   chirp(){tone(4300,.035,'sine',.012);tone(4400,.035,'sine',.012,.07);tone(4300,.035,'sine',.012,.14)}
 };
 // Each animal makes its own sound when you collect from it or feed it.
-const MOO=()=>voice(rr(105,125),rr(85,95),1.1,{wave:'sawtooth',f:520,fEnd:380,q:2.5,vol:.2,at:.15,vib:4,vibD:3,hold:.7});
+// Each animal makes its own sound when you collect from it or feed it. Built as formant voices (see vox).
 const ANIMAL_SFX={
-  chicken(){for(let i=0;i<3;i++)voice(rr(650,800),rr(450,550),.08,{wave:'square',f:1400,q:3,vol:.07,at:.005,delay:i*.12,hold:.2});voice(900,600,.22,{wave:'square',f:1600,q:3,vol:.06,at:.01,delay:.4,hold:.3})},
-  duck(){for(let i=0;i<2;i++)voice(rr(380,420),260,.16,{wave:'sawtooth',f:1300,q:5,vol:.12,at:.008,delay:i*.22,hold:.3})},
-  sheep(){voice(rr(380,420),340,.8,{wave:'sawtooth',f:1100,fEnd:900,q:3,vol:.11,at:.04,trem:28,tremD:.9,hold:.6})},
-  goat(){voice(rr(480,520),420,.6,{wave:'sawtooth',f:1300,q:3,vol:.1,at:.03,trem:34,tremD:.95,hold:.6})},
-  cow:MOO,
-  pig(){for(let i=0;i<2;i++){voice(rr(160,200),120,.14,{wave:'sawtooth',f:500,q:2,vol:.15,at:.01,delay:i*.2,hold:.3});nz(.13,{brown:1,type:'lowpass',f:500,vol:.3,delay:i*.2})}},
-  horse(){voice(900,520,.9,{wave:'sawtooth',f:1500,fEnd:900,q:2,vol:.09,at:.04,vib:14,vibD:60,hold:.5});nz(.3,{f:900,q:.8,vol:.08,delay:.85})},
-  rabbit(){nz(.05,{brown:1,type:'lowpass',f:300,vol:.4});nz(.05,{brown:1,type:'lowpass',f:300,vol:.35,delay:.12});voice(1500,1200,.05,{wave:'sine',ft:'lowpass',f:3000,vol:.03,delay:.2,hold:.3})},
-  turkey(){for(let i=0;i<7;i++)voice(rr(380,460),rr(300,340),.05,{wave:'square',f:1000,q:3,vol:.07,at:.004,delay:i*.055,hold:.3})},
-  llama(){voice(300,340,.7,{wave:'triangle',ft:'lowpass',f:900,q:1,vol:.12,at:.1,vib:5,vibD:6,hold:.6})}
+  // a hen: three soft "bok"s, then the proud "ba-GAWK" after laying
+  chicken(){const k=rr(.92,1.1);for(let i=0;i<3;i++)vox({d:rr(.07,.1),delay:i*rr(.14,.19),f0:[[0,450*k],[1,340*k]],rough:.45,breath:.12,jit:40,vol:0.224,amp:[[0,0],[.1,1],[.45,.7],[1,0]],
+      F:[{f:[[0,650],[1,850]],q:4},{f:1750,q:6,g:.55},{f:2900,q:8,g:.25}]});
+    vox({d:.06,delay:.56,f0:[[0,520*k],[1,560*k]],rough:.4,breath:.1,jit:40,vol:0.196,amp:[[0,0],[.2,1],[1,0]],F:[{f:600,q:4},{f:1700,q:6,g:.5}]});
+    vox({d:rr(.3,.36),delay:.64,f0:[[0,580*k],[.25,800*k],[.65,740*k],[1,520*k]],rough:.75,breath:.22,jit:70,vol:0.252,amp:[[0,0],[.06,1],[.6,.85],[1,0]],
+      F:[{f:[[0,700],[.3,1050],[1,800]],q:5},{f:[[0,1600],[.3,1900],[1,1700]],q:6,g:.7},{f:3000,q:8,g:.35}]})},
+  // ducks: three nasal quacks, each a bit lower
+  duck(){const k=rr(.92,1.08);for(let i=0;i<3;i++)vox({d:rr(.15,.19),delay:i*rr(.2,.24),f0:[[0,330*k*(1-i*.05)],[.2,370*k*(1-i*.05)],[1,270*k*(1-i*.05)]],rough:.85,breath:.18,jit:50,vol:0.21,
+      amp:[[0,0],[.05,1],[.55,.8],[1,0]],F:[{f:[[0,800],[.2,1150],[1,900]],q:6},{f:[[0,1900],[1,1550]],q:9,g:.85},{f:2900,q:10,g:.4}]})},
+  // a ewe's "baa-a-a": a nasal 'aa' with the quick quaver sheep have
+  sheep(){const k=rr(.9,1.1);vox({d:rr(.8,1),f0:[[0,230*k],[.12,280*k],[.7,265*k],[1,215*k]],vib:[rr(20,24),45],trem:[rr(20,24),.55],jit:25,breath:.1,vol:0.224,
+      amp:[[0,0],[.06,.9],[.2,1],[.8,.75],[1,0]],F:[{f:[[0,380],[.12,760],[1,680]],q:5},{f:[[0,1200],[.12,1750],[1,1600]],q:6,g:.6},{f:2700,q:8,g:.3}]})},
+  // a goat's "meh-eh-eh": higher, thinner, with a stronger bleat
+  goat(){const k=rr(.9,1.1);vox({d:rr(.6,.75),f0:[[0,360*k],[.15,420*k],[1,330*k]],vib:[rr(26,30),90],trem:[rr(26,30),.75],jit:40,rough:.2,breath:.12,vol:0.21,
+      amp:[[0,0],[.06,1],[.75,.8],[1,0]],F:[{f:[[0,450],[.15,650],[1,600]],q:5},{f:2100,q:7,g:.7},{f:3200,q:8,g:.35}]})},
+  // a cow: lips closed ("mmm"), the mouth opens into a long "OOO" and closes again
+  cow(){const k=rr(.88,1.12);vox({d:rr(1.25,1.6),f0:[[0,95*k],[.15,122*k],[.55,132*k],[.85,112*k],[1,88*k]],jit:30,vib:[4.5,12],rough:.2,breath:.06,vol:0.294,
+      amp:[[0,0],[.1,.55],[.3,1],[.78,.9],[1,0]],F:[{f:[[0,230],[.25,420],[.6,620],[.88,380],[1,260]],q:3},{f:[[0,700],[.3,1000],[.7,900],[1,700]],q:4,g:.45},{f:2400,q:5,g:.12}]})},
+  // a pig: two or three snorty grunts, rough and nasal
+  pig(){const k=rr(.9,1.1),n=Math.random()<.5?2:3;for(let i=0;i<n;i++){vox({d:rr(.15,.24),delay:i*rr(.2,.27),f0:[[0,110*k],[.3,165*k],[1,120*k]],rough:.95,breath:.5,jit:140,jitF:60,vol:0.28,
+      amp:[[0,0],[.08,1],[.5,.8],[1,0]],F:[{f:[[0,320],[.4,620],[1,380]],q:3},{f:1200,q:4,g:.45},{f:2600,q:5,g:.15}]});
+      nz(.08,{f:900,q:1.2,vol:0.042,delay:i*.22})}},
+  // a horse's whinny: a high squealing neigh with a wide fast wobble that falls away, then a snort
+  horse(){vox({d:1.1,f0:[[0,520],[.1,1150],[.4,980],[1,430]],vib:[16,260],jit:40,rough:.3,breath:.18,vol:0.196,amp:[[0,0],[.08,1],[.6,.75],[1,0]],
+      F:[{f:[[0,1100],[1,750]],q:3},{f:[[0,2300],[1,1700]],q:5,g:.5},{f:3300,q:6,g:.2}]});nz(.35,{f:700,q:.9,vol:0.084,delay:1.1,at:.02})},
+  rabbit(){nz(.05,{brown:1,type:'lowpass',f:300,vol:0.28});nz(.05,{brown:1,type:'lowpass',f:300,vol:0.245,delay:.12});voice(1500,1200,.05,{wave:'sine',ft:'lowpass',f:3000,vol:0.021,delay:.2,hold:.3})},
+  // a turkey's gobble: a fast warbling gurgle that tumbles downward
+  turkey(){vox({d:rr(.6,.75),f0:[[0,720],[.3,640],[1,430]],trem:[rr(26,32),.95],vib:[rr(26,32),160],jit:50,rough:.4,breath:.1,vol:0.224,amp:[[0,0],[.05,1],[.7,.8],[1,0]],
+      F:[{f:[[0,1000],[1,800]],q:4},{f:2100,q:6,g:.5},{f:3100,q:8,g:.2}]})},
+  // a llama's soft hum
+  llama(){vox({d:rr(.8,1),wave:'triangle',f0:[[0,235],[.5,262],[1,218]],vib:[5,10],jit:15,breath:.06,vol:0.21,amp:[[0,0],[.3,1],[.75,.9],[1,0]],F:[{f:420,q:2},{f:1050,q:3,g:.3}]})},
+  // the rooster greets the dawn: cock-a-doodle-doooo
+  rooster(){const k=rr(.95,1.05),seg=[[.09,560,600],[.07,600,640],[.1,660,700],[.08,720,760],[.85,800,500]];let t=0;
+    for(const[d,a,b]of seg){vox({d,delay:t,f0:[[0,a*k],[.2,b*k],[.6,b*k*.98],[1,(d>.5?b:a)*k]],rough:.6,breath:.15,jit:60,vib:d>.5?[7,30]:0,vol:d>.5?.13:.11,pan:o_pan,
+      amp:d>.5?[[0,0],[.05,1],[.7,.85],[1,0]]:[[0,0],[.2,1],[.7,.8],[1,0]],F:[{f:d>.5?[[0,1000],[.6,950],[1,700]]:900,q:5},{f:1900,q:6,g:.6},{f:2900,q:8,g:.3}],bus:o_bus});t+=d+.025}}
 };
+let o_pan=0,o_bus=null;
+
+/* ---- the farm around you: birds by day (busiest at dawn), crickets from dusk to dawn, an owl at night, the rooster at sunrise ---- */
+const AMB={bus:null,crickets:[],dawn:-1};
+function ambBus(a){if(!AMB.bus){AMB.bus=a.createGain();AMB.bus.gain.value=0;AMB.bus.connect(a.destination)}return AMB.bus}
+// a pure whistle with a pitch path: most small songbirds
+function whistle(bus,t0,d,pts,vol,pan,a){
+  const t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain(),v=vol*(S.sfxVol??1);o.type='sine';crv(o.frequency,t,d,pts);
+  g.gain.value=0;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+Math.min(.015,d*.25));g.gain.setValueAtTime(v,t+d*.7);g.gain.linearRampToValueAtTime(0,t+d);
+  let out=g;if(a.createStereoPanner){const p=a.createStereoPanner();p.pan.value=pan;g.connect(p);out=p}o.connect(g);out.connect(bus);o.start(t);o.stop(t+d+.02)}
+const BIRDS=[
+  // "fee-bee": two clear notes, the second lower
+  (b,a,p,v)=>{const f=rr(3700,4100);whistle(b,0,.32,[[0,f],[1,f*.98]],v,p,a);whistle(b,.42,.3,[[0,f*.84],[1,f*.82]],v,p,a)},
+  // a warbling phrase: a handful of quick sliding notes
+  (b,a,p,v)=>{let t=0;const n=4+Math.floor(Math.random()*4);for(let i=0;i<n;i++){const d=rr(.08,.17),f=rr(2100,3500);whistle(b,t,d,[[0,f],[.5,f*rr(1.08,1.25)],[1,f*rr(.85,1)]],v,p,a);t+=d+rr(.04,.12)}},
+  // two notes, then a fast trill that slows and drops
+  (b,a,p,v)=>{whistle(b,0,.12,[[0,4200],[1,3900]],v,p,a);whistle(b,.2,.12,[[0,4200],[1,3900]],v,p,a);let t=.42;for(let i=0;i<14;i++){const f=4600-i*70;whistle(b,t,.04,[[0,f],[1,f-900]],v*.9,p,a);t+=.055+i*.003}},
+  // a far-off cuckoo
+  (b,a,p,v)=>{whistle(b,0,.22,[[0,720],[1,700]],v*1.6,p,a);whistle(b,.32,.34,[[0,590],[1,560]],v*1.6,p,a)},
+  // a quick chip-chip-chip
+  (b,a,p,v)=>{for(let i=0;i<3+Math.floor(Math.random()*3);i++)whistle(b,i*.13,.035,[[0,5200],[1,3600]],v*.8,p,a)}
+];
+function cricketChirp(bus,a,c,t){
+  const o=a.createOscillator(),g=a.createGain(),v=c.vol*(S.sfxVol??1);o.type='sine';o.frequency.value=c.f;g.gain.value=0;g.gain.setValueAtTime(0,t);
+  for(let i=0;i<c.pulses;i++){const s=t+i*.034;g.gain.linearRampToValueAtTime(v,s+.004);g.gain.setValueAtTime(v,s+.014);g.gain.linearRampToValueAtTime(0,s+.02)}
+  let out=g;if(a.createStereoPanner){const p=a.createStereoPanner();p.pan.value=c.pan;g.connect(p);out=p}o.connect(g);out.connect(bus);o.start(t);o.stop(t+c.pulses*.034+.03)}
+function ambTick(){
+  const a=AC;if(!a)return;const bus=ambBus(a),on=!!(S&&S.sound&&a.state==='running'&&!document.hidden);
+  bus.gain.setTargetAtTime(on?.9:0,a.currentTime,.4);if(!on)return;
+  const p=dayPhase(),w=weather(),se=season().id,wet=w==='rain'||w==='storm',dk=darkness(),now=a.currentTime;
+  // sunrise: the rooster crows once a day
+  const day=Math.floor(Date.now()/1000/DAY_LEN);
+  if(p>.915&&p<.94&&AMB.dawn!==day){AMB.dawn=day;o_pan=rr(-.6,.6);o_bus=bus;try{ANIMAL_SFX.rooster()}finally{o_pan=0;o_bus=null}}
+  // birds: a dawn chorus, steady singing in the morning, now and then by day, quiet at night, in rain and mostly in winter
+  const morning=p>.9||p<.2,bird=wet?0:dk>.5?0:(morning?.45:p<.62?.1:.05)*(se==='winter'?.15:1);
+  if(Math.random()<bird)BIRDS[Math.floor(Math.random()*BIRDS.length)](bus,a,rr(-.8,.8),rr(.012,.024));
+  // crickets: from dusk to dawn in the warm seasons; they chirp faster in summer, and only one keeps going in the rain
+  const want=dk>.35&&se!=='winter'?(wet?1:1+Math.round(dk*3)):0;
+  while(AMB.crickets.length<want)AMB.crickets.push({f:rr(4100,4900),per:rr(.55,.95)*(se==='summer'?.8:1),pulses:3+Math.floor(Math.random()*2),pan:rr(-.9,.9),vol:rr(.006,.013),next:0});
+  AMB.crickets.length=Math.min(AMB.crickets.length,want);
+  for(const c of AMB.crickets){if(c.next<now)c.next=now+rr(0,.6);while(c.next<now+1.3){cricketChirp(bus,a,c,c.next);c.next+=c.per*rr(.92,1.08)}}
+  // an owl, once in a while, deep in the night
+  if(dk>.85&&Math.random()<.015){const pn=rr(-.7,.7);for(const[t,d,f]of[[0,.35,390],[.6,.18,400],[.85,.18,400],[1.12,.6,380]])
+    vox({d,delay:t,wave:'triangle',f0:[[0,f],[.3,f*1.03],[1,f*.94]],F:[{type:'lowpass',f:700,q:.7}],amp:[[0,0],[.25,1],[.7,.8],[1,0]],breath:.03,vol:.09,pan:pn,bus})}
+}
 function animalSfx(id){(ANIMAL_SFX[id]||SFX.collect)()}
 // Collecting or feeding a row of the same animal: only the first 2 call out, the rest stay quiet so it doesn't turn
 // into a chorus. A run ends after 4 s without collecting/feeding that kind; then the next one calls again.
@@ -7163,7 +7267,7 @@ function payDelivery(){
   const d=dv(),c=d.run.job;d.run=null;dale.outT=Date.now();S.coins+=c.coins;stat('deliver');stat('earned',c.coins);
   const[tx,ty]=truckSpot();floatText(tx+1,ty-1,'+'+c.coins.toLocaleString(),'#ffd23f');floatText(tx+1,ty-1.6,'+'+c.xp+' XP','#7cc8ff',250);
   if(Math.random()<.5)addMat(randMat(),1+(Math.random()<.3?1:0));
-  SFX.coin();setTimeout(SFX.ribbon,180);toast('Dale is back from '+c.to+' with '+c.coins.toLocaleString()+' coins and '+c.xp+' XP!');
+  SFX.payday();toast('Dale is back from '+c.to+' with '+c.coins.toLocaleString()+' coins and '+c.xp+' XP!');
   addXP(c.xp);changed();if(mq[0]&&mq[0].deliv)rerender();
 }
 function discardContract(c){const d=dv();d.jobs=d.jobs.filter(x=>x!==c);d.next=Math.min(d.next,Date.now()+120000);SFX.click();toast(c.to+' will find another farm. A new contract comes soon.');changed();rerender()}
@@ -8102,7 +8206,7 @@ function updateTip(cx,cy){
   tip.textContent=t;tip.hidden=false;const r=tip.getBoundingClientRect();
   tip.style.left=Math.min(cx+16,vw-r.width-8)+'px';tip.style.top=Math.max(8,cy-34)+'px';
 }
-setInterval(()=>{if(!S)return;if(hover&&!$('tip').hidden){const t=tipText(hover[0],hover[1]);if(t)$('tip').textContent=t}updateFuel();tickOrders();tickDeliv();weatherTick();checkQuest();if(darkness()>.6&&Math.random()<.3)SFX.chirp();
+setInterval(()=>{if(!S)return;if(hover&&!$('tip').hidden){const t=tipText(hover[0],hover[1]);if(t)$('tip').textContent=t}updateFuel();tickOrders();tickDeliv();weatherTick();checkQuest();ambTick();
   if(mq[0]&&mq[0].live&&!$('modal').hidden){const a=document.activeElement,body=$('sheetBody'),btns=[...body.querySelectorAll('button')],i=btns.indexOf(a);rerender();if(i>=0){const nb=body.querySelectorAll('button')[i];if(nb)nb.focus()}}},1000);
 
 /* ================= tools ================= */
