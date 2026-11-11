@@ -2705,6 +2705,10 @@ const ANIMAL_SFX={
   llama(){voice(300,340,.7,{wave:'triangle',ft:'lowpass',f:900,q:1,vol:.12,at:.1,vib:5,vibD:6,hold:.6})}
 };
 function animalSfx(id){(ANIMAL_SFX[id]||SFX.collect)()}
+// Collecting or feeding a row of the same animal: only the first 2 call out, the rest stay quiet so it doesn't turn
+// into a chorus. A run ends after 4 s without collecting/feeding that kind; then the next one calls again.
+const VOX={},VOX_MAX=2,VOX_GAP=4000;
+function animalSfxCapped(id){const now=performance.now(),v=VOX[id]||(VOX[id]={n:0,t:0});if(now-v.t>VOX_GAP)v.n=0;v.t=now;if(v.n>=VOX_MAX)return false;v.n++;animalSfx(id);return true}
 
 /* ================= canvas + camera ================= */
 const cv=document.getElementById('farm');
@@ -7740,9 +7744,9 @@ function finishJob(j,now){
   if(j.kind==='collect'){const o=S.tiles[cx+','+cy];if(o&&o.k==='animal')for(const id in got)flyToBarn(cx,cy,id,got[id],26)}
   if(overSold){floatText(cx,cy-1.1,'+'+overSold+' coins','#ffd23f',250);overSold=0}
   for(const id in got){floatText(cx,cy-line2*.55,'+'+got[id]+' '+ITEMS[id].name,'#fff3b0',line2*160);line2++}
-  if(line2){if(j.kind==='collect'){const o=S.tiles[cx+','+cy];if(o&&o.k==='animal'){animalSfx(o.id);setTimeout(SFX.collect,250)}else SFX.pick()}else SFX.harvest()}
+  if(line2){if(j.kind==='collect'){const o=S.tiles[cx+','+cy];if(o&&o.k==='animal'){setTimeout(SFX.collect,animalSfxCapped(o.id)?250:0)}else SFX.pick()}else SFX.harvest()}
   if(full)floatText(cx,cy-line2*.55,'Barn full!','#ff9a8a');
-  if(spent&&j.kind==='feed'){floatText(cx,cy,'-'+spent+' feed','#ffe0b0');nz(.25,{f:2200,q:.7,vol:.08,at:.03});const o=S.tiles[cx+','+cy];if(o&&o.k==='animal')setTimeout(()=>animalSfx(o.id),200)}
+  if(spent&&j.kind==='feed'){floatText(cx,cy,'-'+spent+' feed','#ffe0b0');nz(.25,{f:2200,q:.7,vol:.08,at:.03});const o=S.tiles[cx+','+cy];if(o&&o.k==='animal')setTimeout(()=>animalSfxCapped(o.id),200)}
   if(xp){floatText(cx,cy-.6-line2*.55,'+'+xp+' XP','#7cc8ff',line2?200:0);addXP(xp)}
   if(j.kind==='plow')SFX.plow();else if(j.kind==='plant')SFX.plant();else if(j.kind==='collect'&&!line2)SFX.click();
   if(j.kind==='plow'&&spent)floatText(cx,cy,'-'+spent,'#ffb3a8');
