@@ -1243,6 +1243,35 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 .sheet-head.market .close:hover{transform:scale(1.06)}
 .sheet-head.market .close:active{transform:translateY(2px) scale(.9);transition:transform .08s;box-shadow:inset 0 2px 5px rgba(0,0,0,.35),0 1px 0 #5a140c}
 .sheet.market .sheet-body{background:radial-gradient(130% 70% at 50% 0,#fdf7e8,#f4e5c4 70%,#ead6ab),repeating-linear-gradient(8deg,rgba(150,110,50,.035) 0 1px,transparent 1px 5px)}
+/* ---- window title bars: a striped awning in the window's colour with a scalloped valance, the title on a cream
+   ribbon with folded tails, and the glossy round close button ---- */
+.sheet-head:not(.market){--h1:#62aee8;--h2:#4a95d6;--hd:#1f5a92;--hk:#2f78b8}
+.sheet-head.green{--h1:#74bb5c;--h2:#5ea547;--hd:#2a5e1e;--hk:#3f8030}
+.sheet-head.gold{--h1:#f4c650;--h2:#e6ac32;--hd:#7a4e0c;--hk:#b97e18}
+.sheet-head.pink{--h1:#ec92ae;--h2:#da7092;--hd:#7e2444;--hk:#b44a6c}
+.sheet-head.red{--h1:#e67c64;--h2:#d35e46;--hd:#702012;--hk:#a83a26}
+.sheet-head:not(.market){min-height:70px;padding:10px 64px 18px;border-bottom:0;
+  background:radial-gradient(circle at 12px 100%,#fdfaf3 7px,transparent 7.6px) 0 100%/24px 9px repeat-x,
+    linear-gradient(rgba(255,255,255,.22),rgba(255,255,255,0) 45%,rgba(0,0,0,.1)),
+    repeating-linear-gradient(90deg,var(--h1) 0 28px,var(--h2) 28px 56px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -12px 10px -10px rgba(0,0,0,.18)}
+.sheet-head:not(.market)::before{display:none}
+.sheet-head:not(.market) h2{position:relative;z-index:1;margin:0;padding:3px 26px 5px;border-radius:8px;max-width:100%;
+  background:linear-gradient(#fffdf6,#f6e8c8);border:2px solid var(--hd);color:var(--hd);
+  font-family:var(--f-display);font-weight:700;font-size:25px;letter-spacing:.3px;line-height:1.15;text-shadow:0 1px 0 #fff;-webkit-text-stroke:0;filter:none;
+  box-shadow:inset 0 -3px 0 rgba(150,110,50,.18),0 3px 0 var(--hd),0 6px 10px rgba(0,0,0,.22);
+  overflow:visible;white-space:nowrap;text-overflow:ellipsis}
+.sheet-head:not(.market) h2::before,.sheet-head:not(.market) h2::after{content:"";position:absolute;z-index:-1;top:9px;width:24px;bottom:-7px;background:var(--hk);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.25);border-radius:2px}
+.sheet-head:not(.market) h2::before{left:-17px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,38% 50%)}
+.sheet-head:not(.market) h2::after{right:-17px;clip-path:polygon(0 0,100% 0,62% 50%,100% 100%,0 100%)}
+.sheet-head:not(.market) .close{width:42px;height:42px;margin-top:-26px;border-radius:50%;border:2px solid #5a140c;color:#fff;font-family:var(--f-body);font-weight:800;font-size:18px;
+  background:radial-gradient(circle at 35% 28%,#ff9a82,#dc4430 52%,#9a2618);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.5),inset 0 -3px 0 rgba(0,0,0,.25),0 3px 0 #5a140c,0 6px 10px rgba(0,0,0,.28);transition:transform .42s cubic-bezier(.34,1.9,.5,1)}
+.sheet-head:not(.market) .close:hover{transform:scale(1.06)}
+.sheet-head:not(.market) .close:active{transform:translateY(2px) scale(.9);transition:transform .08s;box-shadow:inset 0 2px 5px rgba(0,0,0,.35),0 1px 0 #5a140c}
+.sheet-head .close:focus-visible{outline:none;box-shadow:inset 0 2px 0 rgba(255,255,255,.5),0 3px 0 #5a140c,0 0 0 3px rgba(255,255,255,.85),0 0 0 6px rgba(0,0,0,.18)}
+@media (max-width:640px){.sheet-head:not(.market){min-height:62px;padding:9px 56px 16px}.sheet-head:not(.market) h2{font-size:20px;padding:3px 18px 4px}.sheet-head:not(.market) .close{width:38px;height:38px;margin-top:-23px}}
 .sheet.market .mtop{position:sticky;top:0;z-index:2;background:linear-gradient(#f9efd9,#f6e8cb);box-shadow:0 6px 10px -8px rgba(80,50,10,.35)}
 .mwallet{display:flex;gap:8px;justify-content:center;padding:16px 12px 2px}
 .mpill{display:inline-flex;align-items:center;gap:6px;padding:3px 12px 3px 4px;border-radius:999px;border:1.5px solid #24160a;color:#fff6dc;font-family:'Fredoka',var(--f-body);font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;
