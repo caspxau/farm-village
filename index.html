@@ -1177,6 +1177,48 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 .mbtn.locked[data-lv]::after{content:"\2605" attr(data-lv);width:auto;height:auto;min-width:16px;padding:1px 6px;border-radius:10px;background:#4a3420;color:#ffd75a;font:800 11px/1.3 var(--f-body);text-align:center;top:-8px;right:-8px}
 .popgrid .mbtn:active{transform:translateY(2px) scale(.94)}
 @media (max-width:380px){.dock{gap:10px;padding-left:12px;padding-right:12px}}
+
+/* ---- production building window: a framed header, compact job tiles, recipe cards in a grid ---- */
+.maker .home-top{align-items:flex-start;gap:16px;padding:12px;margin-bottom:14px;border-radius:16px;background:linear-gradient(#fffaf0,#f6ead2);border:1px solid #e6d3ae;box-shadow:inset 0 1px 0 #fff}
+.maker .home-top>img{width:128px;flex:0 0 128px;border-radius:12px;background:radial-gradient(ellipse at 50% 70%,#e7f3d5,#f6ead2 70%);padding:4px}
+.maker .home-top>div>strong{font-family:var(--f-display);font-size:20px;color:#3a2310}
+.maker .home-top p{font-size:13.5px;line-height:1.45;color:#5a4630;margin:4px 0 10px}
+.maker .mqueue{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;max-width:520px}
+.maker .slot{width:auto;min-height:0;padding:8px 6px;border:1px solid #e3cfa6;border-radius:12px;background:#fff;box-shadow:0 2px 0 #e9d9b8}
+.maker .slot.empty{min-height:84px;border:1.5px dashed #d8c39c;background:rgba(255,255,255,.55);box-shadow:none;color:#a8957a;font-size:11.5px;gap:2px}
+.maker .slot.empty .plus{font-style:normal;font-weight:800;font-size:20px;line-height:1;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#f1e6d0;color:#b39c74}
+.maker .slot.done{border-color:#8cc84b;background:linear-gradient(#f4fbec,#e4f4d2);box-shadow:0 2px 0 #b9de94,0 0 0 3px rgba(140,200,75,.25)}
+.maker .slot.done b{color:#3f7a24}
+.maker .slot img{width:40px;height:40px}
+.maker .slot .pbar{height:7px}
+.maker .recipes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.maker .recipe{display:flex;flex-direction:column;gap:8px;padding:12px 12px 10px;border:1px solid #e6d3ae;border-radius:14px;background:#fff;box-shadow:0 3px 0 #ecdcbc,0 6px 14px rgba(80,50,10,.06)}
+.maker .recipe .rname{font-family:var(--f-display);font-size:15.5px;color:#3a2310;line-height:1.2}
+.maker .recipe .flow{gap:8px}
+.maker .recipe .req{padding:4px 10px 4px 6px;border-radius:12px;font-size:14px;gap:6px;background:#fff6f4;border:1px solid rgba(196,81,62,.35)}
+.maker .recipe .req.ok{background:#f2f9ec;border-color:rgba(78,138,58,.45)}
+.maker .recipe .req img{width:30px;height:30px}
+.maker .recipe .flow>.req:last-child{background:linear-gradient(#fffbe6,#fff1c2);border-color:#e8c86a}
+.maker .recipe .arrow{width:24px;height:24px;border-radius:50%;background:#f3e3c0;position:relative;flex:0 0 24px}
+.maker .recipe .arrow::after{content:"";position:absolute;left:8px;top:7px;border:5px solid transparent;border-left:8px solid #b07a22;border-right:0}
+.maker .recipe .rmeta{display:flex;align-items:center;gap:10px;margin-top:2px;padding-top:8px;border-top:1px dashed #eadbbd}
+.maker .recipe .rtime,.maker .recipe .rprice{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:#7a6044}
+.maker .recipe .rtime svg{width:15px;height:15px;color:#a07a4e}
+.maker .recipe .rprice .coin{width:15px;height:15px;flex-basis:15px}
+.maker .recipe .go{margin-left:auto;min-height:38px;padding:6px 20px;font-size:15px;border-radius:12px}
+.maker .recipe .go:disabled{background:#f1ebe0;color:#a8987f;box-shadow:inset 0 0 0 1px #e2d6c0;text-shadow:none;filter:none;opacity:1}
+.maker .recipe .go.lockd{background:#efe8dc;color:#8a7a62}
+.maker .recipe .go.lockd::before{content:"";display:inline-block;width:11px;height:12px;margin-right:6px;vertical-align:-1px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='3' y='7' width='10' height='8' rx='1.5' fill='%238a7a62'/%3E%3Cpath d='M5 7V5a3 3 0 0 1 6 0v2' fill='none' stroke='%238a7a62' stroke-width='1.8'/%3E%3C/svg%3E") center/contain no-repeat}
+.maker .recipe.locked{opacity:.75;background:#fbf7ef}
+.maker .recipe.locked .req img{filter:grayscale(.6)}
+.maker .home-top>div{min-width:0;flex:1}
+.maker .recipe{text-align:left;align-items:stretch}
+.maker .recipe .rname{font-family:var(--f-body);font-weight:800;font-size:13px;letter-spacing:.2px;color:#8a6a44;text-transform:none}
+.maker .recipe .flow{justify-content:flex-start}
+.maker .recipe .rmeta{justify-content:flex-start}
+@media (max-width:640px){.maker .home-top{flex-wrap:wrap;gap:10px;padding:10px}.maker .home-top>img{width:72px;flex-basis:72px}.maker .home-top>div{flex-basis:calc(100% - 82px)}
+  .maker .mqueue{grid-template-columns:repeat(3,1fr);max-width:none}.maker .slot{font-size:11px}.maker .slot.empty{min-height:72px}
+  .maker .recipes{grid-template-columns:1fr}.maker .recipe .req img{width:26px;height:26px}}
 /* ---------- Market ---------- */
 .sheet.market{position:relative;background:#f6ead0}
 @media (prefers-reduced-motion:no-preference){.sheet.market{animation:v4slide .52s cubic-bezier(.3,1.32,.5,1)}}
@@ -1841,7 +1883,7 @@ const PL_EXACT={
 'Newspaper Ad':'Ogłoszenie w gazecie','Flyers':'Ulotki','Radio Spot':'Reklama w radiu','Pin flyers around the valley.':'Rozwieś ulotki w całej dolinie.','A half page in the Valley Gazette.':'Pół strony w Gazecie Dolinnej.','A catchy jingle on Hollow FM.':'Wpadający w ucho dżingiel w Radiu Dolina.',
 'No contracts pinned up right now. New ones arrive every few minutes.':'Na razie brak kontraktów. Nowe pojawiają się co kilka minut.','Dale is already out on a delivery.':'Dale jest już w trasie.','Dale is pulling in now!':'Dale właśnie podjeżdża!','You do not have everything for this delivery yet.':'Nie masz jeszcze wszystkiego do tej dostawy.','Dale, your delivery driver':'Dale, twój kierowca','Delivery Board. Dale is out on a delivery':'Tablica dostaw. Dale jest w trasie','Delivery Board: send goods to town with Dale':'Tablica dostaw: wyślij towary do miasta z Dale’em','DELIVERIES':'DOSTAWY','DIESEL':'ROPA',
 // ---- makers, homes, materials
-'Empty slot':'Wolne miejsce','Nothing ready':'Nic gotowego','Ready!':'Gotowe!','Feed':'Nakarm','No hungry animals right now.':'Teraz nikt nie jest głodny.','Ran out of feed.':'Zabrakło paszy.','Let your farmer finish the current jobs first.':'Niech farmer najpierw skończy obecne zadania.','Wait for the farmer to finish there.':'Poczekaj, aż farmer tam skończy.','The farmer is still working there.':'Farmer wciąż tam pracuje.','Farmer is on the way':'Farmer już idzie',
+'Empty slot':'Wolne miejsce','Chicken Feed':'Karma dla kur','Duck Feed':'Karma dla kaczek','Sheep Feed':'Karma dla owiec','Cow Feed':'Karma dla krów','Goat Feed':'Karma dla kóz','Pig Feed':'Karma dla świń','Horse Feed':'Karma dla koni','Rabbit Feed':'Karma dla królików','Turkey Feed':'Karma dla indyków','Llama Feed':'Karma dla lam','Nothing ready':'Nic gotowego','Ready!':'Gotowe!','Feed':'Nakarm','No hungry animals right now.':'Teraz nikt nie jest głodny.','Ran out of feed.':'Zabrakło paszy.','Let your farmer finish the current jobs first.':'Niech farmer najpierw skończy obecne zadania.','Wait for the farmer to finish there.':'Poczekaj, aż farmer tam skończy.','The farmer is still working there.':'Farmer wciąż tam pracuje.','Farmer is on the way':'Farmer już idzie',
 'Materials drop while you harvest, collect from animals and pick fruit trees. Neighbors send them too. Spend them to upgrade your barn and animal homes.':'Materiały wypadają podczas zbiorów, odbierania produktów od zwierząt i zrywania owoców. Wysyłają je też sąsiedzi. Wydawaj je na rozbudowę stodoły i domów zwierząt.',
 'Grinds crops into animal feed and fertilizer.':'Mieli plony na paszę i nawóz.','Presses oily crops into diesel for your tractor, seeder and harvester.':'Wyciska oleiste plony na ropę dla traktora, siewnika i kombajnu.','Cooks farm goods into treats that sell for much more.':'Gotuje z plonów smakołyki, które sprzedają się dużo drożej.','Presses fruit into cider and juice that sell for a lot.':'Wyciska z owoców cydr i soki, które dobrze się sprzedają.','Bees make honey on their own. Flowers help them make more.':'Pszczoły same robią miód. Kwiaty pomagają im robić go więcej.','Cast a line with some bait and catch fresh fish.':'Zarzuć wędkę z przynętą i złów świeże ryby.',
 'Collects from every ready, fed animal right now.':'Od razu odbiera produkty od wszystkich gotowych, nakarmionych zwierząt.','Harvests every ripe crop right now.':'Od razu zbiera wszystkie dojrzałe plony.','Picks every ready fruit tree right now.':'Od razu zrywa owoce ze wszystkich gotowych drzew.','Every growing crop is ready to harvest.':'Każdy rosnący plon jest gotowy do zbioru.','Fills the fuel tank to the top.':'Napełnia bak do pełna.','One can of diesel: 10 fuel. Make your own at a Diesel Press.':'Jeden kanister ropy: 10 paliwa. Zrób własną w tłoczni ropy.','Fuel tank full.':'Bak pełny.','The tank is already full.':'Bak jest już pełny.','Topped up the tank with a can of diesel.':'Dolano kanister ropy do baku.',
@@ -2321,7 +2363,12 @@ function matsMissing(m){return Object.keys(m||{}).some(k=>(S.mats[k]||0)<m[k])}
 const MAKERS={
   feedmill:{name:'Feed Mill',lvl:1,cost:350,xp:20,desc:'Grinds crops into animal feed and fertilizer.',recipes:[
     {in:{strawberry:2},out:'feed',n:8,time:20},{in:{soybean:1},out:'feed',n:10,time:30},{in:{carrot:1},out:'feed',n:9,time:30},
-    {in:{wheat:1},out:'feed',n:24,time:60},{in:{corn:1},out:'feed',n:34,time:90},{in:{carrot:2},out:'fert',n:5,time:45}]},
+    {in:{wheat:1},out:'feed',n:24,time:60},{in:{corn:1},out:'feed',n:34,time:90},{in:{carrot:2},out:'fert',n:5,time:45},
+    // each animal's own feed: one scoop fills it up (plain Animal Feed takes 1 to 3)
+    {in:{wheat:1},out:'f_chicken',n:6,time:30},{in:{wheat:1,soybean:1},out:'f_cow',n:5,time:45},{in:{potato:1,corn:1},out:'f_pig',n:5,time:60},
+    {in:{rice:1,wheat:1},out:'f_duck',n:6,time:45},{in:{barley:1,carrot:1},out:'f_sheep',n:5,time:50},{in:{carrot:2},out:'f_rabbit',n:6,time:40,lvl:16},
+    {in:{barley:1,beet:1},out:'f_goat',n:5,time:55},{in:{corn:1,sunflower:1},out:'f_turkey',n:5,time:50},{in:{barley:2,carrot:1},out:'f_horse',n:4,time:70},
+    {in:{barley:1,corn:1},out:'f_llama',n:4,time:70,lvl:20}]},
   press:{name:'Diesel Press',lvl:3,cost:1200,xp:40,desc:'Presses oily crops into diesel for your tractor, seeder and harvester.',recipes:[
     {in:{soybean:3},out:'diesel',n:1,time:60},{in:{sunflower:1},out:'diesel',n:2,time:90},{in:{corn:2},out:'diesel',n:2,time:120}]},
   kitchen:{name:'Farm Kitchen',lvl:4,cost:1800,xp:60,desc:'Cooks farm goods into treats that sell for much more.',recipes:[
@@ -2360,8 +2407,11 @@ Object.assign(ITEMS,{
   applecider:{name:'Apple Cider',sell:160,cat:'made',lvl:8},cherryjuice:{name:'Cherry Juice',sell:240,cat:'made',lvl:8},grapejuice:{name:'Grape Juice',sell:630,cat:'made',lvl:8}
 });
 for(const id in ITEMS)if(ITEMS[id].cat==='made')ITEMS[id].sell=Math.round(ITEMS[id].sell*MADE_VALUE/5)*5;
-function recipeLvl(r){let l=1;for(const k in r.in)l=Math.max(l,ITEMS[k].lvl);return l}
+for(const id in ANIMALS)ITEMS['f_'+id]={name:ANIMALS[id].name+' Feed',sell:4+(ANIMALS[id].feed||1)*2,cat:'supply',lvl:ANIMALS[id].lvl};
+function recipeLvl(r){let l=r.lvl||1;for(const k in r.in)l=Math.max(l,ITEMS[k].lvl);if(ITEMS[r.out]&&r.out.startsWith('f_'))l=Math.max(l,ITEMS[r.out].lvl);return l}
 function feedNeed(id){return ANIMALS[id].feed||1}
+// what a hungry animal eats: one scoop of its own feed if there is any, otherwise plain Animal Feed (1 to 3 scoops)
+function feedPick(id){const own='f_'+id;return ITEMS[own]&&have(own)>=1?[own,1]:['feed',feedNeed(id)]}
 const ADS={
   flyer:{name:'Flyers',cost:120,mins:10,every:75,boost:.1,desc:'Pin flyers around the valley.'},
   paper:{name:'Newspaper Ad',cost:450,mins:20,every:45,boost:.2,desc:'A half page in the Valley Gazette.'},
@@ -3568,6 +3618,8 @@ function drawLlama(px,py,now,seed){
   aEye(hx-1.6,hy-.6,1.05);aEye(hx+1.9,hy-.6,1.05);ell(hx+1,hy+3.8,.9,.4,'#6a5a4a');
 }
 const ANIMAL_DRAW={chicken:drawChicken,duck:drawDuck,sheep:drawSheep,goat:drawGoat,cow:drawCow,pig:drawPig,horse:drawHorse,rabbit:drawRabbit,turkey:drawTurkey,llama:drawLlama};
+const FEED_COL={chicken:'#e0a020',duck:'#3a88b8',sheep:'#7a9a4a',goat:'#8a7a6a',cow:'#2a2a2a',pig:'#e07a8a',horse:'#8a5a32',rabbit:'#c0688a',turkey:'#a8452a',llama:'#6a5aa8'};
+const FEED_GRAIN={pig:'#c9a46a',rabbit:'#f08a2a',horse:'#d8c06a',duck:'#f4f0e0',turkey:'#e8c040'};
 const GLYPH={chicken:'egg',duck:'feather',sheep:'wool',goat:'milk',cow:'milk',pig:'bacon',horse:'hair',rabbit:'wool',turkey:'feather',llama:'wool'};
 // Every status bubble shares one look: a cream disc with a coloured rim that says what it wants. Gold: ready to collect.
 // Orange with a red pip: hungry. Blue: needs a home. Ready bubbles breathe; hungry ones wobble. They stay readable when zoomed out.
@@ -4276,8 +4328,13 @@ function drawGood(id,x,y,s){
   else if(id.startsWith('t_'))basket(TREES[id.slice(2)].fruit,'#3f9a3c');
   else if(id.startsWith('g_')){basket('#ffcf3a','#c9a020');star4(7,-9,4.4,'#fff7c0');star4(-8,-6,2.8,'#fff7c0')}
   else if(id.startsWith('a_')){ell(0,8,9,2.6,'rgba(40,30,10,.18)');g.scale(1.45,1.45);glyph(0,0,GLYPH[id.slice(2)])}
-  else switch(id){
+  else switch(id.startsWith('f_')?'feed':id){
     case'feed':
+      if(id.startsWith('f_')){const a=id.slice(2),col=FEED_COL[a]||'#3f9a3c';ell(0,9,10,2.6,'rgba(40,30,10,.18)');
+        g.beginPath();g.moveTo(-6,-7);g.quadraticCurveTo(-10,0,-8,8);g.lineTo(8,8);g.quadraticCurveTo(10,0,6,-7);g.closePath();g.fillStyle='#efe0bc';g.fill();g.strokeStyle='#a8895a';g.lineWidth=1;g.stroke();
+        poly([[-6,-7],[6,-7],[3,-10],[-3,-10]],'#d8c08a','#a8895a',.8);g.strokeStyle='#7a5a2a';g.lineWidth=1.2;line([-3.4,-8.4],[3.4,-8.4]);
+        poly([[-7.6,-3],[7.6,-3],[7.9,5],[-7.9,5]],col,shade(col,-.35),.6);ell(0,1,4.4,3.4,'#fffaf0');g.save();g.translate(0,1);g.scale(.42,.42);glyph(0,0,GLYPH[a]);g.restore();
+        for(const[a2,b]of[[-2,-10.6],[0,-11.6],[2,-10.8]])ell(a2,b,1,.7,FEED_GRAIN[a]||'#e8be45');break}
       ell(0,9,10,2.6,'rgba(40,30,10,.18)');
       g.beginPath();g.moveTo(-6,-7);g.quadraticCurveTo(-10,0,-8,8);g.lineTo(8,8);g.quadraticCurveTo(10,0,6,-7);g.closePath();g.fillStyle='#e8d5a8';g.fill();g.strokeStyle='#a8895a';g.lineWidth=1;g.stroke();
       poly([[-6,-7],[6,-7],[3,-10],[-3,-10]],'#d8c08a','#a8895a',.8);g.strokeStyle='#7a5a2a';g.lineWidth=1.2;line([-3.4,-8.4],[3.4,-8.4]);
@@ -7138,7 +7195,7 @@ function showBarn(){
         const sm=el('small');sm.innerHTML='<span class="coin"></span>'+sellPrice(k)+' each';c.appendChild(sm);if(k===hotItem()){c.classList.add('hotitem');c.appendChild(el('span','newtag hot','Hot +50%'))}
         const row=el('div','row');
         if(k==='diesel'){const r=el('button','buy','Refuel');r.onclick=()=>{refuel(false);rerender()};row.appendChild(r)}
-        else if(k==='feed'){const f=el('button','buy','Feed animals');f.onclick=()=>{closeModal();feedAll()};row.appendChild(f)}
+        else if(k==='feed'||k.startsWith('f_')){const f=el('button','buy','Feed animals');f.onclick=()=>{closeModal();feedAll(k==='feed'?undefined:k.slice(2))};row.appendChild(f)}
         else{const s1=el('button','buy','Sell 1');s1.onclick=()=>sellGood(k,1);row.appendChild(s1);const sa=el('button','buy cashbuy','Sell all');sa.onclick=()=>sellGood(k,have(k));row.appendChild(sa)}
         c.appendChild(row);grid.appendChild(c);
       }
@@ -7163,9 +7220,10 @@ function showHome(key){
     const row=el('div','wdrow');
     const col=el('button','go',ready.length?'Collect all ('+ready.length+')':'Nothing ready'+(next<Infinity?' ('+fmt(next)+')':''));col.disabled=!ready.length;
     col.onclick=()=>{for(const t of ready)enqueue({kind:'collect',tiles:[t]});closeModal();toast(H.name+': collecting from '+ready.length+'.')};row.appendChild(col);
-    const need=hun.length*feedNeed(o.id),fd=el('button','go','Feed all ('+hun.length+') · '+need+' feed');fd.disabled=!hun.length;fd.style.background=hun.length?'linear-gradient(#ffd23f,#f2a21e)':'';fd.style.color='#3a2310';
+    const ownN=Math.min(hun.length,have('f_'+o.id)),need=ownN+(hun.length-ownN)*feedNeed(o.id),fd=el('button','go','Feed all ('+hun.length+') · '+need+' feed');fd.disabled=!hun.length;fd.style.background=hun.length?'linear-gradient(#ffd23f,#f2a21e)':'';fd.style.color='#3a2310';
     fd.onclick=()=>{closeModal();feedAll(o.id)};row.appendChild(fd);info.appendChild(row);
     info.appendChild(el('p','hint','Feed in your barn: '+have('feed')+'. Make more at a Feed Mill.'));
+    {const own='f_'+o.id,ch=el('span','req'+(have(own)?' ok':'')),im=el('img');im.src=itemIcon(own);im.alt='';ch.appendChild(im);ch.appendChild(el('b',null,String(have(own))));ch.title=ITEMS[own].name;ch.style.marginTop='4px';info.appendChild(ch)}
     top.appendChild(info);p.appendChild(top);
     {const st=homeStats(now)[key],mine=st?st.keys:[];
      if(mine.length){const grid=el('div','v5anims');grid.setAttribute('aria-label','Animals in this home');
@@ -7184,8 +7242,9 @@ function showHome(key){
 }
 // Queue a feeding trip to every hungry animal (optionally just one breed), as far as the feed in the barn goes.
 function feedAll(only){
-  let feed=have('feed'),n=0,short=false;
-  for(const k in S.tiles){const a=S.tiles[k];if(!hungry(a)||pend[k]||(only&&a.id!==only)||!hasHome(a.id))continue;const need=feedNeed(a.id);if(feed<need){short=true;continue}feed-=need;n++;enqueue({kind:'feed',tiles:[k.split(',').map(Number)]})}
+  const left={},got=k=>left[k]??(left[k]=have(k));let n=0,short=false;
+  for(const k in S.tiles){const a=S.tiles[k];if(!hungry(a)||pend[k]||(only&&a.id!==only)||!hasHome(a.id))continue;
+    const own='f_'+a.id,need=feedNeed(a.id);if(ITEMS[own]&&got(own)>=1)left[own]--;else if(got('feed')>=need)left.feed-=need;else{short=true;continue}n++;enqueue({kind:'feed',tiles:[k.split(',').map(Number)]})}
   if(n)toast('Feeding '+n+' animal'+(n>1?'s':'')+'.'+(short?' Not enough feed for the rest.':''));
   else if(short){SFX.error();toast('Not enough feed. Make some at the Feed Mill or buy a Feed Sack in Market > Farm.')}
   else toast('No hungry animals right now.');
@@ -7274,13 +7333,13 @@ const AD_SVG={
 function showMaker(key){
   const o0=S.tiles[key];if(!o0)return;const M=MAKERS[o0.id];
   modal({title:M.name,color:'green',wide:true,live:true,render(b){
-    const o=S.tiles[key];if(!o)return;const now=Date.now(),{q,done}=makerJobs(o,now),p=el('div','store');
+    const o=S.tiles[key];if(!o)return;const now=Date.now(),{q,done}=makerJobs(o,now),p=el('div','store maker');
     const top=el('div','home-top'),img=el('img'),ik='buildings:'+o.id;if(!ICONS[ik])ICONS[ik]=renderIcon('buildings',o.id);img.src=ICONS[ik];img.alt='';top.appendChild(img);
     const info=el('div'),lvM=mkLv(o);info.appendChild(el('strong',null,M.name+(lvM>1?' · '+tr('Level')+' '+lvM:'')));
     if(lvM===1)info.appendChild(el('p',null,M.desc+' It lines up to 3 jobs and works on them one after another, even while you are away.'));else{info.appendChild(el('p',null,M.desc));info.appendChild(el('p','hint','Upgraded: more job slots and faster work.'))}
     const qs=el('div','mqueue');
     for(let i=0;i<mkSlots(o);i++){
-      const j=q[i];if(!j){qs.appendChild(el('div','slot empty','Empty slot'));continue}
+      const j=q[i];if(!j){const e=el('div','slot empty');e.appendChild(el('i','plus','+'));e.appendChild(el('span',null,'Empty slot'));qs.appendChild(e);continue}
       const r=M.recipes[j.r],ready=j.end<=now,run=!ready&&j.start<=now,s=el('div','slot'+(ready?' done':'')),im=el('img');im.src=itemIcon(r.out);im.alt='';s.appendChild(im);
       s.appendChild(el('span',null,r.n+' '+ITEMS[r.out].name));
       if(ready)s.appendChild(el('b',null,'Ready!'));
@@ -7291,17 +7350,24 @@ function showMaker(key){
     info.appendChild(qs);
     if(done.length){const c=el('button','go','Collect '+done.length+' finished');c.onclick=()=>makerCollect(key);c.style.marginTop='8px';info.appendChild(c)}
     top.appendChild(info);p.appendChild(top);
-    const list=el('div','recipes');
+    const list=el('div','recipes');let shownLocked=0;
+    const CLOCK='<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.4" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.4V8l2.4 1.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
     M.recipes.forEach((r,i)=>{
-      const lv=recipeLvl(r),locked=S.level<lv,row=el('div','recipe'+(locked?' locked':'')),flow=el('div','flow');
+      const lv=recipeLvl(r),locked=S.level<lv;
+      // only the next recipe to unlock is shown; the rest stay a surprise
+      if(locked&&shownLocked++>0)return;
+      const row=el('div','recipe'+(locked?' locked':'')),flow=el('div','flow');
+      row.appendChild(el('strong','rname',ITEMS[r.out].name));
       for(const k in r.in)flow.appendChild(goodReq(k,r.in[k]));
       // a recipe with no ingredients (the bees work for free) says so instead of showing an empty slot
       if(!Object.keys(r.in).length)flow.appendChild(el('span','req ok freereq','Free'));
-      flow.appendChild(el('span','arrow','→'));
+      flow.appendChild(el('span','arrow',''));
       const out=el('span','req ok'),im=el('img');im.src=itemIcon(r.out);im.alt='';out.appendChild(im);out.appendChild(el('b',null,'×'+r.n));out.title=ITEMS[r.out].name;flow.appendChild(out);
       row.appendChild(flow);
-      const ok=!locked&&q.length<mkSlots(o)&&Object.keys(r.in).every(k=>have(k)>=r.in[k]),go=el('button','go',locked?'Level '+lv:'Make');go.disabled=!ok;go.onclick=()=>makerAdd(key,i);row.appendChild(go);
-      row.appendChild(el('small',null,(Object.keys(r.in).length?Object.keys(r.in).map(k=>ITEMS[k].name+' ×'+r.in[k]).join(' + '):'No ingredients')+' → '+ITEMS[r.out].name+' ×'+r.n+' in '+fmt(Math.round(r.time*MK_UP[mkLv(o)].speed))+(ITEMS[r.out].cat==='made'?'. Sells for '+sellPrice(r.out)+' each.':'.')));
+      const ok=!locked&&q.length<mkSlots(o)&&Object.keys(r.in).every(k=>have(k)>=r.in[k]),go=el('button','go'+(locked?' lockd':''),locked?'Level '+lv:'Make');go.disabled=!ok;go.onclick=()=>makerAdd(key,i);
+      const meta=el('div','rmeta'),tm=el('span','rtime');tm.innerHTML=CLOCK;tm.appendChild(document.createTextNode(fmt(Math.round(r.time*MK_UP[mkLv(o)].speed))));meta.appendChild(tm);
+      if(ITEMS[r.out].cat==='made'){const pr=el('span','rprice'),c=el('i','coin');pr.appendChild(c);pr.appendChild(document.createTextNode(String(sellPrice(r.out))));meta.appendChild(pr)}
+      meta.appendChild(go);row.appendChild(meta);
       list.appendChild(row);
     });
     p.appendChild(list);
@@ -7892,7 +7958,7 @@ function clickMulti(hx,hy){
     if(o.k==='mk'){SFX.click();clickMaker(key);return}
     if(o.k==='animal'&&hungry(o)){
       if(pend[key])return;
-      const need=feedNeed(o.id);if(have('feed')<need){SFX.error();toast(ANIMALS[o.id].name+' is hungry and needs '+need+' feed. Make feed at a Feed Mill or buy a Feed Sack in Market > Farm.');return}
+      const[fk,need]=feedPick(o.id);if(have(fk)<need){SFX.error();toast(ANIMALS[o.id].name+' is hungry and needs '+need+' feed. Make feed at a Feed Mill or buy a Feed Sack in Market > Farm.');return}
       enqueue({kind:'feed',tiles:[[x,y]]});return;
     }
     if(o.k==='animal'||o.k==='tree'){
@@ -8037,7 +8103,7 @@ function finishJob(j,now){
     }else if(j.kind==='fertilize'){
       if(o&&o.k==='plot'&&o.crop&&!o.fert&&have('fert')>0){takeGood('fert',1);o.fert=true;if(!o.gold&&Math.random()<.08)o.gold=true;stat('fertilize');SFX.plant();floatText(x,y-.6,'Fertilized: double harvest','#c8f59a')}
     }else if(j.kind==='feed'){
-      if(o&&hungry(o)){const need=feedNeed(o.id);if(have('feed')>=need){takeGood('feed',need);spent+=need;o.fed=true;o.t=now;stat('feed');burst(x,y,['#e8c25a','#c9a46a','#fff3b0']);if(x<=HX){const h=yardOf(k,o.id),G=homeGeo(o.id);if(h&&bigHome(S.tiles[h[0]+','+h[1]])&&!FX.some(f=>f.k==='pour'&&f.h===h))fxAdd({k:'pour',h,x:h[0]+G.tr[0]+.4,y:h[1]+G.tr[1]+.08})}}else{SFX.error();toast('Ran out of feed.')}}
+      if(o&&hungry(o)){const[fk,need]=feedPick(o.id);if(have(fk)>=need){takeGood(fk,need);spent+=need;o.fed=true;o.t=now;stat('feed');burst(x,y,['#e8c25a','#c9a46a','#fff3b0']);if(x<=HX){const h=yardOf(k,o.id),G=homeGeo(o.id);if(h&&bigHome(S.tiles[h[0]+','+h[1]])&&!FX.some(f=>f.k==='pour'&&f.h===h))fxAdd({k:'pour',h,x:h[0]+G.tr[0]+.4,y:h[1]+G.tr[1]+.08})}}else{SFX.error();toast('Ran out of feed.')}}
     }else if(j.kind==='fert'&&VIS){
       if(o&&!o.helped){o.helped=true;helpDone(x,y)}
     }

@@ -1,7 +1,17 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Plow here|এখানে চাষ করুন
+x:`Chicken Feed|মুরগির খাবার
+Duck Feed|হাঁসের খাবার
+Sheep Feed|ভেড়ার খাবার
+Cow Feed|গরুর খাবার
+Goat Feed|ছাগলের খাবার
+Pig Feed|শূকরের খাবার
+Horse Feed|ঘোড়ার খাবার
+Rabbit Feed|খরগোশের খাবার
+Turkey Feed|টার্কির খাবার
+Llama Feed|লামার খাবার
+Plow here|এখানে চাষ করুন
 Free|বিনামূল্যে
 No ingredients|কোনো উপকরণ নেই
 New level|নতুন স্তর

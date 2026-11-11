@@ -1,7 +1,17 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Plow here|Вспахать здесь
+x:`Chicken Feed|Корм для кур
+Duck Feed|Корм для уток
+Sheep Feed|Корм для овец
+Cow Feed|Корм для коров
+Goat Feed|Корм для коз
+Pig Feed|Корм для свиней
+Horse Feed|Корм для лошадей
+Rabbit Feed|Корм для кроликов
+Turkey Feed|Корм для индеек
+Llama Feed|Корм для лам
+Plow here|Вспахать здесь
 Free|Бесплатно
 No ingredients|Без ингредиентов
 New level|Новый уровень

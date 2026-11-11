@@ -1,6 +1,16 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Plow here|Arar aquí
+x:`Chicken Feed|Pienso para gallinas
+Duck Feed|Pienso para patos
+Sheep Feed|Pienso para ovejas
+Cow Feed|Pienso para vacas
+Goat Feed|Pienso para cabras
+Pig Feed|Pienso para cerdos
+Horse Feed|Pienso para caballos
+Rabbit Feed|Pienso para conejos
+Turkey Feed|Pienso para pavos
+Llama Feed|Pienso para llamas
+Plow here|Arar aquí
 Free|Gratis
 No ingredients|Sin ingredientes
 New level|Nuevo nivel

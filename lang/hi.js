@@ -1,7 +1,17 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Plow here|यहाँ जोतें
+x:`Chicken Feed|मुर्गी का दाना
+Duck Feed|बत्तख का दाना
+Sheep Feed|भेड़ का चारा
+Cow Feed|गाय का चारा
+Goat Feed|बकरी का चारा
+Pig Feed|सूअर का चारा
+Horse Feed|घोड़े का चारा
+Rabbit Feed|खरगोश का चारा
+Turkey Feed|टर्की का दाना
+Llama Feed|लामा का चारा
+Plow here|यहाँ जोतें
 Free|मुफ़्त
 No ingredients|कोई सामग्री नहीं
 New level|नया स्तर

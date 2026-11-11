@@ -1,7 +1,17 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Plow here|在这里耕地
+x:`Chicken Feed|鸡饲料
+Duck Feed|鸭饲料
+Sheep Feed|绵羊饲料
+Cow Feed|牛饲料
+Goat Feed|山羊饲料
+Pig Feed|猪饲料
+Horse Feed|马饲料
+Rabbit Feed|兔饲料
+Turkey Feed|火鸡饲料
+Llama Feed|羊驼饲料
+Plow here|在这里耕地
 Free|免费
 No ingredients|无需原料
 New level|新等级

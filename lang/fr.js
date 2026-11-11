@@ -1,6 +1,16 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Plow here|Labourer ici
+x:`Chicken Feed|Aliment pour poules
+Duck Feed|Aliment pour canards
+Sheep Feed|Aliment pour moutons
+Cow Feed|Aliment pour vaches
+Goat Feed|Aliment pour chèvres
+Pig Feed|Aliment pour cochons
+Horse Feed|Aliment pour chevaux
+Rabbit Feed|Aliment pour lapins
+Turkey Feed|Aliment pour dindes
+Llama Feed|Aliment pour lamas
+Plow here|Labourer ici
 Free|Gratuit
 No ingredients|Sans ingrédients
 New level|Nouveau niveau

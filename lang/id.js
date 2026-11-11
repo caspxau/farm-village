@@ -1,6 +1,16 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Plow here|Bajak di sini
+x:`Chicken Feed|Pakan ayam
+Duck Feed|Pakan bebek
+Sheep Feed|Pakan domba
+Cow Feed|Pakan sapi
+Goat Feed|Pakan kambing
+Pig Feed|Pakan babi
+Horse Feed|Pakan kuda
+Rabbit Feed|Pakan kelinci
+Turkey Feed|Pakan kalkun
+Llama Feed|Pakan llama
+Plow here|Bajak di sini
 Free|Gratis
 No ingredients|Tanpa bahan
 New level|Level baru

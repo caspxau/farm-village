@@ -1,6 +1,16 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Plow here|Arar aqui
+x:`Chicken Feed|Ração para galinhas
+Duck Feed|Ração para patos
+Sheep Feed|Ração para ovelhas
+Cow Feed|Ração para vacas
+Goat Feed|Ração para cabras
+Pig Feed|Ração para porcos
+Horse Feed|Ração para cavalos
+Rabbit Feed|Ração para coelhos
+Turkey Feed|Ração para perus
+Llama Feed|Ração para lhamas
+Plow here|Arar aqui
 Free|Grátis
 No ingredients|Sem ingredientes
 New level|Novo nível
