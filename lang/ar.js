@@ -1,7 +1,12 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Chicken Feed|علف الدجاج
+x:`Secret code|الرمز السري
+Unlock|فتح
+Wrong code.|رمز خاطئ.
+Unlimited cash unlocked!|تم فتح المال غير المحدود!
+Unlimited cash turned off.|تم إيقاف المال غير المحدود.
+Chicken Feed|علف الدجاج
 Duck Feed|علف البط
 Sheep Feed|علف الأغنام
 Cow Feed|علف الأبقار

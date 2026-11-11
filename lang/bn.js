@@ -1,7 +1,12 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Chicken Feed|মুরগির খাবার
+x:`Secret code|গোপন কোড
+Unlock|খুলুন
+Wrong code.|ভুল কোড।
+Unlimited cash unlocked!|অসীম টাকা চালু হয়েছে!
+Unlimited cash turned off.|অসীম টাকা বন্ধ করা হয়েছে।
+Chicken Feed|মুরগির খাবার
 Duck Feed|হাঁসের খাবার
 Sheep Feed|ভেড়ার খাবার
 Cow Feed|গরুর খাবার

@@ -1,7 +1,12 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Chicken Feed|Корм для кур
+x:`Secret code|Секретный код
+Unlock|Открыть
+Wrong code.|Неверный код.
+Unlimited cash unlocked!|Бесконечные деньги открыты!
+Unlimited cash turned off.|Бесконечные деньги отключены.
+Chicken Feed|Корм для кур
 Duck Feed|Корм для уток
 Sheep Feed|Корм для овец
 Cow Feed|Корм для коров

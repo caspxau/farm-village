@@ -1227,6 +1227,10 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 @media (prefers-reduced-motion:reduce){.tlogo svg{animation:none}}
 @media (max-height:520px) and (orientation:landscape){.tlogo svg{width:min(340px,46vw)}}
 @media (max-width:640px){.tlogo svg{width:min(330px,80vw)}}
+.secretkey{display:block;margin:10px auto 0;width:30px;height:30px;padding:5px;border:0;border-radius:50%;background:transparent;color:rgba(110,90,60,.28);cursor:pointer}
+.secretkey:hover,.secretkey:focus-visible{color:rgba(110,90,60,.6);background:rgba(110,90,60,.08)}.secretkey svg{width:100%;height:100%}
+.secretin{display:block;width:100%;box-sizing:border-box;margin:0 0 12px;padding:12px 14px;font:700 22px/1 var(--f-body);letter-spacing:8px;text-align:center;border:2px solid #d8c29a;border-radius:12px;background:#fffdf6;color:#3a2310}
+.secretin:focus{outline:none;border-color:#e0a52c;box-shadow:0 0 0 3px rgba(224,165,44,.25)}
 /* ---------- Market ---------- */
 .sheet.market{position:relative;background:#f6ead0}
 @media (prefers-reduced-motion:no-preference){.sheet.market{animation:v4slide .52s cubic-bezier(.3,1.32,.5,1)}}
@@ -1941,7 +1945,7 @@ const PL_EXACT={
 'Newspaper Ad':'Ogłoszenie w gazecie','Flyers':'Ulotki','Radio Spot':'Reklama w radiu','Pin flyers around the valley.':'Rozwieś ulotki w całej dolinie.','A half page in the Valley Gazette.':'Pół strony w Gazecie Dolinnej.','A catchy jingle on Hollow FM.':'Wpadający w ucho dżingiel w Radiu Dolina.',
 'No contracts pinned up right now. New ones arrive every few minutes.':'Na razie brak kontraktów. Nowe pojawiają się co kilka minut.','Dale is already out on a delivery.':'Dale jest już w trasie.','Dale is pulling in now!':'Dale właśnie podjeżdża!','You do not have everything for this delivery yet.':'Nie masz jeszcze wszystkiego do tej dostawy.','Dale, your delivery driver':'Dale, twój kierowca','Delivery Board. Dale is out on a delivery':'Tablica dostaw. Dale jest w trasie','Delivery Board: send goods to town with Dale':'Tablica dostaw: wyślij towary do miasta z Dale’em','DELIVERIES':'DOSTAWY','DIESEL':'ROPA',
 // ---- makers, homes, materials
-'Empty slot':'Wolne miejsce','Chicken Feed':'Karma dla kur','Duck Feed':'Karma dla kaczek','Sheep Feed':'Karma dla owiec','Cow Feed':'Karma dla krów','Goat Feed':'Karma dla kóz','Pig Feed':'Karma dla świń','Horse Feed':'Karma dla koni','Rabbit Feed':'Karma dla królików','Turkey Feed':'Karma dla indyków','Llama Feed':'Karma dla lam','Nothing ready':'Nic gotowego','Ready!':'Gotowe!','Feed':'Nakarm','No hungry animals right now.':'Teraz nikt nie jest głodny.','Ran out of feed.':'Zabrakło paszy.','Let your farmer finish the current jobs first.':'Niech farmer najpierw skończy obecne zadania.','Wait for the farmer to finish there.':'Poczekaj, aż farmer tam skończy.','The farmer is still working there.':'Farmer wciąż tam pracuje.','Farmer is on the way':'Farmer już idzie',
+'Empty slot':'Wolne miejsce','Secret code':'Tajny kod','Unlock':'Odblokuj','Wrong code.':'Zły kod.','Unlimited cash unlocked!':'Nielimitowane pieniądze odblokowane!','Unlimited cash turned off.':'Nielimitowane pieniądze wyłączone.','Chicken Feed':'Karma dla kur','Duck Feed':'Karma dla kaczek','Sheep Feed':'Karma dla owiec','Cow Feed':'Karma dla krów','Goat Feed':'Karma dla kóz','Pig Feed':'Karma dla świń','Horse Feed':'Karma dla koni','Rabbit Feed':'Karma dla królików','Turkey Feed':'Karma dla indyków','Llama Feed':'Karma dla lam','Nothing ready':'Nic gotowego','Ready!':'Gotowe!','Feed':'Nakarm','No hungry animals right now.':'Teraz nikt nie jest głodny.','Ran out of feed.':'Zabrakło paszy.','Let your farmer finish the current jobs first.':'Niech farmer najpierw skończy obecne zadania.','Wait for the farmer to finish there.':'Poczekaj, aż farmer tam skończy.','The farmer is still working there.':'Farmer wciąż tam pracuje.','Farmer is on the way':'Farmer już idzie',
 'Materials drop while you harvest, collect from animals and pick fruit trees. Neighbors send them too. Spend them to upgrade your barn and animal homes.':'Materiały wypadają podczas zbiorów, odbierania produktów od zwierząt i zrywania owoców. Wysyłają je też sąsiedzi. Wydawaj je na rozbudowę stodoły i domów zwierząt.',
 'Grinds crops into animal feed and fertilizer.':'Mieli plony na paszę i nawóz.','Presses oily crops into diesel for your tractor, seeder and harvester.':'Wyciska oleiste plony na ropę dla traktora, siewnika i kombajnu.','Cooks farm goods into treats that sell for much more.':'Gotuje z plonów smakołyki, które sprzedają się dużo drożej.','Presses fruit into cider and juice that sell for a lot.':'Wyciska z owoców cydr i soki, które dobrze się sprzedają.','Bees make honey on their own. Flowers help them make more.':'Pszczoły same robią miód. Kwiaty pomagają im robić go więcej.','Cast a line with some bait and catch fresh fish.':'Zarzuć wędkę z przynętą i złów świeże ryby.',
 'Collects from every ready, fed animal right now.':'Od razu odbiera produkty od wszystkich gotowych, nakarmionych zwierząt.','Harvests every ripe crop right now.':'Od razu zbiera wszystkie dojrzałe plony.','Picks every ready fruit tree right now.':'Od razu zrywa owoce ze wszystkich gotowych drzew.','Every growing crop is ready to harvest.':'Każdy rosnący plon jest gotowy do zbioru.','Fills the fuel tank to the top.':'Napełnia bak do pełna.','One can of diesel: 10 fuel. Make your own at a Diesel Press.':'Jeden kanister ropy: 10 paliwa. Zrób własną w tłoczni ropy.','Fuel tank full.':'Bak pełny.','The tank is already full.':'Bak jest już pełny.','Topped up the tank with a can of diesel.':'Dolano kanister ropy do baku.',
@@ -6964,7 +6968,7 @@ function toastKind(m){
   if(/barn|collect|harvest|picked|got |stored/i.test(m))return'k-item';
   return'';
 }
-function hud(){
+function hud(){richTopUp();
   animCounters();
   if(shownLvl!==null&&S.level>shownLvl){const l=$('lvl').closest('.lvl');l.classList.remove('up');void l.offsetWidth;l.classList.add('up')}
   const xpTot=S.level*1e7+S.xp;if(shownXP!==null&&xpTot>shownXP)delta($('xptext').closest('.xpbox'),S.level>shownLvl?'Level up!':'+'+(S.xp-shownXPv)+' XP','xp');
@@ -8714,7 +8718,22 @@ function showSettings(){
     const r3=el('div','setbtns'),ex=el('button','btn2','Copy save code'),im=el('button','btn2','Load save code');
     ex.onclick=()=>{SFX.click();saveCodeModal()};im.onclick=()=>{SFX.click();loadCodeModal()};r3.appendChild(ex);r3.appendChild(im);p.appendChild(r3);
     p.appendChild(el('p','hint','Farm Village saves automatically in this browser. To move your farm to another browser, phone or the installed app, copy your save code here and load it there.'));
-    {const pv=el('p','hint');const a2=el('a',null,'Privacy policy');a2.href='privacy.html';a2.target='_blank';a2.rel='noopener';pv.appendChild(a2);p.appendChild(pv)};b.appendChild(p);
+    {const pv=el('p','hint');const a2=el('a',null,'Privacy policy');a2.href='privacy.html';a2.target='_blank';a2.rel='noopener';pv.appendChild(a2);p.appendChild(pv)};
+    // a tiny, unlabelled key at the very bottom opens the secret code box
+    {const k=el('button','secretkey');k.setAttribute('aria-label','Secret code');k.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 12h9M18 12v3M21 12v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';k.onclick=()=>{SFX.click();closeModal();secretModal()};p.appendChild(k)}
+    b.appendChild(p);
+  }});
+}
+// Secret code: the right code turns unlimited coins and Farm Cash on (or back off).
+const SECRET='2899',RICH_COINS=9999999,RICH_CASH=99999;
+function richTopUp(){if(S&&S.unlimited){if(S.coins<RICH_COINS)S.coins=RICH_COINS;if(S.cash<RICH_CASH)S.cash=RICH_CASH}}
+function secretModal(){
+  modal({title:'Secret code',color:'',small:true,render(b){
+    const p=el('div','body-pad'),i=document.createElement('input');i.type='password';i.inputMode='numeric';i.autocomplete='off';i.className='secretin';i.setAttribute('aria-label','Secret code');i.dataset.focus='1';
+    const go=el('button','go','Unlock'),msg=el('p','hint','');
+    const tryIt=()=>{if(i.value.trim()===SECRET){S.unlimited=!S.unlimited;if(S.unlimited){richTopUp();SFX.golden();confetti();toast('Unlimited cash unlocked!')}else toast('Unlimited cash turned off.');changed();hud();closeModal()}
+      else{SFX.error();i.value='';msg.textContent='Wrong code.';shakeEl(i)}};
+    go.onclick=tryIt;i.onkeydown=e=>{if(e.key==='Enter')tryIt()};p.appendChild(i);p.appendChild(go);p.appendChild(msg);b.appendChild(p);
   }});
 }
 function installHelp(){

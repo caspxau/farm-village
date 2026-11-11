@@ -1,7 +1,12 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Chicken Feed|मुर्गी का दाना
+x:`Secret code|गुप्त कोड
+Unlock|खोलें
+Wrong code.|गलत कोड।
+Unlimited cash unlocked!|असीमित पैसा खुल गया!
+Unlimited cash turned off.|असीमित पैसा बंद किया गया।
+Chicken Feed|मुर्गी का दाना
 Duck Feed|बत्तख का दाना
 Sheep Feed|भेड़ का चारा
 Cow Feed|गाय का चारा

@@ -1,7 +1,12 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Chicken Feed|鸡饲料
+x:`Secret code|秘密代码
+Unlock|解锁
+Wrong code.|代码错误。
+Unlimited cash unlocked!|无限金钱已解锁！
+Unlimited cash turned off.|无限金钱已关闭。
+Chicken Feed|鸡饲料
 Duck Feed|鸭饲料
 Sheep Feed|绵羊饲料
 Cow Feed|牛饲料

@@ -1,6 +1,11 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Chicken Feed|Aliment pour poules
+x:`Secret code|Code secret
+Unlock|Déverrouiller
+Wrong code.|Code incorrect.
+Unlimited cash unlocked!|Argent illimité débloqué !
+Unlimited cash turned off.|Argent illimité désactivé.
+Chicken Feed|Aliment pour poules
 Duck Feed|Aliment pour canards
 Sheep Feed|Aliment pour moutons
 Cow Feed|Aliment pour vaches

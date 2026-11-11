@@ -1,6 +1,11 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Chicken Feed|Ração para galinhas
+x:`Secret code|Código secreto
+Unlock|Desbloquear
+Wrong code.|Código errado.
+Unlimited cash unlocked!|Dinheiro ilimitado desbloqueado!
+Unlimited cash turned off.|Dinheiro ilimitado desativado.
+Chicken Feed|Ração para galinhas
 Duck Feed|Ração para patos
 Sheep Feed|Ração para ovelhas
 Cow Feed|Ração para vacas

@@ -1,6 +1,11 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Chicken Feed|Pienso para gallinas
+x:`Secret code|Código secreto
+Unlock|Desbloquear
+Wrong code.|Código incorrecto.
+Unlimited cash unlocked!|¡Dinero ilimitado desbloqueado!
+Unlimited cash turned off.|Dinero ilimitado desactivado.
+Chicken Feed|Pienso para gallinas
 Duck Feed|Pienso para patos
 Sheep Feed|Pienso para ovejas
 Cow Feed|Pienso para vacas
