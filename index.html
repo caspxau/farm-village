@@ -3143,6 +3143,31 @@ function drawTile(x,y,base){
   else drawGrass(x,y);
   if(o&&o.k==='plot')drawSoil(x,y,o);
 }
+// Where your land ends: the wild meadow outside is a touch darker, and a low dry-stone wall runs along the two
+// back edges (everything on the farm stands in front of it), with grass tufts at its foot.
+function landTint(r){
+  const A=P(0,0),B=P(N,0),C=P(N,N),D=P(0,N);
+  for(const[e,a]of[[0,.12],[.25,.05]]){const q=[P(-e,-e),P(N+e,-e),P(N+e,N+e),P(-e,N+e)];
+    g.beginPath();g.rect(r[0]-60,r[1]-60,r[2]-r[0]+120,r[3]-r[1]+120);g.moveTo(q[0][0],q[0][1]);for(let i=3;i>=1;i--)g.lineTo(q[i][0],q[i][1]);g.closePath();
+    g.fillStyle='rgba(26,44,10,'+a+')';g.fill('evenodd')}
+}
+function stoneWall(){
+  const P0=GROUND_PAL[season().id],tuft=NATURAL?P0.dk[1]:'#4e8624';
+  // a sunlit lip just inside the edge so the line reads even where the wall is hidden
+  g.lineCap='round';g.strokeStyle='rgba(255,248,200,.28)';g.lineWidth=2.2;
+  for(const[a,b]of[[P(.04,.04),P(N,.04)],[P(.04,.04),P(.04,N)]])line(a,b);
+  const run=(ax,ay,bx,by,seed)=>{const n=Math.round(Math.hypot(bx-ax,by-ay)*5);const st=[];
+    for(let i=0;i<=n;i++){const t=i/n;for(const row of[0,1]){if(row&&hash(i,seed+3)<.18)continue;const j=(hash(i,seed+row)-.5)*.06;st.push([ax+(bx-ax)*t+j,ay+(by-ay)*t-j,row,hash(i*7,seed+row)])}}
+    st.sort((p,q)=>p[2]-q[2]||(p[0]+p[1])-(q[0]+q[1]));
+    for(const[x,y,row,h]of st){const[px,py]=P(x,y),rw=3.3+h*1.5,rh=2.2+h*.9,col=['#a8a294','#9a948a','#b4ad9e','#8e8a80'][Math.floor(h*4)];
+      ball(px,py-2.2-row*3.6,rw,rh,col,'rgba(50,46,38,.55)',.5)}
+    for(let i=0;i<n;i+=2){const t=(i+hash(i,seed+9))/n,[px,py]=P(ax+(bx-ax)*t,ay+(by-ay)*t);if(hash(i,seed+5)<.5)continue;
+      g.strokeStyle=tuft;g.lineWidth=1.1;line([px-2,py+.5],[px-3,py-4]);line([px,py+.5],[px,py-5]);line([px+2,py+.5],[px+3,py-3.6])}
+  };
+  run(-.12,-.12,N+.02,-.12,11);run(-.12,-.12,-.12,N+.02,23);
+  // a squared corner stone where the two walls meet
+  const[cx,cy]=P(-.12,-.12);poly([[cx-5,cy-1],[cx,cy-3.5],[cx+5,cy-1],[cx+5,cy-9],[cx,cy-11.5],[cx-5,cy-9]],'#a49e90','rgba(50,46,38,.6)',.6);poly([[cx-5,cy-9],[cx,cy-11.5],[cx+5,cy-9],[cx,cy-6.5]],'#c2bcae','rgba(50,46,38,.5)',.5);
+}
 function drawFarmEdge(){
   // the farm sits on a low bank: a grassy lip over layered earth with pebbles and roots
   const L=P(0,N),B=P(N,N),R=P(N,0),d=24;
@@ -3160,6 +3185,7 @@ function drawFarmEdge(){
     if(NATURAL){g.fillStyle=soilPat();g.globalAlpha=.35;poly([dn(a,4),dn(b,4),dn(b,d),dn(a,d)]);g.fill();g.globalAlpha=1}
     const P0=GROUND_PAL[season().id];
     poly([a,b,dn(b,5),dn(a,5)],NATURAL?(lit?P0.dk[2]:P0.dk[0]):lit?'#68a832':'#589428');
+    g.strokeStyle='rgba(255,248,200,.3)';g.lineWidth=1.6;line(dn(a,-.6),dn(b,-.6));
     for(let i=0;i<n*2;i++){const t=(i+.5)/(n*2),x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,h=3+hash(i,seed+7)*4;poly([[x-2.4,y+4],[x+2.4,y+4],[x+.3,y+4+h]],NATURAL?(lit?P0.dk[0]:P0.dk[1]):lit?'#5d9a2c':'#4e8624')}
   };
   ell((L[0]+R[0])/2,B[1]+d+8,(R[0]-L[0])*.52,22,'rgba(30,60,10,.16)');
@@ -6638,7 +6664,8 @@ function paintChunk(which,i,j){
       g.fillStyle=fade(0,b[1],0,b[1]+m*.8);g.fillRect(b[0],b[1],bw,m*.8);g.fillStyle=fade(0,b[3],0,b[3]-m*.8);g.fillRect(b[0],b[3]-m*.8,bw,m*.8);
       g.globalCompositeOperation='source-over';
     }
-    drawMeadow([x0-20,y0-20,x1+20,y1+20]);for(const t of BORDER)if(t.back&&treeNear(t,r))drawWildTree(t);
+    drawMeadow([x0-20,y0-20,x1+20,y1+20]);landTint(r);for(const t of BORDER)if(t.back&&treeNear(t,r))drawWildTree(t);
+    {const A=P(0,0),B=P(N,0),D=P(0,N);if(overlaps(r,D[0]-20,A[1]-30,B[0]+20,Math.max(B[1],D[1])+20))stoneWall()}
     {const L=P(0,N),B=P(N,N),R=P(N,0);if(overlaps(r,L[0]-10,R[1]-10,R[0]+10,B[1]+60))drawFarmEdge()}
     {const a=P(-10,N+1.2),z=P(N+10,N+2.4);if(overlaps(r,a[0]-20,Math.min(a[1],z[1])-80,z[0]+20,Math.max(a[1],z[1])+80))drawRoad()}
     const t=rectTiles(x0-W,y0-H,x1+W,y1+H*3);
