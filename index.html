@@ -5353,16 +5353,16 @@ function drawObj(x,y,o,now,part){
     if(ROTATABLE.has(o.id)){const m=wallMask(x,y,o);return blit(sprite('d:'+o.id+':'+m,BOX1,()=>drawDeco(0,0,{k:'deco',id:o.id,m},0)),x,y)}
     return blit(sprite('d:'+o.id,size(o)===2?BOX2:BOX1,()=>drawDeco(0,0,{k:'deco',id:o.id},0)),x,y);
   }
-  if(o.k==='bld'){const lv=o.id==='barn'?(o.lv||barnLv()):(o.lv||houseLv());blit(sprite('b:'+o.id+':'+lv,BOX2,()=>drawBuilding(0,0,{id:o.id,lv})),x,y)}
+  if(o.k==='bld'){const lv=o.id==='barn'?(o.lv||barnLv()):(o.lv||houseLv());blit(mspr('b:'+o.id+':'+lv,BOX2,()=>drawBuilding(0,0,{id:o.id,lv}),o.r),x,y)}
   if(o.k==='mk'){
-    blit(sprite('m:'+o.id+':'+mkLv(o),BOX2,()=>drawMaker(0,0,o.id,mkLv(o))),x,y);
+    blit(mspr('m:'+o.id+':'+mkLv(o),BOX2,()=>drawMaker(0,0,o.id,mkLv(o)),o.r),x,y);
     if(ICON_MODE)return;
     const{done,cur}=makerJobs(o,now),[px,py]=P(x+1,y+1);
     if(cur){
       const k=Math.max(0,Math.min(1,1-(cur.end-now)/(cur.end-cur.start))),w=46;
       poly([[px-w/2,py+12],[px+w/2,py+12],[px+w/2,py+19],[px-w/2,py+19]],'rgba(255,250,240,.92)','#6b3c15',1);
       poly([[px-w/2+1.5,py+13.5],[px-w/2+1.5+(w-3)*k,py+13.5],[px-w/2+1.5+(w-3)*k,py+17.5],[px-w/2+1.5,py+17.5]],'#5bbf3a');
-      if(!reduce){const[sx,sy]=P(x+SMOKE[o.id][0],y+SMOKE[o.id][1],SMOKE[o.id][2]);for(let i=0;i<3;i++){const t=((now/1500)+i/3)%1;ell(sx+t*7,sy-t*22,2.5+t*4,2.2+t*3.4,'rgba(235,235,235,'+(.55*(1-t)).toFixed(3)+')')}}
+      if(!reduce){const[sma,smb]=o.r?[SMOKE[o.id][1],SMOKE[o.id][0]]:[SMOKE[o.id][0],SMOKE[o.id][1]],[sx,sy]=P(x+sma,y+smb,SMOKE[o.id][2]);for(let i=0;i<3;i++){const t=((now/1500)+i/3)%1;ell(sx+t*7,sy-t*22,2.5+t*4,2.2+t*3.4,'rgba(235,235,235,'+(.55*(1-t)).toFixed(3)+')')}}
     }
     if(done.length){goodBubble(px+20,py-80,MAKERS[o.id].recipes[done[0].r].out,now);
       if(done.length>1){ell(px+31,py-89,6,6,'#e0352b','#fff',1.4);g.font='600 8px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText(done.length,px+31,py-86)}}
@@ -5371,11 +5371,11 @@ function drawObj(x,y,o,now,part){
   if(o.k==='home'){
     const lv=o.lv||1;
     if(bigHome(o)){
-      if(part==='front'){blit(sprite('hf:'+o.id,BOXF,()=>drawHomeFront(0,0,o.id)),x,y);homeOverlay(x,y,o,now);return}
-      blit(sprite('h3:'+o.id+':'+lv,BOX3,()=>drawHome3(0,0,o.id,lv)),x,y);if(!ICON_MODE)homeIdle(x,y,o,now);
-      if(!part&&!ICON_MODE)blit(sprite('hf:'+o.id,BOXF,()=>drawHomeFront(0,0,o.id)),x,y);
+      if(part==='front'){blit(mspr('hf:'+o.id,BOXF,()=>drawHomeFront(0,0,o.id),o.r),x,y);homeOverlay(x,y,o,now);return}
+      blit(mspr('h3:'+o.id+':'+lv,BOX3,()=>drawHome3(0,0,o.id,lv),o.r),x,y);if(!ICON_MODE)homeIdle(x,y,o,now);
+      if(!part&&!ICON_MODE)blit(mspr('hf:'+o.id,BOXF,()=>drawHomeFront(0,0,o.id),o.r),x,y);
       return}
-    const ns=!ICON_MODE&&!!(HOUSED[o.id]&&HOUSED[o.id].length);blit(sprite('h:'+o.id+':'+lv+(ns?':e':''),BOX2,()=>drawHome(0,0,o.id,lv,ns)),x,y);
+    const ns=!ICON_MODE&&!!(HOUSED[o.id]&&HOUSED[o.id].length);blit(mspr('h:'+o.id+':'+lv+(ns?':e':''),BOX2,()=>drawHome(0,0,o.id,lv,ns),o.r),x,y);
     if(ICON_MODE)return;const[px,py]=P(x+1,y+1),c=ANC[o.id]||0,sg=homeSign(o.id,c,homeCap(o.id)),ss=Math.max(1,.85/cam.z)*.6;g.drawImage(sg.c,px-sg.w*ss/2,py+4,sg.w*ss,sg.h*ss);
   }
 }
@@ -5525,9 +5525,19 @@ function homeGeo(id){
   const a0=(R[0][2]-R[0][0])*(R[0][3]-R[0][1]),a1=Math.max(0,(R[1][2]-R[1][0])*(R[1][3]-R[1][1]));
   return GEO[id]={b,tr,R,w0:a0/(a0+a1),style:st};
 }
+// Turned buildings are drawn mirrored. On this grid a mirror swaps a footprint's two axes, so every spot inside a
+// turned home (pen floor, trough, door) is the same spot with its two coordinates swapped.
+function homeRot(h){const o=S&&S.tiles[h[0]+','+h[1]];return!!(o&&o.r)}
+function geoAt(h,id){const G=homeGeo(id);if(!homeRot(h))return G;const k=id+':r';
+  return GEO[k]||(GEO[k]={b:[G.b[1],G.b[0],G.b[3],G.b[2]],tr:[G.tr[1],G.tr[0]],R:G.R.map(r=>[r[1],r[0],r[3],r[2]]),w0:G.w0,style:G.style})}
+function swp(h,a,b){return homeRot(h)?[b,a]:[a,b]}
+// a mirrored copy of a building sprite (drawn mirrored before the painted finish, so the light still comes from the top left)
+function mspr(key,box,draw,r){return r?sprite(key+':m',[-box[2],box[1],-box[0],box[3]],()=>{g.scale(-1,1);draw()}):sprite(key,box,draw)}
+const TURNS=new Set(['home','bld','mk']);
+function canTurn(o){return!!o&&(ROTATABLE.has(o.id)||TURNS.has(o.k))}
 // a random free spot on the pen floor
-function penSpot(h,id){const G=homeGeo(id),R=Math.random()<G.w0?G.R[0]:G.R[1];return[h[0]+R[0]+Math.random()*(R[2]-R[0]),h[1]+R[1]+Math.random()*(R[3]-R[1])]}
-function inPen(h,id,ax,ay){const G=homeGeo(id),u=ax-h[0],v=ay-h[1];for(const R of G.R)if(u>=R[0]-.05&&u<=R[2]+.05&&v>=R[1]-.05&&v<=R[3]+.05)return true;return false}
+function penSpot(h,id){const G=geoAt(h,id),R=Math.random()<G.w0?G.R[0]:G.R[1];return[h[0]+R[0]+Math.random()*(R[2]-R[0]),h[1]+R[1]+Math.random()*(R[3]-R[1])]}
+function inPen(h,id,ax,ay){const G=geoAt(h,id),u=ax-h[0],v=ay-h[1];for(const R of G.R)if(u>=R[0]-.05&&u<=R[2]+.05&&v>=R[1]-.05&&v<=R[3]+.05)return true;return false}
 /* ---- wooden pieces ---- */
 const WOOD='#a07a4e';
 function post(px,py,h,col){poly([[px-1.8,py+.5],[px+1.8,py+.5],[px+1.8,py-h],[px,py-h-1.4],[px-1.8,py-h]],col||WOOD,'rgba(50,32,14,.55)',.6);poly([[px+.4,py+.5],[px+1.8,py+.5],[px+1.8,py-h],[px+.4,py-h-.6]],'rgba(40,24,8,.25)')}
@@ -5694,7 +5704,7 @@ function bigBubble(px,py,now,draw,count,state){
   return y;
 }
 function homeOverlay(x,y,o,now){
-  if(ICON_MODE||VIS)return;const G=homeGeo(o.id),hk=x+','+y,st=homeStats(now)[hk]||{keys:[],ready:[],hungry:[]},cap=Math.floor(HOMES[o.id].cap*HOME_MULT[o.lv||1]);
+  if(ICON_MODE||VIS)return;const G=geoAt([x,y],o.id),hk=x+','+y,st=homeStats(now)[hk]||{keys:[],ready:[],hungry:[]},cap=Math.floor(HOMES[o.id].cap*HOME_MULT[o.lv||1]);
   const[b0,b1,b2,b3]=G.b,top=G.style==='barn'?62:G.style==='stilts'?48:G.style==='stable'||G.style==='lodge'?50:G.style==='hutch'?38:38;
   const[sx,sy]=P(x+(b0+b2)/2,y+(b1+b3)/2,top),sg=homeSign(o.id,st.keys.length,cap),ss=Math.max(1,.85/cam.z)*.62;
   g.drawImage(sg.c,sx-sg.w*ss/2,sy-sg.h*ss,sg.w*ss,sg.h*ss);
@@ -5711,16 +5721,16 @@ function bigGlyph(id){
   g.save();g.scale(1.1,1.1);glyph(0,0,k);g.restore();
 }
 function homeIdle(x,y,o,now){
-  const G=homeGeo(o.id),st=G.style,[b0,b1,b2,b3]=G.b;
+  const G=homeGeo(o.id),st=G.style,[b0,b1,b2,b3]=G.b,Lp=(u,v,z)=>o.r?P(x+v,y+u,z):P(x+u,y+v,z);
   if(st==='stilts'){// the pop-hole door, hinged on its left, swings a little and now and then blows wide
-    const dm=x+b0+(b2-b0)/2,yy=y+b3,cyc=reduce?0:(now/1000+x*1.7)%11,big=cyc>8?Math.sin((cyc-8)/3*Math.PI):0,a=1.05+(reduce?0:Math.sin(now/700+x)*.12)+big*.45;
+    const dm=b0+(b2-b0)/2,yy=b3,cyc=reduce?0:(now/1000+x*1.7)%11,big=cyc>8?Math.sin((cyc-8)/3*Math.PI):0,a=1.05+(reduce?0:Math.sin(now/700+x)*.12)+big*.45;
     const hx=dm-.14,ex=hx+.28*Math.cos(a),ey=yy+.28*Math.sin(a),z0=11,z1=23;
-    poly([P(hx,yy,z0),P(ex,ey,z0),P(ex,ey,z1),P(hx,yy,z1)],'#9a4a34','rgba(40,14,6,.6)',.6);
-    g.strokeStyle='#f2eee6';g.lineWidth=1;line(P(hx,yy,z0+1),P(ex,ey,z1-1));line(P(hx,yy,z1-1),P(ex,ey,z0+1));
+    poly([Lp(hx,yy,z0),Lp(ex,ey,z0),Lp(ex,ey,z1),Lp(hx,yy,z1)],'#9a4a34','rgba(40,14,6,.6)',.6);
+    g.strokeStyle='#f2eee6';g.lineWidth=1;line(Lp(hx,yy,z0+1),Lp(ex,ey,z1-1));line(Lp(hx,yy,z1-1),Lp(ex,ey,z0+1));
   }
   if(reduce||cam.z<.6)return;
   const grazer=['barn','pen','stone','stable','lodge'].includes(st),t=performance.now();
-  if(grazer&&Math.random()<.012){const[hx2,hy2]=P(x+2.5,y+.5);parts.push({x:hx2+(Math.random()-.5)*14,y:hy2-8-Math.random()*6,vx:.25+Math.random()*.3,vy:-.15,gr:.004,c:Math.random()<.5?'#e8cc70':'#cfa848',t0:t,life:1.8,kind:'straw'})}
+  if(grazer&&Math.random()<.012){const[hx2,hy2]=Lp(2.5,.5);parts.push({x:hx2+(Math.random()-.5)*14,y:hy2-8-Math.random()*6,vx:.25+Math.random()*.3,vy:-.15,gr:.004,c:Math.random()<.5?'#e8cc70':'#cfa848',t0:t,life:1.8,kind:'straw'})}
 }
 function bubbleAt(cx,cy){for(let i=HBUB.length-1;i>=0;i--){const b=HBUB[i];if(Math.hypot(cx-b.x,cy-b.y)<=b.r)return b}return null}
 function tapBubble(b){
@@ -5766,7 +5776,7 @@ function penLife(k,o,r,h,dt,now,mates){
   // outside the pen: nearby (its home was moved, or it was pushed out) it walks back in; far off (just loaded, new) it is simply there
   if(!inPen(h,o.id,ax,ay)&&!r.walkIn){const p=penSpot(h,o.id);if(Math.hypot(ax-h[0]-1.5,ay-h[1]-1.5)<5){r.walkIn=true;r.gx=p[0];r.gy=p[1];r.mode='walk'}else{ax=p[0];ay=p[1];r.mode=null}}
   // feeding: the animal trots to the trough and eats; hungry ones sit and wait
-  const fedNow=!hungry(o);if(r.wasFed===false&&fedNow){r.jump=performance.now();for(let i=0;i<2;i++)fxAdd({k:'heart',x:ax,y:ay,h:26*(SPEC_SC[o.id]||1),dx:(i-.5)*10});const G=homeGeo(o.id);r.gx=h[0]+G.tr[0]+.1+Math.random()*.55;r.gy=h[1]+G.tr[1]+.32+Math.random()*.12;r.mode='walk';r.eat=1}
+  const fedNow=!hungry(o);if(r.wasFed===false&&fedNow){r.jump=performance.now();for(let i=0;i<2;i++)fxAdd({k:'heart',x:ax,y:ay,h:26*(SPEC_SC[o.id]||1),dx:(i-.5)*10});const G=geoAt(h,o.id),[ox_,oy_]=swp(h,.1+Math.random()*.55,.32+Math.random()*.12);r.gx=h[0]+G.tr[0]+ox_;r.gy=h[1]+G.tr[1]+oy_;r.mode='walk';r.eat=1}
   r.wasFed=fedNow;
   const sp0=BIRD[o.id]||o.id==='rabbit'?.42:.3;
   if(reduce){r.mv=0;r.act='stand'}
@@ -5803,7 +5813,7 @@ function penLife(k,o,r,h,dt,now,mates){
     if(walking){const push=Math.min(m-d,.9*dt)*(q.mode==='walk'?.5:1);ax+=dx/d*push;ay+=dy/d*push}
     // two resting on top of each other (after a feed or a move-in): the later one gets up and wanders off
     else if(d<m*.5&&!pend[k]&&r.mode==='act'&&r.act!=='hungry'&&q.mode!=='walk'&&(r.seed||0)>(q.seed||0))r.at=Math.min(r.at,0)}
-  if(!r.walkIn&&!inPen(h,o.id,ax,ay)){const G=homeGeo(o.id);let best=null,bd=9;for(const R of G.R){const cx=Math.max(h[0]+R[0],Math.min(h[0]+R[2],ax)),cy=Math.max(h[1]+R[1],Math.min(h[1]+R[3],ay)),dd=Math.hypot(cx-ax,cy-ay);if(dd<bd){bd=dd;best=[cx,cy]}}ax=best[0];ay=best[1]}
+  if(!r.walkIn&&!inPen(h,o.id,ax,ay)){const G=geoAt(h,o.id);let best=null,bd=9;for(const R of G.R){const cx=Math.max(h[0]+R[0],Math.min(h[0]+R[2],ax)),cy=Math.max(h[1]+R[1],Math.min(h[1]+R[3],ay)),dd=Math.hypot(cx-ax,cy-ay);if(dd<bd){bd=dd;best=[cx,cy]}}ax=best[0];ay=best[1]}
   r._ax=ax;r._ay=ay;r._rad=rad;r.x=ax-bx;r.y=ay-by;
 }
 function animalPose(o,r,now){
@@ -6530,7 +6540,7 @@ function updateAnimals(dt){
   for(const k in S.tiles){
     const o=S.tiles[k];if(o.k!=='animal'||(held&&held.has(k)))continue;const r=roamOf(k);
     if(isHoused(k)){const h=yardOf(k,o.id);if(!h)continue;if(pens[h[0]+','+h[1]])continue;r.mv=0;const bx=parseFloat(k)+.5,by=.5,cx=bx+r.x,cy=by+r.y;
-      const out=cx<h[0]+.1||cx>h[0]+1.9||cy<h[1]+1.1||cy>h[1]+1.9;
+      const[lu,lv]=swp(h,cx-h[0],cy-h[1]),out=lu<.1||lu>1.9||lv<1.1||lv>1.9;
       if(out&&!r.walkIn){const p=yardSpot(h);r.x=r.tx=p[0]-bx;r.y=r.ty=p[1]-by}
       if(reduce||pend[k]){if(pend[k])r.wait=Math.max(r.wait,1);continue}
       if(r.wait>0){r.wait-=dt;continue}
@@ -6565,7 +6575,7 @@ function vis(x,y){if(x<=HX+.5){const r=ROAM[Math.round(x)+',0'];if(r)return[x+r.
 let HOMEPOS={},HOUSED={};
 // which home's yard a housed animal lives in: homes fill up 7 at a time, in order
 function yardOf(k,id){const hs=HOMEPOS[id],list=HOUSED[id];if(!hs||!hs.length||!list)return null;let i=Math.max(0,list.indexOf(k));for(const h of hs){const o=S.tiles[h[0]+','+h[1]],c=Math.floor(HOMES[id].cap*HOME_MULT[(o&&o.lv)||1]);if(i<c)return h;i-=c}return hs[hs.length-1]}
-function yardSpot(h){const o=S.tiles[h[0]+','+h[1]];if(bigHome(o))return penSpot(h,o.id);return[h[0]+.22+Math.random()*1.56,h[1]+1.2+Math.random()*.62]}
+function yardSpot(h){const o=S.tiles[h[0]+','+h[1]];if(bigHome(o))return penSpot(h,o.id);const[a,b]=swp(h,.22+Math.random()*1.56,1.2+Math.random()*.62);return[h[0]+a,h[1]+b]}
 // move animals in or out of their homes to match the setting (and homes being built or removed)
 function syncHousing(){
   if(!S||VIS||placing)return false;let moved=false;const home=animalsHome();
@@ -6800,7 +6810,7 @@ function frame(t){
   if(VIS)for(const k in S.tiles){const o=S.tiles[k];if(o.helped){const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5);ell(px,py-4,6,6,'#5bbf3a','#fff',1.4);g.strokeStyle='#fff';g.lineWidth=1.6;line([px-2.6,py-4],[px-.6,py-2]);line([px-.6,py-2],[px+2.8,py-6.4])}}
   if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);
     const c=placing.carry;if(c){const dx=hover[0]-c.from[0],dy=hover[1]-c.from[1],ks=[...c.keys].sort((a,b)=>{const p=animalPos(a),q=animalPos(b);return p[0]+p[1]-q[0]-q[1]});
-      for(const k of ks){const r=roamOf(k),x0=r.x,y0=r.y;r.x+=dx;r.y+=dy;try{drawAnimal(parseFloat(k),0,S.tiles[k],now)}finally{r.x=x0;r.y=y0}}}
+      const fl=!!placing.ghost.r!==!!c.r0;for(const k of ks){const r=roamOf(k),x0=r.x,y0=r.y;if(fl){const[ax,ay]=animalPos(k),u=ax-c.from[0],v=ay-c.from[1];r.x+=v-u;r.y+=u-v}r.x+=dx;r.y+=dy;try{drawAnimal(parseFloat(k),0,S.tiles[k],now)}finally{r.x=x0;r.y=y0}}}
     g.globalAlpha=1}}
   drawPending(now);drawTutArrow(now);
   blitLayer('front');
@@ -8103,7 +8113,7 @@ function finishJob(j,now){
     }else if(j.kind==='fertilize'){
       if(o&&o.k==='plot'&&o.crop&&!o.fert&&have('fert')>0){takeGood('fert',1);o.fert=true;if(!o.gold&&Math.random()<.08)o.gold=true;stat('fertilize');SFX.plant();floatText(x,y-.6,'Fertilized: double harvest','#c8f59a')}
     }else if(j.kind==='feed'){
-      if(o&&hungry(o)){const[fk,need]=feedPick(o.id);if(have(fk)>=need){takeGood(fk,need);spent+=need;o.fed=true;o.t=now;stat('feed');burst(x,y,['#e8c25a','#c9a46a','#fff3b0']);if(x<=HX){const h=yardOf(k,o.id),G=homeGeo(o.id);if(h&&bigHome(S.tiles[h[0]+','+h[1]])&&!FX.some(f=>f.k==='pour'&&f.h===h))fxAdd({k:'pour',h,x:h[0]+G.tr[0]+.4,y:h[1]+G.tr[1]+.08})}}else{SFX.error();toast('Ran out of feed.')}}
+      if(o&&hungry(o)){const[fk,need]=feedPick(o.id);if(have(fk)>=need){takeGood(fk,need);spent+=need;o.fed=true;o.t=now;stat('feed');burst(x,y,['#e8c25a','#c9a46a','#fff3b0']);if(x<=HX){const h=yardOf(k,o.id),G=h&&geoAt(h,o.id),pd=h&&swp(h,.4,.08);if(h&&bigHome(S.tiles[h[0]+','+h[1]])&&!FX.some(f=>f.k==='pour'&&f.h===h))fxAdd({k:'pour',h,x:h[0]+G.tr[0]+pd[0],y:h[1]+G.tr[1]+pd[1]})}}else{SFX.error();toast('Ran out of feed.')}}
     }else if(j.kind==='fert'&&VIS){
       if(o&&!o.helped){o.helped=true;helpDone(x,y)}
     }
@@ -8311,6 +8321,7 @@ function infoCard(key){
   c.appendChild(el('p',null,line));
   if(k!=null){const b=el('div','pbar');b.innerHTML='<i style="width:'+Math.max(0,Math.min(100,k*100))+'%"></i>';c.appendChild(b)}
   const row=el('div','row'),mv=el('button','btn2','Move');mv.onclick=()=>{c.hidden=true;startMove(key)};row.appendChild(mv);
+  if(canTurn(o)&&!ROTATABLE.has(o.id)){const tb=el('button','btn2','Turn ↻');tb.onclick=()=>{turnAt(homeKeyFor(key))};row.appendChild(tb)}
   if(o.k==='deco'&&o.id==='sprinkler'&&(o.w??60)<SPR_MAX-1){const fl=el('button','btn2','Fill · '+SPR_FILL+' coins');fl.onclick=()=>{if(S.coins<SPR_FILL){SFX.error();toast('You need '+SPR_FILL+' coins to fill it with well water.');return}S.coins-=SPR_FILL;o.w=SPR_MAX;SFX.water();c.hidden=true;toast('The Auto Waterer is full.');changed()};row.appendChild(fl)}
   if(o.k!=='bld'){const rm=el('button','btn2','Remove');rm.onclick=()=>{if(rm.dataset.sure){c.hidden=true;removeAt(key)}else{rm.dataset.sure='1';rm.textContent='Sure?';rm.classList.add('danger')}};row.appendChild(rm)}
   c.appendChild(row);c.hidden=false;
@@ -8327,7 +8338,12 @@ function startMove(key){
 function homeKeyFor(key){if(!isHoused(key))return key;const o=S.tiles[key],h=o&&yardOf(key,o.id);return h?h[0]+','+h[1]:key}
 function carriedBy(key,o){if(!o||o.k!=='home')return null;const[hx,hy]=key.split(',').map(Number),out=[];
   for(const k in S.tiles){const a=S.tiles[k];if(a.k==='animal'&&isHoused(k)&&a.id===o.id){const h=yardOf(k,a.id);if(h&&h[0]===hx&&h[1]===hy)out.push(k)}}
-  return out.length?{keys:new Set(out),from:[hx,hy]}:null}
+  return out.length?{keys:new Set(out),from:[hx,hy],r0:o.r}:null}
+function turnCarried(c){if(!c)return;const[hx,hy]=c.from;for(const k of c.keys){const r=roamOf(k),bx=parseFloat(k)+.5,by=.5;
+    for(const[a,b]of[['x','y'],['tx','ty']])if(r[a]!=null){const ax=bx+r[a]-hx,ay=by+r[b]-hy;r[a]=hx+ay-bx;r[b]=hy+ax-by}
+    for(const[a,b]of[['gx','gy'],['_ax','_ay']])if(r[a]!=null){const ax=r[a]-hx,ay=r[b]-hy;r[a]=hx+ay;r[b]=hy+ax}}}
+function turnAt(key){const o=S.tiles[key];if(!canTurn(o))return;if(pend[key]){toast('Wait for the farmer to finish there.');return}
+  const c=carriedBy(key,o);o.r=o.r?0:1;turnCarried(c);SFX.place();changed()}
 function shiftCarried(c,dx,dy){if(!c)return;for(const k of c.keys){const r=roamOf(k);for(const[a,b]of[['x','y'],['tx','ty'],['gx','gy'],['_ax','_ay']])if(r[a]!=null){r[a]+=dx;r[b]+=dy}}}
 function removeAt(key){
   const o=S.tiles[key];if(!o||o.k==='bld')return;if(pend[key]){toast('The farmer is still working there.');return}
@@ -8339,7 +8355,7 @@ function rotatePlacing(){placing.ghost.r=placing.ghost.r?0:1;SFX.click()}
 function startPlacing(o){
   const n=size(o.ghost);placing=Object.assign({n},o);
   if(o.ghost.k==='animal'&&!o.move&&animalsHome()){placing.home=true;const h=(HOMEPOS[o.ghost.id]||[])[0];place(h?h[0]+1:N>>1,h?h[1]+1:N>>1);return}
-  $('rotBtn').hidden=!ROTATABLE.has(o.ghost.id);
+  $('rotBtn').hidden=!canTurn(o.ghost);
   toast(o.move?'Pick a new spot for the '+o.name.toLowerCase()+'.':'Click empty grass to place the '+o.name.toLowerCase()+'. Press Escape to stop.');
 }
 function stopPlacing(){
@@ -8350,7 +8366,7 @@ function stopPlacing(){
 function place(x,y){
   const p=placing;
   if(!p.home&&!fits(x,y,p.n)){SFX.error();toast('That spot is taken. Pick empty grass.');return}
-  if(p.move){S.tiles[x+','+y]=p.ghost;if(p.carry)shiftCarried(p.carry,x-p.carry.from[0],y-p.carry.from[1]);placing=null;$('rotBtn').hidden=true;SFX.place();changed();return}
+  if(p.move){S.tiles[x+','+y]=p.ghost;if(p.carry&&!!p.ghost.r!==!!p.carry.r0)turnCarried(p.carry);if(p.carry)shiftCarried(p.carry,x-p.carry.from[0],y-p.carry.from[1]);placing=null;$('rotBtn').hidden=true;SFX.place();changed();return}
   if(p.ghost.k==='animal'){const id=p.ghost.id;
     if(!hasHome(id)){SFX.error();toast('Build a '+HOMES[id].name+' first. Find it in Market > Homes.');placing=null;return}
     if((ANC[id]||0)>=homeCap(id)){SFX.error();toast('Your '+HOMES[id].name+(HC[id]>1?'s are':' is')+' full. Build another one for more room.');placing=null;return}}
@@ -8492,7 +8508,7 @@ document.querySelectorAll('.tool[data-tool]').forEach(b=>b.addEventListener('cli
 }));
 $('seedchip').onclick=()=>{SFX.click();closePops();openMarket('seeds')};
 addEventListener('keydown',e=>{
-  if((e.key==='r'||e.key==='R')&&placing&&ROTATABLE.has(placing.ghost.id)&&!(e.target instanceof HTMLInputElement)){rotatePlacing();return}
+  if((e.key==='r'||e.key==='R')&&placing&&canTurn(placing.ghost)&&!(e.target instanceof HTMLInputElement)){rotatePlacing();return}
   if(e.key!=='Escape')return;
   if(!$('toolPop').hidden||!$('morePop').hidden)closePops();else if(mq.length&&!mq[0].noClose)closeModal();else if(placing){stopPlacing();toast('Stopped placing.')}else if(tool!=='multi')setTool('multi');
 });
