@@ -41,10 +41,12 @@ your farmhouse, and dress your farmer just the way you like.
 - Ribbons, collections, daily goals and quests
 - Plays in portrait or landscape, works offline
 - No ads, no accounts, no data collected
+- Optional Farm Cash packs for premium outfits, furniture and decorations
 
 **Category:** Games > Simulation. **Tags:** Farming, Casual, Offline.
 **Content rating:** fill the IARC questionnaire: no violence, no user interaction or
-chat, no purchases, no ads. Expect "Everyone" / PEGI 3.
+chat, no ads, **in-app purchases: yes** (Farm Cash, digital goods). Expect "Everyone" / PEGI 3 with the
+"In-app purchases" notice.
 **Data safety:** "No data collected" and "No data shared" (the game only stores the save
 on the device).
 
@@ -80,10 +82,46 @@ named exactly `caspxau.github.io` (this repo only serves `/farm-village/`).
    (Google's app signing key). Add it to the list above, or the installed Play version
    will show a URL bar.
 
+## In-app purchases (Farm Cash packs)
+
+The game sells Farm Cash through Google Play Billing, which a TWA reaches through the web
+Digital Goods API. Outside the Play app (the plain website) the Cash Shop still shows, but
+the buy buttons only explain that purchases need the app.
+
+1. Bubblewrap: in `twa-manifest.json` set `"features": {"playBilling": {"enabled": true}}`,
+   then `bubblewrap update` and `bubblewrap build`. This adds the billing library and the
+   `com.android.vending.BILLING` permission to the Android wrapper.
+2. Play Console > Monetize > Payments profile: set up a merchant account (needed before
+   you can sell anything).
+3. Play Console > Monetize > Products > In-app products: create five **consumable**
+   products with exactly these ids (the game matches them in `CASH_PACKS` in `index.html`):
+
+   | Product id | Farm Cash | Suggested price |
+   |---|---|---|
+   | `cash_10` | 10 | $0.99 |
+   | `cash_55` | 55 | $4.99 |
+   | `cash_120` | 120 | $9.99 |
+   | `cash_260` | 260 | $19.99 |
+   | `cash_700` | 700 | $49.99 |
+
+   The game shows Play's local price for each pack once it is available; the dollar prices
+   in `CASH_PACKS` are only a fallback label.
+4. Add your Google account as a **licence tester** (Setup > Licence testing) to buy packs
+   for free while testing the closed track.
+5. Data safety: purchases are processed by Google Play; the game itself only keeps the
+   purchase token on the device (never sent anywhere), so "No data collected" still holds.
+   Update the store listing content rating answers to say the app has in-app purchases.
+
+How it works in the code: `showCashShop()` lists the packs, `buyPack()` opens the Play
+payment sheet with `PaymentRequest`, and `grantPurchase()` adds the Farm Cash once per
+purchase token (kept in `S.iap`) and then consumes the purchase so it can be bought again.
+On every launch `claimPending()` delivers any purchase that was paid for but not yet
+granted (for example if the app closed mid-purchase).
+
 ## Play Console steps
 
 1. Create the app (free game), fill Store listing with the text and images above.
-2. App content: privacy policy URL, ads = no, content rating, target audience
+2. App content: privacy policy URL, ads = no, content rating (with in-app purchases), target audience
    (13+ is simplest; choosing under 13 adds the Families policy review), data safety.
 3. New personal developer accounts must run a **closed test with at least 12 testers
    for 14 days** before production is unlocked. Start this early.

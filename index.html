@@ -1031,6 +1031,22 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 .go[disabled],.buy[disabled]{background:#d2c9b8;color:#fff;box-shadow:none}
 .buy{border-radius:10px;font-weight:800;background:linear-gradient(#67a54d,#4a8436);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 1px 0 #335e24,0 3px 8px rgba(58,107,42,.22)}
 .buy.cashbuy{background:linear-gradient(#4f9a6c,#377a50)}
+.cashshop .csbal{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--f-display);font-size:22px;color:#1f6b28;margin:2px 0 4px}
+.cashshop .csbal span:last-child{font-size:15px;color:#4a6b4f}
+.cashshop .csgrid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr))}
+.cspack{border-color:#86c48f;background:linear-gradient(#ffffff,#effaf0)!important;padding-top:14px}
+.cspack.hot{border-color:#e5b440;background:linear-gradient(#fffdf0,#fff3c8)!important}
+.cspack .csart{height:84px;display:grid;place-items:center}
+.cspack .csamt{display:flex;align-items:center;gap:6px;font-family:var(--f-display);font-size:24px;color:#1f6b28}
+.cspack .csbonus{color:#c0392b;font-weight:700}
+.cspack .cstag{position:absolute;top:-2px;left:50%;transform:translateX(-50%);background:#e0352b;color:#fff;font-family:var(--f-display);font-size:12px;padding:2px 10px;border-radius:0 0 10px 10px;white-space:nowrap}
+.cspack .buy{width:100%;font-size:16px;margin-top:auto}
+.cashshop .csgo{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.cashshop .csfine{font-size:12px;opacity:.75;text-align:center}
+.ptag.prem,.icard .ptag.prem{background:linear-gradient(#7fd88a,#3faa4a);color:#fff;border-color:#1f6b28}
+.icard.prem{border-color:#e5b440!important;background:linear-gradient(#fffdf0,#fff3c8)!important}
+.card.prem{border-color:#e5b440;background:linear-gradient(#fffdf0,#fff3c8)}
+.premtag{position:absolute;top:6px;right:6px;background:linear-gradient(#ffd75a,#e5a820);color:#5a3a00;font-family:var(--f-display);font-size:10px;padding:1px 7px;border-radius:8px;border:1.5px solid #a87e1c}
 .buy.needhome{background:linear-gradient(#e0b352,#c08c2c);box-shadow:0 1px 0 #8a6216}
 .btn2{background:#fff;border:1px solid var(--line-2);box-shadow:var(--sh-1);font-weight:800;color:var(--ink)}
 .btn2:active{box-shadow:0 1px 1px rgba(0,0,0,.15)}
@@ -1705,7 +1721,7 @@ body header.hud .pill:hover{filter:brightness(1.03)}
     <div class="xpbox"><span class="xplabel"><span>To level <b id="lvlnext">2</b></span><span id="xpleft">30 to go</span></span><div class="xpbar"><i id="xpfill" style="width:0%"></i><span class="xptext" id="xptext">0 / 30 XP</span></div></div>
   </div>
   <div class="pill coins" title="Coins"><span class="coin"></span><b id="coins">0</b></div>
-  <div class="pill cashp" title="Farm Cash"><span class="bill">$</span><b id="cash">0</b><button class="plus" id="cashPlus" aria-label="Spend Farm Cash in the market">+</button></div>
+  <div class="pill cashp" title="Farm Cash"><span class="bill">$</span><b id="cash">0</b><button class="plus" id="cashPlus" aria-label="Get Farm Cash">+</button></div>
   <button class="pill wxchip" id="wxchip" aria-label="Season guide"></button>
 <button class="pill fuelpill" id="fuelchip" hidden aria-label="Fuel tank: refuel with diesel from the barn"><img class="fuelico" alt="" id="fuelimg"><span id="fuellabel">Fuel</span><b id="fueltext">50 / 50</b><div class="fuelbar"><i id="fuelfill"></i></div></button>
 </header>
@@ -1899,6 +1915,8 @@ function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.relo
 // Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
 // Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
 const PL_EXACT={
+"Cash Shop":"Sklep z farmdolarami","Get Farm Cash":"Zdobądź farmdolary","Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.":"Za farmdolary kupisz stroje premium, meble, dekoracje i pomocników. Co 5 poziomów i za cele dnia nadal dostajesz trochę za darmo.","Popular":"Popularne","Best value":"Najlepsza oferta","Spend it":"Wydaj je","Premium outfits":"Stroje premium","Premium furniture":"Meble premium","Premium decorations":"Dekoracje premium","Premium":"Premium","Purchases are made through Google Play. Farm Cash is stored on this device with your farm.":"Zakupy odbywają się przez Google Play. Farmdolary są zapisane na tym urządzeniu razem z farmą.","Buying Farm Cash works in the Farm Village app from Google Play.":"Farmdolary można kupić w aplikacji Farm Village z Google Play.","The purchase did not go through.":"Zakup się nie udał.","Chef hat":"Czapka kucharza","Wizard hat":"Kapelusz czarodzieja","Pirate hat":"Kapelusz pirata","Viking helmet":"Hełm wikinga","Hawaiian shirt":"Koszula hawajska","Tuxedo":"Smoking","Royal robe":"Szata królewska","Tartan kilt":"Kilt w kratę","Golden overalls":"Złote ogrodniczki","Bow tie":"Muszka","Gold chain":"Złoty łańcuch","Hero cape":"Peleryna bohatera","Fairy wings":"Skrzydła wróżki","Fish Tank":"Akwarium","Arcade Machine":"Automat do gier","Grand Piano":"Fortepian","Bright tropical fish to feed.":"Kolorowe rybki tropikalne do karmienia.","Play a round for a few coins every half hour.":"Zagraj rundę i zgarnij monety co pół godziny.","Play a tune for bonus XP every hour.":"Zagraj melodię i zdobądź bonusowe XP co godzinę.","Royal Damask":"Królewski adamaszek","Marble Tiles":"Płytki marmurowe","Golden Gnome":"Złoty krasnal","Rainbow Arch":"Tęczowy łuk","Unicorn Statue":"Posąg jednorożca","Feed the fish":"Nakarm rybki","Play the piano":"Zagraj na fortepianie","Play a game":"Zagraj w grę","Feeding the fish":"Karmienie rybek","Playing piano":"Gra na fortepianie","Playing":"Granie","The fish swim up for their food.":"Rybki podpływają po jedzenie.","What a lovely tune!":"Co za piękna melodia!",
+
 "Plow here":"Zaoraj tutaj","Free":"Za darmo","No ingredients":"Bez składników","New level":"Nowy poziom","New in the Market":"Nowości na targu","Press back again to leave Farm Village.":"Naciśnij wstecz jeszcze raz, aby wyjść z Farm Village.","Privacy policy":"Polityka prywatności","Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.":"Potrzebujesz więcej pola? Dotknij trawy i naciśnij Zaoraj tutaj. Albo przytrzymaj palec na trawie i przeciągnij, aby zaorać cały rząd.","That is the top ribbon. Legendary!":"To najwyższa wstęga. Legenda!","Your farm keeps growing.":"Twoja farma wciąż rośnie.","Way to go!":"Brawo!","Check out what is new in the Market.":"Zobacz, co nowego na targu.","Yellow ribbon":"Żółta wstęga","White ribbon":"Biała wstęga","Red ribbon":"Czerwona wstęga","Blue ribbon":"Niebieska wstęga","Can you earn the White ribbon next?":"Zdobędziesz teraz białą wstęgę?","Can you earn the Red ribbon next?":"Zdobędziesz teraz czerwoną wstęgę?","Can you earn the Blue ribbon next?":"Zdobędziesz teraz niebieską wstęgę?","Next level":"Następny poziom","Next ribbon":"Następna wstęga",
 'Homestead':'Gospodarstwo','Ranch':'Ranczo','Country Estate':'Majątek ziemski','Grand Estate':'Wielki majątek','Valley Estate':'Majątek doliny','Next':'Dalej','This is the biggest farm in the valley.':'To największa farma w dolinie.','You need more building materials. You find them while farming, or trade with neighbors.':'Potrzebujesz więcej materiałów budowlanych. Znajdziesz je podczas pracy na farmie albo wymienisz z sąsiadami.','Grow your land to 25 by 25.':'Powiększ ziemię do 25 na 25.','Grow your land to 30 by 30.':'Powiększ ziemię do 30 na 30.','Grow your land to 35 by 35.':'Powiększ ziemię do 35 na 35.','Grow your land to 40 by 40.':'Powiększ ziemię do 40 na 40.','Grow your land to 45 by 45.':'Powiększ ziemię do 45 na 45.','Grow your land to 50 by 50.':'Powiększ ziemię do 50 na 50.','A new version is ready. Tap to reload.':'Nowa wersja jest gotowa. Dotknij, by odświeżyć.','Level':'Poziom','All job slots are full. Collect finished goods to make room.':'Wszystkie miejsca w kolejce są zajęte. Odbierz gotowe towary.','Upgraded: more job slots and faster work.':'Ulepszony: więcej miejsc w kolejce i szybsza praca.','Upgrade this building':'Ulepsz ten budynek','Upgrade building':'Ulepsz budynek','Building upgraded!':'Budynek ulepszony!','Hungry and thirsty: working slower':'Głodny i spragniony: pracuje wolniej','Too hungry: working slower':'Za głodny: pracuje wolniej','Too thirsty: working slower':'Za spragniony: pracuje wolniej','Getting hungry and thirsty':'Robi się głodny i spragniony','Getting hungry':'Robi się głodny','Getting thirsty':'Robi się spragniony','Fresh and clean':'Świeży i czysty','Feeling great':'Świetne samopoczucie','Spiky':'Na jeża','Side part':'Z przedziałkiem','Flower crown':'Wianek z kwiatów','Hoodie':'Bluza z kapturem','Denim jacket':'Kurtka dżinsowa','Quick looks':'Szybkie stylizacje','Classic':'Klasyczny','Rancher':'Ranczer','Gardener':'Ogrodnik','Weekend':'Weekend','Your farm':'Twoja farma','Town':'Miasto','Drink water':'Napij się wody','Relax':'Odpocznij','Watch TV':'Oglądaj TV','Read':'Czytaj','Warm up':'Ogrzej się','Water the plant':'Podlej roślinę','Switch the lamp':'Przełącz lampę','Give a pat':'Pogłaszcz','Reading':'Czytanie','Watching TV':'Oglądanie TV','Relaxing':'Odpoczynek','Warming up':'Grzanie się','Watering':'Podlewanie','Tap things in the house to use them.':'Dotykaj rzeczy w domu, by ich używać.','You read a good farming book.':'Przeczytałeś dobrą książkę o rolnictwie.','You just finished a book. Try again a bit later.':'Właśnie skończyłeś książkę. Spróbuj trochę później.','You put your feet up for a moment.':'Odpoczywasz chwilę z nogami w górze.','Nice and warm by the fire.':'Ciepło i przytulnie przy kominku.','The plant looks happier.':'Roślina wygląda na szczęśliwszą.','On TV: watered crops grow faster.':'W TV: podlane plony rosną szybciej.','On TV: fertilizer doubles your next harvest.':'W TV: nawóz podwaja następne zbiory.','On TV: a Diesel Press turns soybeans into fuel for your machines.':'W TV: Tłocznia ropy zamienia soję w paliwo dla maszyn.','On TV: comfy furniture brings your next nap sooner.':'W TV: wygodne meble przybliżają następną drzemkę.','Walls and floors':'Ściany i podłogi','Cream Plaster':'Kremowy tynk','Sage Stripes':'Szałwiowe paski','Blue Floral':'Niebieskie kwiatki','Log Cabin':'Bale drewniane','Oak Planks':'Dębowe deski','Walnut Planks':'Orzechowe deski','Whitewashed Pine':'Bielona sosna','Use this style':'Użyj tego stylu','In use':'W użyciu','Wallpaper':'Tapeta','Flooring':'Podłoga',
 // ---- HUD, dock, menus
@@ -1932,7 +1950,7 @@ const PL_EXACT={
 'On a phone: open the browser menu and choose "Install app" or "Add to Home screen".':'Na telefonie: otwórz menu przeglądarki i wybierz „Zainstaluj aplikację” lub „Dodaj do ekranu głównego”.','On a computer: click the install icon at the right end of the address bar.':'Na komputerze: kliknij ikonę instalacji po prawej stronie paska adresu.',
 'Wipes this farm and starts over from Level 1 with the tutorial.':'Usuwa tę farmę i zaczyna od poziomu 1 z samouczkiem.','Tutorial restarted. Follow the tips on screen.':'Samouczek uruchomiony ponownie. Postępuj według wskazówek.','Tutorial skipped.':'Pominięto samouczek.','Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!':'Samouczek ukończony! +150 monet i 1 farmdolar. Miłej zabawy!',
 // ---- goals, quests, tutorial
-'All done! Bonus:':'Wszystko gotowe! Bonus:','All goals done. New goals tomorrow!':'Wszystkie cele wykonane. Nowe jutro!','Finish all three for +2 Farm Cash.':'Wykonaj wszystkie trzy, a dostaniesz +2 farmdolary.','+2 Farm Cash':'+2 farmdolary','Daily goals complete! +2 Farm Cash.':'Cele dnia wykonane! +2 farmdolary.',
+'All done! Bonus:':'Wszystko gotowe! Bonus:','All goals done. New goals tomorrow!':'Wszystkie cele wykonane. Nowe jutro!','Finish all three for +1 Farm Cash.':'Wykonaj wszystkie trzy, a dostaniesz +1 farmdolar.','+1 Farm Cash':'+1 farmdolar','Daily goals complete! +1 Farm Cash.':'Cele dnia wykonane! +1 farmdolar.',
 'Welcome to the Valley':'Witaj w dolinie',"Dale's First Run":'Pierwszy kurs Dale’a',"Hank's Feed Problem":'Kłopot Hanka z paszą',"Otis's Orchard":'Sad Otisa',"Rosa's Ranch Dream":'Ranczo marzeń Rosy','Busy Bees':'Pracowite pszczoły','Harvest Festival':'Dożynki','The Big Contract':'Wielki kontrakt',
 'Harvest 10 crops':'Zbierz 10 plonów','Plant 10 seeds':'Posadź 10 nasion','Plant 15 seeds':'Posadź 15 nasion','Sell 5 goods from the barn':'Sprzedaj 5 towarów ze stodoły','Send a delivery with Dale':'Wyślij dostawę z Dale’em','Complete 2 deliveries':'Zrealizuj 2 dostawy','Complete 5 deliveries':'Zrealizuj 5 dostaw','Build a Feed Mill':'Zbuduj młyn paszowy','Bring Hank 20 animal feed':'Przynieś Hankowi 20 paszy','Feed your animals 5 times':'Nakarm zwierzęta 5 razy','Have 3 fruit trees':'Miej 3 drzewa owocowe','Pick fruit 10 times':'Zbierz owoce 10 razy','Bring Otis 8 apples':'Przynieś Otisowi 8 jabłek','Have 6 animals':'Miej 6 zwierząt','Collect from animals 15 times':'Odbierz od zwierząt 15 razy','Bring Rosa 10 eggs':'Przynieś Rosie 10 jajek','Build a Beehive':'Zbuduj ul','Bring Juniper 5 honey':'Przynieś Juniper 5 słoików miodu','Harvest 3 golden crops':'Zbierz 3 złote plony','Make 6 goods in your buildings':'Wytwórz 6 towarów w budynkach','Bring Mabel 2 pumpkin pies':'Przynieś Mabel 2 placki dyniowe','Bring Mabel 3 apple ciders':'Przynieś Mabel 3 cydry','Fill 4 neighbor orders':'Zrealizuj 4 zamówienia sąsiadów',
 'Howdy, new farmer! I drive the road between the farms and town. Grow a little, sell a little, and you will be on your feet in no time.':'Cześć, nowy farmerze! Jeżdżę drogą między farmami a miastem. Trochę uprawiaj, trochę sprzedawaj, a szybko staniesz na nogi.',
@@ -2008,7 +2026,7 @@ const PL_EXACT={
 'Play in':'Graj','Turn your phone upright':'Obróć telefon pionowo','Turn your phone sideways':'Obróć telefon poziomo','You chose to play in portrait.':'Wybrano grę w pionie.','You chose to play in landscape.':'Wybrano grę w poziomie.','Play this way instead':'Graj jednak tak',
 'Champion Trophy':'Puchar Mistrza','Champion Farmer!':'Mistrz farmy!','Thank you!':'Dziękuję!','Top level!':'Najwyższy poziom!','Max level':'Maks. poziom',
 'You reached Level 99, the top level. Well done, champion!':'Masz poziom 99, najwyższy w grze. Brawo, mistrzu!',
-'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
+'At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 20 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.',
 'Art style':'Styl grafiki','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
@@ -2085,7 +2103,7 @@ const PL_PATS=[
 [/^You need (\d+) (.+) in the barn\.$/,m=>'Potrzebujesz w stodole: '+L_w(m[2])+' ×'+m[1]+'.'],
 [/^You need ([\d.,\s ]+) coins for (?:this upgrade|this|that|the (.+))\.$/,m=>'Potrzebujesz '+m[1]+' '+p3(m[1],'monety','monet','monet')+(m[2]?' na: '+L_w(m[2]):'')+'.'],
 [/^You need (\d+) Farm Cash for that\.$/,m=>'Potrzebujesz '+m[1]+' '+p3(m[1],'farmdolara','farmdolarów','farmdolarów')+'.'],
-[/^You need (\d+) Farm Cash\. You earn 1 every level up and from the daily bonus\.$/,m=>'Potrzebujesz '+m[1]+' '+p3(m[1],'farmdolara','farmdolarów','farmdolarów')+'. Dostajesz 1 za każdy nowy poziom i z bonusu dziennego.'],
+[/^You need (\d+) Farm Cash\. Get more in the Cash Shop\.$/,m=>'Potrzebujesz '+m[1]+' '+p3(m[1],'farmdolara','farmdolarów','farmdolarów')+'. Kup więcej w sklepie z farmdolarami.'],
 [/^You need (\d+) coins to plant (.+)\.$/,m=>'Potrzebujesz '+m[1]+' monet, by posadzić: '+L_w(m[2])+'.'],
 [/^Plowing costs (\d+) coins\. Sell some goods from the barn first\.$/,m=>'Oranie kosztuje '+m[1]+' monet. Najpierw sprzedaj coś ze stodoły.'],
 [/^Not enough (coins|Farm Cash) for (.+)\.$/,m=>'Za mało '+(m[1]==='coins'?'monet':'farmdolarów')+' na: '+m[2].split(', ').map(L_w).join(', ')+'.'],
@@ -2228,7 +2246,13 @@ const PL_PATS=[
 [/^(.+) added to your farmhouse!$/,m=>L_w(m[1])+' trafia do twojego domu!'],
 [/^Comfy furniture makes your home cozier: each comfort point makes naps come back sooner\. Comfort now: (\d+)\. Next nap cooldown: (.+)\.$/,m=>'Wygodne meble czynią dom przytulniejszym: każdy punkt komfortu skraca czekanie na drzemkę. Komfort: '+m[1]+'. Czekanie na drzemkę: '+L_t(m[2])+'.'],
 [/^(?:(.+) )?\+(\d+) comfort$/,m=>(m[1]?L_w(m[1])+' ':'')+'+'+m[2]+' komfortu'],
-[/^(.+) \((\d+)\)$/,m=>L_w(m[1])+' ('+m[2]+')']
+[/^(.+) \((\d+)\)$/,m=>L_w(m[1])+' ('+m[2]+')'],
+[/^\+(\d+)% bonus$/,m=>'+'+m[1]+'% bonusu'],
+[/^Thank you! \+(\d+) Farm Cash\.$/,m=>'Dziękujemy! +'+m[1]+' '+p3(m[1],'farmdolar','farmdolary','farmdolarów')+'.'],
+[/^Your purchase is here! \+(\d+) Farm Cash\.$/,m=>'Twój zakup już jest! +'+m[1]+' '+p3(m[1],'farmdolar','farmdolary','farmdolarów')+'.'],
+[/^Lovely! Bonus XP again in (.+)\.$/,m=>'Pięknie! Bonusowe XP znów za '+L_t(m[1])+'.'],
+[/^High score! Coins again in (.+)\.$/,m=>'Rekord! Monety znów za '+L_t(m[1])+'.'],
+[/^High score! \+(\d+) coins\.$/,m=>'Rekord! +'+m[1]+' '+p3(m[1],'moneta','monety','monet')+'.'],
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -2390,6 +2414,9 @@ const DECOR={
   silo:{name:'Silo',lvl:6,cost:1200,xp:120},
   balloon:{name:'Hot Air Balloon',lvl:1,cash:12,xp:100},
   fountain:{name:'Stone Fountain',lvl:1,cash:8,xp:80},
+  goldgnome:{name:'Golden Gnome',lvl:1,cash:4,xp:40},
+  rainbow:{name:'Rainbow Arch',lvl:1,cash:10,xp:100},
+  unicorn:{name:'Unicorn Statue',lvl:1,cash:14,xp:140},
   pumpkins:{name:'Pumpkin Pile',lvl:4,cost:140,xp:14},
   gazebo:{name:'Garden Gazebo',lvl:8,cost:2400,xp:220,size:2},
   sprinkler:{name:'Auto Waterer',lvl:10,cost:1800,xp:60},
@@ -2508,7 +2535,7 @@ const NEIGHBORS=[
   {id:'rosa',name:'Rosa',lvl:19,farm:'Rancho Rosa',look:{gender:'female',build:'slim',skin:'#a86b42',eyes:'#7a4a22',hair:'long',hairColor:'#2a1a12',hat:'sunhat',hatColor:'#e0457b',top:'tee',topColor:'#f2a21e',bottom:'jeans',bottomColor:'#3f6fc0'}}
 ];
 for(const n of NEIGHBORS)n.look=Object.assign(defaultLook(),n.look);
-const DAILY=[{coins:50},{coins:100},{coins:150,fuel:20},{coins:250},{coins:300,cash:2}];
+const DAILY=[{coins:50},{coins:100},{coins:150,fuel:20},{coins:250},{coins:300,cash:1}];
 function need(l){return Math.round(60+50*l+10*l*l)} // XP for the next level: grows steadily so Level 20 takes days of play, not hours
 
 /* ================= state ================= */
@@ -2533,7 +2560,7 @@ function fresh(){
   return s;
 }
 function norm(s){
-  const d={coins:320,cash:5,xp:0,level:1,size:16,seed:'wheat',tiles:{},helped:{day:'',ids:[]},inv:{},stats:{},ribbons:{},mastery:{},mlvl:{},coll:{},collDone:{},daily:{last:'',streak:0},fuel:FUEL_MAX,fuelT:Date.now(),veh:{},mats:{},barnLvl:1,sound:true,music:true,tips:{},owned:[],farmName:'Farm Village',farmerName:'',goods:{},orders:[],orderT:Date.now()+45000,ad:null,visitsOff:false};
+  const d={coins:320,cash:3,xp:0,level:1,size:16,seed:'wheat',tiles:{},helped:{day:'',ids:[]},inv:{},stats:{},ribbons:{},mastery:{},mlvl:{},coll:{},collDone:{},daily:{last:'',streak:0},fuel:FUEL_MAX,fuelT:Date.now(),veh:{},mats:{},barnLvl:1,sound:true,music:true,tips:{},owned:[],farmName:'Farm Village',farmerName:'',goods:{},orders:[],orderT:Date.now()+45000,ad:null,visitsOff:false};
   // A field that is missing, null, the wrong type or NaN (JSON turns NaN into null) falls back to its default.
   for(const k in d){const v=s[k],dv=d[k];if(v===undefined||(dv!==null&&(v===null||typeof v!==typeof dv||Array.isArray(v)!==Array.isArray(dv)||(typeof dv==='number'&&!isFinite(v)))))s[k]=dv}
   s.look=Object.assign(defaultLook(),s.look||{});
@@ -3893,6 +3920,35 @@ function drawDeco(x,y,o,now){
       g.fillStyle='#fffaf0';g.font='bold 4px sans-serif';g.textAlign='center';g.fillText('MAIL',1,3.2);
       g.strokeStyle='#4a4a4a';g.lineWidth=1.2;line([R+1,1],[R+1,-11]);poly([[R+1,-11],[R+7,-10],[R+7,-6.6],[R+1,-7]],pvL(R,0,R+7,0,['#ffd23f','#e8a820']));
       g.restore();break;}
+    case'goldgnome':{
+      g.save();g.filter='grayscale(1) sepia(1) saturate(3.4) brightness(1.3) contrast(1.15)';drawDeco(x,y,Object.assign({},o,{id:'gnome'}),now);g.restore();
+      if(!reduce){const k=(Math.sin(now/280+x)+1)/2;sparkle(px+7,py-30,2+k*1.6,k);sparkle(px-6,py-14,1.6+(1-k),1-k)}
+      break;}
+    case'rainbow':{
+      shadow(px,py,24,7);const R=['#e0352b','#ff8a2a','#ffd23f','#4fb84a','#2d8fe3','#7a4fd0'];
+      g.lineCap='butt';R.forEach((c,i)=>{g.beginPath();g.ellipse(px,py-6,25-i*2.7,40-i*2.7,0,Math.PI,0);g.strokeStyle=c;g.lineWidth=2.9;g.stroke()});
+      g.beginPath();g.ellipse(px,py-6,25.8,40.8,0,Math.PI*1.05,Math.PI*1.45);g.strokeStyle='rgba(255,255,255,.55)';g.lineWidth=1;g.stroke();
+      for(const sx of[-1,1])for(const[dx,dy,r]of[[-5,0,5.4],[3,-1,6],[0,-5,5],[7,2,4]]){ball(px+sx*19+dx*.9,py-3+dy,r,r*.8,'#ffffff','#c9d4e0',.5)}
+      if(!reduce){const k=(Math.sin(now/350)+1)/2;sparkle(px-10,py-46,1.6+k*1.4,k);sparkle(px+14,py-38,1.4+(1-k),1-k)}
+      break;}
+    case'unicorn':{
+      // a white unicorn rearing on a marble plinth, with a rainbow mane and a golden horn
+      shadow(px,py,15,5.2);
+      const F=isoFaces(x+.22,y+.22,x+.78,y+.78,12);poly(F.fl,vgrad(F.fl[3][1],F.fl[0][1],['#f4f0e8','#d8d2c6']));poly(F.fr,vgrad(F.fr[3][1],F.fr[0][1],['#d8d2c6','#a8a298']));poly(F.top,'#fffaf0');
+      g.strokeStyle='#d9a020';g.lineWidth=1;line(F.fl[3],F.fl[2]);line(F.fr[3],F.fr[2]);
+      g.save();g.translate(px,py-16);const wh=pvL(-12,0,12,0,['#ffffff','#f2eef8','#d8d0e4']),ol='#8a80a0';
+      g.lineCap='round';
+      for(const[a,b,c,d]of[[-5,-6,-6.4,5],[-2,-6,-1,5],[5,-8,9,-14],[7,-8,12,-10]]){g.strokeStyle=ol;g.lineWidth=3.4;line([a,b],[c,d]);g.strokeStyle='#f2eef8';g.lineWidth=2.4;line([a,b],[c,d])}
+      for(const[a,b]of[[-6.4,5],[-1,5],[9,-14],[12,-10]])ell(a,b,1.6,1,'#d9a020');
+      g.beginPath();g.ellipse(0,-9,9,5.4,-.35,0,7);g.fillStyle=wh;g.fill();g.strokeStyle=ol;g.lineWidth=.7;g.stroke();
+      g.beginPath();g.moveTo(3,-12);g.quadraticCurveTo(5,-21,8,-25);g.lineTo(12.6,-22);g.quadraticCurveTo(9,-16,8,-10);g.closePath();g.fillStyle=wh;g.fill();g.stroke();
+      g.beginPath();g.ellipse(11.4,-25.4,4.8,3,.5,0,7);g.fillStyle=wh;g.fill();g.stroke();ell(14.6,-23.4,1.3,1,'#f0c8d8');ell(11.2,-26.6,.8,.8,'#2a2a3a');
+      poly([[9.6,-28.4],[11.8,-28],[13.6,-37]],pvL(9,0,14,0,['#c89010','#fff0a0','#d9a020']),'#8a6008',.4);g.strokeStyle='rgba(138,96,8,.6)';g.lineWidth=.3;for(const t of[.3,.55,.8])line([9.6+t*4,-28.3-t*8.6],[11.8+t*1.8,-28-t*9])
+      const M=['#ff7aa8','#ffd23f','#7fd0ff','#b48cff'];M.forEach((c,i)=>{g.beginPath();g.moveTo(8.6-i*.6,-28+i*3.4);g.quadraticCurveTo(3.4-i,-26+i*3,2-i*.8,-19+i*3.2);g.lineWidth=2.4;g.strokeStyle=c;g.stroke()});
+      M.forEach((c,i)=>{g.beginPath();g.moveTo(-8.4,-10+i*.6);g.quadraticCurveTo(-14,-9+i*1.4,-12+i*.6,-1+i);g.lineWidth=1.8;g.strokeStyle=c;g.stroke()});
+      g.restore();
+      if(!reduce){const k=(Math.sin(now/300+y)+1)/2;sparkle(px+14,py-54,1.6+k*1.6,k);sparkle(px-12,py-30,1.4+(1-k),1-k)}
+      break;}
     case'gnome':{
       // a garden gnome: boots, blue coat with belt, white beard, rosy nose, tall red hat
       shadow(px,py,9,3.4);g.save();g.translate(px,py);
@@ -6169,12 +6225,12 @@ const LOOK_OPTS={
   nose:[['button','Button'],['round','Round'],['pointy','Pointed']],
   ears:[['normal','Normal'],['small','Small'],['big','Big'],['pointy','Pointed']],
   blush:[[true,'Rosy cheeks'],[false,'No blush']],
-  acc:[['none','None'],['flower','Hair flower'],['earrings','Earrings'],['necklace','Necklace',{coins:80}],['scarf','Scarf',{coins:100}]],
+  acc:[['none','None'],['flower','Hair flower'],['earrings','Earrings'],['necklace','Necklace',{coins:80}],['scarf','Scarf',{coins:100}],['bowtie','Bow tie',{cash:3}],['goldchain','Gold chain',{cash:4}],['cape','Hero cape',{cash:7}],['wings','Fairy wings',{cash:12}]],
   face:[['none','Clean shaven'],['mustache','Mustache'],['beard','Beard']],
   glasses:[['none','No glasses'],['round','Round glasses'],['shades','Sunglasses']],
-  hat:[['straw','Straw hat'],['cap','Ball cap'],['sunhat','Sun hat'],['bandana','Bandana'],['beanie','Beanie'],['none','No hat'],['cowboy','Cowboy hat',{coins:150}],['flowercrown','Flower crown',{coins:120}],['tophat','Top hat',{coins:400}],['crown','Golden crown',{cash:5}]],
-  top:[['plaid','Plaid shirt'],['tee','T-shirt'],['stripes','Striped shirt'],['sweater','Sweater'],['vest','Farmer vest',{coins:120}],['hoodie','Hoodie',{coins:150}],['jacket','Denim jacket',{coins:220}]],
-  bottom:[['overalls','Overalls'],['jeans','Jeans'],['shorts','Shorts'],['skirt','Skirt'],['patched','Patched overalls',{coins:200}]]
+  hat:[['straw','Straw hat'],['cap','Ball cap'],['sunhat','Sun hat'],['bandana','Bandana'],['beanie','Beanie'],['none','No hat'],['cowboy','Cowboy hat',{coins:150}],['flowercrown','Flower crown',{coins:120}],['tophat','Top hat',{coins:400}],['chef','Chef hat',{cash:4}],['wizard','Wizard hat',{cash:6}],['pirate','Pirate hat',{cash:7}],['viking','Viking helmet',{cash:8}],['crown','Golden crown',{cash:10}]],
+  top:[['plaid','Plaid shirt'],['tee','T-shirt'],['stripes','Striped shirt'],['sweater','Sweater'],['vest','Farmer vest',{coins:120}],['hoodie','Hoodie',{coins:150}],['jacket','Denim jacket',{coins:220}],['hawaii','Hawaiian shirt',{cash:5}],['tux','Tuxedo',{cash:8}],['royal','Royal robe',{cash:12}]],
+  bottom:[['overalls','Overalls'],['jeans','Jeans'],['shorts','Shorts'],['skirt','Skirt'],['patched','Patched overalls',{coins:200}],['kilt','Tartan kilt',{cash:6}],['gold','Golden overalls',{cash:10}]]
 };
 function defaultLook(){return{gender:'male',build:'broad',skin:'#f2c6a0',eyes:'#3f8fe0',freckles:false,hair:'short',hairColor:'#4a2e1a',face:'none',glasses:'none',hat:'straw',hatColor:'#d9402f',top:'plaid',topColor:'#d9402f',bottom:'overalls',bottomColor:'#3f6fc0',shoes:'#5a3418',mouth:'smile',lips:'#d8454c',blush:true,acc:'none',accColor:'#e0457b',eyeShape:'almond',brows:'natural',nose:'button',ears:'normal'}}
 // Picking a gender also swaps in a fitting hairstyle when the current one is the other default; every style stays available to both.
@@ -6319,7 +6375,7 @@ function drawHead(L){
     for(const[bx0,tx,ty]of[[-7.4,-10.6,-9.8],[-5,-7.4,-14],[-2,-2.6,-15.6],[1.2,1.6,-16],[4,5.6,-14.6],[6.6,10,-11]]){g.beginPath();g.moveTo(bx0-2.2,-6.4);g.lineTo(tx,ty);g.lineTo(bx0+2.4,-7.4);g.closePath();paintHair(Hc)}}
   if(hair==='sidepart'){g.save();g.scale(-1,1);fringe(Hc);g.restore();lock(-2.6,-11.4,2.6,-14.6,8.2,-7.6,2.4);paintHair(Hc);lock(-1,-10.6,4,-12.4,8.8,-3.6,1.2);paintHair(Hc)}
   if(hair!=='none'&&hair!=='buzz'&&hair!=='afro')hairShine(Hc);
-  if(L.acc==='flower'&&L.hat!=='tophat'&&L.hat!=='cowboy'){const fx=-7.4,fy=-6.4,fc=L.accColor||'#e0457b';for(let k=0;k<5;k++){const an=k/5*Math.PI*2;ball(fx+Math.cos(an)*1.7,fy+Math.sin(an)*1.7,1.5,1.5,fc)}ball(fx,fy,1,1,'#ffd23f')}
+  if(L.acc==='flower'&&!['tophat','cowboy','wizard','pirate','viking','chef'].includes(L.hat)){const fx=-7.4,fy=-6.4,fc=L.accColor||'#e0457b';for(let k=0;k<5;k++){const an=k/5*Math.PI*2;ball(fx+Math.cos(an)*1.7,fy+Math.sin(an)*1.7,1.5,1.5,fc)}ball(fx,fy,1,1,'#ffd23f')}
   // hats (drawn in the old head's units, scaled up to this bigger head)
   const hc=L.hatColor;
   g.save();g.translate(0,-.8);g.scale(1.65,1.65);
@@ -6346,6 +6402,20 @@ function drawHead(L){
     case'bandana':dome(0,-.9,5.5,5.4,hc,shade(hc,-.35));for(const[a,b]of[[-2,-3],[1.5,-4],[3.4,-1.6],[-.4,-1.4],[-3.6,-1.2]])ell(a,b,.6,.6,'#fff');ell(5.4,-1.4,1.6,1.1,hc);g.strokeStyle=hc;g.lineWidth=1.2;line([5.8,-1],[7.6,2.2]);line([5.4,-.8],[6.4,3]);break;
     case'beanie':dome(0,-1.4,5.9,6.4,hc,shade(hc,-.35));ell(0,-1.6,6,1.7,shade(hc,-.15));ell(0,-8.6,2,2,'#fff','#d8d2c2',.6);break;
     case'tophat':ell(0,-4,7.8,1.9,'#2b2b2b');poly([[-4.2,-4],[4.2,-4],[4.2,-15.5],[-4.2,-15.5]],'#2b2b2b','#000',.5);poly([[-4.2,-5.6],[4.2,-5.6],[4.2,-7.4],[-4.2,-7.4]],hc);ell(0,-15.5,4.2,1.2,'#3d3d3d');break;
+    case'chef':{poly([[-4.6,-6.6],[4.6,-6.6],[4.8,-3.2],[-4.8,-3.2]],'#fbfbf8','#bdb8ae',.5);g.strokeStyle='rgba(150,140,130,.4)';g.lineWidth=.3;for(const x of[-2.4,0,2.4])line([x,-6.4],[x,-3.4]);
+      for(const[x,y,r]of[[-3.6,-9,3.2],[3.6,-9,3.2],[0,-10.6,3.8],[-1.8,-8,3],[1.8,-8,3]])ball(x,y,r,r*.9,'#ffffff','#c9c4ba',.4);break}
+    case'wizard':{ell(0,-3.6,9.4,2.5,shade(hc,-.2),shade(hc,-.45),.6);g.beginPath();g.moveTo(-4.8,-4);g.quadraticCurveTo(-3,-11,1.6,-15.6);g.quadraticCurveTo(4.4,-17.4,6.6,-15.2);g.quadraticCurveTo(3.4,-15.2,2.4,-12.6);g.quadraticCurveTo(3.6,-8,4.8,-4);g.closePath();
+      g.fillStyle=sideGrad(hc,5);g.fill();g.strokeStyle=shade(hc,-.45);g.lineWidth=.5;g.stroke();poly([[-4.7,-5.6],[4.7,-5.6],[4.8,-4.2],[-4.8,-4.2]],'#ffc72c','#9a6400',.3);
+      g.fillStyle='#ffe066';for(const[x,y,r]of[[-1.6,-8.6,1],[1.8,-10.6,.8],[-.2,-12.4,.6],[2.2,-7.4,.6]]){g.beginPath();for(let k=0;k<10;k++){const a=k*Math.PI/5-Math.PI/2,rr=k%2?r*.45:r;g.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}g.closePath();g.fill()}
+      ball(6.6,-15.2,.9,.9,'#ffe066');if(!reduce){const k=(Math.sin(Date.now()/300)+1)/2;sparkle(7.4,-16.4,1+k,k)}break}
+    case'pirate':{g.beginPath();g.moveTo(-10,-4.4);g.quadraticCurveTo(-6,-2.4,0,-2.6);g.quadraticCurveTo(6,-2.4,10,-4.4);g.quadraticCurveTo(7.2,-7,5.6,-10.4);g.quadraticCurveTo(0,-13.2,-5.6,-10.4);g.quadraticCurveTo(-7.2,-7,-10,-4.4);g.closePath();
+      g.fillStyle=sideGrad('#2a2a30',9);g.fill();g.strokeStyle='#d9a020';g.lineWidth=.6;g.stroke();
+      ball(0,-7.6,1.6,1.5,'#f4f0e6');ell(-.6,-7.8,.35,.35,'#2a2a30');ell(.6,-7.8,.35,.35,'#2a2a30');g.strokeStyle='#f4f0e6';g.lineWidth=.55;line([-2,-5.4],[2,-4.4]);line([2,-5.4],[-2,-4.4]);
+      g.beginPath();g.moveTo(4.4,-9.6);g.quadraticCurveTo(7.6,-15.4,11.6,-13.2);g.quadraticCurveTo(8.6,-12.8,4.8,-8.6);g.closePath();g.fillStyle=pvL(4,0,12,0,[shade(hc,-.2),hc,shade(hc,.35)]);g.fill();g.strokeStyle=shade(hc,-.4);g.lineWidth=.3;g.stroke();g.beginPath();g.moveTo(4.6,-9.1);g.quadraticCurveTo(8,-13.4,11.2,-13);g.stroke();break}
+    case'viking':{for(const sx of[-1,1]){g.beginPath();g.moveTo(sx*4.6,-4.6);g.quadraticCurveTo(sx*9.6,-5.2,sx*9.4,-12.4);g.quadraticCurveTo(sx*8,-8.4,sx*4.4,-7.8);g.closePath();g.fillStyle=pvL(sx*4,0,sx*10,0,['#f4ead0','#d8c8a0']);g.fill();g.strokeStyle='#8a7a5a';g.lineWidth=.4;g.stroke();
+        g.strokeStyle='rgba(138,122,90,.6)';g.lineWidth=.3;for(const t of[.3,.55])line([sx*(4.6+t*4.4),-4.8-t*2.2],[sx*(4.6+t*3.2),-7.6-t*1])}
+      const mg=g.createRadialGradient(-1.8,-6,0,0,-3,6.6);mg.addColorStop(0,'#e8eef2');mg.addColorStop(.5,'#9aa6ae');mg.addColorStop(1,'#5a646c');dome(0,-2,5.9,6.6,mg,'#3a444c');
+      poly([[-5.9,-3.6],[5.9,-3.6],[5.9,-2],[-5.9,-2]],'#d9a020','#7a5408',.3);poly([[-.7,-8.6],[.7,-8.6],[.7,-3.6],[-.7,-3.6]],'#d9a020','#7a5408',.3);for(const x of[-4.6,-2.4,2.4,4.6])ell(x,-2.8,.35,.35,'#7a5408');break}
     case'crown':poly([[-4.8,-3],[4.8,-3],[5.4,-10.5],[2.6,-6.6],[0,-11.5],[-2.6,-6.6],[-5.4,-10.5]],'#ffc72c','#9a6400',.7);ell(0,-5,1.2,1.2,'#e0352b');ell(-3,-4.7,.8,.8,'#2d8fe3');ell(3,-4.7,.8,.8,'#3f9a3c');
       if(!reduce){const k=(Math.sin(Date.now()/300)+1)/2;sparkle(4.5,-11,1.5+k,k)}break;
   }
@@ -6363,11 +6433,21 @@ function hand(x,y,skin){ball(x,y,1.55,1.7,skin,shade(skin,-.25),.3);ball(x-.95,y
 function sideGrad(col,bw){const gr=g.createLinearGradient(-bw,0,bw,0);gr.addColorStop(0,shade(col,.2));gr.addColorStop(.45,col);gr.addColorStop(1,shade(col,-.22));return gr}
 function drawAvatar(L,p){
   const fem=L.gender==='female',slim=L.build==='slim',bw=(slim?4:4.8)+(fem?-.3:.35),walking=p.walking&&!reduce,ph=walking?Math.sin(p.walk):0;
-  const bare=L.bottom==='skirt'||L.bottom==='shorts',TC=L.topColor,BC=L.bottomColor,BD=shade(BC,-.32);
+  const bare=L.bottom==='skirt'||L.bottom==='shorts'||L.bottom==='kilt',TC=L.top==='tux'?'#26282e':L.topColor,BC=L.bottom==='gold'?'#e3a91c':L.bottomColor,BD=shade(BC,-.32),ACC=L.accColor||'#e0457b';
   shadow(0,-.5,8.4,3);
   const l1=walking?Math.max(0,ph)*1.9:0,l2=walking?Math.max(0,-ph)*1.9:0;
   // taller, storybook proportions: long legs, everything above the hips sits LG higher
   const LG=3,bob=walking?Math.abs(ph)*.5:0;
+  if(L.acc==='cape'||L.acc==='wings'){g.save();g.translate(0,-LG-bob);
+    if(L.acc==='cape'){const sw=walking?ph*.8:Math.sin(Date.now()/700)*.3*(reduce?0:1);g.beginPath();g.moveTo(-bw+.4,-21.2);g.quadraticCurveTo(-bw-2.2,-10,-bw-3.4+sw,-1.4+LG);g.quadraticCurveTo(0,.2+LG,bw+3.4+sw,-1.4+LG);g.quadraticCurveTo(bw+2.2,-10,bw-.4,-21.2);g.closePath();
+      const cg=g.createLinearGradient(-bw-3,0,bw+3,0);cg.addColorStop(0,shade(ACC,-.35));cg.addColorStop(.5,shade(ACC,-.05));cg.addColorStop(1,shade(ACC,-.4));g.fillStyle=cg;g.fill();g.strokeStyle=shade(ACC,-.5);g.lineWidth=.5;g.stroke();
+      g.strokeStyle='rgba(0,0,0,.18)';g.lineWidth=.6;for(const x of[-2.4,0,2.4]){g.beginPath();g.moveTo(x*.6,-20);g.quadraticCurveTo(x*1.1,-10,x*1.5+sw*.6,-.6+LG);g.stroke()}}
+    else{const f=reduce?0:Math.sin(Date.now()/160)*.12,wc=shade(ACC,.45);g.save();g.globalAlpha=.78;
+      for(const sx of[-1,1]){g.save();g.translate(sx*1.4,-18.6);g.scale(sx,1);g.rotate(-f);
+        for(const[cx,cy,rx,ry,rt]of[[9,-6.4,9,5.6,-.6],[7.4,3.6,6,3.8,.55]]){const wg=g.createRadialGradient(cx-2,cy-1,.5,cx,cy,rx);wg.addColorStop(0,'#ffffff');wg.addColorStop(.55,wc);wg.addColorStop(1,shade(ACC,.1));ell(cx,cy,rx,ry,wg,'rgba(255,255,255,.95)',.5,rt)}
+        g.strokeStyle='rgba(255,255,255,.75)';g.lineWidth=.35;line([0,0],[15,-10]);line([3,-2],[12,-2.6]);line([0,0],[11.6,6]);g.restore()}
+      g.restore();if(!reduce){const k=(Math.sin(Date.now()/260)+1)/2;sparkle(-14,-28,1.4+k,k);sparkle(13,-14,1.2+(1-k),1-k)}}
+    g.restore()}
   for(const[s2,d]of[[-1,l1],[1,l2]]){const lc=bare?L.skin:BC,kx=s2*2.05,ky=-6.6-LG*.5-d*.55;
     limb(s2*1.95,-10.4-LG,kx,ky,3.3,lc);limb(kx,ky,s2*2.1,-3-d,2.9,lc);if(!bare){ell(kx+s2*.3,ky,.9,.4,shade(BC,-.18));poly([[s2*2.1-1.65,-4.6-d],[s2*2.1+1.65,-4.6-d],[s2*2.1+1.6,-3.6-d],[s2*2.1-1.6,-3.6-d]],shade(BC,-.12),shade(BC,-.35),.3)}}
   if(L.bottom==='shorts'){limb(-2.3,-10.5-LG,-2.3,-7-LG,3.6,BC);limb(2.3,-10.5-LG,2.3,-7-LG,3.6,BC)}
@@ -6388,20 +6468,32 @@ function drawAvatar(L,p){
   if(L.top==='jacket'){poly([[-1.3,-21.4],[1.3,-21.4],[1.5,-10.4],[-1.5,-10.4]],'#f4f0e6');g.strokeStyle=shade(TC,.35);g.lineWidth=.3;g.setLineDash([.5,.5]);for(const x of[-1.6,1.6])line([x,-21],[x*1.15,-10.6]);g.setLineDash([]);
     for(const sx of[-1,1]){poly([[sx*1.4,-15.6],[sx*3.6,-15.6],[sx*3.6,-17.8],[sx*1.5,-17.8]],shade(TC,-.1),shade(TC,-.35),.3);ell(sx*2.5,-17.2,.35,.35,'#c9a04a')}
     poly([[-bw,-11.4],[-1.5,-11.4],[-1.5,-10.4],[-bw,-10.4]],shade(TC,-.15));poly([[1.5,-11.4],[bw,-11.4],[bw,-10.4],[1.5,-10.4]],shade(TC,-.15))}
+  if(L.top==='hawaii'){const r=rnd32(7);for(let i=0;i<7;i++){const x=-bw+.8+r()*(bw*2-1.6),y=-20.4+r()*9.4,c=i%3?'#fff6e0':'#ffd23f';ell(x+1.6,y+.9,1.7,.7,'#2f8a3a',null,0,.7);ell(x-1.4,y+1.2,1.4,.6,'#3f9a3c',null,0,-.5);for(let k=0;k<5;k++){const a=k*1.2566+i;ball(x+Math.cos(a)*1.05,y+Math.sin(a)*1.05,.85,.85,c)}ball(x,y,.42,.42,'#e0352b')}
+    poly([[-1.1,-21.4],[1.1,-21.4],[1.1,-10.4],[-1.1,-10.4]],'rgba(0,0,0,.06)');for(const y of[-19,-16,-13])ell(0,y,.35,.35,'#fff6e0')}
+  if(L.top==='tux'){poly([[-2,-21.4],[2,-21.4],[1,-10.4],[-1,-10.4]],'#fbfbf8','rgba(0,0,0,.2)',.3);for(const y of[-18.4,-16.2,-14])ell(0,y,.38,.38,'#26282e');
+    for(const sx of[-1,1])poly([[sx*2,-21.4],[sx*3.8,-21.2],[sx*1.4,-14.4],[sx*1,-12.6]],'#33363e','#0e0f12',.3);ell(-3.2,-17.6,.9,.3,'#fbfbf8')}
+  if(L.top==='royal'){poly([[-1.3,-21.4],[1.3,-21.4],[1.3,-10.4],[-1.3,-10.4]],'#ffc72c','#9a6400',.3);for(const sx of[-1,1]){poly([[sx*1.3,-21.4],[sx*2.6,-21.4],[sx*2.6,-10.4],[sx*1.3,-10.4]],'#fbf8f0');for(const y of[-19.6,-16.6,-13.6,-11.4])ell(sx*1.95,y,.3,.45,'#1a1a1a')}
+    g.strokeStyle='rgba(255,215,90,.45)';g.lineWidth=.3;for(let y=-20;y<-10.6;y+=2.2)for(let x=-bw+.8;x<bw;x+=2.4)if(Math.abs(x)>3){g.beginPath();g.arc(x,y,.5,0,7);g.stroke()}}
   if(fem){g.strokeStyle=shade(TC,-.3);g.lineWidth=.4;g.lineCap='round';for(const sx of[-1,1]){g.beginPath();g.moveTo(sx*2.9,-17.6);g.quadraticCurveTo(sx*1.7,-16.2,sx*.5,-17.2);g.stroke()}ell(-1.7,-18.6,1.5,.9,'rgba(255,255,255,.12)');ell(1.7,-18.6,1.5,.9,'rgba(255,255,255,.08)')}
   g.restore();
   if(L.top==='tee'||L.top==='sweater')ell(0,-21,2.6,1.1,shade(L.skin,-.08),shade(TC,-.3),.5);
   if(L.top==='hoodie'){g.beginPath();g.moveTo(-4.6,-20.6);g.quadraticCurveTo(0,-24.2,4.6,-20.6);g.quadraticCurveTo(0,-19.2,-4.6,-20.6);g.closePath();g.fillStyle=shade(TC,-.2);g.fill();g.strokeStyle=shade(TC,-.4);g.lineWidth=.35;g.stroke();
     g.strokeStyle='#f4f0e6';g.lineWidth=.35;line([-1,-20.4],[-1.2,-16.8]);line([1,-20.4],[1.2,-17.4]);ell(-1.2,-16.6,.35,.45,'#f4f0e6');ell(1.2,-17.2,.35,.45,'#f4f0e6')}
   if(L.top==='jacket'){for(const sx of[-1,1])poly([[sx*1.3,-21.6],[sx*4.4,-21.4],[sx*2.6,-18.6],[sx*1.4,-19.4]],shade(TC,-.12),shade(TC,-.38),.35)}
+  if(L.top==='hawaii'){for(const sx of[-1,1])poly([[sx*.3,-21.6],[sx*3.4,-21.4],[sx*1.4,-18.6]],shade(TC,.12),shade(TC,-.35),.35)}
+  if(L.top==='royal'){g.beginPath();g.ellipse(0,-21,bw+.6,2.1,0,0,7);g.fillStyle='#fbf8f0';g.fill();g.strokeStyle='#cfc8b8';g.lineWidth=.3;g.stroke();for(const x of[-4,-1.6,1.6,4])ell(x,-20.6,.32,.5,'#1a1a1a')}
   if(L.top==='plaid'||L.top==='stripes'){poly([[-2.8,-21.2],[0,-19.4],[-.5,-21.6]],'#fff',shade(TC,-.3),.4);poly([[2.8,-21.2],[0,-19.4],[.5,-21.6]],'#fff',shade(TC,-.3),.4)}
   // bottoms
-  if(L.bottom==='overalls'||L.bottom==='patched'){
+  if(L.bottom==='overalls'||L.bottom==='patched'||L.bottom==='gold'){
     g.beginPath();g.moveTo(-bw,-12.6);g.lineTo(bw,-12.6);g.lineTo(bw,-9.6);g.quadraticCurveTo(0,-8.6,-bw,-9.6);g.closePath();g.fillStyle=sideGrad(BC,bw);g.fill();g.strokeStyle=BD;g.lineWidth=.6;g.stroke();
     poly([[-3.3,-18.4],[3.3,-18.4],[3.3,-12.4],[-3.3,-12.4]],sideGrad(BC,3.3),BD,.6);poly([[-1.6,-16.8],[1.6,-16.8],[1.6,-14.6],[-1.6,-14.6]],null,BD,.5);
     limb(-3,-18.2,-bw+1.3,-21.2,1.3,BC);limb(3,-18.2,bw-1.3,-21.2,1.3,BC);ball(-2.5,-17.6,.85,.85,'#ffd23f');ball(2.5,-17.6,.85,.85,'#ffd23f');
     if(L.bottom==='patched'){poly([[-4.2,-12],[-1.6,-12],[-1.6,-10],[-4.2,-10]],'#e0352b','#7a1c12',.5);poly([[.6,-16.6],[2.6,-16.6],[2.6,-14.8],[.6,-14.8]],'#ffd23f','#9a6400',.5)}
-  }else if(L.bottom==='skirt'){g.beginPath();g.moveTo(-bw,-12.6);g.lineTo(bw,-12.6);g.lineTo(bw+2.2,-7.2);g.quadraticCurveTo(0,-6.2,-bw-2.2,-7.2);g.closePath();g.fillStyle=sideGrad(BC,bw+2);g.fill();g.strokeStyle=BD;g.lineWidth=.6;g.stroke();g.lineWidth=.5;line([-1.4,-12.4],[-2,-6.8]);line([1.4,-12.4],[2,-6.8])}
+    if(L.bottom==='gold'){ell(-1.6,-17.2,1,2.4,'rgba(255,250,200,.45)',null,0,.2);ell(0,-15.7,.9,.9,'#e0352b','#7a1c12',.3);if(!reduce){const k=(Math.sin(Date.now()/240)+1)/2;sparkle(2.6,-13.4,1+k,k);sparkle(-3,-10.6,1+(1-k)*.8,1-k)}}
+  }else if(L.bottom==='kilt'){g.beginPath();g.moveTo(-bw,-12.6);g.lineTo(bw,-12.6);g.lineTo(bw+1.2,-7.8);g.lineTo(-bw-1.2,-7.8);g.closePath();g.fillStyle=sideGrad(BC,bw+1);g.fill();g.save();g.clip();
+    g.strokeStyle='rgba(20,30,20,.45)';g.lineWidth=1;for(const x of[-3.6,-.6,2.4])line([x,-12.6],[x*1.15,-7.8]);for(const y of[-11.2,-9])line([-bw-2,y],[bw+2,y]);g.strokeStyle='rgba(255,230,120,.7)';g.lineWidth=.3;for(const x of[-2.1,.9,3.9])line([x,-12.6],[x*1.15,-7.8]);g.restore();
+    g.strokeStyle=BD;g.lineWidth=.5;g.stroke();poly([[-bw,-12.6],[bw,-12.6],[bw,-11.6],[-bw,-11.6]],'#3a2414');poly([[1.2,-11.4],[3,-11.4],[2.8,-8.6],[1.4,-8.6]],'#f4f0e6','#8a7a60',.3);ell(2.1,-10.4,.5,.5,'#5a3a1c')}
+  else if(L.bottom==='skirt'){g.beginPath();g.moveTo(-bw,-12.6);g.lineTo(bw,-12.6);g.lineTo(bw+2.2,-7.2);g.quadraticCurveTo(0,-6.2,-bw-2.2,-7.2);g.closePath();g.fillStyle=sideGrad(BC,bw+2);g.fill();g.strokeStyle=BD;g.lineWidth=.6;g.stroke();g.lineWidth=.5;line([-1.4,-12.4],[-2,-6.8]);line([1.4,-12.4],[2,-6.8])}
   else{g.beginPath();g.moveTo(-bw,-12.6);g.lineTo(bw,-12.6);g.lineTo(bw,-9.4);g.quadraticCurveTo(0,-8.6,-bw,-9.4);g.closePath();g.fillStyle=sideGrad(BC,bw);g.fill();g.strokeStyle=BD;g.lineWidth=.6;g.stroke();poly([[-bw,-12.6],[bw,-12.6],[bw,-11.5],[-bw,-11.5]],'#5e3a1c');ell(0,-12,.9,.7,'#ffd23f')}
   // arms
   const tee=L.top==='tee',sleeve=TC,armL=walking?ph*.9:0,hx=-bw-.9+armL*.4,hy=-11.4-Math.abs(armL)*.4;
@@ -6427,7 +6519,9 @@ function drawAvatar(L,p){
   }
   g.restore();
   limb(0,-20.8,0,-22.6,fem?2.2:2.8,shade(L.skin,-.1));ell(0,-21.4,2.4,.8,'rgba(60,30,20,.12)');
-  const ACC=L.accColor||'#e0457b';
+  if(L.top==='tux'||L.acc==='bowtie'){const bc=L.acc==='bowtie'?ACC:'#1a1a1a';poly([[0,-20.6],[-2.2,-21.6],[-2.2,-19.4]],bc,shade(bc,-.4),.3);poly([[0,-20.6],[2.2,-21.6],[2.2,-19.4]],bc,shade(bc,-.4),.3);ell(0,-20.5,.7,.7,shade(bc,-.15))}
+  if(L.acc==='goldchain'){g.strokeStyle='#d9a020';g.lineWidth=.7;g.beginPath();g.moveTo(-2.6,-21.2);g.quadraticCurveTo(0,-15.6,2.6,-21.2);g.stroke();g.strokeStyle='#fff0a0';g.lineWidth=.25;g.setLineDash([.5,.5]);g.stroke();g.setLineDash([]);ball(0,-17.4,1.6,1.6,'#ffc72c','#9a6400',.4);g.fillStyle='#9a6400';g.font='bold 2px sans-serif';g.textAlign='center';g.fillText('$',0,-16.7)}
+  if(L.acc==='cape'){for(const sx of[-1,1])ball(sx*(bw-1.2),-21,.9,.9,'#ffc72c','#9a6400',.3);g.strokeStyle='#ffc72c';g.lineWidth=.4;line([-(bw-1.2),-21],[bw-1.2,-21])}
   if(L.acc==='necklace'){g.strokeStyle='#ffc72c';g.lineWidth=.35;g.beginPath();g.moveTo(-2.2,-21.2);g.quadraticCurveTo(0,-17.6,2.2,-21.2);g.stroke();for(let i=0;i<7;i++){const t=i/6,x=-2.1+t*4.2,y=-21.1+Math.sin(t*Math.PI)*3.3;ball(x,y,.55,.55,i===3?'#ffc72c':ACC)}}
   if(L.acc==='scarf'){g.beginPath();g.moveTo(-bw+.6,-21.6);g.quadraticCurveTo(0,-18.6,bw-.6,-21.6);g.quadraticCurveTo(0,-23.4,-bw+.6,-21.6);g.closePath();g.fillStyle=sideGrad(ACC,bw);g.fill();
     poly([[1,-20.6],[3,-20.4],[3.4,-14.6],[1.4,-14.8]],sideGrad(ACC,3),shade(ACC,-.3),.3);g.strokeStyle=shade(ACC,.3);g.lineWidth=.4;for(const y of[-15.8,-16.8])line([1.5,y],[3.3,y+.1])}
@@ -6985,12 +7079,12 @@ addEventListener('pagehide',()=>{if(saveQueued){clearTimeout(saveQueued);saveQue
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&saveQueued){clearTimeout(saveQueued);saveQueued=0;save()}});
 function changed(){buildOcc();if(syncHousing())buildOcc();buildBars();syncGround();uiSoon();saveSoon()}
 // The top level is 99. Reaching it brings the Champion prize; XP stops counting after that.
-const MAX_LVL=99,CHAMP={coins:50000,cash:50};
+const MAX_LVL=99,CHAMP={coins:50000,cash:20};
 function addXP(n){
   if(S.level>=MAX_LVL){S.xp=0;return}
   if(S.home&&isFresh()){S.xpCarry=(S.xpCarry||0)+n*.1;const extra=Math.floor(S.xpCarry);S.xpCarry-=extra;n+=extra}
   S.xp+=n;const l0=S.level;
-  while(S.level<MAX_LVL&&S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=20*S.level;S.cash+=1}
+  while(S.level<MAX_LVL&&S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=20*S.level;if(S.level%5===0)S.cash+=1}
   if(S.level>=MAX_LVL)S.xp=0;
   if(S.level>l0){SFX.level();showLevelUp(l0);if(S.level>=MAX_LVL&&!S.champ)setTimeout(championGift,600);else setTimeout(nextQuest,800)}
 }
@@ -7079,8 +7173,8 @@ function renderGoals(){
     const sk='g:'+S.goals.day+':'+i,state=q.claimed?2:fin?1:0;if(GOAL_ST[sk]!=null&&GOAL_ST[sk]<state)flash(row);GOAL_ST[sk]=state;
   });
   const bonus=el('div','bonus');
-  if(done===3&&!S.goals.bonus){bonus.appendChild(el('span',null,'All done! Bonus:'));const c=el('button','claim','+2 Farm Cash');c.onclick=()=>{S.goals.bonus=true;S.cash+=2;SFX.level();confetti();toast('Daily goals complete! +2 Farm Cash.');changed();renderGoals()};bonus.appendChild(c)}
-  else bonus.appendChild(el('span',null,S.goals.bonus?'All goals done. New goals tomorrow!':'Finish all three for +2 Farm Cash.'));
+  if(done===3&&!S.goals.bonus){bonus.appendChild(el('span',null,'All done! Bonus:'));const c=el('button','claim','+1 Farm Cash');c.onclick=()=>{S.goals.bonus=true;S.cash+=1;SFX.level();confetti();toast('Daily goals complete! +1 Farm Cash.');changed();renderGoals()};bonus.appendChild(c)}
+  else bonus.appendChild(el('span',null,S.goals.bonus?'All goals done. New goals tomorrow!':'Finish all three for +1 Farm Cash.'));
   list.appendChild(bonus);fold.appendChild(list);box.appendChild(fold);
 }
 const GOAL_ST={};
@@ -8034,7 +8128,7 @@ function showLevelUp(l0){
     const list=[];for(let l=l0+1;l<=lv;l++)list.push(...unlockList(l));
     celebrate(b,{tone:'gold',emblem:levelStarArt(lv),kicker:'New level',big:'Level '+lv,
       sub:['Way to go!',list.length?'Check out what is new in the Market.':'Your farm keeps growing.'],
-      rewards:[['coins',bonus],['cash',lv-l0]],
+      rewards:[['coins',bonus],['cash',Math.floor(lv/5)-Math.floor(l0/5)]],
       progress:lv<MAX_LVL?[S.xp,need(lv),'Next level']:null,
       extra:w=>{if(l0<NB_LVL&&lv>=NB_LVL)w.appendChild(el('p','hint nbnews','Your neighbors have moved in! Check the Orders board, and visit their farms from More > Neighbors.'));
         if(list.length){const h=el('div','cele-pl','New in the Market');h.style.cssText='text-align:center;animation:celeUp .5s .85s both';w.appendChild(h);w.appendChild(unlockGrid(list.slice(0,8)))}},
@@ -8716,7 +8810,88 @@ $('modeWalk').onclick=()=>setTapMode('walk');$('modeFarm').onclick=()=>setTapMod
 let seedPillKey='';
 function renderSeedPill(){if(!S)return;const c=CROPS[S.seed],t=c.name+(have(S.seed)?' ('+have(S.seed)+')':''),k=S.seed+'|'+t;if(k===seedPillKey)return;seedPillKey=k;$('seedPillImg').src=itemIcon(S.seed);$('seedPillName').textContent=t}
 $('seedPill').onclick=()=>{SFX.click();closePops();openMarket('seeds')};
-$('cashPlus').onclick=()=>{SFX.click();openMarket('specials')};
+$('cashPlus').onclick=()=>{SFX.click();showCashShop()};
+/* ================= Cash Shop: Farm Cash packs bought with real money ================= */
+// Farm Cash is the premium currency. In the Google Play app (a Trusted Web Activity) packs are bought through Play Billing
+// via the Digital Goods API; each pack is a consumable in-app product whose id matches CASH_PACKS[i].id in the Play Console.
+// Elsewhere (the website) the shop still shows, but buying explains that purchases need the app.
+const CASH_PACKS=[
+  {id:'cash_10',cash:10,usd:'$0.99'},
+  {id:'cash_55',cash:55,usd:'$4.99',bonus:10},
+  {id:'cash_120',cash:120,usd:'$9.99',bonus:20,tag:'Popular'},
+  {id:'cash_260',cash:260,usd:'$19.99',bonus:30},
+  {id:'cash_700',cash:700,usd:'$49.99',bonus:40,tag:'Best value'}
+];
+const PLAY_BILLING='https://play.google.com/billing';
+let dgs=null,dgsTried=false,packPrice={};
+async function billing(){
+  if(dgs||dgsTried)return dgs;dgsTried=true;
+  try{if('getDigitalGoodsService'in window){dgs=await window.getDigitalGoodsService(PLAY_BILLING)}}catch(e){dgs=null}
+  if(dgs){try{const det=await dgs.getDetails(CASH_PACKS.map(p=>p.id));for(const d of det){const a=d.price;try{packPrice[d.itemId]=new Intl.NumberFormat(LANG==='en'?undefined:LANG,{style:'currency',currency:a.currency}).format(a.value)}catch(e){packPrice[d.itemId]=a.value+' '+a.currency}}}catch(e){}
+    claimPending()}
+  return dgs;
+}
+// hand out the cash for one Play purchase exactly once, then consume it so the pack can be bought again
+async function grantPurchase(token,itemId){
+  const pk=CASH_PACKS.find(p=>p.id===itemId);if(!pk||!S)return false;
+  if(!S.iap)S.iap=[];
+  if(!S.iap.includes(token)){S.iap.push(token);if(S.iap.length>200)S.iap.splice(0,S.iap.length-200);S.cash+=pk.cash;S.bought=(S.bought||0)+pk.cash;save();changed();hud()}
+  try{await dgs.consume(token)}catch(e){}
+  return true;
+}
+async function claimPending(){
+  if(!dgs)return;try{const list=await dgs.listPurchases();for(const p of list){const had=(S.iap||[]).includes(p.purchaseToken);if(await grantPurchase(p.purchaseToken,p.itemId)&&!had){const pk=CASH_PACKS.find(x=>x.id===p.itemId);SFX.golden();toast('Your purchase is here! +'+pk.cash+' Farm Cash.')}}}catch(e){}
+}
+async function buyPack(pk,btn){
+  const svc=await billing();
+  if(!svc||!window.PaymentRequest){SFX.error();toast('Buying Farm Cash works in the Farm Village app from Google Play.');return}
+  btn.disabled=true;
+  try{
+    const req=new PaymentRequest([{supportedMethods:PLAY_BILLING,data:{sku:pk.id}}],{total:{label:'Total',amount:{currency:'USD',value:'0'}}});
+    const res=await req.show(),tok=res.details&&res.details.purchaseToken;
+    if(tok&&await grantPurchase(tok,pk.id)){await res.complete('success');SFX.golden();confetti();toast('Thank you! +'+pk.cash+' Farm Cash.');rerender()}
+    else{await res.complete('fail');toast('The purchase did not go through.')}
+  }catch(e){if(e&&e.name!=='AbortError')toast('The purchase did not go through.')}
+  btn.disabled=false;
+}
+function packArt(i){
+  // stacks of green bills that grow with the pack; the biggest one is a treasure chest
+  const bill=(x,y,r)=>`<g transform="translate(${x} ${y}) rotate(${r})"><rect x="-17" y="-10" width="34" height="20" rx="3" fill="#5fc46c" stroke="#1f6b28" stroke-width="2"/><rect x="-13" y="-6.5" width="26" height="13" rx="2" fill="none" stroke="#2f8a3a" stroke-width="1.2"/><circle r="4.6" fill="#3faa4a" stroke="#1f6b28" stroke-width="1"/><text y="3.2" font-size="8" font-weight="800" text-anchor="middle" fill="#fff" font-family="Fredoka,sans-serif">$</text></g>`;
+  const stack=(x,y,n)=>{let o='';for(let k=0;k<n;k++)o+=`<g transform="translate(0 ${-k*4})"><rect x="${x-17}" y="${y-4}" width="34" height="8" rx="2" fill="${k%2?'#4fb45c':'#3faa4a'}" stroke="#1f6b28" stroke-width="1.6"/></g>`;return o+bill(x,y-n*4-6,0)};
+  let b='';
+  if(i===0)b=bill(50,52,-8)+bill(54,46,6);
+  else if(i===1)b=stack(50,70,3)+bill(30,60,-18);
+  else if(i===2)b=stack(36,74,4)+stack(64,76,3)+bill(50,40,10);
+  else if(i===3)b=stack(28,78,4)+stack(52,74,6)+stack(74,80,3);
+  else b=`<path d="M14 52h72v34H14z" fill="#8a5a32" stroke="#4a2c16" stroke-width="3"/><path d="M14 52q36-30 72 0" fill="#a8703f" stroke="#4a2c16" stroke-width="3"/>`+bill(30,44,-20)+bill(52,36,6)+bill(72,44,18)+bill(44,48,-4)+`<rect x="44" y="58" width="12" height="14" rx="2" fill="#ffc72c" stroke="#9a6400" stroke-width="2"/><path d="M14 64h72" stroke="#ffc72c" stroke-width="4"/>`;
+  const glow=i>=2?`<circle cx="50" cy="54" r="40" fill="url(#pg${i})"/><defs><radialGradient id="pg${i}"><stop offset="0" stop-color="#fff6b0" stop-opacity=".9"/><stop offset="1" stop-color="#fff6b0" stop-opacity="0"/></radialGradient></defs>`:'';
+  return`<svg viewBox="0 0 100 100" width="84" height="84" aria-hidden="true">${glow}${b}</svg>`;
+}
+function showCashShop(){
+  billing().then(()=>{if(mq[0]&&mq[0].cashShop)rerender()});
+  modal({title:'Cash Shop',color:'green',wide:true,cashShop:true,render(b){
+    const p=el('div','store cashshop');
+    const top=el('div','csbal');top.innerHTML='<span class="bill">$</span>';const n=el('b');n.textContent=S.cash.toLocaleString();top.appendChild(n);top.appendChild(el('span',null,'Farm Cash'));p.appendChild(top);
+    p.appendChild(el('p','hint','Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.'));
+    const grid=el('div','grid csgrid');
+    CASH_PACKS.forEach((pk,i)=>{const card=el('div','card cspack'+(pk.tag?' hot':''));
+      if(pk.tag)card.appendChild(el('span','cstag',pk.tag));
+      const art=el('div','csart');art.innerHTML=packArt(i);card.appendChild(art);
+      const amt=el('strong','csamt');amt.innerHTML='<span class="bill">$</span>';amt.appendChild(document.createTextNode(pk.cash.toLocaleString()));card.appendChild(amt);
+      if(pk.bonus)card.appendChild(el('small','csbonus','+'+pk.bonus+'% bonus'));
+      const bt=el('button','buy cashbuy');bt.textContent=packPrice[pk.id]||pk.usd;bt.onclick=()=>{SFX.click();buyPack(pk,bt)};card.appendChild(bt);grid.appendChild(card)});
+    p.appendChild(grid);
+    p.appendChild(el('h3',null,'Spend it'));
+    const go=el('div','csgo');
+    for(const[label,fn]of[['Premium outfits',()=>{closeModal();showWardrobe()}],['Premium furniture',()=>{closeModal();if($('house').hidden)enterHouse();setTimeout(showFurniture,50)}],['Premium decorations',()=>{closeModal();openMarket('specials')}]]){const b2=el('button','opt',label);b2.onclick=()=>{SFX.click();fn()};go.appendChild(b2)}
+    p.appendChild(go);
+    p.appendChild(el('p','hint csfine','Purchases are made through Google Play. Farm Cash is stored on this device with your farm.'));
+    b.appendChild(p);
+  }});
+}
+// claim any Play purchase that was paid for but not yet delivered (the app closed mid-purchase)
+(function wait(){setTimeout(()=>{if(S)billing();else wait()},3000)})();
+
 $('btnMusic').onclick=()=>{S.music=!S.music;save();hud();SFX.click();wakeAudio();musicSync();toast(S.music?'Music on':'Music off')};
 $('btnSound').onclick=()=>{S.sound=!S.sound;const a=ac();if(a&&a.state==='suspended')a.resume();save();hud();SFX.click()};
 $('btnRib').onclick=()=>{SFX.click();showRibbons()};
@@ -8823,7 +8998,7 @@ function showNextUnlocks(){
     const p=el('div','store');
     if(S.level>=MAX_LVL){p.appendChild(el('p',null,'You reached Level 99, the top level. Well done, champion!'));b.appendChild(p);return}
     p.appendChild(el('p',null,(need(S.level)-S.xp)+' XP to Level '+(S.level+1)+' of '+MAX_LVL+'. Deliveries with Dale give the most XP, then quests and neighbor orders.'));
-    if(S.level>=MAX_LVL-10)p.appendChild(el('p','hint','At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.'));
+    if(S.level>=MAX_LVL-10)p.appendChild(el('p','hint','At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.'));
     for(const l of[S.level+1,S.level+2]){if(l>MAX_LVL)continue;const list=unlockList(l);if(!list.length)continue;p.appendChild(el('h3',null,'Level '+l+' unlocks'));p.appendChild(unlockGrid(list))}
     b.appendChild(p);
   }});
@@ -9081,7 +9256,7 @@ function shopButton(cat,id,d,locked,owned,card){
   else btn.innerHTML='Buy &middot; '+price;
   const poor=!free&&!canBuy(d);if(poor)btn.classList.add('poor');
   btn.onclick=()=>{
-    if(poor){SFX.error();haptic();shakeEl(btn);if(matsMissing(d.mats)&&S.coins>=d.cost){toast(LAND_MATS_MSG);return}toast(d.cash?'You need '+d.cash+' Farm Cash. You earn 1 every level up and from the daily bonus.':'You need '+d.cost.toLocaleString()+' coins for '+(cat==='seeds'?d.name.toLowerCase():'the '+d.name.toLowerCase())+'.');return}
+    if(poor){SFX.error();haptic();shakeEl(btn);if(matsMissing(d.mats)&&S.coins>=d.cost){toast(LAND_MATS_MSG);return}toast(d.cash?'You need '+d.cash+' Farm Cash. Get more in the Cash Shop.':'You need '+d.cost.toLocaleString()+' coins for '+(cat==='seeds'?d.name.toLowerCase():'the '+d.name.toLowerCase())+'.');return}
     shopPay(btn,card,()=>buyItem(cat,id,d));
   };
   return btn;
@@ -9142,7 +9317,7 @@ function shopDetail(cat,id,d,locked,owned){
 function buyItem(cat,id,d){
   SFX.click();
   if(cat==='seeds'){S.seed=id;stat('seedPick');setTool('multi');closeModal();toast(d.name+' selected. Click plowed plots to plant them.');changed();return}
-  if(d.cash&&S.cash<d.cash){SFX.error();toast('You need '+d.cash+' Farm Cash. You earn 1 every level up and from the daily bonus.');return}
+  if(d.cash&&S.cash<d.cash){SFX.error();toast('You need '+d.cash+' Farm Cash. Get more in the Cash Shop.');return}
   if(!d.cash&&S.coins<d.cost){SFX.error();toast('You need '+d.cost.toLocaleString()+' coins for the '+d.name.toLowerCase()+'.');return}
   if(matsMissing(d.mats)){SFX.error();toast(LAND_MATS_MSG);return}
   if(cat==='farm'){
@@ -9350,10 +9525,10 @@ function showWardrobe(first){
         }else{
           const cards=el('div','icards');
           for(const[val,name,price]of LOOK_OPTS[key]){
-            const on=draft[key]===val,card=el('div','icard'+(on?' on':''));
+            const on=draft[key]===val,card=el('div','icard'+(on?' on':'')+(price&&price.cash?' prem':''));
             card.appendChild(el('strong',null,name));
             const pic=lookThumb(key==='gender'?genderize(draft,val):Object.assign({},draft,frame==='face'&&key!=='hat'?{hat:'none'}:{},{[key]:val}),frame);pic.setAttribute('aria-hidden','true');card.appendChild(pic);
-            if(price&&!owns(key,val)){const tag=el('span','ptag');tag.innerHTML=price.coins?'<span class="coin"></span>'+price.coins:'<span class="bill">$</span>'+price.cash;card.appendChild(tag)}
+            if(price&&!owns(key,val)){const tag=el('span','ptag'+(price.cash?' prem':''));tag.innerHTML=price.coins?'<span class="coin"></span>'+price.coins:'<span class="bill">$</span>'+price.cash;card.appendChild(tag)}
             const use=el('button','use',on?'Wearing':'Use');use.setAttribute('aria-pressed',String(on));use.setAttribute('aria-label',(on?'Wearing ':'Use ')+name);
             use.onclick=()=>{SFX.click();setLook(key,val)};card.appendChild(use);cards.appendChild(card);
           }
@@ -9765,17 +9940,17 @@ const QUESTS=[
   {id:'juniper1',who:'juniper',lvl:8,title:'Busy Bees',intro:'The bees are buzzing and I need your help! A hive near flowers makes the sweetest honey.',
     steps:[{txt:'Build a Beehive',own:'mk:beehive',n:1},{txt:'Plant 15 seeds',stat:'plant',n:15},{txt:'Bring Juniper 5 honey',have:'honey',n:5}],reward:{coins:800,xp:100,item:'deco:greenhouse'}},
   {id:'dale2',who:'dale',lvl:9,title:'The Big Contract',intro:'A big buyer in Harbor Town wants regular deliveries. If we pull this off, everyone will know your farm.',
-    steps:[{txt:'Complete 5 deliveries',stat:'deliver',n:5},{txt:'Fill 4 neighbor orders',stat:'order',n:4},{txt:'Make 6 goods in your buildings',stat:'make',n:6}],reward:{coins:1200,xp:140,cash:2}},
+    steps:[{txt:'Complete 5 deliveries',stat:'deliver',n:5},{txt:'Fill 4 neighbor orders',stat:'order',n:4},{txt:'Make 6 goods in your buildings',stat:'make',n:6}],reward:{coins:1200,xp:140,cash:1}},
   {id:'mabel2',who:'mabel',lvl:10,title:'Harvest Festival',intro:'The whole valley is coming to the Harvest Festival, and we need the finest food on the table. Will you bake for us?',
-    steps:[{txt:'Bring Mabel 2 pumpkin pies',have:'pie',n:2},{txt:'Harvest 3 golden crops',stat:'golden',n:3},{txt:'Bring Mabel 3 apple ciders',have:'applecider',n:3}],reward:{coins:2500,xp:250,cash:3,item:'deco:gazebo'}},
+    steps:[{txt:'Bring Mabel 2 pumpkin pies',have:'pie',n:2},{txt:'Harvest 3 golden crops',stat:'golden',n:3},{txt:'Bring Mabel 3 apple ciders',have:'applecider',n:3}],reward:{coins:2500,xp:250,cash:1,item:'deco:gazebo'}},
   {id:'hank2',who:'hank',lvl:11,title:'Dairy Days',intro:'Cows are the heart of a farm. Keep a few, give them a good home, and let us see some cheese on the table.',
-    steps:[{txt:'Have 3 cows',own:'animal:cow',n:3},{txt:'Collect from animals 20 times',stat:'animal',n:20},{txt:'Bring Hank 3 cheese wheels',have:'cheese',n:3}],reward:{coins:2000,xp:220,cash:2}},
+    steps:[{txt:'Have 3 cows',own:'animal:cow',n:3},{txt:'Collect from animals 20 times',stat:'animal',n:20},{txt:'Bring Hank 3 cheese wheels',have:'cheese',n:3}],reward:{coins:2000,xp:220,cash:1}},
   {id:'otis2',who:'otis',lvl:14,title:'The Orchard Fair',intro:'The orchard fair is coming and I want the valley to taste the best fruit around. Grow your orchard and press some cherry juice.',
-    steps:[{txt:'Have 6 fruit trees',own:'tree',n:6},{txt:'Pick fruit 25 times',stat:'tree',n:25},{txt:'Bring Otis 3 cherry juices',have:'cherryjuice',n:3}],reward:{coins:3000,xp:300,cash:3}},
+    steps:[{txt:'Have 6 fruit trees',own:'tree',n:6},{txt:'Pick fruit 25 times',stat:'tree',n:25},{txt:'Bring Otis 3 cherry juices',have:'cherryjuice',n:3}],reward:{coins:3000,xp:300,cash:1}},
   {id:'rosa2',who:'rosa',lvl:15,title:'Sunday Breakfast',intro:'Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!',
-    steps:[{txt:'Have 2 pigs',own:'animal:pig',n:2},{txt:'Bring Rosa 2 bacon and eggs',have:'baconeggs',n:2},{txt:'Sell 20 goods from the barn',stat:'sell',n:20}],reward:{coins:4000,xp:350,cash:3}},
+    steps:[{txt:'Have 2 pigs',own:'animal:pig',n:2},{txt:'Bring Rosa 2 bacon and eggs',have:'baconeggs',n:2},{txt:'Sell 20 goods from the barn',stat:'sell',n:20}],reward:{coins:4000,xp:350,cash:1}},
   {id:'dale3',who:'dale',lvl:18,title:'Across the Valley',intro:'Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!',
-    steps:[{txt:'Complete 8 deliveries',stat:'deliver',n:8},{txt:'Fill 6 neighbor orders',stat:'order',n:6},{txt:'Make 10 goods in your buildings',stat:'make',n:10}],reward:{coins:6000,xp:450,cash:5}}
+    steps:[{txt:'Complete 8 deliveries',stat:'deliver',n:8},{txt:'Fill 6 neighbor orders',stat:'order',n:6},{txt:'Make 10 goods in your buildings',stat:'make',n:10}],reward:{coins:6000,xp:450,cash:2}}
 ];
 const PEOPLE=()=>[...NEIGHBORS,DRIVER];
 function qDef(){return S.q&&QUESTS.find(q=>q.id===S.q.id)}
@@ -9935,7 +10110,10 @@ const FURN={
   sofa:{name:'Sofa',cost:450,comfort:3,lvl:6},
   tv:{name:'Television',cost:900,comfort:3,lvl:9},
   fireplace:{name:'Fireplace',cost:1500,comfort:4,lvl:12},
-  bigbed:{name:'Comfy Double Bed',cost:2000,comfort:4,lvl:15,desc:'Replaces the old bed. Naps also give you the Fresh bonus.'}
+  bigbed:{name:'Comfy Double Bed',cost:2000,comfort:4,lvl:15,desc:'Replaces the old bed. Naps also give you the Fresh bonus.'},
+  aquarium:{name:'Fish Tank',cash:8,comfort:5,lvl:1,desc:'Bright tropical fish to feed.'},
+  arcade:{name:'Arcade Machine',cash:10,comfort:5,lvl:1,desc:'Play a round for a few coins every half hour.'},
+  piano:{name:'Grand Piano',cash:15,comfort:7,lvl:1,desc:'Play a tune for bonus XP every hour.'}
 };
 const MEALS=[
   {id:'water',name:'Glass of Water',drink:30,need:{},at:'sink'},
@@ -9951,7 +10129,7 @@ const MEALS=[
 ];
 const NAP_SECS=300,NAP_COST=12,FRESH_MIN=20,SHOWER_CD=30*60e3;
 function houseSt(){if(!S.home)S.home={};const h=S.home;if(!h.furn)h.furn={bed:1,shower:1,stove:1,sink:1};if(h.food==null)h.food=85;if(h.drink==null)h.drink=85;if(!h.t)h.t=Date.now();return h}
-function comfort(){const h=houseSt();let c=0;for(const k in h.furn)if(h.furn[k]&&FURN[k])c+=FURN[k].comfort;if(h.wall&&h.wall!=='cream')c++;if(h.floor&&h.floor!=='oak')c++;return c}
+function comfort(){const h=houseSt();let c=0;for(const k in h.furn)if(h.furn[k]&&FURN[k])c+=FURN[k].comfort;if(h.wall&&h.wall!=='cream')c+=HDECOR.wall[h.wall]&&HDECOR.wall[h.wall].cash?3:1;if(h.floor&&h.floor!=='oak')c+=HDECOR.floor[h.floor]&&HDECOR.floor[h.floor].cash?3:1;return c}
 function napCooldown(){return Math.max(45,120-4*comfort())*60e3}
 function napLeft(){return Math.max(0,(houseSt().napT||0)+napCooldown()-Date.now())}
 function isFresh(){return Date.now()<(houseSt().freshUntil||0)}
@@ -10016,11 +10194,11 @@ function advanceFarm(sec){
 // the pet and the lighting are drawn every frame. Tap furniture to use it.
 const RX=8,RY=7,WALL=112,WU=40;
 const SPOT={bed:[2.4,1.25],bigbed:[2.75,1.5],shower:[7.2,.74],stove:[3.85,1.08],sink:[4.8,1.08],fridge:[5.72,1.12],table:[6.25,3.72],sofa:[3.22,5.05],
-  bookshelf:[2.75,.92],fireplace:[1.2,5.0],plant:[6.85,6.05],idle:[5.4,5.9],door:[.55,6.45]};
-const SPOT_DIR={bed:-1,bigbed:-1,stove:1,sink:1,fridge:1,bookshelf:1,shower:1,fireplace:-1,sofa:-1,table:-1,plant:1};
+  bookshelf:[2.75,.92],fireplace:[1.2,5.0],plant:[6.85,6.05],idle:[5.4,5.9],door:[.55,6.45],aquarium:[.95,3.35],piano:[7.05,3.72],arcade:[6.35,6.4]};
+const SPOT_DIR={bed:-1,bigbed:-1,stove:1,sink:1,fridge:1,bookshelf:1,shower:1,fireplace:-1,sofa:-1,table:-1,plant:1,aquarium:-1,piano:-1,arcade:-1};
 const HDECOR={
-  wall:{cream:{name:'Cream Plaster',cost:0},sage:{name:'Sage Stripes',cost:300,lvl:2},floral:{name:'Blue Floral',cost:500,lvl:4},cabin:{name:'Log Cabin',cost:900,lvl:7}},
-  floor:{oak:{name:'Oak Planks',cost:0},walnut:{name:'Walnut Planks',cost:600,lvl:3},white:{name:'Whitewashed Pine',cost:800,lvl:5}}
+  wall:{cream:{name:'Cream Plaster',cost:0},sage:{name:'Sage Stripes',cost:300,lvl:2},floral:{name:'Blue Floral',cost:500,lvl:4},cabin:{name:'Log Cabin',cost:900,lvl:7},royal:{name:'Royal Damask',cash:6,lvl:1}},
+  floor:{oak:{name:'Oak Planks',cost:0},walnut:{name:'Walnut Planks',cost:600,lvl:3},white:{name:'Whitewashed Pine',cost:800,lvl:5},marble:{name:'Marble Tiles',cash:6,lvl:1}}
 };
 const TV_TIPS=['On TV: watered crops grow faster.','On TV: fertilizer doubles your next harvest.','On TV: a Diesel Press turns soybeans into fuel for your machines.','On TV: comfy furniture brings your next nap sooner.'];
 function decorSt(){const h=houseSt();if(!h.wall)h.wall='cream';if(!h.floor)h.floor='oak';if(!h.decor)h.decor={cream:1,oak:1};return h}
@@ -10083,7 +10261,9 @@ function wallPaint(len,style,isBack){
     for(let v=0;v<WALL;v+=14){const gr=g.createLinearGradient(0,v,0,v+14);gr.addColorStop(0,'#6e4426');gr.addColorStop(.25,'#a8703f');gr.addColorStop(.6,'#94602f');gr.addColorStop(1,'#5a361c');rect(0,v,len,14,gr);rect(0,v+13,len,1.4,'#e0cfa8')}
     const r=rnd32(isBack?7:11);g.strokeStyle='rgba(60,32,12,.35)';g.lineWidth=.6;for(let i=0;i<len/6;i++){const u=r()*len,v=Math.floor(r()*8)*14+3+r()*8;g.beginPath();g.moveTo(u,v);g.quadraticCurveTo(u+6,v+1.5,u+14+r()*10,v);g.stroke()}
   }else{
-    const base={cream:'#efe4ca',sage:'#cad6b8',floral:'#d9e4ef'}[style];rect(0,0,len,WALL,base);
+    const base={cream:'#efe4ca',sage:'#cad6b8',floral:'#d9e4ef',royal:'#7a1f3a'}[style];rect(0,0,len,WALL,base);
+    if(style==='royal'){let row=0;for(let v=50;v<WALL-6;v+=15,row++)for(let u=(row%2)*10;u<len;u+=20){g.fillStyle='rgba(255,205,90,.55)';g.beginPath();g.moveTo(u,v-5);g.quadraticCurveTo(u+4,v,u,v+5);g.quadraticCurveTo(u-4,v,u,v-5);g.fill();g.beginPath();g.arc(u,v-6.4,1,0,7);g.arc(u,v+6.4,1,0,7);g.fill();g.fillStyle='rgba(255,230,150,.35)';g.fillRect(u-5,v-.3,10,.6)}
+      rect(0,44,len,2,'#d9a020');rect(0,WALL-9,len,2,'#d9a020')}
     if(style==='sage'){for(let u=0;u<len;u+=18){rect(u,0,9,WALL,'#bccaa8');rect(u+9,0,.8,WALL,'#e3e9d6')}}
     else if(style==='floral'){let row=0;for(let v=52;v<WALL-8;v+=16,row++)for(let u=(row%2)*11;u<len;u+=22){g.fillStyle='#9db5d2';for(let k=0;k<5;k++){const a=k*1.2566;g.beginPath();g.arc(u+Math.cos(a)*2.4,v+Math.sin(a)*2.4,1.7,0,7);g.fill()}g.fillStyle='#e8c66a';g.beginPath();g.arc(u,v,1.2,0,7);g.fill();g.fillStyle='#8fae7a';g.fillRect(u+3,v-4,3,1.2)}}
     else{const r=rnd32(isBack?3:5);for(let i=0;i<len*1.2;i++){g.fillStyle='rgba(150,120,80,'+(r()*.06).toFixed(3)+')';g.fillRect(r()*len,40+r()*(WALL-40),2+r()*5,1+r()*3)}}
@@ -10096,6 +10276,9 @@ function wallPaint(len,style,isBack){
   rect(0,WALL-7,len,7,style==='cabin'?'#5a361c':'#f4efe3');rect(0,WALL-7.6,len,.8,'rgba(90,70,40,.3)');
 }
 function floorPaint(style){
+  if(style==='marble'){const r=rnd32(91),t=40;for(let v=0;v<RY*WU;v+=t)for(let u=0;u<RX*WU;u+=t){const c=((u+v)/t)%2?'#f4f1ec':'#e2ddd6';rect(u,v,t,t,c);
+      g.strokeStyle='rgba(150,140,130,.35)';g.lineWidth=.6;g.beginPath();let x=u+r()*t,y=v;g.moveTo(x,y);for(let k=0;k<4;k++){x+=(r()-.5)*16;y+=t/4;g.lineTo(x,y)}g.stroke();rect(u,v,t,.7,'rgba(120,110,100,.4)');rect(u,v,.7,t,'rgba(120,110,100,.4)')}
+    const sh=g.createLinearGradient(0,0,RX*WU,RY*WU);sh.addColorStop(0,'rgba(255,255,255,.18)');sh.addColorStop(1,'rgba(0,0,0,.05)');rect(0,0,RX*WU,RY*WU,sh);return}
   const pal={oak:['#c48d57','#bb834e','#cc9862','#b47b46','#c08a52'],walnut:['#7c4b2a','#704226','#875431','#62391f','#764828'],white:['#e8dfcf','#e0d6c3','#ece4d6','#dbcfba','#e4dbc9']}[style];
   const r=rnd32(style.length*97+13),pw=10;
   for(let v=0;v<RY*WU;v+=pw){let u=-r()*60;while(u<RX*WU){const len=50+r()*70,c=pal[Math.floor(r()*pal.length)];rect(u,v,len,pw,c);
@@ -10331,6 +10514,56 @@ function drawClock(){
     const hand=(ang,len,w)=>{g.strokeStyle='#2a1a0c';g.lineWidth=w;g.beginPath();g.moveTo(u,v);g.lineTo(u+Math.sin(ang)*len,v+Math.cos(ang)*len);g.stroke()};
     hand((d.getHours()%12+d.getMinutes()/60)/12*Math.PI*2,4.4,1.3);hand(d.getMinutes()/60*Math.PI*2,6.4,.9);hand(d.getSeconds()/60*Math.PI*2,6.6,.4)});
 }
+function drawAquarium(t,fed){
+  bx(.04,2.8,.44,1.12,24,HWOOD_D);faceX(.481,2.86,3.33,3,21,null,'rgba(30,15,5,.5)',.7);faceX(.481,3.39,3.86,3,21,null,'rgba(30,15,5,.5)',.7);
+  const z0=24,z1=58,X=.46,y0=2.84,y1=3.88;
+  faceX(.06,y0,y1,z0,z1,'#1f5f8a');faceY(y0,.06,X,z0,z1,'#2a6f9a');
+  const wg=g.createLinearGradient(...P(X,3.3,z1),...P(X,3.3,z0));wg.addColorStop(0,'#7fd0f0');wg.addColorStop(1,'#2a7fb0');
+  // gravel, weeds and a little castle behind the glass
+  for(let i=0;i<14;i++){const yy=y0+.04+i*(y1-y0-.08)/13,[a,b]=P(X-.02,yy,z0+1.5);ell(a,b,2.4,1.3,['#e8c27a','#c98a4b','#f4e0b0','#a8703f'][i%4])}
+  for(const[yy,hh]of[[2.98,22],[3.18,15],[3.7,26]]){const[a,b]=P(X-.03,yy,z0+2);g.strokeStyle='#3f9a3c';g.lineWidth=1.6;g.beginPath();g.moveTo(a,b);for(let k=1;k<=4;k++)g.lineTo(a+Math.sin(t/700+k+yy*9)*2.6,b-hh*k/4);g.stroke()}
+  {const[a,b]=P(X-.03,3.46,z0+2);poly([[a-6,b],[a+6,b],[a+6,b-12],[a-6,b-12]],'#b9b2a6','#6e685e',.6);for(const dx of[-6,-2,2])poly([[a+dx,b-12],[a+dx+4,b-12],[a+dx+4,b-15],[a+dx,b-15]],'#b9b2a6');ell(a,b-4,2,3,'#2a3a4a')}
+  // fish
+  const cols=['#ff7a2a','#ffd23f','#e0352b','#5ad0e8','#ff9ad0'];
+  for(let i=0;i<5;i++){const sp=reduce?0:t/(2600+i*500),q=(Math.sin(sp+i*1.7)+1)/2,dir=Math.cos(sp+i*1.7)>0?1:-1,yy=y0+.12+q*(y1-y0-.24),zz=z0+8+((i*7)%22)+(fed?Math.max(0,10-((t-fed)/300)):0),[a,b]=P(X-.01,yy,zz);
+    g.save();g.translate(a,b);g.scale(dir,1);ell(0,0,4.4,2.6,cols[i],shade(cols[i],-.4),.4);poly([[-3.6,0],[-7,-2.6],[-7,2.6]],shade(cols[i],-.1));ell(2.2,-.6,.7,.7,'#111');if(i===0){g.fillStyle='#fff';g.fillRect(-.6,-2.4,1.2,4.8)}g.restore()}
+  if(!reduce)for(let i=0;i<6;i++){const q=((t/2200)+i/6)%1,[a,b]=P(X-.01,3.62+(i%2)*.06,z0+4+q*(z1-z0-6));ell(a+Math.sin(q*12+i)*1.2,b,1+q*.6,1+q*.6,null,'rgba(230,250,255,.8)',.5)}
+  if(fed&&t-fed<2500)for(let i=0;i<6;i++){const q=(t-fed)/2500,[a,b]=P(X-.01,3.1+i*.08,z1-2-q*14-i);ell(a,b,.9,.9,'#c98a4b')}
+  g.save();g.globalAlpha=.32;faceX(X,y0,y1,z0,z1,wg);g.restore();faceX(X+.001,y0,y1,z0,z1,null,'#a9c4d2',1.2);
+  faceY(y1,.06,X,z0,z1,'rgba(150,210,240,.25)','#a9c4d2',1);topQ(.06,y0,X,y1,z1,'rgba(160,220,245,.4)','#a9c4d2',.8);bx(.04,y0-.02,.46,1.08,3,'#222a30',z1);
+  g.strokeStyle='rgba(255,255,255,.45)';g.lineWidth=2;line(P(X+.002,3,z1-6),P(X+.002,3.25,z0+8));
+}
+function drawPiano(t,playing){
+  const x0=6.48,x1=7.72,y0=2.2,y1=3.22,blk='#16171b';
+  for(const[a,b]of[[6.6,2.3],[7.6,2.3],[6.62,3.1],[7.58,3.1]])bx(a,b,.08,.08,22,'#0c0c0e');
+  bx(x0,y0,x1-x0,y1-y0,12,blk,22,'rgba(0,0,0,.7)');
+  // keybed with white and black keys on the front
+  bx(x0+.06,y1,x1-x0-.12,.24,4,blk,24,'rgba(0,0,0,.7)');topQ(x0+.1,y1+.02,x1-.1,y1+.2,28.05,'#f8f6f0','rgba(0,0,0,.25)',.4);
+  const n=22,kw=(x1-x0-.2)/n;for(let i=0;i<n;i++){const a=x0+.1+i*kw;g.strokeStyle='rgba(0,0,0,.35)';g.lineWidth=.4;line(P(a,y1+.02,28.1),P(a,y1+.2,28.1));if([1,2,4,5,6].includes(i%7))topQ(a+kw*.62,y1+.02,a+kw*1.38,y1+.12,28.3,'#111')}
+  if(playing&&!reduce){const k=Math.floor(t/140)%n,a=x0+.1+k*kw;topQ(a,y1+.02,a+kw,y1+.2,28.2,'#ffe7a0')}
+  // the lid propped open
+  const hl=P(x0,y0,34),hr=P(x1,y0,34),lr=P(x1,y0+.72,66),ll=P(x0,y0+.72,66);
+  poly([hl,hr,lr,ll],pvL(hl[0],hl[1],lr[0],lr[1],['#2c2e34','#0c0c0e','#3a3d44']),'#000',.7);g.strokeStyle='#5a5d64';g.lineWidth=1.2;line(P(x1-.1,y0+.62,34),P(x1-.1,y0+.62,62));
+  topQ(x0+.05,y0+.05,x1-.05,y1-.05,34.05,'#3a2a1a');for(let i=0;i<9;i++){const a=x0+.15+i*.12;g.strokeStyle='#d9b25a';g.lineWidth=.4;line(P(a,y0+.1,34.1),P(a,y1-.1,34.1))}
+  faceY(y1+.001,x0+.3,x1-.3,30,34,'#d9a020');
+  // bench
+  bx(6.75,3.55,.6,.28,3,'#16171b',16);for(const[a,b]of[[6.78,3.58],[7.3,3.58],[6.78,3.78],[7.3,3.78]])bx(a,b,.04,.04,16,'#0c0c0e');
+  if(playing&&!reduce)for(let i=0;i<3;i++){const q=((t/1200)+i/3)%1,[a,b]=P(7.1,2.7,60+q*40);g.globalAlpha=1-q;g.fillStyle='#3a2310';g.font='bold 14px Fredoka, sans-serif';g.textAlign='center';g.fillText(i%2?'♫':'♪',a+Math.sin(q*6+i)*10,b);g.globalAlpha=1}
+}
+function drawArcade(t,playing){
+  const x0=6.1,x1=6.6,y0=5.45,y1=5.95,col='#2d3fa8';
+  bx(x0,y0,x1-x0,y1-y0,40,col);bx(x0,y0,x1-x0,y1-y0-.12,34,shade(col,-.1),40);
+  // control deck sticking out the front, then the screen and marquee above it
+  bx(x0+.02,y1-.02,x1-x0-.04,.14,6,'#1b1f3a',36);const[ja,jb]=P(x0+.15,y1+.05,42);g.strokeStyle='#222';g.lineWidth=1.4;line([ja,jb],[ja,jb-6]);ball(ja,jb-7,2.2,2.2,'#e0352b');
+  for(const[k,c]of[[.28,'#ffd23f'],[.36,'#3fd0ff']]){const[a,b]=P(x0+k,y1+.06,42);ell(a,b,1.6,.9,c,'#111',.3)}
+  const scr=g.createLinearGradient(...P(x0,y1-.12,72),...P(x0,y1-.12,46));
+  if(playing&&!reduce){const k=t/400;scr.addColorStop(0,'hsl('+((k*60)%360)+',80%,45%)');scr.addColorStop(1,'#0a0a1a')}else{scr.addColorStop(0,'#14204a');scr.addColorStop(1,'#060810')}
+  faceY(y1-.119,x0+.05,x1-.05,46,70,scr,'#000',.6);
+  if(!reduce){for(let i=0;i<5;i++){const q=((t/900)+i/5)%1,[a,b]=P(x0+.08+q*.34,y1-.118,50+((i*5)%16));g.fillStyle=i%2?'#ffd23f':'#7fff7a';g.fillRect(a-1,b-1,2,2)}
+    const[pa,pb]=P(x0+.25,y1-.118,52);g.fillStyle='#ffd23f';g.beginPath();g.moveTo(pa,pb);g.arc(pa,pb,3,.3+Math.abs(Math.sin(t/120))*.4,Math.PI*2-.3-Math.abs(Math.sin(t/120))*.4);g.closePath();g.fill()}
+  faceY(y1-.119,x0+.03,x1-.03,74,82,'#ff4f9a','#000',.5);{const[a,b]=P((x0+x1)/2,y1-.12,78);g.fillStyle='#fff';g.font='bold 5px Fredoka, sans-serif';g.textAlign='center';g.fillText('ARCADE',a,b+2)}
+  g.strokeStyle='rgba(255,255,255,.2)';g.lineWidth=1.5;line(P(x1,y0+.05,4),P(x1,y0+.05,78));
+}
 function shadowQ(x0,y0,x1,y1){topQ(x0-.04,y0-.04,x1+.06,y1+.06,0,'rgba(30,15,5,.12)');topQ(x0,y0,x1,y1,0,'rgba(30,15,5,.16)')}
 
 /* ---- drawing the whole room ---- */
@@ -10353,6 +10586,7 @@ function drawHouse(t){
   if(F.fireplace)add(5.2,()=>drawFireplace(t,!!F.tv));if(F.tv)add(5.25,()=>drawTV(t,tvOn,!!F.fireplace));
   if(F.sofa){add(7.3,()=>drawCoffee());add(8.0,()=>drawSofaSeat());add(8.6,()=>drawSofaBack())}
   if(F.lamp)add(7.3,()=>drawLampFloor(lit));
+  if(F.aquarium)add(3.6,()=>drawAquarium(t,HV.fishT||0));if(F.piano){shadowQ(6.48,2.2,7.72,3.22);add(9.6,()=>drawPiano(t,!!(A&&A.spot==='piano')))}if(F.arcade){shadowQ(6.1,5.45,6.6,5.95);add(11.9,()=>drawArcade(t,!!(A&&A.spot==='arcade')))}
   if(F.chairs)add(7.8,()=>drawChair(5.03,2.68,'y0'));
   if(F.table)add(8.95,()=>drawTable());
   if(F.chairs)add(9.75,()=>drawChair(5.03,4.3,'y1'));
@@ -10373,6 +10607,7 @@ function drawHouse(t){
   if(lit)glow(.24,.2,44,70,'255,210,130',.26*dk);
   if(tvOn)glow(.5,5,F.fireplace?66:38,80,'120,170,255',.18+.04*Math.sin(t/90));
   if(cooking)glow(3.85,.4,32,50,'255,120,40',.25);
+  if(F.aquarium)glow(.5,3.35,42,70,'120,210,255',.08+.14*dk);if(F.arcade)glow(6.35,6.05,60,60,'255,90,200',.06+.16*dk);
   if(dk<1)glow(0,3.3,66,150,'255,240,200',.1*(1-dk));
   g.globalCompositeOperation='source-over';
   // hover label
@@ -10399,11 +10634,11 @@ function houseHits(){
   if(F.fireplace)add('fireplace',0,4.25,.84,5.75,F.tv?86:50);else if(F.tv)add('tv',0,4.4,.42,5.6,58);
   if(F.sofa){add('sofa',2.95,4.05,3.75,6.05,36);add('sofa',1.9,4.6,2.6,5.5,18)}
   if(F.table)add('table',4.6,3.2,5.9,4.2,30);if(F.chairs){add('table',5.03,2.68,5.45,3.1,40);add('table',5.03,4.3,5.45,4.72,40)}
-  if(F.lamp)add('lamp',3.45,3.65,3.65,3.85,88);if(F.plant)add('plant',7.15,6.15,7.65,6.65,78);add('door',0,6.0,.25,6.9,86);
+  if(F.lamp)add('lamp',3.45,3.65,3.65,3.85,88);if(F.aquarium)add('aquarium',0,2.8,.5,3.92,62);if(F.piano)add('piano',6.48,2.2,7.72,3.45,66);if(F.arcade)add('arcade',6.1,5.45,6.6,6.1,82);if(F.plant)add('plant',7.15,6.15,7.65,6.65,78);add('door',0,6.0,.25,6.9,86);
   if(S.pet){const ps=F.fireplace?[1.1,5.95]:[1.5,6.0];add('pet',ps[0]-.25,ps[1]-.25,ps[0]+.25,ps[1]+.25,30)}
   return a;
 }
-function houseLabel(id){const F=houseSt().furn;return{bed:'Nap',bigbed:'Nap',shower:'Shower',stove:'Cook',fridge:'Cook',table:'Eat',sink:'Drink water',bookshelf:'Read',sofa:F.tv?'Watch TV':'Relax',tv:'Watch TV',fireplace:F.tv?'Watch TV':'Warm up',plant:'Water the plant',lamp:'Switch the lamp',door:'Go outside',pet:'Give a pat'}[id]||''}
+function houseLabel(id){const F=houseSt().furn;return{bed:'Nap',bigbed:'Nap',shower:'Shower',stove:'Cook',fridge:'Cook',table:'Eat',sink:'Drink water',bookshelf:'Read',sofa:F.tv?'Watch TV':'Relax',tv:'Watch TV',fireplace:F.tv?'Watch TV':'Warm up',plant:'Water the plant',lamp:'Switch the lamp',aquarium:'Feed the fish',piano:'Play the piano',arcade:'Play a game',door:'Go outside',pet:'Give a pat'}[id]||''}
 function houseHitAt(cx,cy){
   if(!HV||!HV.tf)return null;const c=$('hcv'),r=c.getBoundingClientRect(),pd=c.width/Math.max(1,r.width),tf=HV.tf;
   const rx=((cx-r.left)*pd-tf.ox)/tf.sc,ry=((cy-r.top)*pd-tf.oy)/tf.sc;let best=null;
@@ -10417,8 +10652,22 @@ function houseAct(id){
   else if(id==='sink')eatMeal(MEALS[0]);else if(id==='bookshelf')doRead();else if(id==='sofa'||id==='tv'||(id==='fireplace'&&F.tv))doRelax();else if(id==='fireplace')doWarm();
   else if(id==='plant')houseDo('plant',1.4,'Watering',()=>{HV.plantT=performance.now();SFX.water();toast('The plant looks happier.')});
   else if(id==='lamp'){const h=houseSt();h.lampOff=!h.lampOff;changed()}
+  else if(id==='aquarium')houseDo('aquarium',1.4,'Feeding the fish',()=>{HV.fishT=performance.now();housePop('♥');toast('The fish swim up for their food.')});
+  else if(id==='piano')doPiano();else if(id==='arcade')doArcade();
   else if(id==='door')leaveHouse();
   else if(id==='pet'&&S.pet){HV.petT=performance.now();S.pet.kind==='dog'?SFX.bark():SFX.meow();const ps=F.fireplace?[1.1,5.95]:[1.5,6.0];HV.pops.push({x:ps[0],y:ps[1]+.6,txt:'♥',t0:performance.now()})}
+}
+function doPiano(){
+  const h=houseSt(),left=(h.pianoT||0)+60*60e3-Date.now();
+  const tune=()=>{const N=[523,659,784,659,698,880,784,659,587,523];N.forEach((f,i)=>tone(f,.34,'triangle',.09,i*.26))};
+  if(left>0){houseDo('piano',2.6,'Playing piano',()=>toast('Lovely! Bonus XP again in '+fmt(left/1000)+'.'));tune();return}
+  houseDo('piano',2.6,'Playing piano',()=>{h.pianoT=Date.now();const n=10+S.level*3;addXP(n);housePop('+'+n+' XP');toast('What a lovely tune!');hud();changed()});tune();
+}
+function doArcade(){
+  const h=houseSt(),left=(h.arcadeT||0)+30*60e3-Date.now();
+  const blips=()=>{for(let i=0;i<8;i++)tone(300+((i*137)%5)*120,.08,'square',.05,i*.16)};
+  if(left>0){houseDo('arcade',2.2,'Playing',()=>toast('High score! Coins again in '+fmt(left/1000)+'.'));blips();return}
+  houseDo('arcade',2.2,'Playing',()=>{h.arcadeT=Date.now();const n=20+S.level*4;S.coins+=n;housePop('+'+n);SFX.coin();toast('High score! +'+n+' coins.');hud();changed()});blips();
 }
 function doRead(){
   const h=houseSt(),left=(h.readT||0)+30*60e3-Date.now();if(left>0){toast('You just finished a book. Try again a bit later.');return}
@@ -10482,32 +10731,38 @@ function doNap(){
     h.napT=Date.now();h.food=Math.max(0,h.food-NAP_COST);h.drink=Math.max(0,h.drink-NAP_COST);if(h.furn.bigbed)h.freshUntil=Math.max(h.freshUntil||0,Date.now()+(FRESH_MIN+comfort())*60e3);
     advanceFarm(NAP_SECS);stat('naps');SFX.level();toast('What a nap! Everything on the farm moved 5 minutes ahead. -'+NAP_COST+' food and drink.');renderNeeds()}};HV.tx=HV.x;HV.ty=HV.y});
 }
-const FURN_REF={bed:[1.05,1.25],bigbed:[1.2,1.5],table:[5.25,3.7],chairs:[5.24,2.9],plant:[7.4,6.4],rug:[2.25,5.2],lamp:[3.55,3.75],bookshelf:[2.75,.25],fridge:[5.73,.4],sofa:[3.35,5.05],tv:[.2,5],fireplace:[.3,5]};
+const FURN_REF={bed:[1.05,1.25],bigbed:[1.2,1.5],table:[5.25,3.7],chairs:[5.24,2.9],plant:[7.4,6.4],rug:[2.25,5.2],lamp:[3.55,3.75],bookshelf:[2.75,.25],fridge:[5.73,.4],sofa:[3.35,5.05],tv:[.2,5],fireplace:[.3,5],aquarium:[.26,3.36],piano:[7.1,2.75],arcade:[6.35,5.7]};
 const FURN_DRAW={bed:()=>drawBed(false,false),bigbed:()=>drawBed(true,false),table:()=>drawTable(),chairs:()=>drawChair(5.03,2.68,'y0'),plant:()=>drawPlantBig(0),rug:()=>drawRug(),
-  lamp:()=>drawLampFloor(false),bookshelf:()=>drawShelf(),fridge:()=>drawFridge(),sofa:()=>{drawSofaSeat();drawSofaBack()},tv:()=>drawTV(0,false,false),fireplace:()=>drawFireplace(0,false)};
+  lamp:()=>drawLampFloor(false),bookshelf:()=>drawShelf(),fridge:()=>drawFridge(),sofa:()=>{drawSofaSeat();drawSofaBack()},tv:()=>drawTV(0,false,false),fireplace:()=>drawFireplace(0,false),aquarium:()=>drawAquarium(0,0),piano:()=>drawPiano(0,false),arcade:()=>drawArcade(0,false)};
 function furnIcon(id){const k='furn2:'+id;if(ICONS[k])return ICONS[k];const c=document.createElement('canvas');c.width=c.height=120;const prev=g;g=c.getContext('2d');const pv=ICON_MODE;ICON_MODE=true;
-  const big={rug:.5,bigbed:.72,bed:.85,sofa:.85,fireplace:.55,bookshelf:.75,fridge:.75,lamp:.72,plant:.82,tv:1,table:.85,chairs:1.2}[id]||1.1,[rx,ry]=P(...FURN_REF[id]);g.setTransform(big,0,0,big,60,{fireplace:104,bookshelf:100,fridge:100,lamp:104,plant:104}[id]||80);g.translate(-rx,-ry);try{FURN_DRAW[id]()}catch(e){}
+  const big={rug:.5,bigbed:.72,bed:.85,sofa:.85,fireplace:.55,bookshelf:.75,fridge:.75,lamp:.72,plant:.82,tv:1,table:.85,chairs:1.2,aquarium:.95,piano:.72,arcade:.85}[id]||1.1,[rx,ry]=P(...FURN_REF[id]);g.setTransform(big,0,0,big,60,{fireplace:104,bookshelf:100,fridge:100,lamp:104,plant:104,aquarium:92,piano:96,arcade:104}[id]||80);g.translate(-rx,-ry);try{FURN_DRAW[id]()}catch(e){}
   ICON_MODE=pv;g=prev;return ICONS[k]=c.toDataURL()}
 function decorIcon(kind,id){const k='decor:'+kind+':'+id;if(ICONS[k])return ICONS[k];const c=document.createElement('canvas');c.width=c.height=120;const prev=g;g=c.getContext('2d');
   try{if(kind==='wall'){const s=120/WALL;g.setTransform(s,0,0,-s,0,120);wallPaint(120/s,id,false)}else{g.setTransform(.8,0,0,.8,0,0);floorPaint(id)}}catch(e){}
   g=prev;return ICONS[k]=c.toDataURL()}
+function priceHTML(d){return d.cash?'<span class="bill">$</span>'+d.cash:'<span class="coin"></span>'+d.cost.toLocaleString()}
+function payFor(d){
+  if(d.cash){if(S.cash<d.cash){SFX.error();toast('You need '+d.cash+' Farm Cash. Get more in the Cash Shop.');return false}S.cash-=d.cash;return true}
+  if(S.coins<d.cost){SFX.error();toast('You need '+d.cost.toLocaleString()+' coins for this.');return false}S.coins-=d.cost;return true;
+}
 function showFurniture(){
   modal({title:'Furniture',color:'pink',wide:true,live:true,render(b){
     const h=decorSt(),p=el('div','store'),F=h.furn;p.appendChild(el('p','hint','Comfy furniture makes your home cozier: each comfort point makes naps come back sooner. Comfort now: '+comfort()+'. Next nap cooldown: '+fmt(napCooldown()/1000)+'.'));
     const grid=el('div','grid');
     for(const id in FURN){const d=FURN[id];if(d.starter)continue;const card=el('div','card'),im=el('img');im.src=furnIcon(id);im.alt='';card.appendChild(im);card.appendChild(el('strong',null,d.name));
       card.appendChild(el('small',null,(d.desc?d.desc+' ':'')+'+'+d.comfort+' comfort'));
-      const btn=el('button','buy');if(F[id]){btn.textContent='Owned';btn.disabled=true}else if(d.lvl>S.level){btn.textContent='Unlocks at Level '+d.lvl;btn.disabled=true}
-      else{btn.innerHTML='Buy &middot; <span class="coin"></span>'+d.cost.toLocaleString();btn.onclick=()=>{if(S.coins<d.cost){SFX.error();toast('You need '+d.cost.toLocaleString()+' coins for this.');return}S.coins-=d.cost;F[id]=1;if(id==='bigbed')F.bed=0;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
+      if(d.cash){card.classList.add('prem');card.appendChild(el('span','premtag','Premium'))}
+      const btn=el('button','buy'+(d.cash?' cashbuy':''));if(F[id]){btn.textContent='Owned';btn.disabled=true}else if(d.lvl>S.level){btn.textContent='Unlocks at Level '+d.lvl;btn.disabled=true}
+      else{btn.innerHTML='Buy &middot; '+priceHTML(d);btn.onclick=()=>{if(!payFor(d))return;F[id]=1;if(id==='bigbed')F.bed=0;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
       card.appendChild(btn);grid.appendChild(card)}
     p.appendChild(grid);
     p.appendChild(el('h3',null,'Walls and floors'));const g2=el('div','grid');
     for(const kind of['wall','floor'])for(const id in HDECOR[kind]){const d=HDECOR[kind][id],def=id==='cream'||id==='oak',card=el('div','card'),im=el('img');im.src=decorIcon(kind,id);im.alt='';im.style.borderRadius='10px';card.appendChild(im);card.appendChild(el('strong',null,d.name));
-      card.appendChild(el('small',null,def?(kind==='wall'?'Wallpaper':'Flooring'):'+1 comfort'));const btn=el('button','buy');
+      card.appendChild(el('small',null,def?(kind==='wall'?'Wallpaper':'Flooring'):d.cash?'+3 comfort':'+1 comfort'));if(d.cash){card.classList.add('prem');card.appendChild(el('span','premtag','Premium'))}const btn=el('button','buy'+(d.cash?' cashbuy':''));
       if(h[kind]===id){btn.textContent='In use';btn.disabled=true}
       else if(h.decor[id]){btn.textContent='Use this style';btn.onclick=()=>{h[kind]=id;SFX.place();changed();rerender()}}
       else if(d.lvl>S.level){btn.textContent='Unlocks at Level '+d.lvl;btn.disabled=true}
-      else{btn.innerHTML='Buy &middot; <span class="coin"></span>'+d.cost.toLocaleString();btn.onclick=()=>{if(S.coins<d.cost){SFX.error();toast('You need '+d.cost.toLocaleString()+' coins for this.');return}S.coins-=d.cost;h.decor[id]=1;h[kind]=id;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
+      else{btn.innerHTML='Buy &middot; '+priceHTML(d);btn.onclick=()=>{if(!payFor(d))return;h.decor[id]=1;h[kind]=id;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
       card.appendChild(btn);g2.appendChild(card)}
     p.appendChild(g2);b.appendChild(p);
   }});

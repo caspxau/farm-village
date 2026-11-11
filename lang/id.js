@@ -1,6 +1,51 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Secret code|Kode rahasia
+x:`Cash Shop|Toko Uang
+Get Farm Cash|Dapatkan Uang Kebun
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|Uang Kebun bisa membeli baju, perabot, dekorasi, dan pembantu premium. Tiap 5 level dan target harian tetap memberi sedikit gratis.
+Popular|Populer
+Best value|Paling hemat
+Spend it|Belanjakan
+Premium outfits|Baju premium
+Premium furniture|Perabot premium
+Premium decorations|Dekorasi premium
+Premium|Premium
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|Pembelian dilakukan lewat Google Play. Uang Kebun disimpan di perangkat ini bersama kebunmu.
+Buying Farm Cash works in the Farm Village app from Google Play.|Membeli Uang Kebun bisa dilakukan di aplikasi Farm Village dari Google Play.
+The purchase did not go through.|Pembelian tidak berhasil.
+Chef hat|Topi koki
+Wizard hat|Topi penyihir
+Pirate hat|Topi bajak laut
+Viking helmet|Helm viking
+Hawaiian shirt|Kemeja Hawaii
+Tuxedo|Tuksedo
+Royal robe|Jubah kerajaan
+Tartan kilt|Kilt kotak-kotak
+Golden overalls|Overall emas
+Bow tie|Dasi kupu-kupu
+Gold chain|Kalung emas
+Hero cape|Jubah pahlawan
+Fairy wings|Sayap peri
+Fish Tank|Akuarium
+Arcade Machine|Mesin arkade
+Grand Piano|Piano besar
+Bright tropical fish to feed.|Ikan tropis warna-warni untuk diberi makan.
+Play a round for a few coins every half hour.|Main satu ronde untuk beberapa koin tiap setengah jam.
+Play a tune for bonus XP every hour.|Mainkan lagu untuk bonus XP tiap jam.
+Royal Damask|Damask kerajaan
+Marble Tiles|Ubin marmer
+Golden Gnome|Kurcaci emas
+Rainbow Arch|Lengkung pelangi
+Unicorn Statue|Patung unicorn
+Feed the fish|Beri makan ikan
+Play the piano|Main piano
+Play a game|Main game
+Feeding the fish|Memberi makan ikan
+Playing piano|Bermain piano
+Playing|Bermain
+The fish swim up for their food.|Ikan-ikan berenang mendekati makanannya.
+What a lovely tune!|Lagu yang indah!
+Secret code|Kode rahasia
 Unlock|Buka
 Wrong code.|Kode salah.
 Unlimited cash unlocked!|Uang tanpa batas terbuka!
@@ -314,9 +359,9 @@ Tutorial skipped.|Tutorial dilewati.
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|Tutorial selesai! +150 koin dan 1 Uang Kebun. Selamat berkebun!
 All done! Bonus:|Semua beres! Bonus:
 All goals done. New goals tomorrow!|Semua target selesai. Target baru besok!
-Finish all three for +2 Farm Cash.|Selesaikan ketiganya untuk +2 Uang Kebun.
-+2 Farm Cash|+2 Uang Kebun
-Daily goals complete! +2 Farm Cash.|Target harian selesai! +2 Uang Kebun.
+Finish all three for +1 Farm Cash.|Selesaikan ketiganya untuk +1 Uang Kebun.
++1 Farm Cash|+1 Uang Kebun
+Daily goals complete! +1 Farm Cash.|Target harian selesai! +1 Uang Kebun.
 Welcome to the Valley|Selamat Datang di Lembah
 Dale's First Run|Perjalanan Pertama Dale
 Hank's Feed Problem|Masalah Pakan Hank
@@ -862,7 +907,7 @@ Champion Farmer!|Petani Juara!
 Top level!|Level tertinggi!
 Max level|Level maks
 You reached Level 99, the top level. Well done, champion!|Kamu mencapai Level 99, level tertinggi. Hebat, juara!
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|Di Level 99 kamu memenangkan Piala Juara, 50.000 koin, dan 50 Uang Kebun.
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|Di Level 99 kamu memenangkan Piala Juara, 50.000 koin, dan 20 Uang Kebun.
 Auto Waterer|Penyiram Otomatis
 The Auto Waterer is full.|Penyiram Otomatis sudah penuh.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Hewan tinggal di kandangnya. Pilih Hewan: Bebas di Pengaturan untuk memindahkannya.
@@ -1048,7 +1093,7 @@ p:`0|$1 koin
 54|Kamu butuh $1 {2} di lumbung.
 55|Kamu butuh $1 koin[[ untuk {2}]].
 56|Kamu butuh $1 Uang Kebun untuk itu.
-57|Kamu butuh $1 Uang Kebun. Kamu dapat 1 tiap naik level dan dari bonus harian.
+57|Kamu butuh $1 Uang Kebun. Dapatkan lebih banyak di Toko Uang.
 58|Kamu butuh $1 koin untuk menanam {2}.
 59|Membajak butuh $1 koin. Jual dulu barang dari lumbung.
 60|{1} tidak cukup untuk {l2}.
@@ -1190,4 +1235,10 @@ p:`0|$1 koin
 196|{1} ditambahkan ke rumahmu!
 197|Perabot nyaman membuat rumah lebih hangat: setiap poin kenyamanan membuat tidur siang lebih cepat tersedia. Kenyamanan: $1. Jeda tidur siang: {t2}.
 198|[[{1} ]]+$2 kenyamanan
-199|{1} ($2)`};
+199|{1} ($2)
+200|Bonus +$1%
+201|Terima kasih! +$1 Uang Kebun.
+202|Pembelianmu sudah masuk! +$1 Uang Kebun.
+203|Indah! Bonus XP lagi dalam {t1}.
+204|Skor tertinggi! Koin lagi dalam {t1}.
+205|Skor tertinggi! +$1 koin.`};

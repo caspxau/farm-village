@@ -1,6 +1,51 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Secret code|Código secreto
+x:`Cash Shop|Loja de dinheiro
+Get Farm Cash|Obter dinheiro da fazenda
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|O dinheiro da fazenda compra roupas, móveis, decorações e ajudantes premium. A cada 5 níveis e nas metas diárias você ainda ganha um pouco grátis.
+Popular|Popular
+Best value|Melhor oferta
+Spend it|Gaste
+Premium outfits|Roupas premium
+Premium furniture|Móveis premium
+Premium decorations|Decorações premium
+Premium|Premium
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|As compras são feitas pelo Google Play. O dinheiro da fazenda fica salvo neste aparelho com a sua fazenda.
+Buying Farm Cash works in the Farm Village app from Google Play.|Comprar dinheiro da fazenda funciona no app Farm Village do Google Play.
+The purchase did not go through.|A compra não foi concluída.
+Chef hat|Chapéu de chef
+Wizard hat|Chapéu de mago
+Pirate hat|Chapéu de pirata
+Viking helmet|Capacete viking
+Hawaiian shirt|Camisa havaiana
+Tuxedo|Smoking
+Royal robe|Manto real
+Tartan kilt|Kilt xadrez
+Golden overalls|Macacão dourado
+Bow tie|Gravata-borboleta
+Gold chain|Corrente de ouro
+Hero cape|Capa de herói
+Fairy wings|Asas de fada
+Fish Tank|Aquário
+Arcade Machine|Fliperama
+Grand Piano|Piano de cauda
+Bright tropical fish to feed.|Peixes tropicais coloridos para alimentar.
+Play a round for a few coins every half hour.|Jogue uma partida por algumas moedas a cada meia hora.
+Play a tune for bonus XP every hour.|Toque uma música para ganhar XP extra a cada hora.
+Royal Damask|Damasco real
+Marble Tiles|Piso de mármore
+Golden Gnome|Gnomo dourado
+Rainbow Arch|Arco-íris
+Unicorn Statue|Estátua de unicórnio
+Feed the fish|Alimentar os peixes
+Play the piano|Tocar piano
+Play a game|Jogar uma partida
+Feeding the fish|Alimentando os peixes
+Playing piano|Tocando piano
+Playing|Jogando
+The fish swim up for their food.|Os peixes sobem para comer.
+What a lovely tune!|Que música linda!
+Secret code|Código secreto
 Unlock|Desbloquear
 Wrong code.|Código errado.
 Unlimited cash unlocked!|Dinheiro ilimitado desbloqueado!
@@ -314,9 +359,9 @@ Tutorial skipped.|Tutorial pulado.
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|Tutorial concluído! +150 moedas e 1 de dinheiro da fazenda. Boa colheita!
 All done! Bonus:|Tudo pronto! Bônus:
 All goals done. New goals tomorrow!|Todas as metas cumpridas. Novas metas amanhã!
-Finish all three for +2 Farm Cash.|Cumpra as três para ganhar +2 de dinheiro da fazenda.
-+2 Farm Cash|+2 de dinheiro da fazenda
-Daily goals complete! +2 Farm Cash.|Metas diárias cumpridas! +2 de dinheiro da fazenda.
+Finish all three for +1 Farm Cash.|Cumpra as três para ganhar +1 de dinheiro da fazenda.
++1 Farm Cash|+1 de dinheiro da fazenda
+Daily goals complete! +1 Farm Cash.|Metas diárias cumpridas! +1 de dinheiro da fazenda.
 Welcome to the Valley|Bem-vindo ao vale
 Dale's First Run|A primeira viagem do Dale
 Hank's Feed Problem|O problema de ração do Hank
@@ -862,7 +907,7 @@ Champion Farmer!|Fazendeiro campeão!
 Top level!|Nível máximo!
 Max level|Nível máx.
 You reached Level 99, the top level. Well done, champion!|Você chegou ao nível 99, o máximo. Parabéns, campeão!
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|No nível 99 você ganha o Troféu de campeão, 50.000 moedas e 50 de dinheiro da fazenda.
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|No nível 99 você ganha o Troféu de campeão, 50.000 moedas e 20 de dinheiro da fazenda.
 Auto Waterer|Irrigador automático
 The Auto Waterer is full.|O irrigador automático está cheio.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Os animais moram na casa deles. Escolha Animais: Soltos nos Ajustes para movê-los.
@@ -1048,7 +1093,7 @@ p:`0|$1 {p1:moeda|moedas}
 54|Você precisa de $1 × {2} no celeiro.
 55|Você precisa de $1 moedas[[ para: {2}]].
 56|Você precisa de $1 de dinheiro da fazenda para isso.
-57|Você precisa de $1 de dinheiro da fazenda. Você ganha 1 a cada nível e no bônus diário.
+57|Você precisa de $1 de dinheiro da fazenda. Consiga mais na Loja de dinheiro.
 58|Você precisa de $1 moedas para plantar {2}.
 59|Arar custa $1 moedas. Venda algo do celeiro primeiro.
 60|Não há {1} suficiente para: {l2}.
@@ -1190,4 +1235,10 @@ p:`0|$1 {p1:moeda|moedas}
 196|{1} foi para a sua casa!
 197|Móveis confortáveis deixam a casa mais aconchegante: cada ponto de conforto faz o cochilo voltar mais cedo. Conforto: $1. Espera do cochilo: {t2}.
 198|[[{1} ]]+$2 de conforto
-199|{1} ($2)`};
+199|{1} ($2)
+200|+$1% de bônus
+201|Obrigado! +$1 de dinheiro da fazenda.
+202|Sua compra chegou! +$1 de dinheiro da fazenda.
+203|Lindo! XP extra de novo em {t1}.
+204|Recorde! Moedas de novo em {t1}.
+205|Recorde! +$1 moedas.`};

@@ -1,7 +1,52 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Secret code|Секретный код
+x:`Cash Shop|Магазин
+Get Farm Cash|Получить фермерские доллары
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|За фермерские доллары покупают премиум-наряды, мебель, украшения и помощников. Каждые 5 уровней и ежедневные цели всё ещё дают немного бесплатно.
+Popular|Популярно
+Best value|Выгоднее всего
+Spend it|Потратить
+Premium outfits|Премиум-наряды
+Premium furniture|Премиум-мебель
+Premium decorations|Премиум-украшения
+Premium|Премиум
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|Покупки проходят через Google Play. Фермерские доллары хранятся на этом устройстве вместе с фермой.
+Buying Farm Cash works in the Farm Village app from Google Play.|Купить фермерские доллары можно в приложении Farm Village из Google Play.
+The purchase did not go through.|Покупка не прошла.
+Chef hat|Колпак повара
+Wizard hat|Шляпа волшебника
+Pirate hat|Пиратская шляпа
+Viking helmet|Шлем викинга
+Hawaiian shirt|Гавайская рубашка
+Tuxedo|Смокинг
+Royal robe|Королевская мантия
+Tartan kilt|Клетчатый килт
+Golden overalls|Золотой комбинезон
+Bow tie|Галстук-бабочка
+Gold chain|Золотая цепь
+Hero cape|Плащ героя
+Fairy wings|Крылья феи
+Fish Tank|Аквариум
+Arcade Machine|Игровой автомат
+Grand Piano|Рояль
+Bright tropical fish to feed.|Яркие тропические рыбки, которых можно кормить.
+Play a round for a few coins every half hour.|Сыграй раунд и получи монеты раз в полчаса.
+Play a tune for bonus XP every hour.|Сыграй мелодию и получи бонусный опыт раз в час.
+Royal Damask|Королевский дамаск
+Marble Tiles|Мраморная плитка
+Golden Gnome|Золотой гном
+Rainbow Arch|Радужная арка
+Unicorn Statue|Статуя единорога
+Feed the fish|Покормить рыбок
+Play the piano|Сыграть на рояле
+Play a game|Сыграть в игру
+Feeding the fish|Кормим рыбок
+Playing piano|Играем на рояле
+Playing|Играем
+The fish swim up for their food.|Рыбки подплывают за едой.
+What a lovely tune!|Какая чудесная мелодия!
+Secret code|Секретный код
 Unlock|Открыть
 Wrong code.|Неверный код.
 Unlimited cash unlocked!|Бесконечные деньги открыты!
@@ -322,9 +367,9 @@ Tutorial skipped.|Обучение пропущено.
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|Обучение пройдено! +150 монет и 1 фермерский доллар. Удачи на ферме!
 All done! Bonus:|Всё сделано! Бонус:
 All goals done. New goals tomorrow!|Все цели выполнены. Новые завтра!
-Finish all three for +2 Farm Cash.|Выполни все три и получи +2 фермерских доллара.
-+2 Farm Cash|+2 фермерских доллара
-Daily goals complete! +2 Farm Cash.|Цели дня выполнены! +2 фермерских доллара.
+Finish all three for +1 Farm Cash.|Выполни все три и получи +1 фермерских доллара.
++1 Farm Cash|+1 фермерских доллара
+Daily goals complete! +1 Farm Cash.|Цели дня выполнены! +1 фермерских доллара.
 Welcome to the Valley|Добро пожаловать в долину
 Dale's First Run|Первый рейс Дейла
 Hank's Feed Problem|Хэнку нужен корм
@@ -870,7 +915,7 @@ Champion Farmer!|Фермер-чемпион!
 Top level!|Высший уровень!
 Max level|Макс. уровень
 You reached Level 99, the top level. Well done, champion!|Ты достиг 99 уровня, самого высокого. Молодец, чемпион!
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|На 99 уровне ты получишь Кубок чемпиона, 50 000 монет и 50 фермерских долларов.
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|На 99 уровне ты получишь Кубок чемпиона, 50 000 монет и 20 фермерских долларов.
 Auto Waterer|Автополивалка
 The Auto Waterer is full.|Автополивалка полна.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Животные живут в своём домике. Чтобы их перемещать, выбери в настройках «Животные: На свободе».
@@ -1056,7 +1101,7 @@ p:`0|$1 {p1:монета|монеты|монет}
 54|Нужно в амбаре: {2} ×$1.
 55|Нужно $1 {p1:монета|монеты|монет}[[ на: {2}]].
 56|Для этого нужно фермерских долларов: $1.
-57|Нужно фермерских долларов: $1. Ты получаешь 1 за каждый новый уровень и с ежедневного бонуса.
+57|Нужно фермерских долларов: $1. Больше можно получить в магазине.
 58|Нужно $1 монет, чтобы посадить: {2}.
 59|Пахота стоит $1 монет. Сначала продай что-нибудь из амбара.
 60|Не хватает ({1}) на: {l2}.
@@ -1198,4 +1243,10 @@ p:`0|$1 {p1:монета|монеты|монет}
 196|{1}: теперь в твоём доме!
 197|Удобная мебель делает дом уютнее: каждое очко уюта ускоряет возвращение дрёмы. Уют: $1. Перерыв между снами: {t2}.
 198|[[{1} ]]+$2 уюта
-199|{1} ($2)`};
+199|{1} ($2)
+200|+$1% бонус
+201|Спасибо! Фермерские доллары: +$1.
+202|Покупка доставлена! Фермерские доллары: +$1.
+203|Прекрасно! Бонусный опыт снова через {t1}.
+204|Рекорд! Монеты снова через {t1}.
+205|Рекорд! Монеты: +$1.`};

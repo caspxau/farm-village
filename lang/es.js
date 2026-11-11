@@ -1,6 +1,51 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Secret code|Código secreto
+x:`Cash Shop|Tienda de dinero
+Get Farm Cash|Consigue dinero de granja
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|El dinero de granja compra trajes, muebles, decoraciones y ayudantes premium. Cada 5 niveles y tus metas diarias aún dan un poco gratis.
+Popular|Popular
+Best value|Mejor oferta
+Spend it|Gástalo
+Premium outfits|Trajes premium
+Premium furniture|Muebles premium
+Premium decorations|Decoraciones premium
+Premium|Premium
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|Las compras se hacen con Google Play. El dinero de granja se guarda en este dispositivo con tu granja.
+Buying Farm Cash works in the Farm Village app from Google Play.|Comprar dinero de granja funciona en la app Farm Village de Google Play.
+The purchase did not go through.|La compra no se completó.
+Chef hat|Gorro de chef
+Wizard hat|Sombrero de mago
+Pirate hat|Sombrero pirata
+Viking helmet|Casco vikingo
+Hawaiian shirt|Camisa hawaiana
+Tuxedo|Esmoquin
+Royal robe|Túnica real
+Tartan kilt|Falda escocesa
+Golden overalls|Peto dorado
+Bow tie|Pajarita
+Gold chain|Cadena de oro
+Hero cape|Capa de héroe
+Fairy wings|Alas de hada
+Fish Tank|Pecera
+Arcade Machine|Máquina arcade
+Grand Piano|Piano de cola
+Bright tropical fish to feed.|Peces tropicales de colores para alimentar.
+Play a round for a few coins every half hour.|Juega una partida por unas monedas cada media hora.
+Play a tune for bonus XP every hour.|Toca una melodía para ganar XP extra cada hora.
+Royal Damask|Damasco real
+Marble Tiles|Baldosas de mármol
+Golden Gnome|Gnomo dorado
+Rainbow Arch|Arco iris
+Unicorn Statue|Estatua de unicornio
+Feed the fish|Alimentar a los peces
+Play the piano|Tocar el piano
+Play a game|Jugar una partida
+Feeding the fish|Alimentando a los peces
+Playing piano|Tocando el piano
+Playing|Jugando
+The fish swim up for their food.|Los peces suben a por su comida.
+What a lovely tune!|¡Qué melodía tan bonita!
+Secret code|Código secreto
 Unlock|Desbloquear
 Wrong code.|Código incorrecto.
 Unlimited cash unlocked!|¡Dinero ilimitado desbloqueado!
@@ -314,9 +359,9 @@ Tutorial skipped.|Tutorial omitido.
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|¡Tutorial completado! +150 monedas y 1 de dinero de granja. ¡A cultivar!
 All done! Bonus:|¡Todo hecho! Premio:
 All goals done. New goals tomorrow!|Todas las metas cumplidas. ¡Nuevas metas mañana!
-Finish all three for +2 Farm Cash.|Cumple las tres para ganar +2 de dinero de granja.
-+2 Farm Cash|+2 de dinero de granja
-Daily goals complete! +2 Farm Cash.|¡Metas diarias cumplidas! +2 de dinero de granja.
+Finish all three for +1 Farm Cash.|Cumple las tres para ganar +1 de dinero de granja.
++1 Farm Cash|+1 de dinero de granja
+Daily goals complete! +1 Farm Cash.|¡Metas diarias cumplidas! +1 de dinero de granja.
 Welcome to the Valley|Bienvenido al valle
 Dale's First Run|El primer viaje de Dale
 Hank's Feed Problem|El problema de pienso de Hank
@@ -862,7 +907,7 @@ Champion Farmer!|¡Granjero campeón!
 Top level!|¡Nivel máximo!
 Max level|Nivel máximo
 You reached Level 99, the top level. Well done, champion!|Llegaste al nivel 99, el máximo. ¡Bien hecho, campeón!
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|En el nivel 99 ganas el Trofeo de campeón, 50.000 monedas y 50 de dinero de granja.
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|En el nivel 99 ganas el Trofeo de campeón, 50.000 monedas y 20 de dinero de granja.
 Auto Waterer|Regador automático
 The Auto Waterer is full.|El regador automático está lleno.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Los animales viven en su casa. Elige Animales: Libres en Ajustes para moverlos.
@@ -1048,7 +1093,7 @@ p:`0|$1 {p1:moneda|monedas}
 54|Necesitas $1 × {2} en el granero.
 55|Necesitas $1 monedas[[ para: {2}]].
 56|Necesitas $1 de dinero de granja para eso.
-57|Necesitas $1 de dinero de granja. Ganas 1 cada vez que subes de nivel y con el bono diario.
+57|Necesitas $1 de dinero de granja. Consigue más en la Tienda de dinero.
 58|Necesitas $1 monedas para plantar {2}.
 59|Arar cuesta $1 monedas. Vende antes algo del granero.
 60|No tienes suficiente ({1}) para: {l2}.
@@ -1190,4 +1235,10 @@ p:`0|$1 {p1:moneda|monedas}
 196|¡{1} añadido a tu casa!
 197|Los muebles cómodos hacen tu casa más acogedora: cada punto de comodidad hace que la siesta vuelva antes. Comodidad: $1. Espera de la siesta: {t2}.
 198|[[{1} ]]+$2 de comodidad
-199|{1} ($2)`};
+199|{1} ($2)
+200|+$1% de bono
+201|¡Gracias! +$1 de dinero de granja.
+202|¡Llegó tu compra! +$1 de dinero de granja.
+203|¡Precioso! XP extra otra vez en {t1}.
+204|¡Récord! Monedas otra vez en {t1}.
+205|¡Récord! +$1 {p1:moneda|monedas}.`};

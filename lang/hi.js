@@ -1,7 +1,52 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Secret code|गुप्त कोड
+x:`Cash Shop|कैश शॉप
+Get Farm Cash|फ़ार्म कैश पाएँ
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|फ़ार्म कैश से प्रीमियम कपड़े, फ़र्नीचर, सजावट और मददगार खरीदें। हर 5 लेवल और रोज़ के लक्ष्य अब भी थोड़ा मुफ़्त देते हैं।
+Popular|लोकप्रिय
+Best value|सबसे फ़ायदेमंद
+Spend it|खर्च करें
+Premium outfits|प्रीमियम कपड़े
+Premium furniture|प्रीमियम फ़र्नीचर
+Premium decorations|प्रीमियम सजावट
+Premium|प्रीमियम
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|खरीदारी Google Play से होती है। फ़ार्म कैश आपके फ़ार्म के साथ इसी डिवाइस पर सहेजा जाता है।
+Buying Farm Cash works in the Farm Village app from Google Play.|फ़ार्म कैश Google Play के Farm Village ऐप में खरीदा जा सकता है।
+The purchase did not go through.|खरीदारी पूरी नहीं हुई।
+Chef hat|शेफ़ टोपी
+Wizard hat|जादूगर टोपी
+Pirate hat|समुद्री डाकू टोपी
+Viking helmet|वाइकिंग हेलमेट
+Hawaiian shirt|हवाईयन शर्ट
+Tuxedo|टक्सीडो
+Royal robe|शाही चोगा
+Tartan kilt|चेक वाली किल्ट
+Golden overalls|सुनहरा ओवरऑल
+Bow tie|बो टाई
+Gold chain|सोने की चेन
+Hero cape|हीरो केप
+Fairy wings|परी पंख
+Fish Tank|मछलीघर
+Arcade Machine|आर्केड मशीन
+Grand Piano|ग्रैंड पियानो
+Bright tropical fish to feed.|खिलाने के लिए रंग-बिरंगी उष्णकटिबंधीय मछलियाँ।
+Play a round for a few coins every half hour.|हर आधे घंटे एक राउंड खेलें और कुछ सिक्के पाएँ।
+Play a tune for bonus XP every hour.|हर घंटे एक धुन बजाएँ और बोनस XP पाएँ।
+Royal Damask|शाही डमास्क
+Marble Tiles|संगमरमर की टाइलें
+Golden Gnome|सुनहरा बौना
+Rainbow Arch|इंद्रधनुष मेहराब
+Unicorn Statue|यूनिकॉर्न मूर्ति
+Feed the fish|मछलियों को खिलाएँ
+Play the piano|पियानो बजाएँ
+Play a game|गेम खेलें
+Feeding the fish|मछलियों को खिला रहे हैं
+Playing piano|पियानो बजा रहे हैं
+Playing|खेल रहे हैं
+The fish swim up for their food.|मछलियाँ खाने के लिए ऊपर आती हैं।
+What a lovely tune!|कितनी प्यारी धुन है!
+Secret code|गुप्त कोड
 Unlock|खोलें
 Wrong code.|गलत कोड।
 Unlimited cash unlocked!|असीमित पैसा खुल गया!
@@ -322,9 +367,9 @@ Tutorial skipped.|ट्यूटोरियल छोड़ दिया।
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|ट्यूटोरियल पूरा! +150 सिक्के और 1 फ़ार्म कैश। खेती का मज़ा लें!
 All done! Bonus:|सब पूरा! बोनस:
 All goals done. New goals tomorrow!|सारे लक्ष्य पूरे। कल नए लक्ष्य!
-Finish all three for +2 Farm Cash.|तीनों पूरे करें और +2 फ़ार्म कैश पाएँ।
-+2 Farm Cash|+2 फ़ार्म कैश
-Daily goals complete! +2 Farm Cash.|आज के लक्ष्य पूरे! +2 फ़ार्म कैश।
+Finish all three for +1 Farm Cash.|तीनों पूरे करें और +1 फ़ार्म कैश पाएँ।
++1 Farm Cash|+1 फ़ार्म कैश
+Daily goals complete! +1 Farm Cash.|आज के लक्ष्य पूरे! +1 फ़ार्म कैश।
 Welcome to the Valley|घाटी में स्वागत है
 Dale's First Run|डेल का पहला सफ़र
 Hank's Feed Problem|हैंक की चारे की परेशानी
@@ -870,7 +915,7 @@ Champion Farmer!|चैंपियन किसान!
 Top level!|सबसे ऊँचा लेवल!
 Max level|अधिकतम लेवल
 You reached Level 99, the top level. Well done, champion!|आप लेवल 99 पर पहुँच गए, सबसे ऊँचा लेवल। शाबाश, चैंपियन!
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|लेवल 99 पर आपको चैंपियन ट्रॉफ़ी, 50,000 सिक्के और 50 फ़ार्म कैश मिलेंगे।
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|लेवल 99 पर आपको चैंपियन ट्रॉफ़ी, 50,000 सिक्के और 20 फ़ार्म कैश मिलेंगे।
 Auto Waterer|ऑटो सिंचाई मशीन
 The Auto Waterer is full.|ऑटो सिंचाई मशीन भरी है।
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|जानवर अपने बाड़े में रहते हैं। उन्हें खिसकाने के लिए सेटिंग्स में जानवर: खुले में चुनें।
@@ -1056,7 +1101,7 @@ p:`0|$1 सिक्के
 54|खलिहान में {2} ×$1 चाहिए।
 55|$1 सिक्के चाहिए[[ {2} के लिए]]।
 56|इसके लिए $1 फ़ार्म कैश चाहिए।
-57|$1 फ़ार्म कैश चाहिए। हर नए लेवल और रोज़ाना बोनस से 1 मिलता है।
+57|$1 फ़ार्म कैश चाहिए। कैश शॉप से और पाएँ।
 58|{2} बोने के लिए $1 सिक्के चाहिए।
 59|जुताई में $1 सिक्के लगते हैं। पहले खलिहान से कुछ बेचें।
 60|{l2} के लिए {1} कम हैं।
@@ -1198,4 +1243,10 @@ p:`0|$1 सिक्के
 196|{1} आपके फ़ार्महाउस में आ गया!
 197|आरामदायक फ़र्नीचर घर को सुहाना बनाता है: हर आराम अंक से झपकी जल्दी लौटती है। आराम: $1। झपकी का इंतज़ार: {t2}।
 198|[[{1} ]]+$2 आराम
-199|{1} ($2)`};
+199|{1} ($2)
+200|+$1% बोनस
+201|धन्यवाद! +$1 फ़ार्म कैश।
+202|आपकी खरीद आ गई! +$1 फ़ार्म कैश।
+203|बहुत सुंदर! बोनस XP फिर से {t1} में।
+204|हाई स्कोर! सिक्के फिर से {t1} में।
+205|हाई स्कोर! +$1 सिक्के।`};

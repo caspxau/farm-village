@@ -1,7 +1,52 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Secret code|الرمز السري
+x:`Cash Shop|متجر النقود
+Get Farm Cash|احصل على نقود المزرعة
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|بنقود المزرعة تشتري ملابس وأثاثًا وزينة ومساعدين مميزين. كل 5 مستويات وأهدافك اليومية ما زالت تعطيك القليل مجانًا.
+Popular|الأكثر شيوعًا
+Best value|أفضل قيمة
+Spend it|أنفقها
+Premium outfits|ملابس مميزة
+Premium furniture|أثاث مميز
+Premium decorations|زينة مميزة
+Premium|مميز
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|تتم المشتريات عبر Google Play. تُحفظ نقود المزرعة على هذا الجهاز مع مزرعتك.
+Buying Farm Cash works in the Farm Village app from Google Play.|شراء نقود المزرعة متاح في تطبيق Farm Village من Google Play.
+The purchase did not go through.|لم تكتمل عملية الشراء.
+Chef hat|قبعة الطاهي
+Wizard hat|قبعة الساحر
+Pirate hat|قبعة القرصان
+Viking helmet|خوذة الفايكنج
+Hawaiian shirt|قميص هاواي
+Tuxedo|بدلة سهرة
+Royal robe|رداء ملكي
+Tartan kilt|تنورة مربعات
+Golden overalls|أفرول ذهبي
+Bow tie|ربطة فراشة
+Gold chain|سلسلة ذهبية
+Hero cape|عباءة البطل
+Fairy wings|أجنحة الجنية
+Fish Tank|حوض سمك
+Arcade Machine|آلة ألعاب
+Grand Piano|بيانو كبير
+Bright tropical fish to feed.|أسماك استوائية ملونة لإطعامها.
+Play a round for a few coins every half hour.|العب جولة واربح بعض العملات كل نصف ساعة.
+Play a tune for bonus XP every hour.|اعزف لحنًا واربح خبرة إضافية كل ساعة.
+Royal Damask|دمشقي ملكي
+Marble Tiles|بلاط رخام
+Golden Gnome|قزم ذهبي
+Rainbow Arch|قوس قزح
+Unicorn Statue|تمثال وحيد القرن
+Feed the fish|أطعم الأسماك
+Play the piano|اعزف البيانو
+Play a game|العب لعبة
+Feeding the fish|إطعام الأسماك
+Playing piano|العزف على البيانو
+Playing|اللعب
+The fish swim up for their food.|تصعد الأسماك لتأكل.
+What a lovely tune!|يا له من لحن جميل!
+Secret code|الرمز السري
 Unlock|فتح
 Wrong code.|رمز خاطئ.
 Unlimited cash unlocked!|تم فتح المال غير المحدود!
@@ -322,9 +367,9 @@ Tutorial skipped.|تم تخطي الدرس التعليمي.
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|اكتمل الدرس! +150 عملة و1 من نقود المزرعة. زراعة سعيدة!
 All done! Bonus:|انتهى كل شيء! المكافأة:
 All goals done. New goals tomorrow!|أنجزت كل الأهداف. أهداف جديدة غدًا!
-Finish all three for +2 Farm Cash.|أنجز الثلاثة لتحصل على +2 من نقود المزرعة.
-+2 Farm Cash|+2 من نقود المزرعة
-Daily goals complete! +2 Farm Cash.|اكتملت أهداف اليوم! +2 من نقود المزرعة.
+Finish all three for +1 Farm Cash.|أنجز الثلاثة لتحصل على +1 من نقود المزرعة.
++1 Farm Cash|+1 من نقود المزرعة
+Daily goals complete! +1 Farm Cash.|اكتملت أهداف اليوم! +1 من نقود المزرعة.
 Welcome to the Valley|أهلًا بك في الوادي
 Dale's First Run|رحلة ديل الأولى
 Hank's Feed Problem|مشكلة علف هانك
@@ -870,7 +915,7 @@ Champion Farmer!|مزارع بطل!
 Top level!|أعلى مستوى!
 Max level|أقصى مستوى
 You reached Level 99, the top level. Well done, champion!|وصلت إلى المستوى 99، أعلى مستوى. أحسنت يا بطل!
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|في المستوى 99 تربح كأس البطل و50,000 عملة و50 من نقود المزرعة.
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|في المستوى 99 تربح كأس البطل و50,000 عملة و20 من نقود المزرعة.
 Auto Waterer|الرشاش التلقائي
 The Auto Waterer is full.|الرشاش التلقائي ممتلئ.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|تعيش الحيوانات في بيوتها. اختر الحيوانات: تجوال حر في الإعدادات لتحريكها.
@@ -1056,7 +1101,7 @@ p:`0|$1 عملة
 54|تحتاج {2} ×$1 في الحظيرة.
 55|تحتاج $1 عملة[[ لشراء {2}]].
 56|تحتاج $1 من نقود المزرعة لذلك.
-57|تحتاج $1 من نقود المزرعة. تحصل على 1 مع كل مستوى ومن المكافأة اليومية.
+57|تحتاج $1 من نقود المزرعة. احصل على المزيد من متجر النقود.
 58|تحتاج $1 عملة لزراعة {2}.
 59|الحرث يكلف $1 عملة. بع شيئًا من الحظيرة أولًا.
 60|لا يكفي {1} لشراء: {l2}.
@@ -1198,4 +1243,10 @@ p:`0|$1 عملة
 196|أُضيف {1} إلى بيتك!
 197|الأثاث المريح يجعل بيتك أدفأ: كل نقطة راحة تعيد القيلولة أسرع. الراحة: $1. انتظار القيلولة: {t2}.
 198|[[{1} ]]+$2 راحة
-199|{1} ($2)`};
+199|{1} ($2)
+200|مكافأة +$1%
+201|شكرًا! +$1 من نقود المزرعة.
+202|وصلت مشترياتك! +$1 من نقود المزرعة.
+203|رائع! خبرة إضافية مجددًا بعد {t1}.
+204|رقم قياسي! عملات مجددًا بعد {t1}.
+205|رقم قياسي! +$1 عملة.`};

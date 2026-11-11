@@ -1,6 +1,51 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Secret code|Code secret
+x:`Cash Shop|Boutique
+Get Farm Cash|Obtenir des billets
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|Les billets de ferme achètent tenues, meubles, décorations et aides premium. Tous les 5 niveaux et tes objectifs du jour en donnent encore un peu gratuitement.
+Popular|Populaire
+Best value|Meilleure offre
+Spend it|Dépense-les
+Premium outfits|Tenues premium
+Premium furniture|Meubles premium
+Premium decorations|Décorations premium
+Premium|Premium
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|Les achats passent par Google Play. Les billets de ferme sont gardés sur cet appareil avec ta ferme.
+Buying Farm Cash works in the Farm Village app from Google Play.|L'achat de billets de ferme fonctionne dans l'appli Farm Village de Google Play.
+The purchase did not go through.|L'achat n'a pas abouti.
+Chef hat|Toque de chef
+Wizard hat|Chapeau de sorcier
+Pirate hat|Chapeau de pirate
+Viking helmet|Casque viking
+Hawaiian shirt|Chemise hawaïenne
+Tuxedo|Smoking
+Royal robe|Robe royale
+Tartan kilt|Kilt écossais
+Golden overalls|Salopette dorée
+Bow tie|Nœud papillon
+Gold chain|Chaîne en or
+Hero cape|Cape de héros
+Fairy wings|Ailes de fée
+Fish Tank|Aquarium
+Arcade Machine|Borne d’arcade
+Grand Piano|Piano à queue
+Bright tropical fish to feed.|Des poissons tropicaux colorés à nourrir.
+Play a round for a few coins every half hour.|Joue une partie pour quelques pièces toutes les demi-heures.
+Play a tune for bonus XP every hour.|Joue un air pour des XP bonus toutes les heures.
+Royal Damask|Damas royal
+Marble Tiles|Carrelage en marbre
+Golden Gnome|Nain doré
+Rainbow Arch|Arc-en-ciel
+Unicorn Statue|Statue de licorne
+Feed the fish|Nourrir les poissons
+Play the piano|Jouer du piano
+Play a game|Jouer une partie
+Feeding the fish|Repas des poissons
+Playing piano|Joue du piano
+Playing|Partie en cours
+The fish swim up for their food.|Les poissons montent chercher leur repas.
+What a lovely tune!|Quel bel air !
+Secret code|Code secret
 Unlock|Déverrouiller
 Wrong code.|Code incorrect.
 Unlimited cash unlocked!|Argent illimité débloqué !
@@ -314,9 +359,9 @@ Tutorial skipped.|Tutoriel passé.
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|Tutoriel terminé ! +150 pièces et 1 billet de ferme. Bonne récolte !
 All done! Bonus:|Tout est fait ! Bonus :
 All goals done. New goals tomorrow!|Tous les objectifs sont atteints. Nouveaux objectifs demain !
-Finish all three for +2 Farm Cash.|Termine les trois pour +2 billets de ferme.
-+2 Farm Cash|+2 billets de ferme
-Daily goals complete! +2 Farm Cash.|Objectifs du jour atteints ! +2 billets de ferme.
+Finish all three for +1 Farm Cash.|Termine les trois pour +1 billets de ferme.
++1 Farm Cash|+1 billets de ferme
+Daily goals complete! +1 Farm Cash.|Objectifs du jour atteints ! +1 billets de ferme.
 Welcome to the Valley|Bienvenue dans la vallée
 Dale's First Run|La première tournée de Dale
 Hank's Feed Problem|Le souci de nourriture de Hank
@@ -862,7 +907,7 @@ Champion Farmer!|Fermier champion !
 Top level!|Niveau maximum !
 Max level|Niveau max
 You reached Level 99, the top level. Well done, champion!|Tu as atteint le niveau 99, le plus haut. Bravo, champion !
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|Au niveau 99, tu gagnes le Trophée du champion, 50 000 pièces et 50 billets de ferme.
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|Au niveau 99, tu gagnes le Trophée du champion, 50 000 pièces et 20 billets de ferme.
 Auto Waterer|Arroseur automatique
 The Auto Waterer is full.|L'arroseur automatique est plein.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Les animaux vivent dans leur abri. Choisis Animaux : En liberté dans les Réglages pour les déplacer.
@@ -1048,7 +1093,7 @@ p:`0|$1 {p1:pièce|pièces}
 54|Il te faut $1 × {2} dans la grange.
 55|Il te faut $1 pièces[[ pour : {2}]].
 56|Il te faut $1 billets de ferme pour ça.
-57|Il te faut $1 billets de ferme. Tu en gagnes 1 à chaque niveau et avec le bonus du jour.
+57|Il te faut $1 billets de ferme. Obtiens-en plus dans la Boutique.
 58|Il te faut $1 pièces pour planter : {2}.
 59|Labourer coûte $1 pièces. Vends d'abord des produits de la grange.
 60|Pas assez de {1} pour : {l2}.
@@ -1190,4 +1235,10 @@ p:`0|$1 {p1:pièce|pièces}
 196|{1} ajouté à ta maison !
 197|Les meubles confortables rendent ta maison plus douillette : chaque point de confort fait revenir la sieste plus vite. Confort : $1. Attente de la sieste : {t2}.
 198|[[{1} ]]+$2 confort
-199|{1} ($2)`};
+199|{1} ($2)
+200|+$1 % de bonus
+201|Merci ! +$1 billets de ferme.
+202|Ton achat est arrivé ! +$1 billets de ferme.
+203|Magnifique ! XP bonus à nouveau dans {t1}.
+204|Record ! Pièces à nouveau dans {t1}.
+205|Record ! +$1 pièces.`};

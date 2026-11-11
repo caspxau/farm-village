@@ -1,7 +1,52 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Secret code|গোপন কোড
+x:`Cash Shop|ক্যাশ শপ
+Get Farm Cash|ফার্ম ক্যাশ নাও
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|ফার্ম ক্যাশ দিয়ে প্রিমিয়াম পোশাক, আসবাব, সাজসজ্জা আর সাহায্যকারী কেনা যায়। প্রতি ৫ লেভেলে আর দৈনিক লক্ষ্যে এখনও কিছু ফ্রি পাও।
+Popular|জনপ্রিয়
+Best value|সেরা মূল্য
+Spend it|খরচ করো
+Premium outfits|প্রিমিয়াম পোশাক
+Premium furniture|প্রিমিয়াম আসবাব
+Premium decorations|প্রিমিয়াম সাজসজ্জা
+Premium|প্রিমিয়াম
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|কেনাকাটা হয় Google Play দিয়ে। ফার্ম ক্যাশ তোমার খামারের সাথে এই ডিভাইসেই রাখা থাকে।
+Buying Farm Cash works in the Farm Village app from Google Play.|ফার্ম ক্যাশ কেনা যায় Google Play-এর Farm Village অ্যাপে।
+The purchase did not go through.|কেনাকাটা সম্পন্ন হয়নি।
+Chef hat|শেফের টুপি
+Wizard hat|জাদুকরের টুপি
+Pirate hat|জলদস্যুর টুপি
+Viking helmet|ভাইকিং হেলমেট
+Hawaiian shirt|হাওয়াইয়ান শার্ট
+Tuxedo|টাক্সেডো
+Royal robe|রাজকীয় আলখাল্লা
+Tartan kilt|চেক কিল্ট
+Golden overalls|সোনালি ওভারঅল
+Bow tie|বো টাই
+Gold chain|সোনার চেইন
+Hero cape|হিরো কেপ
+Fairy wings|পরীর ডানা
+Fish Tank|অ্যাকোয়ারিয়াম
+Arcade Machine|আর্কেড মেশিন
+Grand Piano|গ্র্যান্ড পিয়ানো
+Bright tropical fish to feed.|খাওয়ানোর জন্য রঙিন ট্রপিক্যাল মাছ।
+Play a round for a few coins every half hour.|প্রতি আধ ঘণ্টায় এক রাউন্ড খেলে কিছু কয়েন নাও।
+Play a tune for bonus XP every hour.|প্রতি ঘণ্টায় একটা সুর বাজিয়ে বোনাস XP নাও।
+Royal Damask|রাজকীয় দামাস্ক
+Marble Tiles|মার্বেল টাইলস
+Golden Gnome|সোনালি বামন
+Rainbow Arch|রংধনু তোরণ
+Unicorn Statue|ইউনিকর্ন মূর্তি
+Feed the fish|মাছদের খাওয়াও
+Play the piano|পিয়ানো বাজাও
+Play a game|গেম খেলো
+Feeding the fish|মাছদের খাওয়ানো হচ্ছে
+Playing piano|পিয়ানো বাজানো হচ্ছে
+Playing|খেলা হচ্ছে
+The fish swim up for their food.|মাছেরা খাবারের জন্য ভেসে আসে।
+What a lovely tune!|কী সুন্দর সুর!
+Secret code|গোপন কোড
 Unlock|খুলুন
 Wrong code.|ভুল কোড।
 Unlimited cash unlocked!|অসীম টাকা চালু হয়েছে!
@@ -322,9 +367,9 @@ Tutorial skipped.|টিউটোরিয়াল বাদ দেওয়া
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|টিউটোরিয়াল শেষ! +১৫০ কয়েন আর ১ ফার্ম ক্যাশ। আনন্দে চাষ করো!
 All done! Bonus:|সব শেষ! বোনাস:
 All goals done. New goals tomorrow!|সব লক্ষ্য পূরণ। কাল নতুন লক্ষ্য!
-Finish all three for +2 Farm Cash.|তিনটিই শেষ করলে +২ ফার্ম ক্যাশ।
-+2 Farm Cash|+২ ফার্ম ক্যাশ
-Daily goals complete! +2 Farm Cash.|দৈনিক লক্ষ্য পূরণ! +২ ফার্ম ক্যাশ।
+Finish all three for +1 Farm Cash.|তিনটিই শেষ করলে +২ ফার্ম ক্যাশ।
++1 Farm Cash|+২ ফার্ম ক্যাশ
+Daily goals complete! +1 Farm Cash.|দৈনিক লক্ষ্য পূরণ! +২ ফার্ম ক্যাশ।
 Welcome to the Valley|উপত্যকায় স্বাগতম
 Dale's First Run|ডেলের প্রথম যাত্রা
 Hank's Feed Problem|হ্যাঙ্কের খাবারের সমস্যা
@@ -870,7 +915,7 @@ Champion Farmer!|চ্যাম্পিয়ন কৃষক!
 Top level!|সর্বোচ্চ লেভেল!
 Max level|সর্বোচ্চ লেভেল
 You reached Level 99, the top level. Well done, champion!|তুমি লেভেল ৯৯-এ পৌঁছেছ, সর্বোচ্চ লেভেল। শাবাশ, চ্যাম্পিয়ন!
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|লেভেল ৯৯-এ পাবে চ্যাম্পিয়ন ট্রফি, ৫০,০০০ কয়েন আর ৫০ ফার্ম ক্যাশ।
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|লেভেল ৯৯-এ পাবে চ্যাম্পিয়ন ট্রফি, ৫০,০০০ কয়েন আর ২০ ফার্ম ক্যাশ।
 Auto Waterer|স্বয়ংক্রিয় সেচযন্ত্র
 The Auto Waterer is full.|স্বয়ংক্রিয় সেচযন্ত্র ভরা।
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|পশুরা নিজেদের খোঁয়াড়ে থাকে। সরাতে সেটিংসে পশু: খোলা ঘুরুক বেছে নাও।
@@ -1056,7 +1101,7 @@ p:`0|$1 কয়েন
 54|গোলাঘরে {2} ×$1 লাগবে।
 55|$1 কয়েন লাগবে[[ {2}-এর জন্য]]।
 56|এর জন্য $1 ফার্ম ক্যাশ লাগবে।
-57|$1 ফার্ম ক্যাশ লাগবে। প্রতি নতুন লেভেলে আর দৈনিক বোনাসে ১টি পাও।
+57|$1 ফার্ম ক্যাশ লাগবে। ক্যাশ শপ থেকে আরও নাও।
 58|{2} বুনতে $1 কয়েন লাগবে।
 59|চাষে $1 কয়েন লাগে। আগে গোলাঘর থেকে কিছু বেচো।
 60|{l2}-এর জন্য {1} যথেষ্ট নয়।
@@ -1198,4 +1243,10 @@ p:`0|$1 কয়েন
 196|{1} তোমার খামারবাড়িতে যোগ হলো!
 197|আরামের আসবাব ঘরকে সুন্দর করে: প্রতি আরাম পয়েন্টে ঘুম আগে ফেরে। আরাম: $1। ঘুমের বিরতি: {t2}।
 198|[[{1} ]]+$2 আরাম
-199|{1} ($2)`};
+199|{1} ($2)
+200|+$1% বোনাস
+201|ধন্যবাদ! +$1 ফার্ম ক্যাশ।
+202|তোমার কেনা জিনিস এসে গেছে! +$1 ফার্ম ক্যাশ।
+203|দারুণ! বোনাস XP আবার {t1} পরে।
+204|হাই স্কোর! কয়েন আবার {t1} পরে।
+205|হাই স্কোর! +$1 কয়েন।`};

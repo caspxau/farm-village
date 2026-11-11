@@ -1,7 +1,52 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Secret code|秘密代码
+x:`Cash Shop|农场币商店
+Get Farm Cash|获取农场币
+Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|农场币可购买高级服装、家具、装饰和帮手。每升5级和完成每日目标仍可免费获得少量。
+Popular|热门
+Best value|最划算
+Spend it|去消费
+Premium outfits|高级服装
+Premium furniture|高级家具
+Premium decorations|高级装饰
+Premium|高级
+Purchases are made through Google Play. Farm Cash is stored on this device with your farm.|购买通过 Google Play 完成。农场币和你的农场一起保存在此设备上。
+Buying Farm Cash works in the Farm Village app from Google Play.|请在 Google Play 的 Farm Village 应用中购买农场币。
+The purchase did not go through.|购买未完成。
+Chef hat|厨师帽
+Wizard hat|巫师帽
+Pirate hat|海盗帽
+Viking helmet|维京头盔
+Hawaiian shirt|夏威夷衬衫
+Tuxedo|燕尾服
+Royal robe|皇家长袍
+Tartan kilt|格子短裙
+Golden overalls|金色背带裤
+Bow tie|领结
+Gold chain|金项链
+Hero cape|英雄披风
+Fairy wings|仙子翅膀
+Fish Tank|鱼缸
+Arcade Machine|街机
+Grand Piano|三角钢琴
+Bright tropical fish to feed.|可以喂食的彩色热带鱼。
+Play a round for a few coins every half hour.|每半小时玩一局赚些金币。
+Play a tune for bonus XP every hour.|每小时弹一曲获得额外经验。
+Royal Damask|皇家锦缎
+Marble Tiles|大理石地砖
+Golden Gnome|金色小矮人
+Rainbow Arch|彩虹拱门
+Unicorn Statue|独角兽雕像
+Feed the fish|喂鱼
+Play the piano|弹钢琴
+Play a game|玩游戏
+Feeding the fish|正在喂鱼
+Playing piano|正在弹钢琴
+Playing|正在玩
+The fish swim up for their food.|鱼儿游过来吃食了。
+What a lovely tune!|多美的曲子！
+Secret code|秘密代码
 Unlock|解锁
 Wrong code.|代码错误。
 Unlimited cash unlocked!|无限金钱已解锁！
@@ -322,9 +367,9 @@ Tutorial skipped.|已跳过教程。
 Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!|教程完成！+150金币和1农场币。种田愉快！
 All done! Bonus:|全部完成！奖励：
 All goals done. New goals tomorrow!|目标全部完成。明天有新目标！
-Finish all three for +2 Farm Cash.|完成全部三个可得+2农场币。
-+2 Farm Cash|+2农场币
-Daily goals complete! +2 Farm Cash.|每日目标完成！+2农场币。
+Finish all three for +1 Farm Cash.|完成全部三个可得+1农场币。
++1 Farm Cash|+1农场币
+Daily goals complete! +1 Farm Cash.|每日目标完成！+1农场币。
 Welcome to the Valley|欢迎来到山谷
 Dale's First Run|戴尔的第一趟
 Hank's Feed Problem|汉克的饲料难题
@@ -870,7 +915,7 @@ Champion Farmer!|冠军农夫！
 Top level!|最高等级！
 Max level|满级
 You reached Level 99, the top level. Well done, champion!|你达到了99级，最高等级。干得好，冠军！
-At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|达到99级可获得冠军奖杯、50,000金币和50农场币。
+At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|达到99级可获得冠军奖杯、50,000金币和20农场币。
 Auto Waterer|自动浇水器
 The Auto Waterer is full.|自动浇水器已满。
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|动物住在自己的屋里。在设置里把"动物"改成"自由活动"才能移动它们。
@@ -1056,7 +1101,7 @@ p:`0|$1金币
 54|谷仓里需要{2} ×$1。
 55|需要$1金币[[来买{2}]]。
 56|需要$1农场币。
-57|需要$1农场币。每次升级和每日奖励都能得到1个。
+57|需要$1农场币。可在农场币商店获取更多。
 58|需要$1金币来种{2}。
 59|耕地要$1金币。先从谷仓卖点东西吧。
 60|{1}不够买：{l2}。
@@ -1198,4 +1243,10 @@ p:`0|$1金币
 196|{1}已放进你的农舍！
 197|舒适的家具让家更温馨：每点舒适度都会让打盹更快恢复。当前舒适度：$1。打盹冷却：{t2}。
 198|[[{1} ]]+$2 舒适度
-199|{1}（$2）`};
+199|{1}（$2）
+200|额外+$1%
+201|谢谢！农场币+$1。
+202|购买已到账！农场币+$1。
+203|真好听！{t1}后可再获得额外经验。
+204|新纪录！{t1}后可再获得金币。
+205|新纪录！金币+$1。`};
