@@ -2026,7 +2026,7 @@ const PL_EXACT={
 'Play in':'Graj','Turn your phone upright':'Obróć telefon pionowo','Turn your phone sideways':'Obróć telefon poziomo','You chose to play in portrait.':'Wybrano grę w pionie.','You chose to play in landscape.':'Wybrano grę w poziomie.','Play this way instead':'Graj jednak tak',
 'Champion Trophy':'Puchar Mistrza','Champion Farmer!':'Mistrz farmy!','Thank you!':'Dziękuję!','Top level!':'Najwyższy poziom!','Max level':'Maks. poziom',
 'You reached Level 99, the top level. Well done, champion!':'Masz poziom 99, najwyższy w grze. Brawo, mistrzu!',
-'At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 20 farmdolarów.',
+'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.',
 'Art style':'Styl grafiki','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
@@ -7079,7 +7079,7 @@ addEventListener('pagehide',()=>{if(saveQueued){clearTimeout(saveQueued);saveQue
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&saveQueued){clearTimeout(saveQueued);saveQueued=0;save()}});
 function changed(){buildOcc();if(syncHousing())buildOcc();buildBars();syncGround();uiSoon();saveSoon()}
 // The top level is 99. Reaching it brings the Champion prize; XP stops counting after that.
-const MAX_LVL=99,CHAMP={coins:50000,cash:20};
+const MAX_LVL=99,CHAMP={coins:50000,cash:50};
 function addXP(n){
   if(S.level>=MAX_LVL){S.xp=0;return}
   if(S.home&&isFresh()){S.xpCarry=(S.xpCarry||0)+n*.1;const extra=Math.floor(S.xpCarry);S.xpCarry-=extra;n+=extra}
@@ -8998,7 +8998,7 @@ function showNextUnlocks(){
     const p=el('div','store');
     if(S.level>=MAX_LVL){p.appendChild(el('p',null,'You reached Level 99, the top level. Well done, champion!'));b.appendChild(p);return}
     p.appendChild(el('p',null,(need(S.level)-S.xp)+' XP to Level '+(S.level+1)+' of '+MAX_LVL+'. Deliveries with Dale give the most XP, then quests and neighbor orders.'));
-    if(S.level>=MAX_LVL-10)p.appendChild(el('p','hint','At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.'));
+    if(S.level>=MAX_LVL-10)p.appendChild(el('p','hint','At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.'));
     for(const l of[S.level+1,S.level+2]){if(l>MAX_LVL)continue;const list=unlockList(l);if(!list.length)continue;p.appendChild(el('h3',null,'Level '+l+' unlocks'));p.appendChild(unlockGrid(list))}
     b.appendChild(p);
   }});

@@ -915,7 +915,7 @@ Champion Farmer!|冠军农夫！
 Top level!|最高等级！
 Max level|满级
 You reached Level 99, the top level. Well done, champion!|你达到了99级，最高等级。干得好，冠军！
-At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|达到99级可获得冠军奖杯、50,000金币和20农场币。
+At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|达到99级可获得冠军奖杯、50,000金币和50农场币。
 Auto Waterer|自动浇水器
 The Auto Waterer is full.|自动浇水器已满。
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|动物住在自己的屋里。在设置里把"动物"改成"自由活动"才能移动它们。

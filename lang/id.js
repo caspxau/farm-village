@@ -907,7 +907,7 @@ Champion Farmer!|Petani Juara!
 Top level!|Level tertinggi!
 Max level|Level maks
 You reached Level 99, the top level. Well done, champion!|Kamu mencapai Level 99, level tertinggi. Hebat, juara!
-At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|Di Level 99 kamu memenangkan Piala Juara, 50.000 koin, dan 20 Uang Kebun.
+At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|Di Level 99 kamu memenangkan Piala Juara, 50.000 koin, dan 50 Uang Kebun.
 Auto Waterer|Penyiram Otomatis
 The Auto Waterer is full.|Penyiram Otomatis sudah penuh.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Hewan tinggal di kandangnya. Pilih Hewan: Bebas di Pengaturan untuk memindahkannya.

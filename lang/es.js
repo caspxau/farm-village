@@ -907,7 +907,7 @@ Champion Farmer!|¡Granjero campeón!
 Top level!|¡Nivel máximo!
 Max level|Nivel máximo
 You reached Level 99, the top level. Well done, champion!|Llegaste al nivel 99, el máximo. ¡Bien hecho, campeón!
-At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|En el nivel 99 ganas el Trofeo de campeón, 50.000 monedas y 20 de dinero de granja.
+At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|En el nivel 99 ganas el Trofeo de campeón, 50.000 monedas y 50 de dinero de granja.
 Auto Waterer|Regador automático
 The Auto Waterer is full.|El regador automático está lleno.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Los animales viven en su casa. Elige Animales: Libres en Ajustes para moverlos.

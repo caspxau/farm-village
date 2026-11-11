@@ -915,7 +915,7 @@ Champion Farmer!|مزارع بطل!
 Top level!|أعلى مستوى!
 Max level|أقصى مستوى
 You reached Level 99, the top level. Well done, champion!|وصلت إلى المستوى 99، أعلى مستوى. أحسنت يا بطل!
-At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|في المستوى 99 تربح كأس البطل و50,000 عملة و20 من نقود المزرعة.
+At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|في المستوى 99 تربح كأس البطل و50,000 عملة و50 من نقود المزرعة.
 Auto Waterer|الرشاش التلقائي
 The Auto Waterer is full.|الرشاش التلقائي ممتلئ.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|تعيش الحيوانات في بيوتها. اختر الحيوانات: تجوال حر في الإعدادات لتحريكها.

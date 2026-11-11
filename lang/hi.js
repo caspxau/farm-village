@@ -915,7 +915,7 @@ Champion Farmer!|चैंपियन किसान!
 Top level!|सबसे ऊँचा लेवल!
 Max level|अधिकतम लेवल
 You reached Level 99, the top level. Well done, champion!|आप लेवल 99 पर पहुँच गए, सबसे ऊँचा लेवल। शाबाश, चैंपियन!
-At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|लेवल 99 पर आपको चैंपियन ट्रॉफ़ी, 50,000 सिक्के और 20 फ़ार्म कैश मिलेंगे।
+At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|लेवल 99 पर आपको चैंपियन ट्रॉफ़ी, 50,000 सिक्के और 50 फ़ार्म कैश मिलेंगे।
 Auto Waterer|ऑटो सिंचाई मशीन
 The Auto Waterer is full.|ऑटो सिंचाई मशीन भरी है।
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|जानवर अपने बाड़े में रहते हैं। उन्हें खिसकाने के लिए सेटिंग्स में जानवर: खुले में चुनें।

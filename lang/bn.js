@@ -915,7 +915,7 @@ Champion Farmer!|চ্যাম্পিয়ন কৃষক!
 Top level!|সর্বোচ্চ লেভেল!
 Max level|সর্বোচ্চ লেভেল
 You reached Level 99, the top level. Well done, champion!|তুমি লেভেল ৯৯-এ পৌঁছেছ, সর্বোচ্চ লেভেল। শাবাশ, চ্যাম্পিয়ন!
-At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|লেভেল ৯৯-এ পাবে চ্যাম্পিয়ন ট্রফি, ৫০,০০০ কয়েন আর ২০ ফার্ম ক্যাশ।
+At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|লেভেল ৯৯-এ পাবে চ্যাম্পিয়ন ট্রফি, ৫০,০০০ কয়েন আর ৫০ ফার্ম ক্যাশ।
 Auto Waterer|স্বয়ংক্রিয় সেচযন্ত্র
 The Auto Waterer is full.|স্বয়ংক্রিয় সেচযন্ত্র ভরা।
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|পশুরা নিজেদের খোঁয়াড়ে থাকে। সরাতে সেটিংসে পশু: খোলা ঘুরুক বেছে নাও।

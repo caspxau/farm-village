@@ -915,7 +915,7 @@ Champion Farmer!|Фермер-чемпион!
 Top level!|Высший уровень!
 Max level|Макс. уровень
 You reached Level 99, the top level. Well done, champion!|Ты достиг 99 уровня, самого высокого. Молодец, чемпион!
-At Level 99 you win the Champion Trophy, 50,000 coins and 20 Farm Cash.|На 99 уровне ты получишь Кубок чемпиона, 50 000 монет и 20 фермерских долларов.
+At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.|На 99 уровне ты получишь Кубок чемпиона, 50 000 монет и 50 фермерских долларов.
 Auto Waterer|Автополивалка
 The Auto Waterer is full.|Автополивалка полна.
 Animals live in their home. Switch Animals to Free roam in Settings to move them around.|Животные живут в своём домике. Чтобы их перемещать, выбери в настройках «Животные: На свободе».
