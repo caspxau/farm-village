@@ -1342,7 +1342,7 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 .flyitem{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;z-index:210;pointer-events:none;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35));will-change:transform}
 .sweepcur{position:fixed;left:0;top:0;width:46px;height:46px;z-index:205;pointer-events:none;filter:drop-shadow(0 4px 4px rgba(0,0,0,.35));will-change:transform}
 .sweepcur svg{width:100%;height:100%}
-#btnBarn.v5bump{animation:v5bump .42s cubic-bezier(.3,1.6,.5,1)}
+#btnBarn.v5bump,#fuelchip.v5bump{animation:v5bump .42s cubic-bezier(.3,1.6,.5,1)}
 @keyframes v5bump{0%{transform:scale(1)}35%{transform:scale(1.18) translateY(-4px)}70%{transform:scale(.96)}100%{transform:scale(1)}}
 #btnBarn.v5deny{animation:v5deny .5s ease}
 @keyframes v5deny{0%,100%{transform:none}20%{transform:translateX(-5px) rotate(-4deg)}40%{transform:translateX(5px) rotate(4deg)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
@@ -5680,7 +5680,8 @@ function pickAct(id){const L=ACTS[id]||ACTS.cow;let t=0;for(const a of L)t+=a[3]
 function penLife(k,o,r,h,dt,now,mates){
   const bx=parseFloat(k)+.5,by=.5;let ax=bx+r.x,ay=by+r.y;
   if(r.seed==null)r.seed=Math.random()*10;
-  if(!inPen(h,o.id,ax,ay)&&!r.walkIn){const p=penSpot(h,o.id);ax=p[0];ay=p[1];r.mode=null}
+  // outside the pen: nearby (its home was moved, or it was pushed out) it walks back in; far off (just loaded, new) it is simply there
+  if(!inPen(h,o.id,ax,ay)&&!r.walkIn){const p=penSpot(h,o.id);if(Math.hypot(ax-h[0]-1.5,ay-h[1]-1.5)<5){r.walkIn=true;r.gx=p[0];r.gy=p[1];r.mode='walk'}else{ax=p[0];ay=p[1];r.mode=null}}
   // feeding: the animal trots to the trough and eats; hungry ones sit and wait
   const fedNow=!hungry(o);if(r.wasFed===false&&fedNow){r.jump=performance.now();for(let i=0;i<2;i++)fxAdd({k:'heart',x:ax,y:ay,h:26*(SPEC_SC[o.id]||1),dx:(i-.5)*10});const G=homeGeo(o.id);r.gx=h[0]+G.tr[0]+.1+Math.random()*.55;r.gy=h[1]+G.tr[1]+.32+Math.random()*.12;r.mode='walk';r.eat=1}
   r.wasFed=fedNow;
@@ -6440,10 +6441,11 @@ function crosses(ax,ay,bx,by){
 function roamOf(k){return ROAM[k]||(ROAM[k]={x:0,y:0,tx:0,ty:0,wait:Math.random()*4,f:1})}
 function updateAnimals(dt){
   const now=Date.now(),pens={};
-  for(const k in S.tiles){const o=S.tiles[k];if(o.k!=='animal'||!isHoused(k))continue;const h=yardOf(k,o.id);if(!h)continue;const hk=h[0]+','+h[1];if(!bigHome(S.tiles[hk]))continue;(pens[hk]=pens[hk]||{h,list:[]}).list.push(k)}
+  const held=placing&&placing.carry?placing.carry.keys:null; // riding along with a home that is being moved
+  for(const k in S.tiles){const o=S.tiles[k];if(o.k!=='animal'||!isHoused(k)||(held&&held.has(k)))continue;const h=yardOf(k,o.id);if(!h)continue;const hk=h[0]+','+h[1];if(!bigHome(S.tiles[hk]))continue;(pens[hk]=pens[hk]||{h,list:[]}).list.push(k)}
   for(const hk in pens){const P0=pens[hk],mates=P0.list.map(roamOf);for(const k of P0.list){const r=roamOf(k);if(r.walkIn&&r.mode!=='walk'){const p=penSpot(P0.h,S.tiles[k].id);r.gx=p[0];r.gy=p[1];r.mode='walk'}penLife(k,S.tiles[k],r,P0.h,dt,now,mates)}}
   for(const k in S.tiles){
-    const o=S.tiles[k];if(o.k!=='animal')continue;const r=roamOf(k);
+    const o=S.tiles[k];if(o.k!=='animal'||(held&&held.has(k)))continue;const r=roamOf(k);
     if(isHoused(k)){const h=yardOf(k,o.id);if(!h)continue;if(pens[h[0]+','+h[1]])continue;r.mv=0;const bx=parseFloat(k)+.5,by=.5,cx=bx+r.x,cy=by+r.y;
       const out=cx<h[0]+.1||cx>h[0]+1.9||cy<h[1]+1.1||cy>h[1]+1.9;
       if(out&&!r.walkIn){const p=yardSpot(h);r.x=r.tx=p[0]-bx;r.y=r.ty=p[1]-by}
@@ -6700,7 +6702,7 @@ function frame(t){
   const vx0=(-cam.x-140*cam.z)/cam.z,vx1=(vw-cam.x+140*cam.z)/cam.z,vy0=(-cam.y-40*cam.z)/cam.z,vy1=(vh-cam.y+160*cam.z)/cam.z;
   for(const k in S.tiles){const[x,y]=k.split(',').map(Number),o=S.tiles[k],n=size(o);
     if(o.k!=='animal'){const sx=(x-y)*W/2,sy=(x+y+n)*H/2;if(sx<vx0-n*W||sx>vx1+n*W||sy<vy0||sy>vy1+n*H)continue}
-    else{const[ax,ay]=animalPos(k),sx=(ax-ay)*W/2,sy=(ax+ay)*H/2;if(sx<vx0-W||sx>vx1+W||sy<vy0||sy>vy1+H)continue}
+    else{if(placing&&placing.carry&&placing.carry.keys.has(k))continue;const[ax,ay]=animalPos(k),sx=(ax-ay)*W/2,sy=(ax+ay)*H/2;if(sx<vx0-W||sx>vx1+W||sy<vy0||sy>vy1+H)continue}
     let d=x+y+1+(n-1)*2+(o.k==='plot'?-.4:0)+(o.k==='animal'?roamOf(k).x+roamOf(k).y:0);
     if(o.k==='animal'&&x<=HX){const h=yardOf(k,o.id),r=roamOf(k);if(h&&!r.walkIn){if(bigHome(S.tiles[h[0]+','+h[1]]))d=h[0]+h[1]+3.02+Math.max(0,Math.min(1,(x+.5+r.x+.5+r.y-h[0]-h[1])/6))*2.88;else d=h[0]+h[1]+3.02+(x+.5+r.x+.5+r.y-h[0]-h[1])*.004}}
     if(bigHome(o)){list.push([x+y+3,x,y,o]);list.push([x+y+5.95,x,y,o,'front']);continue}
@@ -6712,7 +6714,10 @@ function frame(t){
   list.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
   for(const[,x,y,o,part]of list){if(!o)inkLive(farmer.x,farmer.y,190,170,50,()=>drawFarmer(now));else if(o.pet)inkLive(pet.x,pet.y,80,70,25,()=>drawPetSprite(now));else if(o.deliv)drawDeliveryArea(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now,part)}
   if(VIS)for(const k in S.tiles){const o=S.tiles[k];if(o.helped){const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5);ell(px,py-4,6,6,'#5bbf3a','#fff',1.4);g.strokeStyle='#fff';g.lineWidth=1.6;line([px-2.6,py-4],[px-.6,py-2]);line([px-.6,py-2],[px+2.8,py-6.4])}}
-  if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);g.globalAlpha=1}}
+  if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);
+    const c=placing.carry;if(c){const dx=hover[0]-c.from[0],dy=hover[1]-c.from[1],ks=[...c.keys].sort((a,b)=>{const p=animalPos(a),q=animalPos(b);return p[0]+p[1]-q[0]-q[1]});
+      for(const k of ks){const r=roamOf(k),x0=r.x,y0=r.y;r.x+=dx;r.y+=dy;try{drawAnimal(parseFloat(k),0,S.tiles[k],now)}finally{r.x=x0;r.y=y0}}}
+    g.globalAlpha=1}}
   drawPending(now);drawTutArrow(now);
   blitLayer('front');
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
@@ -7174,15 +7179,21 @@ function makerAdd(key,i){
   SFX.plant();toast(M.name+': making '+r.n+' '+ITEMS[r.out].name.toLowerCase()+', ready in '+fmt((start-now)/1000+t)+'.');changed();rerender();
 }
 function makerCollect(key){
-  const o=S.tiles[key];if(!o)return false;const M=MAKERS[o.id],now=Date.now(),[x,y]=key.split(',').map(Number),got={};let xp=0,full=false;
+  const o=S.tiles[key];if(!o)return false;const M=MAKERS[o.id],now=Date.now(),[x,y]=key.split(',').map(Number),got={};let xp=0,full=false,cans=0;
+  fuelNow();
   o.q=(o.q||[]).filter(j=>{
     if(j.end>now||full)return true;const r=M.recipes[j.r];
-    if(room()<r.n){full=true;return true}
-    addGood(r.out,r.n);got[r.out]=(got[r.out]||0)+r.n;xp+=1+Math.ceil(r.time/60);return false;
+    // fresh diesel goes straight into the tractor's tank; only what does not fit is stored in the barn
+    let tank=0;if(r.out==='diesel')while(tank<r.n&&S.fuel+(cans+tank)*CAN_FUEL<=FUEL_MAX-CAN_FUEL/2)tank++;
+    if(room()<r.n-tank){full=true;return true}
+    cans+=tank;if(r.n-tank){addGood(r.out,r.n-tank);got[r.out]=(got[r.out]||0)+r.n-tank}xp+=1+Math.ceil(r.time/60);return false;
   });
-  let n=0;for(const id in got){floatText(x+1,y+.6-n*.55,'+'+got[id]+' '+ITEMS[id].name,'#fff3b0',n*160);n++}
+  if(cans){S.fuel=Math.min(FUEL_MAX,S.fuel+cans*CAN_FUEL);SFX.engine();toast('Poured in '+cans+' can'+(cans>1?'s':'')+' of diesel. Fuel: '+S.fuel+' / '+FUEL_MAX+'.');
+    const fc=$('fuelchip');if(fc){fc.classList.remove('v5bump');void fc.offsetWidth;fc.classList.add('v5bump')}}
+  let n=0;if(cans){floatText(x+1,y+.6,'+'+cans*CAN_FUEL+' fuel','#ffd27a');n++}
+  for(const id in got){floatText(x+1,y+.6-n*.55,'+'+got[id]+' '+ITEMS[id].name,'#fff3b0',n*160);n++}
   if(full)barnFull();
-  if(n){SFX.harvest();setTimeout(SFX.collect,110);burst(x+1,y+1,['#fff','#ffe066']);stat('make',n);if(xp){floatText(x+1,y-n*.55,'+'+xp+' XP','#7cc8ff',200);addXP(xp)}}
+  if(n){if(Object.keys(got).length){SFX.harvest();setTimeout(SFX.collect,110)}burst(x+1,y+1,['#fff','#ffe066']);stat('make',n);if(xp){floatText(x+1,y-n*.55,'+'+xp+' XP','#7cc8ff',200);addXP(xp)}}
   changed();rerender();return n>0;
 }
 function clickMaker(key){const o=S.tiles[key];if(makerJobs(o,Date.now()).done.length&&makerCollect(key))return;showMaker(key)}
@@ -8214,11 +8225,17 @@ function infoCard(key){
   c.style.left=x+'px';c.style.top=y+'px';
 }
 function startMove(key){
-  const o=S.tiles[key];if(!o)return;if(pend[key]){toast('Wait for the farmer to finish there.');return}
-  if(isHoused(key)){toast('Animals live in their home. Switch Animals to Free roam in Settings to move them around.');return}
-  delete S.tiles[key];buildOcc();const def=defOf(o);
-  startPlacing({move:key,ghost:o,name:o.k==='bld'?(o.id==='house'?'Farmhouse':'Barn'):o.k==='plot'?'Plot':def.name});
+  key=homeKeyFor(key);const o=S.tiles[key];if(!o)return;if(pend[key]){toast('Wait for the farmer to finish there.');return}
+  const carry=carriedBy(key,o);delete S.tiles[key];buildOcc();const def=defOf(o);
+  startPlacing({move:key,carry,ghost:o,name:o.k==='bld'?(o.id==='house'?'Farmhouse':'Barn'):o.k==='plot'?'Plot':def.name});
 }
+// Moving a home takes its animals along: tapping an animal at home picks up the home it lives in,
+// the animals ride inside the ghost while you choose a spot, and step out at the new place.
+function homeKeyFor(key){if(!isHoused(key))return key;const o=S.tiles[key],h=o&&yardOf(key,o.id);return h?h[0]+','+h[1]:key}
+function carriedBy(key,o){if(!o||o.k!=='home')return null;const[hx,hy]=key.split(',').map(Number),out=[];
+  for(const k in S.tiles){const a=S.tiles[k];if(a.k==='animal'&&isHoused(k)&&a.id===o.id){const h=yardOf(k,a.id);if(h&&h[0]===hx&&h[1]===hy)out.push(k)}}
+  return out.length?{keys:new Set(out),from:[hx,hy]}:null}
+function shiftCarried(c,dx,dy){if(!c)return;for(const k of c.keys){const r=roamOf(k);for(const[a,b]of[['x','y'],['tx','ty'],['gx','gy'],['_ax','_ay']])if(r[a]!=null){r[a]+=dx;r[b]+=dy}}}
 function removeAt(key){
   const o=S.tiles[key];if(!o||o.k==='bld')return;if(pend[key]){toast('The farmer is still working there.');return}
   delete S.tiles[key];const[x,y]=key.split(',').map(Number);burst(x,y,['#8b5a2e','#79c43d']);SFX.click();changed();
@@ -8240,7 +8257,7 @@ function stopPlacing(){
 function place(x,y){
   const p=placing;
   if(!p.home&&!fits(x,y,p.n)){SFX.error();toast('That spot is taken. Pick empty grass.');return}
-  if(p.move){S.tiles[x+','+y]=p.ghost;placing=null;$('rotBtn').hidden=true;SFX.place();changed();return}
+  if(p.move){S.tiles[x+','+y]=p.ghost;if(p.carry)shiftCarried(p.carry,x-p.carry.from[0],y-p.carry.from[1]);placing=null;$('rotBtn').hidden=true;SFX.place();changed();return}
   if(p.ghost.k==='animal'){const id=p.ghost.id;
     if(!hasHome(id)){SFX.error();toast('Build a '+HOMES[id].name+' first. Find it in Market > Homes.');placing=null;return}
     if((ANC[id]||0)>=homeCap(id)){SFX.error();toast('Your '+HOMES[id].name+(HC[id]>1?'s are':' is')+' full. Build another one for more room.');placing=null;return}}
@@ -8275,9 +8292,9 @@ function act(hx,hy){
   if(tool==='move'){
     const key=target(hx,hy);if(!key)return;const o=S.tiles[key];
     if(pend[key]){toast('Wait for the farmer to finish there.');return}
-    if(isHoused(key)){toast('Animals live in their home. Switch Animals to Free roam in Settings to move them around.');return}
-    delete S.tiles[key];buildOcc();
-    const def=defOf(o);startPlacing({move:key,ghost:o,name:o.k==='bld'?(o.id==='house'?'Farmhouse':'Barn'):o.k==='plot'?'Plot':def.name});return;
+    if(isHoused(key)){startMove(key);return}
+    const carry=carriedBy(key,o);delete S.tiles[key];buildOcc();
+    const def=defOf(o);startPlacing({move:key,carry,ghost:o,name:o.k==='bld'?(o.id==='house'?'Farmhouse':'Barn'):o.k==='plot'?'Plot':def.name});return;
   }
   if(VEH[tool]){clickVehicle(hx,hy);return}
   clickMulti(hx,hy);
