@@ -2757,16 +2757,32 @@ function musicTick(){
   const a=AC;if(!a||!MUSIC.on)return;
   while(MUSIC.next<a.currentTime+.3){musicStep(a,MUSIC.step,MUSIC.next);MUSIC.next+=BEAT;MUSIC.step++}
 }
+// The soundtrack: recorded tracks (both CC0 / public domain, from OpenGameArt) played in turn: "Apple Cider" and
+// "Sunset Plains". Each file is fetched whole (so the offline cache keeps it) and played through the music volume.
+// If a file cannot be had (offline before it was ever cached), the generated tune above plays instead.
+const TRACKS=['music/apple_cider.mp3','music/sunset_plains.mp3'];
+function playTrack(a){
+  if(!MUSIC.el){const el=new Audio();el.preload='auto';const src=a.createMediaElementSource(el),tg=a.createGain();tg.gain.value=1.7;src.connect(tg).connect(MUSIC.master);
+    el.addEventListener('ended',()=>{MUSIC.track=((MUSIC.track||0)+1)%TRACKS.length;MUSIC.loaded=-1;if(MUSIC.on)playTrack(a)});MUSIC.el=el;MUSIC.urls={};MUSIC.track=0;MUSIC.loaded=-1}
+  const i=MUSIC.track||0,el=MUSIC.el,go=()=>{if(MUSIC.on)el.play().catch(()=>{MUSIC.blocked=true})};
+  if(MUSIC.loaded===i){go();return}
+  const use=url=>{MUSIC.loaded=i;el.src=url;go()};
+  if(MUSIC.urls[i]){use(MUSIC.urls[i]);return}
+  fetch(TRACKS[i]).then(r=>{if(!r.ok)throw 0;return r.blob()}).then(b=>{MUSIC.urls[i]=URL.createObjectURL(b);if(MUSIC.track===i)use(MUSIC.urls[i])})
+    .catch(()=>{MUSIC.fileFail=true;if(MUSIC.on)startGenerated(a)});
+}
+function startGenerated(a){MUSIC.next=a.currentTime+.1;clearInterval(MUSIC.timer);MUSIC.timer=setInterval(musicTick,60);musicTick()}
 function musicSync(){
   const a=AC,want=!!(S&&S.music&&a&&a.state==='running'&&!document.hidden);
-  if(want===MUSIC.on)return;
+  if(want===MUSIC.on){if(want&&MUSIC.blocked&&MUSIC.el&&MUSIC.el.paused){MUSIC.blocked=false;MUSIC.el.play().catch(()=>{MUSIC.blocked=true})}return}
   if(want){
-    musicGraph(a);MUSIC.on=true;MUSIC.next=a.currentTime+.1;
+    musicGraph(a);MUSIC.on=true;
     MUSIC.master.gain.cancelScheduledValues(a.currentTime);MUSIC.master.gain.setTargetAtTime(.55*(S.musicVol??1),a.currentTime,1.2);
-    clearInterval(MUSIC.timer);MUSIC.timer=setInterval(musicTick,60);musicTick();
+    if(MUSIC.fileFail)startGenerated(a);else playTrack(a);
   }else{
     MUSIC.on=false;clearInterval(MUSIC.timer);
     if(a&&MUSIC.master){MUSIC.master.gain.cancelScheduledValues(a.currentTime);MUSIC.master.gain.setTargetAtTime(0,a.currentTime,.25)}
+    const el=MUSIC.el;if(el)setTimeout(()=>{if(!MUSIC.on)el.pause()},900);
   }
 }
 document.addEventListener('visibilitychange',musicSync);

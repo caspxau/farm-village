@@ -1,0 +1,6 @@
+Farm Village soundtrack. Both tracks are CC0 (public domain); credit is not required but given with thanks.
+
+apple_cider.mp3    "Apple Cider"    - https://opengameart.org/content/apple-cider
+sunset_plains.mp3  "Sunset Plains"  - https://opengameart.org/content/sunset-plains
+
+Re-encoded for the game: loudness-normalised to -20 LUFS, 96 kbps stereo MP3.
