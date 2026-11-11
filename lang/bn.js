@@ -1,7 +1,28 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Homestead|খামারবাড়ি
+x:`Plow here|এখানে চাষ করুন
+Free|বিনামূল্যে
+No ingredients|কোনো উপকরণ নেই
+New level|নতুন স্তর
+New in the Market|বাজারে নতুন
+Press back again to leave Farm Village.|Farm Village থেকে বের হতে আবার ব্যাক চাপুন।
+Privacy policy|গোপনীয়তা নীতি
+Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.|আরও জমি লাগবে? ঘাসে ট্যাপ করে এখানে চাষ করুন চাপুন। অথবা ঘাসে চেপে ধরে টেনে পুরো সারি চাষ করুন।
+That is the top ribbon. Legendary!|এটাই সবচেয়ে উঁচু ফিতা। কিংবদন্তি!
+Your farm keeps growing.|আপনার খামার বেড়েই চলেছে।
+Way to go!|দারুণ!
+Check out what is new in the Market.|বাজারে নতুন কী এসেছে দেখুন।
+Yellow ribbon|হলুদ ফিতা
+White ribbon|সাদা ফিতা
+Red ribbon|লাল ফিতা
+Blue ribbon|নীল ফিতা
+Can you earn the White ribbon next?|পরের সাদা ফিতাটা জিততে পারবেন?
+Can you earn the Red ribbon next?|পরের লাল ফিতাটা জিততে পারবেন?
+Can you earn the Blue ribbon next?|পরের নীল ফিতাটা জিততে পারবেন?
+Next level|পরের স্তর
+Next ribbon|পরের ফিতা
+Homestead|খামারবাড়ি
 Ranch|র‍্যাঞ্চ
 Country Estate|গ্রামীণ জমিদারি
 Grand Estate|বড় জমিদারি

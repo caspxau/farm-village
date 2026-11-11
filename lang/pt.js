@@ -1,6 +1,27 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Homestead|Sítio
+x:`Plow here|Arar aqui
+Free|Grátis
+No ingredients|Sem ingredientes
+New level|Novo nível
+New in the Market|Novidades no mercado
+Press back again to leave Farm Village.|Toque em voltar de novo para sair do Farm Village.
+Privacy policy|Política de privacidade
+Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.|Precisa de mais terra? Toque na grama e em Arar aqui. Ou segure na grama e arraste para arar uma fileira inteira.
+That is the top ribbon. Legendary!|É a fita mais alta. Lendário!
+Your farm keeps growing.|Sua fazenda continua crescendo.
+Way to go!|Mandou bem!
+Check out what is new in the Market.|Veja as novidades no mercado.
+Yellow ribbon|Fita amarela
+White ribbon|Fita branca
+Red ribbon|Fita vermelha
+Blue ribbon|Fita azul
+Can you earn the White ribbon next?|Consegue a fita branca agora?
+Can you earn the Red ribbon next?|Consegue a fita vermelha agora?
+Can you earn the Blue ribbon next?|Consegue a fita azul agora?
+Next level|Próximo nível
+Next ribbon|Próxima fita
+Homestead|Sítio
 Ranch|Rancho
 Country Estate|Quinta
 Grand Estate|Grande quinta

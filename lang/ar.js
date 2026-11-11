@@ -1,7 +1,28 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Homestead|المزرعة العائلية
+x:`Plow here|احرث هنا
+Free|مجانًا
+No ingredients|بلا مكونات
+New level|مستوى جديد
+New in the Market|جديد في السوق
+Press back again to leave Farm Village.|اضغط رجوع مرة أخرى للخروج من Farm Village.
+Privacy policy|سياسة الخصوصية
+Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.|تحتاج أرضًا زراعية أكثر؟ انقر على العشب ثم اضغط احرث هنا. أو اضغط مطولًا على العشب واسحب لحرث صف كامل.
+That is the top ribbon. Legendary!|هذا أعلى شريط. أسطوري!
+Your farm keeps growing.|مزرعتك تكبر باستمرار.
+Way to go!|أحسنت!
+Check out what is new in the Market.|اطّلع على الجديد في السوق.
+Yellow ribbon|الشريط الأصفر
+White ribbon|الشريط الأبيض
+Red ribbon|الشريط الأحمر
+Blue ribbon|الشريط الأزرق
+Can you earn the White ribbon next?|هل تفوز بالشريط الأبيض بعد ذلك؟
+Can you earn the Red ribbon next?|هل تفوز بالشريط الأحمر بعد ذلك؟
+Can you earn the Blue ribbon next?|هل تفوز بالشريط الأزرق بعد ذلك؟
+Next level|المستوى التالي
+Next ribbon|الشريط التالي
+Homestead|المزرعة العائلية
 Ranch|المزرعة الكبيرة
 Country Estate|الضيعة الريفية
 Grand Estate|الضيعة الكبرى

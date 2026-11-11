@@ -1,6 +1,27 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Homestead|Domaine
+x:`Plow here|Labourer ici
+Free|Gratuit
+No ingredients|Sans ingrédients
+New level|Nouveau niveau
+New in the Market|Nouveautés au marché
+Press back again to leave Farm Village.|Appuie encore sur retour pour quitter Farm Village.
+Privacy policy|Politique de confidentialité
+Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.|Besoin de plus de terres ? Touche l’herbe puis Labourer ici. Ou reste appuyé sur l’herbe et fais glisser pour labourer toute une rangée.
+That is the top ribbon. Legendary!|C’est le plus haut ruban. Légendaire !
+Your farm keeps growing.|Ta ferme continue de grandir.
+Way to go!|Bravo !
+Check out what is new in the Market.|Découvre les nouveautés du marché.
+Yellow ribbon|Ruban jaune
+White ribbon|Ruban blanc
+Red ribbon|Ruban rouge
+Blue ribbon|Ruban bleu
+Can you earn the White ribbon next?|Tu décroches le ruban blanc ensuite ?
+Can you earn the Red ribbon next?|Tu décroches le ruban rouge ensuite ?
+Can you earn the Blue ribbon next?|Tu décroches le ruban bleu ensuite ?
+Next level|Niveau suivant
+Next ribbon|Ruban suivant
+Homestead|Domaine
 Ranch|Ranch
 Country Estate|Propriété de campagne
 Grand Estate|Grand domaine

@@ -1,6 +1,27 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Homestead|Hacienda
+x:`Plow here|Arar aquí
+Free|Gratis
+No ingredients|Sin ingredientes
+New level|Nuevo nivel
+New in the Market|Novedades en el mercado
+Press back again to leave Farm Village.|Pulsa atrás otra vez para salir de Farm Village.
+Privacy policy|Política de privacidad
+Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.|¿Necesitas más tierra de cultivo? Toca el césped y pulsa Arar aquí. O mantén pulsado el césped y arrastra para arar toda una fila.
+That is the top ribbon. Legendary!|Es el listón más alto. ¡Legendario!
+Your farm keeps growing.|Tu granja sigue creciendo.
+Way to go!|¡Bien hecho!
+Check out what is new in the Market.|Mira lo nuevo en el mercado.
+Yellow ribbon|Listón amarillo
+White ribbon|Listón blanco
+Red ribbon|Listón rojo
+Blue ribbon|Listón azul
+Can you earn the White ribbon next?|¿Podrás ganar el listón blanco ahora?
+Can you earn the Red ribbon next?|¿Podrás ganar el listón rojo ahora?
+Can you earn the Blue ribbon next?|¿Podrás ganar el listón azul ahora?
+Next level|Siguiente nivel
+Next ribbon|Siguiente listón
+Homestead|Hacienda
 Ranch|Rancho
 Country Estate|Finca de campo
 Grand Estate|Gran finca

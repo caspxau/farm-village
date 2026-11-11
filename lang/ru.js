@@ -1,7 +1,28 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Homestead|Усадьба
+x:`Plow here|Вспахать здесь
+Free|Бесплатно
+No ingredients|Без ингредиентов
+New level|Новый уровень
+New in the Market|Новое на рынке
+Press back again to leave Farm Village.|Нажмите «Назад» ещё раз, чтобы выйти из Farm Village.
+Privacy policy|Политика конфиденциальности
+Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.|Нужно больше пашни? Нажмите на траву и выберите «Вспахать здесь». Или зажмите траву и проведите, чтобы вспахать целый ряд.
+That is the top ribbon. Legendary!|Это высшая лента. Легенда!
+Your farm keeps growing.|Ваша ферма растёт.
+Way to go!|Отлично!
+Check out what is new in the Market.|Загляните на рынок за новинками.
+Yellow ribbon|Жёлтая лента
+White ribbon|Белая лента
+Red ribbon|Красная лента
+Blue ribbon|Синяя лента
+Can you earn the White ribbon next?|Получите белую ленту следующей?
+Can you earn the Red ribbon next?|Получите красную ленту следующей?
+Can you earn the Blue ribbon next?|Получите синюю ленту следующей?
+Next level|Следующий уровень
+Next ribbon|Следующая лента
+Homestead|Усадьба
 Ranch|Ранчо
 Country Estate|Загородное поместье
 Grand Estate|Большое поместье

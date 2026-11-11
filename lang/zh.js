@@ -1,7 +1,28 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Homestead|家园农场
+x:`Plow here|在这里耕地
+Free|免费
+No ingredients|无需原料
+New level|新等级
+New in the Market|市场新品
+Press back again to leave Farm Village.|再按一次返回键退出 Farm Village。
+Privacy policy|隐私政策
+Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.|需要更多耕地？点一下草地，再点“在这里耕地”。或者按住草地拖动，一次耕出一整排。
+That is the top ribbon. Legendary!|这是最高的绶带。传奇！
+Your farm keeps growing.|你的农场越来越大了。
+Way to go!|干得好！
+Check out what is new in the Market.|去市场看看新东西吧。
+Yellow ribbon|黄色绶带
+White ribbon|白色绶带
+Red ribbon|红色绶带
+Blue ribbon|蓝色绶带
+Can you earn the White ribbon next?|下一条白色绶带能拿到吗？
+Can you earn the Red ribbon next?|下一条红色绶带能拿到吗？
+Can you earn the Blue ribbon next?|下一条蓝色绶带能拿到吗？
+Next level|下一级
+Next ribbon|下一条绶带
+Homestead|家园农场
 Ranch|大牧场
 Country Estate|乡村庄园
 Grand Estate|宏伟庄园

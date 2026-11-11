@@ -1,6 +1,27 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Homestead|Wisma Tani
+x:`Plow here|Bajak di sini
+Free|Gratis
+No ingredients|Tanpa bahan
+New level|Level baru
+New in the Market|Baru di Pasar
+Press back again to leave Farm Village.|Tekan kembali sekali lagi untuk keluar dari Farm Village.
+Privacy policy|Kebijakan privasi
+Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.|Butuh lahan lagi? Ketuk rumput lalu tekan Bajak di sini. Atau tahan di rumput, lalu seret untuk membajak satu baris.
+That is the top ribbon. Legendary!|Itu pita tertinggi. Legendaris!
+Your farm keeps growing.|Pertanianmu terus berkembang.
+Way to go!|Hebat!
+Check out what is new in the Market.|Lihat yang baru di Pasar.
+Yellow ribbon|Pita kuning
+White ribbon|Pita putih
+Red ribbon|Pita merah
+Blue ribbon|Pita biru
+Can you earn the White ribbon next?|Bisa dapat pita putih berikutnya?
+Can you earn the Red ribbon next?|Bisa dapat pita merah berikutnya?
+Can you earn the Blue ribbon next?|Bisa dapat pita biru berikutnya?
+Next level|Level berikutnya
+Next ribbon|Pita berikutnya
+Homestead|Wisma Tani
 Ranch|Peternakan
 Country Estate|Tanah Pedesaan
 Grand Estate|Tanah Luas
