@@ -1,7 +1,38 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Dairy|ডেয়ারি
+x:`I'm too tired… I need food and water.|আমি খুব ক্লান্ত… আমার খাবার আর জল চাই।
+So tired… I have to eat and drink something.|খুব ক্লান্ত… কিছু খেতে আর পান করতে হবে।
+I'm dehydrated! I need water, now.|আমার শরীরে জলশূন্যতা! এখনই জল চাই।
+Water… I can barely walk…|জল… আমি প্রায় হাঁটতেই পারছি না…
+I'm out of energy… I have to eat.|শক্তি শেষ… আমাকে খেতে হবে।
+Starving… my legs feel like jelly.|খিদেয় মরছি… পা যেন জেলির মতো।
+So thirsty… I'm slowing down.|খুব তেষ্টা… আমি ধীর হয়ে যাচ্ছি।
+My mouth is so dry. I need a drink.|মুখ একদম শুকিয়ে গেছে। কিছু পান করতে হবে।
+I'm so hungry I can't work fast.|এত খিদে যে দ্রুত কাজ করতে পারছি না।
+My tummy hurts… I need some food.|পেটে ব্যথা… কিছু খাবার চাই।
+Phew, thirsty work! I could use some water.|উফ, কী তেষ্টা পাওয়া কাজ! একটু জল হলে ভালো হতো।
+I should grab a drink soon.|শিগগিরই কিছু পান করা উচিত।
+My tummy is rumbling.|পেট গুড়গুড় করছে।
+Is it lunchtime yet?|দুপুরের খাবারের সময় হলো নাকি?
+Ahh, much better!|আহ, অনেক ভালো লাগছে!
+That hit the spot!|একদম মন ভরে গেল!
+Home sweet home.|ঘরই সেরা।
+Nice and cozy in here.|এখানে বেশ আরাম আর উষ্ণ।
+I should get back to the fields soon.|শিগগিরই মাঠে ফিরে যাওয়া উচিত।
+Radio|রেডিও
+An old cabinet radio. Tap it to turn the music on or off.|একটি পুরোনো কাঠের রেডিও। গান চালু বা বন্ধ করতে ট্যাপ করো।
+Pet Bed|পোষা প্রাণীর বিছানা
+A soft basket where your pet curls up for a nap.|একটি নরম ঝুড়ি, যেখানে তোমার পোষা প্রাণী গুটিসুটি মেরে ঘুমায়।
+Coffee Maker|কফি মেকার
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|এক কাপ কফি: +১৫ পানীয় আর ১০ মিনিট ১৫% দ্রুত। প্রতি ৩০ মিনিটে একটি।
+Make coffee|কফি বানাও
+Turn the radio off|রেডিও বন্ধ করো
+Turn the radio on|রেডিও চালু করো
+Making coffee|কফি বানাচ্ছে
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|তাজা কফি! +১৫ পানীয় আর ১০ মিনিট ১৫% দ্রুত।
+You just had a coffee. Try again a bit later.|তুমি এইমাত্র কফি খেয়েছ। একটু পরে আবার চেষ্টা করো।
+Dairy|ডেয়ারি
 Churns milk into butter, cream, goat cheese and yogurt.|দুধ থেকে মাখন, ক্রিম, ছাগলের পনির আর দই বানায়।
 Weaving Loom|তাঁত
 Spins cotton, fur and wool into fabric and cozy things to wear.|তুলা, লোম আর পশম থেকে কাপড় আর গরম জিনিস বোনে।

@@ -1,6 +1,37 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Dairy|Pabrik Susu
+x:`I'm too tired… I need food and water.|Aku terlalu lelah… aku butuh makanan dan air.
+So tired… I have to eat and drink something.|Capek sekali… aku harus makan dan minum sesuatu.
+I'm dehydrated! I need water, now.|Aku dehidrasi! Aku butuh air, sekarang.
+Water… I can barely walk…|Air… aku hampir tidak bisa berjalan…
+I'm out of energy… I have to eat.|Tenagaku habis… aku harus makan.
+Starving… my legs feel like jelly.|Kelaparan… kakiku lemas sekali.
+So thirsty… I'm slowing down.|Haus sekali… aku jadi lambat.
+My mouth is so dry. I need a drink.|Mulutku kering sekali. Aku butuh minum.
+I'm so hungry I can't work fast.|Aku lapar sekali sampai tidak bisa bekerja cepat.
+My tummy hurts… I need some food.|Perutku sakit… aku butuh makanan.
+Phew, thirsty work! I could use some water.|Fiuh, kerja yang bikin haus! Air sedikit pasti enak.
+I should grab a drink soon.|Sebaiknya aku segera minum.
+My tummy is rumbling.|Perutku keroncongan.
+Is it lunchtime yet?|Sudah waktunya makan siang?
+Ahh, much better!|Ahh, jauh lebih baik!
+That hit the spot!|Pas sekali!
+Home sweet home.|Rumahku istanaku.
+Nice and cozy in here.|Nyaman dan hangat di sini.
+I should get back to the fields soon.|Sebaiknya aku segera kembali ke ladang.
+Radio|Radio
+An old cabinet radio. Tap it to turn the music on or off.|Radio lemari kuno. Ketuk untuk menyalakan atau mematikan musik.
+Pet Bed|Kasur Hewan
+A soft basket where your pet curls up for a nap.|Keranjang empuk tempat hewanmu meringkuk untuk tidur siang.
+Coffee Maker|Mesin Kopi
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|Secangkir kopi: +15 minum dan 15% lebih cepat selama 10 menit. Satu setiap 30 menit.
+Make coffee|Buat kopi
+Turn the radio off|Matikan radio
+Turn the radio on|Nyalakan radio
+Making coffee|Membuat kopi
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|Kopi segar! +15 minum, dan 15% lebih cepat selama 10 menit.
+You just had a coffee. Try again a bit later.|Kamu baru saja minum kopi. Coba lagi sebentar lagi.
+Dairy|Pabrik Susu
 Churns milk into butter, cream, goat cheese and yogurt.|Mengolah susu jadi mentega, krim, keju kambing, dan yoghurt.
 Weaving Loom|Alat Tenun
 Spins cotton, fur and wool into fabric and cozy things to wear.|Memintal kapas, bulu, dan wol jadi kain dan pakaian hangat.

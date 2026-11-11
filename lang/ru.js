@@ -1,7 +1,38 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Dairy|Сыроварня
+x:`I'm too tired… I need food and water.|Я слишком устал… мне нужны еда и вода.
+So tired… I have to eat and drink something.|Так устал… надо поесть и попить.
+I'm dehydrated! I need water, now.|У меня обезвоживание! Срочно нужна вода.
+Water… I can barely walk…|Воды… еле иду…
+I'm out of energy… I have to eat.|Сил совсем нет… надо поесть.
+Starving… my legs feel like jelly.|Умираю с голоду… ноги как ватные.
+So thirsty… I'm slowing down.|Так хочется пить… я замедляюсь.
+My mouth is so dry. I need a drink.|Во рту пересохло. Надо попить.
+I'm so hungry I can't work fast.|Я так голоден, что не могу работать быстро.
+My tummy hurts… I need some food.|Живот болит… мне нужно поесть.
+Phew, thirsty work! I could use some water.|Уф, от такой работы хочется пить! Не помешало бы воды.
+I should grab a drink soon.|Надо бы скоро попить.
+My tummy is rumbling.|В животе урчит.
+Is it lunchtime yet?|Уже время обеда?
+Ahh, much better!|Ах, гораздо лучше!
+That hit the spot!|То, что нужно!
+Home sweet home.|Дом, милый дом.
+Nice and cozy in here.|Как тут уютно.
+I should get back to the fields soon.|Пора бы вернуться в поле.
+Radio|Радио
+An old cabinet radio. Tap it to turn the music on or off.|Старый ламповый радиоприёмник. Нажми, чтобы включить или выключить музыку.
+Pet Bed|Лежанка для питомца
+A soft basket where your pet curls up for a nap.|Мягкая корзинка, где питомец сворачивается клубком и дремлет.
+Coffee Maker|Кофеварка
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|Чашка кофе: +15 к питью и на 15% быстрее на 10 минут. Одна каждые 30 минут.
+Make coffee|Сварить кофе
+Turn the radio off|Выключить радио
+Turn the radio on|Включить радио
+Making coffee|Варю кофе
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|Свежий кофе! +15 к питью и на 15% быстрее на 10 минут.
+You just had a coffee. Try again a bit later.|Ты только что выпил кофе. Попробуй чуть позже.
+Dairy|Сыроварня
 Churns milk into butter, cream, goat cheese and yogurt.|Сбивает молоко в масло, сливки, козий сыр и йогурт.
 Weaving Loom|Ткацкий станок
 Spins cotton, fur and wool into fabric and cozy things to wear.|Прядёт хлопок, пух и шерсть в ткань и тёплые вещи.

@@ -1,7 +1,38 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Dairy|مصنع الألبان
+x:`I'm too tired… I need food and water.|أنا متعب جدًا… أحتاج إلى طعام وماء.
+So tired… I have to eat and drink something.|متعب للغاية… يجب أن آكل وأشرب شيئًا.
+I'm dehydrated! I need water, now.|أنا مصاب بالجفاف! أحتاج إلى الماء الآن.
+Water… I can barely walk…|ماء… بالكاد أستطيع المشي…
+I'm out of energy… I have to eat.|نفدت طاقتي… يجب أن آكل.
+Starving… my legs feel like jelly.|أتضوّر جوعًا… ساقاي ترتجفان.
+So thirsty… I'm slowing down.|عطشان جدًا… أصبحت أبطأ.
+My mouth is so dry. I need a drink.|فمي جاف جدًا. أحتاج إلى شراب.
+I'm so hungry I can't work fast.|أنا جائع لدرجة أنني لا أستطيع العمل بسرعة.
+My tummy hurts… I need some food.|بطني يؤلمني… أحتاج إلى بعض الطعام.
+Phew, thirsty work! I could use some water.|يا له من عمل مُعطِش! أحتاج إلى قليل من الماء.
+I should grab a drink soon.|يجب أن أشرب شيئًا قريبًا.
+My tummy is rumbling.|بطني يقرقر.
+Is it lunchtime yet?|هل حان وقت الغداء؟
+Ahh, much better!|آه، أفضل بكثير!
+That hit the spot!|هذا ما كنت أحتاجه!
+Home sweet home.|بيتي يا بيتي.
+Nice and cozy in here.|المكان هنا دافئ ومريح.
+I should get back to the fields soon.|يجب أن أعود إلى الحقول قريبًا.
+Radio|راديو
+An old cabinet radio. Tap it to turn the music on or off.|راديو قديم بخزانة خشبية. اضغط عليه لتشغيل الموسيقى أو إيقافها.
+Pet Bed|سرير الحيوان الأليف
+A soft basket where your pet curls up for a nap.|سلة طرية يلتف فيها حيوانك الأليف ليأخذ قيلولة.
+Coffee Maker|آلة القهوة
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|فنجان قهوة: +15 شراب وأسرع بنسبة 15% لمدة 10 دقائق. فنجان كل 30 دقيقة.
+Make coffee|حضّر القهوة
+Turn the radio off|أطفئ الراديو
+Turn the radio on|شغّل الراديو
+Making coffee|يحضّر القهوة
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|قهوة طازجة! +15 شراب وأسرع بنسبة 15% لمدة 10 دقائق.
+You just had a coffee. Try again a bit later.|شربت قهوة للتو. حاول مرة أخرى بعد قليل.
+Dairy|مصنع الألبان
 Churns milk into butter, cream, goat cheese and yogurt.|يحوّل الحليب إلى زبدة وقشطة وجبن ماعز وزبادي.
 Weaving Loom|النول
 Spins cotton, fur and wool into fabric and cozy things to wear.|يغزل القطن والفرو والصوف إلى قماش وملابس دافئة.

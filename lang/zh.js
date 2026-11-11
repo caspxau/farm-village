@@ -1,7 +1,38 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Dairy|乳品坊
+x:`I'm too tired… I need food and water.|我太累了……我需要吃的和水。
+So tired… I have to eat and drink something.|好累……我得吃点喝点东西。
+I'm dehydrated! I need water, now.|我脱水了!现在就需要水。
+Water… I can barely walk…|水……我快走不动了……
+I'm out of energy… I have to eat.|我没力气了……得吃点东西。
+Starving… my legs feel like jelly.|饿死了……腿都软了。
+So thirsty… I'm slowing down.|好渴……我慢下来了。
+My mouth is so dry. I need a drink.|嘴巴好干,我需要喝点东西。
+I'm so hungry I can't work fast.|我饿得干不快活了。
+My tummy hurts… I need some food.|肚子疼……我需要吃点东西。
+Phew, thirsty work! I could use some water.|呼,干活真渴!来点水就好了。
+I should grab a drink soon.|我该快点去喝点东西。
+My tummy is rumbling.|肚子咕咕叫了。
+Is it lunchtime yet?|到午饭时间了吗?
+Ahh, much better!|啊,好多了!
+That hit the spot!|太舒服了!
+Home sweet home.|家,甜蜜的家。
+Nice and cozy in here.|这里真温馨。
+I should get back to the fields soon.|我该早点回田里去了。
+Radio|收音机
+An old cabinet radio. Tap it to turn the music on or off.|一台老式落地收音机。点它可以打开或关闭音乐。
+Pet Bed|宠物窝
+A soft basket where your pet curls up for a nap.|一个软软的篮子,你的宠物会蜷在里面打盹。
+Coffee Maker|咖啡机
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|一杯咖啡:饮水 +15,10 分钟内速度提高 15%。每 30 分钟一杯。
+Make coffee|煮咖啡
+Turn the radio off|关掉收音机
+Turn the radio on|打开收音机
+Making coffee|正在煮咖啡
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|新鲜咖啡!饮水 +15,10 分钟内速度提高 15%。
+You just had a coffee. Try again a bit later.|你刚喝过咖啡,过一会儿再来吧。
+Dairy|乳品坊
 Churns milk into butter, cream, goat cheese and yogurt.|把牛奶制成黄油、奶油、山羊奶酪和酸奶。
 Weaving Loom|织布机
 Spins cotton, fur and wool into fabric and cozy things to wear.|把棉花、兔毛和羊毛纺成布料和暖和的衣物。

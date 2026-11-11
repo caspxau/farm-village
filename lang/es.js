@@ -1,6 +1,37 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Dairy|Lechería
+x:`I'm too tired… I need food and water.|Estoy agotado… necesito comida y agua.
+So tired… I have to eat and drink something.|Qué cansancio… tengo que comer y beber algo.
+I'm dehydrated! I need water, now.|¡Estoy deshidratado! Necesito agua, ya.
+Water… I can barely walk…|Agua… casi no puedo andar…
+I'm out of energy… I have to eat.|No me queda energía… tengo que comer.
+Starving… my legs feel like jelly.|Muerto de hambre… las piernas me tiemblan.
+So thirsty… I'm slowing down.|Qué sed… voy más lento.
+My mouth is so dry. I need a drink.|Tengo la boca muy seca. Necesito beber algo.
+I'm so hungry I can't work fast.|Tengo tanta hambre que no puedo trabajar rápido.
+My tummy hurts… I need some food.|Me duele la tripa… necesito comer algo.
+Phew, thirsty work! I could use some water.|¡Uf, qué trabajo da sed! Me vendría bien un poco de agua.
+I should grab a drink soon.|Debería beber algo pronto.
+My tummy is rumbling.|Me suenan las tripas.
+Is it lunchtime yet?|¿Ya es hora de comer?
+Ahh, much better!|¡Ah, mucho mejor!
+That hit the spot!|¡Qué bien me ha sentado!
+Home sweet home.|Hogar, dulce hogar.
+Nice and cozy in here.|Qué agradable se está aquí.
+I should get back to the fields soon.|Debería volver pronto al campo.
+Radio|Radio
+An old cabinet radio. Tap it to turn the music on or off.|Una vieja radio de mueble. Tócala para encender o apagar la música.
+Pet Bed|Cama para mascota
+A soft basket where your pet curls up for a nap.|Una cesta blandita donde tu mascota se acurruca para dormir la siesta.
+Coffee Maker|Cafetera
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|Una taza de café: +15 de bebida y un 15% más rápido durante 10 minutos. Una cada 30 minutos.
+Make coffee|Hacer café
+Turn the radio off|Apagar la radio
+Turn the radio on|Encender la radio
+Making coffee|Haciendo café
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|¡Café recién hecho! +15 de bebida y un 15% más rápido durante 10 minutos.
+You just had a coffee. Try again a bit later.|Acabas de tomar un café. Vuelve a intentarlo un poco más tarde.
+Dairy|Lechería
 Churns milk into butter, cream, goat cheese and yogurt.|Bate la leche en mantequilla, nata, queso de cabra y yogur.
 Weaving Loom|Telar
 Spins cotton, fur and wool into fabric and cozy things to wear.|Hila algodón, pelo y lana en tela y ropa calentita.

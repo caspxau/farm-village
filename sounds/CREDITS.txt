@@ -1,0 +1,12 @@
+Pet sounds in this folder are cut, trimmed and level-matched from these CC0 (public domain) recordings on OpenGameArt.
+
+dog_bark1-4.mp3
+  "Dog barking mono" by Brandon Morris (submitted by HaelDB), CC0 (also offered under OGA-BY 3.0)
+  https://opengameart.org/content/dog-barking-mono
+
+cat_meow1.mp3, cat_meow2-3.mp3, cat_purr.mp3
+  "Cat Purr & Meow" by Kerzoven, CC0
+  https://opengameart.org/content/cat-purr-meow
+  (cat_meow1 from cat_mewfood.wav, cat_meow2-3 from cat_softmew.wav, cat_purr from cat_purractive_loop.wav)
+
+CC0: https://creativecommons.org/publicdomain/zero/1.0/

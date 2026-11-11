@@ -1,6 +1,37 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Dairy|Laticínio
+x:`I'm too tired… I need food and water.|Estou cansado demais… preciso de comida e água.
+So tired… I have to eat and drink something.|Que cansaço… tenho de comer e beber alguma coisa.
+I'm dehydrated! I need water, now.|Estou desidratado! Preciso de água, já.
+Water… I can barely walk…|Água… mal consigo andar…
+I'm out of energy… I have to eat.|Estou sem energia… tenho de comer.
+Starving… my legs feel like jelly.|Morto de fome… as pernas parecem gelatina.
+So thirsty… I'm slowing down.|Que sede… estou a ficar mais lento.
+My mouth is so dry. I need a drink.|Estou com a boca muito seca. Preciso de beber.
+I'm so hungry I can't work fast.|Estou com tanta fome que não consigo trabalhar depressa.
+My tummy hurts… I need some food.|Dói-me a barriga… preciso de comer.
+Phew, thirsty work! I could use some water.|Ufa, que trabalho que dá sede! Uma água vinha mesmo a calhar.
+I should grab a drink soon.|Devia beber alguma coisa em breve.
+My tummy is rumbling.|A minha barriga está a roncar.
+Is it lunchtime yet?|Já é hora de almoço?
+Ahh, much better!|Ah, muito melhor!
+That hit the spot!|Soube mesmo bem!
+Home sweet home.|Lar, doce lar.
+Nice and cozy in here.|Que aconchegante que está aqui.
+I should get back to the fields soon.|Devia voltar para os campos em breve.
+Radio|Rádio
+An old cabinet radio. Tap it to turn the music on or off.|Um rádio antigo de móvel. Toca nele para ligar ou desligar a música.
+Pet Bed|Cama para animal
+A soft basket where your pet curls up for a nap.|Um cesto macio onde o teu animal se enrola para dormir a sesta.
+Coffee Maker|Máquina de café
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|Uma chávena de café: +15 de bebida e 15% mais rápido durante 10 minutos. Uma a cada 30 minutos.
+Make coffee|Fazer café
+Turn the radio off|Desligar o rádio
+Turn the radio on|Ligar o rádio
+Making coffee|A fazer café
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|Café acabado de fazer! +15 de bebida e 15% mais rápido durante 10 minutos.
+You just had a coffee. Try again a bit later.|Acabaste de beber um café. Tenta outra vez um pouco mais tarde.
+Dairy|Laticínio
 Churns milk into butter, cream, goat cheese and yogurt.|Bate o leite em manteiga, creme, queijo de cabra e iogurte.
 Weaving Loom|Tear
 Spins cotton, fur and wool into fabric and cozy things to wear.|Fia algodão, pelo e lã em tecido e roupas quentinhas.

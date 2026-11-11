@@ -1,6 +1,37 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Dairy|Laiterie
+x:`I'm too tired… I need food and water.|Je suis trop fatigué… il me faut à manger et à boire.
+So tired… I have to eat and drink something.|Tellement fatigué… je dois manger et boire quelque chose.
+I'm dehydrated! I need water, now.|Je suis déshydraté ! Il me faut de l'eau, tout de suite.
+Water… I can barely walk…|De l'eau… j'arrive à peine à marcher…
+I'm out of energy… I have to eat.|Je n'ai plus d'énergie… je dois manger.
+Starving… my legs feel like jelly.|Je meurs de faim… mes jambes flageolent.
+So thirsty… I'm slowing down.|Quelle soif… je ralentis.
+My mouth is so dry. I need a drink.|J'ai la bouche toute sèche. Il me faut à boire.
+I'm so hungry I can't work fast.|J'ai tellement faim que je ne peux pas travailler vite.
+My tummy hurts… I need some food.|J'ai mal au ventre… il me faut à manger.
+Phew, thirsty work! I could use some water.|Ouf, ça donne soif ! Un peu d'eau me ferait du bien.
+I should grab a drink soon.|Je devrais boire quelque chose bientôt.
+My tummy is rumbling.|Mon ventre gargouille.
+Is it lunchtime yet?|C'est bientôt l'heure du déjeuner ?
+Ahh, much better!|Ah, ça va beaucoup mieux !
+That hit the spot!|Ça fait du bien !
+Home sweet home.|On n'est jamais mieux que chez soi.
+Nice and cozy in here.|On est bien au chaud ici.
+I should get back to the fields soon.|Je devrais vite retourner aux champs.
+Radio|Radio
+An old cabinet radio. Tap it to turn the music on or off.|Un vieux poste de radio en bois. Touche-le pour allumer ou éteindre la musique.
+Pet Bed|Panier pour animal
+A soft basket where your pet curls up for a nap.|Un panier tout doux où ton animal se pelotonne pour faire la sieste.
+Coffee Maker|Cafetière
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|Une tasse de café : +15 de boisson et 15 % plus rapide pendant 10 minutes. Une toutes les 30 minutes.
+Make coffee|Faire du café
+Turn the radio off|Éteindre la radio
+Turn the radio on|Allumer la radio
+Making coffee|Préparation du café
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|Café tout chaud ! +15 de boisson et 15 % plus rapide pendant 10 minutes.
+You just had a coffee. Try again a bit later.|Tu viens de boire un café. Réessaie un peu plus tard.
+Dairy|Laiterie
 Churns milk into butter, cream, goat cheese and yogurt.|Baratte le lait en beurre, crème, fromage de chèvre et yaourt.
 Weaving Loom|Métier à tisser
 Spins cotton, fur and wool into fabric and cozy things to wear.|File le coton, la fourrure et la laine en tissu et en vêtements douillets.

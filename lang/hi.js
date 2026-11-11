@@ -1,7 +1,38 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Dairy|डेयरी
+x:`I'm too tired… I need food and water.|मैं बहुत थक गया हूँ… मुझे खाना और पानी चाहिए।
+So tired… I have to eat and drink something.|बहुत थकान… कुछ खाना-पीना होगा।
+I'm dehydrated! I need water, now.|मुझे पानी की कमी हो गई है! अभी पानी चाहिए।
+Water… I can barely walk…|पानी… मुश्किल से चल पा रहा हूँ…
+I'm out of energy… I have to eat.|ताकत खत्म… मुझे खाना होगा।
+Starving… my legs feel like jelly.|भूख से बुरा हाल… पैर काँप रहे हैं।
+So thirsty… I'm slowing down.|बहुत प्यास… मैं धीमा हो रहा हूँ।
+My mouth is so dry. I need a drink.|मुँह बिल्कुल सूख गया है। कुछ पीना होगा।
+I'm so hungry I can't work fast.|इतनी भूख है कि तेज़ी से काम नहीं कर पा रहा।
+My tummy hurts… I need some food.|पेट दुख रहा है… कुछ खाना चाहिए।
+Phew, thirsty work! I could use some water.|उफ़, कितना प्यासा काम है! थोड़ा पानी मिल जाए तो अच्छा।
+I should grab a drink soon.|जल्दी ही कुछ पी लेना चाहिए।
+My tummy is rumbling.|पेट गुड़गुड़ा रहा है।
+Is it lunchtime yet?|क्या दोपहर के खाने का समय हो गया?
+Ahh, much better!|आह, अब बहुत बेहतर!
+That hit the spot!|मज़ा आ गया!
+Home sweet home.|घर जैसा सुख कहीं नहीं।
+Nice and cozy in here.|यहाँ कितना आरामदायक है।
+I should get back to the fields soon.|मुझे जल्दी खेतों में लौटना चाहिए।
+Radio|रेडियो
+An old cabinet radio. Tap it to turn the music on or off.|एक पुराना लकड़ी का रेडियो। संगीत चालू या बंद करने के लिए टैप करें।
+Pet Bed|पालतू का बिस्तर
+A soft basket where your pet curls up for a nap.|एक मुलायम टोकरी जिसमें आपका पालतू सिमटकर झपकी लेता है।
+Coffee Maker|कॉफ़ी मेकर
+A cup of coffee: +15 drink and 15% faster for 10 minutes. One every 30 minutes.|एक कप कॉफ़ी: +15 पेय और 10 मिनट तक 15% तेज़। हर 30 मिनट में एक।
+Make coffee|कॉफ़ी बनाएँ
+Turn the radio off|रेडियो बंद करें
+Turn the radio on|रेडियो चालू करें
+Making coffee|कॉफ़ी बना रहे हैं
+Fresh coffee! +15 drink, and 15% faster for 10 minutes.|ताज़ा कॉफ़ी! +15 पेय और 10 मिनट तक 15% तेज़।
+You just had a coffee. Try again a bit later.|आपने अभी कॉफ़ी पी है। थोड़ी देर बाद फिर कोशिश करें।
+Dairy|डेयरी
 Churns milk into butter, cream, goat cheese and yogurt.|दूध से मक्खन, क्रीम, बकरी का पनीर और दही बनाती है।
 Weaving Loom|करघा
 Spins cotton, fur and wool into fabric and cozy things to wear.|कपास, फर और ऊन से कपड़ा और गर्म चीज़ें बनाता है।
