@@ -7351,7 +7351,7 @@ function addXP(n){
 function championGift(){
   if(S.champ)return;S.champ=Date.now();S.coins+=CHAMP.coins;S.cash+=CHAMP.cash;S.inv['deco:champion']=(S.inv['deco:champion']||0)+1;changed();
   confetti();setTimeout(confetti,700);SFX.golden();
-  modal({title:'Champion Farmer!',color:'gold',small:true,noClose:true,render(b){
+  modal({title:'Champion Farmer!',color:'gold',small:true,noClose:true,still:true,render(b){
     const p=el('div','body-pad'),im=el('img');if(!ICONS['decor:champion'])ICONS['decor:champion']=renderIcon('decor','champion');im.src=ICONS['decor:champion'];im.alt='';im.style.cssText='width:150px;height:auto;display:block;margin:0 auto';p.appendChild(im);
     p.appendChild(el('p',null,(S.farmerName?S.farmerName+', you':'You')+' reached Level 99, the highest level in Farm Village!'));
     p.appendChild(el('p',null,'Your special gift: the Champion Trophy, '+CHAMP.coins.toLocaleString()+' coins and '+CHAMP.cash+' Farm Cash. Place the trophy from your Gift Box.'));
@@ -7387,7 +7387,8 @@ function hideModal(){
 // Remember which dock button was pressed, so the sheet it opens can mark it as the selected tab.
 document.querySelector('.dock').addEventListener('pointerdown',e=>{if(e.target.closest('.mbtn,.tool'))haptic()},{passive:true});
 document.querySelector('.dock').addEventListener('click',e=>{dockPick=e.target.closest('.mbtn,.tool');setTimeout(()=>dockPick=null)},true);
-function rerender(){if(mq.length){const b=$('sheetBody'),st=b.scrollTop;b.innerHTML='';mq[0].render(b);b.scrollTop=st}}
+// Celebration sheets (still:true) are never rebuilt: a rebuild restarts their entrance animation and hides the button again.
+function rerender(){if(mq.length&&!mq[0].still){const b=$('sheetBody'),st=b.scrollTop;b.innerHTML='';mq[0].render(b);b.scrollTop=st}}
 $('sheetClose').onclick=()=>{SFX.click();closeModal()};
 $('modal').addEventListener('click',e=>{if(e.target===$('modal')&&mq[0]&&!mq[0].noClose)closeModal()});
 function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
@@ -8384,7 +8385,7 @@ function showLevelUp(l0){
   const names=[];let bonus=0;for(let l=l0+1;l<=S.level;l++){names.push(...unlockedAt(l));bonus+=20*l}
   const lv=S.level;
   confetti();
-  modal({title:'Level Up!',color:'gold',small:true,noClose:true,cls:'celeS',render(b){
+  modal({title:'Level Up!',color:'gold',small:true,noClose:true,still:true,cls:'celeS',render(b){
     const list=[];for(let l=l0+1;l<=lv;l++)list.push(...unlockList(l));
     celebrate(b,{tone:'gold',emblem:levelStarArt(lv),kicker:'New level',big:'Level '+lv,
       sub:['Way to go!',list.length?'Check out what is new in the Market.':'Your farm keeps growing.'],
@@ -8634,7 +8635,7 @@ function checkRibbons(){
     if(tier<4&&v>=r.tiers[tier]){
       S.ribbons[r.id]=tier+1;S.coins+=RIB_COINS[tier];
       const t=tier;
-      setTimeout(()=>{addXP(RIB_XP[t]);SFX.ribbon();confetti();modal({title:'Ribbon Earned!',color:'pink',small:true,cls:'celeS',render(b){
+      setTimeout(()=>{addXP(RIB_XP[t]);SFX.ribbon();confetti();modal({title:'Ribbon Earned!',color:'pink',small:true,still:true,cls:'celeS',render(b){
         const nx=t<3?r.tiers[t+1]:0,v2=S.stats[r.stat]||0;
         celebrate(b,{tone:['gold','white','red','blue'][t],emblem:rosetteArt(RIB_COL[t],t+1),kicker:RIB_NAME[t]+' ribbon',big:r.name,
           sub:[t<3?'Can you earn the '+RIB_NAME[t+1]+' ribbon next?':'That is the top ribbon. Legendary!'],
@@ -9203,14 +9204,17 @@ function showSettings(){
     b.appendChild(p);
   }});
 }
-// Secret code: the right code turns unlimited coins and Farm Cash on (or back off).
+// Secret code: the right code turns unlimited coins and Farm Cash on (or back off), and always jumps straight to level 99.
 const SECRET='2899',RICH_COINS=9999999,RICH_CASH=99999;
 function richTopUp(){if(S&&S.unlimited){if(S.coins<RICH_COINS)S.coins=RICH_COINS;if(S.cash<RICH_CASH)S.cash=RICH_CASH}}
 function secretModal(){
   modal({title:'Secret code',color:'',small:true,render(b){
     const p=el('div','body-pad'),i=document.createElement('input');i.type='password';i.inputMode='numeric';i.autocomplete='off';i.className='secretin';i.setAttribute('aria-label','Secret code');i.dataset.focus='1';
     const go=el('button','go','Unlock'),msg=el('p','hint','');
-    const tryIt=()=>{if(i.value.trim()===SECRET){S.unlimited=!S.unlimited;if(S.unlimited){richTopUp();SFX.golden();confetti();toast('Unlimited cash unlocked!')}else toast('Unlimited cash turned off.');changed();hud();closeModal()}
+    const tryIt=()=>{if(i.value.trim()===SECRET){S.unlimited=!S.unlimited;const l0=S.level;
+        if(l0<MAX_LVL){for(let l=l0+1;l<=MAX_LVL;l++){S.coins+=20*l;if(l%5===0)S.cash+=1}S.level=MAX_LVL;S.xp=0}
+        if(S.unlimited){richTopUp();SFX.golden();confetti();toast('Unlimited cash unlocked!')}else toast('Unlimited cash turned off.');changed();hud();closeModal();
+        if(S.level>l0){SFX.level();showLevelUp(l0);if(!S.champ)setTimeout(championGift,600)}}
       else{SFX.error();i.value='';msg.textContent='Wrong code.';shakeEl(i)}};
     go.onclick=tryIt;i.onkeydown=e=>{if(e.key==='Enter')tryIt()};p.appendChild(i);p.appendChild(go);p.appendChild(msg);b.appendChild(p);
   }});
