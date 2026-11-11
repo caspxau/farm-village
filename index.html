@@ -1219,6 +1219,14 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 @media (max-width:640px){.maker .home-top{flex-wrap:wrap;gap:10px;padding:10px}.maker .home-top>img{width:72px;flex-basis:72px}.maker .home-top>div{flex-basis:calc(100% - 82px)}
   .maker .mqueue{grid-template-columns:repeat(3,1fr);max-width:none}.maker .slot{font-size:11px}.maker .slot.empty{min-height:72px}
   .maker .recipes{grid-template-columns:1fr}.maker .recipe .req img{width:26px;height:26px}}
+
+/* the logo: an arched wooden sign with a sprouting seedling and a green ribbon */
+.tlogo{display:block;line-height:1;font-size:inherit;filter:drop-shadow(0 10px 16px rgba(30,20,6,.35))}
+.tlogo svg{display:block;width:min(560px,82vw);height:auto;overflow:visible;transform-origin:50% 0;animation:logosway 5s ease-in-out infinite}
+@keyframes logosway{0%,100%{transform:rotate(-.8deg) translateY(0)}50%{transform:rotate(.8deg) translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.tlogo svg{animation:none}}
+@media (max-height:520px) and (orientation:landscape){.tlogo svg{width:min(340px,46vw)}}
+@media (max-width:640px){.tlogo svg{width:min(330px,80vw)}}
 /* ---------- Market ---------- */
 .sheet.market{position:relative;background:#f6ead0}
 @media (prefers-reduced-motion:no-preference){.sheet.market{animation:v4slide .52s cubic-bezier(.3,1.32,.5,1)}}
@@ -1805,7 +1813,28 @@ body header.hud .pill:hover{filter:brightness(1.03)}
 <div class="visitbar" id="visitbar" hidden><div><strong id="vbName"></strong><small id="vbInfo"></small></div><button class="go" id="vbHome">Go home</button></div>
 <div class="title" id="title">
   <canvas class="tbg" id="tbg" aria-hidden="true"></canvas>
-  <div class="tlogo" aria-label="Farm Village" translate="no"><span>Farm<i class="leaf"></i></span><span>Village</span></div>
+  <div class="tlogo" role="img" aria-label="Farm Village" translate="no"><svg viewBox="0 0 640 360" aria-hidden="true">
+    <defs><linearGradient id="lgW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c88a4e"/><stop offset=".55" stop-color="#a0662f"/><stop offset="1" stop-color="#7a4a20"/></linearGradient>
+      <linearGradient id="lgR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6cbc4a"/><stop offset="1" stop-color="#3f8a2c"/></linearGradient>
+      <linearGradient id="lgT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaea"/><stop offset="1" stop-color="#f2dca6"/></linearGradient></defs>
+    <!-- a seedling sprouting from the top of the sign -->
+    <path d="M320 70 C318 50 320 36 322 22" stroke="#3f7a2a" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M320 44 C296 46 276 34 270 12 C296 6 318 20 320 44Z" fill="#6cc04a" stroke="#2f5e1e" stroke-width="4"/>
+    <path d="M322 34 C342 30 362 14 362 -4 C336 -4 320 12 322 34Z" fill="#8fd65e" stroke="#2f5e1e" stroke-width="4" transform="translate(0 8)"/>
+    <!-- the arched wooden sign -->
+    <path d="M60 104 Q320 40 580 104 L586 228 Q320 196 54 228Z" fill="#3a220e" transform="translate(0 10)"/>
+    <path d="M60 104 Q320 40 580 104 L586 228 Q320 196 54 228Z" fill="url(#lgW)" stroke="#3a220e" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M70 150 Q320 104 572 150 M66 190 Q320 150 578 190" stroke="#6a3c16" stroke-width="3" fill="none" opacity=".55"/>
+    <path d="M80 116 Q320 58 560 116" stroke="#e8b47a" stroke-width="4" fill="none" opacity=".6"/>
+    <g fill="#d8c8a8" stroke="#4a3018" stroke-width="2"><circle cx="86" cy="122" r="6"/><circle cx="556" cy="122" r="6"/><circle cx="84" cy="208" r="6"/><circle cx="558" cy="208" r="6"/></g>
+    <text x="320" y="196" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="800" font-size="132" letter-spacing="2" fill="url(#lgT)" stroke="#3a220e" stroke-width="14" stroke-linejoin="round" paint-order="stroke">Farm</text>
+    <!-- the green ribbon -->
+    <path d="M70 252 L130 238 L118 282 L130 326 L56 306 L82 280Z" fill="#2f6e22" stroke="#1f4a16" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M570 252 L510 238 L522 282 L510 326 L584 306 L558 280Z" fill="#2f6e22" stroke="#1f4a16" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M118 236 Q320 206 522 236 L522 316 Q320 286 118 316Z" fill="url(#lgR)" stroke="#1f4a16" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M126 246 Q320 216 514 246" stroke="#a8e67e" stroke-width="4" fill="none" opacity=".7"/>
+    <text x="320" y="296" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="800" font-size="64" letter-spacing="6" fill="#fffaea" stroke="#1f4a16" stroke-width="8" stroke-linejoin="round" paint-order="stroke">VILLAGE</text>
+  </svg></div>
   <canvas class="tstage" id="tstage" aria-hidden="true"></canvas>
   <div class="tmenu">
     <p class="tsub" id="tsub">Grow crops, raise animals and build the coziest farm in the valley.</p>
