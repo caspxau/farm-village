@@ -1163,6 +1163,20 @@ body{font-family:var(--f-body);letter-spacing:.1px}
   .dock .mbtn>em{font-size:9.5px}
 }
 
+/* dock v6: two buttons each side of the Market, a stronger barn gauge, delivery countdown, level tags on locked buttons */
+.dock::after{background:none}
+.dock .mbtn>em,.dock .tool.market>span{margin-bottom:3px}
+.dock{gap:14px;padding-left:18px;padding-right:18px}
+.dock .tool.market{margin-left:8px;margin-right:8px}
+#btnBarn .capbar{left:4px;right:4px;bottom:3px;height:8px;border-radius:4px;box-shadow:inset 0 1px 2px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.5)}
+#btnBarn .capbar i{border-radius:4px}
+#btnBarn svg.ic{margin-top:-7px}
+.tchip{position:absolute;left:50%;top:-9px;transform:translateX(-50%);padding:1px 6px;border-radius:9px;background:#2f6fb5;border:2px solid #fff;color:#fff;font:800 11px/1.25 var(--f-body);font-variant-numeric:tabular-nums;white-space:nowrap;box-shadow:0 2px 4px rgba(0,0,0,.35);pointer-events:none}
+.tchip[hidden]{display:none}
+#btnDeliv.out svg.ic{opacity:.5;filter:grayscale(.6)}
+.mbtn.locked[data-lv]::after{content:"\2605" attr(data-lv);width:auto;height:auto;min-width:16px;padding:1px 6px;border-radius:10px;background:#4a3420;color:#ffd75a;font:800 11px/1.3 var(--f-body);text-align:center;top:-8px;right:-8px}
+.popgrid .mbtn:active{transform:translateY(2px) scale(.94)}
+@media (max-width:380px){.dock{gap:10px;padding-left:12px;padding-right:12px}}
 /* ---------- Market ---------- */
 .sheet.market{position:relative;background:#f6ead0}
 @media (prefers-reduced-motion:no-preference){.sheet.market{animation:v4slide .52s cubic-bezier(.3,1.32,.5,1)}}
@@ -1649,7 +1663,11 @@ body header.hud .pill:hover{filter:brightness(1.03)}
 </div>
 <div class="pop" id="morePop" hidden role="dialog" aria-label="More">
   <div class="popgrid">
-    <button class="mbtn" id="btnNbrs" aria-label="Neighbors">
+    <button class="mbtn" id="btnOrders" data-lv="5" aria-label="Neighbor orders and advertising">
+          <svg class="ic ic-clip" viewBox="0 0 48 48" aria-hidden="true"><rect x="8.5" y="7" width="26" height="37" rx="3.2" fill="url(#ioW)" stroke="#3b2614" stroke-width="1.6"/><path d="M10 14c6 1 14-1 23 .5M10 33c8-1 15 1 23-.5" stroke="#8a5224" stroke-width=".8" opacity=".5" fill="none"/><rect x="12" y="11.5" width="19" height="28.5" rx="1.2" fill="#fffdf6" stroke="#b8a98e" stroke-width=".9"/><path d="M15 18.5h12.5M15 23h12.5M15 27.5h9M15 32h11" stroke="#9db6cc" stroke-width="1.3" stroke-linecap="round"/><path d="M14.6 18.2l1.2 1.3 2.2-2.6M14.6 22.7l1.2 1.3 2.2-2.6" stroke="#3f9a3c" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="15.5" y="4" width="12" height="6.5" rx="2" fill="url(#ioM)" stroke="#3b3b3b" stroke-width="1.3"/><circle cx="21.5" cy="6.6" r="1.3" fill="#5a6168"/><g class="pencil"><g transform="rotate(28 37 30)"><rect x="34.4" y="13" width="5.2" height="22" rx="1" fill="#f6c534" stroke="#3b2614" stroke-width="1.3"/><path d="M36.2 14v20" stroke="#fff3b0" stroke-width="1"/><rect x="34.4" y="13" width="5.2" height="3.6" rx="1" fill="#ee8fa6" stroke="#3b2614" stroke-width="1.2"/><rect x="34.4" y="16.6" width="5.2" height="2" fill="#c9ccd0"/><path d="M34.4 35 37 40.6 39.6 35z" fill="#f5d7a8" stroke="#3b2614" stroke-width="1.2" stroke-linejoin="round"/><path d="M36.3 39.1 37 40.6l.7-1.5z" fill="#333"/></g></g></svg>
+        <span class="badge" id="orderBadge" hidden>0</span>
+      <em aria-hidden="true">Orders</em></button>
+    <button class="mbtn" id="btnNbrs" aria-label="Neighbors" data-lv="5">
         <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="11" cy="11" r="5" fill="#f2c6a0" stroke="#6b3c15" stroke-width="2"/><path d="M3 27c0-6 3.6-9 8-9s8 3 8 9z" fill="#3f9a3c" stroke="#1f5a1e" stroke-width="2" stroke-linejoin="round"/><circle cx="22" cy="12" r="4.4" fill="#c98b5e" stroke="#6b3c15" stroke-width="2"/><path d="M15.4 27c.4-5 3-8 6.6-8s7 3 7 8z" fill="#e0457b" stroke="#8a1f45" stroke-width="2" stroke-linejoin="round"/></svg>
       <em aria-hidden="true">Neighbors</em></button>
     <button class="mbtn" id="btnWardrobe" aria-label="Wardrobe: customize your farmer">
@@ -1691,26 +1709,22 @@ body header.hud .pill:hover{filter:brightness(1.03)}
 <button class="needpill" id="needPill" aria-label="Your farmer's food and drink. Eat and drink at home to refill. Tap to go home"><span class="nhead"><span class="nface"><img id="needFace" alt=""><i class="nmood" id="needEmo" hidden></i></span><span><b id="needWho">Farmer</b><small id="needMood">Eat &amp; drink at home</small></span><span class="nfresh" id="needFresh" hidden>+10%</span></span><span class="nrow"><span class="nico food"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 2v7a2 2 0 0 0 4 0V2M8 2v16M14 2c-2 2-2 6 0 8v8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span><em><i id="needFood"></i></em><b class="nval" id="needFoodV">0</b></span><span class="nrow"><span class="nico drink"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z" fill="#fff"/></svg></span><em><i id="needDrink"></i></em><b class="nval" id="needDrinkV">0</b></span></button>
 </div>
 <footer class="dock">
-  <button class="mbtn" id="btnTool" aria-label="Tools" aria-expanded="false"><span class="toolic" id="toolIcon"></span><em aria-hidden="true" id="toolLabel">Multi</em></button>
+  <button class="mbtn" id="btnTool" aria-label="Tools" aria-expanded="false"><span class="toolic" id="toolIcon"></span><em aria-hidden="true" id="toolLabel">Tools</em></button>
   <button class="mbtn" id="btnBarn" aria-label="Barn: your stored goods">
         <svg class="ic ic-barn" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 22 24 9.5 41 22v19.5H7z" fill="url(#ibR)" stroke="#3b2614" stroke-width="1.6" stroke-linejoin="round"/><path d="M11.5 22v19.5M16 22v19.5M32 22v19.5M36.5 22v19.5" stroke="#7a1a12" stroke-width="1" opacity=".55"/><path d="M9 23.5v17" stroke="#ff9c8a" stroke-width="1.4" opacity=".55"/><path d="M4.5 23.6 24 7.2l19.5 16.4-2.6 2.6L24 12.2 7.1 26.2z" fill="url(#ibT)" stroke="#3b2614" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 22.6 24 9.4" stroke="#e6eaee" stroke-width="1.1" opacity=".8"/><rect x="20.5" y="15.5" width="7" height="5.5" rx=".8" fill="#2c1a0e" stroke="#fff" stroke-width="1.2"/><path d="M21 21.2l1.3-2.4 1 2.2 1-2.8 1 2.8 1-2.3 1.3 2.5z" fill="#f2c94c" stroke="#a87e1c" stroke-width=".5"/><g class="door"><rect x="16" y="27" width="16" height="14.5" fill="#8f2219" stroke="#fff" stroke-width="1.7"/><path d="M16.8 27.8 31.2 40.7M31.2 27.8 16.8 40.7" stroke="#fff" stroke-width="1.6"/></g><path d="M33.5 41.5c1-2.5 2-3.2 3-1.4.6-1.8 2-2 2.6.2.8-1.4 2-1 2.2 1.2z" fill="#f2c94c" stroke="#a87e1c" stroke-width=".7"/></svg>
         <span class="badge" id="barnBadge" hidden>!</span><span class="capbar" aria-hidden="true"><i id="barnfill"></i></span>
       <em aria-hidden="true" id="barntext">Barn</em></button>
-  <button class="mbtn" id="btnOrders" aria-label="Neighbor orders and advertising">
-        <svg class="ic ic-clip" viewBox="0 0 48 48" aria-hidden="true"><rect x="8.5" y="7" width="26" height="37" rx="3.2" fill="url(#ioW)" stroke="#3b2614" stroke-width="1.6"/><path d="M10 14c6 1 14-1 23 .5M10 33c8-1 15 1 23-.5" stroke="#8a5224" stroke-width=".8" opacity=".5" fill="none"/><rect x="12" y="11.5" width="19" height="28.5" rx="1.2" fill="#fffdf6" stroke="#b8a98e" stroke-width=".9"/><path d="M15 18.5h12.5M15 23h12.5M15 27.5h9M15 32h11" stroke="#9db6cc" stroke-width="1.3" stroke-linecap="round"/><path d="M14.6 18.2l1.2 1.3 2.2-2.6M14.6 22.7l1.2 1.3 2.2-2.6" stroke="#3f9a3c" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="15.5" y="4" width="12" height="6.5" rx="2" fill="url(#ioM)" stroke="#3b3b3b" stroke-width="1.3"/><circle cx="21.5" cy="6.6" r="1.3" fill="#5a6168"/><g class="pencil"><g transform="rotate(28 37 30)"><rect x="34.4" y="13" width="5.2" height="22" rx="1" fill="#f6c534" stroke="#3b2614" stroke-width="1.3"/><path d="M36.2 14v20" stroke="#fff3b0" stroke-width="1"/><rect x="34.4" y="13" width="5.2" height="3.6" rx="1" fill="#ee8fa6" stroke="#3b2614" stroke-width="1.2"/><rect x="34.4" y="16.6" width="5.2" height="2" fill="#c9ccd0"/><path d="M34.4 35 37 40.6 39.6 35z" fill="#f5d7a8" stroke="#3b2614" stroke-width="1.2" stroke-linejoin="round"/><path d="M36.3 39.1 37 40.6l.7-1.5z" fill="#333"/></g></g></svg>
-        <span class="badge" id="orderBadge" hidden>0</span>
-      <em aria-hidden="true">Orders</em></button>
   <button class="tool market" id="openMarket" aria-label="Open the market">
         <svg class="ic ic-stall" viewBox="0 0 56 56" aria-hidden="true"><rect x="12" y="18" width="3" height="16" fill="#8a5428" stroke="#3b2614" stroke-width="1.2"/><rect x="41" y="18" width="3" height="16" fill="#8a5428" stroke="#3b2614" stroke-width="1.2"/><rect x="9.5" y="29" width="37" height="18" rx="2" fill="url(#imW)" stroke="#3b2614" stroke-width="1.6"/><path d="M10.5 35h35M10.5 41h35" stroke="#7a4518" stroke-width=".9" opacity=".6"/><g clip-path="url(#imA)"><rect x="0" y="0" width="56" height="24" fill="#fff4dc"/><path d="M5 24 12.6 6h6.2L15 24zM22 24l2.4-18h6.2L29.2 24zM36.2 24l-.4-18H42l4.8 18z" fill="#e2453a"/></g><path d="M7 21 13.5 8h29L49 21" fill="none" stroke="#3b2614" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 21a3.5 3.5 0 0 0 7 0 3.5 3.5 0 0 0 7 0 3.5 3.5 0 0 0 7 0 3.5 3.5 0 0 0 7 0 3.5 3.5 0 0 0 7 0 3.5 3.5 0 0 0 7 0z" fill="#fff4dc" stroke="#3b2614" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 21a3.5 3.5 0 0 0 7 0zM28 21a3.5 3.5 0 0 0 7 0zM42 21a3.5 3.5 0 0 0 7 0z" fill="#e2453a"/><path d="M14 10h28" stroke="#fff" stroke-width="1.2" opacity=".55"/><g class="crates"><rect x="12" y="37" width="14.5" height="11" rx="1.2" fill="url(#imC)" stroke="#3b2614" stroke-width="1.4"/><rect x="29.5" y="37" width="14.5" height="11" rx="1.2" fill="url(#imC)" stroke="#3b2614" stroke-width="1.4"/><path d="M12.8 42.5h13M30.3 42.5h13" stroke="#8a5428" stroke-width="1"/><circle cx="15.8" cy="35.6" r="3" fill="#e0352b" stroke="#7a1a12" stroke-width="1"/><circle cx="20.6" cy="35" r="3" fill="#ef4a3a" stroke="#7a1a12" stroke-width="1"/><circle cx="23.4" cy="36.2" r="2.6" fill="#d42e24" stroke="#7a1a12" stroke-width="1"/><circle cx="14.9" cy="34.6" r=".9" fill="#fff" opacity=".8"/><circle cx="19.7" cy="34" r=".9" fill="#fff" opacity=".8"/><circle cx="33.2" cy="35.4" r="3.1" fill="#f28a1e" stroke="#8a4a0e" stroke-width="1"/><circle cx="38.2" cy="35.2" r="3.1" fill="#f59a2a" stroke="#8a4a0e" stroke-width="1"/><circle cx="41.4" cy="36.4" r="2.4" fill="#e8801a" stroke="#8a4a0e" stroke-width="1"/><path d="M33.2 32.4v-1.6M38.2 32.2v-1.6" stroke="#3f8a2c" stroke-width="1.4" stroke-linecap="round"/></g></svg>
         <span class="outline-s">Market</span>
       </button>
   <button class="mbtn" id="btnDeliv" aria-label="Delivery Board: send goods to town">
         <svg class="ic ic-truck" viewBox="0 0 48 48" aria-hidden="true"><g class="body"><rect x="7" y="11.5" width="9" height="8" rx="1" fill="#e6b06e" stroke="#3b2614" stroke-width="1.3"/><path d="M7.6 15.5h7.8" stroke="#8a5428" stroke-width=".9"/><rect x="17" y="13.5" width="8.5" height="6" rx="1" fill="#d9a05e" stroke="#3b2614" stroke-width="1.3"/><circle cx="19.5" cy="12.8" r="1.6" fill="#7fb44e" stroke="#3f6a24" stroke-width=".8"/><circle cx="22.8" cy="12.6" r="1.6" fill="#e0352b" stroke="#7a1a12" stroke-width=".8"/><rect x="3.5" y="19.5" width="25" height="11" rx="1.2" fill="url(#idW)" stroke="#3b2614" stroke-width="1.5"/><path d="M4.5 23.2h23M4.5 26.8h23" stroke="#7a4518" stroke-width=".9" opacity=".6"/><path d="M28.5 31V17.5h8.5l6.5 7.2V31z" fill="url(#idR)" stroke="#3b2614" stroke-width="1.5" stroke-linejoin="round"/><path d="M30.4 19.4h5.6l4.6 5.2H30.4z" fill="#bfe3f7" stroke="#3b2614" stroke-width="1.1" stroke-linejoin="round"/><path d="M31.6 20.6l2 0-2 2.6z" fill="#fff" opacity=".8"/><rect x="2.5" y="30" width="42" height="4" rx="1.8" fill="#4a4a4a" stroke="#3b2614" stroke-width="1.2"/><rect x="41.4" y="26" width="2.4" height="2" rx=".6" fill="#ffe27a"/></g><g class="wheel"><circle cx="12" cy="35.5" r="5" fill="#2b2b2b" stroke="#3b2614" stroke-width="1.2"/><circle cx="12" cy="35.5" r="2.4" fill="#cfd3d6"/><path d="M12 33.1v4.8M9.6 35.5h4.8" stroke="#6a7075" stroke-width=".9"/></g><g class="wheel"><circle cx="35.5" cy="35.5" r="5" fill="#2b2b2b" stroke="#3b2614" stroke-width="1.2"/><circle cx="35.5" cy="35.5" r="2.4" fill="#cfd3d6"/><path d="M35.5 33.1v4.8M33.1 35.5h4.8" stroke="#6a7075" stroke-width=".9"/></g></svg>
-        <span class="badge" id="delivBadge" hidden>!</span>
+        <span class="badge" id="delivBadge" hidden>!</span><span class="tchip" id="delivTime" hidden></span>
       <em aria-hidden="true">Delivery</em></button>
   <button class="mbtn" id="btnMore" aria-label="More buttons" aria-expanded="false">
         <svg class="ic ic-more" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="24" rx="12" fill="url(#inW)" stroke="#3b2614" stroke-width="1.6"/><path d="M9 18c8 1 20-1 30 .5M9 30c9-.8 20 .8 30-.4" stroke="#7a4518" stroke-width=".8" opacity=".5" fill="none"/><rect x="7.5" y="14" width="33" height="6" rx="3" fill="#fff" opacity=".22"/><g class="dots"><circle cx="15" cy="24.5" r="3.6" fill="#fff4dc" stroke="#5a3412" stroke-width="1.1"/><circle cx="24" cy="24.5" r="3.6" fill="#fff4dc" stroke="#5a3412" stroke-width="1.1"/><circle cx="33" cy="24.5" r="3.6" fill="#fff4dc" stroke="#5a3412" stroke-width="1.1"/></g></svg>
-        <span class="badge" id="moreBadge" hidden>!</span>
+        <span class="badge" id="moreBadge" hidden>0</span>
       <em aria-hidden="true">More</em></button>
 </footer>
 <div id="neighbors" hidden></div>
@@ -6492,10 +6506,10 @@ function hud(){
   const tot=storeTotal(),cap=barnCap();$('barntext').textContent=Math.max(0,tot-FLYN)+' / '+cap;{const k=cap?tot/cap:0,bf=$('barnfill');bf.style.width=Math.min(100,k*100)+'%';bf.parentElement.classList.toggle('warn',k>=.8&&k<.95);bf.parentElement.classList.toggle('full',k>=.95)}$('btnBarn').classList.toggle('full',tot>=cap);$('barnBadge').hidden=tot<cap;
   $('btnOrders').classList.toggle('locked',!nbOpen());$('btnNbrs').classList.toggle('locked',!nbOpen());
   const fill=nbOpen()?S.orders.filter(canFill).length:0;$('orderBadge').hidden=!fill;$('orderBadge').textContent=fill;
-  const dl=dv(),dready=!dl.run&&dl.jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap());$('delivBadge').hidden=!dready;
+  const dl=dv(),dready=!dl.run&&dl.jobs.some(c=>canFill(c)&&contractCount(c)<=truckCap());$('delivBadge').hidden=!dready;delivChip();
   for(const v in FARM)if(FARM[v].kind==='vehicle'){const b=document.querySelector('.tool[data-tool="'+v+'"]');if(b)b.hidden=true}
   const gifts=Object.values(S.inv).reduce((a,b)=>a+b,0);$('giftBadge').hidden=!gifts;$('giftBadge').textContent=gifts;
-  $('collBadge').hidden=!COLLECTIONS.some(canTrade);$('tradeBadge').hidden=!tradeReady();$('moreBadge').hidden=$('giftBadge').hidden&&$('collBadge').hidden&&$('tradeBadge').hidden;
+  $('collBadge').hidden=!COLLECTIONS.some(canTrade);$('tradeBadge').hidden=!tradeReady();{const n=fill+gifts+($('collBadge').hidden?0:1)+($('tradeBadge').hidden?0:1);$('moreBadge').hidden=!n;$('moreBadge').textContent=n>9?'9+':n}
   $('sndWaves').style.display=S.sound?'':'none';$('sndX').style.display=S.sound?'none':'';
   $('btnSound').setAttribute('aria-pressed',String(S.sound));$('btnSound').setAttribute('aria-label',S.sound?'Sound on':'Sound off');
   $('musX').style.display=S.music?'none':'';$('btnMusic').setAttribute('aria-pressed',String(S.music));$('btnMusic').setAttribute('aria-label',S.music?'Music on':'Music off');
@@ -7094,6 +7108,9 @@ const TRUCK_CAP=[0,20,35,60],TRUCK_UP=[null,{coins:1500,mats:{board:10,nail:10}}
 const DRIVE=5000; // ms to drive off screen or back in: an easy, unhurried pace
 const BOARD=2600; // ms for Dale to walk to the cab, climb in and shut the door
 function tripSecs(c){return Math.max(60,Math.min(240,c.time*24))} // a real trip to town: one to four minutes
+// While Dale is out, the Delivery button shows a countdown to his return.
+function delivChip(){const r=S&&S.deliv&&S.deliv.run,c=$('delivTime');if(!c)return;$('btnDeliv').classList.toggle('out',!!r);if(!r){c.hidden=true;return}
+  const t=Math.max(0,Math.ceil((r.end-Date.now())/1000)),m=Math.floor(t/60);c.textContent=m>=60?Math.floor(m/60)+':'+String(m%60).padStart(2,'0')+'h':m+':'+String(t%60).padStart(2,'0');c.hidden=false}
 function dv(){if(!S.deliv)S.deliv={jobs:[],next:0,run:null,lv:1};return S.deliv}
 function truckCap(){return TRUCK_CAP[dv().lv||1]}
 // Dale's first job on a new farm is a small wheat run you can fill right after the first harvest.
@@ -7114,7 +7131,7 @@ function newContract(){
   return{made:Date.now(),id:Date.now().toString(36)+R().toString(36).slice(2,6),to:town.name,items,coins:Math.round(base*(1.15+R()*.15)/5)*5,xp:6+Math.round(base/12),time:5+Math.floor(R()*6),base};
 }
 function tickDeliv(){
-  if(!S||VIS)return;const d=dv(),now=Date.now();
+  if(!S||VIS)return;delivChip();const d=dv(),now=Date.now();
   {const[j2,gone]=expirePosts(d.jobs,now,c=>c.starter);if(gone){d.jobs=j2;d.next=Math.min(d.next,now+20000)}}
   if(!(S.stats.deliver>0)&&!d.run&&!d.jobs.some(c=>c.starter)&&!d.fixedStart){d.fixedStart=1;d.jobs=d.jobs.filter(c=>canFill(c));d.jobs.unshift(starterContract());hud()}
   if(d.run&&now>=d.run.end)payDelivery();
@@ -8088,7 +8105,7 @@ setInterval(()=>{if(!S)return;if(hover&&!$('tip').hidden){const t=tipText(hover[
 function setTool(tl){
   if(placing)stopPlacing();tool=tl;
   document.querySelectorAll('.tool[data-tool]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.tool===tl)));
-  const tb=document.querySelector('.tool[data-tool="'+tl+'"]');if(tb){$('toolIcon').innerHTML=tb.querySelector('svg').outerHTML;$('toolLabel').textContent=tb.textContent.trim();$('btnTool').classList.toggle('alt',tl!=='multi')}
+  const tb=document.querySelector('.tool[data-tool="'+tl+'"]');if(tb){$('toolIcon').innerHTML=tb.querySelector('svg').outerHTML;$('toolLabel').textContent=tl==='multi'?'Tools':tb.textContent.trim();$('btnTool').classList.toggle('alt',tl!=='multi')}
 }
 document.querySelectorAll('.tool[data-tool]').forEach(b=>b.addEventListener('click',()=>{
   SFX.click();setTool(b.dataset.tool);
