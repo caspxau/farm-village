@@ -2404,7 +2404,8 @@ function fresh(){
 }
 function norm(s){
   const d={coins:320,cash:5,xp:0,level:1,size:16,seed:'wheat',tiles:{},helped:{day:'',ids:[]},inv:{},stats:{},ribbons:{},mastery:{},mlvl:{},coll:{},collDone:{},daily:{last:'',streak:0},fuel:FUEL_MAX,fuelT:Date.now(),veh:{},mats:{},barnLvl:1,sound:true,music:true,tips:{},owned:[],farmName:'Farm Village',farmerName:'',goods:{},orders:[],orderT:Date.now()+45000,ad:null,visitsOff:false};
-  for(const k in d)if(s[k]===undefined)s[k]=d[k];
+  // A field that is missing, null, the wrong type or NaN (JSON turns NaN into null) falls back to its default.
+  for(const k in d){const v=s[k],dv=d[k];if(v===undefined||(dv!==null&&(v===null||typeof v!==typeof dv||Array.isArray(v)!==Array.isArray(dv)||(typeof dv==='number'&&!isFinite(v)))))s[k]=dv}
   s.look=Object.assign(defaultLook(),s.look||{});
   if(!CROPS[s.seed]||CROPS[s.seed].lvl>s.level)s.seed='wheat';
   for(const k in s.tiles){const o=s.tiles[k];if(!o||!o.k||(o.k==='plot'&&o.crop&&!CROPS[o.crop])||(o.k==='animal'&&!ANIMALS[o.id])||(o.k==='tree'&&!TREES[o.id])||(o.k==='deco'&&!DECOR[o.id])||(o.k==='home'&&!HOMES[o.id])||(o.k==='mk'&&!MAKERS[o.id]))delete s.tiles[k]}
@@ -2435,12 +2436,20 @@ function norm(s){
   return s;
 }
 function valid(s){return s&&typeof s==='object'&&s.tiles&&typeof s.coins==='number'&&typeof s.level==='number'}
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));return valid(s)?s:null}catch(e){return null}}
+// The save also keeps a backup copy (refreshed every few minutes). If the main save is ever unreadable the game loads the
+// backup, and the damaged one is set aside under '-broken' instead of being overwritten by a new farm.
+function load(){
+  const get=k=>{try{const s=JSON.parse(localStorage.getItem(k));return valid(s)?s:null}catch(e){return null}};
+  const s=get(KEY);if(s)return s;
+  try{const raw=localStorage.getItem(KEY);if(raw)localStorage.setItem(KEY+'-broken',raw)}catch(e){}
+  return get(KEY+'-bak');
+}
+let lastBak=0;
 // While visiting a neighbor, S.tiles holds their farm; the save always keeps your own.
 function homeState(){return VIS?Object.assign({},S,{tiles:VIS.home.tiles,size:VIS.home.size}):S}
 function homeTiles(){return VIS?VIS.home.tiles:S.tiles}
 let RESET=false;
-function save(){if(RESET)return;try{localStorage.setItem(KEY,JSON.stringify(homeState()))}catch(e){}}
+function save(){if(RESET)return;try{const j=JSON.stringify(homeState());localStorage.setItem(KEY,j);if(Date.now()-lastBak>180000){lastBak=Date.now();localStorage.setItem(KEY+'-bak',j)}}catch(e){}}
 function defOf(o){return o.k==='mk'?MAKERS[o.id]:o.k==='home'?HOMES[o.id]:o.k==='animal'?ANIMALS[o.id]:o.k==='tree'?TREES[o.id]:o.k==='deco'?DECOR[o.id]:o.k==='plot'?(o.crop?CROPS[o.crop]:null):null}
 function size(o){return o.k==='home'?(o.small?2:3):o.k==='bld'||o.k==='mk'?2:(o.k==='deco'&&DECOR[o.id].size)||1}
 // Homes grew from 2x2 to a 3x3 pen. Old saves: each home grows where it stands if there is room, or moves to the nearest
@@ -9123,7 +9132,7 @@ function confirmNewFarm(){
   modal({title:'Start Over?',color:'red',small:true,render(b){
     const p=el('div','body-pad');p.appendChild(el('p',null,'This deletes '+S.farmName+' for good: your coins, level, animals and everything in the barn. You start a brand-new farm with the tutorial.'));
     const row=el('div','wdrow'),no=el('button','btn2','Keep my farm'),yes=el('button','go danger','Yes, start over');no.dataset.focus='1';no.onclick=closeModal;
-    yes.onclick=()=>{RESET=true;try{localStorage.removeItem(KEY)}catch(e){}location.reload()};row.appendChild(no);row.appendChild(yes);p.appendChild(row);b.appendChild(p);
+    yes.onclick=()=>{RESET=true;try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+'-bak')}catch(e){}location.reload()};row.appendChild(no);row.appendChild(yes);p.appendChild(row);b.appendChild(p);
   }});
 }
 function renderStats(b){
