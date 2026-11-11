@@ -1,6 +1,113 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Cash Shop|Loja de dinheiro
+x:`Dairy|Laticínio
+Churns milk into butter, cream, goat cheese and yogurt.|Bate o leite em manteiga, creme, queijo de cabra e iogurte.
+Weaving Loom|Tear
+Spins cotton, fur and wool into fabric and cozy things to wear.|Fia algodão, pelo e lã em tecido e roupas quentinhas.
+Juice Bar|Bar de sucos
+Fresh juice, lemonade and smoothies from your orchard.|Sucos frescos, limonada e vitaminas do seu pomar.
+Bakery|Padaria
+A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.|Um forno a lenha para croissants, bolos, tortas e tortinhas. Usa manteiga e creme do Laticínio.
+Flower Shop|Floricultura
+Ties your flowers into bouquets and pours lavender candles.|Amarra suas flores em buquês e faz velas de lavanda.
+Sugar Mill|Usina de açúcar
+Grinds beets into sugar for sauces, caramel apples and ice cream.|Mói beterraba em açúcar para molhos, maçãs do amor e sorvete.
+Country Diner|Restaurante do campo
+Hot meals for hungry towns: pizza, sushi and stir fry.|Comida quente para cidades famintas: pizza, sushi e refogado.
+Tailor|Alfaiate
+Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.|Costura colchas, selas, cachecóis e ursinhos com tecido, penas e pelo.
+Butter|Manteiga
+Fresh Cream|Creme fresco
+Goat Cheese|Queijo de cabra
+Blueberry Yogurt|Iogurte de mirtilo
+Cotton Fabric|Tecido de algodão
+Angora Mittens|Luvas de angorá
+Llama Poncho|Poncho de lhama
+Down Pillow|Travesseiro de penas
+Orange Juice|Suco de laranja
+Honey Lemonade|Limonada com mel
+Peach Smoothie|Vitamina de pêssego
+Melon Cooler|Refresco de melancia
+Croissant|Croissant
+Carrot Cake|Bolo de cenoura
+Plum Tart|Torta de ameixa
+Lemon Cream Pie|Torta de limão
+Spring Bouquet|Buquê de primavera
+Rose Bouquet|Buquê de rosas
+Sunny Bouquet|Buquê ensolarado
+Lavender Candle|Vela de lavanda
+Beet Sugar|Açúcar de beterraba
+Cranberry Sauce|Molho de cranberry
+Caramel Apple|Maçã do amor
+Cherry Ice Cream|Sorvete de cereja
+Farm Pizza|Pizza da fazenda
+Pepper Pizza|Pizza de pimentão
+Sushi Rolls|Rolinhos de sushi
+Veggie Stir Fry|Refogado de legumes
+Patchwork Quilt|Colcha de retalhos
+Leather Saddle|Sela de couro
+Woolly Scarf|Cachecol de lã
+Teddy Bear|Ursinho de pelúcia
+Butter Up|Manteiga para todos
+Threads and Yarns|Linhas e lãs
+Summer Stand|Barraca de verão
+Fresh From the Oven|Saindo do forno
+Say It With Flowers|Diga com flores
+Sweet Cargo|Carga doce
+Diner Days|Dias de restaurante
+A Cozy Winter|Um inverno aconchegante
+Ice Cream Social|Festa do sorvete
+Pride of the Valley|Orgulho do vale
+Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.|O pessoal da cidade cansou de leite puro. Construa um Laticínio e vamos vender manteiga aos barris.
+My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?|Meu irmãozinho vive perdendo as luvas! Você poderia tecer um pano e fazer um par quentinho para ele?
+The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?|A feira de verão precisa de uma barraca de sucos e eu já estou velha para espremer laranjas o dia todo. Ajuda uma velha amiga?
+My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!|Minha filha faz dez anos esta semana e só quer croissants e bolo de cenoura. Uma padaria salvaria o dia!
+I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.|Quero chamar a Mabel para o baile da colheita. Não ria! Preciso do buquê mais bonito do vale.
+The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.|A loja de doces da cidade quer açúcar, e muito. Meu caminhão está pronto se a sua usina estiver.
+Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!|Todo caminhoneiro da região para para almoçar. Abra um restaurante e sirva uma boa pizza da fazenda!
+Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!|O inverno está chegando e minha colcha velha tem mais furos do que colcha. Um alfaiate remendaria o vale inteiro!
+The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?|O piquenique da escola é no sábado. Você poderia levar sorvete e maçãs do amor para todos?
+The county fair judges are coming to see the finest farm around. Show them what you have built!|Os jurados da feira vêm ver a melhor fazenda da região. Mostre o que você construiu!
+Build a Dairy|Construa um Laticínio
+Bring Hank 3 butter|Leve 3 manteigas para o Hank
+Collect from animals 30 times|Colete dos animais 30 vezes
+Build a Weaving Loom|Construa um Tear
+Bring Juniper 2 cotton fabric|Leve 2 tecidos de algodão para a Juniper
+Bring Juniper 1 pair of angora mittens|Leve 1 par de luvas de angorá para a Juniper
+Build a Juice Bar|Construa um Bar de sucos
+Bring Mabel 3 orange juices|Leve 3 sucos de laranja para a Mabel
+Pick fruit 40 times|Colha frutas 40 vezes
+Build a Bakery|Construa uma Padaria
+Bring Rosa 4 croissants|Leve 4 croissants para a Rosa
+Bring Rosa 1 carrot cake|Leve 1 bolo de cenoura para a Rosa
+Build a Flower Shop|Construa uma Floricultura
+Bring Otis 1 rose bouquet|Leve 1 buquê de rosas para o Otis
+Harvest 60 crops|Colha 60 plantações
+Build a Sugar Mill|Construa uma Usina de açúcar
+Bring Dale 6 beet sugar|Leve 6 açúcares de beterraba para o Dale
+Complete 10 deliveries|Complete 10 entregas
+Build a Country Diner|Construa um Restaurante do campo
+Bring Hank 2 farm pizzas|Leve 2 pizzas da fazenda para o Hank
+Make 25 goods in your buildings|Faça 25 produtos nos seus prédios
+Build a Tailor|Construa um Alfaiate
+Bring Mabel 1 patchwork quilt|Leve 1 colcha de retalhos para a Mabel
+Fill 10 neighbor orders|Atenda 10 pedidos de vizinhos
+Bring Juniper 3 cherry ice creams|Leve 3 sorvetes de cereja para a Juniper
+Bring Juniper 4 caramel apples|Leve 4 maçãs do amor para a Juniper
+Harvest 5 golden crops|Colha 5 plantações douradas
+Bring Otis 2 teddy bears|Leve 2 ursinhos de pelúcia para o Otis
+Bring Otis 2 leather saddles|Leve 2 selas de couro para o Otis
+Complete 15 deliveries|Complete 15 entregas
+Farm Report|Relatório da fazenda
+Let's go!|Vamos lá!
+Spend Farm Cash?|Gastar dinheiro da fazenda?
+Yes, buy|Sim, comprar
+Don't ask me again|Não perguntar de novo
+Not enough Farm Cash|Dinheiro da fazenda insuficiente
+Not now|Agora não
+Ask before spending Farm Cash|Perguntar antes de gastar dinheiro da fazenda
+Farm report when you come back|Relatório da fazenda ao voltar
+Cash Shop|Loja de dinheiro
 Get Farm Cash|Obter dinheiro da fazenda
 Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|O dinheiro da fazenda compra roupas, móveis, decorações e ajudantes premium. A cada 5 níveis e nas metas diárias você ainda ganha um pouco grátis.
 Popular|Popular
@@ -1241,4 +1348,14 @@ p:`0|$1 {p1:moeda|moedas}
 202|Sua compra chegou! +$1 de dinheiro da fazenda.
 203|Lindo! XP extra de novo em {t1}.
 204|Recorde! Moedas de novo em {t1}.
-205|Recorde! +$1 moedas.`};
+205|Recorde! +$1 moedas.
+206|Você ficou fora {t1}. Veja o que espera na fazenda:
+207|$1 {p1:plantação pronta|plantações prontas} para colher
+208|$1 {p1:animal tem|animais têm} algo para você
+209|$1 {p1:árvore pronta|árvores prontas} para colher
+210|$1 {p1:produto espera|produtos esperam} nos seus prédios
+211|$1 {p1:pedido de vizinho pronto|pedidos de vizinhos prontos} para atender
+212|$1 {p1:animal está|animais estão} com fome
+213|$1 {p1:plantação murchou|plantações murcharam}. Limpe e replante
+214|Gastar $1 de dinheiro da fazenda em {l2}?
+215|Faltam $1 de dinheiro da fazenda.`};

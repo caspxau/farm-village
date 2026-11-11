@@ -1,7 +1,114 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`Cash Shop|متجر النقود
+x:`Dairy|مصنع الألبان
+Churns milk into butter, cream, goat cheese and yogurt.|يحوّل الحليب إلى زبدة وقشطة وجبن ماعز وزبادي.
+Weaving Loom|النول
+Spins cotton, fur and wool into fabric and cozy things to wear.|يغزل القطن والفرو والصوف إلى قماش وملابس دافئة.
+Juice Bar|بار العصير
+Fresh juice, lemonade and smoothies from your orchard.|عصير طازج وليموناضة وسموذي من بستانك.
+Bakery|المخبز
+A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.|فرن حطب للكرواسون والكعك والتارت والفطائر. يستخدم زبدة وقشطة مصنع الألبان.
+Flower Shop|محل الزهور
+Ties your flowers into bouquets and pours lavender candles.|يربط زهورك في باقات ويصنع شموع اللافندر.
+Sugar Mill|مصنع السكر
+Grinds beets into sugar for sauces, caramel apples and ice cream.|يطحن الشمندر إلى سكر للصلصات والتفاح بالكراميل والآيس كريم.
+Country Diner|مطعم الريف
+Hot meals for hungry towns: pizza, sushi and stir fry.|وجبات ساخنة للبلدات الجائعة: بيتزا وسوشي وخضار مقلية.
+Tailor|الخياط
+Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.|يخيط اللحف والسروج والأوشحة ودمى الدببة من القماش والريش والفرو.
+Butter|زبدة
+Fresh Cream|قشطة طازجة
+Goat Cheese|جبن الماعز
+Blueberry Yogurt|زبادي التوت الأزرق
+Cotton Fabric|قماش قطني
+Angora Mittens|قفازات أنغورا
+Llama Poncho|بونشو اللاما
+Down Pillow|وسادة ريش
+Orange Juice|عصير برتقال
+Honey Lemonade|ليموناضة بالعسل
+Peach Smoothie|سموذي الخوخ
+Melon Cooler|مشروب البطيخ
+Croissant|كرواسون
+Carrot Cake|كعكة الجزر
+Plum Tart|تارت البرقوق
+Lemon Cream Pie|فطيرة الليمون بالكريمة
+Spring Bouquet|باقة الربيع
+Rose Bouquet|باقة الورد
+Sunny Bouquet|باقة مشمسة
+Lavender Candle|شمعة لافندر
+Beet Sugar|سكر الشمندر
+Cranberry Sauce|صلصة التوت البري
+Caramel Apple|تفاحة بالكراميل
+Cherry Ice Cream|آيس كريم الكرز
+Farm Pizza|بيتزا المزرعة
+Pepper Pizza|بيتزا الفلفل
+Sushi Rolls|لفائف السوشي
+Veggie Stir Fry|خضار مقلية
+Patchwork Quilt|لحاف مرقّع
+Leather Saddle|سرج جلدي
+Woolly Scarf|وشاح صوفي
+Teddy Bear|دبدوب
+Butter Up|زبدة للجميع
+Threads and Yarns|خيوط وصوف
+Summer Stand|كشك الصيف
+Fresh From the Oven|طازج من الفرن
+Say It With Flowers|قلها بالزهور
+Sweet Cargo|حمولة حلوة
+Diner Days|أيام المطعم
+A Cozy Winter|شتاء دافئ
+Ice Cream Social|حفلة الآيس كريم
+Pride of the Valley|فخر الوادي
+Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.|ملّ أهل البلدة من الحليب العادي. ابنِ مصنع ألبان وسنبيع لهم الزبدة بالبراميل.
+My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?|أخي الصغير يضيّع قفازاته دائمًا! هل تنسج قماشًا وتصنع له زوجًا دافئًا؟
+The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?|معرض الصيف يحتاج كشك عصير، وأنا كبرت على عصر البرتقال طوال اليوم. هل تساعد صديقة قديمة؟
+My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!|ابنتي تتم عشر سنوات هذا الأسبوع ولا تريد إلا الكرواسون وكعكة الجزر. المخبز سينقذ الموقف!
+I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.|أريد دعوة مابل إلى رقصة الحصاد. لا تضحك! أحتاج أجمل باقة في الوادي.
+The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.|محل الحلوى في البلدة يريد سكرًا، وكثيرًا منه. شاحنتي جاهزة إن كان مصنعك جاهزًا.
+Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!|كل سائقي الشاحنات في المنطقة يتوقفون للغداء. افتح مطعمًا وقدّم لهم بيتزا مزرعة حقيقية!
+Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!|الشتاء قادم ولحافي القديم ثقوبه أكثر منه. خياط واحد يستطيع ترقيع الوادي كله!
+The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?|نزهة المدرسة يوم السبت. هل تحضر آيس كريم وتفاحًا بالكراميل للجميع؟
+The county fair judges are coming to see the finest farm around. Show them what you have built!|حكّام المعرض قادمون ليروا أفضل مزرعة هنا. أرهم ما بنيته!
+Build a Dairy|ابنِ مصنع ألبان
+Bring Hank 3 butter|أحضر لهانك 3 زبدة
+Collect from animals 30 times|اجمع من الحيوانات 30 مرة
+Build a Weaving Loom|ابنِ نولًا
+Bring Juniper 2 cotton fabric|أحضر لجونيبر 2 قماش قطني
+Bring Juniper 1 pair of angora mittens|أحضر لجونيبر زوج قفازات أنغورا
+Build a Juice Bar|ابنِ بار عصير
+Bring Mabel 3 orange juices|أحضر لمابل 3 عصير برتقال
+Pick fruit 40 times|اقطف الفاكهة 40 مرة
+Build a Bakery|ابنِ مخبزًا
+Bring Rosa 4 croissants|أحضر لروزا 4 كرواسون
+Bring Rosa 1 carrot cake|أحضر لروزا كعكة جزر
+Build a Flower Shop|ابنِ محل زهور
+Bring Otis 1 rose bouquet|أحضر لأوتيس باقة ورد
+Harvest 60 crops|احصد 60 محصولًا
+Build a Sugar Mill|ابنِ مصنع سكر
+Bring Dale 6 beet sugar|أحضر لديل 6 سكر شمندر
+Complete 10 deliveries|أكمل 10 توصيلات
+Build a Country Diner|ابنِ مطعم الريف
+Bring Hank 2 farm pizzas|أحضر لهانك 2 بيتزا المزرعة
+Make 25 goods in your buildings|اصنع 25 منتجًا في مبانيك
+Build a Tailor|ابنِ محل خياط
+Bring Mabel 1 patchwork quilt|أحضر لمابل لحافًا مرقّعًا
+Fill 10 neighbor orders|لبِّ 10 طلبات للجيران
+Bring Juniper 3 cherry ice creams|أحضر لجونيبر 3 آيس كريم الكرز
+Bring Juniper 4 caramel apples|أحضر لجونيبر 4 تفاح بالكراميل
+Harvest 5 golden crops|احصد 5 محاصيل ذهبية
+Bring Otis 2 teddy bears|أحضر لأوتيس 2 دبدوب
+Bring Otis 2 leather saddles|أحضر لأوتيس 2 سرج جلدي
+Complete 15 deliveries|أكمل 15 توصيلة
+Farm Report|تقرير المزرعة
+Let's go!|هيا بنا!
+Spend Farm Cash?|إنفاق نقود المزرعة؟
+Yes, buy|نعم، اشترِ
+Don't ask me again|لا تسألني مجددًا
+Not enough Farm Cash|نقود المزرعة غير كافية
+Not now|ليس الآن
+Ask before spending Farm Cash|اسأل قبل إنفاق نقود المزرعة
+Farm report when you come back|تقرير المزرعة عند العودة
+Cash Shop|متجر النقود
 Get Farm Cash|احصل على نقود المزرعة
 Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|بنقود المزرعة تشتري ملابس وأثاثًا وزينة ومساعدين مميزين. كل 5 مستويات وأهدافك اليومية ما زالت تعطيك القليل مجانًا.
 Popular|الأكثر شيوعًا
@@ -1249,4 +1356,14 @@ p:`0|$1 عملة
 202|وصلت مشترياتك! +$1 من نقود المزرعة.
 203|رائع! خبرة إضافية مجددًا بعد {t1}.
 204|رقم قياسي! عملات مجددًا بعد {t1}.
-205|رقم قياسي! +$1 عملة.`};
+205|رقم قياسي! +$1 عملة.
+206|غبت لمدة {t1}. هذا ما ينتظرك في المزرعة:
+207|محاصيل جاهزة للحصاد: $1
+208|حيوانات لديها شيء لك: $1
+209|أشجار فاكهة جاهزة للقطف: $1
+210|منتجات تنتظر في مبانيك: $1
+211|طلبات جيران جاهزة للتلبية: $1
+212|حيوانات جائعة: $1
+213|محاصيل ذبلت: $1. نظّفها وازرع من جديد
+214|إنفاق $1 من نقود المزرعة على {l2}؟
+215|تحتاج $1 أخرى من نقود المزرعة.`};

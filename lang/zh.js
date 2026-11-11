@@ -1,7 +1,114 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`Cash Shop|农场币商店
+x:`Dairy|乳品坊
+Churns milk into butter, cream, goat cheese and yogurt.|把牛奶制成黄油、奶油、山羊奶酪和酸奶。
+Weaving Loom|织布机
+Spins cotton, fur and wool into fabric and cozy things to wear.|把棉花、兔毛和羊毛纺成布料和暖和的衣物。
+Juice Bar|果汁吧
+Fresh juice, lemonade and smoothies from your orchard.|用果园水果做的鲜榨果汁、柠檬水和奶昔。
+Bakery|面包房
+A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.|柴火烤炉，烤可颂、蛋糕、挞和派。需要乳品坊的黄油和奶油。
+Flower Shop|花店
+Ties your flowers into bouquets and pours lavender candles.|把鲜花扎成花束，还能做薰衣草蜡烛。
+Sugar Mill|制糖厂
+Grinds beets into sugar for sauces, caramel apples and ice cream.|把甜菜磨成糖，用来做果酱、焦糖苹果和冰淇淋。
+Country Diner|乡村餐馆
+Hot meals for hungry towns: pizza, sushi and stir fry.|为饥饿的城镇提供热饭：披萨、寿司和炒蔬菜。
+Tailor|裁缝铺
+Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.|用布料、羽毛和兔毛缝制被子、马鞍、围巾和泰迪熊。
+Butter|黄油
+Fresh Cream|鲜奶油
+Goat Cheese|山羊奶酪
+Blueberry Yogurt|蓝莓酸奶
+Cotton Fabric|棉布
+Angora Mittens|安哥拉手套
+Llama Poncho|羊驼斗篷
+Down Pillow|羽绒枕
+Orange Juice|橙汁
+Honey Lemonade|蜂蜜柠檬水
+Peach Smoothie|桃子奶昔
+Melon Cooler|西瓜冰饮
+Croissant|可颂
+Carrot Cake|胡萝卜蛋糕
+Plum Tart|李子挞
+Lemon Cream Pie|柠檬奶油派
+Spring Bouquet|春日花束
+Rose Bouquet|玫瑰花束
+Sunny Bouquet|阳光花束
+Lavender Candle|薰衣草蜡烛
+Beet Sugar|甜菜糖
+Cranberry Sauce|蔓越莓酱
+Caramel Apple|焦糖苹果
+Cherry Ice Cream|樱桃冰淇淋
+Farm Pizza|农场披萨
+Pepper Pizza|彩椒披萨
+Sushi Rolls|寿司卷
+Veggie Stir Fry|炒蔬菜
+Patchwork Quilt|拼布被
+Leather Saddle|皮马鞍
+Woolly Scarf|羊毛围巾
+Teddy Bear|泰迪熊
+Butter Up|黄油时间
+Threads and Yarns|针线与毛线
+Summer Stand|夏日小摊
+Fresh From the Oven|新鲜出炉
+Say It With Flowers|用花说话
+Sweet Cargo|甜蜜货物
+Diner Days|餐馆时光
+A Cozy Winter|温暖的冬天
+Ice Cream Social|冰淇淋派对
+Pride of the Valley|山谷之光
+Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.|镇上的人喝腻了纯牛奶。盖一座乳品坊，我们按桶卖黄油。
+My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?|我弟弟总是弄丢手套！你能织点布，给他做一双暖和的吗？
+The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?|夏日集市需要一个果汁摊，我年纪大了，没法整天榨橙子。帮帮老朋友吧？
+My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!|我女儿这周满十岁，她只想要可颂和胡萝卜蛋糕。有面包房就好了！
+I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.|我想邀请梅布尔参加丰收舞会。别笑！我需要山谷里最漂亮的花束。
+The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.|镇上的糖果店要糖，要很多。只要你的糖厂准备好，我的卡车就出发。
+Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!|附近的卡车司机都来吃午饭。开一家餐馆，给他们来份地道的农场披萨！
+Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!|冬天要来了，我的旧被子破洞比布还多。来个裁缝就能缝补整个山谷！
+The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?|学校野餐在星期六。你能给大家带些冰淇淋和焦糖苹果吗？
+The county fair judges are coming to see the finest farm around. Show them what you have built!|集市评委要来看看这里最好的农场。让他们看看你建成了什么！
+Build a Dairy|建造乳品坊
+Bring Hank 3 butter|给汉克带3份黄油
+Collect from animals 30 times|从动物那里收获30次
+Build a Weaving Loom|建造织布机
+Bring Juniper 2 cotton fabric|给朱妮珀带2块棉布
+Bring Juniper 1 pair of angora mittens|给朱妮珀带1副安哥拉手套
+Build a Juice Bar|建造果汁吧
+Bring Mabel 3 orange juices|给梅布尔带3瓶橙汁
+Pick fruit 40 times|采摘水果40次
+Build a Bakery|建造面包房
+Bring Rosa 4 croissants|给罗莎带4个可颂
+Bring Rosa 1 carrot cake|给罗莎带1个胡萝卜蛋糕
+Build a Flower Shop|建造花店
+Bring Otis 1 rose bouquet|给奥蒂斯带1束玫瑰花束
+Harvest 60 crops|收获60次作物
+Build a Sugar Mill|建造制糖厂
+Bring Dale 6 beet sugar|给戴尔带6份甜菜糖
+Complete 10 deliveries|完成10次送货
+Build a Country Diner|建造乡村餐馆
+Bring Hank 2 farm pizzas|给汉克带2个农场披萨
+Make 25 goods in your buildings|在建筑里制作25件商品
+Build a Tailor|建造裁缝铺
+Bring Mabel 1 patchwork quilt|给梅布尔带1床拼布被
+Fill 10 neighbor orders|完成10个邻居订单
+Bring Juniper 3 cherry ice creams|给朱妮珀带3份樱桃冰淇淋
+Bring Juniper 4 caramel apples|给朱妮珀带4个焦糖苹果
+Harvest 5 golden crops|收获5次金色作物
+Bring Otis 2 teddy bears|给奥蒂斯带2只泰迪熊
+Bring Otis 2 leather saddles|给奥蒂斯带2个皮马鞍
+Complete 15 deliveries|完成15次送货
+Farm Report|农场报告
+Let's go!|出发！
+Spend Farm Cash?|花费农场币？
+Yes, buy|是，购买
+Don't ask me again|不再询问
+Not enough Farm Cash|农场币不足
+Not now|以后再说
+Ask before spending Farm Cash|花费农场币前询问
+Farm report when you come back|回来时显示农场报告
+Cash Shop|农场币商店
 Get Farm Cash|获取农场币
 Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|农场币可购买高级服装、家具、装饰和帮手。每升5级和完成每日目标仍可免费获得少量。
 Popular|热门
@@ -1249,4 +1356,14 @@ p:`0|$1金币
 202|购买已到账！农场币+$1。
 203|真好听！{t1}后可再获得额外经验。
 204|新纪录！{t1}后可再获得金币。
-205|新纪录！金币+$1。`};
+205|新纪录！金币+$1。
+206|你离开了{t1}。农场上有这些在等你：
+207|$1块作物可以收获
+208|$1只动物有东西给你
+209|$1棵果树可以采摘
+210|$1件商品在建筑里等着
+211|$1个邻居订单可以完成
+212|$1只动物饿了
+213|$1块作物枯萎了。清理后重新种植
+214|花费$1农场币购买{l2}？
+215|还差$1农场币。`};

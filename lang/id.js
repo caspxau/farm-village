@@ -1,6 +1,113 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`Cash Shop|Toko Uang
+x:`Dairy|Pabrik Susu
+Churns milk into butter, cream, goat cheese and yogurt.|Mengolah susu jadi mentega, krim, keju kambing, dan yoghurt.
+Weaving Loom|Alat Tenun
+Spins cotton, fur and wool into fabric and cozy things to wear.|Memintal kapas, bulu, dan wol jadi kain dan pakaian hangat.
+Juice Bar|Bar Jus
+Fresh juice, lemonade and smoothies from your orchard.|Jus segar, limun, dan smoothie dari kebunmu.
+Bakery|Toko Roti
+A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.|Oven kayu untuk croissant, kue, tart, dan pai. Memakai mentega dan krim dari Pabrik Susu.
+Flower Shop|Toko Bunga
+Ties your flowers into bouquets and pours lavender candles.|Merangkai bungamu jadi buket dan membuat lilin lavender.
+Sugar Mill|Pabrik Gula
+Grinds beets into sugar for sauces, caramel apples and ice cream.|Menggiling bit jadi gula untuk saus, apel karamel, dan es krim.
+Country Diner|Kedai Desa
+Hot meals for hungry towns: pizza, sushi and stir fry.|Makanan hangat untuk kota yang lapar: piza, sushi, dan tumis sayur.
+Tailor|Penjahit
+Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.|Menjahit selimut, pelana, syal, dan boneka beruang dari kain, bulu, dan wol.
+Butter|Mentega
+Fresh Cream|Krim segar
+Goat Cheese|Keju kambing
+Blueberry Yogurt|Yoghurt blueberry
+Cotton Fabric|Kain katun
+Angora Mittens|Sarung tangan angora
+Llama Poncho|Ponco llama
+Down Pillow|Bantal bulu
+Orange Juice|Jus jeruk
+Honey Lemonade|Limun madu
+Peach Smoothie|Smoothie persik
+Melon Cooler|Es semangka
+Croissant|Croissant
+Carrot Cake|Kue wortel
+Plum Tart|Tart plum
+Lemon Cream Pie|Pai krim lemon
+Spring Bouquet|Buket musim semi
+Rose Bouquet|Buket mawar
+Sunny Bouquet|Buket ceria
+Lavender Candle|Lilin lavender
+Beet Sugar|Gula bit
+Cranberry Sauce|Saus cranberry
+Caramel Apple|Apel karamel
+Cherry Ice Cream|Es krim ceri
+Farm Pizza|Piza kebun
+Pepper Pizza|Piza paprika
+Sushi Rolls|Gulungan sushi
+Veggie Stir Fry|Tumis sayur
+Patchwork Quilt|Selimut perca
+Leather Saddle|Pelana kulit
+Woolly Scarf|Syal wol
+Teddy Bear|Boneka beruang
+Butter Up|Mentega untuk semua
+Threads and Yarns|Benang dan wol
+Summer Stand|Kios musim panas
+Fresh From the Oven|Baru dari oven
+Say It With Flowers|Katakan dengan bunga
+Sweet Cargo|Muatan manis
+Diner Days|Hari-hari di kedai
+A Cozy Winter|Musim dingin yang hangat
+Ice Cream Social|Pesta es krim
+Pride of the Valley|Kebanggaan lembah
+Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.|Orang kota bosan dengan susu biasa. Bangun Pabrik Susu dan kita jual mentega per tong.
+My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?|Adikku selalu kehilangan sarung tangannya! Bisakah kamu menenun kain dan membuatkan sepasang yang hangat?
+The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?|Pekan raya musim panas butuh kios jus, dan aku terlalu tua untuk memeras jeruk seharian. Bantu teman lama?
+My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!|Putriku berulang tahun ke-10 minggu ini dan dia cuma mau croissant dan kue wortel. Toko roti akan menyelamatkan hari!
+I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.|Aku mau mengajak Mabel ke pesta panen. Jangan tertawa! Aku butuh buket tercantik di lembah.
+The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.|Toko permen di kota butuh gula, banyak sekali. Trukku siap kalau pabrikmu juga siap.
+Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!|Semua sopir truk di daerah ini mampir makan siang. Buka kedai dan beri mereka piza kebun yang enak!
+Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!|Musim dingin datang dan selimut tuaku lebih banyak lubangnya. Seorang penjahit bisa menambal seluruh lembah!
+The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?|Piknik sekolah hari Sabtu. Bisakah kamu bawa es krim dan apel karamel untuk semua?
+The county fair judges are coming to see the finest farm around. Show them what you have built!|Juri pekan raya datang untuk melihat kebun terbaik di sini. Tunjukkan apa yang sudah kamu bangun!
+Build a Dairy|Bangun Pabrik Susu
+Bring Hank 3 butter|Bawakan Hank 3 mentega
+Collect from animals 30 times|Ambil hasil hewan 30 kali
+Build a Weaving Loom|Bangun Alat Tenun
+Bring Juniper 2 cotton fabric|Bawakan Juniper 2 kain katun
+Bring Juniper 1 pair of angora mittens|Bawakan Juniper 1 pasang sarung tangan angora
+Build a Juice Bar|Bangun Bar Jus
+Bring Mabel 3 orange juices|Bawakan Mabel 3 jus jeruk
+Pick fruit 40 times|Petik buah 40 kali
+Build a Bakery|Bangun Toko Roti
+Bring Rosa 4 croissants|Bawakan Rosa 4 croissant
+Bring Rosa 1 carrot cake|Bawakan Rosa 1 kue wortel
+Build a Flower Shop|Bangun Toko Bunga
+Bring Otis 1 rose bouquet|Bawakan Otis 1 buket mawar
+Harvest 60 crops|Panen 60 tanaman
+Build a Sugar Mill|Bangun Pabrik Gula
+Bring Dale 6 beet sugar|Bawakan Dale 6 gula bit
+Complete 10 deliveries|Selesaikan 10 pengiriman
+Build a Country Diner|Bangun Kedai Desa
+Bring Hank 2 farm pizzas|Bawakan Hank 2 piza kebun
+Make 25 goods in your buildings|Buat 25 barang di bangunanmu
+Build a Tailor|Bangun Penjahit
+Bring Mabel 1 patchwork quilt|Bawakan Mabel 1 selimut perca
+Fill 10 neighbor orders|Penuhi 10 pesanan tetangga
+Bring Juniper 3 cherry ice creams|Bawakan Juniper 3 es krim ceri
+Bring Juniper 4 caramel apples|Bawakan Juniper 4 apel karamel
+Harvest 5 golden crops|Panen 5 tanaman emas
+Bring Otis 2 teddy bears|Bawakan Otis 2 boneka beruang
+Bring Otis 2 leather saddles|Bawakan Otis 2 pelana kulit
+Complete 15 deliveries|Selesaikan 15 pengiriman
+Farm Report|Laporan Kebun
+Let's go!|Ayo!
+Spend Farm Cash?|Belanjakan Uang Kebun?
+Yes, buy|Ya, beli
+Don't ask me again|Jangan tanya lagi
+Not enough Farm Cash|Uang Kebun tidak cukup
+Not now|Nanti saja
+Ask before spending Farm Cash|Tanya sebelum membelanjakan Uang Kebun
+Farm report when you come back|Laporan kebun saat kembali
+Cash Shop|Toko Uang
 Get Farm Cash|Dapatkan Uang Kebun
 Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|Uang Kebun bisa membeli baju, perabot, dekorasi, dan pembantu premium. Tiap 5 level dan target harian tetap memberi sedikit gratis.
 Popular|Populer
@@ -1241,4 +1348,14 @@ p:`0|$1 koin
 202|Pembelianmu sudah masuk! +$1 Uang Kebun.
 203|Indah! Bonus XP lagi dalam {t1}.
 204|Skor tertinggi! Koin lagi dalam {t1}.
-205|Skor tertinggi! +$1 koin.`};
+205|Skor tertinggi! +$1 koin.
+206|Kamu pergi selama {t1}. Ini yang menunggu di kebun:
+207|$1 tanaman siap dipanen
+208|$1 hewan punya sesuatu untukmu
+209|$1 pohon buah siap dipetik
+210|$1 barang menunggu di bangunanmu
+211|$1 pesanan tetangga siap dipenuhi
+212|$1 hewan lapar
+213|$1 tanaman layu. Bersihkan dan tanam lagi
+214|Belanjakan $1 Uang Kebun untuk {l2}?
+215|Kamu butuh $1 Uang Kebun lagi.`};

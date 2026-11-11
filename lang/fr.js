@@ -1,6 +1,113 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`Cash Shop|Boutique
+x:`Dairy|Laiterie
+Churns milk into butter, cream, goat cheese and yogurt.|Baratte le lait en beurre, crème, fromage de chèvre et yaourt.
+Weaving Loom|Métier à tisser
+Spins cotton, fur and wool into fabric and cozy things to wear.|File le coton, la fourrure et la laine en tissu et en vêtements douillets.
+Juice Bar|Bar à jus
+Fresh juice, lemonade and smoothies from your orchard.|Jus frais, limonade et smoothies de ton verger.
+Bakery|Boulangerie
+A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.|Un four à bois pour croissants, gâteaux, tartes et tourtes. Utilise le beurre et la crème de la Laiterie.
+Flower Shop|Fleuriste
+Ties your flowers into bouquets and pours lavender candles.|Noue tes fleurs en bouquets et coule des bougies à la lavande.
+Sugar Mill|Sucrerie
+Grinds beets into sugar for sauces, caramel apples and ice cream.|Broie les betteraves en sucre pour les sauces, les pommes d'amour et la glace.
+Country Diner|Restaurant de campagne
+Hot meals for hungry towns: pizza, sushi and stir fry.|Des plats chauds pour les villes affamées : pizza, sushi et légumes sautés.
+Tailor|Tailleur
+Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.|Coud couettes, selles, écharpes et oursons avec du tissu, des plumes et de la fourrure.
+Butter|Beurre
+Fresh Cream|Crème fraîche
+Goat Cheese|Fromage de chèvre
+Blueberry Yogurt|Yaourt aux myrtilles
+Cotton Fabric|Tissu de coton
+Angora Mittens|Moufles en angora
+Llama Poncho|Poncho en lama
+Down Pillow|Oreiller en duvet
+Orange Juice|Jus d'orange
+Honey Lemonade|Limonade au miel
+Peach Smoothie|Smoothie à la pêche
+Melon Cooler|Rafraîchissement pastèque
+Croissant|Croissant
+Carrot Cake|Gâteau aux carottes
+Plum Tart|Tarte aux prunes
+Lemon Cream Pie|Tarte au citron
+Spring Bouquet|Bouquet de printemps
+Rose Bouquet|Bouquet de roses
+Sunny Bouquet|Bouquet ensoleillé
+Lavender Candle|Bougie à la lavande
+Beet Sugar|Sucre de betterave
+Cranberry Sauce|Sauce aux canneberges
+Caramel Apple|Pomme d'amour
+Cherry Ice Cream|Glace à la cerise
+Farm Pizza|Pizza de la ferme
+Pepper Pizza|Pizza aux poivrons
+Sushi Rolls|Makis
+Veggie Stir Fry|Légumes sautés
+Patchwork Quilt|Couette en patchwork
+Leather Saddle|Selle en cuir
+Woolly Scarf|Écharpe en laine
+Teddy Bear|Ours en peluche
+Butter Up|Du beurre pour tous
+Threads and Yarns|Fils et laines
+Summer Stand|Stand d'été
+Fresh From the Oven|Tout chaud sorti du four
+Say It With Flowers|Dis-le avec des fleurs
+Sweet Cargo|Cargaison sucrée
+Diner Days|Jours de resto
+A Cozy Winter|Un hiver douillet
+Ice Cream Social|Fête de la glace
+Pride of the Valley|Fierté de la vallée
+Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.|Les gens en ville en ont assez du lait nature. Construis une Laiterie et on leur vendra du beurre par tonneaux.
+My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?|Mon petit frère perd sans arrêt ses moufles ! Tu pourrais tisser du tissu et lui en faire une paire bien chaude ?
+The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?|La fête d'été a besoin d'un stand de jus et je suis trop vieille pour presser des oranges toute la journée. Tu aides une vieille amie ?
+My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!|Ma fille a dix ans cette semaine et elle ne veut que des croissants et du gâteau aux carottes. Une boulangerie nous sauverait !
+I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.|Je veux inviter Mabel au bal des moissons. Ne ris pas ! Il me faut le plus beau bouquet de la vallée.
+The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.|La confiserie de la ville veut du sucre, et beaucoup. Mon camion est prêt si ta sucrerie l'est.
+Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!|Tous les routiers du comté s'arrêtent déjeuner. Ouvre un restaurant et sers-leur une vraie pizza de la ferme !
+Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!|L'hiver arrive et ma vieille couette a plus de trous que de couette. Un tailleur pourrait rapiécer toute la vallée !
+The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?|Le pique-nique de l'école, c'est samedi. Tu pourrais apporter de la glace et des pommes d'amour pour tout le monde ?
+The county fair judges are coming to see the finest farm around. Show them what you have built!|Les juges de la foire viennent voir la plus belle ferme du coin. Montre-leur ce que tu as construit !
+Build a Dairy|Construis une Laiterie
+Bring Hank 3 butter|Apporte 3 beurres à Hank
+Collect from animals 30 times|Récolte les animaux 30 fois
+Build a Weaving Loom|Construis un Métier à tisser
+Bring Juniper 2 cotton fabric|Apporte 2 tissus de coton à Juniper
+Bring Juniper 1 pair of angora mittens|Apporte 1 paire de moufles en angora à Juniper
+Build a Juice Bar|Construis un Bar à jus
+Bring Mabel 3 orange juices|Apporte 3 jus d'orange à Mabel
+Pick fruit 40 times|Cueille des fruits 40 fois
+Build a Bakery|Construis une Boulangerie
+Bring Rosa 4 croissants|Apporte 4 croissants à Rosa
+Bring Rosa 1 carrot cake|Apporte 1 gâteau aux carottes à Rosa
+Build a Flower Shop|Construis un Fleuriste
+Bring Otis 1 rose bouquet|Apporte 1 bouquet de roses à Otis
+Harvest 60 crops|Récolte 60 cultures
+Build a Sugar Mill|Construis une Sucrerie
+Bring Dale 6 beet sugar|Apporte 6 sucres de betterave à Dale
+Complete 10 deliveries|Termine 10 livraisons
+Build a Country Diner|Construis un Restaurant de campagne
+Bring Hank 2 farm pizzas|Apporte 2 pizzas de la ferme à Hank
+Make 25 goods in your buildings|Fabrique 25 produits dans tes bâtiments
+Build a Tailor|Construis un Tailleur
+Bring Mabel 1 patchwork quilt|Apporte 1 couette en patchwork à Mabel
+Fill 10 neighbor orders|Remplis 10 commandes de voisins
+Bring Juniper 3 cherry ice creams|Apporte 3 glaces à la cerise à Juniper
+Bring Juniper 4 caramel apples|Apporte 4 pommes d'amour à Juniper
+Harvest 5 golden crops|Récolte 5 cultures dorées
+Bring Otis 2 teddy bears|Apporte 2 ours en peluche à Otis
+Bring Otis 2 leather saddles|Apporte 2 selles en cuir à Otis
+Complete 15 deliveries|Termine 15 livraisons
+Farm Report|Rapport de la ferme
+Let's go!|C'est parti !
+Spend Farm Cash?|Dépenser des billets de ferme ?
+Yes, buy|Oui, acheter
+Don't ask me again|Ne plus me demander
+Not enough Farm Cash|Pas assez de billets de ferme
+Not now|Pas maintenant
+Ask before spending Farm Cash|Demander avant de dépenser des billets de ferme
+Farm report when you come back|Rapport de la ferme au retour
+Cash Shop|Boutique
 Get Farm Cash|Obtenir des billets
 Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|Les billets de ferme achètent tenues, meubles, décorations et aides premium. Tous les 5 niveaux et tes objectifs du jour en donnent encore un peu gratuitement.
 Popular|Populaire
@@ -1241,4 +1348,14 @@ p:`0|$1 {p1:pièce|pièces}
 202|Ton achat est arrivé ! +$1 billets de ferme.
 203|Magnifique ! XP bonus à nouveau dans {t1}.
 204|Record ! Pièces à nouveau dans {t1}.
-205|Record ! +$1 pièces.`};
+205|Record ! +$1 pièces.
+206|Tu étais absent {t1}. Voici ce qui t’attend à la ferme :
+207|$1 {p1:culture prête|cultures prêtes} à récolter
+208|$1 {p1:animal a|animaux ont} quelque chose pour toi
+209|$1 {p1:arbre fruitier prêt|arbres fruitiers prêts} à cueillir
+210|$1 {p1:produit attend|produits attendent} dans tes bâtiments
+211|$1 {p1:commande de voisin prête|commandes de voisins prêtes} à remplir
+212|$1 {p1:animal a|animaux ont} faim
+213|$1 {p1:culture a|cultures ont} fané. Nettoie et replante
+214|Dépenser $1 billets de ferme pour {l2} ?
+215|Il te manque $1 billets de ferme.`};

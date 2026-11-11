@@ -1042,6 +1042,12 @@ body{font-family:var(--f-body);letter-spacing:.1px}
 .cspack .cstag{position:absolute;top:-2px;left:50%;transform:translateX(-50%);background:#e0352b;color:#fff;font-family:var(--f-display);font-size:12px;padding:2px 10px;border-radius:0 0 10px 10px;white-space:nowrap}
 .cspack .buy{width:100%;font-size:16px;margin-top:auto}
 .cashshop .csgo{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.askbox{position:fixed;inset:0;z-index:9000;background:rgba(20,14,8,.45);display:grid;place-items:center;padding:16px}
+.askin{background:linear-gradient(#fffdf7,#fbf1dd);border:3px solid #cfae78;border-radius:18px;padding:18px 18px 14px;max-width:340px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,.35);text-align:center}
+.askin h3{margin:0 0 6px;font-family:var(--f-display);color:#5a3410}.askin p{margin:0 0 10px}.asknever{display:flex;gap:6px;align-items:center;justify-content:center;font-size:13px;margin-bottom:10px}
+.askrow{display:flex;gap:10px;justify-content:center}.askrow button{flex:1;min-height:42px}
+.awaylist{list-style:none;padding:0;margin:8px 0 14px;display:flex;flex-direction:column;gap:6px}.awaylist li{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid #e2cfa8;border-radius:12px;padding:5px 10px}
+.awaylist img{width:34px;height:34px;object-fit:contain}.away .go{width:100%}
 .cashshop .csfine{font-size:12px;opacity:.75;text-align:center}
 .ptag.prem,.icard .ptag.prem{background:linear-gradient(#7fd88a,#3faa4a);color:#fff;border-color:#1f6b28}
 .icard.prem{border-color:#e5b440!important;background:linear-gradient(#fffdf0,#fff3c8)!important}
@@ -1915,6 +1921,8 @@ function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.relo
 // Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
 // Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
 const PL_EXACT={
+"Dairy":"Mleczarnia","Churns milk into butter, cream, goat cheese and yogurt.":"Ubija mleko na masło, śmietanę, kozi ser i jogurt.","Weaving Loom":"Krosno","Spins cotton, fur and wool into fabric and cozy things to wear.":"Przędzie bawełnę, futerko i wełnę na tkaninę i ciepłe ubrania.","Juice Bar":"Bar z sokami","Fresh juice, lemonade and smoothies from your orchard.":"Świeże soki, lemoniada i koktajle z twojego sadu.","Bakery":"Piekarnia","A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.":"Piec opalany drewnem na rogaliki, ciasta, tarty i placki. Używa masła i śmietany z Mleczarni.","Flower Shop":"Kwiaciarnia","Ties your flowers into bouquets and pours lavender candles.":"Wiąże kwiaty w bukiety i odlewa lawendowe świece.","Sugar Mill":"Cukrownia","Grinds beets into sugar for sauces, caramel apples and ice cream.":"Miele buraki na cukier do sosów, jabłek w karmelu i lodów.","Country Diner":"Wiejski bar","Hot meals for hungry towns: pizza, sushi and stir fry.":"Ciepłe posiłki dla głodnych miast: pizza, sushi i warzywa z woka.","Tailor":"Krawiec","Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.":"Szyje kołdry, siodła, szaliki i misie z tkaniny, piór i futerka.","Butter":"Masło","Fresh Cream":"Świeża śmietana","Goat Cheese":"Kozi ser","Blueberry Yogurt":"Jogurt jagodowy","Cotton Fabric":"Tkanina bawełniana","Angora Mittens":"Rękawiczki z angory","Llama Poncho":"Ponczo z lamy","Down Pillow":"Poduszka z puchu","Orange Juice":"Sok pomarańczowy","Honey Lemonade":"Lemoniada z miodem","Peach Smoothie":"Koktajl brzoskwiniowy","Melon Cooler":"Napój arbuzowy","Croissant":"Rogalik","Carrot Cake":"Ciasto marchewkowe","Plum Tart":"Tarta ze śliwkami","Lemon Cream Pie":"Tarta cytrynowa","Spring Bouquet":"Wiosenny bukiet","Rose Bouquet":"Bukiet róż","Sunny Bouquet":"Słoneczny bukiet","Lavender Candle":"Świeca lawendowa","Beet Sugar":"Cukier buraczany","Cranberry Sauce":"Sos żurawinowy","Caramel Apple":"Jabłko w karmelu","Cherry Ice Cream":"Lody wiśniowe","Farm Pizza":"Pizza z farmy","Pepper Pizza":"Pizza z papryką","Sushi Rolls":"Rolki sushi","Veggie Stir Fry":"Warzywa z woka","Patchwork Quilt":"Kołdra patchworkowa","Leather Saddle":"Skórzane siodło","Woolly Scarf":"Wełniany szalik","Teddy Bear":"Miś pluszowy","Butter Up":"Masło na start","Threads and Yarns":"Nici i włóczki","Summer Stand":"Letnie stoisko","Fresh From the Oven":"Prosto z pieca","Say It With Flowers":"Powiedz to kwiatami","Sweet Cargo":"Słodki ładunek","Diner Days":"Dni w barze","A Cozy Winter":"Przytulna zima","Ice Cream Social":"Lodowy piknik","Pride of the Valley":"Duma doliny","Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.":"Ludzie w mieście mają dość zwykłego mleka. Zbuduj Mleczarnię, a będziemy sprzedawać masło beczkami.","My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?":"Mój młodszy brat ciągle gubi rękawiczki! Utkasz trochę tkaniny i zrobisz mu ciepłą parę?","The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?":"Letni festyn potrzebuje stoiska z sokami, a ja jestem za stara, by cały dzień wyciskać pomarańcze. Pomożesz starej przyjaciółce?","My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!":"Moja córka kończy w tym tygodniu dziesięć lat i chce tylko rogalików i ciasta marchewkowego. Piekarnia uratuje sytuację!","I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.":"Chcę zaprosić Mabel na dożynkowe tańce. Nie śmiej się! Potrzebuję najpiękniejszego bukietu w dolinie.","The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.":"Sklep ze słodyczami w mieście chce cukru, i to dużo. Moja ciężarówka jest gotowa, jeśli twoja cukrownia też.","Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!":"Każdy kierowca w okolicy zatrzymuje się na obiad. Otwórz bar i nakarm ich porządną pizzą z farmy!","Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!":"Nadchodzi zima, a moja stara kołdra ma więcej dziur niż kołdry. Krawiec połatałby całą dolinę!","The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?":"W sobotę jest szkolny piknik. Przyniesiesz lody i jabłka w karmelu dla wszystkich?","The county fair judges are coming to see the finest farm around. Show them what you have built!":"Sędziowie z jarmarku przyjeżdżają zobaczyć najlepszą farmę w okolicy. Pokaż im, co zbudowałeś!","Build a Dairy":"Zbuduj Mleczarnię","Bring Hank 3 butter":"Przynieś Hankowi 3 masła","Collect from animals 30 times":"Zbierz od zwierząt 30 razy","Build a Weaving Loom":"Zbuduj Krosno","Bring Juniper 2 cotton fabric":"Przynieś Juniper 2 tkaniny bawełniane","Bring Juniper 1 pair of angora mittens":"Przynieś Juniper 1 parę rękawiczek z angory","Build a Juice Bar":"Zbuduj Bar z sokami","Bring Mabel 3 orange juices":"Przynieś Mabel 3 soki pomarańczowe","Pick fruit 40 times":"Zbierz owoce 40 razy","Build a Bakery":"Zbuduj Piekarnię","Bring Rosa 4 croissants":"Przynieś Rosie 4 rogaliki","Bring Rosa 1 carrot cake":"Przynieś Rosie 1 ciasto marchewkowe","Build a Flower Shop":"Zbuduj Kwiaciarnię","Bring Otis 1 rose bouquet":"Przynieś Otisowi 1 bukiet róż","Harvest 60 crops":"Zbierz 60 plonów","Build a Sugar Mill":"Zbuduj Cukrownię","Bring Dale 6 beet sugar":"Przynieś Dale'owi 6 cukru buraczanego","Complete 10 deliveries":"Wykonaj 10 dostaw","Build a Country Diner":"Zbuduj Wiejski bar","Bring Hank 2 farm pizzas":"Przynieś Hankowi 2 pizze z farmy","Make 25 goods in your buildings":"Zrób 25 produktów w budynkach","Build a Tailor":"Zbuduj Krawca","Bring Mabel 1 patchwork quilt":"Przynieś Mabel 1 kołdrę patchworkową","Fill 10 neighbor orders":"Zrealizuj 10 zamówień sąsiadów","Bring Juniper 3 cherry ice creams":"Przynieś Juniper 3 lody wiśniowe","Bring Juniper 4 caramel apples":"Przynieś Juniper 4 jabłka w karmelu","Harvest 5 golden crops":"Zbierz 5 złotych plonów","Bring Otis 2 teddy bears":"Przynieś Otisowi 2 misie pluszowe","Bring Otis 2 leather saddles":"Przynieś Otisowi 2 skórzane siodła","Complete 15 deliveries":"Wykonaj 15 dostaw","Farm Report":"Raport z farmy","Let's go!":"Do dzieła!","Spend Farm Cash?":"Wydać farmdolary?","Yes, buy":"Tak, kupuję","Don't ask me again":"Nie pytaj ponownie","Not enough Farm Cash":"Za mało farmdolarów","Not now":"Nie teraz","Ask before spending Farm Cash":"Pytaj przed wydaniem farmdolarów","Farm report when you come back":"Raport z farmy po powrocie",
+
 "Cash Shop":"Sklep z farmdolarami","Get Farm Cash":"Zdobądź farmdolary","Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.":"Za farmdolary kupisz stroje premium, meble, dekoracje i pomocników. Co 5 poziomów i za cele dnia nadal dostajesz trochę za darmo.","Popular":"Popularne","Best value":"Najlepsza oferta","Spend it":"Wydaj je","Premium outfits":"Stroje premium","Premium furniture":"Meble premium","Premium decorations":"Dekoracje premium","Premium":"Premium","Purchases are made through Google Play. Farm Cash is stored on this device with your farm.":"Zakupy odbywają się przez Google Play. Farmdolary są zapisane na tym urządzeniu razem z farmą.","Buying Farm Cash works in the Farm Village app from Google Play.":"Farmdolary można kupić w aplikacji Farm Village z Google Play.","The purchase did not go through.":"Zakup się nie udał.","Chef hat":"Czapka kucharza","Wizard hat":"Kapelusz czarodzieja","Pirate hat":"Kapelusz pirata","Viking helmet":"Hełm wikinga","Hawaiian shirt":"Koszula hawajska","Tuxedo":"Smoking","Royal robe":"Szata królewska","Tartan kilt":"Kilt w kratę","Golden overalls":"Złote ogrodniczki","Bow tie":"Muszka","Gold chain":"Złoty łańcuch","Hero cape":"Peleryna bohatera","Fairy wings":"Skrzydła wróżki","Fish Tank":"Akwarium","Arcade Machine":"Automat do gier","Grand Piano":"Fortepian","Bright tropical fish to feed.":"Kolorowe rybki tropikalne do karmienia.","Play a round for a few coins every half hour.":"Zagraj rundę i zgarnij monety co pół godziny.","Play a tune for bonus XP every hour.":"Zagraj melodię i zdobądź bonusowe XP co godzinę.","Royal Damask":"Królewski adamaszek","Marble Tiles":"Płytki marmurowe","Golden Gnome":"Złoty krasnal","Rainbow Arch":"Tęczowy łuk","Unicorn Statue":"Posąg jednorożca","Feed the fish":"Nakarm rybki","Play the piano":"Zagraj na fortepianie","Play a game":"Zagraj w grę","Feeding the fish":"Karmienie rybek","Playing piano":"Gra na fortepianie","Playing":"Granie","The fish swim up for their food.":"Rybki podpływają po jedzenie.","What a lovely tune!":"Co za piękna melodia!",
 
 "Plow here":"Zaoraj tutaj","Free":"Za darmo","No ingredients":"Bez składników","New level":"Nowy poziom","New in the Market":"Nowości na targu","Press back again to leave Farm Village.":"Naciśnij wstecz jeszcze raz, aby wyjść z Farm Village.","Privacy policy":"Polityka prywatności","Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.":"Potrzebujesz więcej pola? Dotknij trawy i naciśnij Zaoraj tutaj. Albo przytrzymaj palec na trawie i przeciągnij, aby zaorać cały rząd.","That is the top ribbon. Legendary!":"To najwyższa wstęga. Legenda!","Your farm keeps growing.":"Twoja farma wciąż rośnie.","Way to go!":"Brawo!","Check out what is new in the Market.":"Zobacz, co nowego na targu.","Yellow ribbon":"Żółta wstęga","White ribbon":"Biała wstęga","Red ribbon":"Czerwona wstęga","Blue ribbon":"Niebieska wstęga","Can you earn the White ribbon next?":"Zdobędziesz teraz białą wstęgę?","Can you earn the Red ribbon next?":"Zdobędziesz teraz czerwoną wstęgę?","Can you earn the Blue ribbon next?":"Zdobędziesz teraz niebieską wstęgę?","Next level":"Następny poziom","Next ribbon":"Następna wstęga",
@@ -2253,6 +2261,16 @@ const PL_PATS=[
 [/^Lovely! Bonus XP again in (.+)\.$/,m=>'Pięknie! Bonusowe XP znów za '+L_t(m[1])+'.'],
 [/^High score! Coins again in (.+)\.$/,m=>'Rekord! Monety znów za '+L_t(m[1])+'.'],
 [/^High score! \+(\d+) coins\.$/,m=>'Rekord! +'+m[1]+' '+p3(m[1],'moneta','monety','monet')+'.'],
+[/^You were away for (.+)\. Here is what is waiting on the farm:$/,m=>'Nie było cię przez '+L_t(m[1])+'. Oto, co czeka na farmie:'],
+[/^(\d+) crops? (?:is|are) ready to harvest$/,m=>m[1]+' '+p3(m[1],'plon czeka','plony czekają','plonów czeka')+' na zbiór'],
+[/^(\d+) animals? (?:has|have) something for you$/,m=>m[1]+' '+p3(m[1],'zwierzę ma','zwierzęta mają','zwierząt ma')+' coś dla ciebie'],
+[/^(\d+) fruit trees? (?:is|are) ready to pick$/,m=>m[1]+' '+p3(m[1],'drzewo owocowe jest gotowe','drzewa owocowe są gotowe','drzew owocowych jest gotowych')+' do zbioru'],
+[/^(\d+) goods? (?:is|are) waiting in your buildings$/,m=>m[1]+' '+p3(m[1],'produkt czeka','produkty czekają','produktów czeka')+' w budynkach'],
+[/^(\d+) neighbor orders? (?:is|are) ready to fill$/,m=>m[1]+' '+p3(m[1],'zamówienie sąsiada można','zamówienia sąsiadów można','zamówień sąsiadów można')+' zrealizować'],
+[/^(\d+) animals? (?:is|are) hungry$/,m=>m[1]+' '+p3(m[1],'zwierzę jest głodne','zwierzęta są głodne','zwierząt jest głodnych')],
+[/^(\d+) crops? (?:has|have) withered\. Clear and replant them$/,m=>m[1]+' '+p3(m[1],'plon usechł','plony uschły','plonów uschło')+'. Usuń je i posadź od nowa'],
+[/^Spend (\d+) Farm Cash on (.+)\?$/,m=>'Wydać '+m[1]+' '+p3(m[1],'farmdolara','farmdolary','farmdolarów')+' na: '+m[2].split(', ').map(L_w).join(', ')+'?'],
+[/^You need (\d+) more Farm Cash for this\.$/,m=>'Potrzebujesz jeszcze '+m[1]+' '+p3(m[1],'farmdolara','farmdolarów','farmdolarów')+'.'],
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -2473,7 +2491,24 @@ const MAKERS={
   fishpond:{name:'Fishing Pond',lvl:6,cost:2200,xp:60,desc:'Cast a line with some bait and catch fresh fish.',recipes:[
     {in:{feed:4},out:'fish',n:1,time:120},{in:{feed:10},out:'fish',n:3,time:240},{in:{corn:1},out:'fish',n:2,time:180}]},
   cider:{name:'Cider Press',lvl:8,cost:3500,xp:80,desc:'Presses fruit into cider and juice that sell for a lot.',recipes:[
-    {in:{t_apple:4},out:'applecider',n:1,time:150},{in:{t_cherry:4},out:'cherryjuice',n:1,time:150},{in:{grapes:3},out:'grapejuice',n:1,time:180}]}
+    {in:{t_apple:4},out:'applecider',n:1,time:150},{in:{t_cherry:4},out:'cherryjuice',n:1,time:150},{in:{grapes:3},out:'grapejuice',n:1,time:180}]},
+  // the second half of the valley: each building turns goods that only sold before into something new, and the later ones use what the earlier ones make
+  dairy:{name:'Dairy',lvl:21,cost:6000,xp:120,desc:'Churns milk into butter, cream, goat cheese and yogurt.',recipes:[
+    {in:{a_cow:2},out:'butter',n:1,time:40},{in:{a_cow:3},out:'cream',n:1,time:50,lvl:22},{in:{a_goat:3},out:'goatcheese',n:1,time:60,lvl:23},{in:{a_cow:2,blueberry:2},out:'yogurt',n:1,time:55,lvl:24}]},
+  loom:{name:'Weaving Loom',lvl:23,cost:8000,xp:140,desc:'Spins cotton, fur and wool into fabric and cozy things to wear.',recipes:[
+    {in:{cotton:3},out:'fabric',n:1,time:50},{in:{a_rabbit:3},out:'mittens',n:1,time:60,lvl:24},{in:{a_llama:2,fabric:1},out:'poncho',n:1,time:80,lvl:27},{in:{a_duck:4,fabric:1},out:'pillow',n:1,time:70,lvl:29}]},
+  juicebar:{name:'Juice Bar',lvl:25,cost:10000,xp:160,desc:'Fresh juice, lemonade and smoothies from your orchard.',recipes:[
+    {in:{t_orange:3},out:'ojuice',n:1,time:40},{in:{t_lemon:3,honey:1},out:'lemonade',n:1,time:50,lvl:26},{in:{t_peach:2,a_cow:1},out:'smoothie',n:1,time:50,lvl:28},{in:{watermelon:1,raspberry:2},out:'melonade',n:1,time:60,lvl:30}]},
+  bakery:{name:'Bakery',lvl:28,cost:14000,xp:200,desc:'A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.',recipes:[
+    {in:{wheat:3,butter:1,a_chicken:1},out:'croissant',n:2,time:60},{in:{carrot:3,wheat:2,a_chicken:1},out:'carrotcake',n:1,time:80,lvl:29},{in:{t_plum:3,wheat:2,butter:1},out:'plumtart',n:1,time:85,lvl:31},{in:{t_lemon:2,cream:1,wheat:2},out:'lemonpie',n:1,time:95,lvl:33}]},
+  florist:{name:'Flower Shop',lvl:31,cost:18000,xp:240,desc:'Ties your flowers into bouquets and pours lavender candles.',recipes:[
+    {in:{tulip:3,daffodil:2},out:'springbq',n:1,time:50},{in:{rose:3,glory:2},out:'rosebq',n:1,time:65,lvl:32},{in:{sunflower:3,daisy:3},out:'sunbq',n:1,time:60,lvl:34},{in:{lavender:3,honey:1},out:'candle',n:1,time:75,lvl:35}]},
+  sugarmill:{name:'Sugar Mill',lvl:34,cost:22000,xp:280,desc:'Grinds beets into sugar for sauces, caramel apples and ice cream.',recipes:[
+    {in:{beet:3},out:'sugar',n:2,time:50},{in:{cranberry:3,sugar:1},out:'cransauce',n:1,time:60,lvl:36},{in:{t_apple:2,sugar:1,cream:1},out:'caramelapple',n:2,time:70,lvl:38},{in:{sugar:2,a_cow:1,t_cherry:2},out:'icecream',n:1,time:80,lvl:40}]},
+  diner:{name:'Country Diner',lvl:38,cost:28000,xp:340,desc:'Hot meals for hungry towns: pizza, sushi and stir fry.',recipes:[
+    {in:{wheat:2,tomato:2,cheese:1},out:'pizza',n:1,time:80},{in:{wheat:2,tomato:1,pepper:2,cheese:1},out:'pepperpizza',n:1,time:90,lvl:41},{in:{rice:2,fish:2},out:'sushi',n:2,time:75,lvl:43},{in:{rice:2,pepper:1,eggplant:1,carrot:1},out:'stirfry',n:1,time:85,lvl:45}]},
+  tailor:{name:'Tailor',lvl:42,cost:34000,xp:400,desc:'Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.',recipes:[
+    {in:{fabric:2,a_turkey:3},out:'quilt',n:1,time:100},{in:{a_horse:3,fabric:1},out:'saddle',n:1,time:110,lvl:44},{in:{a_sheep:3,a_llama:1},out:'wscarf',n:1,time:90,lvl:46},{in:{fabric:2,a_rabbit:2,cotton:2},out:'teddy',n:1,time:115,lvl:48}]}
 };
 // Everything the barn can hold. Crops keep their crop id; animal goods are a_<animal>, fruit is t_<tree>.
 const ITEMS={};
@@ -2500,6 +2535,14 @@ Object.assign(ITEMS,{
   applecider:{name:'Apple Cider',sell:160,cat:'made',lvl:8},cherryjuice:{name:'Cherry Juice',sell:240,cat:'made',lvl:8},grapejuice:{name:'Grape Juice',sell:630,cat:'made',lvl:8}
 });
 for(const id in ITEMS)if(ITEMS[id].cat==='made')ITEMS[id].sell=Math.round(ITEMS[id].sell*MADE_VALUE/5)*5;
+// goods from the Dairy, Loom and the other later buildings: each is worth its ingredients plus a share for the time it takes
+const LATE_GOODS={butter:'Butter',cream:'Fresh Cream',goatcheese:'Goat Cheese',yogurt:'Blueberry Yogurt',fabric:'Cotton Fabric',mittens:'Angora Mittens',poncho:'Llama Poncho',pillow:'Down Pillow',
+  ojuice:'Orange Juice',lemonade:'Honey Lemonade',smoothie:'Peach Smoothie',melonade:'Melon Cooler',croissant:'Croissant',carrotcake:'Carrot Cake',plumtart:'Plum Tart',lemonpie:'Lemon Cream Pie',
+  springbq:'Spring Bouquet',rosebq:'Rose Bouquet',sunbq:'Sunny Bouquet',candle:'Lavender Candle',sugar:'Beet Sugar',cransauce:'Cranberry Sauce',caramelapple:'Caramel Apple',icecream:'Cherry Ice Cream',
+  pizza:'Farm Pizza',pepperpizza:'Pepper Pizza',sushi:'Sushi Rolls',stirfry:'Veggie Stir Fry',quilt:'Patchwork Quilt',saddle:'Leather Saddle',wscarf:'Woolly Scarf',teddy:'Teddy Bear'};
+for(const m of['dairy','loom','juicebar','bakery','florist','sugarmill','diner','tailor'])for(const r of MAKERS[m].recipes){if(ITEMS[r.out])continue;
+  let v=0;for(const k in r.in)v+=(ITEMS[k]?ITEMS[k].sell:0)*r.in[k];
+  ITEMS[r.out]={name:LATE_GOODS[r.out],sell:Math.max(10,Math.round((v*1.3+r.time/15)/r.n/5)*5),cat:'made',lvl:Math.max(MAKERS[m].lvl,r.lvl||0)}}
 for(const id in ANIMALS)ITEMS['f_'+id]={name:ANIMALS[id].name+' Feed',sell:4+(ANIMALS[id].feed||1)*2,cat:'supply',lvl:ANIMALS[id].lvl};
 function recipeLvl(r){let l=r.lvl||1;for(const k in r.in)l=Math.max(l,ITEMS[k].lvl);if(ITEMS[r.out]&&r.out.startsWith('f_'))l=Math.max(l,ITEMS[r.out].lvl);return l}
 function feedNeed(id){return ANIMALS[id].feed||1}
@@ -2536,7 +2579,7 @@ const NEIGHBORS=[
 ];
 for(const n of NEIGHBORS)n.look=Object.assign(defaultLook(),n.look);
 const DAILY=[{coins:50},{coins:100},{coins:150,fuel:20},{coins:250},{coins:300,cash:1}];
-function need(l){return Math.round(60+50*l+10*l*l)} // XP for the next level: grows steadily so Level 20 takes days of play, not hours
+function need(l){const q=x=>Math.round(60+50*x+10*x*x);return l<=20?q(l):q(20)+(l-20)*440} // XP for the next level: grows quickly to Level 20, then by a steady 440 a level so 21 to 50 stays reachable
 
 /* ================= state ================= */
 let S,occ={},N=16,VIS=null;
@@ -2606,7 +2649,7 @@ let lastBak=0;
 function homeState(){return VIS?Object.assign({},S,{tiles:VIS.home.tiles,size:VIS.home.size}):S}
 function homeTiles(){return VIS?VIS.home.tiles:S.tiles}
 let RESET=false;
-function save(){if(RESET)return;try{const j=JSON.stringify(homeState());localStorage.setItem(KEY,j);if(Date.now()-lastBak>180000){lastBak=Date.now();localStorage.setItem(KEY+'-bak',j)}}catch(e){}}
+function save(){if(RESET)return;if(S&&!VIS)S.seen=Date.now();try{const j=JSON.stringify(homeState());localStorage.setItem(KEY,j);if(Date.now()-lastBak>180000){lastBak=Date.now();localStorage.setItem(KEY+'-bak',j)}}catch(e){}}
 function defOf(o){return o.k==='mk'?MAKERS[o.id]:o.k==='home'?HOMES[o.id]:o.k==='animal'?ANIMALS[o.id]:o.k==='tree'?TREES[o.id]:o.k==='deco'?DECOR[o.id]:o.k==='plot'?(o.crop?CROPS[o.crop]:null):null}
 function size(o){return o.k==='home'?(o.small?2:3):o.k==='bld'||o.k==='mk'?2:(o.k==='deco'&&DECOR[o.id].size)||1}
 // Homes grew from 2x2 to a 3x3 pen. Old saves: each home grows where it stands if there is room, or moves to the nearest
@@ -5156,6 +5199,94 @@ function expandArt(label){
   }catch(e){console.error(e)}
   g=prev;return EXPAND_ART[label]=c;
 }
+// ---- goods from the later buildings ----
+function pvBlob(cx,cy,rx,ry,col,o){o=o||{};g.beginPath();g.ellipse(cx,cy,rx,ry,o.rot||0,0,7);g.fillStyle=pvR(cx,cy,Math.max(rx,ry),[shade(col,.35),col,shade(col,-.4)]);g.fill();if(o.line!==false){g.strokeStyle=shade(col,-.5);g.lineWidth=.7;g.stroke()}}
+function pvGlass(cx,top,bot,w,liquid,o){o=o||{};const L=cx-w/2,R=cx+w/2,b2=w*.38;
+  g.beginPath();g.moveTo(L,top);g.lineTo(R,top);g.lineTo(cx+b2,bot);g.lineTo(cx-b2,bot);g.closePath();g.fillStyle='rgba(215,235,240,.45)';g.fill();
+  g.save();g.clip();const ly=top+(o.air??8);g.fillStyle=pvL(L,0,R,0,[shade(liquid,-.35),shade(liquid,.15),liquid,shade(liquid,-.45)]);g.fillRect(L-2,ly,w+4,bot-ly+2);if(o.inner)o.inner(L,R,ly);g.restore();
+  g.strokeStyle='rgba(80,100,110,.7)';g.lineWidth=.8;g.beginPath();g.moveTo(L,top);g.lineTo(cx-b2,bot);g.lineTo(cx+b2,bot);g.lineTo(R,top);g.stroke();g.beginPath();g.ellipse(cx,top,w/2,2.4,0,0,7);g.strokeStyle='rgba(120,140,150,.8)';g.stroke();
+  g.fillStyle='rgba(255,255,255,.55)';g.beginPath();g.moveTo(L+4,top+4);g.lineTo(L+7,top+4);g.lineTo(cx-b2+3,bot-4);g.lineTo(cx-b2+1.5,bot-4);g.closePath();g.fill()}
+function pvBouquet(cols,paper){pvShadow(50,88,26,5);
+  g.beginPath();g.moveTo(30,44);g.lineTo(70,44);g.lineTo(54,88);g.lineTo(46,88);g.closePath();g.fillStyle=pvL(30,0,70,0,[shade(paper,-.25),paper,shade(paper,-.35)]);g.fill();g.strokeStyle=shade(paper,-.5);g.lineWidth=.8;g.stroke();
+  g.strokeStyle='#3f8a34';g.lineWidth=1.4;for(const[x,y]of[[34,30],[44,22],[56,22],[66,30],[50,30]])line([50,62],[x,y+8]);
+  for(const[x,y,a]of[[28,40,-.8],[72,40,.8],[38,46,-.4],[62,46,.4]])pvLeaf(x,y,12,5,a+Math.PI/2,'#4f9a3e');
+  const pos=[[36,34],[50,26],[64,34],[43,42],[57,42],[50,38]];pos.forEach(([x,y],i)=>{const c=cols[i%cols.length];if(typeof c==='function')c(x,y);else{for(let k=0;k<6;k++){const an=k/6*Math.PI*2;pvBlob(x+Math.cos(an)*3.6,y+Math.sin(an)*3.2,3.4,3,c,{line:false})}pvBlob(x,y,2.4,2.2,'#ffd23f',{line:false})}});
+  g.beginPath();g.moveTo(42,66);g.quadraticCurveTo(50,70,58,66);g.lineWidth=3;g.strokeStyle='#e0352b';g.stroke();pvBlob(50,67,3.2,2.4,'#e0352b')}
+function pvRose(x,y){pvBlob(x,y,6,5.4,'#d81e3a');g.strokeStyle='#8a0a1e';g.lineWidth=.7;for(const r of[1.6,3,4.4]){g.beginPath();g.arc(x,y,r,.4,4.6);g.stroke()}}
+function pvSun(x,y){for(let k=0;k<12;k++){const an=k/12*Math.PI*2;g.save();g.translate(x,y);g.rotate(an);g.beginPath();g.ellipse(6,0,4,1.8,0,0,7);g.fillStyle='#f6c21e';g.fill();g.restore()}pvBlob(x,y,4,4,'#6a3a12')}
+function pvTulip(x,y){g.beginPath();g.moveTo(x-5,y-2);g.lineTo(x-5,y+3);g.quadraticCurveTo(x,y+7,x+5,y+3);g.lineTo(x+5,y-2);g.lineTo(x+2.5,y+.5);g.lineTo(x,y-4);g.lineTo(x-2.5,y+.5);g.closePath();g.fillStyle=pvL(x-5,0,x+5,0,['#ff8aa8','#e0356a','#a8204a']);g.fill()}
+Object.assign(PV,{
+  butter(){pvPlate(50,74,36,12);const F=[[26,58],[62,52],[76,60],[40,67]];
+    g.beginPath();g.moveTo(26,58);g.lineTo(40,67);g.lineTo(40,78);g.lineTo(26,69);g.closePath();g.fillStyle='#e8c040';g.fill();g.beginPath();g.moveTo(40,67);g.lineTo(76,60);g.lineTo(76,71);g.lineTo(40,78);g.closePath();g.fillStyle=pvL(40,0,76,0,['#f6d860','#d8b030']);g.fill();
+    g.beginPath();F.forEach((p,i)=>i?g.lineTo(...p):g.moveTo(...p));g.closePath();g.fillStyle=pvL(26,52,76,67,['#fff2a8','#f6dc6a']);g.fill();g.strokeStyle='#b8901a';g.lineWidth=.7;g.stroke();
+    g.strokeStyle='rgba(180,140,30,.6)';g.lineWidth=1;g.beginPath();g.moveTo(44,58);g.quadraticCurveTo(52,55,60,58);g.stroke();pvSpark(36,58,3)},
+  cream(){pvShadow(50,87,26,5);pvJar(50,34,86,36,'#fbf6ea',{inner:()=>{g.fillStyle='rgba(255,255,255,.4)';g.fillRect(32,34,36,10)}});
+    g.beginPath();g.ellipse(50,34,18,4,0,0,7);g.fillStyle='#fffdf6';g.fill();g.strokeStyle='#bdb6a6';g.lineWidth=.7;g.stroke();g.beginPath();g.moveTo(66,36);g.quadraticCurveTo(78,40,70,58);g.lineWidth=3.4;g.strokeStyle='#e8e2d2';g.stroke();
+    pvLabel(50,60,22,12,'#5a8ac0',()=>{g.fillStyle='#3f6a9a';g.font='bold 5px sans-serif';g.textAlign='center';g.fillText('CREAM',0,2)})},
+  goatcheese(){pvShadow(50,86,38,6);g.beginPath();g.roundRect(14,72,72,10,3);g.fillStyle=pvL(0,72,0,82,['#c9935a','#8a5a32']);g.fill();
+    g.beginPath();g.ellipse(36,62,10,12,0,0,7);g.fillStyle='#f4f0e6';g.fill();g.beginPath();g.rect(36,50,34,24);g.fillStyle=pvL(0,50,0,74,['#ffffff','#e8e2d6']);g.fill();g.beginPath();g.ellipse(70,62,10,12,0,0,7);g.fillStyle='#f8f4ec';g.fill();g.strokeStyle='#c8c0b0';g.lineWidth=.7;g.stroke();
+    const k=pvRand(3);for(let i=0;i<14;i++){g.fillStyle=i%2?'#4f8a3a':'#6aa84a';g.fillRect(38+k()*30,52+k()*20,1.6,1.2)}pvLeaf(58,48,12,5,-.4,'#5fa84a')},
+  yogurt(){pvShadow(50,87,24,5);pvJar(50,40,86,34,'#f6eef8');for(let i=0;i<9;i++){pvBlob(38+(i%5)*6,38-(i>4?4:0)+Math.sin(i)*1.5,3.2,3,'#4a5ad0')}pvSpark(42,34,2.4);
+    pvLabel(50,66,24,12,'#7a4fd0',()=>{pvBlob(0,0,2.6,2.4,'#4a5ad0')})},
+  fabric(){pvShadow(50,86,38,6);const col='#e8dcc4';g.beginPath();g.moveTo(30,70);g.lineTo(80,62);g.lineTo(86,82);g.lineTo(34,88);g.closePath();g.fillStyle=pvL(30,0,86,0,[shade(col,-.1),col]);g.fill();g.strokeStyle='#a89878';g.lineWidth=.7;g.stroke();
+    g.save();g.translate(32,56);g.beginPath();g.ellipse(0,0,14,22,-.15,0,7);g.fillStyle=pvR(0,0,22,['#fffaf0',col,'#b8a888']);g.fill();g.strokeStyle='#a89878';g.stroke();g.strokeStyle='#c8b898';g.lineWidth=.7;for(const r of[3,6,9])g.beginPath(),g.ellipse(0,0,r*.65,r,-.15,0,7),g.stroke();g.restore();
+    g.strokeStyle='#5a8ac0';g.lineWidth=2;for(const t of[.3,.6])line([34+t*50,70-t*8+6],[38+t*50,86-t*6])},
+  mittens(){pvShadow(50,87,34,5);for(const[x,r,c]of[[38,-.2,'#f2a0c0'],[62,.2,'#e07aa8']]){g.save();g.translate(x,60);g.rotate(r);g.beginPath();g.moveTo(-10,24);g.lineTo(-10,-2);g.quadraticCurveTo(-10,-18,2,-18);g.quadraticCurveTo(12,-18,12,-4);g.lineTo(12,24);g.closePath();g.fillStyle=pvL(-10,0,12,0,[shade(c,.25),c,shade(c,-.3)]);g.fill();g.strokeStyle=shade(c,-.45);g.lineWidth=.7;g.stroke();
+    g.beginPath();g.ellipse(-12,4,5,8,-.5,0,7);g.fillStyle=shade(c,.1);g.fill();g.stroke();g.beginPath();g.rect(-11,18,24,8);g.fillStyle='#fffaf4';g.fill();g.strokeStyle='#d8c8c0';g.stroke();g.restore()}},
+  poncho(){pvShadow(50,88,38,5);g.beginPath();g.moveTo(50,22);g.lineTo(86,76);g.lineTo(14,76);g.closePath();g.fillStyle=pvL(14,0,86,0,['#c84a2a','#e8743a','#c84a2a']);g.fill();g.strokeStyle='#7a2a12';g.lineWidth=.8;g.stroke();
+    g.save();g.clip();for(const[y,c]of[[44,'#ffd23f'],[52,'#2a6aa8'],[60,'#ffd23f'],[68,'#2f8a3a']]){g.fillStyle=c;g.fillRect(0,y,100,3.4)}g.restore();g.beginPath();g.ellipse(50,26,7,3,0,0,7);g.fillStyle='#5a2a12';g.fill();
+    g.strokeStyle='#e8a050';g.lineWidth=1.2;for(let x=16;x<85;x+=3.4)line([x,76],[x,83])},
+  pillow(){pvShadow(50,84,38,6);g.beginPath();g.moveTo(16,40);g.quadraticCurveTo(50,30,84,40);g.quadraticCurveTo(90,58,84,76);g.quadraticCurveTo(50,86,16,76);g.quadraticCurveTo(10,58,16,40);g.closePath();g.fillStyle=pvR(46,54,40,['#ffffff','#f2eef6','#cfc6dc']);g.fill();g.strokeStyle='#a89ec0';g.lineWidth=.8;g.stroke();
+    g.strokeStyle='rgba(150,140,170,.4)';g.lineWidth=1;g.beginPath();g.moveTo(30,50);g.quadraticCurveTo(48,58,70,48);g.stroke();for(const[x,y]of[[16,40],[84,40],[84,76],[16,76]])pvBlob(x,y,2.6,2.2,'#e8e2f0');pvLeaf(70,30,10,4,-.6,'#f4f0e8')},
+  ojuice(){pvShadow(50,87,26,5);pvBottle(46,86,30,58,'#ffa21e','#2f8a3a');pvLabel(46,64,22,14,'#f2a21e',()=>{pvBlob(0,0,4,4,'#ff9a1e')});
+    g.save();g.translate(70,74);g.beginPath();g.arc(0,0,10,Math.PI,0);g.closePath();g.fillStyle='#ffb43a';g.fill();g.strokeStyle='#d8801a';g.lineWidth=1;g.stroke();g.strokeStyle='#ffe0a0';g.lineWidth=.7;for(let i=1;i<6;i++){const an=Math.PI+i/6*Math.PI;line([0,0],[Math.cos(an)*8.6,Math.sin(an)*8.6])}g.restore()},
+  lemonade(){pvShadow(50,87,26,5);pvGlass(50,30,86,40,'#f8e46a',{inner:(L,R,ly)=>{for(const[x,y]of[[44,50],[56,60],[48,72]]){g.beginPath();g.roundRect(x-4,y-4,8,8,1.6);g.fillStyle='rgba(255,255,255,.55)';g.fill()}}});
+    g.save();g.translate(66,32);g.beginPath();g.arc(0,0,9,0,7);g.fillStyle='#f8e040';g.fill();g.strokeStyle='#c8a810';g.lineWidth=1;g.stroke();g.beginPath();g.arc(0,0,6.6,0,7);g.fillStyle='#fff6a8';g.fill();g.strokeStyle='#f0d030';for(let i=0;i<8;i++){const an=i/8*Math.PI*2;line([0,0],[Math.cos(an)*6,Math.sin(an)*6])}g.restore();
+    g.strokeStyle='#e0352b';g.lineWidth=2.4;line([42,40],[34,14])},
+  smoothie(){pvShadow(50,87,24,5);pvGlass(50,30,86,38,'#ffa878',{air:4});g.beginPath();g.ellipse(50,30,19,5,0,0,7);g.fillStyle='#ffc8a0';g.fill();
+    pvBlob(60,26,7,6,'#ffa36b');pvLeaf(62,20,7,3,-.6,'#3f9a3c');g.strokeStyle='#4ab0e8';g.lineWidth=2.4;line([44,34],[38,12]);g.strokeStyle='#fff';g.lineWidth=.8;line([43,30],[39,16])},
+  melonade(){pvShadow(50,87,24,5);pvGlass(50,32,86,38,'#ff6a7a',{air:6});g.save();g.translate(64,32);g.rotate(.3);g.beginPath();g.moveTo(-10,0);g.arc(0,0,10,Math.PI,0,true);g.closePath();g.fillStyle='#ff4a5a';g.fill();g.beginPath();g.arc(0,0,10,0,Math.PI);g.lineWidth=2.4;g.strokeStyle='#3f9a3c';g.stroke();
+    g.fillStyle='#2a1a12';for(const x of[-5,0,5])g.fillRect(x-.6,3,1.2,2);g.restore()},
+  croissant(){pvPlate(50,74,38,12);for(const[x,y,s]of[[40,64,1],[60,58,.9]]){g.save();g.translate(x,y);g.scale(s,s);for(let i=-3;i<=3;i++){const w=9-Math.abs(i)*1.6;g.beginPath();g.ellipse(i*4.6,Math.abs(i)*1.6,w*.6,w,i*.3,0,7);g.fillStyle=pvR(i*4.6,-2,w,['#ffd890','#e8a040','#a86018']);g.fill();g.strokeStyle='#8a4a10';g.lineWidth=.6;g.stroke()}g.restore()}pvSpark(36,56,2.6)},
+  carrotcake(){pvPlate(50,76,36,12);g.beginPath();g.moveTo(28,60);g.lineTo(70,54);g.lineTo(70,72);g.lineTo(28,78);g.closePath();g.fillStyle=pvL(0,54,0,78,['#c8783a','#e8a060','#c8783a','#e8a060','#a8602a']);g.fill();
+    g.beginPath();g.moveTo(28,60);g.lineTo(70,54);g.lineTo(78,58);g.lineTo(36,64);g.closePath();g.fillStyle='#fffaf0';g.fill();g.fillStyle='#fffaf0';g.fillRect(28,66,42,2.4);
+    g.save();g.translate(54,54);g.rotate(-.6);g.beginPath();g.moveTo(0,-2);g.lineTo(10,0);g.lineTo(0,2);g.closePath();g.fillStyle='#f2801e';g.fill();g.restore();pvLeaf(52,52,6,2.4,-2,'#4f9a3e')},
+  plumtart(){pvShadow(50,84,38,6);g.beginPath();g.ellipse(50,64,36,16,0,0,7);g.fillStyle=pvL(0,48,0,80,['#e8b060','#b87830']);g.fill();g.beginPath();g.ellipse(50,62,30,12,0,0,7);g.fillStyle='#6a1e5a';g.fill();
+    for(let i=0;i<10;i++){const an=i/10*Math.PI*2;g.save();g.translate(50+Math.cos(an)*16,62+Math.sin(an)*6.4);g.rotate(an);g.beginPath();g.ellipse(0,0,6,3,0,0,7);g.fillStyle=pvR(0,0,6,['#c86ab8','#8a2a7a','#4a0a3a']);g.fill();g.restore()}pvCrust(50,64,34,14,'#d89850',16);pvBlob(50,62,4,3,'#8a2a7a')},
+  lemonpie(){pvShadow(50,84,38,6);g.beginPath();g.ellipse(50,66,36,15,0,0,7);g.fillStyle=pvL(0,50,0,82,['#e8b060','#b87830']);g.fill();g.beginPath();g.ellipse(50,62,32,12,0,0,7);g.fillStyle='#f8e040';g.fill();
+    for(let i=0;i<14;i++){const an=i/14*Math.PI*2,r=i%2?12:20;const x=50+Math.cos(an)*r,y=58+Math.sin(an)*r*.38;g.beginPath();g.moveTo(x-4,y+2);g.quadraticCurveTo(x,y-9,x+1.6,y-8);g.quadraticCurveTo(x+4,y-1,x+4,y+2);g.closePath();g.fillStyle=pvL(0,y-9,0,y+2,['#d8a060','#fffaf0']);g.fill()}pvCrust(50,66,34,13,'#d89850',16)},
+  springbq(){pvBouquet([pvTulip,'#ffd23f',pvTulip,'#fff6a0','#ff8aa8',pvTulip],'#e8f4d8')},
+  rosebq(){pvBouquet([pvRose,pvRose,pvRose,'#7a4fd0',pvRose,'#7a4fd0'],'#f8e8ee')},
+  sunbq(){pvBouquet([pvSun,'#ffffff',pvSun,'#ffffff',pvSun,'#ffffff'],'#e8dcc0')},
+  candle(){pvShadow(50,87,24,5);pvJar(50,40,86,32,'#b8a0e0',{air:10});g.beginPath();g.ellipse(50,44,15,3.4,0,0,7);g.fillStyle='#d8c8f0';g.fill();g.strokeStyle='#2a2a2a';g.lineWidth=1;line([50,44],[50,38]);
+    g.beginPath();g.moveTo(50,22);g.quadraticCurveTo(56,32,50,38);g.quadraticCurveTo(44,32,50,22);g.fillStyle=pvL(0,22,0,38,['#fff6a0','#ffb02a','#e0602a']);g.fill();g.beginPath();g.arc(50,32,14,0,7);g.fillStyle='rgba(255,220,120,.18)';g.fill();
+    for(const x of[40,58])pvLeaf(x,62,10,3,-1.6+(x-50)*.03,'#8a6ac0')},
+  sugar(){pvShadow(50,87,36,6);pvSack(50,28,86,44,'#f8f6f0',{label:()=>{g.fillStyle='#5a8ac0';g.font='bold 7px sans-serif';g.textAlign='center';g.fillText('SUGAR',50,62)}});
+    for(const[x,y]of[[24,80],[76,82],[70,76]]){g.beginPath();g.moveTo(x,y-5);g.lineTo(x+6,y-3);g.lineTo(x+6,y+3);g.lineTo(x,y+5);g.lineTo(x-6,y+3);g.lineTo(x-6,y-3);g.closePath();g.fillStyle='#ffffff';g.fill();g.strokeStyle='#c8ccd2';g.lineWidth=.6;g.stroke()}},
+  cransauce(){pvShadow(50,87,26,5);pvJar(50,36,86,36,'#a8122a');const k=pvRand(4);for(let i=0;i<8;i++)pvBlob(36+k()*28,46+k()*30,2.6,2.4,'#d82a44',{line:false});
+    g.beginPath();g.roundRect(30,28,40,10,3);g.fillStyle=pvL(30,0,70,0,['#c8a040','#f6dc80','#a88020']);g.fill();g.strokeStyle='#7a5a10';g.lineWidth=.7;g.stroke();pvLabel(50,62,22,12,'#a8122a',()=>{pvBlob(0,0,3,3,'#d82a44')})},
+  caramelapple(){pvShadow(50,87,30,5);for(const[x,s]of[[38,1],[62,.9]]){g.save();g.translate(x,62);g.scale(s,s);g.strokeStyle='#e8d0a0';g.lineWidth=3;line([0,-10],[0,-34]);pvBlob(0,4,15,14,'#d82a2a');
+    g.beginPath();g.moveTo(-15,4);g.quadraticCurveTo(-14,-11,0,-11);g.quadraticCurveTo(14,-11,15,4);g.quadraticCurveTo(10,2,8,8);g.quadraticCurveTo(4,2,0,6);g.quadraticCurveTo(-5,2,-8,9);g.quadraticCurveTo(-10,2,-15,4);g.closePath();g.fillStyle=pvL(0,-11,0,9,['#f0b060','#c87a2a']);g.fill();g.restore()}pvSpark(32,52,2.6)},
+  icecream(){pvShadow(50,88,16,4);g.beginPath();g.moveTo(36,52);g.lineTo(64,52);g.lineTo(50,90);g.closePath();g.fillStyle=pvL(36,0,64,0,['#e8b060','#c88838']);g.fill();g.strokeStyle='#8a5a1a';g.lineWidth=.7;g.stroke();g.save();g.clip();g.strokeStyle='rgba(140,90,30,.6)';for(let i=-4;i<8;i++){line([30+i*6,52],[50+i*6,92]);line([70-i*6,52],[50-i*6,92])}g.restore();
+    pvBlob(50,46,15,12,'#ffd0dc');pvBlob(50,32,12,10,'#ffffff');pvBlob(50,22,4,4,'#d81e3a');g.strokeStyle='#3f8a34';g.lineWidth=1;line([50,18],[54,12])},
+  pizza(){pvShadow(50,82,40,6);g.beginPath();g.ellipse(50,64,40,17,0,0,7);g.fillStyle=pvL(0,47,0,81,['#e8b060','#b87830']);g.fill();g.beginPath();g.ellipse(50,62,34,13.5,0,0,7);g.fillStyle='#d8402a';g.fill();g.save();g.clip();const k=pvRand(9);for(let i=0;i<16;i++){g.beginPath();g.ellipse(18+k()*64,50+k()*24,6,3,k(),0,7);g.fillStyle='#fff0b0';g.fill()}g.restore();
+    for(const[x,y]of[[36,58],[56,56],[64,66],[44,68],[50,61]])pvBlob(x,y,4,2.4,'#a81e1a');pvLeaf(60,60,6,2.6,.4,'#3f9a3c');g.strokeStyle='rgba(120,60,20,.5)';g.lineWidth=.8;line([16,62],[84,62]);line([30,52],[70,72])},
+  pepperpizza(){PV.pizza();for(const[x,y]of[[40,60],[58,64],[48,54],[66,58]]){g.beginPath();g.arc(x,y,3,0,7);g.lineWidth=1.6;g.strokeStyle='#3f9a3c';g.stroke()}pvBlob(34,66,3,2,'#ffd23f')},
+  sushi(){pvShadow(50,84,40,6);g.beginPath();g.roundRect(12,66,76,12,3);g.fillStyle=pvL(0,66,0,78,['#c9935a','#7a4a22']);g.fill();
+    for(const x of[28,50,72]){g.beginPath();g.ellipse(x,60,10,6,0,0,7);g.fillStyle='#1a2a1a';g.fill();g.fillRect(x-10,52,20,8);g.beginPath();g.ellipse(x,52,10,6,0,0,7);g.fillStyle='#fbfbf6';g.fill();g.beginPath();g.ellipse(x,52,5,3,0,0,7);g.fillStyle=x===50?'#f28a5a':'#ff9a8a';g.fill();g.beginPath();g.ellipse(x,52,2,1.2,0,0,7);g.fillStyle='#3f9a3c';g.fill()}},
+  stirfry(){pvShadow(50,86,36,6);g.beginPath();g.ellipse(50,56,34,10,0,0,7);g.fillStyle='#fbfbf6';g.fill();g.beginPath();g.moveTo(16,56);g.quadraticCurveTo(22,84,50,84);g.quadraticCurveTo(78,84,84,56);g.fillStyle=pvL(16,0,84,0,['#2a6aa8','#4a8ad0','#1f4f7a']);g.fill();
+    const k=pvRand(12);for(let i=0;i<22;i++){const c=['#f2801e','#3f9a3c','#e0352b','#6a2a8a','#f6dc6a'][i%5];pvBlob(24+k()*52,50+k()*8,3,1.6,c,{line:false,rot:k()*3})}g.strokeStyle='#5a3a1a';g.lineWidth=2;line([60,40],[84,20]);line([64,42],[88,24])},
+  quilt(){pvShadow(50,86,40,6);const C=['#e0457b','#f6dc6a','#5a8ac0','#5fa84a','#fffaf0','#e8743a'];for(let r=0;r<3;r++)for(let c=0;c<4;c++){const x=16+c*17-r*4,y=48+r*11;g.beginPath();g.moveTo(x,y);g.lineTo(x+17,y);g.lineTo(x+13,y+11);g.lineTo(x-4,y+11);g.closePath();g.fillStyle=C[(r*4+c)%6];g.fill();g.strokeStyle='rgba(60,40,30,.5)';g.lineWidth=.6;g.setLineDash([1,1]);g.stroke();g.setLineDash([])}
+    g.beginPath();g.moveTo(84,48);g.lineTo(80,59);g.lineTo(76,70);g.lineTo(72,81);g.lineTo(78,82);g.lineTo(90,50);g.closePath();g.fillStyle='#c84a6a';g.fill()},
+  saddle(){pvShadow(50,86,36,6);g.beginPath();g.moveTo(16,50);g.quadraticCurveTo(30,62,50,58);g.quadraticCurveTo(70,62,82,40);g.quadraticCurveTo(88,44,84,54);g.quadraticCurveTo(72,74,50,74);g.quadraticCurveTo(26,74,14,58);g.closePath();g.fillStyle=pvL(14,0,88,0,['#a8602a','#c88040','#7a4018']);g.fill();g.strokeStyle='#4a2410';g.lineWidth=.8;g.stroke();
+    g.beginPath();g.ellipse(20,48,6,8,-.3,0,7);g.fillStyle='#8a4a1a';g.fill();g.stroke();g.strokeStyle='#e8c070';g.lineWidth=.6;g.setLineDash([1.2,1]);g.beginPath();g.moveTo(22,58);g.quadraticCurveTo(50,70,78,52);g.stroke();g.setLineDash([]);
+    g.strokeStyle='#5a3418';g.lineWidth=2.4;line([50,72],[50,86]);g.beginPath();g.ellipse(50,86,5,2.6,0,0,7);g.strokeStyle='#c8ccd2';g.lineWidth=1.6;g.stroke()},
+  wscarf(){pvShadow(50,86,36,6);for(let i=0;i<3;i++){const y=50+i*9;g.beginPath();g.ellipse(46,y,26-i*2,8,0,0,7);g.fillStyle=pvL(20,0,72,0,i%2?['#3f9a3c','#5fb84a','#2f7a2c']:['#d9402f','#f06a52','#a82c22']);g.fill();g.strokeStyle='rgba(0,0,0,.3)';g.lineWidth=.6;g.stroke()}
+    g.beginPath();g.moveTo(66,52);g.lineTo(80,56);g.lineTo(78,82);g.lineTo(64,80);g.closePath();g.fillStyle=pvL(64,0,80,0,['#d9402f','#a82c22']);g.fill();g.fillStyle='#3f9a3c';g.fillRect(65,64,14,4);g.strokeStyle='#f06a52';g.lineWidth=1;for(let x=65;x<79;x+=2.4)line([x,81],[x-.6,88])},
+  teddy(){pvShadow(50,88,30,5);const c='#b8783a';for(const s of[-1,1]){pvBlob(50+s*16,72,7,8,c);pvBlob(50+s*12,82,8,6,c);pvBlob(50+s*12,82,4,3,'#e8c8a0',{line:false});pvBlob(50+s*12,26,6,6,c);pvBlob(50+s*12,26,3,3,'#e8c8a0',{line:false})}
+    pvBlob(50,68,16,18,c);pvBlob(50,70,9,11,'#e8c8a0',{line:false});pvBlob(50,38,15,14,c);pvBlob(50,44,7,5,'#e8c8a0');ell(50,41,2.4,1.6,'#2a1a12');ell(44,34,1.8,1.8,'#2a1a12');ell(56,34,1.8,1.8,'#2a1a12');
+    g.beginPath();g.moveTo(40,52);g.lineTo(50,56);g.lineTo(60,52);g.lineTo(60,58);g.lineTo(50,55);g.lineTo(40,58);g.closePath();g.fillStyle='#e0352b';g.fill()}
+});
 function prodCanvas(id){
   if(PROD[id])return PROD[id];
   const gold=id.startsWith('g_'),base=gold?id.slice(2):id,fn=PV[base];if(!fn)return null;
@@ -5239,6 +5370,36 @@ function signN(x,y,out){const[sx,sy]=P(x,y);g.strokeStyle='#4e331e';g.lineWidth=
   // upgraded buildings fly bunting from the sign; fully upgraded ones get a gold star
   if(MK_LV>=2){g.strokeStyle='#3a3a3a';g.lineWidth=.4;g.beginPath();g.moveTo(sx,sy-30);g.quadraticCurveTo(sx+9,sy-26,sx+20,sy-31);g.stroke();for(let i=0;i<5;i++){const t=(i+.5)/5,px=sx+t*20,py=sy-30+Math.sin(t*Math.PI)*2.6-t*1;poly([[px-1.6,py],[px+1.6,py],[px,py+3.4]],['#d9402f','#ffd23f','#2d8fe3','#3f9a3c','#e0457b'][i])}}
   if(MK_LV>=3)star4(sx+15,sy-25,3.4,'#ffd23f')}
+
+// The later buildings share one painted shed with their own walls, roof, front and yard props.
+const MK_LOOK={
+  dairy:{wallL:'#f2efe6',wallR:'#d9d4c6',wall:'lap',roof:['#5a8ac0','#3f6a9a','#2a4a70'],metal:true,trim:'#3f6a9a',door:'#3f6a9a',front:'milk',props:[['drum','#d8dde2'],['drum','#c8cdd2'],['crate','a_cow']],yard:'#c9bfa6',c:['#f4f1e8','#dcd6c8','#4f7fb5','#35608f']},
+  loom:{wallL:'#b0764a',wallR:'#8f5c38',wall:'batten',roof:['#8a4a6a','#6a3452','#4a2238'],trim:'#efe6d6',door:'#6a3452',front:'wheel',props:[['sack','#f4f0e6'],['crate','cotton'],['crate','a_rabbit']],yard:'#c4b391',c:['#c98a5a','#a8693e','#9a4a7a','#7a3460']},
+  juicebar:{wallL:'#fff2d0',wallR:'#ead8aa',wall:'lap',roof:['#f2a21e','#d98a10','#a86808'],trim:'#fffaf0',door:'#2f8a3a',front:'awning',awn:['#f2a21e','#fffaf0'],props:[['crate','t_orange'],['crate','t_lemon'],['barrel']],yard:'#d8caa4',c:['#fff2d0','#ead8aa','#f2a21e','#c98010']},
+  bakery:{wallL:'#e8c9a0',wallR:'#cfae82',wall:'stone',stoneTo:12,roof:['#b8584a','#9a4436','#6e2e24'],trim:'#fff6e8',door:'#7a4a22',front:'awning',awn:['#b8584a','#fff6e8'],chimney:1,props:[['sack','#e8dcc0'],['sack','#d8c8a0'],['crate','wheat']],yard:'#cbb994',c:['#f0d4ae','#d6b68a','#b8584a','#8a3c30']},
+  florist:{wallL:'#f6e6ee',wallR:'#e2cad6',wall:'lap',roof:['#5fa84a','#3f8a34','#2a6424'],trim:'#ffffff',door:'#d9467a',front:'awning',awn:['#e0457b','#ffffff'],props:[['crate','tulip'],['crate','rose'],['crate','sunflower']],yard:'#cfc4a4',c:['#f8e8f0','#e4ccd8','#5fa84a','#3f8a34']},
+  sugarmill:{wallL:'#c9bfae',wallR:'#ada392',wall:'stone',roof:['#7a6a5a','#5a4c3e','#3e342a'],trim:'#efe9dc',door:'#5a3a22',front:'wheel',props:[['sack','#f8f8f4'],['sack','#f8f8f4'],['crate','beet']],yard:'#bfb08e',c:['#cfc6b6','#b0a696','#7a6a5a','#5a4c3e']},
+  diner:{wallL:'#f4f0e6',wallR:'#dad4c6',wall:'lap',stoneTo:9,roof:['#d9402f','#b02e20','#7a1c12'],metal:true,trim:'#d9402f',door:'#2a4a70',front:'awning',awn:['#d9402f','#ffffff'],chimney:1,props:[['crate','tomato'],['crate','pepper'],['barrel']],yard:'#c8bc9c',c:['#f4f0e6','#dad4c6','#d9402f','#a82c22']},
+  tailor:{wallL:'#c9d8e8',wallR:'#aebfd2',wall:'batten',roof:['#4a4f6a','#363a52','#24273a'],trim:'#fbf8f0',door:'#8a4a6a',front:'awning',awn:['#4a4f6a','#e8d8b0'],props:[['crate','a_sheep'],['sack','#d8c8e8'],['crate','a_turkey']],yard:'#c2b69a',c:['#cfdcea','#b2c2d4','#4a4f6a','#363a52']}
+};
+function makerLateN(x,y,id){
+  const L=MK_LOOK[id],[cx,cy]=P(x+1,y+1);shadow(cx,cy+6,62,20);yardN(x,y,L.yard);
+  const m=makerShedN(x+.16,y+.3,1.3,1.1,28,15,{wallL:L.wallL,wallR:L.wallR,wall:L.wall,stoneTo:L.stoneTo,metal:L.metal,roof:L.roof,trim:L.trim,decor:(F,S2,k)=>{
+    // a door with a little window, two front windows with shutters, and the building's own front
+    const a=.5,b=.8;fp(F,[[a,k.base],[b,k.base],[b,k.base+17],[a,k.base+17]],L.door,'rgba(20,10,5,.5)',.6);fp(F,[[a+.06,k.base+11],[b-.06,k.base+11],[b-.06,k.base+15],[a+.06,k.base+15]],'#cfe6f2');ell(...F(b-.05,k.base+8),.9,.9,'#d9b25a');
+    for(const u of[.1,1.0]){fp(F,[[u,k.base+8],[u+.22,k.base+8],[u+.22,k.base+17],[u,k.base+17]],'#bfe0f0','rgba(20,10,5,.5)',.6);g.strokeStyle='#fffaf0';g.lineWidth=.8;fl(F,[u+.11,k.base+8],[u+.11,k.base+17]);fl(F,[u,k.base+12.5],[u+.22,k.base+12.5]);fp(F,[[u-.05,k.base+7.4],[u+.27,k.base+7.4],[u+.27,k.base+8.2],[u-.05,k.base+8.2]],L.trim)}
+    fp(S2,[[.38,k.base+9],[.72,k.base+9],[.72,k.base+18],[.38,k.base+18]],'#a8cfe2','rgba(20,10,5,.5)',.6);g.strokeStyle='#fffaf0';g.lineWidth=.8;fl(S2,[.55,k.base+9],[.55,k.base+18]);
+    if(L.front==='awning'){const n=8;for(let i=0;i<n;i++){const u0=i/n*1.3,u1=(i+1)/n*1.3;poly([F(u0,k.h-2),F(u1,k.h-2),P(x+.16+u1,y+1.4+.16,k.h-8),P(x+.16+u0,y+1.4+.16,k.h-8)],L.awn[i%2],'rgba(0,0,0,.25)',.4)}
+      for(let i=0;i<n;i++){const u=(i+.5)/n*1.3,[px,py]=P(x+.16+u,y+1.56,k.h-8);g.beginPath();g.arc(px,py,1.6,0,Math.PI);g.fillStyle=L.awn[i%2];g.fill()}}
+    if(L.front==='milk'){fp(F,[[.06,k.h-7],[.42,k.h-7],[.42,k.h-3],[.06,k.h-3]],'#3f6a9a');const[px,py]=F(.24,k.h-5);g.fillStyle='#fff';g.font='bold 3px sans-serif';g.textAlign='center';g.fillText('MILK',px,py+1)}
+    if(L.front==='wheel'){const[px,py]=F(1.18,k.base+12);g.strokeStyle='#5a3a22';g.lineWidth=1.6;g.beginPath();g.ellipse(px+3,py,6,9,0,0,7);g.stroke();g.lineWidth=.8;for(let i=0;i<8;i++){const an=i/8*Math.PI*2;line([px+3,py],[px+3+Math.cos(an)*6,py+Math.sin(an)*9])}}
+  }});
+  if(L.chimney){isoBox(x+.4,y+.5,.2,.2,50,'#9a5a4a','#7a4436','#b06a5a','#4a2418');if(!reduce){const t=performance.now()/1000;for(let i=0;i<3;i++){const q=(t*.4+i/3)%1,[px,py]=P(x+.5,y+.6,52+q*24);ell(px+Math.sin(q*5+i)*3,py,2+q*4,1.6+q*3,'rgba(240,240,240,'+(.5*(1-q)).toFixed(2)+')')}}}
+  // yard props along the front
+  L.props.forEach(([k,v],i)=>{const u=x+1.08+i*.27,w=y+1.62+(i%2)*.14,[px,py]=P(u,w);
+    if(k==='crate')crateN(u-.13,w-.1,.3,.22,8,0,v);else if(k==='sack')sackN(px,py,.8,v);else if(k==='drum')drumN(px,py,5,13,v);else{barrelN(px,py,6,13)}});
+  signN(x+.1,y+1.92,MAKERS[id].recipes[0].out);
+}
 function drawMakerN(x,y,id){
   const[cx,cy]=P(x+1,y+1);
   if(id==='feedmill'){
@@ -5402,7 +5563,8 @@ function drawMakerN(x,y,id){
     {const[p,q]=P(x+1.68,y+1.25);barrelN(p,q,7,15);ell(p+2,q-5,1.2,.8,'#c9a04a')}
     crateN(x+1.45,y+1.55,.34,.26,8,0,'t_apple');crateN(x+1.12,y+1.68,.34,.26,8,0,'t_apple');crateN(x+1.18,y+1.62,.3,.22,7,8,'t_cherry');
     signN(x+.1,y+1.92,'applecider');
-  }else drawMakerC(x,y,id);
+  }else if(MK_LOOK[id])makerLateN(x,y,id);
+  else drawMakerC(x,y,id);
 }
 
 // the original cartoon-style buildings (Settings > Art style > Cartoon)
@@ -5458,6 +5620,12 @@ function drawMakerC(x,y,id){
     g.strokeStyle='#3a3a3a';g.lineWidth=3;line([px2,py2-10],[px2,py2-34]);g.lineWidth=2;line([px2-12,py2-30],[px2+12,py2-30]);ell(px2,py2-14,8,3.4,'#6a7078','#22262b',1);
     for(const[a,b]of[[x+1.75,y+1.75],[x+1.4,y+1.85]]){const[bx2,by2]=P(a,b,0);cylinder(bx2,by2,7,3,14,'#a8692f','#6b3c15','#c98a4b');g.strokeStyle='#3a3a3a';g.lineWidth=1;for(const k of[3,11]){g.beginPath();g.ellipse(bx2,by2-k,7,3,0,0,Math.PI);g.stroke()}}
     for(const[a,b]of[[x+.35,y+1.7],[x+.55,y+1.85]]){const[ax,ay]=P(a,b);g.save();g.translate(ax,ay-5);g.scale(.5,.5);drawGood('t_apple',0,0,1);g.restore()}
+  }else if(MK_LOOK[id]){
+    // the later buildings: a gable house in their own colours with crates of what they use out front
+    const c=MK_LOOK[id].c;gableHouse(x+.2,y+.25,1.5,1.1,24,17,c[0],c[1],c[2],c[3],'#6b3c15');const yy=y+.25+1.1;
+    faceQuad(x+.75,x+1.05,yy,0,16,'#8a5530','#4e2c12');faceQuad(x+.32,x+.6,yy,9,18,'#8fd0f5','#6b3c15');faceQuad(x+1.2,x+1.48,yy,9,18,'#8fd0f5','#6b3c15');
+    if(MK_LOOK[id].chimney)isoBox(x+1.25,y+.45,.22,.22,54,'#b8584a','#c9685a','#d47a6a','#6b2a20');
+    MK_LOOK[id].props.forEach(([k,v],i)=>{if(k!=='crate')return;const[ax,ay]=P(x+1.3+i*.18,y+1.75);g.save();g.translate(ax,ay-5);g.scale(.5,.5);drawGood(v,0,0,1);g.restore()});
   }else{
     // a cream cottage with a striped awning, a brick chimney and treats cooling out front
     gableHouse(x+.18,y+.25,1.64,1.12,25,18,'#fff4dc','#ead9b4','#e0457b','#b8325f','#8a5a32');
@@ -7403,7 +7571,7 @@ function showTitle(){
     g=prev;raf=requestAnimationFrame(loop);
   }
   raf=requestAnimationFrame(loop);
-  const play=()=>{if(t.hidden)return;SFX.click();wakeAudio();lockOrient();t.classList.add('out');setTimeout(()=>{t.hidden=true;cancelAnimationFrame(raf);checkTut();renderWx();setTimeout(nextQuest,2500);heldToasts.splice(0).forEach((m,i)=>setTimeout(()=>toast(m),i*700))},520)};
+  const play=()=>{if(t.hidden)return;SFX.click();wakeAudio();lockOrient();t.classList.add('out');setTimeout(()=>{t.hidden=true;cancelAnimationFrame(raf);checkTut();setTimeout(awaySummary,900);renderWx();setTimeout(nextQuest,2500);heldToasts.splice(0).forEach((m,i)=>setTimeout(()=>toast(m),i*700))},520)};
   $('tplay').onclick=play;$('tplay').focus();
 }
 
@@ -7701,7 +7869,7 @@ function newOrder(){
   if(!pool.length||!free.length)return null;
   const R=Math.random,pick=a=>a[Math.floor(R()*a.length)],who=pick(free);
   const lines=Math.min(pool.length,1+(S.level>=4&&R()<.5?1:0)+(S.level>=8&&R()<.35?1:0)),items=[],used=new Set();
-  while(items.length<lines){const id=pick(pool);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=60+S.level*25+R()*90;items.push([id,Math.max(1,Math.min(makeCap(id,20),Math.round(want/it.sell)))])}
+  while(items.length<lines){const id=pick(pool);if(used.has(id))continue;used.add(id);const it=ITEMS[id],want=60+S.level*25+R()*90;items.push([id,Math.max(1,Math.min(makeCap(id,12),Math.round(want/it.sell)))])}
   const base=items.reduce((a,[id,n])=>a+ITEMS[id].sell*n,0),a=adOn(),mult=1.2+R()*.25+(a?ADS[a].boost:0);
   return{id:Date.now().toString(36)+R().toString(36).slice(2,6),who:who.id,items,coins:Math.max(5,Math.round(base*mult/5)*5),xp:3+Math.round(base/40),base,made:Date.now()};
 }
@@ -9019,6 +9187,8 @@ function showSettings(){
     if(navigator.vibrate)toggle('Vibrate on tap',S.haptics!==false,()=>{S.haptics=S.haptics===false;haptic()});
     slider('Effects volume',S.sfxVol??1,v=>{S.sfxVol=v});
     toggle('Rain, snow and falling leaves',S.fx!==false,()=>{S.fx=S.fx===false});
+    toggle('Ask before spending Farm Cash',S.cashAsk!==false,()=>{S.cashAsk=S.cashAsk===false});
+    toggle('Farm report when you come back',S.awayOff!==true,()=>{S.awayOff=!S.awayOff});
     const r2=el('div','setbtns'),tut=el('button','btn2','Replay the tutorial');tut.onclick=()=>{S.tut=0;for(const k of['harvest','plow','plant','seedPick','houseIn','modeSwitch','water','delivSent','tradesSeen','animal','feed','sell','ordersSeen','delivSeen'])S.stats['tut_'+k]=S.stats[k]||0;closeModal();renderTut();toast('Tutorial restarted. Follow the tips on screen.')};
     const nf=el('button','btn2 danger','Start a new farm');nf.onclick=()=>{closeModal();confirmNewFarm()};r2.appendChild(tut);r2.appendChild(nf);p.appendChild(r2);
     if(!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches&&!navigator.standalone){
@@ -9348,7 +9518,8 @@ function shopButton(cat,id,d,locked,owned,card){
   else btn.innerHTML='Buy &middot; '+price;
   const poor=!free&&!canBuy(d);if(poor)btn.classList.add('poor');
   btn.onclick=()=>{
-    if(poor){SFX.error();haptic();shakeEl(btn);if(matsMissing(d.mats)&&S.coins>=d.cost){toast(LAND_MATS_MSG);return}toast(d.cash?'You need '+d.cash+' Farm Cash. Get more in the Cash Shop.':'You need '+d.cost.toLocaleString()+' coins for '+(cat==='seeds'?d.name.toLowerCase():'the '+d.name.toLowerCase())+'.');return}
+    if(poor){haptic();shakeEl(btn);if(d.cash){cashShort(d.cash);return}SFX.error();if(matsMissing(d.mats)&&S.coins>=d.cost){toast(LAND_MATS_MSG);return}toast('You need '+d.cost.toLocaleString()+' coins for '+(cat==='seeds'?d.name.toLowerCase():'the '+d.name.toLowerCase())+'.');return}
+    if(d.cash&&!cashPass(d.cash,d.name,()=>btn.onclick()))return;
     shopPay(btn,card,()=>buyItem(cat,id,d));
   };
   return btn;
@@ -9661,12 +9832,14 @@ function showWardrobe(first){
       buy.disabled=!c.keys.length;
       note.textContent=c.keys.length?'Not yet yours: '+c.names.join(', ')+'.':first?'Pick a look. You can change it any time from the Wardrobe button.':'Everything you are wearing is already yours.';
     }
-    function purchase(){
+    function purchase(again){
       const c=lookCost(draft);if(!c.keys.length)return true;
+      if(S.cash<c.cash&&S.coins>=c.coins){cashShort(c.cash);return false}
       if(S.coins<c.coins||S.cash<c.cash){SFX.error();toast('Not enough '+(S.coins<c.coins?'coins':'Farm Cash')+' for '+c.names.join(', ')+'.');return false}
+      if(again&&!cashPass(c.cash,c.names.join(', '),again))return false;
       S.coins-=c.coins;S.cash-=c.cash;S.owned.push(...c.keys);hud();save();return true;
     }
-    buy.onclick=()=>{if(purchase()){SFX.coin();toast('Bought! It is yours to wear any time.');drawPanel();updateFoot()}};
+    buy.onclick=()=>{if(purchase(()=>buy.onclick())){SFX.coin();toast('Bought! It is yours to wear any time.');drawPanel();updateFoot()}};
     reset.onclick=()=>{SFX.click();hist.push(Object.assign({},draft));Object.assign(draft,S.look);drawPanel();updateFoot()};
     undo.onclick=()=>{if(!hist.length){SFX.error();return}SFX.click();Object.assign(draft,hist.pop());drawPanel();updateFoot()};
     rnd.onclick=()=>{
@@ -9679,7 +9852,7 @@ function showWardrobe(first){
     };
     cancel.onclick=()=>{SFX.click();closeModal()};
     saveB.onclick=()=>{
-      if(!purchase())return;
+      if(!purchase(()=>saveB.onclick()))return;
       S.look=Object.assign({},draft);S.farmerName=fname.trim().slice(0,20);S.farmName=(farmN.trim()||'Farm Village').slice(0,22);if(S.pet)S.pet.name=(petN.trim()||PET_NAME[S.pet.kind]).slice(0,16);S.tips.avatar=true;
       SFX.ribbon();closeModal();changed();toast(S.farmerName?'Looking sharp, '+S.farmerName+'!':'Looking sharp!');
     };
@@ -10042,7 +10215,27 @@ const QUESTS=[
   {id:'rosa2',who:'rosa',lvl:15,title:'Sunday Breakfast',intro:'Nothing says Sunday like a farm breakfast. Raise a couple of pigs and cook me up some bacon and eggs!',
     steps:[{txt:'Have 2 pigs',own:'animal:pig',n:2},{txt:'Bring Rosa 2 bacon and eggs',have:'baconeggs',n:2},{txt:'Sell 20 goods from the barn',stat:'sell',n:20}],reward:{coins:4000,xp:350,cash:1}},
   {id:'dale3',who:'dale',lvl:18,title:'Across the Valley',intro:'Word is out about your farm. Every town wants a load from you. Let us keep that truck rolling!',
-    steps:[{txt:'Complete 8 deliveries',stat:'deliver',n:8},{txt:'Fill 6 neighbor orders',stat:'order',n:6},{txt:'Make 10 goods in your buildings',stat:'make',n:10}],reward:{coins:6000,xp:450,cash:2}}
+    steps:[{txt:'Complete 8 deliveries',stat:'deliver',n:8},{txt:'Fill 6 neighbor orders',stat:'order',n:6},{txt:'Make 10 goods in your buildings',stat:'make',n:10}],reward:{coins:6000,xp:450,cash:2}},
+  {id:'hank3',who:'hank',lvl:21,title:'Butter Up',intro:'Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.',
+    steps:[{txt:'Build a Dairy',own:'mk:dairy',n:1},{txt:'Bring Hank 3 butter',have:'butter',n:3},{txt:'Collect from animals 30 times',stat:'animal',n:30}],reward:{coins:7000,xp:500,cash:1,item:'deco:pumpkins'}},
+  {id:'juniper2',who:'juniper',lvl:24,title:'Threads and Yarns',intro:'My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?',
+    steps:[{txt:'Build a Weaving Loom',own:'mk:loom',n:1},{txt:'Bring Juniper 2 cotton fabric',have:'fabric',n:2},{txt:'Bring Juniper 1 pair of angora mittens',have:'mittens',n:1}],reward:{coins:8000,xp:560,cash:1}},
+  {id:'mabel3',who:'mabel',lvl:27,title:'Summer Stand',intro:'The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?',
+    steps:[{txt:'Build a Juice Bar',own:'mk:juicebar',n:1},{txt:'Bring Mabel 3 orange juices',have:'ojuice',n:3},{txt:'Pick fruit 40 times',stat:'tree',n:40}],reward:{coins:9000,xp:620,cash:1,item:'deco:gazebo'}},
+  {id:'rosa3',who:'rosa',lvl:30,title:'Fresh From the Oven',intro:'My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!',
+    steps:[{txt:'Build a Bakery',own:'mk:bakery',n:1},{txt:'Bring Rosa 4 croissants',have:'croissant',n:4},{txt:'Bring Rosa 1 carrot cake',have:'carrotcake',n:1}],reward:{coins:11000,xp:700,cash:2}},
+  {id:'otis3',who:'otis',lvl:33,title:'Say It With Flowers',intro:'I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.',
+    steps:[{txt:'Build a Flower Shop',own:'mk:florist',n:1},{txt:'Bring Otis 1 rose bouquet',have:'rosebq',n:1},{txt:'Harvest 60 crops',stat:'harvest',n:60}],reward:{coins:12000,xp:760,cash:1}},
+  {id:'dale4',who:'dale',lvl:36,title:'Sweet Cargo',intro:'The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.',
+    steps:[{txt:'Build a Sugar Mill',own:'mk:sugarmill',n:1},{txt:'Bring Dale 6 beet sugar',have:'sugar',n:6},{txt:'Complete 10 deliveries',stat:'deliver',n:10}],reward:{coins:14000,xp:820,cash:2}},
+  {id:'hank4',who:'hank',lvl:39,title:'Diner Days',intro:'Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!',
+    steps:[{txt:'Build a Country Diner',own:'mk:diner',n:1},{txt:'Bring Hank 2 farm pizzas',have:'pizza',n:2},{txt:'Make 25 goods in your buildings',stat:'make',n:25}],reward:{coins:16000,xp:900,cash:2}},
+  {id:'mabel4',who:'mabel',lvl:42,title:'A Cozy Winter',intro:'Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!',
+    steps:[{txt:'Build a Tailor',own:'mk:tailor',n:1},{txt:'Bring Mabel 1 patchwork quilt',have:'quilt',n:1},{txt:'Fill 10 neighbor orders',stat:'order',n:10}],reward:{coins:19000,xp:980,cash:2}},
+  {id:'juniper3',who:'juniper',lvl:45,title:'Ice Cream Social',intro:'The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?',
+    steps:[{txt:'Bring Juniper 3 cherry ice creams',have:'icecream',n:3},{txt:'Bring Juniper 4 caramel apples',have:'caramelapple',n:4},{txt:'Harvest 5 golden crops',stat:'golden',n:5}],reward:{coins:22000,xp:1060,cash:2}},
+  {id:'otis4',who:'otis',lvl:48,title:'Pride of the Valley',intro:'The county fair judges are coming to see the finest farm around. Show them what you have built!',
+    steps:[{txt:'Bring Otis 2 teddy bears',have:'teddy',n:2},{txt:'Bring Otis 2 leather saddles',have:'saddle',n:2},{txt:'Complete 15 deliveries',stat:'deliver',n:15}],reward:{coins:26000,xp:1200,cash:3}}
 ];
 const PEOPLE=()=>[...NEIGHBORS,DRIVER];
 function qDef(){return S.q&&QUESTS.find(q=>q.id===S.q.id)}
@@ -10136,6 +10329,50 @@ function animBar(fill,key,pct){
 }
 function flash(e){if(reduce)return;e.classList.remove('flash');void e.offsetWidth;e.classList.add('flash');setTimeout(()=>e.classList.remove('flash'),950)}
 
+/* ================= welcome back: what happened on the farm while you were away ================= */
+let AWAY_FROM=0;
+function awaySummary(){
+  if(!S||VIS||!AWAY_FROM||S.awayOff)return;const now=Date.now(),gone=now-AWAY_FROM;AWAY_FROM=0;
+  if(gone<15*60e3||typeof S.tut==='number'&&S.tut<TUT.length)return;
+  let crops=0,dead=0,animals=0,hungryN=0,trees=0,goods=0;
+  for(const k in S.tiles){const o=S.tiles[k];
+    if(o.k==='plot'&&o.crop){const st=cropState(o,now).st;if(st==='ripe')crops++;else if(st==='withered')dead++}
+    else if(o.k==='animal'&&ANIMALS[o.id]){if(hungry(o))hungryN++;else if(readyIn(o,ANIMALS[o.id],now)<=0)animals++}
+    else if(o.k==='tree'&&TREES[o.id]&&readyIn(o,TREES[o.id],now)<=0)trees++;
+    else if(o.k==='mk'&&o.q)goods+=o.q.filter(j=>j.end<=now).length}
+  const orders=(S.orders||[]).filter(o=>canFill(o)).length,rows=[];
+  if(crops)rows.push(['wheat',crops+(crops===1?' crop is':' crops are')+' ready to harvest']);
+  if(animals)rows.push(['a_chicken',animals+(animals===1?' animal has':' animals have')+' something for you']);
+  if(trees)rows.push(['t_apple',trees+(trees===1?' fruit tree is':' fruit trees are')+' ready to pick']);
+  if(goods)rows.push(['bread',goods+(goods===1?' good is':' goods are')+' waiting in your buildings']);
+  if(orders)rows.push(['juice',orders+(orders===1?' neighbor order is':' neighbor orders are')+' ready to fill']);
+  if(hungryN)rows.push(['feed',hungryN+(hungryN===1?' animal is':' animals are')+' hungry']);
+  if(dead)rows.push(['g_wheat',dead+(dead===1?' crop has':' crops have')+' withered. Clear and replant them']);
+  if(!rows.length)return;
+  modal({title:'Farm Report',color:'green',small:true,render(b){
+    const p=el('div','body-pad away');p.appendChild(el('p',null,'You were away for '+fmt(gone/1000)+'. Here is what is waiting on the farm:'));
+    const ul=el('ul','awaylist');for(const[icon,txt]of rows){const li=el('li'),im=el('img');im.src=itemIcon(icon);im.alt='';li.appendChild(im);li.appendChild(el('span',null,txt));ul.appendChild(li)}p.appendChild(ul);
+    const go=el('button','go',"Let's go!");go.setAttribute('data-focus','');go.onclick=()=>{SFX.click();closeModal()};p.appendChild(go);b.appendChild(p)}});
+}
+/* ================= spending Farm Cash: ask first, and offer the Cash Shop when it runs short ================= */
+let CASH_PASS=false;
+function askBox(title,msg,yesTxt,noTxt,onYes,opt){
+  opt=opt||{};const w=el('div','askbox'),box=el('div','askin');box.appendChild(el('h3',null,title));box.appendChild(el('p',null,msg));
+  let chk=null;if(opt.never){const l=el('label','asknever');chk=document.createElement('input');chk.type='checkbox';l.appendChild(chk);l.appendChild(el('span',null,"Don't ask me again"));box.appendChild(l)}
+  const row=el('div','askrow'),no=el('button','btn2',noTxt),yes=el('button','go'+(opt.cash?' cashbuy':''),yesTxt);row.appendChild(no);row.appendChild(yes);box.appendChild(row);w.appendChild(box);document.body.appendChild(w);
+  const close=()=>w.remove();no.onclick=()=>{SFX.click();close()};w.onclick=e=>{if(e.target===w)close()};yes.onclick=()=>{SFX.click();close();onYes(chk&&chk.checked)};yes.focus();
+}
+// true when the purchase may go ahead now; otherwise it asks, and on Yes runs again() so the purchase repeats with the pass
+function cashPass(amount,what,again){
+  if(!amount||S.cashAsk===false||S.unlimited){return true}
+  if(CASH_PASS){CASH_PASS=false;return true}
+  askBox('Spend Farm Cash?','Spend '+amount+' Farm Cash on '+what+'?','Yes, buy','Cancel',never=>{if(never)S.cashAsk=false;CASH_PASS=true;again();CASH_PASS=false},{never:true,cash:true});
+  return false;
+}
+function cashShort(need){
+  const miss=need-S.cash;SFX.error();
+  askBox('Not enough Farm Cash','You need '+miss+' more Farm Cash for this.','Get Farm Cash','Not now',()=>{while(mq.length)closeModal();showCashShop()},{cash:true});
+}
 /* ================= daily bonus ================= */
 function dailyBonus(){
   const t=today();if(S.daily.last===t)return;
@@ -10833,8 +11070,8 @@ function decorIcon(kind,id){const k='decor:'+kind+':'+id;if(ICONS[k])return ICON
   try{if(kind==='wall'){const s=120/WALL;g.setTransform(s,0,0,-s,0,120);wallPaint(120/s,id,false)}else{g.setTransform(.8,0,0,.8,0,0);floorPaint(id)}}catch(e){}
   g=prev;return ICONS[k]=c.toDataURL()}
 function priceHTML(d){return d.cash?'<span class="bill">$</span>'+d.cash:'<span class="coin"></span>'+d.cost.toLocaleString()}
-function payFor(d){
-  if(d.cash){if(S.cash<d.cash){SFX.error();toast('You need '+d.cash+' Farm Cash. Get more in the Cash Shop.');return false}S.cash-=d.cash;return true}
+function payFor(d,again){
+  if(d.cash){if(S.cash<d.cash){cashShort(d.cash);return false}if(again&&!cashPass(d.cash,d.name,again))return false;S.cash-=d.cash;return true}
   if(S.coins<d.cost){SFX.error();toast('You need '+d.cost.toLocaleString()+' coins for this.');return false}S.coins-=d.cost;return true;
 }
 function showFurniture(){
@@ -10845,7 +11082,7 @@ function showFurniture(){
       card.appendChild(el('small',null,(d.desc?d.desc+' ':'')+'+'+d.comfort+' comfort'));
       if(d.cash){card.classList.add('prem');card.appendChild(el('span','premtag','Premium'))}
       const btn=el('button','buy'+(d.cash?' cashbuy':''));if(F[id]){btn.textContent='Owned';btn.disabled=true}else if(d.lvl>S.level){btn.textContent='Unlocks at Level '+d.lvl;btn.disabled=true}
-      else{btn.innerHTML='Buy &middot; '+priceHTML(d);btn.onclick=()=>{if(!payFor(d))return;F[id]=1;if(id==='bigbed')F.bed=0;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
+      else{btn.innerHTML='Buy &middot; '+priceHTML(d);btn.onclick=()=>{if(!payFor(d,()=>btn.onclick()))return;F[id]=1;if(id==='bigbed')F.bed=0;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
       card.appendChild(btn);grid.appendChild(card)}
     p.appendChild(grid);
     p.appendChild(el('h3',null,'Walls and floors'));const g2=el('div','grid');
@@ -10854,7 +11091,7 @@ function showFurniture(){
       if(h[kind]===id){btn.textContent='In use';btn.disabled=true}
       else if(h.decor[id]){btn.textContent='Use this style';btn.onclick=()=>{h[kind]=id;SFX.place();changed();rerender()}}
       else if(d.lvl>S.level){btn.textContent='Unlocks at Level '+d.lvl;btn.disabled=true}
-      else{btn.innerHTML='Buy &middot; '+priceHTML(d);btn.onclick=()=>{if(!payFor(d))return;h.decor[id]=1;h[kind]=id;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
+      else{btn.innerHTML='Buy &middot; '+priceHTML(d);btn.onclick=()=>{if(!payFor(d,()=>btn.onclick()))return;h.decor[id]=1;h[kind]=id;SFX.place();stat('furniture');toast(d.name+' added to your farmhouse!');changed();rerender()}}
       card.appendChild(btn);g2.appendChild(card)}
     p.appendChild(g2);b.appendChild(p);
   }});
@@ -10869,7 +11106,7 @@ $('needPill').onclick=()=>{if(VIS)return;enterHouse()};
 
 /* ================= boot ================= */
 function start(data){
-  S=norm(valid(data&&data.S)?data.S:(load()||fresh()));
+  S=norm(valid(data&&data.S)?data.S:(load()||fresh()));AWAY_FROM=S.seen||0;
   if(S.size===24)S.size=25;N=S.size;migrateHomes();S.tapMode='farm';
   // an old bug let upgrades go through without enough coins or materials; never keep a negative balance
   if(S.coins<0)S.coins=0;if(S.mats)for(const k in S.mats)if(S.mats[k]<0)S.mats[k]=0;

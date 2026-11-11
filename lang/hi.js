@@ -1,7 +1,114 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`Cash Shop|कैश शॉप
+x:`Dairy|डेयरी
+Churns milk into butter, cream, goat cheese and yogurt.|दूध से मक्खन, क्रीम, बकरी का पनीर और दही बनाती है।
+Weaving Loom|करघा
+Spins cotton, fur and wool into fabric and cozy things to wear.|कपास, फर और ऊन से कपड़ा और गर्म चीज़ें बनाता है।
+Juice Bar|जूस बार
+Fresh juice, lemonade and smoothies from your orchard.|आपके बाग़ से ताज़ा जूस, नींबू पानी और स्मूदी।
+Bakery|बेकरी
+A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.|क्रोइसां, केक, टार्ट और पाई के लिए लकड़ी का ओवन। डेयरी का मक्खन और क्रीम लगता है।
+Flower Shop|फूलों की दुकान
+Ties your flowers into bouquets and pours lavender candles.|आपके फूलों से गुलदस्ते और लैवेंडर मोमबत्तियाँ बनाती है।
+Sugar Mill|चीनी मिल
+Grinds beets into sugar for sauces, caramel apples and ice cream.|चुकंदर से चीनी बनाती है, सॉस, कैरेमल सेब और आइसक्रीम के लिए।
+Country Diner|देसी ढाबा
+Hot meals for hungry towns: pizza, sushi and stir fry.|भूखे शहरों के लिए गरम खाना: पिज़्ज़ा, सुशी और भुनी सब्ज़ियाँ।
+Tailor|दर्ज़ी
+Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.|कपड़े, पंख और फर से रज़ाई, काठी, स्कार्फ़ और टेडी बियर सिलता है।
+Butter|मक्खन
+Fresh Cream|ताज़ा क्रीम
+Goat Cheese|बकरी का पनीर
+Blueberry Yogurt|ब्लूबेरी दही
+Cotton Fabric|सूती कपड़ा
+Angora Mittens|अंगोरा दस्ताने
+Llama Poncho|लामा पोंचो
+Down Pillow|पंखों का तकिया
+Orange Juice|संतरे का जूस
+Honey Lemonade|शहद नींबू पानी
+Peach Smoothie|आड़ू स्मूदी
+Melon Cooler|तरबूज़ शर्बत
+Croissant|क्रोइसां
+Carrot Cake|गाजर केक
+Plum Tart|आलूबुखारा टार्ट
+Lemon Cream Pie|नींबू क्रीम पाई
+Spring Bouquet|वसंत गुलदस्ता
+Rose Bouquet|गुलाब गुलदस्ता
+Sunny Bouquet|धूप गुलदस्ता
+Lavender Candle|लैवेंडर मोमबत्ती
+Beet Sugar|चुकंदर चीनी
+Cranberry Sauce|क्रैनबेरी सॉस
+Caramel Apple|कैरेमल सेब
+Cherry Ice Cream|चेरी आइसक्रीम
+Farm Pizza|फ़ार्म पिज़्ज़ा
+Pepper Pizza|शिमला मिर्च पिज़्ज़ा
+Sushi Rolls|सुशी रोल
+Veggie Stir Fry|भुनी सब्ज़ियाँ
+Patchwork Quilt|पैचवर्क रज़ाई
+Leather Saddle|चमड़े की काठी
+Woolly Scarf|ऊनी स्कार्फ़
+Teddy Bear|टेडी बियर
+Butter Up|मक्खन का कमाल
+Threads and Yarns|धागे और ऊन
+Summer Stand|गर्मियों की दुकान
+Fresh From the Oven|ओवन से ताज़ा
+Say It With Flowers|फूलों से कहो
+Sweet Cargo|मीठा माल
+Diner Days|ढाबे के दिन
+A Cozy Winter|आरामदेह सर्दी
+Ice Cream Social|आइसक्रीम पार्टी
+Pride of the Valley|घाटी की शान
+Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.|शहर के लोग सादे दूध से ऊब गए हैं। डेयरी बनाइए, हम पीपे भर मक्खन बेचेंगे।
+My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?|मेरा छोटा भाई बार-बार दस्ताने खो देता है! क्या आप कपड़ा बुनकर उसके लिए गर्म जोड़ी बना देंगे?
+The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?|गर्मियों के मेले को जूस की दुकान चाहिए और मैं पूरे दिन संतरे निचोड़ने के लिए बहुत बूढ़ी हूँ। पुरानी दोस्त की मदद करेंगे?
+My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!|मेरी बेटी इस हफ़्ते दस साल की हो रही है और उसे बस क्रोइसां और गाजर केक चाहिए। बेकरी से काम बन जाएगा!
+I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.|मैं मेबल को फ़सल के नाच में बुलाना चाहता हूँ। हँसिए मत! मुझे घाटी का सबसे सुंदर गुलदस्ता चाहिए।
+The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.|शहर की मिठाई की दुकान को चीनी चाहिए, ढेर सारी। अगर आपकी मिल तैयार है तो मेरा ट्रक भी।
+Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!|इलाक़े का हर ट्रक वाला दोपहर का खाना खाने रुकता है। ढाबा खोलिए और उन्हें बढ़िया फ़ार्म पिज़्ज़ा खिलाइए!
+Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!|सर्दी आ रही है और मेरी पुरानी रज़ाई में रज़ाई से ज़्यादा छेद हैं। एक दर्ज़ी पूरी घाटी की मरम्मत कर देगा!
+The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?|स्कूल की पिकनिक शनिवार को है। क्या आप सबके लिए आइसक्रीम और कैरेमल सेब लाएँगे?
+The county fair judges are coming to see the finest farm around. Show them what you have built!|मेले के जज इलाक़े का सबसे अच्छा फ़ार्म देखने आ रहे हैं। उन्हें दिखाइए आपने क्या बनाया है!
+Build a Dairy|डेयरी बनाएँ
+Bring Hank 3 butter|हैंक को 3 मक्खन दें
+Collect from animals 30 times|जानवरों से 30 बार इकट्ठा करें
+Build a Weaving Loom|करघा बनाएँ
+Bring Juniper 2 cotton fabric|जूनिपर को 2 सूती कपड़े दें
+Bring Juniper 1 pair of angora mittens|जूनिपर को 1 जोड़ी अंगोरा दस्ताने दें
+Build a Juice Bar|जूस बार बनाएँ
+Bring Mabel 3 orange juices|मेबल को 3 संतरे के जूस दें
+Pick fruit 40 times|40 बार फल तोड़ें
+Build a Bakery|बेकरी बनाएँ
+Bring Rosa 4 croissants|रोज़ा को 4 क्रोइसां दें
+Bring Rosa 1 carrot cake|रोज़ा को 1 गाजर केक दें
+Build a Flower Shop|फूलों की दुकान बनाएँ
+Bring Otis 1 rose bouquet|ओटिस को 1 गुलाब गुलदस्ता दें
+Harvest 60 crops|60 फ़सलें काटें
+Build a Sugar Mill|चीनी मिल बनाएँ
+Bring Dale 6 beet sugar|डेल को 6 चुकंदर चीनी दें
+Complete 10 deliveries|10 डिलीवरी पूरी करें
+Build a Country Diner|देसी ढाबा बनाएँ
+Bring Hank 2 farm pizzas|हैंक को 2 फ़ार्म पिज़्ज़ा दें
+Make 25 goods in your buildings|अपनी इमारतों में 25 चीज़ें बनाएँ
+Build a Tailor|दर्ज़ी की दुकान बनाएँ
+Bring Mabel 1 patchwork quilt|मेबल को 1 पैचवर्क रज़ाई दें
+Fill 10 neighbor orders|पड़ोसियों के 10 ऑर्डर पूरे करें
+Bring Juniper 3 cherry ice creams|जूनिपर को 3 चेरी आइसक्रीम दें
+Bring Juniper 4 caramel apples|जूनिपर को 4 कैरेमल सेब दें
+Harvest 5 golden crops|5 सुनहरी फ़सलें काटें
+Bring Otis 2 teddy bears|ओटिस को 2 टेडी बियर दें
+Bring Otis 2 leather saddles|ओटिस को 2 चमड़े की काठी दें
+Complete 15 deliveries|15 डिलीवरी पूरी करें
+Farm Report|फ़ार्म रिपोर्ट
+Let's go!|चलिए!
+Spend Farm Cash?|फ़ार्म कैश खर्च करें?
+Yes, buy|हाँ, खरीदें
+Don't ask me again|दोबारा न पूछें
+Not enough Farm Cash|फ़ार्म कैश कम है
+Not now|अभी नहीं
+Ask before spending Farm Cash|फ़ार्म कैश खर्च करने से पहले पूछें
+Farm report when you come back|लौटने पर फ़ार्म रिपोर्ट
+Cash Shop|कैश शॉप
 Get Farm Cash|फ़ार्म कैश पाएँ
 Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|फ़ार्म कैश से प्रीमियम कपड़े, फ़र्नीचर, सजावट और मददगार खरीदें। हर 5 लेवल और रोज़ के लक्ष्य अब भी थोड़ा मुफ़्त देते हैं।
 Popular|लोकप्रिय
@@ -1249,4 +1356,14 @@ p:`0|$1 सिक्के
 202|आपकी खरीद आ गई! +$1 फ़ार्म कैश।
 203|बहुत सुंदर! बोनस XP फिर से {t1} में।
 204|हाई स्कोर! सिक्के फिर से {t1} में।
-205|हाई स्कोर! +$1 सिक्के।`};
+205|हाई स्कोर! +$1 सिक्के।
+206|आप {t1} दूर रहे। फ़ार्म पर यह इंतज़ार कर रहा है:
+207|$1 फ़सलें कटने को तैयार
+208|$1 जानवरों के पास आपके लिए कुछ है
+209|$1 फल के पेड़ तोड़ने को तैयार
+210|$1 चीज़ें इमारतों में इंतज़ार कर रही हैं
+211|पड़ोसियों के $1 ऑर्डर पूरे किए जा सकते हैं
+212|$1 जानवर भूखे हैं
+213|$1 फ़सलें सूख गईं। साफ़ करके फिर बोएँ
+214|{l2} पर $1 फ़ार्म कैश खर्च करें?
+215|आपको $1 और फ़ार्म कैश चाहिए।`};

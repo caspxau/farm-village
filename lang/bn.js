@@ -1,7 +1,114 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`Cash Shop|ক্যাশ শপ
+x:`Dairy|ডেয়ারি
+Churns milk into butter, cream, goat cheese and yogurt.|দুধ থেকে মাখন, ক্রিম, ছাগলের পনির আর দই বানায়।
+Weaving Loom|তাঁত
+Spins cotton, fur and wool into fabric and cozy things to wear.|তুলা, লোম আর পশম থেকে কাপড় আর গরম জিনিস বোনে।
+Juice Bar|জুস বার
+Fresh juice, lemonade and smoothies from your orchard.|তোমার বাগানের তাজা জুস, লেবুর শরবত আর স্মুদি।
+Bakery|বেকারি
+A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.|ক্রোয়াসাঁ, কেক, টার্ট আর পাইয়ের জন্য কাঠের চুলা। ডেয়ারির মাখন আর ক্রিম লাগে।
+Flower Shop|ফুলের দোকান
+Ties your flowers into bouquets and pours lavender candles.|তোমার ফুল দিয়ে তোড়া বাঁধে আর ল্যাভেন্ডার মোমবাতি বানায়।
+Sugar Mill|চিনিকল
+Grinds beets into sugar for sauces, caramel apples and ice cream.|বিট থেকে চিনি বানায় সস, ক্যারামেল আপেল আর আইসক্রিমের জন্য।
+Country Diner|গ্রামের ধাবা
+Hot meals for hungry towns: pizza, sushi and stir fry.|ক্ষুধার্ত শহরের জন্য গরম খাবার: পিৎজা, সুশি আর সবজি ভাজা।
+Tailor|দর্জি
+Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.|কাপড়, পালক আর লোম দিয়ে কাঁথা, জিন, স্কার্ফ আর টেডি বিয়ার সেলাই করে।
+Butter|মাখন
+Fresh Cream|তাজা ক্রিম
+Goat Cheese|ছাগলের পনির
+Blueberry Yogurt|ব্লুবেরি দই
+Cotton Fabric|সুতির কাপড়
+Angora Mittens|অ্যাঙ্গোরা দস্তানা
+Llama Poncho|লামা পোঞ্চো
+Down Pillow|পালকের বালিশ
+Orange Juice|কমলার জুস
+Honey Lemonade|মধু লেবুর শরবত
+Peach Smoothie|পিচ স্মুদি
+Melon Cooler|তরমুজ শরবত
+Croissant|ক্রোয়াসাঁ
+Carrot Cake|গাজরের কেক
+Plum Tart|আলুবোখারা টার্ট
+Lemon Cream Pie|লেবু ক্রিম পাই
+Spring Bouquet|বসন্তের তোড়া
+Rose Bouquet|গোলাপের তোড়া
+Sunny Bouquet|রোদেলা তোড়া
+Lavender Candle|ল্যাভেন্ডার মোমবাতি
+Beet Sugar|বিট চিনি
+Cranberry Sauce|ক্র্যানবেরি সস
+Caramel Apple|ক্যারামেল আপেল
+Cherry Ice Cream|চেরি আইসক্রিম
+Farm Pizza|খামারের পিৎজা
+Pepper Pizza|ক্যাপসিকাম পিৎজা
+Sushi Rolls|সুশি রোল
+Veggie Stir Fry|সবজি ভাজা
+Patchwork Quilt|নকশি কাঁথা
+Leather Saddle|চামড়ার জিন
+Woolly Scarf|পশমি স্কার্ফ
+Teddy Bear|টেডি বিয়ার
+Butter Up|মাখনের দিন
+Threads and Yarns|সুতো আর উল
+Summer Stand|গ্রীষ্মের দোকান
+Fresh From the Oven|চুলা থেকে টাটকা
+Say It With Flowers|ফুলে ফুলে বলো
+Sweet Cargo|মিষ্টি মাল
+Diner Days|ধাবার দিন
+A Cozy Winter|আরামের শীত
+Ice Cream Social|আইসক্রিম উৎসব
+Pride of the Valley|উপত্যকার গর্ব
+Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.|শহরের লোকেরা শুধু দুধে বিরক্ত। একটা ডেয়ারি বানাও, আমরা পিপে ভরে মাখন বেচব।
+My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?|আমার ছোট ভাই কেবলই দস্তানা হারায়! একটু কাপড় বুনে ওকে একজোড়া গরম দস্তানা বানিয়ে দেবে?
+The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?|গ্রীষ্মের মেলায় জুসের দোকান দরকার, আর আমি সারাদিন কমলা চিপতে বুড়ো হয়ে গেছি। পুরোনো বন্ধুকে সাহায্য করবে?
+My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!|এই সপ্তাহে আমার মেয়ের দশ বছর, ও শুধু ক্রোয়াসাঁ আর গাজরের কেক চায়। একটা বেকারি হলেই চলবে!
+I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.|আমি মেবলকে নবান্নের নাচে ডাকতে চাই। হেসো না! আমার উপত্যকার সবচেয়ে সুন্দর তোড়া চাই।
+The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.|শহরের মিষ্টির দোকানে চিনি লাগবে, অনেক। তোমার কল তৈরি থাকলে আমার ট্রাকও তৈরি।
+Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!|এলাকার সব ট্রাকচালক দুপুরে খেতে থামে। একটা ধাবা খোলো আর ওদের খাঁটি খামারের পিৎজা খাওয়াও!
+Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!|শীত আসছে আর আমার পুরোনো কাঁথায় কাঁথার চেয়ে ফুটো বেশি। একজন দর্জি পুরো উপত্যকা সেলাই করে দিতে পারে!
+The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?|শনিবার স্কুলের পিকনিক। সবার জন্য আইসক্রিম আর ক্যারামেল আপেল আনবে?
+The county fair judges are coming to see the finest farm around. Show them what you have built!|মেলার বিচারকেরা এলাকার সেরা খামার দেখতে আসছেন। তুমি কী বানিয়েছ দেখাও!
+Build a Dairy|ডেয়ারি বানাও
+Bring Hank 3 butter|হ্যাঙ্ককে ৩টি মাখন দাও
+Collect from animals 30 times|পশুদের থেকে ৩০ বার সংগ্রহ করো
+Build a Weaving Loom|তাঁত বানাও
+Bring Juniper 2 cotton fabric|জুনিপারকে ২টি সুতির কাপড় দাও
+Bring Juniper 1 pair of angora mittens|জুনিপারকে ১ জোড়া অ্যাঙ্গোরা দস্তানা দাও
+Build a Juice Bar|জুস বার বানাও
+Bring Mabel 3 orange juices|মেবলকে ৩টি কমলার জুস দাও
+Pick fruit 40 times|৪০ বার ফল পাড়ো
+Build a Bakery|বেকারি বানাও
+Bring Rosa 4 croissants|রোজাকে ৪টি ক্রোয়াসাঁ দাও
+Bring Rosa 1 carrot cake|রোজাকে ১টি গাজরের কেক দাও
+Build a Flower Shop|ফুলের দোকান বানাও
+Bring Otis 1 rose bouquet|ওটিসকে ১টি গোলাপের তোড়া দাও
+Harvest 60 crops|৬০টি ফসল কাটো
+Build a Sugar Mill|চিনিকল বানাও
+Bring Dale 6 beet sugar|ডেলকে ৬টি বিট চিনি দাও
+Complete 10 deliveries|১০টি ডেলিভারি সম্পন্ন করো
+Build a Country Diner|গ্রামের ধাবা বানাও
+Bring Hank 2 farm pizzas|হ্যাঙ্ককে ২টি খামারের পিৎজা দাও
+Make 25 goods in your buildings|তোমার দালানে ২৫টি জিনিস বানাও
+Build a Tailor|দর্জির দোকান বানাও
+Bring Mabel 1 patchwork quilt|মেবলকে ১টি নকশি কাঁথা দাও
+Fill 10 neighbor orders|প্রতিবেশীদের ১০টি অর্ডার পূরণ করো
+Bring Juniper 3 cherry ice creams|জুনিপারকে ৩টি চেরি আইসক্রিম দাও
+Bring Juniper 4 caramel apples|জুনিপারকে ৪টি ক্যারামেল আপেল দাও
+Harvest 5 golden crops|৫টি সোনালি ফসল কাটো
+Bring Otis 2 teddy bears|ওটিসকে ২টি টেডি বিয়ার দাও
+Bring Otis 2 leather saddles|ওটিসকে ২টি চামড়ার জিন দাও
+Complete 15 deliveries|১৫টি ডেলিভারি সম্পন্ন করো
+Farm Report|খামারের রিপোর্ট
+Let's go!|চলো!
+Spend Farm Cash?|ফার্ম ক্যাশ খরচ করবে?
+Yes, buy|হ্যাঁ, কেনো
+Don't ask me again|আর জিজ্ঞেস কোরো না
+Not enough Farm Cash|যথেষ্ট ফার্ম ক্যাশ নেই
+Not now|এখন না
+Ask before spending Farm Cash|ফার্ম ক্যাশ খরচের আগে জিজ্ঞেস করো
+Farm report when you come back|ফিরে এলে খামারের রিপোর্ট
+Cash Shop|ক্যাশ শপ
 Get Farm Cash|ফার্ম ক্যাশ নাও
 Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|ফার্ম ক্যাশ দিয়ে প্রিমিয়াম পোশাক, আসবাব, সাজসজ্জা আর সাহায্যকারী কেনা যায়। প্রতি ৫ লেভেলে আর দৈনিক লক্ষ্যে এখনও কিছু ফ্রি পাও।
 Popular|জনপ্রিয়
@@ -1249,4 +1356,14 @@ p:`0|$1 কয়েন
 202|তোমার কেনা জিনিস এসে গেছে! +$1 ফার্ম ক্যাশ।
 203|দারুণ! বোনাস XP আবার {t1} পরে।
 204|হাই স্কোর! কয়েন আবার {t1} পরে।
-205|হাই স্কোর! +$1 কয়েন।`};
+205|হাই স্কোর! +$1 কয়েন।
+206|তুমি {t1} দূরে ছিলে। খামারে যা অপেক্ষা করছে:
+207|$1টি ফসল কাটার জন্য তৈরি
+208|$1টি পশুর কাছে তোমার জন্য কিছু আছে
+209|$1টি ফলগাছ পাড়ার জন্য তৈরি
+210|$1টি জিনিস দালানে অপেক্ষা করছে
+211|প্রতিবেশীদের $1টি অর্ডার পূরণ করা যায়
+212|$1টি পশু ক্ষুধার্ত
+213|$1টি ফসল শুকিয়ে গেছে। পরিষ্কার করে আবার লাগাও
+214|{l2}-এ $1 ফার্ম ক্যাশ খরচ করবে?
+215|তোমার আরও $1 ফার্ম ক্যাশ লাগবে।`};

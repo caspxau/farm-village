@@ -1,7 +1,114 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`Cash Shop|Магазин
+x:`Dairy|Сыроварня
+Churns milk into butter, cream, goat cheese and yogurt.|Сбивает молоко в масло, сливки, козий сыр и йогурт.
+Weaving Loom|Ткацкий станок
+Spins cotton, fur and wool into fabric and cozy things to wear.|Прядёт хлопок, пух и шерсть в ткань и тёплые вещи.
+Juice Bar|Сок-бар
+Fresh juice, lemonade and smoothies from your orchard.|Свежие соки, лимонад и смузи из твоего сада.
+Bakery|Пекарня
+A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.|Дровяная печь для круассанов, тортов, тартов и пирогов. Нужны масло и сливки из сыроварни.
+Flower Shop|Цветочная лавка
+Ties your flowers into bouquets and pours lavender candles.|Собирает цветы в букеты и отливает лавандовые свечи.
+Sugar Mill|Сахарный завод
+Grinds beets into sugar for sauces, caramel apples and ice cream.|Перемалывает свёклу в сахар для соусов, карамельных яблок и мороженого.
+Country Diner|Деревенская закусочная
+Hot meals for hungry towns: pizza, sushi and stir fry.|Горячая еда для голодных городов: пицца, суши и овощи вок.
+Tailor|Портной
+Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.|Шьёт одеяла, сёдла, шарфы и мишек из ткани, перьев и меха.
+Butter|Сливочное масло
+Fresh Cream|Свежие сливки
+Goat Cheese|Козий сыр
+Blueberry Yogurt|Черничный йогурт
+Cotton Fabric|Хлопковая ткань
+Angora Mittens|Варежки из ангоры
+Llama Poncho|Пончо из шерсти ламы
+Down Pillow|Пуховая подушка
+Orange Juice|Апельсиновый сок
+Honey Lemonade|Медовый лимонад
+Peach Smoothie|Персиковый смузи
+Melon Cooler|Арбузный напиток
+Croissant|Круассан
+Carrot Cake|Морковный торт
+Plum Tart|Сливовый тарт
+Lemon Cream Pie|Лимонный пирог
+Spring Bouquet|Весенний букет
+Rose Bouquet|Букет роз
+Sunny Bouquet|Солнечный букет
+Lavender Candle|Лавандовая свеча
+Beet Sugar|Свекольный сахар
+Cranberry Sauce|Клюквенный соус
+Caramel Apple|Карамельное яблоко
+Cherry Ice Cream|Вишнёвое мороженое
+Farm Pizza|Фермерская пицца
+Pepper Pizza|Пицца с перцем
+Sushi Rolls|Роллы
+Veggie Stir Fry|Овощи вок
+Patchwork Quilt|Лоскутное одеяло
+Leather Saddle|Кожаное седло
+Woolly Scarf|Шерстяной шарф
+Teddy Bear|Плюшевый мишка
+Butter Up|Масло для всех
+Threads and Yarns|Нитки и пряжа
+Summer Stand|Летний прилавок
+Fresh From the Oven|Прямо из печи
+Say It With Flowers|Скажи это цветами
+Sweet Cargo|Сладкий груз
+Diner Days|Дни в закусочной
+A Cozy Winter|Уютная зима
+Ice Cream Social|Праздник мороженого
+Pride of the Valley|Гордость долины
+Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.|Людям в городе надоело простое молоко. Построй сыроварню, и мы будем продавать масло бочками.
+My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?|Мой младший брат вечно теряет варежки! Сотки ткань и сделай ему тёплую пару?
+The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?|Летней ярмарке нужен сок-бар, а я уже стара, чтобы весь день выжимать апельсины. Поможешь старой подруге?
+My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!|Моей дочке на этой неделе десять, и она хочет только круассаны и морковный торт. Пекарня нас спасёт!
+I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.|Хочу пригласить Мейбл на праздник урожая. Не смейся! Мне нужен самый красивый букет в долине.
+The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.|Кондитерской в городе нужен сахар, и много. Мой грузовик готов, если готов твой завод.
+Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!|Все водители в округе заезжают пообедать. Открой закусочную и накорми их настоящей фермерской пиццей!
+Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!|Близится зима, а в моём старом одеяле больше дыр, чем одеяла. Портной залатал бы всю долину!
+The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?|В субботу школьный пикник. Принесёшь всем мороженое и карамельные яблоки?
+The county fair judges are coming to see the finest farm around. Show them what you have built!|Судьи ярмарки едут посмотреть на лучшую ферму в округе. Покажи им, что ты построил!
+Build a Dairy|Построй сыроварню
+Bring Hank 3 butter|Принеси Хэнку 3 масла
+Collect from animals 30 times|Собери с животных 30 раз
+Build a Weaving Loom|Построй ткацкий станок
+Bring Juniper 2 cotton fabric|Принеси Джунипер 2 хлопковые ткани
+Bring Juniper 1 pair of angora mittens|Принеси Джунипер 1 пару варежек из ангоры
+Build a Juice Bar|Построй сок-бар
+Bring Mabel 3 orange juices|Принеси Мейбл 3 апельсиновых сока
+Pick fruit 40 times|Собери фрукты 40 раз
+Build a Bakery|Построй пекарню
+Bring Rosa 4 croissants|Принеси Розе 4 круассана
+Bring Rosa 1 carrot cake|Принеси Розе 1 морковный торт
+Build a Flower Shop|Построй цветочную лавку
+Bring Otis 1 rose bouquet|Принеси Отису 1 букет роз
+Harvest 60 crops|Собери урожай 60 раз
+Build a Sugar Mill|Построй сахарный завод
+Bring Dale 6 beet sugar|Принеси Дейлу 6 свекольного сахара
+Complete 10 deliveries|Выполни 10 доставок
+Build a Country Diner|Построй деревенскую закусочную
+Bring Hank 2 farm pizzas|Принеси Хэнку 2 фермерские пиццы
+Make 25 goods in your buildings|Сделай 25 товаров в своих зданиях
+Build a Tailor|Построй мастерскую портного
+Bring Mabel 1 patchwork quilt|Принеси Мейбл 1 лоскутное одеяло
+Fill 10 neighbor orders|Выполни 10 заказов соседей
+Bring Juniper 3 cherry ice creams|Принеси Джунипер 3 вишнёвых мороженых
+Bring Juniper 4 caramel apples|Принеси Джунипер 4 карамельных яблока
+Harvest 5 golden crops|Собери 5 золотых урожаев
+Bring Otis 2 teddy bears|Принеси Отису 2 плюшевых мишки
+Bring Otis 2 leather saddles|Принеси Отису 2 кожаных седла
+Complete 15 deliveries|Выполни 15 доставок
+Farm Report|Отчёт фермы
+Let's go!|Вперёд!
+Spend Farm Cash?|Потратить фермерские доллары?
+Yes, buy|Да, купить
+Don't ask me again|Больше не спрашивать
+Not enough Farm Cash|Не хватает фермерских долларов
+Not now|Не сейчас
+Ask before spending Farm Cash|Спрашивать перед тратой фермерских долларов
+Farm report when you come back|Отчёт фермы при возвращении
+Cash Shop|Магазин
 Get Farm Cash|Получить фермерские доллары
 Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.|За фермерские доллары покупают премиум-наряды, мебель, украшения и помощников. Каждые 5 уровней и ежедневные цели всё ещё дают немного бесплатно.
 Popular|Популярно
@@ -1249,4 +1356,14 @@ p:`0|$1 {p1:монета|монеты|монет}
 202|Покупка доставлена! Фермерские доллары: +$1.
 203|Прекрасно! Бонусный опыт снова через {t1}.
 204|Рекорд! Монеты снова через {t1}.
-205|Рекорд! Монеты: +$1.`};
+205|Рекорд! Монеты: +$1.
+206|Тебя не было {t1}. Вот что ждёт на ферме:
+207|Готово к сбору: $1
+208|Животные с продукцией: $1
+209|Фруктовые деревья готовы: $1
+210|Товары ждут в зданиях: $1
+211|Заказы соседей можно выполнить: $1
+212|Голодные животные: $1
+213|Засохло посевов: $1. Убери и посади заново
+214|Потратить фермерские доллары ($1) на {l2}?
+215|Не хватает фермерских долларов: $1.`};
