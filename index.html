@@ -1914,6 +1914,11 @@ body header.hud .pill:hover{filter:brightness(1.03)}
   .house .hbtn span{font-size:13px}.house .hbtn small{font-size:9.5px}
   .house .hbtn.cool .hic::after{-webkit-mask:radial-gradient(circle,transparent 17px,#000 17.5px);mask:radial-gradient(circle,transparent 17px,#000 17.5px)}
 }
+
+/* medium and low quality: no frosted-glass blur behind panels (costly where the browser draws without the graphics
+   card); the panels get an almost solid parchment instead */
+body.lowfx *,body.lowfx *::before,body.lowfx *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+body.lowfx .qtrack,body.lowfx .goals,body.lowfx .ocard,body.lowfx .tut,body.lowfx .visitbar,body.lowfx .seedpill,body.lowfx .needpill,body.lowfx .tsub{background:linear-gradient(#fcf8ef,#f4ecdc)}
 </style>
 </head>
 <body>
@@ -3241,11 +3246,12 @@ const QL_DPR=[1,1.5,2],INK_DIRS_HI=[[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[
 const perf={sum:0,n:0,t0:0,stable:0};
 function perfTick(dt){
   if(gfxPref()!=='auto'||document.hidden)return;perf.sum+=dt;perf.n++;
-  if(perf.n<(QL>=2?45:90))return;const avg=perf.sum/perf.n*1000;perf.sum=perf.n=0;
-  if(avg>24&&QL>0){QL--;perf.stable=0;applyQuality()}
+  // judge by time, not frame count: slow frames would otherwise take many seconds to be noticed
+  const crawl=perf.n>=6&&perf.sum/perf.n>.06;if(!crawl&&(perf.sum<1||perf.n<20))return;const avg=perf.sum/perf.n*1000;perf.sum=perf.n=0;
+  if(avg>21&&QL>0){QL--;perf.stable=0;applyQuality()}
   else if(avg<15&&QL<2){if(++perf.stable>=12){QL++;perf.stable=0;applyQuality()}}else perf.stable=0;
 }
-function applyQuality(){INK_DIRS.length=0;INK_DIRS.push(...(QL>=2?INK_DIRS_HI:INK_DIRS_LO));resize()}
+function applyQuality(){INK_DIRS.length=0;INK_DIRS.push(...(QL>=2?INK_DIRS_HI:INK_DIRS_LO));document.body.classList.toggle('lowfx',QL<2);resize()}
 const cam={x:0,y:0,z:1};
 function P(x,y,z){return[(x-y)*W/2,(x+y)*H/2-(z||0)]}
 function fit(){
@@ -3259,7 +3265,10 @@ function fit(){
       cam.z=zz;cam.x=vw/2-(L+R)/2*zz;cam.y=(vh+40)/2-(T+B)/2*zz}}
 }
 function resize(){
-  dpr=Math.min(window.devicePixelRatio||1,QL_DPR[QL]);
+  // on automatic quality the canvas also has a pixel budget: big high-density screens (a 2880x1800 canvas) were the
+  // main cause of lag, as the browser ran out of graphics memory for the canvas and its cached layers
+  const cap=gfxPref()==='auto'?[1,2.0e6,3.0e6][QL]:Infinity;
+  dpr=Math.max(1,Math.min(window.devicePixelRatio||1,QL_DPR[QL],Math.sqrt(cap/Math.max(1,innerWidth*innerHeight))));
   BG=null;VIG=null;const first=!vw,ow=vw,oh=vh;vw=innerWidth;vh=innerHeight;cv.width=Math.round(vw*dpr);cv.height=Math.round(vh*dpr);
   if(first)fit();else{cam.x+=(vw-ow)/2;cam.y+=(vh-oh)/2}
 }
@@ -3366,9 +3375,28 @@ function inkOutline(c,r){
    Plain canvas copies only (no filters), so it stays cheap on every device. */
 const INK_OFF=[0,0],INK=document.createElement('canvas'),INK2=document.createElement('canvas'),INK_DIRS=[[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[.7,-.7],[-.7,-.7]];
 if(QL<2){INK_DIRS.length=0;INK_DIRS.push(...INK_DIRS_LO)}
-function inkLive(ax,ay,rw,up,down,fn){
+document.body.classList.toggle('lowfx',QL<2);
+// Static things (the delivery board, the parked truck) pass a key: their outlined picture is baked once into its own
+// canvas, ground shadow included, and only stamped afterwards; it is rebuilt when the zoom or the quality changes.
+const INKC=new Map();
+function inkBake(T,sx,sy,s,r,rw,up,down,fn){
+  const pad=Math.ceil(r)+2,bw=Math.ceil(rw*s)+pad*2,bh=Math.ceil((up+down)*s)+pad*2,ox=pad+rw*s/2,oy=pad+up*s,mk=()=>{const c=document.createElement('canvas');c.width=bw;c.height=bh;return c};
+  const C=mk(),A=mk(),B=mk(),cx=C.getContext('2d'),ax=A.getContext('2d'),bx2=B.getContext('2d');
+  ax.setTransform(T.a,T.b,T.c,T.d,T.e-sx+ox,T.f-sy+oy);
+  const prev=g,pI=INKING,o0=INK_OFF[0],o1=INK_OFF[1];INKING=cx;INK_OFF[0]=INK_OFF[1]=0;g=ax;try{fn()}finally{g=prev;INKING=pI;INK_OFF[0]=o0;INK_OFF[1]=o1}
+  bx2.drawImage(A,0,0);bx2.globalCompositeOperation='source-in';bx2.fillStyle=NATURAL?'rgba(34,24,12,.42)':'rgba(38,20,8,.82)';bx2.fillRect(0,0,bw,bh);
+  for(const[dx,dy]of INK_DIRS)cx.drawImage(B,dx*r,dy*r);cx.drawImage(A,0,0);
+  return{c:C,ox,oy,a:T.a,b:T.b,cc:T.c,d:T.d,n:INK_DIRS.length};
+}
+function inkLive(ax,ay,rw,up,down,fn,key){
   if(ICON_MODE||QL===0)return fn();
   const T=g.getTransform(),[wx,wy]=P(ax,ay),s=Math.hypot(T.a,T.b),sx=T.a*wx+T.c*wy+T.e,sy=T.b*wx+T.d*wy+T.f,r=NATURAL?Math.max(.6,Math.min(1.4,s*.22)):Math.max(1,Math.min(4,s*.65));
+  if(key){
+    if(sx+rw*s<0||sx-rw*s>cv.width||sy+down*s<0||sy-up*s>cv.height)return;
+    const k=key+'|'+(NATURAL?1:0);let c=INKC.get(k);
+    if(!c||c.a!==T.a||c.b!==T.b||c.cc!==T.c||c.d!==T.d||c.n!==INK_DIRS.length){c=inkBake(T,sx,sy,s,r,rw,up,down,fn);INKC.set(k,c)}
+    g.save();g.setTransform(1,0,0,1,0,0);g.drawImage(c.c,Math.round(sx-c.ox),Math.round(sy-c.oy));g.restore();return;
+  }
   const x0=Math.max(0,Math.floor(sx-rw*s/2)),y0=Math.max(0,Math.floor(sy-up*s)),x1=Math.min(cv.width,Math.ceil(sx+rw*s/2)),y1=Math.min(cv.height,Math.ceil(sy+down*s)),w=x1-x0,h=y1-y0;
   if(w<=0||h<=0)return;
   if(INK.width<w||INK.height<h){INK.width=INK2.width=Math.max(INK.width,w);INK.height=INK2.height=Math.max(INK.height,h)}
@@ -7410,7 +7438,7 @@ function toTile(px,py){return[(px/(W/2)+py/(H/2))/2,(py/(H/2)-px/(W/2))/2]}
 function rectTiles(x0,y0,x1,y1){const c=[toTile(x0,y0),toTile(x1,y0),toTile(x0,y1),toTile(x1,y1)],xs=c.map(p=>p[0]),ys=c.map(p=>p[1]);return[Math.floor(Math.min(...xs)),Math.floor(Math.min(...ys)),Math.ceil(Math.max(...xs)),Math.ceil(Math.max(...ys))]}
 function overlaps(r,x0,y0,x1,y1){return x1>r[0]&&x0<r[2]&&y1>r[1]&&y0<r[3]}
 function treeNear(t,r){const[px,py]=P(t.x,t.y);return overlaps(r,px-60,py-120,px+60,py+20)}
-function paintChunk(which,i,j){
+function paintChunk(which,i,j){if(which==='ground')groundVer++;
   const b=gBounds(),bw=b[2]-b[0],bh=b[3]-b[1],x0=b[0]+i*CHW,y0=b[1]+j*CHW,x1=x0+CHW,y1=y0+CHW,r=[x0,y0,x1,y1];
   if(which==='front'&&!BORDER.some(t=>!t.back&&treeNear(t,r)))return{c:null,used:chTick,s:chS};
   const c=document.createElement('canvas');c.width=c.height=Math.ceil(CHW*chS);
@@ -7441,7 +7469,10 @@ function paintChunk(which,i,j){
   g=prev;return{c,used:chTick,s:chS};
 }
 function syncLayers(t){
-  const want=Math.min(cam.z*dpr,QL>=2?2:QL?1.5:1);
+  // Ground chunks are big canvases: past a certain total the browser starts shuffling them in and out of graphics
+  // memory and every frame crawls. Their resolution is chosen so the chunks on screen stay within a pixel budget.
+  const gb=gBounds(),ci=k=>Math.floor((k/cam.z-gb[0])/CHW),cj=k=>Math.floor((k/cam.z-gb[1])/CHW),ni=ci(vw-cam.x)-ci(-cam.x)+1,nj=cj(vh-cam.y)-cj(-cam.y)+1,
+    budget=Math.sqrt(2.6e6/(Math.max(1,ni*nj)*CHW*CHW)),want=Math.min(cam.z*dpr,QL>=2?2:QL?1.5:1,Math.max(.5,budget));
   if(!GC||chN!==N){CHUNK.ground.clear();CHUNK.front.clear();chS=want;chN=N;GC=GF=true;gstate={};syncGround();dirty.clear();return}
   // after a zoom the old chunks stay up (a little soft) and blitLayer repaints them sharp, one per frame, so zooming never stalls
   if(Math.abs(want/chS-1)>.2&&t-lastZoomT>250)chS=want;
@@ -7451,7 +7482,7 @@ function syncLayers(t){
     const a=P(x,y),c=P(x+1,y+1);
     for(const[key,ch]of CHUNK.ground){if(!ch.c)continue;const[i,j]=key.split(',').map(Number),x0=b[0]+i*CHW,y0=b[1]+j*CHW;
       if(!overlaps([x0,y0,x0+CHW,y0+CHW],a[0]-W/2-4,a[1]-4,a[0]+W/2+4,c[1]+4))continue;
-      g=ch.c.getContext('2d');g.setTransform(ch.s,0,0,ch.s,-x0*ch.s,-y0*ch.s);g.save();poly(quad(x,y));g.clip();drawTile(x,y,true);g.restore()}}
+      g=ch.c.getContext('2d');g.setTransform(ch.s,0,0,ch.s,-x0*ch.s,-y0*ch.s);g.save();poly(quad(x,y));g.clip();drawTile(x,y,true);g.restore();groundVer++}}
   dirty.clear();g=prev;
 }
 function blitLayer(which){
@@ -7467,7 +7498,7 @@ function blitLayer(which){
     const ax=Math.max(dx,0),ay=Math.max(dy,0),bx=Math.min(dx+dw,cv.width),by=Math.min(dy+dh,cv.height);if(bx<=ax||by<=ay)continue;
     const kx=ch.c.width/dw,ky=ch.c.height/dh;g.drawImage(ch.c,(ax-dx)*kx,(ay-dy)*ky,(bx-ax)*kx,(by-ay)*ky,ax,ay,bx-ax,by-ay)}
   // keep the chunks on screen plus a generous margin of recently seen ones
-  const keep=Math.max(24,(i1-i0+1)*(j1-j0+1)*3);
+  const keep=(i1-i0+1)*(j1-j0+1)+6;
   if(m.size>keep){const old=[...m].sort((p,q)=>p[1].used-q[1].used);for(let k=0;k<m.size-keep;k++)m.delete(old[k][0])}
 }
 let last=performance.now();
@@ -7477,7 +7508,7 @@ function drawVignette(){
     gr.addColorStop(0,'rgba(20,30,8,0)');gr.addColorStop(.6,'rgba(20,30,8,.06)');gr.addColorStop(1,'rgba(20,30,8,.34)');x.fillStyle=gr;x.fillRect(0,0,256,256)}
   g.setTransform(1,0,0,1,0,0);g.drawImage(VIG,0,0,cv.width,cv.height);
 }
-let skipFrame=false;
+let skipFrame=false,GCV=null,gcKey='',groundVer=0;
 function frame(t){
   // on the lowest quality, draw every other frame (30 per second) to save battery on weak phones
   if(QL===0&&!HV){skipFrame=!skipFrame;if(skipFrame){requestAnimationFrame(frame);return}}
@@ -7485,15 +7516,25 @@ function frame(t){
   const now=Date.now();
   if(HV){updateFarmer(dt,now);requestAnimationFrame(frame);return}
   seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
+  // The background (base colour, the endless meadow and the ground chunks) is composed into a screen-sized canvas only
+  // when the camera, the canvas, the season or a ground chunk changes; otherwise each frame stamps it 1:1, which is
+  // cheap even where the browser draws without the graphics card.
+  {const key=[cam.x.toFixed(2),cam.y.toFixed(2),cam.z.toFixed(4),cv.width,cv.height,chS,groundVer,season().id,NATURAL?1:0,QL].join('|');
+    if(!GCV)GCV=document.createElement('canvas');
+    if(key!==gcKey||GCV.width!==cv.width||GCV.height!==cv.height){if(GCV.width!==cv.width||GCV.height!==cv.height){GCV.width=cv.width;GCV.height=cv.height}
+      const prevG=g,pv=groundVer;g=GCV.getContext('2d');try{
   g.setTransform(1,0,0,1,0,0);
   if(!BG){const sb=NATURAL?groundBg():season().bg;BG=g.createLinearGradient(0,0,0,cv.height);BG.addColorStop(0,sb[0]);BG.addColorStop(1,sb[1])}
   g.fillStyle=BG;g.fillRect(0,0,cv.width,cv.height);HBUB=[];
   // painted style: the grass carries on past the painted land in every direction, so zooming out never shows its edge
   // (it is the same texture, anchored at the same world origin, so the land's soft rim fades into it seamlessly)
-  if(NATURAL){g.setTransform(cam.z*dpr,0,0,cam.z*dpr,cam.x*dpr,cam.y*dpr);const vx=-cam.x/cam.z,vy=-cam.y/cam.z,vw2=cv.width/dpr/cam.z,vh2=cv.height/dpr/cam.z;
+  const gb=gBounds(),vx=-cam.x/cam.z,vy=-cam.y/cam.z,vw2=cv.width/dpr/cam.z,vh2=cv.height/dpr/cam.z,covered=vx>=gb[0]+430&&vx+vw2<=gb[2]-430&&vy>=gb[1]+345&&vy+vh2<=gb[3]-345;
+  if(NATURAL&&!covered){g.setTransform(cam.z*dpr,0,0,cam.z*dpr,cam.x*dpr,cam.y*dpr);
     g.fillStyle=grassPat();g.fillRect(vx,vy,vw2,vh2);if(season().id==='winter'){g.fillStyle='rgba(238,243,250,.18)';g.fillRect(vx,vy,vw2,vh2)}
     g.fillStyle=farMeadowPat();g.fillRect(vx,vy,vw2,vh2);g.fillStyle='rgba(26,44,10,.164)';g.fillRect(vx,vy,vw2,vh2);g.setTransform(1,0,0,1,0,0)}
   blitLayer('ground');
+      }finally{g=prevG}gcKey=groundVer===pv?key:''}
+    g.setTransform(1,0,0,1,0,0);g.drawImage(GCV,0,0)}HBUB=[];
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
   drawHover();
   const list=[];
@@ -7511,7 +7552,7 @@ function frame(t){
   if(S.pet)list.push([pet.x+pet.y,0,0,{pet:1}]);
   list.push([N*2+3,0,0,{deliv:1}]);
   list.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
-  for(const[,x,y,o,part]of list){if(!o)inkLive(farmer.x,farmer.y,190,170,50,()=>drawFarmer(now));else if(o.pet)inkLive(pet.x,pet.y,80,70,25,()=>drawPetSprite(now));else if(o.deliv)drawDeliveryArea(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now,part)}
+  for(const[,x,y,o,part]of list){if(!o){const veh=farmer.job&&farmer.job.vehicle;inkLive(farmer.x,farmer.y,veh?190:104,veh?170:92,veh?50:24,()=>drawFarmer(now))}else if(o.pet)inkLive(pet.x,pet.y,72,58,16,()=>drawPetSprite(now));else if(o.deliv)drawDeliveryArea(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now,part)}
   if(farmer.sayT>0&&!VIS){const[px,py]=P(farmer.x,farmer.y);g.save();g.globalAlpha=Math.min(1,farmer.sayT*2.5);talkBubble(px,py-50,farmer.say);g.restore()}
   if(VIS)for(const k in S.tiles){const o=S.tiles[k];if(o.helped){const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5);ell(px,py-4,6,6,'#5bbf3a','#fff',1.4);g.strokeStyle='#fff';g.lineWidth=1.6;line([px-2.6,py-4],[px-.6,py-2]);line([px-.6,py-2],[px+2.8,py-6.4])}}
   if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);
@@ -8506,7 +8547,8 @@ function drawDeliveryArea(now){
   if(tp){const cargo=d.run?(ph==='leaving'||ph==='boarding'?d.run.job.items:ph==='back'?'money':null):null;
     const cab=!!(inCab||(d.run&&ph!=='boarding')||(!d.run&&dale.outT&&now-dale.outT<520));
     const load=d.run&&ph==='boarding'?(now-d.run.start)/BOARD:null;
-    inkLive(tp[0]+1.3,tp[1]+.4,210,95,45,()=>drawTruck(tp[0],tp[1],now,tp[2],cargo,cab,door,tp[3],{lv:d.lv||1,load}));
+    const still=!tp[2]&&!cab&&!door&&load==null&&!cargo&&!tp[3];
+    inkLive(tp[0]+1.3,tp[1]+.4,210,95,45,()=>drawTruck(tp[0],tp[1],now,tp[2],cargo,cab,door,tp[3],{lv:d.lv||1,load}),still?'truck:'+(d.lv||1)+':'+tp[0]+','+tp[1]:null);
     // a beep when Dale honks: leaving the farm and pulling back in
     {const r=d.run,hk=r?(now>=r.start+BOARD&&now<r.start+BOARD+520?(now-r.start-BOARD)/520:now>=r.end-500&&now<r.end?(now-r.end+500)/500:-1):-1;
       if(hk>=0){const[hx,hy]=P(tp[0]+2.78,tp[1]+.4,15);g.lineCap='round';for(let i=0;i<3;i++){const rr=5+i*4+hk*4;g.strokeStyle='rgba(255,250,230,'+((1-hk)*.9).toFixed(2)+')';g.lineWidth=1.6;g.beginPath();g.arc(hx,hy,rr,-.7,.5);g.stroke()}}}truckLights(tp[0],tp[1],(tp[2]||cab)&&darkness()>.3);
@@ -8523,7 +8565,7 @@ function drawDeliveryArea(now){
       if(dale.sayT>0)speech(px,ty-14,dale.say)}
     else if(dale.sayT>0&&ph==='leaving'){const[hx,hy]=P(tp[0]+1.75,tp[1]+.4,50);dale.sayT-=1/60;speech(hx,hy,dale.say)}}
   // the board stands in front of the road, so it is drawn after the truck
-  inkLive(bx+.5,by+.3,90,80,20,()=>drawBoard(bx,by));
+  inkLive(bx+.5,by+.3,90,80,20,()=>drawBoard(bx,by),'board');
   if(ready){const[px,py]=P(bx+.5,by+.3);const k=reduce?0:Math.sin(now/240)*2;ell(px+26,py-70+k,8,8,'#3f9a3c','#fff',1.6);g.font='bold 10px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText('!',px+26,py-66.5+k)}
 }
 function deliveryAt(cx,cy){
