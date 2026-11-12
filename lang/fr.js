@@ -1371,7 +1371,7 @@ p:`0|$1 {p1:pièce|pièces}
 194|Tu n'as pas encore sommeil. Prochaine sieste dans {t1}.
 195|Quelle sieste ! Tout à la ferme a avancé de 5 minutes. -$1 nourriture et boisson.
 196|{1} ajouté à ta maison !
-197|Les meubles confortables rendent ta maison plus douillette : chaque point de confort fait revenir la sieste plus vite. Confort : $1. Attente de la sieste : {t2}.
+197|Des meubles confortables rendent ta maison plus douillette : chaque point de confort prolonge d'une minute le bonus Frais de la douche. Confort : $1.
 198|[[{1} ]]+$2 confort
 199|{1} ($2)
 200|+$1 % de bonus

@@ -1371,7 +1371,7 @@ p:`0|$1 koin
 194|Kamu belum mengantuk. Tidur siang lagi dalam {t1}.
 195|Tidur siang yang nyenyak! Semua di kebun maju 5 menit. -$1 makan dan minum.
 196|{1} ditambahkan ke rumahmu!
-197|Perabot nyaman membuat rumah lebih hangat: setiap poin kenyamanan membuat tidur siang lebih cepat tersedia. Kenyamanan: $1. Jeda tidur siang: {t2}.
+197|Perabot yang nyaman membuat rumahmu lebih hangat: setiap poin kenyamanan memperpanjang bonus Segar dari mandi satu menit. Kenyamanan: $1.
 198|[[{1} ]]+$2 kenyamanan
 199|{1} ($2)
 200|Bonus +$1%

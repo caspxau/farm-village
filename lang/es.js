@@ -1371,7 +1371,7 @@ p:`0|$1 {p1:moneda|monedas}
 194|Aún no tienes sueño. Próxima siesta en {t1}.
 195|¡Qué siesta! Todo en la granja avanzó 5 minutos. -$1 de comida y bebida.
 196|¡{1} añadido a tu casa!
-197|Los muebles cómodos hacen tu casa más acogedora: cada punto de comodidad hace que la siesta vuelva antes. Comodidad: $1. Espera de la siesta: {t2}.
+197|Los muebles cómodos hacen tu casa más acogedora: cada punto de comodidad alarga un minuto el bono Fresco de la ducha. Comodidad: $1.
 198|[[{1} ]]+$2 de comodidad
 199|{1} ($2)
 200|+$1% de bono

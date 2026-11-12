@@ -1371,7 +1371,7 @@ p:`0|$1 {p1:moeda|moedas}
 194|Você ainda não está com sono. Próximo cochilo em {t1}.
 195|Que cochilo! Tudo na fazenda avançou 5 minutos. -$1 de comida e bebida.
 196|{1} foi para a sua casa!
-197|Móveis confortáveis deixam a casa mais aconchegante: cada ponto de conforto faz o cochilo voltar mais cedo. Conforto: $1. Espera do cochilo: {t2}.
+197|Móveis confortáveis deixam a tua casa mais acolhedora: cada ponto de conforto prolonga em um minuto o bónus Fresco do duche. Conforto: $1.
 198|[[{1} ]]+$2 de conforto
 199|{1} ($2)
 200|+$1% de bônus
