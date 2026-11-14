@@ -2227,7 +2227,7 @@ const PL_EXACT={
 'Feed Mill':'Młyn paszowy','Diesel Press':'Tłocznia ropy','Farm Kitchen':'Kuchnia farmy','Cider Press':'Tłocznia cydru','Beehive':'Ul','Fishing Pond':'Staw rybny','Farmhouse':'Dom','Silo':'Silos','Windmill':'Wiatrak','Mailbox':'Skrzynka pocztowa','Scarecrow':'Strach na wróble','Hay Bale':'Bela siana','White Fence':'Biały płot','Fence Gate':'Furtka','Hedge':'Żywopłot','Flower Bed':'Rabata','Flower Patch':'Kwietnik','Park Bench':'Ławka','Lamp Post':'Latarnia','Birdbath':'Poidełko dla ptaków','Birdhouse':'Budka dla ptaków','Garden Gnome':'Krasnal ogrodowy','Wishing Well':'Studnia życzeń','Stone Fountain':'Kamienna fontanna','Garden Arch':'Pergola','Garden Gazebo':'Altana','Picnic Table':'Stół piknikowy','Picnic Blanket':'Koc piknikowy','Stepping Stones':'Kamienna ścieżka','Pumpkin Pile':'Stos dyń','Duck Pond':'Staw z kaczkami','Town Clock':'Zegar miejski','Ladybug Topiary':'Biedronka z żywopłotu','Golden Cow Statue':'Pomnik złotej krowy','Hot Air Balloon':'Balon','Glass Greenhouse':'Szklarnia','Feed Sack':'Worek paszy','Diesel Can':'Kanister ropy','A little something to make the farm cozy.':'Drobiazg, który uprzytulni farmę.',
 // ---- misc single words used as labels
 'Plant ·':'Posadź ·','Selected ·':'Wybrane ·','Buy ·':'Kup ·','Run it ·':'Uruchom ·',
-'Welcome back to Farm Village! Come back every day for bigger rewards.':'Witaj ponownie w Farm Village! Wracaj codziennie po coraz większe nagrody.',
+'Welcome back to Farm Village! Come back every day for bigger rewards.':'Witaj ponownie w Farm Village! Wracaj codziennie po coraz większe nagrody.','Welcome to Farm Village! Come back every day for bigger rewards.':'Witaj w Farm Village! Wracaj codziennie po coraz większe nagrody.',
 '10 animal feed for your barn. Cheaper to make your own at a Feed Mill.':'10 paszy do stodoły. Taniej zrobić własną w młynie paszowym.',
 '5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.':'5 worków nawozu. Kliknij podlany plon, by go nawieźć: podwójny zbiór i większa szansa na złoto.',
 // proper names stay as they are
@@ -2251,7 +2251,7 @@ const PL_EXACT={
 'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.',
-'Art style':'Styl grafiki','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
+'Art style':'Styl grafiki','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
 ,
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
@@ -2485,6 +2485,10 @@ const PL_PATS=[
 [/^(\d+) crops? (?:has|have) withered\. Clear and replant them$/,m=>m[1]+' '+p3(m[1],'plon usechł','plony uschły','plonów uschło')+'. Usuń je i posadź od nowa'],
 [/^Spend (\d+) Farm Cash on (.+)\?$/,m=>'Wydać '+m[1]+' '+p3(m[1],'farmdolara','farmdolary','farmdolarów')+' na: '+m[2].split(', ').map(L_w).join(', ')+'?'],
 [/^You need (\d+) more Farm Cash for this\.$/,m=>'Potrzebujesz jeszcze '+m[1]+' '+p3(m[1],'farmdolara','farmdolarów','farmdolarów')+'.'],
+[/^Sells for ([\d.,\s ]+)$/,m=>'Cena: '+m[1]],
+[/^Every (\d[\d:hms ]*)$/,m=>'Co '+L_t(m[1])],
+[/^x(\d+) in barn$/,m=>'×'+m[1]+' w stodole'],
+[/^Home for up to (\d+) (.+)\. You own (\d+)\.$/,m=>'Dom dla '+m[1]+' zwierząt ('+L_w(m[2]).toLowerCase()+'). Masz: '+m[3]+'.'],
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -3272,7 +3276,7 @@ function resize(){
   BG=null;VIG=null;const first=!vw,ow=vw,oh=vh;vw=innerWidth;vh=innerHeight;cv.width=Math.round(vw*dpr);cv.height=Math.round(vh*dpr);
   if(first)fit();else{cam.x+=(vw-ow)/2;cam.y+=(vh-oh)/2}
 }
-addEventListener('resize',resize);
+addEventListener('resize',resize);addEventListener('resize',()=>{const t=$('tip');if(t)t.hidden=true});
 
 /* ================= drawing helpers ================= */
 function poly(pts,fill,stroke,lw){
@@ -5945,7 +5949,7 @@ function drawObj(x,y,o,now,part){
       const k=Math.max(0,Math.min(1,1-(cur.end-now)/(cur.end-cur.start))),w=46;
       poly([[px-w/2,py+12],[px+w/2,py+12],[px+w/2,py+19],[px-w/2,py+19]],'rgba(255,250,240,.92)','#6b3c15',1);
       poly([[px-w/2+1.5,py+13.5],[px-w/2+1.5+(w-3)*k,py+13.5],[px-w/2+1.5+(w-3)*k,py+17.5],[px-w/2+1.5,py+17.5]],'#5bbf3a');
-      if(!reduce){const[sma,smb]=o.r?[SMOKE[o.id][1],SMOKE[o.id][0]]:[SMOKE[o.id][0],SMOKE[o.id][1]],[sx,sy]=P(x+sma,y+smb,SMOKE[o.id][2]);for(let i=0;i<3;i++){const t=((now/1500)+i/3)%1;ell(sx+t*7,sy-t*22,2.5+t*4,2.2+t*3.4,'rgba(235,235,235,'+(.55*(1-t)).toFixed(3)+')')}}
+      if(!reduce&&SMOKE[o.id]){const[sma,smb]=o.r?[SMOKE[o.id][1],SMOKE[o.id][0]]:[SMOKE[o.id][0],SMOKE[o.id][1]],[sx,sy]=P(x+sma,y+smb,SMOKE[o.id][2]);for(let i=0;i<3;i++){const t=((now/1500)+i/3)%1;ell(sx+t*7,sy-t*22,2.5+t*4,2.2+t*3.4,'rgba(235,235,235,'+(.55*(1-t)).toFixed(3)+')')}}
     }
     if(done.length){goodBubble(px+20,py-80,MAKERS[o.id].recipes[done[0].r].out,now);
       if(done.length>1){ell(px+31,py-89,6,6,'#e0352b','#fff',1.4);g.font='600 8px Fredoka, sans-serif';g.textAlign='center';g.fillStyle='#fff';g.fillText(done.length,px+31,py-86)}}
@@ -7509,7 +7513,10 @@ function drawVignette(){
   g.setTransform(1,0,0,1,0,0);g.drawImage(VIG,0,0,cv.width,cv.height);
 }
 let skipFrame=false,GCV=null,gcKey='',groundVer=0;
-function frame(t){
+// A drawing error must never stop the game: report it once and keep the loop going.
+let frameErr=false;
+function frame(t){try{frameStep(t)}catch(e){if(!frameErr){frameErr=true;console.error(e)}g=MAIN_G;try{g.restore();g.restore();g.restore();g.globalAlpha=1}catch(e2){}requestAnimationFrame(frame)}}
+function frameStep(t){
   // on the lowest quality, draw every other frame (30 per second) to save battery on weak phones
   if(QL===0&&!HV){skipFrame=!skipFrame;if(skipFrame){requestAnimationFrame(frame);return}}
   const rawDt=(t-last)/1000,dt=Math.min(.05,rawDt);last=t;if(rawDt>0&&rawDt<.5)perfTick(rawDt);
@@ -8043,21 +8050,21 @@ function makerAdd(key,i){
   SFX.plant();toast(M.name+': making '+r.n+' '+ITEMS[r.out].name.toLowerCase()+', ready in '+fmt((start-now)/1000+t)+'.');changed();rerender();
 }
 function makerCollect(key){
-  const o=S.tiles[key];if(!o)return false;const M=MAKERS[o.id],now=Date.now(),[x,y]=key.split(',').map(Number),got={};let xp=0,full=false,cans=0;
+  const o=S.tiles[key];if(!o)return false;const M=MAKERS[o.id],now=Date.now(),[x,y]=key.split(',').map(Number),got={};let xp=0,full=false,cans=0,jobs=0;
   fuelNow();
   o.q=(o.q||[]).filter(j=>{
     if(j.end>now||full)return true;const r=M.recipes[j.r];
     // fresh diesel goes straight into the tractor's tank; only what does not fit is stored in the barn
     let tank=0;if(r.out==='diesel')while(tank<r.n&&S.fuel+(cans+tank)*CAN_FUEL<=FUEL_MAX-CAN_FUEL/2)tank++;
     if(room()<r.n-tank){full=true;return true}
-    cans+=tank;if(r.n-tank){addGood(r.out,r.n-tank);got[r.out]=(got[r.out]||0)+r.n-tank}xp+=1+Math.ceil(r.time/60);return false;
+    cans+=tank;if(r.n-tank){addGood(r.out,r.n-tank);got[r.out]=(got[r.out]||0)+r.n-tank}xp+=1+Math.ceil(r.time/60);jobs++;return false;
   });
   if(cans){S.fuel=Math.min(FUEL_MAX,S.fuel+cans*CAN_FUEL);SFX.engine();toast('Poured in '+cans+' can'+(cans>1?'s':'')+' of diesel. Fuel: '+S.fuel+' / '+FUEL_MAX+'.');
     const fc=$('fuelchip');if(fc){fc.classList.remove('v5bump');void fc.offsetWidth;fc.classList.add('v5bump')}}
   let n=0;if(cans){floatText(x+1,y+.6,'+'+cans*CAN_FUEL+' fuel','#ffd27a');n++}
   for(const id in got){floatText(x+1,y+.6-n*.55,'+'+got[id]+' '+ITEMS[id].name,'#fff3b0',n*160);n++}
   if(full)barnFull();
-  if(n){if(Object.keys(got).length){SFX.harvest();setTimeout(SFX.collect,110)}burst(x+1,y+1,['#fff','#ffe066']);stat('make',n);if(xp){floatText(x+1,y-n*.55,'+'+xp+' XP','#7cc8ff',200);addXP(xp)}}
+  if(n){if(Object.keys(got).length){SFX.harvest();setTimeout(SFX.collect,110)}burst(x+1,y+1,['#fff','#ffe066']);stat('make',jobs);if(xp){floatText(x+1,y-n*.55,'+'+xp+' XP','#7cc8ff',200);addXP(xp)}}
   changed();rerender();return n>0;
 }
 function clickMaker(key){const o=S.tiles[key];if(makerJobs(o,Date.now()).done.length&&makerCollect(key))return;showMaker(key)}
@@ -8119,7 +8126,7 @@ function showMaker(key){
     for(let i=0;i<mkSlots(o);i++){
       const j=q[i];if(!j){const e=el('div','slot empty');e.appendChild(el('i','plus','+'));e.appendChild(el('span',null,'Empty slot'));qs.appendChild(e);continue}
       const r=M.recipes[j.r],ready=j.end<=now,run=!ready&&j.start<=now,s=el('div','slot'+(ready?' done':'')),im=el('img');im.src=itemIcon(r.out);im.alt='';s.appendChild(im);
-      s.appendChild(el('span',null,r.n+' '+ITEMS[r.out].name));
+      s.appendChild(el('span',null,ITEMS[r.out].name+' ×'+r.n));
       if(ready)s.appendChild(el('b',null,'Ready!'));
       else if(run){const bar=el('div','pbar');bar.innerHTML='<i style="width:'+Math.min(100,(now-j.start)/(j.end-j.start)*100)+'%"></i>';s.appendChild(bar);s.appendChild(el('small',null,fmt((j.end-now)/1000)))}
       else s.appendChild(el('small',null,'Next up'));
@@ -9578,8 +9585,9 @@ function showNextUnlocks(){
   modal({title:'Level '+S.level,color:'gold',render(b){
     const p=el('div','store');
     if(S.level>=MAX_LVL){p.appendChild(el('p',null,'You reached Level 99, the top level. Well done, champion!'));b.appendChild(p);return}
-    p.appendChild(el('p',null,(need(S.level)-S.xp)+' XP to Level '+(S.level+1)+' of '+MAX_LVL+'. Deliveries with Dale give the most XP, then quests and neighbor orders.'));
-    if(S.level>=MAX_LVL-10)p.appendChild(el('p','hint','At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.'));
+    p.appendChild(el('p',null,(need(S.level)-S.xp).toLocaleString()+' XP to Level '+(S.level+1)+' of '+MAX_LVL+'. Deliveries with Dale give the most XP, then quests and neighbor orders.'));
+    let more=false;for(let l=S.level+1;l<MAX_LVL&&!more;l++)more=unlockList(l).length>0;
+    if(S.level>=MAX_LVL-10||!more)p.appendChild(el('p','hint','At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.'));
     for(const l of[S.level+1,S.level+2]){if(l>MAX_LVL)continue;const list=unlockList(l);if(!list.length)continue;p.appendChild(el('h3',null,'Level '+l+' unlocks'));p.appendChild(unlockGrid(list))}
     b.appendChild(p);
   }});
@@ -9968,7 +9976,7 @@ function doTrade(o){
   const nb=NEIGHBORS.find(x=>x.id===o.who);toast(nb.name+' traded with you: '+o.get.map(([k,n])=>MATS[k].name+' ×'+n).join(', ')+'.');
   changed();rerender();
 }
-function matChip(k,n,ok){const r=el('span','req'+(ok?' ok':''));r.innerHTML=MATS[k].svg;r.appendChild(el('b',null,(ok?'+':'')+n));r.title=MATS[k].name;r.setAttribute('aria-label',MATS[k].name+': '+n);return r}
+function matChip(k,n,ok){const r=el('span','req'+(ok?' ok':''));r.innerHTML=MATS[k].svg;r.appendChild(el('b',null,(ok?'+':'')+n));r.title=MATS[k].name;r.setAttribute('aria-label',MATS[k].name+' ×'+n);return r}
 function tradeReady(){if(!S)return false;const t=tradeState();return t.offers.some(canTrade2)}
 function showTrades(){
   if(VIS)return;stat('tradesSeen');
@@ -10825,7 +10833,7 @@ function awaySummary(){
     if(o.k==='plot'&&o.crop){const st=cropState(o,now).st;if(st==='ripe')crops++;else if(st==='withered')dead++}
     else if(o.k==='animal'&&ANIMALS[o.id]){if(hungry(o))hungryN++;else if(readyIn(o,ANIMALS[o.id],now)<=0)animals++}
     else if(o.k==='tree'&&TREES[o.id]&&readyIn(o,TREES[o.id],now)<=0)trees++;
-    else if(o.k==='mk'&&o.q)goods+=o.q.filter(j=>j.end<=now).length}
+    else if(o.k==='mk'&&o.q&&MAKERS[o.id])for(const j of o.q){const r=MAKERS[o.id].recipes[j.r];if(j.end<=now&&r)goods+=r.n}}
   const orders=(S.orders||[]).filter(o=>canFill(o)).length,rows=[];
   if(crops)rows.push(['wheat',crops+(crops===1?' crop is':' crops are')+' ready to harvest']);
   if(animals)rows.push(['a_chicken',animals+(animals===1?' animal has':' animals have')+' something for you']);
@@ -10864,7 +10872,7 @@ function dailyBonus(){
   const t=today();if(S.daily.last===t)return;
   const streak=S.daily.last===yesterday()?Math.min(5,S.daily.streak+1):1;
   modal({title:'Daily Bonus',color:'green',small:true,noClose:true,render(b){
-    const p=el('div','body-pad');p.appendChild(el('p',null,'Welcome back to Farm Village! Come back every day for bigger rewards.'));
+    const p=el('div','body-pad');p.appendChild(el('p',null,S.daily.last?'Welcome back to Farm Village! Come back every day for bigger rewards.':'Welcome to Farm Village! Come back every day for bigger rewards.'));
     const days=el('div','days');
     DAILY.forEach((r,i)=>{const d=el('div','day'+(i+1<streak?' done':i+1===streak?' today':''));d.appendChild(el('b',null,'Day '+(i+1)));
       d.appendChild(el('span',null,r.coins+' coins'));if(r.fuel)d.appendChild(el('span',null,'+'+r.fuel+' fuel'));if(r.cash)d.appendChild(el('span',null,'+'+r.cash+' Farm Cash'));days.appendChild(d)});
@@ -11011,7 +11019,7 @@ function renderNeeds(){
   const mood=needMood(h),low=h.food<15||h.drink<15;
   // the face follows how the farmer feels
   {const face=Object.assign({},S.look||{},low?{mouth:'calm',brows:S.look&&S.look.brows==='none'?'none':'natural'}:{}),fk=JSON.stringify(face);
-    if(fk!==needFaceKey&&S.look){needFaceKey=fk;try{$('needFace').src=lookThumb(face,'face').toDataURL()}catch(e){}}$('needWho').textContent=S.farmerName||'Farmer'}
+    if(fk!==needFaceKey&&S.look){needFaceKey=fk;try{$('needFace').src=lookThumb(face,'face').toDataURL()}catch(e){}}$('needWho').textContent=S.farmerName||tr('Farmer')}
   const lvl=v=>v<20?'low':v<45?'mid':'ok';
   for(const[el2,v,key,vEl]of[[f,h.food,'f','needFoodV'],[d,h.drink,'d','needDrinkV']]){
     el2.style.width=Math.max(3,Math.round(v))+'%';el2.className=lvl(v);$(vEl).textContent=Math.round(v);

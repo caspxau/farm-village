@@ -998,6 +998,7 @@ Selected ·|Escolhida ·
 Buy ·|Comprar ·
 Run it ·|Ativar ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|Bem-vindo de volta a Farm Village! Volte todo dia para prêmios maiores.
+Welcome to Farm Village! Come back every day for bigger rewards.|Bem-vindo a Farm Village! Volte todo dia para prêmios maiores.
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|10 de ração para o seu celeiro. Sai mais barato fazer no moinho de ração.
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|5 sacos de adubo. Toque numa plantação regada para adubar: colheita dupla e mais chance de ouro.
 Plots|Lotes
@@ -1173,7 +1174,26 @@ Napping|Cochilando
 You need the ingredients in your barn first.|Primeiro você precisa dos ingredientes no celeiro.
 You are full!|Você está satisfeito!
 Cook and eat with goods from your barn. A full farmer works at full speed.|Cozinhe e coma com produtos do celeiro. Um fazendeiro satisfeito trabalha a toda velocidade.
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cozinhe e coma com produtos do celeiro. Um fazendeiro satisfeito trabalha a toda velocidade. Sua geladeira melhora cada refeição em 20%.`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cozinhe e coma com produtos do celeiro. Um fazendeiro satisfeito trabalha a toda velocidade. Sua geladeira melhora cada refeição em 20%.
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|A comida e bebida do seu fazendeiro. Coma e beba em casa para repor. Toque para ir para casa
+Farmer|Fazendeiro
+Eat & drink at home|Coma e beba em casa
+Vibrate on tap|Vibrar ao tocar
+Affordable|Acessível
+In season|Da estação
+Fastest|Mais rápido
+Most profit|Mais lucro
+Best in spring|Melhor na primavera
+Best in summer|Melhor no verão
+Best in autumn|Melhor no outono
+Best in winter|Melhor no inverno
+Plant free|Plantar grátis
++50% price|+50% no preço
+Waters growing crops up to 2 plots away.|Rega plantações a até 2 lotes de distância.
+Art style|Estilo gráfico
+Cartoon|Desenho animado
+Natural look: soft light and painted textures.|Visual natural: luz suave e texturas pintadas.
+Cartoon look: bold outlines.|Visual desenho animado: contornos fortes.`,
 p:`0|$1 {p1:moeda|moedas}
 1|$1 / $2 XP
 2|faltam $1
@@ -1389,4 +1409,8 @@ p:`0|$1 {p1:moeda|moedas}
 212|$1 {p1:animal está|animais estão} com fome
 213|$1 {p1:plantação murchou|plantações murcharam}. Limpe e replante
 214|Gastar $1 de dinheiro da fazenda em {l2}?
-215|Faltam $1 de dinheiro da fazenda.`};
+215|Faltam $1 de dinheiro da fazenda.
+216|Vende por $1
+217|A cada {t1}
+218|×$1 no celeiro
+219|Casa para até $1 ({2}). Você tem $3.`};

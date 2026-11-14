@@ -998,6 +998,7 @@ Selected ·|Elegida ·
 Buy ·|Comprar ·
 Run it ·|Activar ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|¡Bienvenido de nuevo a Farm Village! Vuelve cada día para premios mayores.
+Welcome to Farm Village! Come back every day for bigger rewards.|¡Bienvenido a Farm Village! Vuelve cada día para premios mayores.
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|10 de pienso para tu granero. Sale más barato hacerlo en un molino de pienso.
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|5 sacos de abono. Toca un cultivo regado para abonarlo: cosecha doble y más probabilidad de oro.
 Plots|Parcelas
@@ -1173,7 +1174,26 @@ Napping|Durmiendo la siesta
 You need the ingredients in your barn first.|Primero necesitas los ingredientes en el granero.
 You are full!|¡Estás lleno!
 Cook and eat with goods from your barn. A full farmer works at full speed.|Cocina y come con productos del granero. Un granjero lleno trabaja a toda velocidad.
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cocina y come con productos del granero. Un granjero lleno trabaja a toda velocidad. Tu nevera mejora cada comida un 20%.`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cocina y come con productos del granero. Un granjero lleno trabaja a toda velocidad. Tu nevera mejora cada comida un 20%.
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|La comida y bebida de tu granjero. Come y bebe en casa para recuperarlas. Toca para ir a casa
+Farmer|Granjero
+Eat & drink at home|Come y bebe en casa
+Vibrate on tap|Vibrar al tocar
+Affordable|Asequible
+In season|De temporada
+Fastest|Más rápido
+Most profit|Más ganancia
+Best in spring|Mejor en primavera
+Best in summer|Mejor en verano
+Best in autumn|Mejor en otoño
+Best in winter|Mejor en invierno
+Plant free|Plantar gratis
++50% price|+50 % de precio
+Waters growing crops up to 2 plots away.|Riega los cultivos hasta a 2 parcelas de distancia.
+Art style|Estilo gráfico
+Cartoon|Caricatura
+Natural look: soft light and painted textures.|Aspecto natural: luz suave y texturas pintadas.
+Cartoon look: bold outlines.|Aspecto caricatura: contornos marcados.`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1
@@ -1389,4 +1409,8 @@ p:`0|$1 {p1:moneda|monedas}
 212|$1 {p1:animal tiene|animales tienen} hambre
 213|$1 {p1:cultivo se ha|cultivos se han} marchitado. Límpialos y vuelve a plantar
 214|¿Gastar $1 de dinero de granja en {l2}?
-215|Te faltan $1 de dinero de granja.`};
+215|Te faltan $1 de dinero de granja.
+216|Se vende por $1
+217|Cada {t1}
+218|×$1 en el granero
+219|Casa para hasta $1 ({2}). Tienes $3.`};

@@ -1006,6 +1006,7 @@ Selected ·|বাছাই ·
 Buy ·|কেনো ·
 Run it ·|চালাও ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|Farm Village-এ আবার স্বাগতম! বড় পুরস্কারের জন্য রোজ এসো।
+Welcome to Farm Village! Come back every day for bigger rewards.|Farm Village-এ স্বাগতম! বড় পুরস্কারের জন্য রোজ এসো।
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|গোলাঘরের জন্য ১০ পশুখাদ্য। খাদ্য কলে নিজে বানানো সস্তা।
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|৫ বস্তা সার। জল দেওয়া ফসলে ট্যাপ করে সার দাও: দ্বিগুণ ফসল আর সোনার বেশি সুযোগ।
 Plots|জমি
@@ -1181,7 +1182,26 @@ Napping|ঘুমাচ্ছে
 You need the ingredients in your barn first.|আগে গোলাঘরে উপকরণ লাগবে।
 You are full!|পেট ভরে গেছে!
 Cook and eat with goods from your barn. A full farmer works at full speed.|গোলাঘরের জিনিস দিয়ে রাঁধো আর খাও। পেট ভরা কৃষক পুরো গতিতে কাজ করে।
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|গোলাঘরের জিনিস দিয়ে রাঁধো আর খাও। পেট ভরা কৃষক পুরো গতিতে কাজ করে। ফ্রিজ প্রতিটি খাবার ২০% ভালো করে।`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|গোলাঘরের জিনিস দিয়ে রাঁধো আর খাও। পেট ভরা কৃষক পুরো গতিতে কাজ করে। ফ্রিজ প্রতিটি খাবার ২০% ভালো করে।
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|তোমার কৃষকের খাবার ও পানীয়। পূরণ করতে বাড়িতে খাও ও পান করো। বাড়ি যেতে ট্যাপ করো
+Farmer|কৃষক
+Eat & drink at home|বাড়িতে খাও ও পান করো
+Vibrate on tap|ট্যাপে কম্পন
+Affordable|সাশ্রয়ী
+In season|মৌসুমি
+Fastest|সবচেয়ে দ্রুত
+Most profit|সবচেয়ে লাভ
+Best in spring|বসন্তে সেরা
+Best in summer|গ্রীষ্মে সেরা
+Best in autumn|শরতে সেরা
+Best in winter|শীতে সেরা
+Plant free|বিনামূল্যে লাগাও
++50% price|দাম +৫০%
+Waters growing crops up to 2 plots away.|২ প্লট দূর পর্যন্ত বাড়ন্ত ফসলে জল দেয়।
+Art style|ছবির ধরন
+Cartoon|কার্টুন
+Natural look: soft light and painted textures.|প্রাকৃতিক রূপ: নরম আলো ও আঁকা টেক্সচার।
+Cartoon look: bold outlines.|কার্টুন রূপ: মোটা রেখা।`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -1397,4 +1417,8 @@ p:`0|$1 কয়েন
 212|$1টি পশু ক্ষুধার্ত
 213|$1টি ফসল শুকিয়ে গেছে। পরিষ্কার করে আবার লাগাও
 214|{l2}-এ $1 ফার্ম ক্যাশ খরচ করবে?
-215|তোমার আরও $1 ফার্ম ক্যাশ লাগবে।`};
+215|তোমার আরও $1 ফার্ম ক্যাশ লাগবে।
+216|বিক্রি $1-এ
+217|প্রতি {t1}
+218|গোলায় ×$1
+219|$1টি {2}-এর ঘর। তোমার আছে $3টি।`};

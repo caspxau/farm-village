@@ -1006,6 +1006,7 @@ Selected ·|已选 ·
 Buy ·|购买 ·
 Run it ·|投放 ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|欢迎回到 Farm Village！每天回来领更大的奖励。
+Welcome to Farm Village! Come back every day for bigger rewards.|欢迎来到 Farm Village！每天回来领更大的奖励。
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|10份饲料放进谷仓。在饲料磨坊自己做更便宜。
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|5袋肥料。点击浇过水的作物来施肥：双倍收获，更容易出金色作物。
 Plots|地块
@@ -1181,7 +1182,26 @@ Napping|打盹中
 You need the ingredients in your barn first.|先得在谷仓里备好食材。
 You are full!|吃饱啦！
 Cook and eat with goods from your barn. A full farmer works at full speed.|用谷仓里的食材做饭吃饭。吃饱的农夫干活全速。
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|用谷仓里的食材做饭吃饭。吃饱的农夫干活全速。冰箱让每顿饭效果提高20%。`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|用谷仓里的食材做饭吃饭。吃饱的农夫干活全速。冰箱让每顿饭效果提高20%。
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|农夫的食物和饮水。在家吃喝来补充。点击回家
+Farmer|农夫
+Eat & drink at home|在家吃喝
+Vibrate on tap|点击时振动
+Affordable|买得起
+In season|当季
+Fastest|最快
+Most profit|最赚钱
+Best in spring|春季最佳
+Best in summer|夏季最佳
+Best in autumn|秋季最佳
+Best in winter|冬季最佳
+Plant free|免费种植
++50% price|价格+50%
+Waters growing crops up to 2 plots away.|为2格范围内生长中的作物浇水。
+Art style|画面风格
+Cartoon|卡通
+Natural look: soft light and painted textures.|自然风格：柔和光线与手绘质感。
+Cartoon look: bold outlines.|卡通风格：粗轮廓线。`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -1397,4 +1417,8 @@ p:`0|$1金币
 212|$1只动物饿了
 213|$1块作物枯萎了。清理后重新种植
 214|花费$1农场币购买{l2}？
-215|还差$1农场币。`};
+215|还差$1农场币。
+216|售价$1
+217|每{t1}
+218|谷仓里有×$1
+219|最多住$1只{2}。你有$3个。`};

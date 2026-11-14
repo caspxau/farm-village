@@ -998,6 +998,7 @@ Selected ·|Choisie ·
 Buy ·|Acheter ·
 Run it ·|Lancer ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|Bon retour à Farm Village ! Reviens chaque jour pour de plus grosses récompenses.
+Welcome to Farm Village! Come back every day for bigger rewards.|Bienvenue à Farm Village ! Reviens chaque jour pour de plus grosses récompenses.
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|10 aliments pour ta grange. C'est moins cher de les faire dans un moulin à aliments.
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|5 sacs d'engrais. Touche une culture arrosée pour l'engraisser : double récolte et plus de chances d'or.
 Plots|Parcelles
@@ -1173,7 +1174,26 @@ Napping|Sieste
 You need the ingredients in your barn first.|Il te faut d'abord les ingrédients dans la grange.
 You are full!|Tu es rassasié !
 Cook and eat with goods from your barn. A full farmer works at full speed.|Cuisine et mange avec les produits de ta grange. Un fermier rassasié travaille à pleine vitesse.
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cuisine et mange avec les produits de ta grange. Un fermier rassasié travaille à pleine vitesse. Ton frigo améliore chaque repas de 20 %.`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Cuisine et mange avec les produits de ta grange. Un fermier rassasié travaille à pleine vitesse. Ton frigo améliore chaque repas de 20 %.
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|Nourriture et boisson de ton fermier. Mange et bois à la maison pour les remplir. Touche pour rentrer
+Farmer|Fermier
+Eat & drink at home|Mange et bois à la maison
+Vibrate on tap|Vibrer au toucher
+Affordable|Abordable
+In season|De saison
+Fastest|Le plus rapide
+Most profit|Plus rentable
+Best in spring|Idéal au printemps
+Best in summer|Idéal en été
+Best in autumn|Idéal en automne
+Best in winter|Idéal en hiver
+Plant free|Planter gratuitement
++50% price|+50 % de prix
+Waters growing crops up to 2 plots away.|Arrose les cultures jusqu'à 2 parcelles autour.
+Art style|Style graphique
+Cartoon|Dessin animé
+Natural look: soft light and painted textures.|Aspect naturel : lumière douce et textures peintes.
+Cartoon look: bold outlines.|Aspect dessin animé : contours marqués.`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -1389,4 +1409,8 @@ p:`0|$1 {p1:pièce|pièces}
 212|$1 {p1:animal a|animaux ont} faim
 213|$1 {p1:culture a|cultures ont} fané. Nettoie et replante
 214|Dépenser $1 billets de ferme pour {l2} ?
-215|Il te manque $1 billets de ferme.`};
+215|Il te manque $1 billets de ferme.
+216|Se vend $1
+217|Toutes les {t1}
+218|×$1 dans la grange
+219|Abri pour $1 animaux ({2}). Tu en as $3.`};

@@ -998,6 +998,7 @@ Selected ·|Dipilih ·
 Buy ·|Beli ·
 Run it ·|Jalankan ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|Selamat datang kembali di Farm Village! Datang setiap hari untuk hadiah lebih besar.
+Welcome to Farm Village! Come back every day for bigger rewards.|Selamat datang di Farm Village! Datang setiap hari untuk hadiah lebih besar.
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|10 pakan untuk lumbungmu. Lebih murah buat sendiri di Penggiling Pakan.
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|5 karung pupuk. Ketuk tanaman yang sudah disiram untuk memupuknya: panen ganda dan peluang emas lebih besar.
 Plots|Petak
@@ -1173,7 +1174,26 @@ Napping|Tidur siang
 You need the ingredients in your barn first.|Kamu butuh bahannya di lumbung dulu.
 You are full!|Kamu sudah kenyang!
 Cook and eat with goods from your barn. A full farmer works at full speed.|Masak dan makan dengan barang dari lumbung. Petani yang kenyang bekerja dengan cepat.
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Masak dan makan dengan barang dari lumbung. Petani yang kenyang bekerja dengan cepat. Kulkasmu membuat setiap makanan 20% lebih baik.`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Masak dan makan dengan barang dari lumbung. Petani yang kenyang bekerja dengan cepat. Kulkasmu membuat setiap makanan 20% lebih baik.
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|Makanan dan minuman petanimu. Makan dan minum di rumah untuk mengisinya. Ketuk untuk pulang
+Farmer|Petani
+Eat & drink at home|Makan & minum di rumah
+Vibrate on tap|Getar saat diketuk
+Affordable|Terjangkau
+In season|Sedang musim
+Fastest|Tercepat
+Most profit|Untung terbesar
+Best in spring|Terbaik di musim semi
+Best in summer|Terbaik di musim panas
+Best in autumn|Terbaik di musim gugur
+Best in winter|Terbaik di musim dingin
+Plant free|Tanam gratis
++50% price|Harga +50%
+Waters growing crops up to 2 plots away.|Menyiram tanaman hingga 2 petak di sekitarnya.
+Art style|Gaya gambar
+Cartoon|Kartun
+Natural look: soft light and painted textures.|Tampilan alami: cahaya lembut dan tekstur lukisan.
+Cartoon look: bold outlines.|Tampilan kartun: garis tepi tebal.`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -1389,4 +1409,8 @@ p:`0|$1 koin
 212|$1 hewan lapar
 213|$1 tanaman layu. Bersihkan dan tanam lagi
 214|Belanjakan $1 Uang Kebun untuk {l2}?
-215|Kamu butuh $1 Uang Kebun lagi.`};
+215|Kamu butuh $1 Uang Kebun lagi.
+216|Dijual $1
+217|Setiap {t1}
+218|×$1 di lumbung
+219|Kandang untuk $1 {2}. Kamu punya $3.`};

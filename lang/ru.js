@@ -1006,6 +1006,7 @@ Selected ·|Выбрано ·
 Buy ·|Купить ·
 Run it ·|Запустить ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|С возвращением в Farm Village! Заходи каждый день за наградами побольше.
+Welcome to Farm Village! Come back every day for bigger rewards.|Добро пожаловать в Farm Village! Заходи каждый день за наградами побольше.
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|10 корма для амбара. Дешевле сделать самому на кормовой мельнице.
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|5 мешков удобрения. Нажми на политую посадку, чтобы удобрить: двойной урожай и больше шансов на золото.
 Plots|Грядки
@@ -1181,7 +1182,26 @@ Napping|Дремлет
 You need the ingredients in your barn first.|Сначала нужны ингредиенты в амбаре.
 You are full!|Ты сыт!
 Cook and eat with goods from your barn. A full farmer works at full speed.|Готовь и ешь из продуктов амбара. Сытый фермер работает в полную силу.
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Готовь и ешь из продуктов амбара. Сытый фермер работает в полную силу. Холодильник делает каждое блюдо на 20% лучше.`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|Готовь и ешь из продуктов амбара. Сытый фермер работает в полную силу. Холодильник делает каждое блюдо на 20% лучше.
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|Еда и питьё фермера. Ешь и пей дома, чтобы восполнить. Нажми, чтобы пойти домой
+Farmer|Фермер
+Eat & drink at home|Ешь и пей дома
+Vibrate on tap|Вибрация при нажатии
+Affordable|По карману
+In season|Сезонное
+Fastest|Быстрее всего
+Most profit|Выгоднее всего
+Best in spring|Лучше всего весной
+Best in summer|Лучше всего летом
+Best in autumn|Лучше всего осенью
+Best in winter|Лучше всего зимой
+Plant free|Посадить бесплатно
++50% price|+50% к цене
+Waters growing crops up to 2 plots away.|Поливает растущие посевы в радиусе 2 грядок.
+Art style|Стиль графики
+Cartoon|Мультяшный
+Natural look: soft light and painted textures.|Естественный вид: мягкий свет и рисованные текстуры.
+Cartoon look: bold outlines.|Мультяшный вид: чёткие контуры.`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -1397,4 +1417,8 @@ p:`0|$1 {p1:монета|монеты|монет}
 212|Голодные животные: $1
 213|Засохло посевов: $1. Убери и посади заново
 214|Потратить фермерские доллары ($1) на {l2}?
-215|Не хватает фермерских долларов: $1.`};
+215|Не хватает фермерских долларов: $1.
+216|Продаётся за $1
+217|Каждые {t1}
+218|×$1 в амбаре
+219|Домик на $1 ({2}). У тебя: $3.`};

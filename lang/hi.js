@@ -1006,6 +1006,7 @@ Selected ·|चुना ·
 Buy ·|ख़रीदें ·
 Run it ·|चलाएँ ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|Farm Village में फिर स्वागत है! बड़े इनाम के लिए रोज़ आएँ।
+Welcome to Farm Village! Come back every day for bigger rewards.|Farm Village में स्वागत है! बड़े इनाम के लिए रोज़ आएँ।
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|खलिहान के लिए 10 चारा। चारा चक्की में ख़ुद बनाना सस्ता है।
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|खाद की 5 बोरियाँ। पानी वाली फ़सल पर टैप करके खाद डालें: दुगुनी फ़सल और सोने का बेहतर मौक़ा।
 Plots|खेत
@@ -1181,7 +1182,26 @@ Napping|झपकी ले रहे हैं
 You need the ingredients in your barn first.|पहले खलिहान में सामग्री चाहिए।
 You are full!|पेट भर गया!
 Cook and eat with goods from your barn. A full farmer works at full speed.|खलिहान के सामान से पकाएँ और खाएँ। भरे पेट वाला किसान पूरी रफ़्तार से काम करता है।
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|खलिहान के सामान से पकाएँ और खाएँ। भरे पेट वाला किसान पूरी रफ़्तार से काम करता है। फ़्रिज हर भोजन को 20% बेहतर बनाता है।`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|खलिहान के सामान से पकाएँ और खाएँ। भरे पेट वाला किसान पूरी रफ़्तार से काम करता है। फ़्रिज हर भोजन को 20% बेहतर बनाता है।
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|आपके किसान का खाना और पानी। भरने के लिए घर में खाएँ-पिएँ। घर जाने के लिए टैप करें
+Farmer|किसान
+Eat & drink at home|घर में खाएँ-पिएँ
+Vibrate on tap|टैप पर कंपन
+Affordable|किफ़ायती
+In season|मौसम में
+Fastest|सबसे तेज़
+Most profit|सबसे ज़्यादा मुनाफ़ा
+Best in spring|वसंत में सबसे अच्छा
+Best in summer|गर्मी में सबसे अच्छा
+Best in autumn|पतझड़ में सबसे अच्छा
+Best in winter|सर्दी में सबसे अच्छा
+Plant free|मुफ़्त बोएँ
++50% price|कीमत +50%
+Waters growing crops up to 2 plots away.|2 प्लॉट दूर तक उगती फ़सलों को पानी देता है।
+Art style|चित्र शैली
+Cartoon|कार्टून
+Natural look: soft light and painted textures.|प्राकृतिक रूप: हल्की रोशनी और पेंट की हुई बनावट।
+Cartoon look: bold outlines.|कार्टून रूप: मोटी रेखाएँ।`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -1397,4 +1417,8 @@ p:`0|$1 सिक्के
 212|$1 जानवर भूखे हैं
 213|$1 फ़सलें सूख गईं। साफ़ करके फिर बोएँ
 214|{l2} पर $1 फ़ार्म कैश खर्च करें?
-215|आपको $1 और फ़ार्म कैश चाहिए।`};
+215|आपको $1 और फ़ार्म कैश चाहिए।
+216|$1 में बिकता है
+217|हर {t1}
+218|खलिहान में ×$1
+219|$1 {2} तक के लिए घर। आपके पास $3 हैं।`};

@@ -1006,6 +1006,7 @@ Selected ·|مختار ·
 Buy ·|شراء ·
 Run it ·|شغّل ·
 Welcome back to Farm Village! Come back every day for bigger rewards.|أهلًا بعودتك إلى Farm Village! عُد كل يوم لمكافآت أكبر.
+Welcome to Farm Village! Come back every day for bigger rewards.|أهلًا بك في Farm Village! عُد كل يوم لمكافآت أكبر.
 10 animal feed for your barn. Cheaper to make your own at a Feed Mill.|10 علف لحظيرتك. صنعه في مطحنة العلف أرخص.
 5 bags of fertilizer. Click a watered crop to fertilize it: double harvest and a better chance of gold.|5 أكياس سماد. انقر على محصول مسقي لتسميده: حصاد مضاعف وفرصة أكبر للذهب.
 Plots|القطع
@@ -1181,7 +1182,26 @@ Napping|في قيلولة
 You need the ingredients in your barn first.|تحتاج المكونات في الحظيرة أولًا.
 You are full!|أنت شبعان!
 Cook and eat with goods from your barn. A full farmer works at full speed.|اطبخ وكُل من بضائع الحظيرة. المزارع الشبعان يعمل بكامل سرعته.
-Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|اطبخ وكُل من بضائع الحظيرة. المزارع الشبعان يعمل بكامل سرعته. ثلاجتك تحسّن كل وجبة بنسبة 20%.`,
+Cook and eat with goods from your barn. A full farmer works at full speed. Your fridge makes every meal 20% better.|اطبخ وكُل من بضائع الحظيرة. المزارع الشبعان يعمل بكامل سرعته. ثلاجتك تحسّن كل وجبة بنسبة 20%.
+Your farmer's food and drink. Eat and drink at home to refill. Tap to go home|طعام وشراب مزارعك. كُل واشرب في البيت لتملأهما. انقر للذهاب إلى البيت
+Farmer|المزارع
+Eat & drink at home|كُل واشرب في البيت
+Vibrate on tap|اهتزاز عند النقر
+Affordable|في المتناول
+In season|في موسمه
+Fastest|الأسرع
+Most profit|الأكثر ربحًا
+Best in spring|الأفضل في الربيع
+Best in summer|الأفضل في الصيف
+Best in autumn|الأفضل في الخريف
+Best in winter|الأفضل في الشتاء
+Plant free|ازرع مجانًا
++50% price|+50% على السعر
+Waters growing crops up to 2 plots away.|يسقي المحاصيل النامية حتى بُعد قطعتين.
+Art style|نمط الرسوم
+Cartoon|كرتوني
+Natural look: soft light and painted textures.|مظهر طبيعي: ضوء ناعم وملامس مرسومة.
+Cartoon look: bold outlines.|مظهر كرتوني: حواف بارزة.`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -1397,4 +1417,8 @@ p:`0|$1 عملة
 212|حيوانات جائعة: $1
 213|محاصيل ذبلت: $1. نظّفها وازرع من جديد
 214|إنفاق $1 من نقود المزرعة على {l2}؟
-215|تحتاج $1 أخرى من نقود المزرعة.`};
+215|تحتاج $1 أخرى من نقود المزرعة.
+216|يُباع بـ $1
+217|كل {t1}
+218|×$1 في الحظيرة
+219|بيت لـ $1 من {2}. لديك $3.`};
