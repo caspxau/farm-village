@@ -1193,7 +1193,36 @@ Waters growing crops up to 2 plots away.|Menyiram tanaman hingga 2 petak di seki
 Art style|Gaya gambar
 Cartoon|Kartun
 Natural look: soft light and painted textures.|Tampilan alami: cahaya lembut dan tekstur lukisan.
-Cartoon look: bold outlines.|Tampilan kartun: garis tepi tebal.`,
+Cartoon look: bold outlines.|Tampilan kartun: garis tepi tebal.
+Event|Acara
+Christmas|Natal
+Christmas on the Farm|Natal di Kebun
+candy canes|permen tongkat
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|Kerja di kebun memberi permen tongkat: kadang saat panen, dari hewan dan pohon buah, setiap barang jadi, 3 untuk pesanan tetangga dan 5 untuk pengiriman.
+The event ends tomorrow.|Acara berakhir besok.
+Christmas prizes|Hadiah Natal
+Claim|Ambil
+Claimed|Sudah diambil
+Advent calendar|Kalender Adven
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|Buka satu pintu baru setiap hari sampai Malam Natal. Terlewat sehari? Pintu sebelumnya tetap terbuka.
+The advent calendar opens on December 1.|Kalender Adven dibuka pada 1 Desember.
+Elf hat|Topi elf
+Reindeer antlers|Tanduk rusa kutub
+Santa hat|Topi Sinterklas
+Christmas sweater|Sweter Natal
+Santa coat|Mantel Sinterklas
+Santa trousers|Celana Sinterklas
+Christmas lights|Lampu Natal
+Gift Pile|Tumpukan kado
+Snowman|Manusia salju
+Christmas Tree|Pohon Natal
+Christmas is coming!|Natal sudah dekat!
+Look for the Christmas card on the left of the screen.|Cari kartu Natal di sisi kiri layar.
+Ho ho ho!|Ho ho ho!
+Christmas event preview on!|Pratinjau acara Natal aktif!
+Christmas event preview off.|Pratinjau acara Natal mati.
+Christmas event|Acara Natal
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Seluruh lembah bersiap menyambut Natal! Setiap kerja di kebun memberi permen tongkat. Kumpulkan cukup banyak dan menangkan baju serta hiasan Natal.`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -1413,4 +1442,19 @@ p:`0|$1 koin
 216|Dijual $1
 217|Setiap {t1}
 218|×$1 di lumbung
-219|Kandang untuk $1 {2}. Kamu punya $3.`};
+219|Kandang untuk $1 {2}. Kamu punya $3.
+220|+$1 permen tongkat
+221|Acara berakhir dalam $1 hari. Hadiahnya jadi milikmu selamanya.
+222|Pintu $1
+223|Pintu terbuka $1
+224|Hadiah Natal siap: {1}! Buka kartu Natal untuk mengambilnya.
+225|Terbuka: {1}! Pakai dari Lemari Baju.
+226|{1} masuk ke kotak hadiahmu. Taruh di kebunmu!
+227|Hadiah Natal: {1}!
+228|Pintu $1: $2.
+229|+$1 bahan bangunan
+230|$1: "Seluruh lembah bersiap menyambut Natal! Setiap kerja di kebun memberi permen tongkat. Kumpulkan cukup banyak dan menangkan baju serta hiasan Natal."
+231|Natal sudah usai. Hadiah terakhirmu jadi milikmu: {l1}.
+232|Menangkan di acara Natal: {l1}.
+233|$1 Uang Kebun
+234|+$1 koin`};

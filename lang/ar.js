@@ -1201,7 +1201,36 @@ Waters growing crops up to 2 plots away.|يسقي المحاصيل النامي�
 Art style|نمط الرسوم
 Cartoon|كرتوني
 Natural look: soft light and painted textures.|مظهر طبيعي: ضوء ناعم وملامس مرسومة.
-Cartoon look: bold outlines.|مظهر كرتوني: حواف بارزة.`,
+Cartoon look: bold outlines.|مظهر كرتوني: حواف بارزة.
+Event|فعالية
+Christmas|عيد الميلاد
+Christmas on the Farm|عيد الميلاد في المزرعة
+candy canes|حلوى العصا
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|عمل المزرعة يمنحك حلوى العصا: أحيانًا عند الحصاد ومع الحيوانات وأشجار الفاكهة، ومع كل منتج جاهز، و3 لطلب الجار و5 للتوصيلة.
+The event ends tomorrow.|تنتهي الفعالية غدًا.
+Christmas prizes|جوائز عيد الميلاد
+Claim|استلم
+Claimed|تم الاستلام
+Advent calendar|تقويم المجيء
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|افتح بابًا جديدًا كل يوم حتى ليلة الميلاد. فاتك يوم؟ الأبواب السابقة تبقى مفتوحة لك.
+The advent calendar opens on December 1.|يفتح تقويم المجيء في 1 ديسمبر.
+Elf hat|قبعة القزم
+Reindeer antlers|قرون الرنة
+Santa hat|قبعة سانتا
+Christmas sweater|سترة الميلاد
+Santa coat|معطف سانتا
+Santa trousers|بنطال سانتا
+Christmas lights|أضواء الميلاد
+Gift Pile|كومة هدايا
+Snowman|رجل الثلج
+Christmas Tree|شجرة الميلاد
+Christmas is coming!|عيد الميلاد يقترب!
+Look for the Christmas card on the left of the screen.|ابحث عن بطاقة الميلاد على يسار الشاشة.
+Ho ho ho!|هو هو هو!
+Christmas event preview on!|تم تشغيل معاينة فعالية الميلاد!
+Christmas event preview off.|تم إيقاف معاينة فعالية الميلاد.
+Christmas event|فعالية عيد الميلاد
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|الوادي كله يستعد لعيد الميلاد! كل عمل في المزرعة يمنحك حلوى العصا. اجمع ما يكفي واربح ملابس وزينة الميلاد.`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -1421,4 +1450,19 @@ p:`0|$1 عملة
 216|يُباع بـ $1
 217|كل {t1}
 218|×$1 في الحظيرة
-219|بيت لـ $1 من {2}. لديك $3.`};
+219|بيت لـ $1 من {2}. لديك $3.
+220|+$1 حلوى عصا
+221|تنتهي الفعالية بعد $1 يوم. الجوائز تبقى لك.
+222|الباب $1
+223|الباب المفتوح $1
+224|جائزة الميلاد جاهزة: {1}! افتح بطاقة الميلاد لاستلامها.
+225|تم الفتح: {1}! ارتدِه من خزانة الملابس.
+226|أضيف {1} إلى صندوق هداياك. ضعه في مزرعتك!
+227|جائزة الميلاد: {1}!
+228|الباب $1: $2.
+229|+$1 من مواد البناء
+230|$1: "الوادي كله يستعد لعيد الميلاد! كل عمل في المزرعة يمنحك حلوى العصا. اجمع ما يكفي واربح ملابس وزينة الميلاد."
+231|انتهى عيد الميلاد. آخر جوائزك لك: {l1}.
+232|تُربح في فعالية الميلاد: {l1}.
+233|$1 من نقود المزرعة
+234|+$1 عملة`};

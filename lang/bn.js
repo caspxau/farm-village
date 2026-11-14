@@ -1201,7 +1201,36 @@ Waters growing crops up to 2 plots away.|২ প্লট দূর পর্য
 Art style|ছবির ধরন
 Cartoon|কার্টুন
 Natural look: soft light and painted textures.|প্রাকৃতিক রূপ: নরম আলো ও আঁকা টেক্সচার।
-Cartoon look: bold outlines.|কার্টুন রূপ: মোটা রেখা।`,
+Cartoon look: bold outlines.|কার্টুন রূপ: মোটা রেখা।
+Event|ইভেন্ট
+Christmas|বড়দিন
+Christmas on the Farm|খামারে বড়দিন
+candy canes|ক্যান্ডি কেন
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|খামারের কাজে ক্যান্ডি কেন মেলে: মাঝে মাঝে ফসল তোলা, পশু আর ফলের গাছ থেকে, প্রতিটি তৈরি পণ্যে, প্রতিবেশীর অর্ডারে ৩টি আর ডেলিভারিতে ৫টি।
+The event ends tomorrow.|ইভেন্ট কাল শেষ হবে।
+Christmas prizes|বড়দিনের পুরস্কার
+Claim|নাও
+Claimed|নেওয়া হয়েছে
+Advent calendar|অ্যাডভেন্ট ক্যালেন্ডার
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|বড়দিনের আগের রাত পর্যন্ত প্রতিদিন একটি নতুন দরজা খোলো। একদিন বাদ গেছে? আগের দরজাগুলো খোলা থাকে।
+The advent calendar opens on December 1.|অ্যাডভেন্ট ক্যালেন্ডার ১ ডিসেম্বর খুলবে।
+Elf hat|এলফ টুপি
+Reindeer antlers|বলগা হরিণের শিং
+Santa hat|সান্তার টুপি
+Christmas sweater|বড়দিনের সোয়েটার
+Santa coat|সান্তার কোট
+Santa trousers|সান্তার প্যান্ট
+Christmas lights|বড়দিনের আলো
+Gift Pile|উপহারের স্তূপ
+Snowman|তুষারমানব
+Christmas Tree|বড়দিনের গাছ
+Christmas is coming!|বড়দিন আসছে!
+Look for the Christmas card on the left of the screen.|পর্দার বাঁ দিকে বড়দিনের কার্ড খোঁজো।
+Ho ho ho!|হো হো হো!
+Christmas event preview on!|বড়দিনের ইভেন্টের প্রিভিউ চালু!
+Christmas event preview off.|বড়দিনের ইভেন্টের প্রিভিউ বন্ধ।
+Christmas event|বড়দিনের ইভেন্ট
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|পুরো উপত্যকা বড়দিনের জন্য তৈরি হচ্ছে! খামারের প্রতিটি কাজে ক্যান্ডি কেন মেলে। যথেষ্ট জমাও আর বড়দিনের পোশাক ও সাজ জেতো।`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -1421,4 +1450,19 @@ p:`0|$1 কয়েন
 216|বিক্রি $1-এ
 217|প্রতি {t1}
 218|গোলায় ×$1
-219|$1টি {2}-এর ঘর। তোমার আছে $3টি।`};
+219|$1টি {2}-এর ঘর। তোমার আছে $3টি।
+220|+$1টি ক্যান্ডি কেন
+221|ইভেন্ট শেষ হবে $1 দিনে। পুরস্কার চিরকাল তোমার।
+222|দরজা $1
+223|খোলা দরজা $1
+224|বড়দিনের পুরস্কার তৈরি: {1}! নিতে বড়দিনের কার্ড খোলো।
+225|আনলক হলো: {1}! পোশাকঘর থেকে পরো।
+226|{1} তোমার উপহার বাক্সে যোগ হলো। খামারে বসাও!
+227|বড়দিনের পুরস্কার: {1}!
+228|দরজা $1: $2।
+229|+$1টি নির্মাণ সামগ্রী
+230|$1: "পুরো উপত্যকা বড়দিনের জন্য তৈরি হচ্ছে! খামারের প্রতিটি কাজে ক্যান্ডি কেন মেলে। যথেষ্ট জমাও আর বড়দিনের পোশাক ও সাজ জেতো।"
+231|বড়দিন শেষ। শেষ পুরস্কারগুলো তোমার: {l1}।
+232|বড়দিনের ইভেন্টে জেতা যায়: {l1}।
+233|$1 ফার্ম ক্যাশ
+234|+$1টি কয়েন`};

@@ -1201,7 +1201,36 @@ Waters growing crops up to 2 plots away.|2 प्लॉट दूर तक उ�
 Art style|चित्र शैली
 Cartoon|कार्टून
 Natural look: soft light and painted textures.|प्राकृतिक रूप: हल्की रोशनी और पेंट की हुई बनावट।
-Cartoon look: bold outlines.|कार्टून रूप: मोटी रेखाएँ।`,
+Cartoon look: bold outlines.|कार्टून रूप: मोटी रेखाएँ।
+Event|इवेंट
+Christmas|क्रिसमस
+Christmas on the Farm|फ़ार्म पर क्रिसमस
+candy canes|कैंडी केन
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|फ़ार्म का काम कैंडी केन देता है: कभी-कभी फ़सल काटने, जानवरों और फलों के पेड़ों से, हर तैयार सामान पर, पड़ोसी के ऑर्डर पर 3 और डिलीवरी पर 5।
+The event ends tomorrow.|इवेंट कल खत्म होगा।
+Christmas prizes|क्रिसमस इनाम
+Claim|लें
+Claimed|ले लिया
+Advent calendar|एडवेंट कैलेंडर
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|क्रिसमस की पूर्व संध्या तक हर दिन एक नया दरवाज़ा खोलें। कोई दिन छूट गया? पिछले दरवाज़े खुले रहते हैं।
+The advent calendar opens on December 1.|एडवेंट कैलेंडर 1 दिसंबर को खुलेगा।
+Elf hat|एल्फ़ टोपी
+Reindeer antlers|रेनडियर सींग
+Santa hat|सांता टोपी
+Christmas sweater|क्रिसमस स्वेटर
+Santa coat|सांता कोट
+Santa trousers|सांता पैंट
+Christmas lights|क्रिसमस लाइटें
+Gift Pile|उपहारों का ढेर
+Snowman|स्नोमैन
+Christmas Tree|क्रिसमस ट्री
+Christmas is coming!|क्रिसमस आने वाला है!
+Look for the Christmas card on the left of the screen.|स्क्रीन के बाईं ओर क्रिसमस कार्ड देखें।
+Ho ho ho!|हो हो हो!
+Christmas event preview on!|क्रिसमस इवेंट प्रीव्यू चालू!
+Christmas event preview off.|क्रिसमस इवेंट प्रीव्यू बंद।
+Christmas event|क्रिसमस इवेंट
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|पूरी घाटी क्रिसमस की तैयारी कर रही है! फ़ार्म का हर काम कैंडी केन देता है। काफ़ी जमा करें और क्रिसमस के कपड़े व सजावट जीतें।`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -1421,4 +1450,19 @@ p:`0|$1 सिक्के
 216|$1 में बिकता है
 217|हर {t1}
 218|खलिहान में ×$1
-219|$1 {2} तक के लिए घर। आपके पास $3 हैं।`};
+219|$1 {2} तक के लिए घर। आपके पास $3 हैं।
+220|+$1 कैंडी केन
+221|इवेंट $1 दिन में खत्म होगा। इनाम हमेशा आपके रहेंगे।
+222|दरवाज़ा $1
+223|खुला दरवाज़ा $1
+224|क्रिसमस इनाम तैयार: {1}! लेने के लिए क्रिसमस कार्ड खोलें।
+225|अनलॉक हुआ: {1}! अलमारी से पहनें।
+226|{1} आपके उपहार बॉक्स में आ गया। इसे फ़ार्म पर रखें!
+227|क्रिसमस इनाम: {1}!
+228|दरवाज़ा $1: $2।
+229|+$1 निर्माण सामग्री
+230|$1: "पूरी घाटी क्रिसमस की तैयारी कर रही है! फ़ार्म का हर काम कैंडी केन देता है। काफ़ी जमा करें और क्रिसमस के कपड़े व सजावट जीतें।"
+231|क्रिसमस खत्म हो गया। आखिरी इनाम आपके हैं: {l1}।
+232|क्रिसमस इवेंट में जीतें: {l1}।
+233|$1 फ़ार्म कैश
+234|+$1 सिक्के`};

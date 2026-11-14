@@ -1201,7 +1201,36 @@ Waters growing crops up to 2 plots away.|Поливает растущие по�
 Art style|Стиль графики
 Cartoon|Мультяшный
 Natural look: soft light and painted textures.|Естественный вид: мягкий свет и рисованные текстуры.
-Cartoon look: bold outlines.|Мультяшный вид: чёткие контуры.`,
+Cartoon look: bold outlines.|Мультяшный вид: чёткие контуры.
+Event|Событие
+Christmas|Рождество
+Christmas on the Farm|Рождество на ферме
+candy canes|леденцы
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|Работа на ферме приносит леденцы: иногда за урожай, животных и фруктовые деревья, за каждый готовый товар, 3 за заказ соседа и 5 за доставку.
+The event ends tomorrow.|Событие закончится завтра.
+Christmas prizes|Рождественские призы
+Claim|Забрать
+Claimed|Получено
+Advent calendar|Адвент-календарь
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|Открывай новое окошко каждый день до Сочельника. Пропустил день? Прошлые окошки ждут тебя.
+The advent calendar opens on December 1.|Адвент-календарь откроется 1 декабря.
+Elf hat|Шапка эльфа
+Reindeer antlers|Оленьи рога
+Santa hat|Шапка Санты
+Christmas sweater|Рождественский свитер
+Santa coat|Шуба Санты
+Santa trousers|Штаны Санты
+Christmas lights|Гирлянда
+Gift Pile|Гора подарков
+Snowman|Снеговик
+Christmas Tree|Рождественская ёлка
+Christmas is coming!|Скоро Рождество!
+Look for the Christmas card on the left of the screen.|Ищи рождественскую карточку слева на экране.
+Ho ho ho!|Хо-хо-хо!
+Christmas event preview on!|Предпросмотр рождественского события включён!
+Christmas event preview off.|Предпросмотр рождественского события выключен.
+Christmas event|Рождественское событие
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Вся долина готовится к Рождеству! Любая работа на ферме приносит леденцы. Собери побольше и выиграй рождественскую одежду и украшения.`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -1421,4 +1450,19 @@ p:`0|$1 {p1:монета|монеты|монет}
 216|Продаётся за $1
 217|Каждые {t1}
 218|×$1 в амбаре
-219|Домик на $1 ({2}). У тебя: $3.`};
+219|Домик на $1 ({2}). У тебя: $3.
+220|+$1 {p1:леденец|леденца|леденцов}
+221|Событие закончится через $1 {p1:день|дня|дней}. Призы останутся у тебя.
+222|Окошко $1
+223|Открытое окошко $1
+224|Рождественский приз готов: {1}! Открой рождественскую карточку, чтобы забрать.
+225|Открыто: {1}! Надень в гардеробе.
+226|{1}: в коробке с подарками. Поставь на ферме!
+227|Рождественский приз: {1}!
+228|Окошко $1: $2.
+229|+$1 {p1:стройматериал|стройматериала|стройматериалов}
+230|$1: «Вся долина готовится к Рождеству! Любая работа на ферме приносит леденцы. Собери побольше и выиграй рождественскую одежду и украшения.»
+231|Рождество закончилось. Последние призы твои: {l1}.
+232|Можно выиграть в рождественском событии: {l1}.
+233|Фермерские доллары: $1
+234|+$1 {p1:монета|монеты|монет}`};

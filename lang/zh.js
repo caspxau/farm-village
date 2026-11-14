@@ -1201,7 +1201,36 @@ Waters growing crops up to 2 plots away.|为2格范围内生长中的作物浇�
 Art style|画面风格
 Cartoon|卡通
 Natural look: soft light and painted textures.|自然风格：柔和光线与手绘质感。
-Cartoon look: bold outlines.|卡通风格：粗轮廓线。`,
+Cartoon look: bold outlines.|卡通风格：粗轮廓线。
+Event|活动
+Christmas|圣诞
+Christmas on the Farm|农场圣诞节
+candy canes|拐杖糖
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|农场劳作能得到拐杖糖：收获、照料动物和采摘果树时有机会获得，每件成品1个，邻居订单3个，送货5个。
+The event ends tomorrow.|活动明天结束。
+Christmas prizes|圣诞奖励
+Claim|领取
+Claimed|已领取
+Advent calendar|降临节日历
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|每天打开一扇新门，直到平安夜。错过了一天？之前的门还会为你留着。
+The advent calendar opens on December 1.|降临节日历12月1日开启。
+Elf hat|精灵帽
+Reindeer antlers|驯鹿角
+Santa hat|圣诞帽
+Christmas sweater|圣诞毛衣
+Santa coat|圣诞老人外套
+Santa trousers|圣诞老人裤子
+Christmas lights|圣诞彩灯
+Gift Pile|礼物堆
+Snowman|雪人
+Christmas Tree|圣诞树
+Christmas is coming!|圣诞节要到了！
+Look for the Christmas card on the left of the screen.|在屏幕左侧找圣诞卡片。
+Ho ho ho!|吼吼吼！
+Christmas event preview on!|圣诞活动预览已开启！
+Christmas event preview off.|圣诞活动预览已关闭。
+Christmas event|圣诞活动
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|整个山谷都在准备过圣诞！农场里的每样活都能得到拐杖糖。攒够了就能赢得圣诞服装和装饰。`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -1421,4 +1450,19 @@ p:`0|$1金币
 216|售价$1
 217|每{t1}
 218|谷仓里有×$1
-219|最多住$1只{2}。你有$3个。`};
+219|最多住$1只{2}。你有$3个。
+220|+$1个拐杖糖
+221|活动还有$1天结束。奖励永久归你。
+222|第$1扇门
+223|已打开的第$1扇门
+224|圣诞奖励可领取：{1}！打开圣诞卡片领取。
+225|已解锁：{1}！去衣橱穿上吧。
+226|{1}已放进你的礼物箱。把它摆到农场上吧！
+227|圣诞奖励：{1}！
+228|第$1扇门：$2。
+229|+$1个建材
+230|$1：“整个山谷都在准备过圣诞！农场里的每样活都能得到拐杖糖。攒够了就能赢得圣诞服装和装饰。”
+231|圣诞节结束了。最后的奖励归你：{l1}。
+232|在圣诞活动中赢取：{l1}。
+233|$1农场币
+234|+$1金币`};

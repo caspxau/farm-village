@@ -1193,7 +1193,36 @@ Waters growing crops up to 2 plots away.|Rega plantações a até 2 lotes de dis
 Art style|Estilo gráfico
 Cartoon|Desenho animado
 Natural look: soft light and painted textures.|Visual natural: luz suave e texturas pintadas.
-Cartoon look: bold outlines.|Visual desenho animado: contornos fortes.`,
+Cartoon look: bold outlines.|Visual desenho animado: contornos fortes.
+Event|Evento
+Christmas|Natal
+Christmas on the Farm|Natal na fazenda
+candy canes|bengalas doces
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|O trabalho na fazenda dá bengalas doces: às vezes ao colher, com animais e árvores frutíferas, por cada produto pronto, 3 por pedido de vizinho e 5 por entrega.
+The event ends tomorrow.|O evento termina amanhã.
+Christmas prizes|Prêmios de Natal
+Claim|Resgatar
+Claimed|Resgatado
+Advent calendar|Calendário do Advento
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|Abra uma porta nova todo dia até a véspera de Natal. Perdeu um dia? As portas anteriores continuam abertas.
+The advent calendar opens on December 1.|O calendário do Advento abre em 1º de dezembro.
+Elf hat|Gorro de elfo
+Reindeer antlers|Chifres de rena
+Santa hat|Gorro de Papai Noel
+Christmas sweater|Suéter de Natal
+Santa coat|Casaco de Papai Noel
+Santa trousers|Calça de Papai Noel
+Christmas lights|Pisca-pisca de Natal
+Gift Pile|Pilha de presentes
+Snowman|Boneco de neve
+Christmas Tree|Árvore de Natal
+Christmas is coming!|O Natal está chegando!
+Look for the Christmas card on the left of the screen.|Procure o cartão de Natal à esquerda da tela.
+Ho ho ho!|Ho ho ho!
+Christmas event preview on!|Prévia do evento de Natal ativada!
+Christmas event preview off.|Prévia do evento de Natal desativada.
+Christmas event|Evento de Natal
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|O vale inteiro está se preparando para o Natal! Todo trabalho na fazenda dá bengalas doces. Junte bastante e ganhe roupas e enfeites de Natal.`,
 p:`0|$1 {p1:moeda|moedas}
 1|$1 / $2 XP
 2|faltam $1
@@ -1413,4 +1442,19 @@ p:`0|$1 {p1:moeda|moedas}
 216|Vende por $1
 217|A cada {t1}
 218|×$1 no celeiro
-219|Casa para até $1 ({2}). Você tem $3.`};
+219|Casa para até $1 ({2}). Você tem $3.
+220|+$1 {p1:bengala doce|bengalas doces}
+221|O evento termina em $1 dias. Os prêmios são seus para sempre.
+222|Porta $1
+223|Porta aberta $1
+224|Prêmio de Natal pronto: {1}! Abra o cartão de Natal para resgatar.
+225|Desbloqueado: {1}! Use pelo Guarda-roupa.
+226|{1} foi para a sua caixa de presentes. Coloque na fazenda!
+227|Prêmio de Natal: {1}!
+228|Porta $1: $2.
+229|+$1 {p1:material de construção|materiais de construção}
+230|$1: "O vale inteiro está se preparando para o Natal! Todo trabalho na fazenda dá bengalas doces. Junte bastante e ganhe roupas e enfeites de Natal."
+231|O Natal acabou. Seus últimos prêmios são seus: {l1}.
+232|Ganhe no evento de Natal: {l1}.
+233|$1 de dinheiro da fazenda
+234|+$1 {p1:moeda|moedas}`};

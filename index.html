@@ -1919,6 +1919,41 @@ body header.hud .pill:hover{filter:brightness(1.03)}
    card); the panels get an almost solid parchment instead */
 body.lowfx *,body.lowfx *::before,body.lowfx *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 body.lowfx .qtrack,body.lowfx .goals,body.lowfx .ocard,body.lowfx .tut,body.lowfx .visitbar,body.lowfx .seedpill,body.lowfx .needpill,body.lowfx .tsub{background:linear-gradient(#fcf8ef,#f4ecdc)}
+
+/* ---- Christmas event ---- */
+body.visiting #evbox{display:none}
+.evbox{pointer-events:auto}
+body .evbox .goals-head{background:linear-gradient(rgba(212,42,42,.26),rgba(47,138,58,.12))}
+.evbox .goals-head .cane{width:26px;height:26px;flex:none}
+.evbox.evready .goals-head i{background:#d42a2a;color:#fff;border-color:#7a1010;animation:xmpulse 1.6s ease-in-out infinite}
+@keyframes xmpulse{50%{transform:scale(1.15)}}
+@media (prefers-reduced-motion:reduce){.evbox.evready .goals-head i{animation:none}}
+.cane{display:inline-block;vertical-align:middle}
+.xmas h3{margin:14px 0 6px}
+.xmtop{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.xmtop p{margin:0}
+.xmcount{display:inline-flex;align-items:center;gap:6px;background:#fff6f2;border:2px solid #d42a2a;border-radius:999px;padding:3px 14px 3px 6px;font-weight:800}
+.xmcount .cane{width:30px;height:30px}.xmcount b{font-size:22px;color:#a81c1c}
+.xmtrack{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
+.xmprize{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;background:#fffaf2;border:2px solid #e3cfa8;border-radius:12px;padding:8px 6px;font-size:12.5px}
+.xmprize strong{line-height:1.15;min-height:2.3em;display:flex;align-items:center}
+.xmprize.can{border-color:#d42a2a;background:#fff1ee;box-shadow:0 0 0 3px rgba(212,42,42,.15)}
+.xmprize.got{opacity:.62}
+.xmpic{width:84px;height:84px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,#fff 40%,#f4e6cc);overflow:hidden}
+.xmpic canvas,.xmpic img{width:100%;height:100%;object-fit:contain}
+.xmpic .coin.big{width:44px;height:44px;flex-basis:44px}.xmpic .bill.big{width:52px;height:36px;flex-basis:52px;font-size:20px}
+.xmneed{display:inline-flex;align-items:center;gap:2px;font-weight:800;color:#a81c1c}.xmneed .cane{width:16px;height:16px}
+.xmprize .gbar{width:100%;height:8px}.xmprize .claim{width:100%}
+.xmdone{font-weight:800;color:#2f8a3a}
+.xmcal{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px}
+.xmdoor{aspect-ratio:1;border-radius:10px;border:2px solid #7a1010;background:linear-gradient(145deg,#e0453a,#a81c1c);color:#fff;font-family:var(--f-display);font-size:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer;padding:0}
+.xmdoor:nth-child(3n+2){background:linear-gradient(145deg,#3fa04a,#1f6a2a);border-color:#145a1c}
+.xmdoor:nth-child(4n+3){background:linear-gradient(145deg,#f2c040,#c8901a);border-color:#8a5a08}
+.xmdoor:disabled{cursor:default;filter:grayscale(.55) brightness(.92);opacity:.75}
+.xmdoor.can{box-shadow:0 0 0 3px #ffd23f;animation:xmpulse 1.6s ease-in-out infinite}
+.xmdoor.open{background:#fffaf2;border-color:#e3cfa8;color:#a81c1c;filter:none;opacity:1}
+.xmdoor.open .cane{width:20px;height:20px}.xmdoor small{font-family:var(--f-body);font-weight:800;font-size:11px}.xmdoor small.xc{color:#1f6b28}
+.ptag.xmtag{border-color:#d42a2a;color:#a81c1c;font-weight:800}.ptag.xmtag .cane{width:12px;height:12px}
 </style>
 </head>
 <body>
@@ -2050,7 +2085,7 @@ body.lowfx .qtrack,body.lowfx .goals,body.lowfx .ocard,body.lowfx .tut,body.lowf
 </footer>
 <div id="neighbors" hidden></div>
 
-<div class="side" id="side"><div class="qtrack" id="qtrack" hidden aria-label="Quest"></div><aside class="goals" id="goals" aria-label="Today's goals"></aside></div>
+<div class="side" id="side"><aside class="goals evbox closed" id="evbox" hidden aria-label="Christmas event"></aside><div class="qtrack" id="qtrack" hidden aria-label="Quest"></div><aside class="goals" id="goals" aria-label="Today's goals"></aside></div>
 <div class="tut" id="tut" hidden><div><small id="tutStep"></small><strong id="tutText"></strong></div><button class="btn2" id="tutSkip">Skip</button></div>
 <div class="visitbar" id="visitbar" hidden><div><strong id="vbName"></strong><small id="vbInfo"></small></div><button class="go" id="vbHome">Go home</button></div>
 <div class="title" id="title">
@@ -2251,7 +2286,7 @@ const PL_EXACT={
 'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.',
-'Art style':'Styl grafiki','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
+'Art style':'Styl grafiki','The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.':'Cała dolina szykuje się do świąt! Każda praca na farmie daje laski cukrowe. Zbierz ich dość, a wygrasz świąteczne ubrania i ozdoby.','Event':'Wydarzenie','Christmas':'Boże Narodzenie','Christmas on the Farm':'Święta na farmie','candy canes':'laski cukrowe','Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.':'Praca na farmie daje laski cukrowe: czasem przy zbiorach, zwierzętach i drzewach owocowych, za każdy gotowy towar, 3 za zamówienie sąsiada i 5 za dostawę.','The event ends tomorrow.':'Wydarzenie kończy się jutro.','Christmas prizes':'Świąteczne nagrody','Claim':'Odbierz','Claimed':'Odebrano','Advent calendar':'Kalendarz adwentowy','Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.':'Otwieraj nowe okienko każdego dnia aż do Wigilii. Ominął cię dzień? Wcześniejsze okienka nadal czekają.','The advent calendar opens on December 1.':'Kalendarz adwentowy otwiera się 1 grudnia.','Elf hat':'Czapka elfa','Reindeer antlers':'Rogi renifera','Santa hat':'Czapka Mikołaja','Christmas sweater':'Świąteczny sweter','Santa coat':'Płaszcz Mikołaja','Santa trousers':'Spodnie Mikołaja','Christmas lights':'Świąteczne lampki','Gift Pile':'Stos prezentów','Snowman':'Bałwan','Christmas Tree':'Choinka','Christmas is coming!':'Święta tuż-tuż!','Look for the Christmas card on the left of the screen.':'Szukaj świątecznej karty po lewej stronie ekranu.','Ho ho ho!':'Ho ho ho!','Christmas event preview on!':'Podgląd świątecznego wydarzenia włączony!','Christmas event preview off.':'Podgląd świątecznego wydarzenia wyłączony.','Christmas event':'Świąteczne wydarzenie','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
 ,
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
@@ -2489,6 +2524,21 @@ const PL_PATS=[
 [/^Every (\d[\d:hms ]*)$/,m=>'Co '+L_t(m[1])],
 [/^x(\d+) in barn$/,m=>'×'+m[1]+' w stodole'],
 [/^Home for up to (\d+) (.+)\. You own (\d+)\.$/,m=>'Dom dla '+m[1]+' zwierząt ('+L_w(m[2]).toLowerCase()+'). Masz: '+m[3]+'.'],
+[/^\+(\d+) candy canes?$/,m=>'+'+m[1]+' '+p3(m[1],'laska cukrowa','laski cukrowe','lasek cukrowych')],
+[/^The event ends in (\d+) days\. Prizes are yours to keep\.$/,m=>'Wydarzenie kończy się za '+m[1]+' '+p3(m[1],'dzień','dni','dni')+'. Nagrody zostają u ciebie.'],
+[/^Door (\d+)$/,m=>'Okienko '+m[1]],
+[/^Opened door (\d+)$/,m=>'Otwarte okienko '+m[1]],
+[/^Christmas prize ready: (.+)! Open the Christmas card to claim it\.$/,m=>'Świąteczna nagroda gotowa: '+L_w(m[1])+'! Otwórz świąteczną kartę, by ją odebrać.'],
+[/^Unlocked: (.+)! Wear it from the Wardrobe\.$/,m=>'Odblokowano: '+L_w(m[1])+'! Załóż w Garderobie.'],
+[/^(.+) added to your Gift Box\. Place it on your farm!$/,m=>L_w(m[1])+' trafia do pudełka z prezentami. Postaw na farmie!'],
+[/^Christmas prize: (.+)!$/,m=>'Świąteczna nagroda: '+L_w(m[1])+'!'],
+[/^Door (\d+): (.+)\.$/,m=>'Okienko '+m[1]+': '+m[2]+'.'],
+[/^\+(\d+) building materials$/,m=>'+'+m[1]+' '+p3(m[1],'materiał budowlany','materiały budowlane','materiałów budowlanych')],
+[/^(.+): "The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes\. Collect enough and you can win Christmas clothes and decorations\."$/,m=>m[1]+': „Cała dolina szykuje się do świąt! Każda praca na farmie daje laski cukrowe. Zbierz ich dość, a wygrasz świąteczne ubrania i ozdoby.”'],
+[/^Christmas is over\. Your last prizes are yours: (.+)\.$/,m=>'Święta się skończyły. Ostatnie nagrody są twoje: '+m[1].split(', ').map(L_w).join(', ')+'.'],
+[/^Win this in the Christmas event: (.+)\.$/,m=>'Do wygrania w świątecznym wydarzeniu: '+m[1].split(', ').map(L_w).join(', ')+'.'],
+[/^(\d+) Farm Cash$/,m=>m[1]+' '+p3(m[1],'farmdolar','farmdolary','farmdolarów')],
+[/^\+([\d.,\s ]+) coins$/,m=>'+'+m[1]+' '+p3(m[1],'moneta','monety','monet')],
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -2662,7 +2712,10 @@ const DECOR={
   greenhouse:{name:'Glass Greenhouse',special:true,xp:200,size:2},
   goldcan:{name:'Golden Watering Can',special:true,xp:50},
   topiary:{name:'Ladybug Topiary',special:true,xp:60},
-  picnic:{name:'Picnic Table',special:true,xp:70}
+  picnic:{name:'Picnic Table',special:true,xp:70},
+  giftpile:{name:'Gift Pile',special:true,xp:40},
+  snowman:{name:'Snowman',special:true,xp:60},
+  xtree:{name:'Christmas Tree',special:true,xp:120}
 };
 const FARM={
   tractor:{name:'Tractor',lvl:3,cost:1500,kind:'vehicle',verb:'Plows',up:[{lvl:7,cost:4000},{lvl:12,cost:10000}]},
@@ -2935,7 +2988,7 @@ function fuelNow(){
 }
 // counting is instant; the goal, tutorial and quest checks that follow run once per frame
 let statQueued=false;
-function stat(k,n){S.stats[k]=(S.stats[k]||0)+(n||1);if(statQueued)return;statQueued=true;requestAnimationFrame(statFlush);setTimeout(statFlush,250)}
+function stat(k,n){S.stats[k]=(S.stats[k]||0)+(n||1);xmStat(k,n);if(statQueued)return;statQueued=true;requestAnimationFrame(statFlush);setTimeout(statFlush,250)}
 function statFlush(){if(!statQueued||!S)return;statQueued=false;checkRibbons();if(S.goals)renderGoals();checkTut();checkQuest()}
 
 /* ================= sound ================= */
@@ -4484,6 +4537,37 @@ function drawDeco(x,y,o,now){
       for(const[dx,dy,r]of[[-6,-4,2.6],[-6,4,2.2],[6,-5,2.4],[6.4,3.6,2.4],[-1,-7,1.6]]){g.beginPath();g.ellipse(cx+dx,cy+dy,r,r*.85,0,0,7);g.fillStyle='#1a1a1a';g.fill()}
       g.strokeStyle='#22301e';g.lineWidth=1;g.beginPath();g.moveTo(cx+15,cy-5);g.quadraticCurveTo(cx+18,cy-11,cx+20,cy-10);g.moveTo(cx+13,cy-5.6);g.quadraticCurveTo(cx+14,cy-12,cx+16,cy-12);g.stroke();
       break;}
+    case'xtree':{
+      // a decorated fir in a wooden tub: three tiers, a gold garland, twinkling lights and a star on top
+      shadow(px,py,18,6);poly([[px-5.5,py-1],[px+5.5,py-1],[px+4.4,py-9],[px-4.4,py-9]],'#a8692f','#5e3a1c',1);g.strokeStyle='#5e3a1c';g.lineWidth=.8;line([px-5,py-5],[px+5,py-5]);
+      poly([[px-2,py-9],[px+2,py-9],[px+2,py-15],[px-2,py-15]],'#6b4423');
+      for(const[by,w,h]of[[py-13,22,21],[py-27,18,19],[py-40,13,17]]){g.beginPath();g.moveTo(px,by-h);g.quadraticCurveTo(px+w*.45,by-h*.45,px+w,by);g.quadraticCurveTo(px,by+4.5,px-w,by);g.quadraticCurveTo(px-w*.45,by-h*.45,px,by-h);g.closePath();
+        g.fillStyle=pvL(px-w,0,px+w,0,['#46a43f','#2a7a2c','#165418']);g.fill();g.strokeStyle='#0e3a10';g.lineWidth=1;g.stroke();
+        for(const f of[-.7,-.25,.25,.7])ell(px+w*f,by+1.4-Math.abs(f)*2.2,w*.13,1.3,'rgba(250,252,255,.9)')}
+      g.lineCap='round';g.strokeStyle='#ffd23f';g.lineWidth=1.3;for(const[by,w]of[[py-17,16],[py-30,12],[py-43,7]]){g.beginPath();g.moveTo(px-w,by-3);g.quadraticCurveTo(px,by+3,px+w,by-6);g.stroke()}
+      const cols=['#ff4a4a','#ffd23f','#4ab0ff','#ff7ad0','#ffffff'],tk=reduce||ICON_MODE?0:Math.floor(now/420);
+      [[-13,-15],[-4,-19],[6,-17],[14,-14],[-9,-29],[1,-32],[10,-29],[-5,-42],[5,-43],[-1,-24],[-16,-13],[17,-13],[0,-49]].forEach(([dx,dy],i)=>{const c=cols[i%5],on=reduce||ICON_MODE||(tk+i)%3!==0;if(on)ell(px+dx,py+dy,4.2,4.2,'rgba(255,240,170,.28)');ball(px+dx,py+dy,1.9,1.9,on?c:shade(c,-.45),shade(c,-.55),.4)});
+      g.beginPath();for(let k=0;k<10;k++){const a=k*Math.PI/5-Math.PI/2,r=k%2?2.7:6.2;g.lineTo(px+Math.cos(a)*r,py-59+Math.sin(a)*r)}g.closePath();g.fillStyle=pvR(px-1,py-60,6,['#fff6c0','#ffd23f','#d9a020']);g.fill();g.strokeStyle='#9a6400';g.lineWidth=.8;g.stroke();
+      if(!reduce&&!ICON_MODE){const k=(Math.sin(now/300)+1)/2;sparkle(px+6,py-63,2+k*2,k)}else pvSpark(px+6,py-63,3);
+      break;}
+    case'snowman':{
+      shadow(px,py,14,5);
+      for(const[cy,rx,ry]of[[-9,10,9],[-24,7.6,7.1],[-36,5.7,5.5]]){ball(px,py+cy,rx,ry,'#fbfdff','#aab8c8',1);ell(px+rx*.35,py+cy+ry*.3,rx*.55,ry*.5,'rgba(150,175,205,.28)');ell(px-rx*.4,py+cy-ry*.4,rx*.3,ry*.22,'rgba(255,255,255,.9)')}
+      for(const y of[-27,-23.5,-20])ball(px,py+y,.95,.95,'#2a2a30');
+      g.lineCap='round';g.strokeStyle='#6b4423';g.lineWidth=1.4;line([px-7,py-25],[px-15,py-31]);line([px+7,py-25],[px+15,py-32]);g.lineWidth=1;line([px-13,py-30],[px-14,py-34]);line([px+13,py-31],[px+16,py-34]);
+      ball(px-2,py-37.6,.85,.85,'#1a1a1a');ball(px+2,py-37.6,.85,.85,'#1a1a1a');for(let k=0;k<5;k++)ball(px-2.4+k*1.2,py-33.4+Math.sin(k/4*Math.PI)*.9,.4,.4,'#2a2a30');
+      g.beginPath();g.moveTo(px,py-36);g.lineTo(px+6.4,py-34.8);g.lineTo(px,py-34.4);g.closePath();g.fillStyle='#f28a26';g.fill();g.strokeStyle='#b85a10';g.lineWidth=.4;g.stroke();
+      poly([[px-6.2,py-31.6],[px+6.2,py-31.6],[px+5.8,py-29.2],[px-5.8,py-29.2]],'#d42a2a','#7a1010',.4);poly([[px+2,py-30],[px+4.8,py-30],[px+5.6,py-22.6],[px+2.8,py-22.6]],'#d42a2a','#7a1010',.4);g.strokeStyle='#fbf8f0';g.lineWidth=.5;line([px+3,py-23.6],[px+5.4,py-23.6]);
+      poly([[px-6.8,py-40.8],[px+6.8,py-40.8],[px+6.8,py-42.4],[px-6.8,py-42.4]],'#2b2b2b');poly([[px-4.2,py-42.4],[px+4.2,py-42.4],[px+4.2,py-50.5],[px-4.2,py-50.5]],'#2b2b2b','#000',.5);poly([[px-4.2,py-43.6],[px+4.2,py-43.6],[px+4.2,py-45.2],[px-4.2,py-45.2]],'#2f8a3a');ell(px-2.6,py-44.4,1,1,'#d42a2a');
+      break;}
+    case'giftpile':{
+      shadow(px,py,19,6.5);
+      const box=(bx,by,w,h,c,rb)=>{const d=w/2;
+        poly([[bx-w,by],[bx,by+d],[bx,by+d-h],[bx-w,by-h]],shade(c,-.05),shade(c,-.5),.6);poly([[bx,by+d],[bx+w,by],[bx+w,by-h],[bx,by+d-h]],shade(c,-.3),shade(c,-.55),.6);poly([[bx-w,by-h],[bx,by+d-h],[bx+w,by-h],[bx,by-d-h]],shade(c,.18),shade(c,-.5),.6);
+        g.lineCap='butt';g.strokeStyle=rb;g.lineWidth=1.7;line([bx-w/2,by+d/2],[bx-w/2,by+d/2-h]);line([bx+w/2,by+d/2],[bx+w/2,by+d/2-h]);line([bx-w/2,by+d/2-h],[bx+w/2,by-d/2-h]);line([bx+w/2,by+d/2-h],[bx-w/2,by-d/2-h]);
+        ell(bx-2,by-h-1.4,2.3,1.4,rb,shade(rb,-.35),.4,-.5);ell(bx+2,by-h-1.4,2.3,1.4,rb,shade(rb,-.35),.4,.5);ball(bx,by-h-1,1,.8,shade(rb,-.15))};
+      box(px+8,py-3,8,9,'#2f8a3a','#fbf8f0');box(px-6,py+1,9,11,'#d42a2a','#ffd23f');box(px+3,py+6,6,7,'#7a4ec0','#fbf8f0');box(px-5,py-10,6,8,'#3f6fc0','#ffd23f');
+      break;}
     case'picnic':
       shadow(px,py,22,8);
       for(const[a,b]of[[.2,.25],[.8,.25],[.2,.75],[.8,.75]]){const p=P(x+a,y+b);g.strokeStyle='#7a4e2a';g.lineWidth=2.4;line(p,[p[0],p[1]-12])}
@@ -5922,7 +6006,7 @@ const SMOKE_C={feedmill:[1.5,.5,64],press:[1.38,1.26,42],kitchen:[1.32,.54,58],b
 // where a working building puffs: the bin vent, the press hopper, the kitchen chimney, the hive tops, the pond, the press house
 const SMOKE_N={feedmill:[1.42,.52,64],press:[.76,.68,50],kitchen:[1.48,.7,62],beehive:[1.45,.5,40],fishpond:[1,1,8],cider:[.75,.8,46]};
 const SMOKE=new Proxy({},{get:(t,k)=>(NATURAL?SMOKE_N:SMOKE_C)[k]});
-const LIVE_DECO=new Set(['gate','windmill','balloon','fountain','pond','goldcan','sprinkler']);
+const LIVE_DECO=new Set(['gate','windmill','balloon','fountain','pond','goldcan','sprinkler','xtree']);
 function drawObj(x,y,o,now,part){
   if(o.k==='plot'){if(o.crop)drawPlot(x,y,o,now);return}
   if(o.k==='animal'){drawAnimal(x,y,o,now);return}
@@ -6675,12 +6759,12 @@ const LOOK_OPTS={
   nose:[['button','Button'],['round','Round'],['pointy','Pointed']],
   ears:[['normal','Normal'],['small','Small'],['big','Big'],['pointy','Pointed']],
   blush:[[true,'Rosy cheeks'],[false,'No blush']],
-  acc:[['none','None'],['flower','Hair flower'],['earrings','Earrings'],['necklace','Necklace',{coins:80}],['scarf','Scarf',{coins:100}],['bowtie','Bow tie',{cash:3}],['goldchain','Gold chain',{cash:4}],['cape','Hero cape',{cash:7}],['wings','Fairy wings',{cash:12}]],
+  acc:[['none','None'],['flower','Hair flower'],['earrings','Earrings'],['necklace','Necklace',{coins:80}],['scarf','Scarf',{coins:100}],['bowtie','Bow tie',{cash:3}],['goldchain','Gold chain',{cash:4}],['cape','Hero cape',{cash:7}],['wings','Fairy wings',{cash:12}],['lights','Christmas lights',{event:'xmas'}]],
   face:[['none','Clean shaven'],['mustache','Mustache'],['beard','Beard']],
   glasses:[['none','No glasses'],['round','Round glasses'],['shades','Sunglasses']],
-  hat:[['straw','Straw hat'],['cap','Ball cap'],['sunhat','Sun hat'],['bandana','Bandana'],['beanie','Beanie'],['none','No hat'],['cowboy','Cowboy hat',{coins:150}],['flowercrown','Flower crown',{coins:120}],['tophat','Top hat',{coins:400}],['chef','Chef hat',{cash:4}],['wizard','Wizard hat',{cash:6}],['pirate','Pirate hat',{cash:7}],['viking','Viking helmet',{cash:8}],['crown','Golden crown',{cash:10}]],
-  top:[['plaid','Plaid shirt'],['tee','T-shirt'],['stripes','Striped shirt'],['sweater','Sweater'],['vest','Farmer vest',{coins:120}],['hoodie','Hoodie',{coins:150}],['jacket','Denim jacket',{coins:220}],['hawaii','Hawaiian shirt',{cash:5}],['tux','Tuxedo',{cash:8}],['royal','Royal robe',{cash:12}]],
-  bottom:[['overalls','Overalls'],['jeans','Jeans'],['shorts','Shorts'],['skirt','Skirt'],['patched','Patched overalls',{coins:200}],['kilt','Tartan kilt',{cash:6}],['gold','Golden overalls',{cash:10}]]
+  hat:[['straw','Straw hat'],['cap','Ball cap'],['sunhat','Sun hat'],['bandana','Bandana'],['beanie','Beanie'],['none','No hat'],['cowboy','Cowboy hat',{coins:150}],['flowercrown','Flower crown',{coins:120}],['tophat','Top hat',{coins:400}],['chef','Chef hat',{cash:4}],['wizard','Wizard hat',{cash:6}],['pirate','Pirate hat',{cash:7}],['viking','Viking helmet',{cash:8}],['crown','Golden crown',{cash:10}],['elf','Elf hat',{event:'xmas'}],['antlers','Reindeer antlers',{event:'xmas'}],['santa','Santa hat',{event:'xmas'}]],
+  top:[['plaid','Plaid shirt'],['tee','T-shirt'],['stripes','Striped shirt'],['sweater','Sweater'],['vest','Farmer vest',{coins:120}],['hoodie','Hoodie',{coins:150}],['jacket','Denim jacket',{coins:220}],['hawaii','Hawaiian shirt',{cash:5}],['tux','Tuxedo',{cash:8}],['royal','Royal robe',{cash:12}],['xmasjumper','Christmas sweater',{event:'xmas'}],['santacoat','Santa coat',{event:'xmas'}]],
+  bottom:[['overalls','Overalls'],['jeans','Jeans'],['shorts','Shorts'],['skirt','Skirt'],['patched','Patched overalls',{coins:200}],['kilt','Tartan kilt',{cash:6}],['gold','Golden overalls',{cash:10}],['santapants','Santa trousers',{event:'xmas'}]]
 };
 function defaultLook(){return{gender:'male',build:'broad',skin:'#f2c6a0',eyes:'#3f8fe0',freckles:false,hair:'short',hairColor:'#4a2e1a',face:'none',glasses:'none',hat:'straw',hatColor:'#d9402f',top:'plaid',topColor:'#d9402f',bottom:'overalls',bottomColor:'#3f6fc0',shoes:'#5a3418',mouth:'smile',lips:'#d8454c',blush:true,acc:'none',accColor:'#e0457b',eyeShape:'almond',brows:'natural',nose:'button',ears:'normal'}}
 // Picking a gender also swaps in a fitting hairstyle when the current one is the other default; every style stays available to both.
@@ -6829,7 +6913,7 @@ function drawHead(L){
     for(const[bx0,tx,ty]of[[-7.4,-10.6,-9.8],[-5,-7.4,-14],[-2,-2.6,-15.6],[1.2,1.6,-16],[4,5.6,-14.6],[6.6,10,-11]]){g.beginPath();g.moveTo(bx0-2.2,-6.4);g.lineTo(tx,ty);g.lineTo(bx0+2.4,-7.4);g.closePath();paintHair(Hc)}}
   if(hair==='sidepart'){g.save();g.scale(-1,1);fringe(Hc);g.restore();lock(-2.6,-11.4,2.6,-14.6,8.2,-7.6,2.4);paintHair(Hc);lock(-1,-10.6,4,-12.4,8.8,-3.6,1.2);paintHair(Hc)}
   if(hair!=='none'&&hair!=='buzz'&&hair!=='afro'&&hair!=='curly')hairShine(Hc);
-  if(L.acc==='flower'&&!['tophat','cowboy','wizard','pirate','viking','chef'].includes(L.hat)){const fx=-7.4,fy=-6.4,fc=L.accColor||'#e0457b';for(let k=0;k<5;k++){const an=k/5*Math.PI*2;ball(fx+Math.cos(an)*1.7,fy+Math.sin(an)*1.7,1.5,1.5,fc)}ball(fx,fy,1,1,'#ffd23f')}
+  if(L.acc==='flower'&&!['tophat','cowboy','wizard','pirate','viking','chef','santa','elf'].includes(L.hat)){const fx=-7.4,fy=-6.4,fc=L.accColor||'#e0457b';for(let k=0;k<5;k++){const an=k/5*Math.PI*2;ball(fx+Math.cos(an)*1.7,fy+Math.sin(an)*1.7,1.5,1.5,fc)}ball(fx,fy,1,1,'#ffd23f')}
   // hats (drawn in the old head's units, scaled up to this bigger head)
   const hc=L.hatColor;
   g.save();g.translate(0,-.8);g.scale(1.65,1.65);
@@ -6870,6 +6954,20 @@ function drawHead(L){
         g.strokeStyle='rgba(138,122,90,.6)';g.lineWidth=.3;for(const t of[.3,.55])line([sx*(4.6+t*4.4),-4.8-t*2.2],[sx*(4.6+t*3.2),-7.6-t*1])}
       const mg=g.createRadialGradient(-1.8,-6,0,0,-3,6.6);mg.addColorStop(0,'#e8eef2');mg.addColorStop(.5,'#9aa6ae');mg.addColorStop(1,'#5a646c');dome(0,-2,5.9,6.6,mg,'#3a444c');
       poly([[-5.9,-3.6],[5.9,-3.6],[5.9,-2],[-5.9,-2]],'#d9a020','#7a5408',.3);poly([[-.7,-8.6],[.7,-8.6],[.7,-3.6],[-.7,-3.6]],'#d9a020','#7a5408',.3);for(const x of[-4.6,-2.4,2.4,4.6])ell(x,-2.8,.35,.35,'#7a5408');break}
+    case'santa':{const rc='#d42a2a';g.beginPath();g.moveTo(-5.8,-2.4);g.bezierCurveTo(-6,-8.6,-2.6,-12.8,2,-13.1);g.quadraticCurveTo(6.6,-13.2,8.1,-8.2);g.quadraticCurveTo(5.8,-10.3,3.9,-9.7);g.quadraticCurveTo(5.9,-6.2,5.8,-2.4);g.closePath();
+      g.fillStyle=sideGrad(rc,6);g.fill();g.strokeStyle='#7a1010';g.lineWidth=.45;g.stroke();g.strokeStyle='rgba(0,0,0,.16)';g.lineWidth=.4;g.beginPath();g.moveTo(-1.8,-10.6);g.quadraticCurveTo(-.9,-6.6,-1.4,-3.4);g.moveTo(2.6,-11.6);g.quadraticCurveTo(3.4,-9,3.9,-9.7);g.stroke();
+      g.beginPath();g.ellipse(0,-2.3,6.4,1.65,0,0,7);g.fillStyle=pvL(-6,0,6,0,['#ffffff','#f4f1ea','#dcd7cc']);g.fill();g.strokeStyle='#c9c4b8';g.lineWidth=.35;g.stroke();
+      for(const x of[-4.4,-1.8,.8,3.4])ell(x,-2.7,1.1,.5,'rgba(255,255,255,.95)');
+      ball(8.2,-7.6,1.9,1.9,'#ffffff','#c9c4b8',.35);ell(7.7,-8.2,.6,.5,'rgba(255,255,255,.95)');break}
+    case'elf':{const ec='#2f9a3c';g.beginPath();g.moveTo(-5.4,-2.6);g.quadraticCurveTo(-3.4,-10,1,-15.4);g.quadraticCurveTo(3.4,-17.4,6.8,-16.2);g.quadraticCurveTo(3.6,-15.2,3.2,-12);g.quadraticCurveTo(4.8,-7,5.4,-2.6);g.closePath();
+      g.fillStyle=sideGrad(ec,5);g.fill();g.strokeStyle='#145a1c';g.lineWidth=.45;g.stroke();
+      g.beginPath();g.moveTo(-6,-4);for(let i=0;i<=8;i++)g.lineTo(-6+i*1.5,i%2?-.5:-2.3);g.lineTo(6,-4);g.closePath();g.fillStyle='#d42a2a';g.fill();g.strokeStyle='#7a1010';g.lineWidth=.35;g.stroke();
+      for(let i=1;i<8;i+=2)ball(-6+i*1.5,-.7,.35,.35,'#ffd23f');ball(7,-16.2,1.35,1.35,'#ffd23f','#9a6400',.35);ell(7,-15.5,.4,.25,'#7a5408');break}
+    case'antlers':{g.strokeStyle='#4a2c14';g.lineWidth=.9;g.beginPath();g.ellipse(0,-2.4,6,5.6,0,Math.PI*1.06,Math.PI*1.94);g.stroke();g.lineCap='round';
+      for(const sx of[-1,1]){g.strokeStyle='#5e3a1c';g.lineWidth=1.7;g.beginPath();g.moveTo(sx*3.2,-6.6);g.quadraticCurveTo(sx*4.4,-10.6,sx*7,-13.8);g.stroke();g.lineWidth=1.25;g.beginPath();g.moveTo(sx*4.2,-9.6);g.lineTo(sx*2.4,-12.8);g.moveTo(sx*5.7,-12);g.lineTo(sx*5,-15.2);g.moveTo(sx*5.1,-10.9);g.lineTo(sx*8.8,-11);g.stroke();
+        g.strokeStyle='#a8743f';g.lineWidth=.8;g.beginPath();g.moveTo(sx*3.2,-6.6);g.quadraticCurveTo(sx*4.4,-10.6,sx*7,-13.8);g.moveTo(sx*4.2,-9.6);g.lineTo(sx*2.4,-12.8);g.moveTo(sx*5.7,-12);g.lineTo(sx*5,-15.2);g.moveTo(sx*5.1,-10.9);g.lineTo(sx*8.8,-11);g.stroke();
+        ell(sx*6.2,-5.8,1.8,1,'#a8743f','#5e3a1c',.3,sx*-.5);ell(sx*6.2,-5.8,.9,.45,'#e8b8a0',null,0,sx*-.5)}
+      break}
     case'crown':poly([[-4.8,-3],[4.8,-3],[5.4,-10.5],[2.6,-6.6],[0,-11.5],[-2.6,-6.6],[-5.4,-10.5]],'#ffc72c','#9a6400',.7);ell(0,-5,1.2,1.2,'#e0352b');ell(-3,-4.7,.8,.8,'#2d8fe3');ell(3,-4.7,.8,.8,'#3f9a3c');
       if(!reduce){const k=(Math.sin(Date.now()/300)+1)/2;sparkle(4.5,-11,1.5+k,k)}break;
   }
@@ -6895,7 +6993,8 @@ function sleeveOf(L,TC){
   if(t==='tux')return{col:TC,cuff:'#fbfbf8'};
   if(t==='royal')return{col:TC,cuff:'#fbf8f0',wide:true,spots:true};
   if(t==='jacket')return{col:TC,cuff:shade(TC,-.12),stitch:true};
-  if(t==='sweater'||t==='hoodie')return{col:TC,cuff:shade(TC,-.14),rib:true};
+  if(t==='sweater'||t==='hoodie'||t==='xmasjumper')return{col:TC,cuff:shade(TC,-.14),rib:true};
+  if(t==='santacoat')return{col:TC,cuff:'#fbf8f0'};
   return{col:TC,cuff:shade(TC,-.12),print:t==='plaid'||t==='vest'?'plaid':t};
 }
 // One arm, drawn down the local y axis from the shoulder (0,0); returns where the hand goes.
@@ -6931,7 +7030,7 @@ function drawShoe(x,d,sh){
 }
 function drawAvatar(L,p){
   const fem=L.gender==='female',slim=L.build==='slim',bw=(slim?4.45:5.25)+(fem?-.45:.3),walking=p.walking&&!reduce,ph=walking?Math.sin(p.walk):0;
-  const bot=L.bottom,bare=bot==='skirt'||bot==='shorts'||bot==='kilt',TC=L.top==='tux'?'#26282e':L.topColor,BC=bot==='gold'?'#e3a91c':L.bottomColor,BD=shade(BC,-.34),ACC=L.accColor||'#e0457b',SK=L.skin;
+  const bot=L.bottom,bare=bot==='skirt'||bot==='shorts'||bot==='kilt',TC=L.top==='tux'?'#26282e':L.top==='santacoat'?'#d42a2a':L.topColor,BC=bot==='gold'?'#e3a91c':bot==='santapants'?'#d42a2a':L.bottomColor,BD=shade(BC,-.34),ACC=L.accColor||'#e0457b',SK=L.skin;
   const bib=bot==='overalls'||bot==='patched'||bot==='gold',denim=bot==='jeans'||bib;
   shadow(0,-.5,8.8,3.1);
   const l1=walking?Math.max(0,ph)*1.9:0,l2=walking?Math.max(0,-ph)*1.9:0;
@@ -6957,7 +7056,7 @@ function drawAvatar(L,p){
     else{limb(s2*1.95,-10.6-LG,kx,ky,3.7,BC);limb(kx,ky,s2*2.15,-3.6-d,3.3,BC);
       g.strokeStyle=shade(BC,-.18);g.lineWidth=.3;g.beginPath();g.moveTo(kx-s2*.9,ky-1);g.quadraticCurveTo(kx,ky+.4,kx+s2*.9,ky-.6);g.stroke();
       // rolled cuffs on denim, a plain hem otherwise
-      const cy=-4.9-d;if(denim){poly([[s2*2.15-1.85,cy-.3],[s2*2.15+1.85,cy-.3],[s2*2.15+1.85,cy+1.1],[s2*2.15-1.85,cy+1.1]],shade(BC,.28),shade(BC,-.3),.3)}else poly([[s2*2.15-1.75,cy+.3],[s2*2.15+1.75,cy+.3],[s2*2.15+1.75,cy+1],[s2*2.15-1.75,cy+1]],shade(BC,-.14));
+      const cy=-4.9-d;if(bot==='santapants'){poly([[s2*2.15-2,cy-.7],[s2*2.15+2,cy-.7],[s2*2.15+2,cy+1.3],[s2*2.15-2,cy+1.3]],'#fbf8f0','#cfcac0',.25);ell(s2*2.15-.8,cy-.2,.8,.45,'rgba(255,255,255,.95)')}else if(denim){poly([[s2*2.15-1.85,cy-.3],[s2*2.15+1.85,cy-.3],[s2*2.15+1.85,cy+1.1],[s2*2.15-1.85,cy+1.1]],shade(BC,.28),shade(BC,-.3),.3)}else poly([[s2*2.15-1.75,cy+.3],[s2*2.15+1.75,cy+.3],[s2*2.15+1.75,cy+1],[s2*2.15-1.75,cy+1]],shade(BC,-.14));
       g.strokeStyle=denim?'rgba(230,170,70,.7)':shade(BC,-.25);g.lineWidth=.25;if(denim)g.setLineDash([.4,.35]);line([s2*3.6,-10-LG],[s2*3.7,cy-.4]);g.setLineDash([])}}
   for(const[x,d]of[[-2.2,l1],[2.2,l2]])drawShoe(x,d,L.shoes);
   g.save();g.translate(0,-LG-bob);
@@ -6994,6 +7093,13 @@ function drawAvatar(L,p){
     poly([[-3.9,-18],[-2.5,-18.2],[-2.6,-17.4],[-3.8,-17.3]],'#fbfbf8');poly([[-bw,-12.6],[bw,-12.6],[bw,-11.2],[-bw,-11.2]],'#17181c');g.strokeStyle='rgba(255,255,255,.12)';g.lineWidth=.25;for(const y of[-12.2,-11.6])line([-bw,y],[bw,y])}
   if(t==='royal'){poly([[-1.4,-21.8],[1.4,-21.8],[1.4,-10],[-1.4,-10]],pvL(-1.4,0,1.4,0,['#fff0a0','#ffc72c','#c89010']),'#9a6400',.3);for(const sx of[-1,1]){poly([[sx*1.4,-21.8],[sx*2.7,-21.8],[sx*2.7,-10],[sx*1.4,-10]],'#fbf8f0');for(const y of[-19.6,-16.6,-13.6,-11.2])ell(sx*2.05,y,.3,.45,'#1a1a1a')}
     g.strokeStyle='rgba(255,215,90,.5)';g.lineWidth=.3;for(let y=-20;y<-10.6;y+=2.2)for(let x=-bw+.8;x<bw;x+=2.4)if(Math.abs(x)>3){g.beginPath();g.arc(x,y,.5,0,7);g.stroke()}}
+  if(t==='xmasjumper'){g.strokeStyle=shade(TC,-.2);g.lineWidth=.3;for(let x=-bw+.6;x<bw;x+=1.15)line([x,-21],[x,-12.4]);
+    for(const y of[-19.9,-14.3]){poly([[-bw,y-.75],[bw,y-.75],[bw,y+.75],[-bw,y+.75]],'#fbf8f0');g.strokeStyle=y<-17?'#d42a2a':'#2f8a3a';g.lineWidth=.35;g.beginPath();for(let x=-bw+.2;x<bw;x+=1.3){g.moveTo(x,y+.5);g.lineTo(x+.65,y-.5);g.lineTo(x+1.3,y+.5)}g.stroke()}
+    poly([[0,-18.6],[2,-15.6],[-2,-15.6]],'#2f8a3a','#145a1c',.25);poly([[0,-17.9],[1.4,-16.5],[-1.4,-16.5]],'#46b04e');ball(0,-18.7,.45,.45,'#ffd23f','#9a6400',.15);
+    for(const[x,y,c]of[[-.8,-16.1,'#e0352b'],[.9,-15.95,'#ffd23f'],[.2,-17.2,'#4ab0ff']])ball(x,y,.24,.24,c);
+    g.strokeStyle='#fbf8f0';g.lineWidth=.28;for(const sx of[-1,1]){const cx=sx*3.7,cy=-17.1;for(let k=0;k<3;k++){const a=k*Math.PI/3;line([cx-Math.cos(a)*1,cy-Math.sin(a)*1],[cx+Math.cos(a)*1,cy+Math.sin(a)*1])}}
+    poly([[-bw,-12.4],[bw,-12.4],[bw,-10],[-bw,-10]],shade(TC,-.14));g.strokeStyle=shade(TC,-.3);g.lineWidth=.22;for(let x=-bw+.3;x<bw;x+=.55)line([x,-12.3],[x,-10.2])}
+  if(t==='santacoat'){poly([[-1.3,-21.8],[1.3,-21.8],[1.3,-10],[-1.3,-10]],'#fbf8f0');for(let y=-21;y<-10.4;y+=1.4){ell(-.5,y,.55,.42,'rgba(255,255,255,.95)');ell(.6,y+.7,.55,.42,'rgba(210,205,195,.8)')}}
   if(fem&&!bib){g.strokeStyle=shade(TC,-.3);g.lineWidth=.35;g.lineCap='round';for(const sx of[-1,1]){g.beginPath();g.moveTo(sx*3,-17.6);g.quadraticCurveTo(sx*1.8,-16.2,sx*.6,-17.2);g.stroke()}}
   // soft form shading: light from the top left, shadow under the chest and at the waist
   const fs=g.createLinearGradient(0,-22,0,-10);fs.addColorStop(0,'rgba(255,255,255,.12)');fs.addColorStop(.35,'rgba(255,255,255,0)');fs.addColorStop(1,'rgba(0,0,0,.16)');g.fillStyle=fs;g.fillRect(-bw-1,-22,bw*2+2,12.2);
@@ -7007,6 +7113,8 @@ function drawAvatar(L,p){
     g.strokeStyle='#f4f0e6';g.lineWidth=.35;line([-1.1,-20],[-1.3,-16.6]);line([1.1,-20],[1.3,-17.2]);ell(-1.3,-16.4,.35,.5,'#c9c4ba');ell(1.3,-17,.35,.5,'#c9c4ba')}
   if(t==='plaid'||t==='vest'||t==='hawaii'){const cc=t==='hawaii'?shade(TC,.12):shade(TC,-.06);for(const sx of[-1,1])poly([[sx*.2,-21.9],[sx*3.4,-21.7],[sx*1.4,-19.2]],cc,shade(TC,-.42),.35)}
   if(t==='jacket'){for(const sx of[-1,1])poly([[sx*1.5,-22],[sx*4.6,-21.6],[sx*3,-18.6],[sx*1.7,-19.6]],shade(TC,-.1),shade(TC,-.4),.35)}
+  if(t==='xmasjumper'){g.beginPath();g.ellipse(0,-21.4,2.8,1.3,0,0,Math.PI);g.strokeStyle=shade(TC,-.2);g.lineWidth=1.1;g.stroke()}
+  if(t==='santacoat'){g.beginPath();g.ellipse(0,-21.2,bw-.4,1.9,0,0,7);g.fillStyle='#fbf8f0';g.fill();g.strokeStyle='#cfcac0';g.lineWidth=.3;g.stroke();for(const x of[-3,-1,1,3])ell(x,-21.6,.8,.45,'rgba(255,255,255,.95)')}
   if(t==='royal'){g.beginPath();g.ellipse(0,-21.1,bw+.8,2.3,0,0,7);g.fillStyle='#fbf8f0';g.fill();g.strokeStyle='#cfc8b8';g.lineWidth=.3;g.stroke();for(const x of[-4.2,-1.6,1.6,4.2])ell(x,-20.6,.32,.5,'#1a1a1a')}
   // ---- bottoms
   if(bib){
@@ -7036,6 +7144,9 @@ function drawAvatar(L,p){
     poly([[-.9,-12.95],[.9,-12.95],[.9,-11.65],[-.9,-11.65]],'#d9b25a','#7a5408',.3);poly([[-.45,-12.6],[.45,-12.6],[.45,-12],[-.45,-12]],'#5e3a1c');
     g.strokeStyle=denim?'rgba(230,170,70,.75)':BD;g.lineWidth=.25;if(denim)g.setLineDash([.4,.35]);for(const sx of[-1,1]){g.beginPath();g.moveTo(sx*(bw-.6),-11.5);g.quadraticCurveTo(sx*(bw-2.2),-11.2,sx*(bw-2.6),-11.6);g.stroke()}g.beginPath();g.moveTo(0,-11.6);g.quadraticCurveTo(.9,-10.4,.2,-9.4);g.stroke();g.setLineDash([])}
   if(t==='royal'){for(const sx of[-1,1]){g.beginPath();g.moveTo(sx*1.2,-12.4);g.lineTo(sx*(bw+.2),-12.4);g.lineTo(sx*(bw+1.6),-5.4);g.lineTo(sx*2,-5.4);g.closePath();g.fillStyle=sideGrad(TC,bw+1);g.fill();g.strokeStyle=shade(TC,-.4);g.lineWidth=.35;g.stroke();poly([[sx*1.2,-12.4],[sx*2.4,-12.4],[sx*3.2,-5.4],[sx*2,-5.4]],'#fbf8f0');ell(sx*2.4,-9.6,.3,.45,'#1a1a1a');ell(sx*2.8,-7,.3,.45,'#1a1a1a')}}
+  if(t==='santacoat'){g.beginPath();g.moveTo(-bw,-12.2);g.lineTo(bw,-12.2);g.lineTo(bw+1.2,-6.6);g.lineTo(-bw-1.2,-6.6);g.closePath();g.fillStyle=sideGrad(TC,bw+1);g.fill();g.strokeStyle=shade(TC,-.4);g.lineWidth=.35;g.stroke();
+    poly([[-1.3,-12.2],[1.3,-12.2],[1.5,-6.6],[-1.5,-6.6]],'#fbf8f0');poly([[-bw-1.15,-7.9],[bw+1.15,-7.9],[bw+1.3,-6.2],[-bw-1.3,-6.2]],'#fbf8f0','#cfcac0',.25);for(let x=-bw;x<bw+1;x+=1.6)ell(x,-7.4,.7,.4,'rgba(255,255,255,.95)');
+    poly([[-bw-.1,-13.7],[bw+.1,-13.7],[bw+.2,-12],[-bw-.2,-12]],'#1e1a18');g.strokeStyle='#ffc72c';g.lineWidth=.5;g.strokeRect(-1.4,-13.95,2.8,2.2);poly([[-.2,-13.4],[.2,-13.4],[.2,-12.3],[-.2,-12.3]],'#ffc72c')}
   // ---- arms: the near arm swings, the far arm holds the tool
   const S2=sleeveOf(L,TC),armL=walking?ph*.9:0,hx=-bw-.7+armL*.4,hy=-9.6-Math.abs(armL)*.4,sx0=-bw+.6,sy0=-20;
   g.save();g.translate(sx0,sy0);const aa=Math.atan2(hx-sx0,hy-sy0);g.rotate(-aa);const hl=drawArm(Math.hypot(hx-sx0,hy-sy0)-.8,S2,L);hand(0,hl,SK);g.restore();
@@ -7064,6 +7175,8 @@ function drawAvatar(L,p){
   if(L.acc==='goldchain'){g.strokeStyle='#d9a020';g.lineWidth=.7;g.beginPath();g.moveTo(-2.6,-21.2);g.quadraticCurveTo(0,-15.6,2.6,-21.2);g.stroke();g.strokeStyle='#fff0a0';g.lineWidth=.25;g.setLineDash([.5,.5]);g.stroke();g.setLineDash([]);ball(0,-17.4,1.6,1.6,'#ffc72c','#9a6400',.4);g.fillStyle='#9a6400';g.font='bold 2px sans-serif';g.textAlign='center';g.fillText('$',0,-16.7)}
   if(L.acc==='cape'){for(const sx of[-1,1])ball(sx*(bw-1.2),-21,.9,.9,'#ffc72c','#9a6400',.3);g.strokeStyle='#ffc72c';g.lineWidth=.4;line([-(bw-1.2),-21],[bw-1.2,-21])}
   if(L.acc==='necklace'){g.strokeStyle='#ffc72c';g.lineWidth=.35;g.beginPath();g.moveTo(-2.4,-21.3);g.quadraticCurveTo(0,-17.2,2.4,-21.3);g.stroke();for(let i=0;i<7;i++){const k=i/6,x=-2.3+k*4.6,y=-21.2+Math.sin(k*Math.PI)*3.6;ball(x,y,i===3?.85:.6,i===3?.85:.6,i===3?'#ffc72c':ACC,shade(ACC,-.35),.2)}}
+  if(L.acc==='lights'){g.strokeStyle='#2f5a2a';g.lineWidth=.3;g.beginPath();g.moveTo(-bw+.8,-21.2);g.quadraticCurveTo(0,-15.6,bw-.8,-21.2);g.stroke();const cols=['#ff4a4a','#ffd23f','#4ab0ff','#5ad05a','#ff7ad0'],tk=reduce?0:Math.floor(Date.now()/450);
+    for(let i=0;i<7;i++){const k=i/6,x=-bw+.8+k*(bw*2-1.6),y=-21.2+Math.sin(k*Math.PI)*2.8,c=cols[i%5],on=reduce||(tk+i)%3!==0;if(on)ell(x,y+.7,1.2,1.3,'rgba(255,250,200,.3)');ell(x,y+.7,.45,.7,on?c:shade(c,-.35),shade(c,-.5),.15);ell(x-.12,y+.45,.15,.25,'rgba(255,255,255,.7)')}}
   if(L.acc==='scarf'){g.beginPath();g.moveTo(-bw+.4,-21.8);g.quadraticCurveTo(0,-18.4,bw-.4,-21.8);g.quadraticCurveTo(0,-23.8,-bw+.4,-21.8);g.closePath();g.fillStyle=sideGrad(ACC,bw);g.fill();g.strokeStyle=shade(ACC,-.35);g.lineWidth=.3;g.stroke();
     ball(1.8,-20.2,1.3,1.1,shade(ACC,-.06),shade(ACC,-.35),.3);
     for(const[x0,x1,y1]of[[1.4,2.2,-14.4],[2.4,3.8,-15.2]]){poly([[x0-.8,-19.8],[x0+.8,-19.8],[x1+.8,y1],[x1-.8,y1]],sideGrad(ACC,3),shade(ACC,-.35),.3);g.strokeStyle=shade(ACC,.35);g.lineWidth=.35;line([x1-.8,y1+.6],[x1+.8,y1+.6]);g.strokeStyle=ACC;g.lineWidth=.3;for(const dx of[-.5,0,.5])line([x1+dx,y1],[x1+dx,y1+1])}}
@@ -7604,6 +7717,7 @@ function toast(m){
 }
 // Each toast gets an icon from what the message is about: warnings first, then milestones, money, goods, orders, upgrades.
 function toastKind(m){
+  if(/^(Unlocked: |Christmas prize|Christmas event|Door \d+: )/.test(m))return'k-star';
   if(/(full|need|not enough|cannot|can only|Out of|unlock|still|already|Wait|first)/i.test(m))return'k-warn';
   if(/quest|tutorial|complete|ribbon|level|golden|baby|arrived/i.test(m))return'k-star';
   if(/upgrad|expand|built|bigger/i.test(m))return'k-up';
@@ -8638,7 +8752,7 @@ function goHome(){
   S.tiles=VIS.home.tiles;S.size=VIS.home.size;N=S.size;farmer.x=VIS.fx;farmer.y=VIS.fy;VIS=null;placePet();renderTut();
   visitors.length=0;for(const k in ROAM)delete ROAM[k];for(const k in GATE)delete GATE[k];
   document.body.classList.remove('visiting');$('visitbar').hidden=true;
-  buildBorder();changed();GC=null;fit();renderNeighbors();renderGoals();SFX.click();toast('Back home at '+S.farmName+'.');
+  buildBorder();changed();GC=null;fit();renderNeighbors();renderGoals();renderEvent();SFX.click();toast('Back home at '+S.farmName+'.');
 }
 function updateVisitBar(){
   if(!VIS)return;const c=helpedHere(VIS.n.id).length;
@@ -9533,7 +9647,8 @@ function secretModal(){
   modal({title:'Secret code',color:'',small:true,render(b){
     const p=el('div','body-pad'),i=document.createElement('input');i.type='password';i.inputMode='numeric';i.autocomplete='off';i.className='secretin';i.setAttribute('aria-label','Secret code');i.dataset.focus='1';
     const go=el('button','go','Unlock'),msg=el('p','hint','');
-    const tryIt=()=>{if(i.value.trim()===SECRET){S.unlimited=!S.unlimited;const l0=S.level;
+    const tryIt=()=>{if(i.value.trim()===XM_CODE){S.xmPreview=!S.xmPreview;closeModal();changed();SFX.golden();toast(S.xmPreview?'Christmas event preview on!':'Christmas event preview off.');xmCheck();return}
+      if(i.value.trim()===SECRET){S.unlimited=!S.unlimited;const l0=S.level;
         if(l0<MAX_LVL){for(let l=l0+1;l<=MAX_LVL;l++){S.coins+=20*l;if(l%5===0)S.cash+=1}S.level=MAX_LVL;S.xp=0}
         if(S.unlimited){richTopUp();SFX.golden();confetti();toast('Unlimited cash unlocked!')}else toast('Unlimited cash turned off.');changed();hud();closeModal();
         if(S.level>l0){SFX.level();showLevelUp(l0);if(!S.champ)setTimeout(championGift,600)}}
@@ -9658,7 +9773,7 @@ function renderIcon(cat,id,lv,bare){
   const R=ICON_R,c=document.createElement('canvas');c.width=240*R;c.height=200*R;
   const prev=g;g=c.getContext('2d');const now=Date.now();ICON_MODE=true;ICON_BARE=!!bare;
   try{
-  const tall=cat==='trees'||(cat==='decor'&&['windmill','silo','balloon','scarecrow','lamp','arbor','towerclock'].includes(id));
+  const tall=cat==='trees'||(cat==='decor'&&['windmill','silo','balloon','scarecrow','lamp','arbor','towerclock','xtree','snowman'].includes(id));
   const big=(cat==='decor'&&DECOR[id].size===2)||cat==='homes'||cat==='buildings',pen=cat==='homes';
   const sc=pen?.9:big?1.25:tall?1.6:2.2;g.setTransform(sc*R,0,0,sc*R,120*R,(pen?72:big?70:tall?122:96)*R);
   const tf=NATURAL?grassPat():'#7cc63e',ts=NATURAL?'rgba(52,74,26,.35)':'#5d9a2c';
@@ -10088,9 +10203,10 @@ function lookThumb(L,frame){
 }
 function owns(group,val){return!priceOf(group,val)||S.owned.includes(group+':'+val)}
 function lookCost(L){
-  const out={coins:0,cash:0,keys:[],names:[]};
+  const out={coins:0,cash:0,keys:[],names:[],event:[]};
   for(const grp of['hat','top','bottom','acc']){
     const p=priceOf(grp,L[grp]);if(!p||owns(grp,L[grp]))continue;
+    if(p.event){out.event.push(LOOK_OPTS[grp].find(x=>x[0]===L[grp])[1]);continue}
     out.coins+=p.coins||0;out.cash+=p.cash||0;out.keys.push(grp+':'+L[grp]);
     out.names.push(LOOK_OPTS[grp].find(x=>x[0]===L[grp])[1]);
   }
@@ -10132,7 +10248,8 @@ function showWardrobe(first){
             const on=draft[key]===val,card=el('div','icard'+(on?' on':'')+(price&&price.cash?' prem':''));
             card.appendChild(el('strong',null,name));
             const pic=lookThumb(key==='gender'?genderize(draft,val):Object.assign({},draft,frame==='face'&&key!=='hat'?{hat:'none'}:{},key==='top'&&['overalls','patched','gold'].includes(draft.bottom)?{bottom:'jeans'}:{},{[key]:val}),frame);pic.setAttribute('aria-hidden','true');card.appendChild(pic);
-            if(price&&!owns(key,val)){const tag=el('span','ptag'+(price.cash?' prem':''));tag.innerHTML=price.coins?'<span class="coin"></span>'+price.coins:'<span class="bill">$</span>'+price.cash;card.appendChild(tag)}
+            if(price&&price.event&&!owns(key,val)){const tag=el('span','ptag xmtag');tag.innerHTML=CANE_SVG;tag.appendChild(el('span',null,'Christmas'));card.appendChild(tag)}
+            else if(price&&!owns(key,val)){const tag=el('span','ptag'+(price.cash?' prem':''));tag.innerHTML=price.coins?'<span class="coin"></span>'+price.coins:'<span class="bill">$</span>'+price.cash;card.appendChild(tag)}
             if(on){const ck=el('i','wdcheck');ck.setAttribute('aria-hidden','true');card.appendChild(ck)}
             const use=el('button','use',on?'Wearing':'Use');use.setAttribute('aria-pressed',String(on));use.setAttribute('aria-label',(on?'Wearing ':'Use ')+name);
             use.onclick=()=>{SFX.click();setLook(key,val)};card.appendChild(use);cards.appendChild(card);
@@ -10172,10 +10289,10 @@ function showWardrobe(first){
       const c=lookCost(draft);
       tagNums.innerHTML='<span class="bill">$</span><b>'+c.cash+'</b><span class="coin"></span><b>'+c.coins.toLocaleString()+'</b>';
       buy.disabled=!c.keys.length;
-      note.textContent=c.keys.length?'Not yet yours: '+c.names.join(', ')+'.':first?'Pick a look. You can change it any time from the Wardrobe button.':'Everything you are wearing is already yours.';
+      note.textContent=c.event.length?'Win this in the Christmas event: '+c.event.join(', ')+'.':c.keys.length?'Not yet yours: '+c.names.join(', ')+'.':first?'Pick a look. You can change it any time from the Wardrobe button.':'Everything you are wearing is already yours.';
     }
     function purchase(again){
-      const c=lookCost(draft);if(!c.keys.length)return true;
+      const c=lookCost(draft);if(c.event.length){SFX.error();toast('Win this in the Christmas event: '+c.event.join(', ')+'.');return false}if(!c.keys.length)return true;
       if(S.cash<c.cash&&S.coins>=c.coins){cashShort(c.cash);return false}
       if(S.coins<c.coins||S.cash<c.cash){SFX.error();toast('Not enough '+(S.coins<c.coins?'coins':'Farm Cash')+' for '+c.names.join(', ')+'.');return false}
       if(again&&!cashPass(c.cash,c.names.join(', '),again))return false;
@@ -10866,6 +10983,123 @@ function cashPass(amount,what,again){
 function cashShort(need){
   const miss=need-S.cash;SFX.error();
   askBox('Not enough Farm Cash','You need '+miss+' more Farm Cash for this.','Get Farm Cash','Not now',()=>{while(mq.length)closeModal();showCashShop()},{cash:true});
+}
+/* ================= seasonal events: Christmas ================= */
+// Runs every year from December 1 to January 6. Farming earns candy canes; the canes fill a prize track of Christmas
+// clothes and decorations, and an advent calendar opens one door a day until Christmas Eve. Clothes and decor stay
+// yours for good. The secret code 1225 previews the event at any time of year.
+const XM_CODE='1225';
+const CANE_SVG='<svg class="cane" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 21V9a4.5 4.5 0 0 1 9 0v1.2" fill="none" stroke="#7a1010" stroke-width="5.6" stroke-linecap="round"/><path d="M8.5 21V9a4.5 4.5 0 0 1 9 0v1.2" fill="none" stroke="#fbfaf6" stroke-width="3.8" stroke-linecap="round"/><path d="M8.5 21V9a4.5 4.5 0 0 1 9 0v1.2" fill="none" stroke="#e0352b" stroke-width="3.8" stroke-dasharray="2.2 2.4" stroke-linecap="butt"/></svg>';
+const XM_TRACK=[
+  {at:10,look:['hat','elf']},{at:25,coins:500},{at:40,deco:'giftpile'},{at:60,look:['top','xmasjumper']},
+  {at:85,cash:2},{at:110,look:['hat','antlers']},{at:140,deco:'snowman'},{at:175,look:['acc','lights']},
+  {at:215,look:['hat','santa']},{at:260,look:['bottom','santapants']},{at:310,deco:'xtree'},{at:370,look:['top','santacoat'],cash:5}
+];
+// how many candy canes each kind of farm work brings (a fraction is a chance of one)
+const XM_EARN={harvest:.3,animal:.3,tree:.3,make:1,order:3,deliver:5};
+function xmDate(){const d=new Date();return{m:d.getMonth(),day:d.getDate(),y:d.getFullYear()}}
+function xmasOn(){if(!S)return false;if(S.xmPreview)return true;const{m,day}=xmDate();return m===11||(m===0&&day<=6)}
+function xmasId(){const{m,y}=xmDate();return'xmas'+(m===0?y-1:y)}
+function xmEnds(){const{m,y}=xmDate();return new Date(m===0?y:y+1,0,7).getTime()}
+function xmDaysLeft(){return Math.max(1,Math.ceil((xmEnds()-Date.now())/864e5))}
+// the advent door you may open today: the date in December, every door after Christmas, the date of the month in a preview
+function xmAdvDay(){const{m,day}=xmDate();if(m===11)return Math.min(24,day);if(m===0)return 24;return S.xmPreview?Math.min(24,day):0}
+function xmState(){if(!S.ev||S.ev.id!==xmasId())S.ev={id:xmasId(),canes:0,got:[],adv:[],intro:false};return S.ev}
+function xmLookName(l){const o=LOOK_OPTS[l[0]].find(x=>x[0]===l[1]);return o?o[1]:l[1]}
+function xmPrizeName(r){return r.look?xmLookName(r.look):r.deco?DECOR[r.deco].name:r.cash?r.cash+' Farm Cash':r.coins.toLocaleString()+' coins'}
+function xmAdvGift(i){return i===24?{canes:15,cash:3}:i%6===0?{canes:8,cash:1}:i%3===0?{canes:5,mats:2}:i%2===0?{canes:4,coins:150+i*10}:{canes:6}}
+function xmGain(n,quiet){
+  if(!n||!xmasOn()||VIS)return;const e=xmState(),before=e.canes;e.canes+=n;
+  if(!quiet){floatText(farmer.x,farmer.y-1.5,'+'+n+' '+(n===1?'candy cane':'candy canes'),'#ffb0a8',150)}
+  const next=XM_TRACK.find(r=>r.at>before);if(next&&e.canes>=next.at){SFX.ribbon();toast('Christmas prize ready: '+tr(xmPrizeName(next))+'! Open the Christmas card to claim it.')}
+  renderEvent();
+}
+// called from stat(): every bit of farm work can drop candy canes while the event runs
+function xmStat(k,n){const r=XM_EARN[k];if(!r||!xmasOn()||VIS)return;let got=0;n=n||1;if(r>=1)got=Math.round(r*n);else for(let i=0;i<n;i++)if(Math.random()<r)got++;if(got)xmGain(got)}
+function xmGive(r){
+  if(r.coins)S.coins+=r.coins;if(r.cash)S.cash+=r.cash;if(r.mats)addMat(randMat(),r.mats);
+  if(r.look){const k=r.look[0]+':'+r.look[1];if(!S.owned.includes(k))S.owned.push(k)}
+  if(r.deco){const k='deco:'+r.deco;S.inv[k]=(S.inv[k]||0)+1}
+}
+function xmClaim(i){
+  const e=xmState(),r=XM_TRACK[i];if(!r||e.got.includes(i)||e.canes<r.at)return;
+  e.got.push(i);xmGive(r);SFX.golden();confetti();
+  toast(r.look?'Unlocked: '+xmLookName(r.look)+'! Wear it from the Wardrobe.':r.deco?DECOR[r.deco].name+' added to your Gift Box. Place it on your farm!':'Christmas prize: '+tr(xmPrizeName(r))+'!');
+  hud();changed();renderEvent();rerender();
+}
+function xmOpenDoor(i){
+  const e=xmState();if(i>xmAdvDay()||e.adv.includes(i))return;e.adv.push(i);const r=xmAdvGift(i);
+  e.canes+=r.canes;xmGive(r);SFX.find();if(i===24)confetti();
+  const bits=['+'+r.canes+' candy canes'];if(r.coins)bits.push('+'+r.coins+' coins');if(r.cash)bits.push('+'+r.cash+' Farm Cash');if(r.mats)bits.push('+'+r.mats+' building materials');
+  toast('Door '+i+': '+bits.map(tr).join(', ')+'.');hud();changed();renderEvent();rerender();
+}
+function renderEvent(){
+  const box=$('evbox');if(!box)return;
+  if(!S||VIS||!xmasOn()){box.hidden=true;return}
+  const e=xmState(),ready=XM_TRACK.some((r,i)=>e.canes>=r.at&&!e.got.includes(i))||XM_DOORS().some(i=>i<=xmAdvDay()&&!e.adv.includes(i));
+  box.hidden=false;box.className='goals evbox closed'+(ready?' evready':'');box.innerHTML='';
+  const head=el('button','goals-head');head.setAttribute('aria-label','Christmas on the Farm');head.innerHTML=CANE_SVG+'<span><small>'+tr('Event')+'</small>'+tr('Christmas')+'</span><i>'+e.canes+'</i>';
+  head.onclick=()=>{SFX.click();showEvent()};box.appendChild(head);
+}
+function XM_DOORS(){return Array.from({length:24},(_,i)=>i+1)}
+function showEvent(){
+  if(!xmasOn())return;xmState();
+  modal({title:'Christmas on the Farm',color:'red',wide:true,cls:'xmS',render(b){
+    const e=xmState(),p=el('div','store xmas');
+    const top=el('div','xmtop'),cnt=el('div','xmcount');cnt.innerHTML=CANE_SVG;cnt.appendChild(el('b',null,String(e.canes)));cnt.appendChild(el('span',null,'candy canes'));top.appendChild(cnt);
+    top.appendChild(el('p',null,'Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.'));
+    top.appendChild(el('p','hint',xmDaysLeft()===1?'The event ends tomorrow.':'The event ends in '+xmDaysLeft()+' days. Prizes are yours to keep.'));p.appendChild(top);
+    // prize track
+    p.appendChild(el('h3',null,'Christmas prizes'));
+    const tr2=el('div','xmtrack');
+    XM_TRACK.forEach((r,i)=>{
+      const got=e.got.includes(i),can=!got&&e.canes>=r.at,c=el('div','xmprize'+(got?' got':can?' can':''));
+      const pic=el('div','xmpic');
+      if(r.look){const L=Object.assign({},S.look,{[r.look[0]]:r.look[1]});if(r.look[0]==='top'&&['overalls','patched','gold'].includes(L.bottom))L.bottom='jeans';const cv=lookThumb(L,r.look[0]==='hat'?'face':r.look[0]==='bottom'?'body':'top');cv.setAttribute('aria-hidden','true');pic.appendChild(cv)}
+      else if(r.deco){const ik='decor:'+r.deco;if(!ICONS[ik])ICONS[ik]=renderIcon('decor',r.deco);const im=el('img');im.src=ICONS[ik];im.alt='';pic.appendChild(im)}
+      else pic.innerHTML=r.cash?'<span class="bill big">$</span>':'<span class="coin big"></span>';
+      c.appendChild(pic);c.appendChild(el('strong',null,xmPrizeName(r)));
+      const need=el('span','xmneed');need.innerHTML=CANE_SVG;need.append(String(r.at));c.appendChild(need);
+      if(got)c.appendChild(el('span','xmdone','Claimed'));
+      else if(can){const bt=el('button','claim','Claim');bt.onclick=()=>xmClaim(i);c.appendChild(bt)}
+      else{const bar=el('div','gbar'),f=el('b');f.style.width=Math.min(100,e.canes/r.at*100)+'%';bar.appendChild(f);c.appendChild(bar)}
+      tr2.appendChild(c);
+    });
+    p.appendChild(tr2);
+    // advent calendar
+    p.appendChild(el('h3',null,'Advent calendar'));
+    const today2=xmAdvDay();
+    p.appendChild(el('p','hint',today2?'Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.':'The advent calendar opens on December 1.'));
+    const cal=el('div','xmcal');
+    for(const i of XM_DOORS()){
+      const open=e.adv.includes(i),can=!open&&i<=today2,d=el('button','xmdoor'+(open?' open':can?' can':''));d.setAttribute('aria-label',(open?'Opened door ':'Door ')+i);
+      if(open){const r=xmAdvGift(i);d.innerHTML=CANE_SVG+'<small>+'+r.canes+'</small>'+(r.cash?'<small class="xc">+'+r.cash+'$</small>':'')}
+      else d.appendChild(el('b',null,String(i)));
+      d.disabled=!can;if(can)d.onclick=()=>xmOpenDoor(i);cal.appendChild(d);
+    }
+    p.appendChild(cal);
+    b.appendChild(p);
+  }});
+}
+// once per event: Mabel brings the news; after the event, any prizes earned but not claimed are handed out
+function xmCheck(){
+  if(!S||VIS)return;
+  if(xmasOn()){const e=xmState();e.done=false;renderEvent();
+    if(!e.intro&&!(typeof S.tut==='number'&&S.tut<TUT.length)){e.intro=true;save();
+      const who=NEIGHBORS.find(n=>n.id==='mabel')||NEIGHBORS[0];
+      modal({title:'Christmas',color:'red',small:true,render(b){
+        const p=el('div','body-pad'),face=el('div','vface');face.innerHTML=avatar(who);p.appendChild(face);
+        p.appendChild(el('h3',null,'Christmas is coming!'));p.appendChild(el('p',null,who.name+': "The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations."'));
+        p.appendChild(el('p','hint','Look for the Christmas card on the left of the screen.'));
+        const go=el('button','go','Ho ho ho!');go.dataset.focus='1';go.onclick=()=>{SFX.click();closeModal();showEvent()};p.appendChild(go);b.appendChild(p);
+      }});
+    }
+    return;
+  }
+  renderEvent();
+  const e=S.ev;if(!e||e.done)return;const left=[];
+  XM_TRACK.forEach((r,i)=>{if(e.canes>=r.at&&!e.got.includes(i)){e.got.push(i);xmGive(r);left.push(tr(xmPrizeName(r)))}});
+  e.done=true;if(left.length){toast('Christmas is over. Your last prizes are yours: '+left.join(', ')+'.');changed();hud()}else save();
 }
 /* ================= daily bonus ================= */
 function dailyBonus(){
@@ -11746,8 +11980,8 @@ function start(data){
   else if(!S.tips.homes&&Object.values(S.tiles).some(o=>o.k==='animal'&&!hasHome(o.id))){S.tips.homes=true;setTimeout(()=>toast('Your chickens and sheep need homes! Buy a Chicken Coop and a Sheep Pen in Market > Homes.'),3200)}
   if(first)toast('Welcome to Farm Village! Your wheat is ready: click it and your farmer will harvest it.');
   if(!S.tips.avatar)showWardrobe(true);
-  dailyBonus();
-  renderGoals();setInterval(()=>{if(S.goals&&S.goals.day!==today())renderGoals()},60000);
+  dailyBonus();xmCheck();
+  renderGoals();setInterval(()=>{if(S.goals&&S.goals.day!==today())renderGoals();xmCheck()},60000);
   tickOrders();tickDeliv();renderQuest();setTimeout(()=>{if($('title').hidden)nextQuest()},4000);
   showTitle();
 }

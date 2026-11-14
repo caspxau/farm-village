@@ -1193,7 +1193,36 @@ Waters growing crops up to 2 plots away.|Arrose les cultures jusqu'à 2 parcelle
 Art style|Style graphique
 Cartoon|Dessin animé
 Natural look: soft light and painted textures.|Aspect naturel : lumière douce et textures peintes.
-Cartoon look: bold outlines.|Aspect dessin animé : contours marqués.`,
+Cartoon look: bold outlines.|Aspect dessin animé : contours marqués.
+Event|Événement
+Christmas|Noël
+Christmas on the Farm|Noël à la ferme
+candy canes|sucres d'orge
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|Le travail à la ferme rapporte des sucres d'orge : parfois en récoltant, avec les animaux et les arbres fruitiers, pour chaque produit fini, 3 par commande de voisin et 5 par livraison.
+The event ends tomorrow.|L'événement se termine demain.
+Christmas prizes|Cadeaux de Noël
+Claim|Récupérer
+Claimed|Récupéré
+Advent calendar|Calendrier de l'Avent
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|Ouvre une nouvelle case chaque jour jusqu'au réveillon. Un jour manqué ? Les cases précédentes restent ouvertes.
+The advent calendar opens on December 1.|Le calendrier de l'Avent ouvre le 1er décembre.
+Elf hat|Bonnet de lutin
+Reindeer antlers|Bois de renne
+Santa hat|Bonnet de Père Noël
+Christmas sweater|Pull de Noël
+Santa coat|Manteau de Père Noël
+Santa trousers|Pantalon de Père Noël
+Christmas lights|Guirlande lumineuse
+Gift Pile|Pile de cadeaux
+Snowman|Bonhomme de neige
+Christmas Tree|Sapin de Noël
+Christmas is coming!|Noël approche !
+Look for the Christmas card on the left of the screen.|Cherche la carte de Noël à gauche de l'écran.
+Ho ho ho!|Ho ho ho !
+Christmas event preview on!|Aperçu de l'événement de Noël activé !
+Christmas event preview off.|Aperçu de l'événement de Noël désactivé.
+Christmas event|Événement de Noël
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Toute la vallée se prépare pour Noël ! Chaque travail à la ferme rapporte des sucres d'orge. Récoltes-en assez pour gagner des vêtements et des décorations de Noël.`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -1413,4 +1442,19 @@ p:`0|$1 {p1:pièce|pièces}
 216|Se vend $1
 217|Toutes les {t1}
 218|×$1 dans la grange
-219|Abri pour $1 animaux ({2}). Tu en as $3.`};
+219|Abri pour $1 animaux ({2}). Tu en as $3.
+220|+$1 {p1:sucre d'orge|sucres d'orge}
+221|L'événement se termine dans $1 jours. Les cadeaux sont à toi pour de bon.
+222|Case $1
+223|Case ouverte $1
+224|Cadeau de Noël prêt : {1} ! Ouvre la carte de Noël pour le récupérer.
+225|Débloqué : {1} ! Porte-le depuis la garde-robe.
+226|{1} ajouté à ta boîte à cadeaux. Place-le sur ta ferme !
+227|Cadeau de Noël : {1} !
+228|Case $1 : $2.
+229|+$1 {p1:matériau de construction|matériaux de construction}
+230|$1 : « Toute la vallée se prépare pour Noël ! Chaque travail à la ferme rapporte des sucres d'orge. Récoltes-en assez pour gagner des vêtements et des décorations de Noël. »
+231|Noël est fini. Tes derniers cadeaux sont à toi : {l1}.
+232|À gagner pendant l'événement de Noël : {l1}.
+233|$1 {p1:billet de ferme|billets de ferme}
+234|+$1 {p1:pièce|pièces}`};

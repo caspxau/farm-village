@@ -1193,7 +1193,36 @@ Waters growing crops up to 2 plots away.|Riega los cultivos hasta a 2 parcelas d
 Art style|Estilo gráfico
 Cartoon|Caricatura
 Natural look: soft light and painted textures.|Aspecto natural: luz suave y texturas pintadas.
-Cartoon look: bold outlines.|Aspecto caricatura: contornos marcados.`,
+Cartoon look: bold outlines.|Aspecto caricatura: contornos marcados.
+Event|Evento
+Christmas|Navidad
+Christmas on the Farm|Navidad en la granja
+candy canes|bastones de caramelo
+Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.|El trabajo en la granja da bastones de caramelo: a veces al cosechar, con los animales y los frutales, por cada producto terminado, 3 por pedido de vecino y 5 por entrega.
+The event ends tomorrow.|El evento termina mañana.
+Christmas prizes|Premios de Navidad
+Claim|Reclamar
+Claimed|Reclamado
+Advent calendar|Calendario de Adviento
+Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.|Abre una puerta nueva cada día hasta Nochebuena. ¿Te saltaste un día? Las puertas anteriores siguen abiertas.
+The advent calendar opens on December 1.|El calendario de Adviento abre el 1 de diciembre.
+Elf hat|Gorro de elfo
+Reindeer antlers|Cuernos de reno
+Santa hat|Gorro de Papá Noel
+Christmas sweater|Suéter navideño
+Santa coat|Abrigo de Papá Noel
+Santa trousers|Pantalón de Papá Noel
+Christmas lights|Luces navideñas
+Gift Pile|Montón de regalos
+Snowman|Muñeco de nieve
+Christmas Tree|Árbol de Navidad
+Christmas is coming!|¡Ya llega la Navidad!
+Look for the Christmas card on the left of the screen.|Busca la tarjeta navideña a la izquierda de la pantalla.
+Ho ho ho!|¡Jo, jo, jo!
+Christmas event preview on!|¡Vista previa del evento de Navidad activada!
+Christmas event preview off.|Vista previa del evento de Navidad desactivada.
+Christmas event|Evento de Navidad
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|¡Todo el valle se prepara para la Navidad! Cada trabajo en la granja da bastones de caramelo. Junta suficientes y ganarás ropa y adornos navideños.`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1
@@ -1413,4 +1442,19 @@ p:`0|$1 {p1:moneda|monedas}
 216|Se vende por $1
 217|Cada {t1}
 218|×$1 en el granero
-219|Casa para hasta $1 ({2}). Tienes $3.`};
+219|Casa para hasta $1 ({2}). Tienes $3.
+220|+$1 {p1:bastón de caramelo|bastones de caramelo}
+221|El evento termina en $1 días. Los premios son tuyos para siempre.
+222|Puerta $1
+223|Puerta abierta $1
+224|¡Premio de Navidad listo: {1}! Abre la tarjeta navideña para reclamarlo.
+225|¡Desbloqueado: {1}! Póntelo desde el Armario.
+226|{1} se añadió a tu caja de regalos. ¡Colócalo en tu granja!
+227|¡Premio de Navidad: {1}!
+228|Puerta $1: $2.
+229|+$1 {p1:material de construcción|materiales de construcción}
+230|$1: «¡Todo el valle se prepara para la Navidad! Cada trabajo en la granja da bastones de caramelo. Junta suficientes y ganarás ropa y adornos navideños.»
+231|La Navidad terminó. Tus últimos premios son tuyos: {l1}.
+232|Se gana en el evento de Navidad: {l1}.
+233|$1 de dinero de granja
+234|+$1 {p1:moneda|monedas}`};
