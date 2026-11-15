@@ -1222,7 +1222,13 @@ Ho ho ho!|Ho ho ho!
 Christmas event preview on!|Prévia do evento de Natal ativada!
 Christmas event preview off.|Prévia do evento de Natal desativada.
 Christmas event|Evento de Natal
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|O vale inteiro está se preparando para o Natal! Todo trabalho na fazenda dá bengalas doces. Junte bastante e ganhe roupas e enfeites de Natal.`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|O vale inteiro está se preparando para o Natal! Todo trabalho na fazenda dá bengalas doces. Junte bastante e ganhe roupas e enfeites de Natal.
+Collect all|Coletar tudo
+Hungry|Com fome
+Animals in this home|Animais nesta casa
+Feed your animals to start production.|Alimente seus animais para começar a produção.
+A chicken laid an egg. Tap the Chicken Coop to collect it.|Uma galinha botou um ovo. Toque no galinheiro para coletar.
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Agora essa galinha está com fome. Toque no galinheiro e aperte Alimentar todos.`,
 p:`0|$1 {p1:moeda|moedas}
 1|$1 / $2 XP
 2|faltam $1
@@ -1457,4 +1463,8 @@ p:`0|$1 {p1:moeda|moedas}
 231|O Natal acabou. Seus últimos prêmios são seus: {l1}.
 232|Ganhe no evento de Natal: {l1}.
 233|$1 de dinheiro da fazenda
-234|+$1 {p1:moeda|moedas}`};
+234|+$1 {p1:moeda|moedas}
+235|$1 com fome
+236|Próximo ({1}) em {t2}.
+237|{1}: pronto para coletar.
+238|Alimentar todos ($1) · $2 de ração`};

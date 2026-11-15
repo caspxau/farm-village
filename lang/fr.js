@@ -1222,7 +1222,13 @@ Ho ho ho!|Ho ho ho !
 Christmas event preview on!|Aperçu de l'événement de Noël activé !
 Christmas event preview off.|Aperçu de l'événement de Noël désactivé.
 Christmas event|Événement de Noël
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Toute la vallée se prépare pour Noël ! Chaque travail à la ferme rapporte des sucres d'orge. Récoltes-en assez pour gagner des vêtements et des décorations de Noël.`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Toute la vallée se prépare pour Noël ! Chaque travail à la ferme rapporte des sucres d'orge. Récoltes-en assez pour gagner des vêtements et des décorations de Noël.
+Collect all|Tout récupérer
+Hungry|Affamé
+Animals in this home|Animaux de cet abri
+Feed your animals to start production.|Nourris tes animaux pour lancer la production.
+A chicken laid an egg. Tap the Chicken Coop to collect it.|Une poule a pondu un œuf. Touche le poulailler pour le récupérer.
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Cette poule a faim maintenant. Touche le poulailler et appuie sur Tout nourrir.`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -1457,4 +1463,8 @@ p:`0|$1 {p1:pièce|pièces}
 231|Noël est fini. Tes derniers cadeaux sont à toi : {l1}.
 232|À gagner pendant l'événement de Noël : {l1}.
 233|$1 {p1:billet de ferme|billets de ferme}
-234|+$1 {p1:pièce|pièces}`};
+234|+$1 {p1:pièce|pièces}
+235|$1 {p1:affamé|affamés}
+236|Prochain lot ({1}) dans {t2}.
+237|{1} : prêt à récupérer.
+238|Tout nourrir ($1) · $2 aliments`};

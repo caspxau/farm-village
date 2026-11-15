@@ -1230,7 +1230,13 @@ Ho ho ho!|Хо-хо-хо!
 Christmas event preview on!|Предпросмотр рождественского события включён!
 Christmas event preview off.|Предпросмотр рождественского события выключен.
 Christmas event|Рождественское событие
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Вся долина готовится к Рождеству! Любая работа на ферме приносит леденцы. Собери побольше и выиграй рождественскую одежду и украшения.`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Вся долина готовится к Рождеству! Любая работа на ферме приносит леденцы. Собери побольше и выиграй рождественскую одежду и украшения.
+Collect all|Собрать всё
+Hungry|Голоден
+Animals in this home|Животные в этом домике
+Feed your animals to start production.|Покорми животных, чтобы начать производство.
+A chicken laid an egg. Tap the Chicken Coop to collect it.|Курица снесла яйцо. Нажми на курятник, чтобы забрать его.
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Теперь курица голодна. Нажми на курятник и выбери «Покормить всех».`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -1465,4 +1471,8 @@ p:`0|$1 {p1:монета|монеты|монет}
 231|Рождество закончилось. Последние призы твои: {l1}.
 232|Можно выиграть в рождественском событии: {l1}.
 233|Фермерские доллары: $1
-234|+$1 {p1:монета|монеты|монет}`};
+234|+$1 {p1:монета|монеты|монет}
+235|Голодных: $1
+236|Следующее ({1}) через {t2}.
+237|{1}: можно забрать.
+238|Покормить всех ($1) · корм: $2`};

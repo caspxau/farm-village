@@ -1222,7 +1222,13 @@ Ho ho ho!|¡Jo, jo, jo!
 Christmas event preview on!|¡Vista previa del evento de Navidad activada!
 Christmas event preview off.|Vista previa del evento de Navidad desactivada.
 Christmas event|Evento de Navidad
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|¡Todo el valle se prepara para la Navidad! Cada trabajo en la granja da bastones de caramelo. Junta suficientes y ganarás ropa y adornos navideños.`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|¡Todo el valle se prepara para la Navidad! Cada trabajo en la granja da bastones de caramelo. Junta suficientes y ganarás ropa y adornos navideños.
+Collect all|Recoger todo
+Hungry|Hambriento
+Animals in this home|Animales en esta casa
+Feed your animals to start production.|Alimenta a tus animales para empezar la producción.
+A chicken laid an egg. Tap the Chicken Coop to collect it.|Una gallina puso un huevo. Toca el gallinero para recogerlo.
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Ahora esa gallina tiene hambre. Toca el gallinero y pulsa Alimentar a todos.`,
 p:`0|$1 {p1:moneda|monedas}
 1|$1 / $2 XP
 2|faltan $1
@@ -1457,4 +1463,8 @@ p:`0|$1 {p1:moneda|monedas}
 231|La Navidad terminó. Tus últimos premios son tuyos: {l1}.
 232|Se gana en el evento de Navidad: {l1}.
 233|$1 de dinero de granja
-234|+$1 {p1:moneda|monedas}`};
+234|+$1 {p1:moneda|monedas}
+235|$1 con hambre
+236|Siguiente ({1}) en {t2}.
+237|{1}: listo para recoger.
+238|Alimentar a todos ($1) · $2 de pienso`};

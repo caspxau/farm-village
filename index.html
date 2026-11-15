@@ -503,7 +503,7 @@ body.visiting .tut{display:none}
 .unl img{width:80px;height:auto}
 .newtag{position:absolute;top:6px;left:6px;background:linear-gradient(#ff8fb5,#e0457b);color:#fff;border:2px solid #fff;border-radius:10px;font-size:11px;font-weight:700;padding:1px 7px;box-shadow:0 2px 0 rgba(0,0,0,.18)}
 .newtag.hot{background:linear-gradient(#ffb04a,#e8771a);left:auto;right:6px}
-.item .newtag.hot{top:auto;bottom:52px;right:4px}
+.item .newtag.hot{top:6px;bottom:auto;left:6px;right:auto}
 .card{position:relative}
 .hotitem{border-color:#f2a21e!important;box-shadow:0 3px 0 #e8a23a!important}
 .hotbar{display:flex;align-items:center;gap:8px;background:#fff3dc;border:2px dashed #f2a21e;border-radius:12px;padding:4px 10px;margin:6px 0;font-size:13px;font-weight:600}.hotbar img{width:34px;height:34px}
@@ -2286,7 +2286,7 @@ const PL_EXACT={
 'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.',
-'Art style':'Styl grafiki','The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.':'Cała dolina szykuje się do świąt! Każda praca na farmie daje laski cukrowe. Zbierz ich dość, a wygrasz świąteczne ubrania i ozdoby.','Event':'Wydarzenie','Christmas':'Boże Narodzenie','Christmas on the Farm':'Święta na farmie','candy canes':'laski cukrowe','Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.':'Praca na farmie daje laski cukrowe: czasem przy zbiorach, zwierzętach i drzewach owocowych, za każdy gotowy towar, 3 za zamówienie sąsiada i 5 za dostawę.','The event ends tomorrow.':'Wydarzenie kończy się jutro.','Christmas prizes':'Świąteczne nagrody','Claim':'Odbierz','Claimed':'Odebrano','Advent calendar':'Kalendarz adwentowy','Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.':'Otwieraj nowe okienko każdego dnia aż do Wigilii. Ominął cię dzień? Wcześniejsze okienka nadal czekają.','The advent calendar opens on December 1.':'Kalendarz adwentowy otwiera się 1 grudnia.','Elf hat':'Czapka elfa','Reindeer antlers':'Rogi renifera','Santa hat':'Czapka Mikołaja','Christmas sweater':'Świąteczny sweter','Santa coat':'Płaszcz Mikołaja','Santa trousers':'Spodnie Mikołaja','Christmas lights':'Świąteczne lampki','Gift Pile':'Stos prezentów','Snowman':'Bałwan','Christmas Tree':'Choinka','Christmas is coming!':'Święta tuż-tuż!','Look for the Christmas card on the left of the screen.':'Szukaj świątecznej karty po lewej stronie ekranu.','Ho ho ho!':'Ho ho ho!','Christmas event preview on!':'Podgląd świątecznego wydarzenia włączony!','Christmas event preview off.':'Podgląd świątecznego wydarzenia wyłączony.','Christmas event':'Świąteczne wydarzenie','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
+'Art style':'Styl grafiki','Collect all':'Odbierz wszystko','Hungry':'Głodne','Animals in this home':'Zwierzęta w tym domu','Feed your animals to start production.':'Nakarm zwierzęta, by zaczęły produkcję.','A chicken laid an egg. Tap the Chicken Coop to collect it.':'Kura zniosła jajko. Dotknij kurnika, by je zebrać.','Now that chicken is hungry. Tap the Chicken Coop and press Feed all.':'Teraz kura jest głodna. Dotknij kurnika i naciśnij Nakarm wszystkie.','The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.':'Cała dolina szykuje się do świąt! Każda praca na farmie daje laski cukrowe. Zbierz ich dość, a wygrasz świąteczne ubrania i ozdoby.','Event':'Wydarzenie','Christmas':'Boże Narodzenie','Christmas on the Farm':'Święta na farmie','candy canes':'laski cukrowe','Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.':'Praca na farmie daje laski cukrowe: czasem przy zbiorach, zwierzętach i drzewach owocowych, za każdy gotowy towar, 3 za zamówienie sąsiada i 5 za dostawę.','The event ends tomorrow.':'Wydarzenie kończy się jutro.','Christmas prizes':'Świąteczne nagrody','Claim':'Odbierz','Claimed':'Odebrano','Advent calendar':'Kalendarz adwentowy','Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.':'Otwieraj nowe okienko każdego dnia aż do Wigilii. Ominął cię dzień? Wcześniejsze okienka nadal czekają.','The advent calendar opens on December 1.':'Kalendarz adwentowy otwiera się 1 grudnia.','Elf hat':'Czapka elfa','Reindeer antlers':'Rogi renifera','Santa hat':'Czapka Mikołaja','Christmas sweater':'Świąteczny sweter','Santa coat':'Płaszcz Mikołaja','Santa trousers':'Spodnie Mikołaja','Christmas lights':'Świąteczne lampki','Gift Pile':'Stos prezentów','Snowman':'Bałwan','Christmas Tree':'Choinka','Christmas is coming!':'Święta tuż-tuż!','Look for the Christmas card on the left of the screen.':'Szukaj świątecznej karty po lewej stronie ekranu.','Ho ho ho!':'Ho ho ho!','Christmas event preview on!':'Podgląd świątecznego wydarzenia włączony!','Christmas event preview off.':'Podgląd świątecznego wydarzenia wyłączony.','Christmas event':'Świąteczne wydarzenie','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
 ,
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
@@ -2436,7 +2436,7 @@ const PL_PATS=[
 [/^This deletes (.+) for good: your coins, level, animals and everything in the barn\. You start a brand-new farm with the tutorial\.$/,m=>'To na zawsze usunie farmę '+m[1]+': monety, poziom, zwierzęta i wszystko w stodole. Zaczniesz nową farmę z samouczkiem.'],
 [/^You have (\d+)\.$/,m=>'Masz: '+m[1]+'.'],
 [/^Feed in your barn: (\d+)\. Make more at a Feed Mill\.$/,m=>'Pasza w stodole: '+m[1]+'. Więcej zrobisz w młynie paszowym.'],
-[/^Hot today: (.+) sell for 50% more here\.$/,m=>'Hit dnia: '+L_w(m[1])+' – tutaj o 50% drożej.'],
+[/^Hot today: (.+) sells? for 50% more here\.$/,m=>'Hit dnia: '+L_w(m[1])+' – tutaj o 50% drożej.'],
 [/^(.+) are out! Orders come every (.+) and pay (\d+)% more for (\d+) minutes\.$/,m=>L_w(m[1])+' działają! Zamówienia co '+L_t(m[2])+', płacą o '+m[3]+'% więcej przez '+m[4]+' min.'],
 [/^(.+) running: an order every (.+), paying (\d+)% more\. (.+) left\.$/,m=>L_w(m[1])+' trwa: zamówienie co '+L_t(m[2])+', płacą o '+m[3]+'% więcej. Zostało '+L_t(m[4])+'.'],
 [/^(.+) For (\d+) minutes, an order every (.+) paying (\d+)% more\.$/,m=>L_w(m[1])+' Przez '+m[2]+' min zamówienie co '+L_t(m[3])+', płacą o '+m[4]+'% więcej.'],
@@ -2539,6 +2539,10 @@ const PL_PATS=[
 [/^Win this in the Christmas event: (.+)\.$/,m=>'Do wygrania w świątecznym wydarzeniu: '+m[1].split(', ').map(L_w).join(', ')+'.'],
 [/^(\d+) Farm Cash$/,m=>m[1]+' '+p3(m[1],'farmdolar','farmdolary','farmdolarów')],
 [/^\+([\d.,\s ]+) coins$/,m=>'+'+m[1]+' '+p3(m[1],'moneta','monety','monet')],
+[/^(\d+) hungry$/,m=>m[1]+' '+p3(m[1],'głodne','głodne','głodnych')],
+[/^Next (.+) in (.+)\.$/,m=>'Następne ('+L_w(m[1]).toLowerCase()+') za '+L_t(m[2])+'.'],
+[/^(.+) ready to collect\.$/,m=>L_w(m[1])+' – gotowe do odbioru.'],
+[/^Feed all \((\d+)\) · (\d+) feed$/,m=>'Nakarm wszystkie ('+m[1]+') · '+m[2]+' paszy'],
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -2897,7 +2901,7 @@ function norm(s){
   delete s.unlimited;
   if(!s.tapMode)s.tapMode=s.tapGrass==='plow'?'plow':'farm';
   // the Walk / Plow step was added as tutorial step 4: older saves past step 3 move up one
-  if(s.tutV!==2&&s.tutV!==3){if(typeof s.tut==='number'&&s.tut>=3)s.tut++;s.tutV=2}
+  if(![2,3,4,5].includes(s.tutV)){if(typeof s.tut==='number'&&s.tut>=3)s.tut++;s.tutV=2}
   // v3: the Delivery step moved before Sell and a Trades tip was added at the end
   if(s.tutV===2){if(typeof s.tut==='number'){if(s.tut>=9)s.tut=99;else if(s.tut>=7)s.tut=7}s.tutV=3}
   // v4: two seed-choosing tips were added after the first planting
@@ -8100,7 +8104,7 @@ function showBarn(){
     b.appendChild(tabs);
     const p=el('div','store');
     const head=el('div','store-head');head.innerHTML='<strong>Barn level '+lv+'</strong><span>'+tot+' / '+cap+' stored</span>';p.appendChild(head);
-    {const h=hotItem();if(h){const hb=el('div','hotbar'),im=el('img');im.src=itemIcon(h);im.alt='';hb.appendChild(im);hb.appendChild(el('span',null,'Hot today: '+CROPS[h].name+' sell for 50% more here.'));p.appendChild(hb)}}
+    {const h=hotItem();if(h){const hb=el('div','hotbar'),im=el('img');im.src=itemIcon(h);im.alt='';hb.appendChild(im);hb.appendChild(el('span',null,'Hot today: '+CROPS[h].name+(/s$/.test(CROPS[h].name)?' sell':' sells')+' for 50% more here.'));p.appendChild(hb)}}
     const ids=Object.keys(S.goods).filter(k=>have(k)>0&&(barnTab==='all'||ITEMS[k].cat===barnTab)).sort((a,b)=>ITEMS[a].cat.localeCompare(ITEMS[b].cat)||ITEMS[a].name.localeCompare(ITEMS[b].name));
     const sellable=ids.filter(k=>ITEMS[k].cat!=='supply'),worth=sellable.reduce((a,k)=>a+sellPrice(k)*have(k),0);
     const bb=el('div','barnbar'),bar=el('div','pbar big'+(tot>=cap?' full':''));bar.innerHTML='<i style="width:'+Math.min(100,tot/cap*100)+'%"></i>';bb.appendChild(bar);
@@ -8160,7 +8164,7 @@ function showHome(key){
          card.onclick=()=>{animalReact(ak)};grid.appendChild(card)}
        p.appendChild(grid)}
      const nxt=mine.reduce((m,ak)=>{const a=S.tiles[ak];if(!a||hungry(a))return m;const l=readyIn(a,A,now);return l>0?Math.min(m,l):m},Infinity);
-     p.appendChild(el('p','hint',(st&&st.hungry.length?st.hungry.length+' hungry · ':'')+(nxt<Infinity?'Next '+A.product.toLowerCase()+' in '+fmt(nxt):st&&st.ready.length?A.product+' ready to collect':'Feed your animals to start production')+'.'))}
+     {const hp=el('p','hint');if(st&&st.hungry.length){hp.appendChild(el('span',null,st.hungry.length+' hungry'));hp.append(' · ')}hp.appendChild(el('span',null,(nxt<Infinity?'Next '+A.product.toLowerCase()+' in '+fmt(nxt):st&&st.ready.length?A.product+' ready to collect':'Feed your animals to start production')+'.'));p.appendChild(hp)}}
     const up=homeUp(o.id,lv);
     if(up)p.appendChild(upgradeBox('Upgrade to level '+(lv+1)+': '+HOME_BONUS[lv+1]*100+'% chance of double '+A.product.toLowerCase()+' and more babies',up,'Upgrade '+H.name,()=>{o.lv=lv+1;toast(H.name+' upgraded to level '+(lv+1)+'!')}));
     else p.appendChild(el('p','hint','This home is fully upgraded.'));
@@ -8932,7 +8936,8 @@ function clickMulti(hx,hy){
   queueKind(kind,[[hx,hy]],null);
 }
 // Plowing grass makes new farmland (NEW_PLOT coins); plowing a harvested plot again costs PLOW_COST.
-function plowCost(x,y){const e=effective(x,y);return e.grass?NEW_PLOT:PLOW_COST}
+// the tutorial's first piece of new farmland is free, so a new player keeps their starting coins
+function plowCost(x,y){const e=effective(x,y);return e.grass?(tutOn()&&TUT[S.tut].grass&&!S.freePlot?0:NEW_PLOT):PLOW_COST}
 function costFor(kind,x,y){if(kind==='plow')return plowCost(x,y);if(kind==='plant')return CROPS[S.seed].cost;return 0}
 // Seeds come from the barn first: a crop you have in storage is planted for free.
 function queueKind(kind,tiles,vehicle){
@@ -8941,7 +8946,7 @@ function queueKind(kind,tiles,vehicle){
   if(kind==='harvest'&&tiles.length&&harvestBlocked(tiles[0][0],tiles[0][1]))return false;
   const costs={},free=new Set();let cost=0,fromBarn=0;
   if(kind==='plant'){fromBarn=Math.min(tiles.length,have(S.seed));for(let i=0;i<tiles.length;i++){const k=tiles[i][0]+','+tiles[i][1];if(i<fromBarn){free.add(k);costs[k]=0}else{costs[k]=c.cost;cost+=c.cost}}}
-  else for(const[x,y]of tiles){const k=x+','+y,v=costFor(kind,x,y);costs[k]=v;cost+=v}
+  else for(const[x,y]of tiles){const k=x+','+y,free0=kind==='plow'&&!S.freePlot&&tutOn()&&TUT[S.tut].grass,v=costFor(kind,x,y);if(free0&&v===0&&effective(x,y).grass)S.freePlot=true;costs[k]=v;cost+=v}
   if(S.coins<cost){SFX.error();toast(kind==='plow'?(cost>=NEW_PLOT?'New farmland costs '+NEW_PLOT+' coins a plot. Sell some goods from the barn first.':'Plowing costs '+PLOW_COST+' coins. Sell some goods from the barn first.'):'You need '+cost+' coins to plant '+c.name.toLowerCase()+'.');return false}
   S.coins-=cost;if(fromBarn){takeGood(S.seed,fromBarn);floatText(tiles[0][0],tiles[0][1]-.4,'-'+fromBarn+' '+c.name+' from the barn','#e8f5c8')}
   const job={kind,tiles,vehicle,seed:S.seed,costs,free:kind==='plant'?free:null};
@@ -8953,7 +8958,7 @@ let PLOW_CHIP=null;
 function hidePlowChip(){if(PLOW_CHIP){PLOW_CHIP.el.remove();clearTimeout(PLOW_CHIP.t);PLOW_CHIP=null}}
 function plowChip(x,y){
   hidePlowChip();if(S.level<1)return;
-  const b=el('button','plowchip');b.innerHTML=SWEEP_ICON.plow+'<span>Plow here</span><em><span class="coin"></span>'+NEW_PLOT+'</em>';b.setAttribute('aria-label','Plow this tile into new farmland for '+NEW_PLOT+' coins');
+  const cost=plowCost(x,y),b=el('button','plowchip');b.innerHTML=SWEEP_ICON.plow+'<span>Plow here</span>'+(cost?'<em><span class="coin"></span>'+cost+'</em>':'');{const t=$('tip');if(t)t.hidden=true}b.setAttribute('aria-label','Plow this tile into new farmland for '+NEW_PLOT+' coins');
   const place=()=>{const[wx,wy]=P(x+.5,y+.5);b.style.left=(wx*cam.z+cam.x)+'px';b.style.top=(wy*cam.z+cam.y-14)+'px'};place();
   b.onpointerdown=e=>e.stopPropagation();
   b.onclick=e=>{e.stopPropagation();hidePlowChip();if(occ[x+','+y])return;if(queueKind('plow',[[x,y]],null)){SFX.plow&&SFX.plow()}};
@@ -9380,7 +9385,7 @@ function act(hx,hy){
   if(placing){place(hx,hy);return}
   if(!inGrid(hx,hy)&&!(hx<=HX&&S.tiles[hx+','+hy]))return;
   if(VIS){actVisit(hx,hy);return}
-  if(tutLocked()){const t=TUT[S.tut],key=target(hx,hy),o=key&&S.tiles[key];if(!(t.btn==='btnBarn'&&o&&o.k==='bld'&&o.id==='barn')&&(!t.find||!o||!t.find(o)||pend[key])){SFX.error();tutNudge=performance.now();toast('Follow the tip: '+t.txt);return}}
+  if(tutLocked()){const t=TUT[S.tut],key=target(hx,hy),o=key&&S.tiles[key];if(!(t.btn==='btnBarn'&&o&&o.k==='bld'&&o.id==='barn')&&!(t.grass&&!o&&inGrid(hx,hy))&&(!t.find||!o||!tutHit(t,o)||pend[key])){SFX.error();tutNudge=performance.now();toast('Follow the tip: '+t.txt);return}}
   if(tool==='delete'){
     const key=target(hx,hy);if(!key)return;const o=S.tiles[key];
     if(o.k==='bld'){toast('The farmhouse and barn stay. Use Move to shift them.');return}
@@ -9409,7 +9414,7 @@ cv.addEventListener('pointerdown',e=>{
   cv.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(pointers.size===1){down={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y,moved:false};
     // press and hold on a plot that can be planted or harvested, then drag across the field
-    if(!placing&&!VIS&&tool==='multi'&&S.tapMode!=='walk'&&!tutLocked()){const[hx,hy]=tileAt(e.clientX,e.clientY),o=S.tiles[occ[hx+','+hy]];const kind=o&&o.k==='plot'?planAt(hx,hy):(!o&&inGrid(hx,hy)&&planAt(hx,hy,'plow')==='plow'?'plow':null);
+    if(!placing&&!VIS&&tool==='multi'&&S.tapMode!=='walk'&&(!tutLocked()||TUT[S.tut].grass)){const[hx,hy]=tileAt(e.clientX,e.clientY),o=S.tiles[occ[hx+','+hy]];const kind=o&&o.k==='plot'?planAt(hx,hy):(!o&&inGrid(hx,hy)&&planAt(hx,hy,'plow')==='plow'?'plow':null);
       if(kind==='plant'||kind==='harvest'||kind==='clear'||kind==='plow'){const d0=down;d0.hold=setTimeout(()=>{if(down===d0&&!d0.moved&&pointers.size===1){d0.sweep=true;sweepStart(kind,lastMove.x,lastMove.y)}},230)}}}
   else{down=null;const[p1,p2]=[...pointers.values()];pinch={d:Math.hypot(p1.x-p2.x,p1.y-p2.y)||1,z:cam.z,mx:(p1.x+p2.x)/2,my:(p1.y+p2.y)/2}}
 });
@@ -10743,10 +10748,10 @@ const TUT=[
   {txt:'Click the plowed plot to plant wheat.',done:()=>tst('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
   {txt:'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.',done:()=>tst('seedPick')>=1,btn:'openMarket'},
   {txt:'Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.',done:()=>tst('plant')>=2,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
-  {txt:'Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.',done:()=>tst('plow')>=2},
+  {txt:'Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.',done:()=>tst('plow')>=2,grass:true},
   {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow','almost'].includes(cropState(o,Date.now()).st)},
-  {txt:'A chicken laid an egg. Click it to collect.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
-  {txt:'Now that chicken is hungry. Click it to give it feed.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
+  {txt:'A chicken laid an egg. Tap the Chicken Coop to collect it.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
+  {txt:'Now that chicken is hungry. Tap the Chicken Coop and press Feed all.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
   {txt:'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.',done:()=>tst('delivSent')>=1,btn:'btnDeliv'},
   {txt:'Everything you harvest goes to the barn. Open the Barn and sell something.',done:()=>tst('sell')>=1,btn:'btnBarn'},
   {txt:'Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.',done:()=>tst('houseIn')>=1,find:o=>o.k==='bld'&&o.id==='house'},
@@ -10759,7 +10764,7 @@ function checkTut(){
   if(!S||typeof S.tut!=='number'||S.tut>=TUT.length)return;
   let moved=false;while(S.tut<TUT.length&&TUT[S.tut].done()){S.tut++;moved=true}
   if(moved){
-    if(S.tut>=TUT.length){S.coins+=150;S.cash+=1;SFX.level();confetti();toast('Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!');save();setTimeout(nextQuest,2500)}
+    if(S.tut>=TUT.length){S.coins+=150;S.cash+=1;SFX.level();confetti();toast('Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!');save();setTimeout(dailyBonus,1800);setTimeout(nextQuest,2500)}
     else SFX.find();
   }
   renderTut();
@@ -10773,6 +10778,8 @@ function tutWatch(){
 }
 setInterval(()=>{if(S)tutWatch()},1000);
 function tutLocked(){return tutOn()&&$('title').hidden}
+// a tip's target counts when tapped directly, or through the home its animals live in
+function tutHit(t,o){return t.find(o)||o.k==='home'&&Object.values(S.tiles).some(a=>a.k==='animal'&&a.id===o.id&&t.find(a))}
 function renderTut(){
   const b=$('tut');if(!b)return;
   document.querySelectorAll('.tutpulse').forEach(e=>e.classList.remove('tutpulse'));
@@ -11125,7 +11132,7 @@ function xmCheck(){
 }
 /* ================= daily bonus ================= */
 function dailyBonus(){
-  const t=today();if(S.daily.last===t)return;
+  const t=today();if(S.daily.last===t||tutOn())return;
   const streak=S.daily.last===yesterday()?Math.min(5,S.daily.streak+1):1;
   modal({title:'Daily Bonus',color:'green',small:true,noClose:true,render(b){
     const p=el('div','body-pad');p.appendChild(el('p',null,S.daily.last?'Welcome back to Farm Village! Come back every day for bigger rewards.':'Welcome to Farm Village! Come back every day for bigger rewards.'));

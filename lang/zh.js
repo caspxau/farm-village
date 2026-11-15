@@ -1230,7 +1230,13 @@ Ho ho ho!|吼吼吼！
 Christmas event preview on!|圣诞活动预览已开启！
 Christmas event preview off.|圣诞活动预览已关闭。
 Christmas event|圣诞活动
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|整个山谷都在准备过圣诞！农场里的每样活都能得到拐杖糖。攒够了就能赢得圣诞服装和装饰。`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|整个山谷都在准备过圣诞！农场里的每样活都能得到拐杖糖。攒够了就能赢得圣诞服装和装饰。
+Collect all|全部收取
+Hungry|饿了
+Animals in this home|这个家里的动物
+Feed your animals to start production.|喂养动物才能开始生产。
+A chicken laid an egg. Tap the Chicken Coop to collect it.|一只鸡下了蛋。点击鸡舍收取。
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|现在那只鸡饿了。点击鸡舍，然后按“全部喂食”。`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -1465,4 +1471,8 @@ p:`0|$1金币
 231|圣诞节结束了。最后的奖励归你：{l1}。
 232|在圣诞活动中赢取：{l1}。
 233|$1农场币
-234|+$1金币`};
+234|+$1金币
+235|$1只饿了
+236|下一批{1}还需{t2}。
+237|{1}可以收取了。
+238|全部喂食（$1）· $2份饲料`};

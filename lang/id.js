@@ -1222,7 +1222,13 @@ Ho ho ho!|Ho ho ho!
 Christmas event preview on!|Pratinjau acara Natal aktif!
 Christmas event preview off.|Pratinjau acara Natal mati.
 Christmas event|Acara Natal
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Seluruh lembah bersiap menyambut Natal! Setiap kerja di kebun memberi permen tongkat. Kumpulkan cukup banyak dan menangkan baju serta hiasan Natal.`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|Seluruh lembah bersiap menyambut Natal! Setiap kerja di kebun memberi permen tongkat. Kumpulkan cukup banyak dan menangkan baju serta hiasan Natal.
+Collect all|Ambil semua
+Hungry|Lapar
+Animals in this home|Hewan di kandang ini
+Feed your animals to start production.|Beri makan hewanmu untuk mulai produksi.
+A chicken laid an egg. Tap the Chicken Coop to collect it.|Seekor ayam bertelur. Ketuk Kandang Ayam untuk mengambilnya.
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Sekarang ayam itu lapar. Ketuk Kandang Ayam lalu tekan Beri makan semua.`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -1457,4 +1463,8 @@ p:`0|$1 koin
 231|Natal sudah usai. Hadiah terakhirmu jadi milikmu: {l1}.
 232|Menangkan di acara Natal: {l1}.
 233|$1 Uang Kebun
-234|+$1 koin`};
+234|+$1 koin
+235|$1 lapar
+236|Berikutnya ({1}) dalam {t2}.
+237|{1} siap diambil.
+238|Beri makan semua ($1) · $2 pakan`};

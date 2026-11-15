@@ -1230,7 +1230,13 @@ Ho ho ho!|هو هو هو!
 Christmas event preview on!|تم تشغيل معاينة فعالية الميلاد!
 Christmas event preview off.|تم إيقاف معاينة فعالية الميلاد.
 Christmas event|فعالية عيد الميلاد
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|الوادي كله يستعد لعيد الميلاد! كل عمل في المزرعة يمنحك حلوى العصا. اجمع ما يكفي واربح ملابس وزينة الميلاد.`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|الوادي كله يستعد لعيد الميلاد! كل عمل في المزرعة يمنحك حلوى العصا. اجمع ما يكفي واربح ملابس وزينة الميلاد.
+Collect all|اجمع الكل
+Hungry|جائع
+Animals in this home|الحيوانات في هذا البيت
+Feed your animals to start production.|أطعم حيواناتك لتبدأ الإنتاج.
+A chicken laid an egg. Tap the Chicken Coop to collect it.|وضعت دجاجة بيضة. انقر على قن الدجاج لجمعها.
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|الدجاجة جائعة الآن. انقر على قن الدجاج ثم اضغط إطعام الكل.`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -1465,4 +1471,8 @@ p:`0|$1 عملة
 231|انتهى عيد الميلاد. آخر جوائزك لك: {l1}.
 232|تُربح في فعالية الميلاد: {l1}.
 233|$1 من نقود المزرعة
-234|+$1 عملة`};
+234|+$1 عملة
+235|جائعة: $1
+236|التالي ({1}) بعد {t2}.
+237|{1}: جاهز للجمع.
+238|إطعام الكل ($1) · $2 علف`};

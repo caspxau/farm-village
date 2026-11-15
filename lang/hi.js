@@ -1230,7 +1230,13 @@ Ho ho ho!|हो हो हो!
 Christmas event preview on!|क्रिसमस इवेंट प्रीव्यू चालू!
 Christmas event preview off.|क्रिसमस इवेंट प्रीव्यू बंद।
 Christmas event|क्रिसमस इवेंट
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|पूरी घाटी क्रिसमस की तैयारी कर रही है! फ़ार्म का हर काम कैंडी केन देता है। काफ़ी जमा करें और क्रिसमस के कपड़े व सजावट जीतें।`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|पूरी घाटी क्रिसमस की तैयारी कर रही है! फ़ार्म का हर काम कैंडी केन देता है। काफ़ी जमा करें और क्रिसमस के कपड़े व सजावट जीतें।
+Collect all|सब इकट्ठा करें
+Hungry|भूखा
+Animals in this home|इस घर के जानवर
+Feed your animals to start production.|उत्पादन शुरू करने के लिए जानवरों को खिलाएँ।
+A chicken laid an egg. Tap the Chicken Coop to collect it.|एक मुर्गी ने अंडा दिया। लेने के लिए मुर्गीघर पर टैप करें।
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|अब वह मुर्गी भूखी है। मुर्गीघर पर टैप करें और सबको खिलाएँ दबाएँ।`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -1465,4 +1471,8 @@ p:`0|$1 सिक्के
 231|क्रिसमस खत्म हो गया। आखिरी इनाम आपके हैं: {l1}।
 232|क्रिसमस इवेंट में जीतें: {l1}।
 233|$1 फ़ार्म कैश
-234|+$1 सिक्के`};
+234|+$1 सिक्के
+235|$1 भूखे
+236|अगला {1} {t2} में।
+237|{1} लेने के लिए तैयार।
+238|सबको खिलाएँ ($1) · $2 चारा`};

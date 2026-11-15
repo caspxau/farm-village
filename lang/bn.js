@@ -1230,7 +1230,13 @@ Ho ho ho!|হো হো হো!
 Christmas event preview on!|বড়দিনের ইভেন্টের প্রিভিউ চালু!
 Christmas event preview off.|বড়দিনের ইভেন্টের প্রিভিউ বন্ধ।
 Christmas event|বড়দিনের ইভেন্ট
-The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|পুরো উপত্যকা বড়দিনের জন্য তৈরি হচ্ছে! খামারের প্রতিটি কাজে ক্যান্ডি কেন মেলে। যথেষ্ট জমাও আর বড়দিনের পোশাক ও সাজ জেতো।`,
+The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.|পুরো উপত্যকা বড়দিনের জন্য তৈরি হচ্ছে! খামারের প্রতিটি কাজে ক্যান্ডি কেন মেলে। যথেষ্ট জমাও আর বড়দিনের পোশাক ও সাজ জেতো।
+Collect all|সব সংগ্রহ করো
+Hungry|ক্ষুধার্ত
+Animals in this home|এই ঘরের পশু
+Feed your animals to start production.|উৎপাদন শুরু করতে পশুদের খাওয়াও।
+A chicken laid an egg. Tap the Chicken Coop to collect it.|একটি মুরগি ডিম পেড়েছে। নিতে মুরগির খোপে ট্যাপ করো।
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|এখন মুরগিটি ক্ষুধার্ত। মুরগির খোপে ট্যাপ করে সবাইকে খাওয়াও চাপো।`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -1465,4 +1471,8 @@ p:`0|$1 কয়েন
 231|বড়দিন শেষ। শেষ পুরস্কারগুলো তোমার: {l1}।
 232|বড়দিনের ইভেন্টে জেতা যায়: {l1}।
 233|$1 ফার্ম ক্যাশ
-234|+$1টি কয়েন`};
+234|+$1টি কয়েন
+235|$1টি ক্ষুধার্ত
+236|পরের {1} {t2} পরে।
+237|{1} নেওয়ার জন্য তৈরি।
+238|সবাইকে খাওয়াও ($1) · $2 খাবার`};
