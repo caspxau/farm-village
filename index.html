@@ -10964,7 +10964,12 @@ $('tutSkip').onclick=()=>{S.tut=TUT.length;SFX.click();renderTut();save();toast(
 
 // A bouncing arrow that points at what to tap next: a button in the dock, a tab or button inside an open window,
 // or the "Plow here" chip. Farm tiles get their arrow on the canvas (drawTutArrow).
+// A window that has nothing to do with the current tip gets its X pointed at, so the player is never left without a hint.
 function tutDomTarget(){
+  const e=tutDomTarget0(),m=mq[0];if(e||!m||m.noClose||!tutOn()||!$('title').hidden)return e;
+  const x=$('sheetClose');return x&&x.offsetParent!==null?x:null;
+}
+function tutDomTarget0(){
   if(!tutOn()||!$('title').hidden)return null;const t=TUT[S.tut],m=mq[0],q=sel=>document.querySelector('#sheetBody '+sel),vis=e=>e&&e.offsetParent!==null&&!e.disabled?e:null;
   const visBtn=id=>{const e=$(id);return e&&e.offsetParent!==null?e:null};
   if(t.id==='seed'){if(m&&m.title==='Market'){if(marketCat!=='seeds')return q('[data-tut="mtab-seeds"]');const b=q('[data-tut="buy-seeds-soybean"]');if(b&&!b.dataset.tutScrolled){b.dataset.tutScrolled=1;b.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})}return b}return m?null:visBtn('openMarket')}
