@@ -26,7 +26,15 @@ web page and as a Play Store app (Trusted Web Activity). You either pitch ideas 
   numbers). Text is translated automatically when shown, so new strings only need dictionary entries. Check sync with a
   script that compares `PL_EXACT` keys and `PL_PATS` length against each pack.
 - `sw.js` caches the game offline: bump `VERSION` on every shipped change.
-- `store/` holds the Play Store kit (listing text, screenshots, release guide).
+- `store/` holds the Play Store kit (listing text, screenshots, release guide); `store/before-after/` holds the
+  before/after pictures of every visual change.
+- Retention features already in the game (don't pitch duplicates): daily bonus, daily goals, quests, ribbons,
+  collections, neighbor orders/trades/visits, Dale's deliveries, farmhouse needs, pets, wardrobe, Christmas event
+  (`XM_TRACK`, `xmCheck`), Lucky Wheel (`WHEEL`, `showWheel`, daily free spin), mystery crates (`spawnCrate`,
+  `openCrate`, every 8 min of play), harvest combos (`comboHarvest`), flying coins (`coinFly`), and Jake the farm
+  helper (`HLP`, `updateHelper`, `showHelper`, energy-limited, hired in Market > Farm). Horse Stable holds 3.
+- Helper scripts used before (may still be in the session scratchpad): a level 1-99 bot playthrough, a full
+  function test, and an every-button sweep, all driven through `__G` in headless Chromium.
 
 ## Rules
 1. **Never drive the user's own Chrome.** Test in headless Chromium only: make a throwaway copy of `index.html` that
