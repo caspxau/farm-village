@@ -1238,7 +1238,34 @@ Free spin|Putaran gratis
 Wheel|Roda
 an extra spin|putaran tambahan
 A mystery crate appeared on your farm! Tap it to open.|Peti misteri muncul di kebunmu! Ketuk untuk membukanya.
-Mystery crate: tap to open|Peti misteri: ketuk untuk membuka`,
+Mystery crate: tap to open|Peti misteri: ketuk untuk membuka
+Farm Helper|Pembantu Kebun
+Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.|Jake berkeliling kebunmu sendiri: memanen dan menanam ulang, memetik buah, dan merawat hewan. Ia punya energi untuk sejumlah pekerjaan dan beristirahat untuk mengisi ulang.
+Hired|Dipekerjakan
+Jake joined your farm! Tap him to see his energy and choose his jobs.|Jake bergabung di kebunmu! Ketuk dia untuk melihat energinya dan memilih pekerjaannya.
+Jake, your farm helper|Jake, pembantu kebunmu
+Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.|Jake memanen dan menanam ulang tanamanmu, memetik buah, dan merawat hewanmu. Setiap pekerjaan memakai 1 energi, dan energi pulih seiring waktu.
+Energy|Energi
+Full of energy.|Penuh energi.
+Jobs for Jake|Pekerjaan untuk Jake
+Harvest crops|Panen tanaman
+Replant|Tanam ulang
+Pick fruit|Petik buah
+Look after animals|Rawat hewan
+Refill energy|Isi ulang energi
+Jake is fully trained.|Jake sudah terlatih penuh.
+Train Jake|Latih Jake
+Jake, your farm helper: tap to see his energy|Jake, pembantu kebunmu: ketuk untuk melihat energinya
+Howdy! I will lend a hand around the farm.|Halo! Aku akan membantu di kebun.
+The barn is full!|Lumbung penuh!
+Another one done!|Satu lagi selesai!
+Happy to help!|Senang membantu!
+Looking good out here.|Di sini terlihat bagus.
+This farm is coming along!|Kebun ini makin maju!
+I need a rest. Back soon!|Aku perlu istirahat. Segera kembali!
+Rested and ready!|Sudah segar dan siap!
+Thanks! Back to work.|Terima kasih! Kembali bekerja.
+a full energy refill for Jake|isi ulang energi penuh untuk Jake`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -1482,4 +1509,8 @@ p:`0|$1 koin
 240|+$1 pupuk
 241|Roda Keberuntungan: $1!
 242|Peti misteri: $1!
-243|Kombo x$1!`};
+243|Kombo x$1!
+244|+1 energi dalam {t1}
+245|Latih Jake: $1 energi (sekarang $2)
+246|Jake kini bisa $1 pekerjaan sebelum istirahat!
+247|Pekerjaan selesai: $1.`};

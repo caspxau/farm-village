@@ -1246,7 +1246,34 @@ Free spin|বিনামূল্যে ঘোরানো
 Wheel|চাকা
 an extra spin|একটি বাড়তি ঘোরানো
 A mystery crate appeared on your farm! Tap it to open.|তোমার খামারে একটি রহস্য বাক্স এসেছে! খুলতে ট্যাপ করো।
-Mystery crate: tap to open|রহস্য বাক্স: খুলতে ট্যাপ করো`,
+Mystery crate: tap to open|রহস্য বাক্স: খুলতে ট্যাপ করো
+Farm Helper|খামার সহকারী
+Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.|জেক নিজেই তোমার খামারে ঘোরে: ফসল তোলে ও আবার বোনে, ফল পাড়ে আর পশুদের দেখাশোনা করে। নির্দিষ্ট সংখ্যক কাজের শক্তি থাকে, তারপর বিশ্রাম নিয়ে আবার চাঙ্গা হয়।
+Hired|নিয়োগ করা হয়েছে
+Jake joined your farm! Tap him to see his energy and choose his jobs.|জেক তোমার খামারে যোগ দিয়েছে! তার শক্তি দেখতে ও কাজ বাছতে তাকে ট্যাপ করো।
+Jake, your farm helper|জেক, তোমার খামার সহকারী
+Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.|জেক তোমার ফসল তোলে ও আবার বোনে, ফল পাড়ে আর পশুদের দেখাশোনা করে। প্রতিটি কাজে ১ শক্তি লাগে, আর সময়ের সাথে শক্তি ফেরে।
+Energy|শক্তি
+Full of energy.|শক্তিতে ভরপুর।
+Jobs for Jake|জেকের কাজ
+Harvest crops|ফসল তোলো
+Replant|আবার বোনো
+Pick fruit|ফল পাড়ো
+Look after animals|পশুদের দেখো
+Refill energy|শক্তি ভরো
+Jake is fully trained.|জেক পুরো প্রশিক্ষিত।
+Train Jake|জেককে প্রশিক্ষণ দাও
+Jake, your farm helper: tap to see his energy|জেক, তোমার খামার সহকারী: শক্তি দেখতে ট্যাপ করো
+Howdy! I will lend a hand around the farm.|হ্যালো! খামারে তোমাকে সাহায্য করব।
+The barn is full!|গোলা ভর্তি!
+Another one done!|আরেকটা হলো!
+Happy to help!|সাহায্য করে খুশি!
+Looking good out here.|এখানে দারুণ দেখাচ্ছে।
+This farm is coming along!|খামারটা বেড়ে উঠছে!
+I need a rest. Back soon!|আমার বিশ্রাম দরকার। শিগগির ফিরব!
+Rested and ready!|বিশ্রাম নিয়ে তৈরি!
+Thanks! Back to work.|ধন্যবাদ! কাজে ফিরছি।
+a full energy refill for Jake|জেকের জন্য পুরো শক্তি ভরা`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -1490,4 +1517,8 @@ p:`0|$1 কয়েন
 240|+$1 সার
 241|ভাগ্যের চাকা: $1!
 242|রহস্য বাক্স: $1!
-243|কম্বো x$1!`};
+243|কম্বো x$1!
+244|{t1} পরে +১ শক্তি
+245|জেককে প্রশিক্ষণ দাও: $1 শক্তি (এখন $2)
+246|জেক এখন বিশ্রামের আগে $1টি কাজ করতে পারে!
+247|কাজ শেষ: $1।`};

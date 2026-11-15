@@ -1943,7 +1943,7 @@ body .evbox .goals-head{background:linear-gradient(rgba(212,42,42,.26),rgba(47,1
 .xmpic canvas,.xmpic img{width:100%;height:100%;object-fit:contain}
 .xmpic .coin.big{width:44px;height:44px;flex-basis:44px}.xmpic .bill.big{width:52px;height:36px;flex-basis:52px;font-size:20px}
 .xmneed{display:inline-flex;align-items:center;gap:2px;font-weight:800;color:#a81c1c}.xmneed .cane{width:16px;height:16px}
-.xmprize .gbar{width:100%;height:8px}.xmprize .claim{width:100%}
+.xmprize .gbar{width:100%;height:8px}.xmprize .gbar b{display:block;height:100%;background:linear-gradient(90deg,#ff8a7a,#d42a2a)}.xmprize .claim{width:100%}
 .xmdone{font-weight:800;color:#2f8a3a}
 .xmcal{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px}
 .xmdoor{aspect-ratio:1;border-radius:10px;border:2px solid #7a1010;background:linear-gradient(145deg,#e0453a,#a81c1c);color:#fff;font-family:var(--f-display);font-size:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer;padding:0}
@@ -1971,6 +1971,15 @@ body .wheelbox .goals-head{background:linear-gradient(rgba(242,197,58,.36),rgba(
 .wheelgo .bill{width:22px;height:16px;flex-basis:22px;font-size:10px;border-width:1px;margin:0 3px;vertical-align:-2px}
 .coinfly{position:fixed;left:-11px;top:-11px;z-index:9999;pointer-events:none;will-change:transform}
 .coinfly .coin{width:22px;height:22px;flex-basis:22px;border-width:1.5px;box-shadow:0 2px 4px rgba(0,0,0,.25)}
+
+/* ---- farm helper ---- */
+.helperwin{display:flex;flex-direction:column;align-items:center;text-align:center}
+.helperwin .hbarw{width:100%;max-width:340px;background:#fffaf2;border:2px solid #e3cfa8;border-radius:12px;padding:8px 12px;margin:6px 0}
+.helperwin .hlab{display:flex;justify-content:space-between;font-weight:800;margin-bottom:4px}
+.helperwin .gbar{height:12px}.helperwin .gbar b{display:block;height:100%;background:linear-gradient(90deg,#8fd04a,#3f9a3c)}.helperwin small{display:block;margin-top:4px;color:var(--ink-soft)}
+.helperwin .hopts{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:8px}
+.helperwin .hrow{margin:4px 0 8px}.helperwin .upbox{width:100%;max-width:340px}
+.helperwin .bill{width:22px;height:16px;flex-basis:22px;font-size:10px;border-width:1px;margin:0 3px;vertical-align:-2px}
 </style>
 </head>
 <body>
@@ -2306,7 +2315,7 @@ const PL_EXACT={
 'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.',
-'Art style':'Styl grafiki','Lucky Wheel':'Koło fortuny','Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.':'Kręć raz dziennie i wygraj darmową nagrodę: monety, materiały, paszę, nawóz, XP, a nawet farmdolary.','Spin!':'Kręć!','Spin again':'Kręć jeszcze raz','Next free spin tomorrow.':'Następne darmowe kręcenie jutro.','Free spin':'Darmowe kręcenie','Wheel':'Koło','an extra spin':'dodatkowe kręcenie','A mystery crate appeared on your farm! Tap it to open.':'Na farmie pojawiła się tajemnicza skrzynia! Dotknij, by ją otworzyć.','Mystery crate: tap to open':'Tajemnicza skrzynia: dotknij, by otworzyć','Collect all':'Odbierz wszystko','Hungry':'Głodne','Animals in this home':'Zwierzęta w tym domu','Feed your animals to start production.':'Nakarm zwierzęta, by zaczęły produkcję.','A chicken laid an egg. Tap the Chicken Coop to collect it.':'Kura zniosła jajko. Dotknij kurnika, by je zebrać.','Now that chicken is hungry. Tap the Chicken Coop and press Feed all.':'Teraz kura jest głodna. Dotknij kurnika i naciśnij Nakarm wszystkie.','The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.':'Cała dolina szykuje się do świąt! Każda praca na farmie daje laski cukrowe. Zbierz ich dość, a wygrasz świąteczne ubrania i ozdoby.','Event':'Wydarzenie','Christmas':'Boże Narodzenie','Christmas on the Farm':'Święta na farmie','candy canes':'laski cukrowe','Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.':'Praca na farmie daje laski cukrowe: czasem przy zbiorach, zwierzętach i drzewach owocowych, za każdy gotowy towar, 3 za zamówienie sąsiada i 5 za dostawę.','The event ends tomorrow.':'Wydarzenie kończy się jutro.','Christmas prizes':'Świąteczne nagrody','Claim':'Odbierz','Claimed':'Odebrano','Advent calendar':'Kalendarz adwentowy','Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.':'Otwieraj nowe okienko każdego dnia aż do Wigilii. Ominął cię dzień? Wcześniejsze okienka nadal czekają.','The advent calendar opens on December 1.':'Kalendarz adwentowy otwiera się 1 grudnia.','Elf hat':'Czapka elfa','Reindeer antlers':'Rogi renifera','Santa hat':'Czapka Mikołaja','Christmas sweater':'Świąteczny sweter','Santa coat':'Płaszcz Mikołaja','Santa trousers':'Spodnie Mikołaja','Christmas lights':'Świąteczne lampki','Gift Pile':'Stos prezentów','Snowman':'Bałwan','Christmas Tree':'Choinka','Christmas is coming!':'Święta tuż-tuż!','Look for the Christmas card on the left of the screen.':'Szukaj świątecznej karty po lewej stronie ekranu.','Ho ho ho!':'Ho ho ho!','Christmas event preview on!':'Podgląd świątecznego wydarzenia włączony!','Christmas event preview off.':'Podgląd świątecznego wydarzenia wyłączony.','Christmas event':'Świąteczne wydarzenie','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
+'Art style':'Styl grafiki','Farm Helper':'Pomocnik','Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.':'Jake sam chodzi po farmie: zbiera i ponownie sieje, zrywa owoce i dba o zwierzęta. Ma energię na określoną liczbę prac i odpoczywa, by ją odzyskać.','Hired':'Zatrudniony','Jake joined your farm! Tap him to see his energy and choose his jobs.':'Jake dołączył do farmy! Dotknij go, by zobaczyć jego energię i wybrać prace.','Jake, your farm helper':'Jake, twój pomocnik','Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.':'Jake zbiera i ponownie sieje plony, zrywa owoce i dba o zwierzęta. Każda praca zużywa 1 energię, a energia wraca z czasem.','Energy':'Energia','Full of energy.':'Pełen energii.','Jobs for Jake':'Prace dla Jake’a','Harvest crops':'Zbieraj plony','Replant':'Siej ponownie','Pick fruit':'Zrywaj owoce','Look after animals':'Dbaj o zwierzęta','Refill energy':'Uzupełnij energię','Jake is fully trained.':'Jake jest w pełni wyszkolony.','Train Jake':'Wyszkol Jake’a','Jake, your farm helper: tap to see his energy':'Jake, twój pomocnik: dotknij, by zobaczyć jego energię','Howdy! I will lend a hand around the farm.':'Cześć! Pomogę ci na farmie.','The barn is full!':'Stodoła jest pełna!','Another one done!':'Kolejna gotowa!','Happy to help!':'Chętnie pomogę!','Looking good out here.':'Ładnie tu wygląda.','This farm is coming along!':'Ta farma pięknie rośnie!','I need a rest. Back soon!':'Muszę odpocząć. Zaraz wracam!','Rested and ready!':'Wypoczęty i gotowy!','Thanks! Back to work.':'Dzięki! Wracam do pracy.','a full energy refill for Jake':'pełne uzupełnienie energii Jake’a','Lucky Wheel':'Koło fortuny','Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.':'Kręć raz dziennie i wygraj darmową nagrodę: monety, materiały, paszę, nawóz, XP, a nawet farmdolary.','Spin!':'Kręć!','Spin again':'Kręć jeszcze raz','Next free spin tomorrow.':'Następne darmowe kręcenie jutro.','Free spin':'Darmowe kręcenie','Wheel':'Koło','an extra spin':'dodatkowe kręcenie','A mystery crate appeared on your farm! Tap it to open.':'Na farmie pojawiła się tajemnicza skrzynia! Dotknij, by ją otworzyć.','Mystery crate: tap to open':'Tajemnicza skrzynia: dotknij, by otworzyć','Collect all':'Odbierz wszystko','Hungry':'Głodne','Animals in this home':'Zwierzęta w tym domu','Feed your animals to start production.':'Nakarm zwierzęta, by zaczęły produkcję.','A chicken laid an egg. Tap the Chicken Coop to collect it.':'Kura zniosła jajko. Dotknij kurnika, by je zebrać.','Now that chicken is hungry. Tap the Chicken Coop and press Feed all.':'Teraz kura jest głodna. Dotknij kurnika i naciśnij Nakarm wszystkie.','The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.':'Cała dolina szykuje się do świąt! Każda praca na farmie daje laski cukrowe. Zbierz ich dość, a wygrasz świąteczne ubrania i ozdoby.','Event':'Wydarzenie','Christmas':'Boże Narodzenie','Christmas on the Farm':'Święta na farmie','candy canes':'laski cukrowe','Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.':'Praca na farmie daje laski cukrowe: czasem przy zbiorach, zwierzętach i drzewach owocowych, za każdy gotowy towar, 3 za zamówienie sąsiada i 5 za dostawę.','The event ends tomorrow.':'Wydarzenie kończy się jutro.','Christmas prizes':'Świąteczne nagrody','Claim':'Odbierz','Claimed':'Odebrano','Advent calendar':'Kalendarz adwentowy','Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.':'Otwieraj nowe okienko każdego dnia aż do Wigilii. Ominął cię dzień? Wcześniejsze okienka nadal czekają.','The advent calendar opens on December 1.':'Kalendarz adwentowy otwiera się 1 grudnia.','Elf hat':'Czapka elfa','Reindeer antlers':'Rogi renifera','Santa hat':'Czapka Mikołaja','Christmas sweater':'Świąteczny sweter','Santa coat':'Płaszcz Mikołaja','Santa trousers':'Spodnie Mikołaja','Christmas lights':'Świąteczne lampki','Gift Pile':'Stos prezentów','Snowman':'Bałwan','Christmas Tree':'Choinka','Christmas is coming!':'Święta tuż-tuż!','Look for the Christmas card on the left of the screen.':'Szukaj świątecznej karty po lewej stronie ekranu.','Ho ho ho!':'Ho ho ho!','Christmas event preview on!':'Podgląd świątecznego wydarzenia włączony!','Christmas event preview off.':'Podgląd świątecznego wydarzenia wyłączony.','Christmas event':'Świąteczne wydarzenie','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
 ,
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
@@ -2568,6 +2577,10 @@ const PL_PATS=[
 [/^Lucky Wheel: (.+)!$/,m=>'Koło fortuny: '+m[1]+'!'],
 [/^Mystery crate: (.+)!$/,m=>'Tajemnicza skrzynia: '+m[1]+'!'],
 [/^Combo x(\d+)!$/,m=>'Kombo x'+m[1]+'!'],
+[/^\+1 energy in (.+)$/,m=>'+1 energii za '+L_t(m[1])],
+[/^Train Jake: (\d+) energy \(now (\d+)\)$/,m=>'Wyszkol Jake’a: '+m[1]+' energii (teraz '+m[2]+')'],
+[/^Jake can now do (\d+) jobs before resting!$/,m=>'Jake wykona teraz '+m[1]+' prac przed odpoczynkiem!'],
+[/^Jobs done: ([\d.,\s ]+)\.$/,m=>'Wykonane prace: '+m[1]+'.'],
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -2751,6 +2764,7 @@ const FARM={
   seeder:{name:'Seeder',lvl:5,cost:2500,kind:'vehicle',verb:'Plants',up:[{lvl:9,cost:6000},{lvl:14,cost:14000}]},
   harvester:{name:'Harvester',lvl:6,cost:3500,kind:'vehicle',verb:'Harvests',up:[{lvl:10,cost:8000},{lvl:15,cost:18000}]},
   fuel:{name:'Fuel Refill',lvl:1,cash:1,kind:'fuel',desc:'Fills the fuel tank to the top.'},
+  helper:{name:'Farm Helper',lvl:6,cost:2500,kind:'helper',desc:'Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.'},
   farmhand:{name:'Farmhand',lvl:1,cash:2,kind:'farmhand',desc:'Harvests every ripe crop right now.'},
   arborist:{name:'Arborist',lvl:1,cash:2,kind:'arborist',desc:'Picks every ready fruit tree right now.'},
   feed:{name:'Ranch Hand',lvl:1,cash:2,kind:'feed',desc:'Collects from every ready, fed animal right now.'},
@@ -7803,7 +7817,7 @@ function frameStep(t){
   const rawDt=(t-last)/1000,dt=Math.min(.05,rawDt);last=t;if(rawDt>0&&rawDt<.5)perfTick(rawDt);
   const now=Date.now();
   if(HV){updateFarmer(dt,now);requestAnimationFrame(frame);return}
-  seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
+  seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateHelper(dt);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
   // The background (base colour, the endless meadow and the ground chunks) is composed into a screen-sized canvas only
   // when the camera, the canvas, the season or a ground chunk changes; otherwise each frame stamps it 1:1, which is
   // cheap even where the browser draws without the graphics card.
@@ -7837,10 +7851,11 @@ function frameStep(t){
     list.push([d,x,y,o])}
   list.push([farmer.x+farmer.y,0,0,null]);
   for(const v of visitors)list.push([v.x+v.y,0,0,v]);
+  if(HLP.on)list.push([HLP.x+HLP.y,0,0,{helper:1}]);
   if(S.pet)list.push([pet.x+pet.y,0,0,{pet:1}]);
   list.push([N*2+3,0,0,{deliv:1}]);
   list.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
-  for(const[,x,y,o,part]of list){if(!o){const veh=farmer.job&&farmer.job.vehicle;inkLive(farmer.x,farmer.y,veh?190:104,veh?170:92,veh?50:24,()=>drawFarmer(now))}else if(o.pet)inkLive(pet.x,pet.y,72,58,16,()=>drawPetSprite(now));else if(o.deliv)drawDeliveryArea(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now,part)}
+  for(const[,x,y,o,part]of list){if(!o){const veh=farmer.job&&farmer.job.vehicle;inkLive(farmer.x,farmer.y,veh?190:104,veh?170:92,veh?50:24,()=>drawFarmer(now))}else if(o.pet)inkLive(pet.x,pet.y,72,58,16,()=>drawPetSprite(now));else if(o.deliv)drawDeliveryArea(now);else if(o.helper)drawHelper(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now,part)}
   if(farmer.sayT>0&&!VIS){const[px,py]=P(farmer.x,farmer.y);g.save();g.globalAlpha=Math.min(1,farmer.sayT*2.5);talkBubble(px,py-50,farmer.say);g.restore()}
   if(VIS)for(const k in S.tiles){const o=S.tiles[k];if(o.helped){const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5);ell(px,py-4,6,6,'#5bbf3a','#fff',1.4);g.strokeStyle='#fff';g.lineWidth=1.6;line([px-2.6,py-4],[px-.6,py-2]);line([px-.6,py-2],[px+2.8,py-6.4])}}
   if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);
@@ -9573,6 +9588,7 @@ function endPointer(e){
   if(down&&!down.moved&&e.type==='pointerup'&&!placing&&!tutLocked()&&petAt(e.clientX,e.clientY)){petPet()}
   else if(down&&!down.moved&&e.type==='pointerup'&&!placing&&tool==='multi'&&!tutLocked()&&deliveryAt(e.clientX,e.clientY)){SFX.click();showDelivery()}
   else if(down&&!down.moved&&e.type==='pointerup'&&!placing&&tool==='multi'&&!VIS&&!tutLocked()&&bubbleAt(e.clientX,e.clientY)){tapBubble(bubbleAt(e.clientX,e.clientY))}
+  else if(down&&!down.moved&&e.type==='pointerup'&&!placing&&tool==='multi'&&helperAt(e.clientX,e.clientY)){SFX.click();showHelper()}
   else if(down&&!down.moved&&e.type==='pointerup'){const v=!placing&&tool==='multi'&&visitorAt(e.clientX,e.clientY),ak=!placing&&!VEH[tool]&&animalAt(e.clientX,e.clientY);if(v)clickVisitor(v);else if(ak){const[x,y]=ak.split(',').map(Number);hover=[x,y];act(x,y)}else{const[x,y]=tileAt(e.clientX,e.clientY);hover=[x,y];act(x,y)}}
   if(pointers.size===0){down=null;cv.classList.remove('grab')}
 }
@@ -9622,6 +9638,7 @@ function tipText(hx,hy){
 function updateTip(cx,cy){
   const tip=$('tip');
   if((!hover&&!deliveryAt(cx,cy))||(down&&down.moved)||matchMedia('(hover: none)').matches){tip.hidden=true;return}
+  if(!placing&&tool==='multi'&&helperAt(cx,cy)){const tip=$('tip');tip.textContent=tr('Jake, your farm helper: tap to see his energy');tip.hidden=false;const r=tip.getBoundingClientRect();tip.style.left=Math.min(cx+16,vw-r.width-8)+'px';tip.style.top=Math.max(8,cy-34)+'px';return}
   const vv=!placing&&tool==='multi'&&visitorAt(cx,cy),dl=!vv&&!placing&&tool==='multi'&&deliveryAt(cx,cy),t=vv?vv.n.name+': say hi!':dl?(dv().run?'Delivery Board. Dale is out on a delivery':'Delivery Board: send goods to town with Dale'):tipText(hover[0],hover[1]);if(!t){tip.hidden=true;return}
   tip.textContent=t;tip.hidden=false;const r=tip.getBoundingClientRect();
   tip.style.left=Math.min(cx+16,vw-r.width-8)+'px';tip.style.top=Math.max(8,cy-34)+'px';
@@ -9962,6 +9979,7 @@ function drawFarmIcon(id,now){
   const[px,py]=P(.5,.5);
   if(FARM[id].kind==='vehicle'){const k=id==='harvester'?.62:.78;g.save();g.translate(px+(id==='harvester'?-2:0),py+6);g.scale(k,k);drawVehicle(id,now,false,false,{icon:1,ang:1.75});g.restore();return}
   if(FARM[id].kind==='supply'){drawGood(FARM[id].item,px,py-12,2.1);return}
+  if(FARM[id].kind==='helper'){g.save();g.translate(px,py+10);g.scale(1.9,1.9);drawAvatar(HELPER_P.look,{kind:'harvest'});g.restore();return}
   if(FARM[id].kind==='pet'){g.save();g.translate(px-4,py+4);g.scale(2,2);drawPet(FARM[id].pet,{sit:true,happy:true},now);g.restore();return}
   if(FARM[id].kind==='expand'){g.drawImage(expandArt(FARM[id].to+'x'+FARM[id].to),px-34,py-50,68,68);return}
   const k=FARM[id].kind;
@@ -10004,7 +10022,7 @@ function shopSrc(cat){return{seeds:CROPS,trees:TREES,animals:ANIMALS,homes:HOMES
 function shopIds(cat){
   const src=shopSrc(cat);
   return Object.keys(src).filter(id=>{const d=src[id];if(cat==='farm'&&d.kind==='expand')return d.to===(nextLand()||LAND_MAX);return !d.special&&!(cat==='decor'&&d.cash)&&!(cat==='specials'&&!d.cash)})
-    .sort((a,b)=>(cat==='farm'?(src[b].kind==='expand')-(src[a].kind==='expand'):0)||(S.level<src[a].lvl)-(S.level<src[b].lvl)||(src[a].lvl||0)-(src[b].lvl||0));
+    .sort((a,b)=>(cat==='farm'?(src[b].kind==='expand')-(src[a].kind==='expand')||(src[b].kind==='helper'&&!S.helper)-(src[a].kind==='helper'&&!S.helper):0)||(S.level<src[a].lvl)-(S.level<src[b].lvl)||(src[a].lvl||0)-(src[b].lvl||0));
 }
 function tabHasNew(cat){const src=shopSrc(cat);return S.level>1&&shopIds(cat).some(id=>src[id].lvl===S.level&&!src[id].cash)}
 // coins (or Farm Cash) an item costs, the time it takes, and what it earns per minute; null when it does not apply
@@ -10095,7 +10113,7 @@ function renderShop(body){
       for(let i=0;i<3;i++)st.innerHTML+='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.7 5.6 6.1.8-4.5 4.2 1.2 6.1L10 14.8 4.5 17.7l1.2-6.1L1.2 7.4l6.1-.8z" fill="'+(i<ml?'#ffc72c':'#e5dccb')+'" stroke="#6b3c15" stroke-width="1.2"/></svg>';
       st.title='Mastery: '+(S.mastery[id]||0)+' harvested';card.appendChild(st);
     }
-    const owned=cat==='farm'&&((d.kind==='vehicle'&&S.veh[id])||(d.kind==='expand'&&S.size>=d.to)||(d.kind==='pet'&&S.pet&&S.pet.kind===d.pet));
+    const owned=cat==='farm'&&((d.kind==='vehicle'&&S.veh[id])||(d.kind==='expand'&&S.size>=d.to)||(d.kind==='pet'&&S.pet&&S.pet.kind===d.pet)||(d.kind==='helper'&&!!S.helper));
     if(owned)card.appendChild(el('span','owned','Owned'));
     const btn=shopButton(cat,id,d,locked,owned,card);card.appendChild(btn);
     card.onclick=e=>{if(e.target.closest('button'))return;SFX.click();haptic();shopDetail(cat,id,d,locked,owned)};
@@ -10122,7 +10140,7 @@ function shopButton(cat,id,d,locked,owned,card){
         if(S.coins<u.cost){SFX.error();shakeEl(btn);toast('You need '+u.cost.toLocaleString()+' coins for this upgrade.');return}
         S.coins-=u.cost;S.veh[id]=lv+1;SFX.engine();confetti();toast('Your '+d.name.toLowerCase()+' now works '+VSIZE[lv+1]+' by '+VSIZE[lv+1]+' plots per trip!');changed();rerender()})}
     return btn}
-  if(owned){btn.textContent=d.kind==='pet'?'Your pet':'Done';btn.disabled=true;return btn}
+  if(owned){btn.textContent=d.kind==='pet'?'Your pet':d.kind==='helper'?'Hired':'Done';btn.disabled=true;return btn}
   if(cat==='animals'&&!hasHome(id)){btn.textContent='Build a '+HOMES[id].name+' first';btn.classList.add('needhome');btn.onclick=()=>{SFX.click();shopCat('homes')};return btn}
   if(cat==='animals'&&(ANC[id]||0)>=homeCap(id)){btn.textContent=HOMES[id].name+' full: build another';btn.classList.add('needhome');btn.onclick=()=>{SFX.click();shopCat('homes')};return btn}
   const free=cat==='seeds'&&have(id),price=d.cash?'<span class="bill">$</span>'+d.cash:'<span class="coin"></span>'+d.cost.toLocaleString();
@@ -10199,6 +10217,7 @@ function buyItem(cat,id,d){
     if(d.kind==='supply'&&room()<d.n){barnFull();return}
     if(d.cash)S.cash-=d.cash;else S.coins-=d.cost;
     const now=Date.now();let n=0;
+    if(d.kind==='helper'){if(S.helper){S.coins+=d.cost;return}hireHelper();SFX.coin();closeModal();toast('Jake joined your farm! Tap him to see his energy and choose his jobs.');changed();return}
     if(d.kind==='pet'){const had=S.pet;S.pet={kind:d.pet,name:PET_NAME[d.pet]};placePet();d.pet==='dog'?SFX.bark():SFX.meow();closeModal();toast((had?'Swapped pets! ':'')+'Meet '+S.pet.name+', your new '+(d.pet==='dog'?'farm dog':'barn cat')+'! Tap your pet to give it a name.');changed();setTimeout(renamePet,500);return}
     if(d.kind==='vehicle'){S.veh[id]=true;toast('Your new '+d.name.toLowerCase()+' is ready! The Multi-tool uses it by itself.');SFX.engine()}
     else if(d.kind==='expand'){for(const k in d.mats)S.mats[k]-=d.mats[k];S.size=d.to;N=S.size;buildBorder();fit();closeModal();confetti();toast('Your farm grew to '+d.to+' by '+d.to+'!');SFX.level()}
@@ -11374,6 +11393,95 @@ function comboHarvest(x,y){
   const now=performance.now();COMBO.n=now-COMBO.t<3000?COMBO.n+1:1;COMBO.t=now;const n=COMBO.n;
   if(n===3||n%5===0){floatText(x,y-1.3,'Combo x'+n+'!','#ffcf5a',120)}
   if(n%5===0){const b=n;S.coins+=b;floatText(x,y-1.9,'+'+b,'#ffd23f',260)}
+}
+/* ================= Jake, the farm helper ================= */
+// Hired once in Market > Farm. He walks the farm by himself, harvesting (and replanting), picking fruit and looking
+// after the animals. Every job uses 1 energy; energy comes back slowly over time, and he rests when he runs out.
+const HELPER_P={id:'jake',name:'Jake',look:Object.assign(defaultLook(),{gender:'male',skin:'#e8b88f',eyes:'#3fa05a',hair:'short',hairColor:'#c2502a',freckles:true,face:'none',glasses:'none',hat:'cap',hatColor:'#3f9a3c',top:'tee',topColor:'#f2a21e',bottom:'overalls',bottomColor:'#2f6a3a',shoes:'#5a3418',acc:'none'})};
+const HELPER_MAX=[0,30,45,60,80],HELPER_REGEN=4*60e3,HELPER_REFILL=3;
+const HELPER_UP=[null,null,{coins:4000,mats:{board:4,nail:4}},{coins:12000,mats:{board:6,brick:4}},{coins:30000,mats:{brick:6,paint:6}}];
+const HLP={x:0,y:0,tx:0,ty:0,state:'idle',t:0,walk:0,dir:1,wait:2,say:'',sayT:0,job:null,on:false};
+function helperMax(){return HELPER_MAX[S.helper.lv||1]}
+function helperEnergy(){
+  const h=S.helper,now=Date.now(),mx=helperMax();if(h.en>=mx){h.en=mx;h.t=now;return h.en}
+  const gain=Math.floor((now-h.t)/HELPER_REGEN);if(gain>0){h.en=Math.min(mx,h.en+gain);h.t=h.en>=mx?now:h.t+gain*HELPER_REGEN}
+  return h.en;
+}
+function helperNext(){return Math.max(0,HELPER_REGEN-(Date.now()-S.helper.t))/1000}
+function hireHelper(){S.helper={en:HELPER_MAX[1],lv:1,t:Date.now(),jobs:0,do:{crops:true,replant:true,trees:true,animals:true}};spawnHelper();helperSay('Howdy! I will lend a hand around the farm.')}
+function spawnHelper(){const hk=Object.keys(S.tiles).find(k=>S.tiles[k].k==='bld'&&S.tiles[k].id==='house');const[x,y]=hk?hk.split(',').map(Number):[2,2];HLP.x=HLP.tx=x+2.9;HLP.y=HLP.ty=y+2.2;HLP.state='idle';HLP.wait=2;HLP.job=null;HLP.on=true}
+function helperSay(t){HLP.say=t;HLP.sayT=3.4}
+// the next job: the nearest ripe crop, fruit tree or animal, in the jobs he is allowed to do
+function helperFind(){
+  const d=S.helper.do,now=Date.now(),cand=[];
+  const busy=k=>pend[k]||(farmer.job&&farmer.job.tiles.some(([a,b])=>a+','+b===k));
+  for(const k in S.tiles){const o=S.tiles[k];if(busy(k))continue;const[x,y]=k.split(',').map(Number);
+    if(d.crops&&o.k==='plot'&&o.crop&&cropState(o,now).st==='ripe')cand.push({k,kind:'harvest',x,y,wx:x,wy:y});
+    else if(d.trees&&o.k==='tree'&&readyIn(o,TREES[o.id],now)<=0)cand.push({k,kind:'collect',x,y,wx:x,wy:y});
+    else if(d.animals&&o.k==='animal'&&hasHome(o.id)){const h=yardOf(k,o.id);if(!h)continue;
+      if(hungry(o)){const[fk,nd]=feedPick(o.id);if(have(fk)>=nd)cand.push({k,kind:'feed',x,y,wx:h[0]+1,wy:h[1]+2})}
+      else if(readyIn(o,ANIMALS[o.id],now)<=0)cand.push({k,kind:'collect',x,y,wx:h[0]+1,wy:h[1]+2})}}
+  if(!cand.length)return null;
+  cand.sort((a,b)=>Math.hypot(a.wx-HLP.x,a.wy-HLP.y)-Math.hypot(b.wx-HLP.x,b.wy-HLP.y));return cand[0];
+}
+function helperDo(j){
+  const o=S.tiles[j.k],now=Date.now();if(!o)return false;
+  if(j.kind==='harvest'){if(!(o.k==='plot'&&o.crop&&cropState(o,now).st==='ripe'))return false;if(room()<=0){helperSay('The barn is full!');return false}
+    const crop=o.crop;finishJob({kind:'harvest',tiles:[[j.x,j.y]]},now);
+    // replant the same crop: plow and seed, paid like any planting (seeds in the barn are used first)
+    if(S.helper.do.replant&&S.tiles[j.k]&&S.tiles[j.k].fallow&&S.level>=CROPS[crop].lvl){const fromBarn=have(crop)>0,cost=PLOW_COST+(fromBarn?0:CROPS[crop].cost);
+      if(S.coins>=cost){S.coins-=cost;if(fromBarn)takeGood(crop,1);finishJob({kind:'plow',tiles:[[j.x,j.y]],costs:{}},now);finishJob({kind:'plant',tiles:[[j.x,j.y]],seed:crop,costs:{},free:new Set()},now)}}
+    return true}
+  if(j.kind==='collect'){if(room()<=0){helperSay('The barn is full!');return false}const def=defOf(o);if(!def||readyIn(o,def,now)>0||hungry(o))return false;finishJob({kind:'collect',tiles:[[j.x,j.y]]},now);return true}
+  if(j.kind==='feed'){if(!hungry(o))return false;finishJob({kind:'feed',tiles:[[j.x,j.y]]},now);return true}
+  return false;
+}
+function updateHelper(dt){
+  if(!S||!S.helper||VIS){HLP.on=false;return}if(!HLP.on)spawnHelper();
+  HLP.t+=dt;if(HLP.sayT>0)HLP.sayT-=dt;
+  if(HLP.state==='walk'){const dx=HLP.tx-HLP.x,dy=HLP.ty-HLP.y,d=Math.hypot(dx,dy),sp=1.9*dt;if(Math.abs(dx-dy)>.02)HLP.dir=dx-dy>0?1:-1;
+    if(d<=sp){HLP.x=HLP.tx;HLP.y=HLP.ty;if(HLP.job){HLP.state='work';HLP.t=0}else{HLP.state=HLP.resting?'rest':'idle';HLP.wait=2+Math.random()*3}}else{HLP.x+=dx/d*sp;HLP.y+=dy/d*sp;HLP.walk+=dt*12}return}
+  if(HLP.state==='work'){if(HLP.t<1.1)return;const j=HLP.job;HLP.job=null;
+    if(helperDo(j)){S.helper.en=Math.max(0,helperEnergy()-1);if(S.helper.en<helperMax()&&S.helper.en===helperMax()-1)S.helper.t=Date.now();S.helper.jobs=(S.helper.jobs||0)+1;stat('helper');changed();hud();if(Math.random()<.12)helperSay(['Another one done!','Happy to help!','Looking good out here.','This farm is coming along!'][Math.floor(Math.random()*4)])}
+    HLP.state='idle';HLP.wait=.4;return}
+  if(HLP.state==='rest'){if(helperEnergy()>0){HLP.resting=false;HLP.state='idle';HLP.wait=.5;helperSay('Rested and ready!')}return}
+  // idle: pick the next job
+  HLP.wait-=dt;if(HLP.wait>0)return;
+  if(helperEnergy()<=0){if(!HLP.resting){HLP.resting=true;helperSay('I need a rest. Back soon!');const hk=Object.keys(S.tiles).find(k=>S.tiles[k].k==='bld'&&S.tiles[k].id==='house');const[x,y]=hk?hk.split(',').map(Number):[2,2];HLP.tx=x+2.9;HLP.ty=y+2.3;HLP.state='walk'}else HLP.state='rest';return}
+  const j=helperFind();
+  if(!j){HLP.wait=3+Math.random()*3;if(Math.random()<.5){const[sx,sy]=freeSpot();HLP.tx=sx;HLP.ty=sy;HLP.state='walk'}return}
+  HLP.job=j;HLP.tx=j.wx+.5;HLP.ty=j.wy+.95;HLP.state='walk';
+}
+function drawHelper(now){
+  if(!HLP.on)return;const[px,py]=P(HLP.x,HLP.y),kind=HLP.state==='work'?(HLP.job&&HLP.job.kind==='feed'?'feed':HLP.job&&HLP.job.kind==='harvest'?'harvest':'collect'):null;
+  inkLive(HLP.x,HLP.y,90,90,20,()=>{g.save();g.translate(px,py);g.scale(HLP.dir*FIG,FIG);drawAvatar(HELPER_P.look,{walking:HLP.state==='walk',walk:HLP.walk,t:HLP.t,kind,working:HLP.state==='work'});g.restore()});
+  const en=helperEnergy(),mx=helperMax(),ty=py-66;g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=Math.max(34,g.measureText('Jake').width+12);
+  poly([[px-w/2,ty-10],[px+w/2,ty-10],[px+w/2,ty+7],[px-w/2,ty+7]],'rgba(255,250,240,.94)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText('Jake',px,ty-1);
+  const bw=w-8,k=en/mx;poly([[px-bw/2,ty+1.5],[px+bw/2,ty+1.5],[px+bw/2,ty+4.5],[px-bw/2,ty+4.5]],'#e2d6bf');if(k>0)poly([[px-bw/2,ty+1.5],[px-bw/2+bw*k,ty+1.5],[px-bw/2+bw*k,ty+4.5],[px-bw/2,ty+4.5]],k<.25?'#e8771a':'#5bbf3a');
+  if(HLP.state==='rest'&&!reduce){const z=(now/900)%1;g.globalAlpha=1-z;g.fillStyle='#5a7aa8';g.font='bold '+(9+z*5)+'px sans-serif';g.fillText('z',px+10+z*6,ty-14-z*14);g.globalAlpha=1}
+  if(HLP.sayT>0&&HLP.say){g.save();g.globalAlpha=Math.min(1,HLP.sayT*2.5);talkBubble(px,ty-14,tr(HLP.say));g.restore()}
+}
+function helperAt(cx,cy){if(!HLP.on||VIS)return false;const[px,py]=P(HLP.x,HLP.y),sx=px*cam.z+cam.x,sy=(py-28)*cam.z+cam.y;return Math.abs(cx-sx)<14*cam.z&&Math.abs(cy-sy)<34*cam.z}
+function showHelper(){
+  modal({title:'Jake, your farm helper',color:'green',small:true,render(b){
+    const h=S.helper,en=helperEnergy(),mx=helperMax(),p=el('div','body-pad helperwin');
+    const face=el('div','vface');face.innerHTML=avatar(HELPER_P);p.appendChild(face);
+    p.appendChild(el('p',null,'Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.'));
+    const bar=el('div','hbarw'),lab=el('div','hlab');lab.appendChild(el('b',null,tr('Energy')));lab.appendChild(el('span',null,en+' / '+mx));bar.appendChild(lab);
+    const gb=el('div','gbar'),f=el('b');f.style.width=(en/mx*100)+'%';gb.appendChild(f);bar.appendChild(gb);
+    bar.appendChild(el('small',null,en>=mx?'Full of energy.':'+1 energy in '+fmt(helperNext())));p.appendChild(bar);
+    p.appendChild(el('h3',null,'Jobs for Jake'));const opts=el('div','hopts');
+    for(const[k,l]of[['crops','Harvest crops'],['replant','Replant'],['trees','Pick fruit'],['animals','Look after animals']]){const c=el('button','chip',l);c.setAttribute('aria-pressed',String(!!h.do[k]));c.onclick=()=>{h.do[k]=!h.do[k];SFX.click();save();rerender()};opts.appendChild(c)}
+    p.appendChild(opts);
+    const row=el('div','hrow'),rf=el('button','go cashbuy');rf.append(tr('Refill energy')+' · ');rf.appendChild(el('span','bill','$'));rf.append(String(HELPER_REFILL));rf.disabled=en>=mx;
+    rf.onclick=()=>{if(S.cash<HELPER_REFILL){cashShort(HELPER_REFILL);return}if(!cashPass(HELPER_REFILL,'a full energy refill for Jake',()=>rf.onclick()))return;S.cash-=HELPER_REFILL;h.en=mx;h.t=Date.now();HLP.resting=false;if(HLP.state==='rest')HLP.state='idle';SFX.golden();helperSay('Thanks! Back to work.');hud();changed();rerender()};
+    row.appendChild(rf);p.appendChild(row);
+    const nx=(h.lv||1)+1,up=HELPER_UP[nx];
+    if(up)p.appendChild(upgradeBox('Train Jake: '+HELPER_MAX[nx]+' energy (now '+mx+')',up,'Train Jake',()=>{h.lv=nx;h.en=Math.min(HELPER_MAX[nx],h.en+(HELPER_MAX[nx]-mx));toast('Jake can now do '+HELPER_MAX[nx]+' jobs before resting!')}));
+    else p.appendChild(el('p','hint','Jake is fully trained.'));
+    p.appendChild(el('p','hint','Jobs done: '+(h.jobs||0).toLocaleString()+'.'));
+    b.appendChild(p);
+  }});
 }
 /* ================= daily bonus ================= */
 function dailyBonus(){

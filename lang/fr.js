@@ -1238,7 +1238,34 @@ Free spin|Tour gratuit
 Wheel|Roue
 an extra spin|un tour de plus
 A mystery crate appeared on your farm! Tap it to open.|Une caisse mystère est apparue sur ta ferme ! Touche-la pour l'ouvrir.
-Mystery crate: tap to open|Caisse mystère : touche pour ouvrir`,
+Mystery crate: tap to open|Caisse mystère : touche pour ouvrir
+Farm Helper|Aide de ferme
+Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.|Jake parcourt ta ferme tout seul : il récolte et replante, cueille les fruits et s'occupe des animaux. Il a de l'énergie pour un certain nombre de tâches et se repose pour recharger.
+Hired|Embauché
+Jake joined your farm! Tap him to see his energy and choose his jobs.|Jake a rejoint ta ferme ! Touche-le pour voir son énergie et choisir ses tâches.
+Jake, your farm helper|Jake, ton aide de ferme
+Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.|Jake récolte et replante tes cultures, cueille les fruits et s'occupe de tes animaux. Chaque tâche coûte 1 énergie, qui revient avec le temps.
+Energy|Énergie
+Full of energy.|Plein d'énergie.
+Jobs for Jake|Tâches de Jake
+Harvest crops|Récolter
+Replant|Replanter
+Pick fruit|Cueillir les fruits
+Look after animals|S'occuper des animaux
+Refill energy|Recharger l'énergie
+Jake is fully trained.|Jake est entièrement formé.
+Train Jake|Former Jake
+Jake, your farm helper: tap to see his energy|Jake, ton aide de ferme : touche pour voir son énergie
+Howdy! I will lend a hand around the farm.|Salut ! Je vais te donner un coup de main.
+The barn is full!|La grange est pleine !
+Another one done!|Et une de plus !
+Happy to help!|Avec plaisir !
+Looking good out here.|Ça a fière allure ici.
+This farm is coming along!|Cette ferme prend forme !
+I need a rest. Back soon!|J'ai besoin de repos. Je reviens vite !
+Rested and ready!|Reposé et prêt !
+Thanks! Back to work.|Merci ! Au travail.
+a full energy refill for Jake|une recharge complète d'énergie pour Jake`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -1482,4 +1509,8 @@ p:`0|$1 {p1:pièce|pièces}
 240|+$1 engrais
 241|Roue de la chance : $1 !
 242|Caisse mystère : $1 !
-243|Combo x$1 !`};
+243|Combo x$1 !
+244|+1 énergie dans {t1}
+245|Former Jake : $1 énergie (actuellement $2)
+246|Jake peut maintenant faire $1 tâches avant de se reposer !
+247|Tâches faites : $1.`};

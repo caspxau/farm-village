@@ -1246,7 +1246,34 @@ Free spin|Бесплатное вращение
 Wheel|Колесо
 an extra spin|дополнительное вращение
 A mystery crate appeared on your farm! Tap it to open.|На ферме появился таинственный ящик! Нажми, чтобы открыть.
-Mystery crate: tap to open|Таинственный ящик: нажми, чтобы открыть`,
+Mystery crate: tap to open|Таинственный ящик: нажми, чтобы открыть
+Farm Helper|Помощник
+Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.|Джейк сам ходит по ферме: собирает урожай и сажает снова, рвёт фрукты и ухаживает за животными. Энергии у него на определённое число дел, потом он отдыхает.
+Hired|Нанят
+Jake joined your farm! Tap him to see his energy and choose his jobs.|Джейк теперь работает на ферме! Нажми на него, чтобы увидеть энергию и выбрать дела.
+Jake, your farm helper|Джейк, твой помощник
+Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.|Джейк собирает и снова сажает урожай, рвёт фрукты и ухаживает за животными. Каждое дело тратит 1 энергию, и она восстанавливается со временем.
+Energy|Энергия
+Full of energy.|Полон сил.
+Jobs for Jake|Дела для Джейка
+Harvest crops|Собирать урожай
+Replant|Сажать снова
+Pick fruit|Рвать фрукты
+Look after animals|Ухаживать за животными
+Refill energy|Восполнить энергию
+Jake is fully trained.|Джейк полностью обучен.
+Train Jake|Обучить Джейка
+Jake, your farm helper: tap to see his energy|Джейк, твой помощник: нажми, чтобы увидеть энергию
+Howdy! I will lend a hand around the farm.|Привет! Помогу тебе на ферме.
+The barn is full!|Амбар полон!
+Another one done!|Ещё одно готово!
+Happy to help!|Рад помочь!
+Looking good out here.|Здесь становится красиво.
+This farm is coming along!|Ферма растёт!
+I need a rest. Back soon!|Мне нужно отдохнуть. Скоро вернусь!
+Rested and ready!|Отдохнул и готов!
+Thanks! Back to work.|Спасибо! За работу.
+a full energy refill for Jake|полное восполнение энергии Джейка`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -1490,4 +1517,8 @@ p:`0|$1 {p1:монета|монеты|монет}
 240|+$1 удобрения
 241|Колесо удачи: $1!
 242|Таинственный ящик: $1!
-243|Комбо x$1!`};
+243|Комбо x$1!
+244|+1 энергии через {t1}
+245|Обучить Джейка: энергия $1 (сейчас $2)
+246|Теперь Джейк делает $1 дел до отдыха!
+247|Сделано дел: $1.`};

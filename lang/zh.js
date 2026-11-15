@@ -1246,7 +1246,34 @@ Free spin|免费转盘
 Wheel|转盘
 an extra spin|额外一次转盘
 A mystery crate appeared on your farm! Tap it to open.|农场上出现了一个神秘箱！点击打开。
-Mystery crate: tap to open|神秘箱：点击打开`,
+Mystery crate: tap to open|神秘箱：点击打开
+Farm Helper|农场帮手
+Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.|Jake 会自己在农场里干活：收获并重新播种、摘果子、照顾动物。他的体力只够做一定数量的活，累了会休息恢复。
+Hired|已雇用
+Jake joined your farm! Tap him to see his energy and choose his jobs.|Jake 加入了你的农场！点击他查看体力并选择工作。
+Jake, your farm helper|Jake，你的农场帮手
+Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.|Jake 会收获并重新播种你的作物、摘果子、照顾你的动物。每项工作消耗 1 点体力，体力会随时间恢复。
+Energy|体力
+Full of energy.|体力充沛。
+Jobs for Jake|Jake 的工作
+Harvest crops|收获作物
+Replant|重新播种
+Pick fruit|摘果子
+Look after animals|照顾动物
+Refill energy|恢复体力
+Jake is fully trained.|Jake 已训练满级。
+Train Jake|训练 Jake
+Jake, your farm helper: tap to see his energy|Jake，你的农场帮手：点击查看体力
+Howdy! I will lend a hand around the farm.|你好！我来帮你打理农场。
+The barn is full!|谷仓满了！
+Another one done!|又完成一件！
+Happy to help!|乐意帮忙！
+Looking good out here.|这里看起来真不错。
+This farm is coming along!|农场越来越好了！
+I need a rest. Back soon!|我得歇一会儿，马上回来！
+Rested and ready!|休息好了，准备开工！
+Thanks! Back to work.|谢谢！继续干活。
+a full energy refill for Jake|为 Jake 恢复全部体力`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -1490,4 +1517,8 @@ p:`0|$1金币
 240|+$1份肥料
 241|幸运转盘：$1！
 242|神秘箱：$1！
-243|连击x$1！`};
+243|连击x$1！
+244|{t1}后 +1 体力
+245|训练 Jake：体力 $1（当前 $2）
+246|Jake 现在休息前能做 $1 件活！
+247|已完成工作：$1。`};

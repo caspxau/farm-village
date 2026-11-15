@@ -1246,7 +1246,34 @@ Free spin|मुफ़्त स्पिन
 Wheel|पहिया
 an extra spin|एक और स्पिन
 A mystery crate appeared on your farm! Tap it to open.|आपके फ़ार्म पर एक रहस्य बक्सा आया है! खोलने के लिए टैप करें।
-Mystery crate: tap to open|रहस्य बक्सा: खोलने के लिए टैप करें`,
+Mystery crate: tap to open|रहस्य बक्सा: खोलने के लिए टैप करें
+Farm Helper|फ़ार्म सहायक
+Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.|जेक खुद आपके फ़ार्म पर घूमता है: फ़सल काटता और फिर बोता है, फल तोड़ता है और जानवरों की देखभाल करता है। उसके पास कुछ कामों जितनी ऊर्जा होती है, फिर वह आराम करके ऊर्जा भरता है।
+Hired|काम पर रखा
+Jake joined your farm! Tap him to see his energy and choose his jobs.|जेक आपके फ़ार्म में आ गया! उसकी ऊर्जा देखने और काम चुनने के लिए उस पर टैप करें।
+Jake, your farm helper|जेक, आपका फ़ार्म सहायक
+Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.|जेक आपकी फ़सलें काटता और फिर बोता है, फल तोड़ता है और जानवरों की देखभाल करता है। हर काम में 1 ऊर्जा लगती है, जो समय के साथ लौट आती है।
+Energy|ऊर्जा
+Full of energy.|ऊर्जा से भरपूर।
+Jobs for Jake|जेक के काम
+Harvest crops|फ़सल काटें
+Replant|फिर से बोएँ
+Pick fruit|फल तोड़ें
+Look after animals|जानवरों की देखभाल
+Refill energy|ऊर्जा भरें
+Jake is fully trained.|जेक पूरी तरह प्रशिक्षित है।
+Train Jake|जेक को प्रशिक्षित करें
+Jake, your farm helper: tap to see his energy|जेक, आपका फ़ार्म सहायक: ऊर्जा देखने के लिए टैप करें
+Howdy! I will lend a hand around the farm.|नमस्ते! मैं फ़ार्म पर हाथ बँटाऊँगा।
+The barn is full!|खलिहान भर गया!
+Another one done!|एक और हो गया!
+Happy to help!|मदद करके खुशी हुई!
+Looking good out here.|यहाँ बढ़िया लग रहा है।
+This farm is coming along!|यह फ़ार्म बढ़ रहा है!
+I need a rest. Back soon!|मुझे आराम चाहिए। जल्दी लौटूँगा!
+Rested and ready!|आराम हो गया, तैयार हूँ!
+Thanks! Back to work.|धन्यवाद! काम पर वापस।
+a full energy refill for Jake|जेक के लिए पूरी ऊर्जा`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -1490,4 +1517,8 @@ p:`0|$1 सिक्के
 240|+$1 खाद
 241|किस्मत का पहिया: $1!
 242|रहस्य बक्सा: $1!
-243|कॉम्बो x$1!`};
+243|कॉम्बो x$1!
+244|{t1} में +1 ऊर्जा
+245|जेक को प्रशिक्षित करें: $1 ऊर्जा (अभी $2)
+246|जेक अब आराम से पहले $1 काम कर सकता है!
+247|किए गए काम: $1।`};

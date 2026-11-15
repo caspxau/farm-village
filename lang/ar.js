@@ -1246,7 +1246,34 @@ Free spin|دورة مجانية
 Wheel|العجلة
 an extra spin|دورة إضافية
 A mystery crate appeared on your farm! Tap it to open.|ظهر صندوق غامض في مزرعتك! انقر لفتحه.
-Mystery crate: tap to open|صندوق غامض: انقر للفتح`,
+Mystery crate: tap to open|صندوق غامض: انقر للفتح
+Farm Helper|مساعد المزرعة
+Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.|يتجول جيك في مزرعتك وحده: يحصد ويعيد الزراعة ويقطف الفاكهة ويعتني بالحيوانات. لديه طاقة لعدد محدد من المهام ويستريح ليعيد شحنها.
+Hired|تم التوظيف
+Jake joined your farm! Tap him to see his energy and choose his jobs.|انضم جيك إلى مزرعتك! انقر عليه لترى طاقته وتختار مهامه.
+Jake, your farm helper|جيك، مساعدك في المزرعة
+Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.|يحصد جيك محاصيلك ويعيد زراعتها ويقطف الفاكهة ويعتني بحيواناتك. كل مهمة تستهلك طاقة واحدة، والطاقة تعود مع الوقت.
+Energy|الطاقة
+Full of energy.|مليء بالطاقة.
+Jobs for Jake|مهام جيك
+Harvest crops|احصد المحاصيل
+Replant|أعد الزراعة
+Pick fruit|اقطف الفاكهة
+Look after animals|اعتنِ بالحيوانات
+Refill energy|اشحن الطاقة
+Jake is fully trained.|جيك مدرَّب بالكامل.
+Train Jake|درِّب جيك
+Jake, your farm helper: tap to see his energy|جيك، مساعدك في المزرعة: انقر لترى طاقته
+Howdy! I will lend a hand around the farm.|مرحبًا! سأساعدك في المزرعة.
+The barn is full!|الحظيرة ممتلئة!
+Another one done!|واحدة أخرى انتهت!
+Happy to help!|يسعدني المساعدة!
+Looking good out here.|المكان يبدو جميلًا.
+This farm is coming along!|المزرعة تكبر!
+I need a rest. Back soon!|أحتاج إلى راحة. سأعود قريبًا!
+Rested and ready!|ارتحت وأنا جاهز!
+Thanks! Back to work.|شكرًا! عودة إلى العمل.
+a full energy refill for Jake|شحن كامل لطاقة جيك`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -1490,4 +1517,8 @@ p:`0|$1 عملة
 240|+$1 سماد
 241|عجلة الحظ: $1!
 242|صندوق غامض: $1!
-243|كومبو x$1!`};
+243|كومبو x$1!
+244|+1 طاقة بعد {t1}
+245|درِّب جيك: طاقة $1 (الآن $2)
+246|يستطيع جيك الآن أداء $1 مهمة قبل الراحة!
+247|المهام المنجزة: $1.`};

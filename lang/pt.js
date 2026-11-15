@@ -1238,7 +1238,34 @@ Free spin|Giro grátis
 Wheel|Roda
 an extra spin|um giro extra
 A mystery crate appeared on your farm! Tap it to open.|Uma caixa misteriosa apareceu na sua fazenda! Toque para abrir.
-Mystery crate: tap to open|Caixa misteriosa: toque para abrir`,
+Mystery crate: tap to open|Caixa misteriosa: toque para abrir
+Farm Helper|Ajudante
+Jake walks your farm by himself: he harvests and replants, picks fruit and looks after the animals. He has energy for a set number of jobs and rests to recharge.|Jake percorre sua fazenda sozinho: colhe e replanta, apanha frutas e cuida dos animais. Ele tem energia para um certo número de tarefas e descansa para recarregar.
+Hired|Contratado
+Jake joined your farm! Tap him to see his energy and choose his jobs.|Jake entrou na sua fazenda! Toque nele para ver a energia e escolher as tarefas.
+Jake, your farm helper|Jake, seu ajudante
+Jake harvests and replants your crops, picks fruit and looks after your animals. Every job uses 1 energy, and energy comes back over time.|Jake colhe e replanta suas plantações, apanha frutas e cuida dos seus animais. Cada tarefa gasta 1 de energia, que volta com o tempo.
+Energy|Energia
+Full of energy.|Cheio de energia.
+Jobs for Jake|Tarefas do Jake
+Harvest crops|Colher
+Replant|Replantar
+Pick fruit|Apanhar frutas
+Look after animals|Cuidar dos animais
+Refill energy|Recarregar energia
+Jake is fully trained.|Jake está totalmente treinado.
+Train Jake|Treinar Jake
+Jake, your farm helper: tap to see his energy|Jake, seu ajudante: toque para ver a energia
+Howdy! I will lend a hand around the farm.|Olá! Vou dar uma mão na fazenda.
+The barn is full!|O celeiro está cheio!
+Another one done!|Mais uma pronta!
+Happy to help!|Feliz em ajudar!
+Looking good out here.|Está ficando bonito aqui.
+This farm is coming along!|Esta fazenda está crescendo!
+I need a rest. Back soon!|Preciso descansar. Volto logo!
+Rested and ready!|Descansado e pronto!
+Thanks! Back to work.|Obrigado! De volta ao trabalho.
+a full energy refill for Jake|uma recarga completa de energia para o Jake`,
 p:`0|$1 {p1:moeda|moedas}
 1|$1 / $2 XP
 2|faltam $1
@@ -1482,4 +1509,8 @@ p:`0|$1 {p1:moeda|moedas}
 240|+$1 de fertilizante
 241|Roda da sorte: $1!
 242|Caixa misteriosa: $1!
-243|Combo x$1!`};
+243|Combo x$1!
+244|+1 de energia em {t1}
+245|Treinar Jake: $1 de energia (agora $2)
+246|Jake agora faz $1 tarefas antes de descansar!
+247|Tarefas feitas: $1.`};
