@@ -2668,7 +2668,7 @@ const HOMES={
   goat:{name:'Goat Shed',cost:900,cap:7,xp:18,wall:'#bdb7ab',wall2:'#9a948a',roof:'#8a5a32',roof2:'#6b4122',style:'stone'},
   cow:{name:'Dairy Barn',cost:450,cap:7,xp:25,wall:'#f6f2e8',wall2:'#ddd6c6',roof:'#3a3434',roof2:'#252020',style:'barn'},
   pig:{name:'Pig Sty',cost:900,cap:7,xp:25,wall:'#e0a0aa',wall2:'#c88090',roof:'#8a5a32',roof2:'#6b4122',style:'mud'},
-  horse:{name:'Horse Stable',cost:1500,cap:7,xp:40,wall:'#8a5530',wall2:'#6e4424',roof:'#3f6fc0',roof2:'#2d55a0',style:'stable'},
+  horse:{name:'Horse Stable',cost:1500,cap:3,xp:40,wall:'#8a5530',wall2:'#6e4424',roof:'#3f6fc0',roof2:'#2d55a0',style:'stable'},
   rabbit:{name:'Rabbit Hutch',cost:760,cap:7,xp:15,wall:'#f0d9a8',wall2:'#d8bf88',roof:'#3f9a3c',roof2:'#2f7a2c',style:'hutch'},
   turkey:{name:'Turkey Roost',cost:980,cap:7,xp:18,wall:'#a8642a',wall2:'#8a4e1e',roof:'#e0a040',roof2:'#b8802a',style:'stilts'},
   llama:{name:'Llama Lodge',cost:1800,cap:7,xp:45,wall:'#f2e6cf',wall2:'#d8c8a8',roof:'#e0457b',roof2:'#b8305e',style:'lodge'}
@@ -3571,6 +3571,10 @@ function grassDetail(x,y){
   if(se==='autumn')for(let i=0;i<3;i++){if(hash(x*5+i,y)<.5)continue;const[px,py]=P(x+.15+hash(x*5+i,y)*.7,y+.15+hash(y*5,x+i)*.7);ell(px,py,1.9,.9,['#b8702a','#a24a26','#c98e36'][i],null,0,hash(i,x))}
   const f=hash(x*13,y*17);
   if(P0.fl.length&&(f>.95||(se==='spring'&&f>.88))){const[px,py]=P(x+.3+hash(y,x*2)*.4,y+.3+hash(x*2,y)*.4);wildflower(px,py,P0.fl[Math.floor(hash(x,y*3)*P0.fl.length)])}
+  // drifts of wildflowers gather where the land rolls, so a big empty farm still looks like a meadow
+  if(P0.fl.length&&se!=='winter'&&lowNoise(x*1.7,y*1.7)>.42){const col=P0.fl[Math.floor(hash(x*3,y)*P0.fl.length)];for(let i=0;i<3;i++){if(hash(x*11+i,y*5)<.35)continue;const[px,py]=P(x+.12+hash(x+i*3,y*7)*.76,y+.12+hash(y+i*5,x*3)*.76);wildflower(px,py,col)}}
+  // the odd pebble
+  if(hash(x*19,y*23)>.965){const[px,py]=P(x+.3+hash(y*2,x)*.4,y+.3+hash(x,y*2)*.4);ell(px,py+.6,3,1.2,'rgba(40,30,15,.18)');ell(px,py,2.6,1.6,'#a8a294','#7a7468',.4);ell(px-.6,py-.5,1,.5,'rgba(255,255,255,.4)')}
 }
 function lowNoise(x,y){return(Math.sin(x*.55+1.3)+Math.sin(y*.7+.4)+Math.sin((x+y)*.31+2.1)+Math.sin((x-y)*.43))/4}
 function drawGrass(x,y){
@@ -5677,7 +5681,19 @@ function cylinder(cx,by,rx,ry,h,col,dark,top){
 /* ---- Natural style production buildings, painted to sit beside the farmhouse and barn ----
    Each fills its 2x2 lot, drawn back to front: a yard, the buildings, then props and a hanging sign with what it makes. */
 let MK_LV=1;
-function drawMaker(x,y,id,lv){MK_LV=lv||1;try{return NATURAL?drawMakerN(x,y,id):drawMakerC(x,y,id)}finally{MK_LV=1}}
+function drawMaker(x,y,id,lv){MK_LV=lv||1;try{if(MK_LV>=2)makerUpgrade(x,y,MK_LV);return NATURAL?drawMakerN(x,y,id):drawMakerC(x,y,id)}finally{MK_LV=1}}
+// Upgraded buildings show it (drawn first, along the back of the lot): bunting from level 2, and a flagpole with a gold star pennant at level 3
+function makerUpgrade(x,y,lv){
+  const A=P(x+.05,y+.15,16),B=P(x+.05,y+1.85,16),cols=['#d9402f','#ffd23f','#2d8fe3','#3f9a3c','#e0457b'];
+  g.strokeStyle='#4e331e';g.lineWidth=1.2;line([A[0],A[1]+16],A);line([B[0],B[1]+16],B);
+  g.strokeStyle='#5e3a1c';g.lineWidth=.8;g.beginPath();g.moveTo(A[0],A[1]);g.quadraticCurveTo((A[0]+B[0])/2,(A[1]+B[1])/2+6,B[0],B[1]);g.stroke();
+  for(let i=0;i<7;i++){const t=(i+.5)/7,px=A[0]+(B[0]-A[0])*t,py=A[1]+(B[1]-A[1])*t+Math.sin(t*Math.PI)*3;poly([[px-2.8,py],[px+2.8,py+1.4],[px-.2,py+7]],cols[i%5],'rgba(0,0,0,.25)',.3)}
+  if(lv<3)return;
+  const[fx,fy]=P(x+1.92,y+.12);g.strokeStyle='#8a8f96';g.lineWidth=1.6;line([fx,fy],[fx,fy-58]);ball(fx,fy-59,1.8,1.8,'#ffd23f','#9a6400',.4);
+  const wv=reduce||ICON_MODE?0:Math.sin(performance.now()/500)*1.5;
+  g.beginPath();g.moveTo(fx,fy-56);g.quadraticCurveTo(fx+9,fy-55+wv,fx+18,fy-51);g.quadraticCurveTo(fx+9,fy-47-wv,fx,fy-45);g.closePath();g.fillStyle=pvL(fx,0,fx+18,0,['#e8b020','#ffe066','#d9a020']);g.fill();g.strokeStyle='#9a6400';g.lineWidth=.5;g.stroke();
+  star4(fx+7,fy-50.5,3,'#fff7c0');
+}
 function hullPts(p){p=p.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]),lo=[],up=[];
   for(const q of p){while(lo.length>1&&cr(lo[lo.length-2],lo[lo.length-1],q)<=0)lo.pop();lo.push(q)}for(const q of p.slice().reverse()){while(up.length>1&&cr(up[up.length-2],up[up.length-1],q)<=0)up.pop();up.push(q)}return lo.slice(0,-1).concat(up.slice(0,-1))}
 // a gravel or dirt yard with scattered stones and grass at the edges
@@ -6356,7 +6372,27 @@ function drawHome3(x,y,id,lv){
     const[fx,fy]=P(x+2.45,y+.62);ell(fx,fy,8,3.4,'#8a8a90');ell(fx,fy-1,6.4,2.4,'#d8b45a');poly([[fx-1.5,fy-1],[fx+1.5,fy-1],[fx+1.5,fy-12],[fx-1.5,fy-12]],'#a0a0a8');ell(fx,fy-12,5,2.2,'#7a7a82')}
   drawHomeBuilding(x,y,id,lv);
   trough(x+G.tr[0],y+G.tr[1],.72,false);
-  // upgrade touches: flower boxes from level 2, a weathervane at level 3 (barn has a cupola)
+  // upgrade touches: bunting and a flower box from level 2, a golden weathervane and a prize rosette at level 3
+  if(lv>=2)homeUpgrades(x,y,id,lv);
+}
+function homeUpgrades(x,y,id,lv){
+  const G=homeGeo(id),st=G.style,[b0,b1,b2,b3]=G.b,x0=x+b0,w=b2-b0,yf=y+b3;
+  // bunting along the left fence
+  const A=P(x+.06,y+.3,17),B=P(x+.06,y+2.7,17),cols=['#d9402f','#ffd23f','#2d8fe3','#3f9a3c','#e0457b'];
+  g.strokeStyle='#5e3a1c';g.lineWidth=.8;g.beginPath();g.moveTo(A[0],A[1]);g.quadraticCurveTo((A[0]+B[0])/2,(A[1]+B[1])/2+6,B[0],B[1]);g.stroke();
+  for(let i=0;i<8;i++){const t=(i+.5)/8,px=A[0]+(B[0]-A[0])*t,py=A[1]+(B[1]-A[1])*t+Math.sin(t*Math.PI)*3;poly([[px-2.6,py],[px+2.6,py+1.3],[px-.2,py+6.4]],cols[i%5],'rgba(0,0,0,.25)',.3)}
+  // a flower box under the front of the building
+  if(st!=='pond'){faceQuad(x0+.12,x0+.5,yf+.02,5,9,'#8a5530','#4e2c12');for(let k=0;k<6;k++){const[fx,fy]=P(x0+.15+k*.065,yf+.02,10.4);ball(fx,fy,1.7,1.5,['#e0457b','#ffd23f','#ffffff','#ff7a3a'][k%4]);ell(fx+1.2,fy+1.6,1.4,.7,'#4f9a3c')}}
+  if(lv<3)return;
+  // a blue prize rosette on the fence by the gate
+  const[rx,ry]=P(x+1.1,y+2.94,13);poly([[rx-3,ry],[rx-5.4,ry+12],[rx-1.4,ry+9.6]],'#2d6fc0');poly([[rx+3,ry],[rx+5.4,ry+12],[rx+1.4,ry+9.6]],'#2d6fc0');
+  for(let k=0;k<12;k++){const an=k/12*Math.PI*2;ball(rx+Math.cos(an)*5,ry+Math.sin(an)*5,2.3,2.3,'#3f86e0','#1f4f9a',.3)}ball(rx,ry,3.8,3.8,'#ffd23f','#9a6400',.5);star4(rx,ry,2.4,'#fff7c0');
+  // a golden weathervane on the roof (the dairy barn has its own cupola)
+  if(st==='barn')return;
+  const top={stilts:44,stable:46,lodge:46,hutch:34,pond:36}[st]||36,[vx,vy]=P(x0+w/2,y+b1+(b3-b1)/2,top);
+  g.strokeStyle='#7a5408';g.lineWidth=1.2;line([vx,vy],[vx,vy-16]);g.lineWidth=.8;line([vx-5,vy-9],[vx+5,vy-9]);
+  ball(vx,vy-16,1.2,1.2,'#ffd23f');
+  g.beginPath();g.moveTo(vx-6,vy-12.5);g.lineTo(vx+3,vy-12.5);g.lineTo(vx+6,vy-15);g.lineTo(vx+3,vy-14.2);g.lineTo(vx+1,vy-17.5);g.lineTo(vx-2,vy-14.4);g.closePath();g.fillStyle=pvL(vx-6,0,vx+6,0,['#c8901a','#ffe066','#c8901a']);g.fill();g.strokeStyle='#7a5408';g.lineWidth=.5;g.stroke();
 }
 function drawHomeFront(x,y,id){
   railRun(P(x+.06,y+2.94),P(x+1.15,y+2.94));
@@ -9812,7 +9848,7 @@ function renderIcon(cat,id,lv,bare){
     if(cat==='animals')drawObj(0,0,{k:'animal',id,t:now-1e9},now);
     else if(cat==='trees')drawObj(0,0,{k:'tree',id,t:now-1e9},now);
     else if(cat==='homes'){drawHome3(0,0,id,lv||1);const G=homeGeo(id),sc2=SPEC_SC[id]||1;for(const[u,v]of[[1.2,2.2],[2.1,1.9]]){const[ax,ay]=P(u,v);g.save();g.translate(ax,ay);g.scale(sc2,sc2);ANIMAL_DRAW[id](0,0,0,0);g.restore()}drawHomeFront(0,0,id)}
-    else if(cat==='buildings')drawMaker(0,0,id);
+    else if(cat==='buildings')drawMaker(0,0,id,lv||1);
     else drawObj(0,0,{k:'deco',id},now);
   }
   }finally{g=prev;ICON_MODE=false;ICON_BARE=false}
