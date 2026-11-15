@@ -3466,8 +3466,20 @@ function ball(x,y,rx,ry,col,stroke,lw,rot){
 }
 /* Pre-drawn sprites: static art is drawn once into a canvas, then stamped each frame. */
 const SPR={},SPR_SCALE=2.5,BOX1=[-48,-104,48,40],BOX2=[-86,-96,86,88],BOXC=[-40,-46,40,40],BOXA=[-34,-36,34,27];
+// Canvases that are painted once and then read back (sprite finishing, outlines, icons) live in main memory:
+// reading pixels from a graphics-card canvas stalls until the card catches up, which made the first frame take seconds.
+let SPR_DEADLINE=0,SPR_MISS=0,SPR_MISS_LAST=-1,SPR_SPENT=0,SPR_MADE=0;const EMPTY_CV=document.createElement('canvas');EMPTY_CV.width=EMPTY_CV.height=1;
+function cpuCanvas(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d',{willReadFrequently:true});return c}
 function sprite(key,box,draw){
   let s=SPR[key];if(s)return s;
+  // Behind the loading screen, painting every sprite of a big farm in one frame froze the bar for seconds: there each
+  // frame gets a budget, a sprite past it waits for a later frame, and the bar waits until none are left (at most 6 s).
+  // In the game itself there is no budget, so nothing is ever missing.
+  // (the budget counts only time spent making sprites, and every frame makes at least one, so nothing waits forever)
+  if(SPR_DEADLINE&&SPR_MADE>0&&SPR_SPENT>SPR_DEADLINE){SPR_MISS++;return{c:EMPTY_CV,box,w:1,h:1,wait:1}}
+  const t0s=SPR_DEADLINE?performance.now():0;try{return sprite0(key,box,draw)}finally{if(SPR_DEADLINE){SPR_SPENT+=performance.now()-t0s;SPR_MADE++}}
+}
+function sprite0(key,box,draw){
   const c=document.createElement('canvas'),w=box[2]-box[0],h=box[3]-box[1];
   c.width=Math.ceil(w*SPR_SCALE);c.height=Math.ceil(h*SPR_SCALE);
   const prev=g;g=c.getContext('2d');g.setTransform(SPR_SCALE,0,0,SPR_SCALE,-box[0]*SPR_SCALE,-box[1]*SPR_SCALE);draw();g=prev;
@@ -3539,22 +3551,31 @@ document.body.classList.toggle('lowfx',QL<2);
 // Static things (the delivery board, the parked truck) pass a key: their outlined picture is baked once into its own
 // canvas, ground shadow included, and only stamped afterwards; it is rebuilt when the zoom or the quality changes.
 const INKC=new Map();
-function inkBake(T,sx,sy,s,r,rw,up,down,fn){
+function inkBake(T,sx,sy,s,r,rw,up,down,fn,old){
+  const dl=SPR_DEADLINE;SPR_DEADLINE=0;try{return inkBake0(T,sx,sy,s,r,rw,up,down,fn,old)}finally{SPR_DEADLINE=dl}
+}
+function inkBake0(T,sx,sy,s,r,rw,up,down,fn,old){
   const pad=Math.ceil(r)+2,bw=Math.ceil(rw*s)+pad*2,bh=Math.ceil((up+down)*s)+pad*2,ox=pad+rw*s/2,oy=pad+up*s,mk=()=>{const c=document.createElement('canvas');c.width=bw;c.height=bh;return c};
-  const C=mk(),A=mk(),B=mk(),cx=C.getContext('2d'),ax=A.getContext('2d'),bx2=B.getContext('2d');
+  // an animated picture re-bakes into the same three canvases: allocating new ones many times a second churns graphics memory
+  const re=old&&old.A&&old.c.width===bw&&old.c.height===bh,C=re?old.c:mk(),A=re?old.A:mk(),B=re?old.B:mk(),cx=C.getContext('2d'),ax=A.getContext('2d'),bx2=B.getContext('2d');
+  if(re)for(const x of [cx,ax,bx2]){x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='source-over';x.globalAlpha=1;x.clearRect(0,0,bw,bh)}
   ax.setTransform(T.a,T.b,T.c,T.d,T.e-sx+ox,T.f-sy+oy);
   const prev=g,pI=INKING,o0=INK_OFF[0],o1=INK_OFF[1];INKING=cx;INK_OFF[0]=INK_OFF[1]=0;g=ax;try{fn()}finally{g=prev;INKING=pI;INK_OFF[0]=o0;INK_OFF[1]=o1}
   bx2.drawImage(A,0,0);bx2.globalCompositeOperation='source-in';bx2.fillStyle=NATURAL?'rgba(34,24,12,.42)':'rgba(38,20,8,.82)';bx2.fillRect(0,0,bw,bh);
   for(const[dx,dy]of INK_DIRS)cx.drawImage(B,dx*r,dy*r);cx.drawImage(A,0,0);
-  return{c:C,ox,oy,a:T.a,b:T.b,cc:T.c,d:T.d,n:INK_DIRS.length};
+  return{c:C,A,B,ox,oy,a:T.a,b:T.b,cc:T.c,d:T.d,n:INK_DIRS.length};
 }
-function inkLive(ax,ay,rw,up,down,fn,key){
+// maxAge (ms): a keyed picture that animates; it is re-baked when older than that, at most a couple per frame
+let liveBudget=2,VISK=0,FRAME_SCALE=0;
+function inkLive(ax,ay,rw,up,down,fn,key,maxAge){
   if(ICON_MODE||QL===0)return fn();
   const T=g.getTransform(),[wx,wy]=P(ax,ay),s=Math.hypot(T.a,T.b),sx=T.a*wx+T.c*wy+T.e,sy=T.b*wx+T.d*wy+T.f,r=NATURAL?Math.max(.6,Math.min(1.4,s*.22)):Math.max(1,Math.min(4,s*.65));
   if(key){
     if(sx+rw*s<0||sx-rw*s>cv.width||sy+down*s<0||sy-up*s>cv.height)return;
     const k=key+'|'+(NATURAL?1:0);let c=INKC.get(k);
-    if(!c||c.a!==T.a||c.b!==T.b||c.cc!==T.c||c.d!==T.d||c.n!==INK_DIRS.length){c=inkBake(T,sx,sy,s,r,rw,up,down,fn);INKC.set(k,c)}
+    const tn=performance.now(),stale=c&&maxAge&&tn-c.t>maxAge&&liveBudget>0;
+    if(!c||stale||c.a!==T.a||c.b!==T.b||c.cc!==T.c||c.d!==T.d||c.n!==INK_DIRS.length){if(maxAge)liveBudget--;c=inkBake(T,sx,sy,s,r,rw,up,down,fn,maxAge?c:null);c.t=tn;INKC.set(k,c)}
+    c.u=tn;
     g.save();g.setTransform(1,0,0,1,0,0);g.drawImage(c.c,Math.round(sx-c.ox),Math.round(sy-c.oy));g.restore();return;
   }
   const x0=Math.max(0,Math.floor(sx-rw*s/2)),y0=Math.max(0,Math.floor(sy-up*s)),x1=Math.min(cv.width,Math.ceil(sx+rw*s/2)),y1=Math.min(cv.height,Math.ceil(sy+down*s)),w=x1-x0,h=y1-y0;
@@ -3571,9 +3592,9 @@ function inkLive(ax,ay,rw,up,down,fn,key){
 }
 // Sprites are painted at 2.5x; when the farm is zoomed out, a pre-shrunk copy close to screen size is used instead,
 // so the browser never has to scale a big picture down every frame.
-function spriteAt(s){
+function spriteAt(s){if(s.wait)return s.c;
   if(ICON_MODE||g!==MAIN_G)return s.c;
-  const want=Math.abs(g.getTransform().a);let c=s.c,k=SPR_SCALE;
+  const want=FRAME_SCALE||Math.abs(g.getTransform().a);let c=s.c,k=SPR_SCALE;
   while(k/2>=want*1.15&&k>.6){k/=2;const key='m'+k;if(!s[key]){const m=document.createElement('canvas');m.width=Math.max(1,Math.ceil(s.w*k));m.height=Math.max(1,Math.ceil(s.h*k));const x=m.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(c,0,0,m.width,m.height);s[key]=m}c=s[key]}
   return c;
 }
@@ -4206,17 +4227,28 @@ function bubbleBase(px,py,r,state,now,seed){
   if(state==='feed'){const qx=px+r*.78,qy=py-r*.7,k=reduce?1:1+Math.max(0,Math.sin(t*5))*.12;ell(qx,qy,4.4*k,4.4*k,'#e0352b','#fff',1.2);
     g.fillStyle='#fff';g.fillRect(qx-.75,qy-2.8,1.5,3.4);g.fillRect(qx-.75,qy+1.2,1.5,1.4)}
 }
-function bubbleWrap(px,py,r,state,now,seed,draw,gs){
+// ck: a cache key for the bubble's picture. Bubbles that only bob and pulse are painted once per zoom level and
+// stamped afterwards; the feed bubble (its "!" blinks) is always drawn live.
+const BUBC=new Map();
+function bubbleWrap(px,py,r,state,now,seed,draw,gs,ck){
   const t=reduce?0:now/1000+(seed||0),k=bubK();
   py+=reduce?0:Math.sin(t*2.6)*1.6;
+  const pulse=state==='ready'&&!reduce?1+Math.sin(t*4)*.045:1;
+  if(ck&&state!=='feed'&&FRAME_SCALE&&g===MAIN_G){
+    const rq=Math.ceil(FRAME_SCALE*k*1.1*4)/4,key=ck+'|'+state+'|'+r+'|'+gs+'|'+rq+'|'+(NATURAL?1:0);let c=BUBC.get(key);
+    if(!c){const half=r+6,top=r+6,cv2=document.createElement('canvas');cv2.width=Math.ceil(2*half*rq);cv2.height=Math.ceil((top+r*1.4+6)*rq);
+      const prev=g;g=cv2.getContext('2d');try{g.setTransform(rq,0,0,rq,half*rq,top*rq);bubbleBase(0,0,r,state,now,seed);g.save();g.scale(gs,gs);draw();g.restore()}finally{g=prev}
+      if(BUBC.size>240)BUBC.clear();c={c:cv2,half,top,rq};BUBC.set(key,c)}
+    g.save();g.translate(px,py);g.scale(k*pulse,k*pulse);g.drawImage(c.c,-c.half,-c.top,c.c.width/c.rq,c.c.height/c.rq);g.restore();return py;
+  }
   g.save();g.translate(px,py);
-  const pulse=state==='ready'&&!reduce?1+Math.sin(t*4)*.045:1;g.scale(k*pulse,k*pulse);
+  g.scale(k*pulse,k*pulse);
   if(state==='feed'&&!reduce)g.rotate(Math.sin(t*3.2)*.06);
   bubbleBase(0,0,r,state,now,seed);g.save();g.scale(gs,gs);draw();g.restore();g.restore();
   return py;
 }
 function bubble(px,py,kind,now){
-  bubbleWrap(px,py,11,kind==='home'?'home':'ready',now,px*.01,()=>glyph(0,0,kind),1);
+  bubbleWrap(px,py,11,kind==='home'?'home':'ready',now,px*.01,()=>glyph(0,0,kind),1,'gl:'+kind);
 }
 function glyph(px,py,kind){
   if(kind==='egg'){const gr=g.createRadialGradient(px-1.6,py-1.6,.5,px,py+1,6.4);gr.addColorStop(0,'#fffaf0');gr.addColorStop(.6,'#f6e6c6');gr.addColorStop(1,'#d9bf8e');
@@ -5837,7 +5869,7 @@ function prodCanvas(id){
 function hasProd(id){return !!PV[id.startsWith('g_')?id.slice(2):id]}
 const ITEM_ICON={};
 function itemIcon(id){
-  if(!ITEM_ICON[id]){const c=document.createElement('canvas');c.width=c.height=96;const prev=g;g=c.getContext('2d');drawGood(id,48,52,3.4);g=prev;ITEM_ICON[id]=c.toDataURL()}
+  if(!ITEM_ICON[id]){const c=cpuCanvas(96,96);const prev=g;g=c.getContext('2d');drawGood(id,48,52,3.4);g=prev;ITEM_ICON[id]=c.toDataURL()}
   return ITEM_ICON[id];
 }
 function goodBubble(px,py,id,now){
@@ -6236,11 +6268,11 @@ function drawObj(x,y,o,now,part){
     if(reduce||ICON_MODE)blit(ts,x,y);
     else{// trees lean gently in the breeze, each on its own rhythm; the trunk base stays put
       const[bx,by]=P(x+.5,y+.5),k=Math.sin(now/1700+x*1.3+y*.9)*.02;g.save();g.translate(bx,by);g.transform(1,0,-k,1,0,0);g.translate(-bx,-by);blit(ts,x,y);g.restore()}
-    if(ready&&!ICON_BARE){const[px,py]=P(x+.5,y+.5);bubbleWrap(px+20,py-56,11,'ready',now,px*.01,()=>drawGood('t_'+o.id,0,.6,.74),1)}
+    if(ready&&!ICON_BARE){const[px,py]=P(x+.5,y+.5);bubbleWrap(px+20,py-56,11,'ready',now,px*.01,()=>drawGood('t_'+o.id,0,.6,.74),1,'t:'+o.id)}
     return;
   }
   if(o.k==='deco'){
-    if(LIVE_DECO.has(o.id)){const n=size(o);return inkLive(x+n/2,y+n/2,110*n+60,200,60,()=>drawDeco(x,y,o,now))}
+    if(LIVE_DECO.has(o.id)){const n=size(o);return inkLive(x+n/2,y+n/2,110*n+60,200,60,()=>drawDeco(x,y,o,now),'live:'+x+','+y+':'+o.id,reduce?1e9:QL>=2?66:100)}
     if(ROTATABLE.has(o.id)){const m=wallMask(x,y,o);return blit(sprite('d:'+o.id+':'+m,BOX1,()=>drawDeco(0,0,{k:'deco',id:o.id,m},0)),x,y)}
     return blit(sprite('d:'+o.id,size(o)===2?BOX2:BOX1,()=>drawDeco(0,0,{k:'deco',id:o.id},0)),x,y);
   }
@@ -6297,9 +6329,12 @@ function drawPlot(x,y,o,now){
   if(gold){const k2=reduce?.5:(Math.sin(now/400)+1)/2;ell(cx,cy-2,30,14,'rgba(255,214,60,'+(.45+k2*.25).toFixed(2)+')',null);ell(cx,cy-2,30,14,null,'rgba(255,240,150,.9)',1.6)}
   const growing=s.st!=='seed'&&s.st!=='withered',sw=reduce||!growing?0:Math.sin(now/1150-(x*.62+y*.38))*(s.st==='sprout'?.03:.06),
     bo=ripe&&!reduce?Math.abs(Math.sin(now/560+x*.9+y*1.3))*.04:0,sh=shakeOf(k);
-  if(sw||bo||sh||pop!==1){g.save();g.translate(cx+sh,cy);g.transform(1,0,-sw,1,0,0);g.scale(pop,pop*(1+bo));g.translate(-cx,-cy)}
-  blit(sprite('c2:'+o.crop+':'+s.st,BOXC,()=>drawClumps(0,0,s.c,s.st)),x,y);
-  if(sw||bo||sh||pop!==1)g.restore();
+  const cs=sprite('c2:'+o.crop+':'+s.st,BOXC,()=>drawClumps(0,0,s.c,s.st));
+  if((sw||bo||sh||pop!==1)&&FRAME_SCALE&&g===MAIN_G){// the sway as one matrix on top of the camera (no save/restore per plot)
+    const a=FRAME_SCALE,e=dpr*cam.x,f=dpr*cam.y,py=pop*(1+bo);
+    g.setTransform(a*pop,0,-a*sw*py,a*py,a*(cx+sh-pop*cx+sw*py*cy)+e,a*(cy-py*cy)+f);blit(cs,x,y);g.setTransform(a,0,0,a,e,f)}
+  else if(sw||bo||sh||pop!==1){g.save();g.translate(cx+sh,cy);g.transform(1,0,-sw,1,0,0);g.scale(pop,pop*(1+bo));g.translate(-cx,-cy);blit(cs,x,y);g.restore()}
+  else blit(cs,x,y);
   if(gold)for(let i=0;i<3;i++){const k2=reduce?.8:(Math.sin(now/300+i*2.1)+1)/2;star4(cx-14+i*14,cy-16-i%2*12,3+k2*4,'rgba(255,236,120,'+(.5+k2*.5).toFixed(2)+')')}
   if(ripe&&!ICON_MODE&&cam.z>.55&&!pend[k]){const b=reduce?0:Math.sin(now/300+x*1.3+y*.7)*2.2,c=cropBadge(o.gold?'g_'+o.crop:o.crop);g.drawImage(c,cx-12,cy-50+b,24,26.7)}
 }
@@ -6607,8 +6642,8 @@ function feedGlyph(px,py,s){s=s||1;g.save();g.translate(px,py);g.scale(s,s);
   g.strokeStyle='#b08a3a';g.lineWidth=.7;line([-1.6,3],[0,-1.4]);line([0,-1.4],[1.6,3]);line([0,-1.4],[0,3.6]);
   for(const[dx,dy]of[[-1.6,-8.8],[.2,-9.6],[1.8,-8.6],[-.6,-10.6],[1.2,-10.8]])ell(dx,dy,.95,.7,'#f0c84a','#a8801a',.3);
   g.restore()}
-function bigBubble(px,py,now,draw,count,state){
-  const k=bubK(),y=bubbleWrap(px,py,15,state||'ready',now,0,draw,1.5);
+function bigBubble(px,py,now,draw,count,state,ck){
+  const k=bubK(),y=bubbleWrap(px,py,15,state||'ready',now,0,draw,1.5,ck);
   if(count>1){const cx=px+19*k,cy=y-15*k;g.save();g.translate(cx,cy);g.scale(k,k);
     const w=count>9?12:9.5;ell(.6,1.4,w,8,'rgba(20,10,4,.3)');ell(0,0,w,8,state==='feed'?'#e0352b':'#3f9a3c','#fff',1.6);
     g.font='800 10.5px Nunito, Fredoka, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.fillText('×'+count,0,.6);g.textBaseline='alphabetic';g.restore()}
@@ -6621,7 +6656,7 @@ function homeOverlay(x,y,o,now){
   g.drawImage(sg.c,sx-sg.w*ss/2,sy-sg.h*ss,sg.w*ss,sg.h*ss);
   // bubbles: ready goods (tap to collect all) and a feed sack (tap to feed all)
   const items=[];if(st.ready.length)items.push(['ready',st.ready.length]);if(st.hungry.length)items.push(['feed',st.hungry.length]);
-  items.forEach(([kind,n],i)=>{const bx=sx+(i-(items.length-1)/2)*50*bubK(),by0=sy-sg.h*ss-30*bubK(),by=bigBubble(bx,by0,now+i*400,kind==='ready'?()=>bigGlyph(o.id):()=>feedGlyph(0,1,1),n,kind==='ready'?'ready':'feed');
+  items.forEach(([kind,n],i)=>{const bx=sx+(i-(items.length-1)/2)*50*bubK(),by0=sy-sg.h*ss-30*bubK(),by=bigBubble(bx,by0,now+i*400,kind==='ready'?()=>bigGlyph(o.id):()=>feedGlyph(0,1,1),n,kind==='ready'?'ready':'feed',kind==='ready'?'big:'+o.id:null);
     const[scx,scy]=[bx*cam.z+cam.x,by*cam.z+cam.y],r=Math.max(24,21*cam.z*bubK());HBUB.push({x:scx,y:scy,r,kind,home:hk,id:o.id})});
 }
 function bigGlyph(id){
@@ -6752,7 +6787,7 @@ const NAMES={cow:['Bessie','Daisy','Clover','Buttercup','Mabel','Rosie','Hazel',
   turkey:['Gobbles','Chestnut','Tom','Acorn'],llama:['Dolly','Karma','Fuzz','Andes']};
 function animalName(k,id){const L=NAMES[id]||['Buddy'];let h=0;for(const c of k)h=(h*31+c.charCodeAt(0))>>>0;return L[h%L.length]}
 function happiness(o,now){if(hungry(o))return 35;const lv=HLV[o.id]||1;return Math.min(100,78+lv*6+(readyIn(o,ANIMALS[o.id],now)<=0?4:0))}
-function smallBubble(px,py,now,draw,state){bubbleWrap(px,py,9.5,state||'ready',now,0,draw,.85)}
+function smallBubble(px,py,now,draw,state,ck){bubbleWrap(px,py,9.5,state||'ready',now,0,draw,.85,ck)}
 function drawAnimal(x,y,o,now){
   const k=x+','+y,r=ICON_MODE?{x:0,y:0,f:1}:roamOf(k),[ox,oy]=P(x,y),px=ox+(r.x-r.y)*W/2,py=oy+(r.x+r.y)*H/2+18;
   let sc=ICON_MODE?1:(SPEC_SC[o.id]||1);const baby=isBaby(o,now);if(baby)sc*=.62;
@@ -6768,7 +6803,7 @@ function drawAnimal(x,y,o,now){
   if(ICON_MODE)return;
   const top=py-((o.id==='horse'||o.id==='llama'?52:o.id==='cow'?38:o.id==='rabbit'?26:32)*sc)-10;
   if(homeless)bubble(px,top-6,'home',now);
-  else if(ready&&(cam.z>1.9||x>HX))smallBubble(px,top,now+(r.seed||0)*300,()=>drawGood('a_'+o.id,0,.4,.56),'ready');
+  else if(ready&&(cam.z>1.9||x>HX))smallBubble(px,top,now+(r.seed||0)*300,()=>drawGood('a_'+o.id,0,.4,.56),'ready','a:'+o.id);
   else if(hn&&(cam.z>1.9||x>HX))smallBubble(px,top,now+(r.seed||0)*300,()=>feedGlyph(0,1,.9),'feed');
 }
 // tapping an animal: it hops, says something, and a heart floats up
@@ -7553,9 +7588,10 @@ function updateVisitors(dt,now){
 }
 function drawVisitor(v,now){
   const[px,py]=P(v.x,v.y);
+  if(!v._k)v._k='vis'+(++VISK);
   inkLive(v.x,v.y,90,90,20,()=>{g.save();g.translate(px,py);g.scale(v.dir*FIG,FIG);
   drawAvatar(v.n.look,{walking:v.state==='walk',walk:v.walk,t:v.t,kind:v.state==='wave'?'wave':null});
-  g.restore()});
+  g.restore()},v._k,reduce?0:40);
   // name tag
   g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=g.measureText(v.n.name).width+10,ty=py-66;
   poly([[px-w/2,ty-9],[px+w/2,ty-9],[px+w/2,ty+3],[px-w/2,ty+3]],'rgba(255,250,240,.92)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText(v.n.name,px,ty);
@@ -7850,14 +7886,16 @@ function blitLayer(which){
   // chunk edges land on whole device pixels so neighbours meet without a hairline
   const X=x=>Math.round((cam.x+x*cam.z)*dpr),Y=y=>Math.round((cam.y+y*cam.z)*dpr);
   g.setTransform(1,0,0,1,0,0);chTick++;let redo=1;
-  for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){const key=i+','+j;let ch=m.get(key);if(!ch||(ch.s!==chS&&redo-->0)){ch=paintChunk(which,i,j);m.set(key,ch)}ch.used=chTick;
+  let soft=false;
+  for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){const key=i+','+j;let ch=m.get(key);if(!ch||(ch.s!==chS&&redo-->0)){ch=paintChunk(which,i,j);m.set(key,ch)}else if(ch.s!==chS)soft=true;ch.used=chTick;
     if(!ch.c)continue;const x0=b[0]+i*CHW,y0=b[1]+j*CHW,dx=X(x0),dy=Y(y0),dw=X(x0+CHW)-dx,dh=Y(y0+CHW)-dy;
     // copy only the part of the chunk that is on screen
-    const ax=Math.max(dx,0),ay=Math.max(dy,0),bx=Math.min(dx+dw,cv.width),by=Math.min(dy+dh,cv.height);if(bx<=ax||by<=ay)continue;
+    const ax=Math.max(dx,0),ay=Math.max(dy,0),bx=Math.min(dx+dw,clipW||cv.width),by=Math.min(dy+dh,clipH||cv.height);if(bx<=ax||by<=ay)continue;
     const kx=ch.c.width/dw,ky=ch.c.height/dh;g.drawImage(ch.c,(ax-dx)*kx,(ay-dy)*ky,(bx-ax)*kx,(by-ay)*ky,ax,ay,bx-ax,by-ay)}
   // keep the chunks on screen plus a generous margin of recently seen ones
   const keep=(i1-i0+1)*(j1-j0+1)+6;
   if(m.size>keep){const old=[...m].sort((p,q)=>p[1].used-q[1].used);for(let k=0;k<m.size-keep;k++)m.delete(old[k][0])}
+  return soft;
 }
 let last=performance.now();
 // A soft darkening toward the screen edges keeps the eye on the farm in the middle.
@@ -7866,7 +7904,7 @@ function drawVignette(){
     gr.addColorStop(0,'rgba(20,30,8,0)');gr.addColorStop(.6,'rgba(20,30,8,.06)');gr.addColorStop(1,'rgba(20,30,8,.34)');x.fillStyle=gr;x.fillRect(0,0,256,256)}
   g.setTransform(1,0,0,1,0,0);g.drawImage(VIG,0,0,cv.width,cv.height);
 }
-let skipFrame=false,GCV=null,gcKey='',groundVer=0;
+let skipFrame=false,GCV=null,gcKey='',groundVer=0,gcX=0,gcY=0,gcLX=NaN,gcLY=NaN,clipW=0,clipH=0;
 // A drawing error must never stop the game: report it once and keep the loop going.
 let frameErr=false;
 function frame(t){try{frameStep(t)}catch(e){if(!frameErr){frameErr=true;console.error(e)}g=MAIN_G;try{g.restore();g.restore();g.restore();g.globalAlpha=1}catch(e2){}requestAnimationFrame(frame)}}
@@ -7876,26 +7914,35 @@ function frameStep(t){
   const rawDt=(t-last)/1000,dt=Math.min(.05,rawDt);last=t;if(rawDt>0&&rawDt<.5)perfTick(rawDt);
   const now=Date.now();
   if(HV){updateFarmer(dt,now);requestAnimationFrame(frame);return}
+  liveBudget=2;FRAME_SCALE=0;SPR_DEADLINE=0;if(INKC.size>120&&Math.random()<.02){const tn=performance.now();for(const[k,c]of INKC)if(c.u&&tn-c.u>5000)INKC.delete(k)}
   seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateHelper(dt);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
   // The background (base colour, the endless meadow and the ground chunks) is composed into a screen-sized canvas only
   // when the camera, the canvas, the season or a ground chunk changes; otherwise each frame stamps it 1:1, which is
   // cheap even where the browser draws without the graphics card.
-  {const key=[cam.x.toFixed(2),cam.y.toFixed(2),cam.z.toFixed(4),cv.width,cv.height,chS,groundVer,season().id,NATURAL?1:0,QL].join('|');
+  // The background (base colour, the endless meadow and the ground chunks) is composed into a canvas a little bigger than
+  // the screen. Dragging the farm only slides that picture; it is composed again when the camera has moved past the
+  // margin, the zoom, canvas, season or a ground chunk changes, or once the camera comes to rest on a fractional pixel.
+  {const key=[cam.z.toFixed(4),cv.width,cv.height,chS,groundVer,season().id,NATURAL?1:0,QL].join('|'),
+      mg=Math.round(Math.min(vw,vh)*.3),mp=Math.round(mg*dpr),GW=cv.width+2*mp,GH=cv.height+2*mp;
     if(!GCV)GCV=document.createElement('canvas');
-    if(key!==gcKey||GCV.width!==cv.width||GCV.height!==cv.height){if(GCV.width!==cv.width||GCV.height!==cv.height){GCV.width=cv.width;GCV.height=cv.height}
-      const prevG=g,pv=groundVer;g=GCV.getContext('2d');try{
+    let ox=(cam.x-gcX)*dpr,oy=(cam.y-gcY)*dpr;const still=cam.x===gcLX&&cam.y===gcLY;gcLX=cam.x;gcLY=cam.y;
+    const ok=key===gcKey&&GCV.width===GW&&GCV.height===GH&&Math.abs(ox)<=mp&&Math.abs(oy)<=mp&&!(still&&(ox%1||oy%1));
+    if(!ok){if(GCV.width!==GW||GCV.height!==GH){GCV.width=GW;GCV.height=GH}
+      const prevG=g,pv=groundVer,cx0=cam.x,cy0=cam.y,vw0=vw,vh0=vh;g=GCV.getContext('2d');cam.x+=mg;cam.y+=mg;vw+=2*mg;vh+=2*mg;clipW=GW;clipH=GH;let soft=false;try{
   g.setTransform(1,0,0,1,0,0);
-  if(!BG){const sb=NATURAL?groundBg():season().bg;BG=g.createLinearGradient(0,0,0,cv.height);BG.addColorStop(0,sb[0]);BG.addColorStop(1,sb[1])}
-  g.fillStyle=BG;g.fillRect(0,0,cv.width,cv.height);HBUB=[];
+  if(!BG||BG.mp!==mp){const sb=NATURAL?groundBg():season().bg;BG=g.createLinearGradient(0,mp,0,mp+cv.height);BG.addColorStop(0,sb[0]);BG.addColorStop(1,sb[1]);BG.mp=mp}
+  g.fillStyle=BG;g.fillRect(0,0,GW,GH);HBUB=[];
   // painted style: the grass carries on past the painted land in every direction, so zooming out never shows its edge
   // (it is the same texture, anchored at the same world origin, so the land's soft rim fades into it seamlessly)
-  const gb=gBounds(),vx=-cam.x/cam.z,vy=-cam.y/cam.z,vw2=cv.width/dpr/cam.z,vh2=cv.height/dpr/cam.z,covered=vx>=gb[0]+430&&vx+vw2<=gb[2]-430&&vy>=gb[1]+345&&vy+vh2<=gb[3]-345;
+  const gb=gBounds(),vx=-cam.x/cam.z,vy=-cam.y/cam.z,vw2=GW/dpr/cam.z,vh2=GH/dpr/cam.z,covered=vx>=gb[0]+430&&vx+vw2<=gb[2]-430&&vy>=gb[1]+345&&vy+vh2<=gb[3]-345;
   if(NATURAL&&!covered){g.setTransform(cam.z*dpr,0,0,cam.z*dpr,cam.x*dpr,cam.y*dpr);
     g.fillStyle=grassPat();g.fillRect(vx,vy,vw2,vh2);if(season().id==='winter'){g.fillStyle='rgba(238,243,250,.18)';g.fillRect(vx,vy,vw2,vh2)}
     g.fillStyle=farMeadowPat();g.fillRect(vx,vy,vw2,vh2);g.fillStyle='rgba(26,44,10,.164)';g.fillRect(vx,vy,vw2,vh2);g.setTransform(1,0,0,1,0,0)}
-  blitLayer('ground');
-      }finally{g=prevG}gcKey=groundVer===pv?key:''}
-    g.setTransform(1,0,0,1,0,0);g.drawImage(GCV,0,0)}HBUB=[];
+  soft=blitLayer('ground');
+      }finally{g=prevG;cam.x=cx0;cam.y=cy0;vw=vw0;vh=vh0;clipW=clipH=0}
+      // chunks still waiting to be repainted sharp after a zoom: compose again next frame
+      gcKey=groundVer===pv&&!soft?key:'';gcX=cam.x;gcY=cam.y;ox=oy=0}
+    g.setTransform(1,0,0,1,0,0);g.drawImage(GCV,Math.round(ox)-mp,Math.round(oy)-mp)}HBUB=[];
   g.setTransform(dpr*cam.z,0,0,dpr*cam.z,dpr*cam.x,dpr*cam.y);
   drawHover();
   const list=[];
@@ -7914,7 +7961,9 @@ function frameStep(t){
   if(S.pet)list.push([pet.x+pet.y,0,0,{pet:1}]);
   list.push([N*2+3,0,0,{deliv:1}]);
   list.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  FRAME_SCALE=dpr*cam.z;SPR_MISS=0;SPR_SPENT=0;SPR_MADE=0;SPR_DEADLINE=$('title').hidden?0:14;
   for(const[,x,y,o,part]of list){if(!o){const veh=farmer.job&&farmer.job.vehicle;inkLive(farmer.x,farmer.y,veh?190:104,veh?170:92,veh?50:24,()=>drawFarmer(now))}else if(o.pet)inkLive(pet.x,pet.y,72,58,16,()=>drawPetSprite(now));else if(o.deliv)drawDeliveryArea(now);else if(o.helper)drawHelper(now);else if(o.n)drawVisitor(o,now);else drawObj(x,y,o,now,part)}
+  FRAME_SCALE=0;SPR_DEADLINE=0;SPR_MISS_LAST=SPR_MISS;
   if(farmer.sayT>0&&!VIS){const[px,py]=P(farmer.x,farmer.y);g.save();g.globalAlpha=Math.min(1,farmer.sayT*2.5);talkBubble(px,py-50,farmer.say);g.restore()}
   if(VIS)for(const k in S.tiles){const o=S.tiles[k];if(o.helped){const[x,y]=k.split(',').map(Number),[px,py]=P(x+.5,y+.5);ell(px,py-4,6,6,'#5bbf3a','#fff',1.4);g.strokeStyle='#fff';g.lineWidth=1.6;line([px-2.6,py-4],[px-.6,py-2]);line([px-.6,py-2],[px+2.8,py-6.4])}}
   if(placing&&hover){const n=placing.n;if(fits(hover[0],hover[1],n)){g.globalAlpha=.65;drawObj(hover[0],hover[1],placing.ghost,now);
@@ -8223,6 +8272,31 @@ function paintTitleBg(){
   // a soft vignette to keep the eye on the middle
   q=x.createRadialGradient(w/2,h*.45,m*.3,w/2,h*.5,Math.max(w,h)*.8);q.addColorStop(0,'rgba(0,0,0,0)');q.addColorStop(1,'rgba(20,30,10,.32)');x.fillStyle=q;x.fillRect(0,0,w,h);
 }
+
+/* ---- generated icons survive between sessions ----
+   Market and barn pictures are drawn on a canvas and turned into PNGs the first time they are needed, which is the
+   slowest part of opening those windows. They are kept in IndexedDB under a fingerprint of the game code, the art
+   style and the language, so a new version or a different look never shows stale pictures. */
+const ICDB={db:null,fp:'',saved:-1,busy:false};
+function icFingerprint(){let n=0;for(const sc of document.scripts)n+=sc.text.length;return n+'|'+(NATURAL?1:0)+'|'+ICON_R+'|'+LANG}
+function icOpen(){return new Promise(res=>{try{const r=indexedDB.open('fv-icons',1);r.onupgradeneeded=()=>r.result.createObjectStore('i');r.onsuccess=()=>res(r.result);r.onerror=()=>res(null);r.onblocked=()=>res(null)}catch(e){res(null)}})}
+async function icLoad(){
+  const db=ICDB.db||(ICDB.db=await icOpen());if(!db)return 0;ICDB.fp=icFingerprint();
+  return new Promise(res=>{try{const rq=db.transaction('i','readonly').objectStore('i').get(ICDB.fp);
+    rq.onsuccess=()=>{const v=rq.result;let n=0;if(v){for(const k in v.icons)if(!ICONS[k]){ICONS[k]=v.icons[k];n++}for(const k in v.items)if(!ITEM_ICON[k]){ITEM_ICON[k]=v.items[k];n++}}ICDB.saved=icCount();res(n)};
+    rq.onerror=()=>res(0)}catch(e){res(0)}});
+}
+function icCount(){return Object.keys(ICONS).length+Object.keys(ITEM_ICON).length}
+function icSave(){
+  if(!ICDB.db||ICDB.busy)return;const fp=icFingerprint(),n=icCount();if(n===ICDB.saved&&fp===ICDB.fp)return;
+  ICDB.busy=true;const icons={},items={};for(const k in ICONS)if(typeof ICONS[k]==='string')icons[k]=ICONS[k];for(const k in ITEM_ICON)items[k]=ITEM_ICON[k];
+  try{const tx=ICDB.db.transaction('i','readwrite'),st=tx.objectStore('i');st.clear();st.put({icons,items},fp);
+    tx.oncomplete=()=>{ICDB.busy=false;ICDB.saved=n;ICDB.fp=fp};tx.onerror=tx.onabort=()=>{ICDB.busy=false}}catch(e){ICDB.busy=false}
+}
+// new pictures are written in a quiet moment, never while a window is opening
+setInterval(()=>{const go=()=>icSave();if(window.requestIdleCallback)requestIdleCallback(go,{timeout:5000});else go()},15000);
+addEventListener('pagehide',()=>icSave());
+
 /* ================= boot: loading bar and the hawk intro ================= */
 const LOAD_STEPS=['Waking the rooster…','Plowing the fields…','Watering the crops…','Feeding the animals…','Opening the barn doors…'];
 const LOAD_TIPS=['Tip: watered crops grow faster.','Tip: hungry animals stop making goods. Keep the Feed Mill busy.','Tip: Dale pays well for deliveries and gives lots of XP.','Tip: spin the Lucky Wheel for free once a day.','Tip: neighbors trade boards, nails, bricks and paint.','Tip: press and hold on the grass, then drag to plow a whole row.'];
@@ -8251,9 +8325,11 @@ function bootLoad(gate,done){
   const T0=performance.now(),minMs=1300;
   (async()=>{
     try{await Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),wait(2500)])}catch(e){}target=22;
-    await nextFrame();await nextFrame();target=34;
-    const ids=Object.keys(ITEMS);
-    for(let i=0;i<ids.length;i++){try{itemIcon(ids[i])}catch(e){}if(i%5===4){target=34+48*(i/ids.length);await nextFrame()}}
+    {const t0=performance.now();while(performance.now()-t0<6000){await nextFrame();if(SPR_MISS_LAST===0||(SPR_MISS_LAST<0&&performance.now()-t0>400))break;target=Math.min(29,target+.4)}}target=30;
+    try{await Promise.race([icLoad(),wait(1500)])}catch(e){}target=34;
+    // warm the item icons the market and barn show first, within a time budget; the rest are drawn when first needed
+    const ids=Object.keys(ITEMS),tw=performance.now(),budget=600;
+    for(let i=0;i<ids.length;i++){try{itemIcon(ids[i])}catch(e){}const used=performance.now()-tw;if(used>budget)break;if(i%4===3){target=34+48*Math.max(i/ids.length,used/budget);await nextFrame()}}
     target=84;
     await Promise.race([Promise.all(['dog_bark1','cat_meow1'].map(n=>fetch('sounds/'+n+'.mp3').catch(()=>0))),wait(1500)]);target=92;
     const left=minMs-(performance.now()-T0);if(left>0)await wait(left);
@@ -9818,8 +9894,8 @@ cv.addEventListener('pointermove',e=>{
   if(pointers.has(e.pointerId))pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});lastMove={x:e.clientX,y:e.clientY};
   if(SWEEP){sweepMove(e.clientX,e.clientY);return}
   if(pinch&&pointers.size===2){const[p1,p2]=[...pointers.values()],mx=(p1.x+p2.x)/2,my=(p1.y+p2.y)/2;cam.x+=mx-pinch.mx;cam.y+=my-pinch.my;pinch.mx=mx;pinch.my=my;zoomAt(mx,my,pinch.z*Math.hypot(p1.x-p2.x,p1.y-p2.y)/pinch.d/cam.z);return}
+  if(down){const dx=e.clientX-down.x,dy=e.clientY-down.y;if(!down.moved&&Math.hypot(dx,dy)>7){down.moved=true;clearTimeout(down.hold);cv.classList.add('grab');hover=null;$('tip').hidden=true}if(down.moved){cam.x=down.cx+dx;cam.y=down.cy+dy;return}}
   hover=tileAt(e.clientX,e.clientY);
-  if(down){const dx=e.clientX-down.x,dy=e.clientY-down.y;if(!down.moved&&Math.hypot(dx,dy)>7){down.moved=true;clearTimeout(down.hold);cv.classList.add('grab')}if(down.moved){cam.x=down.cx+dx;cam.y=down.cy+dy}}
   updateTip(e.clientX,e.clientY);
 });
 function endPointer(e){
@@ -10168,7 +10244,7 @@ function cropIcon(c,W2,H2,pad,maxUp){
   const x=c.getContext('2d'),w=c.width,h=c.height,d=x.getImageData(0,0,w,h).data;let x0=w,y0=h,x1=-1,y1=-1;
   for(let y=0;y<h;y+=2)for(let i=0;i<w;i+=2)if(d[(y*w+i)*4+3]>12){if(i<x0)x0=i;if(i>x1)x1=i;if(y<y0)y0=y;if(y>y1)y1=y}
   if(x1<0)return c;x0=Math.max(0,x0-2);y0=Math.max(0,y0-2);x1=Math.min(w-1,x1+2);y1=Math.min(h-1,y1+2);
-  const bw=x1-x0+1,bh=y1-y0+1,o=document.createElement('canvas');o.width=W2;o.height=H2;
+  const bw=x1-x0+1,bh=y1-y0+1,o=cpuCanvas(W2,H2);
   const k=Math.min((W2-2*pad)/bw,(H2-2*pad)/bh,maxUp),dw=bw*k,dh=bh*k;o.getContext('2d').drawImage(c,x0,y0,bw,bh,(W2-dw)/2,H2-pad-dh,dw,dh);return o;
 }
 // a round patch of lawn with a few tufts, for animals and trees
@@ -10197,7 +10273,7 @@ function seedPacket(id){
   const pc2=prodCanvas(id);if(pc2)g.drawImage(pc2,118,64,118,118);
 }
 function renderIcon(cat,id,lv,bare){
-  const R=ICON_R,c=document.createElement('canvas');c.width=240*R;c.height=200*R;
+  const R=ICON_R,c=cpuCanvas(240*R,200*R);
   const prev=g;g=c.getContext('2d');const now=Date.now();ICON_MODE=true;ICON_BARE=!!bare;
   try{
   const tall=cat==='trees'||(cat==='decor'&&['windmill','silo','balloon','scarecrow','lamp','arbor','towerclock','xtree','snowman'].includes(id));
@@ -11743,7 +11819,7 @@ function updateHelper(dt){
 }
 function drawHelper(now){
   if(!HLP.on)return;const[px,py]=P(HLP.x,HLP.y),kind=HLP.state==='work'?(HLP.job&&HLP.job.kind==='feed'?'feed':HLP.job&&HLP.job.kind==='harvest'?'harvest':'collect'):null;
-  inkLive(HLP.x,HLP.y,90,90,20,()=>{g.save();g.translate(px,py);g.scale(HLP.dir*FIG,FIG);drawAvatar(HELPER_P.look,{walking:HLP.state==='walk',walk:HLP.walk,t:HLP.t,kind,working:HLP.state==='work'});g.restore()});
+  inkLive(HLP.x,HLP.y,90,90,20,()=>{g.save();g.translate(px,py);g.scale(HLP.dir*FIG,FIG);drawAvatar(HELPER_P.look,{walking:HLP.state==='walk',walk:HLP.walk,t:HLP.t,kind,working:HLP.state==='work'});g.restore()},reduce?null:'helper',40);
   const en=helperEnergy(),mx=helperMax(),ty=py-66;g.font='600 9px Fredoka, sans-serif';g.textAlign='center';const w=Math.max(34,g.measureText('Jake').width+12);
   poly([[px-w/2,ty-10],[px+w/2,ty-10],[px+w/2,ty+7],[px-w/2,ty+7]],'rgba(255,250,240,.94)','#6b3c15',1);g.fillStyle='#3a2310';g.fillText('Jake',px,ty-1);
   const bw=w-8,k=en/mx;poly([[px-bw/2,ty+1.5],[px+bw/2,ty+1.5],[px+bw/2,ty+4.5],[px-bw/2,ty+4.5]],'#e2d6bf');if(k>0)poly([[px-bw/2,ty+1.5],[px-bw/2+bw*k,ty+1.5],[px-bw/2+bw*k,ty+4.5],[px-bw/2,ty+4.5]],k<.25?'#e8771a':'#5bbf3a');
@@ -11751,7 +11827,7 @@ function drawHelper(now){
   if(HLP.sayT>0&&HLP.say){g.save();g.globalAlpha=Math.min(1,HLP.sayT*2.5);talkBubble(px,ty-14,tr(HLP.say));g.restore()}
 }
 function helperAt(cx,cy){if(!HLP.on||VIS)return false;const[px,py]=P(HLP.x,HLP.y),sx=px*cam.z+cam.x,sy=(py-28)*cam.z+cam.y;return Math.abs(cx-sx)<14*cam.z&&Math.abs(cy-sy)<34*cam.z}
-function showHelper(){
+function showHelper(){if(!S.helper)return;
   modal({title:'Jake, your farm helper',color:'green',small:true,render(b){
     const h=S.helper,en=helperEnergy(),mx=helperMax(),p=el('div','body-pad helperwin');
     const face=el('div','vface');face.innerHTML=avatar(HELPER_P);p.appendChild(face);
