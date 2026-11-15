@@ -1980,6 +1980,16 @@ body .wheelbox .goals-head{background:linear-gradient(rgba(242,197,58,.36),rgba(
 .helperwin .hopts{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:8px}
 .helperwin .hrow{margin:4px 0 8px}.helperwin .upbox{width:100%;max-width:340px}
 .helperwin .bill{width:22px;height:16px;flex-basis:22px;font-size:10px;border-width:1px;margin:0 3px;vertical-align:-2px}
+
+/* ---- tutorial pointer ---- */
+.tutarrow{position:fixed;z-index:60;width:34px;height:42px;margin-left:-17px;transform:translateY(-100%);pointer-events:none;animation:tutbob .9s ease-in-out infinite;filter:drop-shadow(0 3px 3px rgba(40,20,0,.35))}
+.tutarrow svg{width:100%;height:100%;display:block}
+.tutarrow.up{transform:none}.tutarrow.up svg{transform:rotate(180deg)}
+@keyframes tutbob{0%,100%{translate:0 0}50%{translate:0 -9px}}
+.tutarrow.up{animation-name:tutbobup}@keyframes tutbobup{0%,100%{translate:0 0}50%{translate:0 9px}}
+@media (prefers-reduced-motion:reduce){.tutarrow{animation:none}}
+#sheetBody .tutpulse{position:relative;z-index:1}
+.tut{transition:translate .2s ease}
 </style>
 </head>
 <body>
@@ -8279,7 +8289,7 @@ function showBarn(){
         const row=el('div','row');
         if(k==='diesel'){const r=el('button','buy','Refuel');r.onclick=()=>{refuel(false);rerender()};row.appendChild(r)}
         else if(k==='feed'||k.startsWith('f_')){const f=el('button','buy','Feed animals');f.onclick=()=>{closeModal();feedAll(k==='feed'?undefined:k.slice(2))};row.appendChild(f)}
-        else{const s1=el('button','buy','Sell 1');s1.onclick=()=>sellGood(k,1);row.appendChild(s1);const sa=el('button','buy cashbuy','Sell all');sa.onclick=()=>sellGood(k,have(k));row.appendChild(sa)}
+        else{const s1=el('button','buy','Sell 1');s1.dataset.tut='sell1';s1.onclick=()=>sellGood(k,1);row.appendChild(s1);const sa=el('button','buy cashbuy','Sell all');sa.onclick=()=>sellGood(k,have(k));row.appendChild(sa)}
         c.appendChild(row);grid.appendChild(c);
       }
       p.appendChild(grid);
@@ -8301,9 +8311,9 @@ function showHome(key){
     const info=el('div');info.appendChild(el('strong',null,'Level '+lv+' '+H.name));
     info.appendChild(el('p',null,'Room for '+H.cap+' '+plural(A.name).toLowerCase()+(HOME_BONUS[lv]?', with a '+HOME_BONUS[lv]*100+'% chance of double '+A.product.toLowerCase():'')+'. Each one eats '+feedNeed(o.id)+' feed per batch. Spots used: '+(ANC[o.id]||0)+' of '+homeCap(o.id)+'.'));
     const row=el('div','wdrow');
-    const col=el('button','go',ready.length?'Collect all ('+ready.length+')':'Nothing ready'+(next<Infinity?' ('+fmt(next)+')':''));col.disabled=!ready.length;
+    const col=el('button','go',ready.length?'Collect all ('+ready.length+')':'Nothing ready'+(next<Infinity?' ('+fmt(next)+')':''));col.disabled=!ready.length;col.dataset.tut='collect';
     col.onclick=()=>{for(const t of ready)enqueue({kind:'collect',tiles:[t]});closeModal();toast(H.name+': collecting from '+ready.length+'.')};row.appendChild(col);
-    const ownN=Math.min(hun.length,have('f_'+o.id)),need=ownN+(hun.length-ownN)*feedNeed(o.id),fd=el('button','go','Feed all ('+hun.length+') · '+need+' feed');fd.disabled=!hun.length;fd.style.background=hun.length?'linear-gradient(#ffd23f,#f2a21e)':'';fd.style.color='#3a2310';
+    const ownN=Math.min(hun.length,have('f_'+o.id)),need=ownN+(hun.length-ownN)*feedNeed(o.id),fd=el('button','go','Feed all ('+hun.length+') · '+need+' feed');fd.dataset.tut='feed';fd.disabled=!hun.length;fd.style.background=hun.length?'linear-gradient(#ffd23f,#f2a21e)':'';fd.style.color='#3a2310';
     fd.onclick=()=>{closeModal();feedAll(o.id)};row.appendChild(fd);info.appendChild(row);
     info.appendChild(el('p','hint','Feed in your barn: '+have('feed')+'. Make more at a Feed Mill.'));
     {const own='f_'+o.id,ch=el('span','req'+(have(own)?' ok':'')),im=el('img');im.src=itemIcon(own);im.alt='';ch.appendChild(im);ch.appendChild(el('b',null,String(have(own))));ch.title=ITEMS[own].name;ch.style.marginTop='4px';info.appendChild(ch)}
@@ -8664,7 +8674,7 @@ function showDelivery(){
       const rw=payRow(c.coins,c.xp,c.base),trip=el('span','rm');trip.innerHTML=CLOCK_SVG;trip.appendChild(el('b',null,fmt(tripSecs(c))));trip.title=fmt(tripSecs(c))+' trip';
       const load=el('span','rm'+(fits?'':' over'));load.innerHTML=TRUCK_SVG;load.appendChild(el('b',null,contractCount(c)+'/'+truckCap()));load.title=contractCount(c)+' / '+truckCap()+' load';
       rw.appendChild(trip);rw.appendChild(load);mid.appendChild(rw);row.appendChild(mid);
-      const acts=el('div','acts'),go=el('button','go','Send');go.disabled=!!d.run||!ok;go.onclick=()=>sendDelivery(c);if(ok&&!d.run)steadyAnim(go,1800);acts.appendChild(go);
+      const acts=el('div','acts'),go=el('button','go','Send');go.dataset.tut='send';go.disabled=!!d.run||!ok;go.onclick=()=>sendDelivery(c);if(ok&&!d.run)steadyAnim(go,1800);acts.appendChild(go);
       const x=el('button','lnk','Discard');x.onclick=()=>discardContract(c);acts.appendChild(x);row.appendChild(acts);w.appendChild(row);
     }
     if(d.jobs.length<3)w.appendChild(nextSlot('Next contract in about '+fmt(Math.max(1,(d.next-now)/1000))+'.'));
@@ -10048,7 +10058,7 @@ function renderShop(body){
   // tabs
   const tw=el('div','mtabs-wrap'),tabs=el('div','tabs mtabs');tabs.setAttribute('role','tablist');let selTab=null;
   for(const[k,label]of MCATS){
-    const t=el('button','tab mtab');t.setAttribute('role','tab');t.setAttribute('aria-selected',String(k===marketCat));
+    const t=el('button','tab mtab');t.dataset.tut='mtab-'+k;t.setAttribute('role','tab');t.setAttribute('aria-selected',String(k===marketCat));
     t.appendChild(mtabIcon(k));t.appendChild(el('span',null,label));
     if(tabHasNew(k)){const dt=el('i','mdot');dt.setAttribute('aria-label','New items');t.appendChild(dt)}
     t.onclick=()=>shopCat(k);if(k===marketCat){t.dataset.focus='1';selTab=t}tabs.appendChild(t);
@@ -10128,7 +10138,7 @@ function renderShop(body){
 }
 // the button at the bottom of a card (and in the detail sheet): same rules and actions as before, new looks
 function shopButton(cat,id,d,locked,owned,card){
-  const btn=el('button','buy mbuy'+(d.cash?' cashbuy':''));
+  const btn=el('button','buy mbuy'+(d.cash?' cashbuy':''));btn.dataset.tut='buy-'+cat+'-'+id;
   if(locked){btn.textContent='Unlocks at Level '+d.lvl;btn.classList.add('lockedbtn');btn.setAttribute('aria-disabled','true');
     btn.onclick=()=>{SFX.error();haptic();shakeEl(card||btn);toast('Reach Level '+d.lvl+' to unlock '+d.name+'.')};return btn}
   if(owned&&d.kind==='vehicle'){
@@ -10902,19 +10912,19 @@ function seasonSync(){const id=season().id;if(curSeason!==id){if(curSeason)toast
 
 /* ================= tutorial for new farms ================= */
 const TUT=[
-  {txt:'Your wheat is ripe! Click the golden wheat to harvest it.',done:()=>tst('harvest')>=1,find:o=>o.k==='plot'&&o.crop&&cropState(o,Date.now()).st==='ripe'},
-  {txt:'Click the empty brown plot to plow it.',done:()=>tst('plow')>=1,find:o=>o.k==='plot'&&o.fallow},
-  {txt:'Click the plowed plot to plant wheat.',done:()=>tst('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
-  {txt:'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.',done:()=>tst('seedPick')>=1,btn:'openMarket'},
-  {txt:'Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.',done:()=>tst('plant')>=2,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
-  {txt:'Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.',done:()=>tst('plow')>=2,grass:true},
-  {txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow','almost'].includes(cropState(o,Date.now()).st)},
-  {txt:'A chicken laid an egg. Tap the Chicken Coop to collect it.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
-  {txt:'Now that chicken is hungry. Tap the Chicken Coop and press Feed all.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
-  {txt:'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.',done:()=>tst('delivSent')>=1,btn:'btnDeliv'},
-  {txt:'Everything you harvest goes to the barn. Open the Barn and sell something.',done:()=>tst('sell')>=1,btn:'btnBarn'},
-  {txt:'Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.',done:()=>tst('houseIn')>=1,find:o=>o.k==='bld'&&o.id==='house'},
-  {txt:'Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.',done:()=>tst('tradesSeen')>=1,btn:'btnMore',btn2:'btnTrade'}
+  {id:'harvest',txt:'Your wheat is ripe! Click the golden wheat to harvest it.',done:()=>tst('harvest')>=1,find:o=>o.k==='plot'&&o.crop&&cropState(o,Date.now()).st==='ripe'},
+  {id:'plow',txt:'Click the empty brown plot to plow it.',done:()=>tst('plow')>=1,find:o=>o.k==='plot'&&o.fallow},
+  {id:'plant',txt:'Click the plowed plot to plant wheat.',done:()=>tst('plant')>=1,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
+  {id:'seed',txt:'You can plant other crops too. Open the Market, go to Seeds and tap Plant on Soybeans.',done:()=>tst('seedPick')>=1,btn:'openMarket'},
+  {id:'plant2',txt:'Soybeans are your seed now. Click a plowed plot to plant them. Change seeds any time in Market > Seeds.',done:()=>tst('plant')>=2,find:o=>o.k==='plot'&&!o.fallow&&!o.crop},
+  {id:'grass',txt:'Need more farmland? Tap the grass and press Plow here. Or press and hold on the grass, then drag to plow a whole row.',done:()=>tst('plow')>=2,grass:true},
+  {id:'water',txt:'Click a growing crop to water it. Watered crops grow faster.',done:()=>tst('water')>=1,find:o=>o.k==='plot'&&o.crop&&!o.wet&&['seed','sprout','grow','almost'].includes(cropState(o,Date.now()).st)},
+  {id:'egg',txt:'A chicken laid an egg. Tap the Chicken Coop to collect it.',done:()=>tst('animal')>=1,find:o=>o.k==='animal'&&!hungry(o)&&readyIn(o,ANIMALS[o.id],Date.now())<=0},
+  {id:'feed',txt:'Now that chicken is hungry. Tap the Chicken Coop and press Feed all.',done:()=>tst('feed')>=1,find:o=>o.k==='animal'&&hungry(o)},
+  {id:'deliv',txt:'Dale drives goods to town for coins and lots of XP. Open the Delivery Board and send him off with your wheat.',done:()=>tst('delivSent')>=1,btn:'btnDeliv'},
+  {id:'sell',txt:'Everything you harvest goes to the barn. Open the Barn and sell something.',done:()=>tst('sell')>=1,btn:'btnBarn'},
+  {id:'house',txt:'Your farmer needs food and drink now and then. Tap the farmhouse to go inside, where you can eat, shower and nap.',done:()=>tst('houseIn')>=1,find:o=>o.k==='bld'&&o.id==='house'},
+  {id:'trades',txt:'Upgrades need boards, nails, bricks and paint. You find them while farming, and neighbors trade them in More > Trades.',done:()=>tst('tradesSeen')>=1,btn:'btnMore',btn2:'btnTrade'}
 ];
 function st(k){return S.stats[k]||0}
 function tst(k){return st(k)-(S.stats['tut_'+k]||0)}
@@ -10951,9 +10961,50 @@ function renderTut(){
   if(t.btn)$(t.btn).classList.add('tutpulse');if(t.btn2)$(t.btn2).classList.add('tutpulse');
 }
 $('tutSkip').onclick=()=>{S.tut=TUT.length;SFX.click();renderTut();save();toast('Tutorial skipped.');setTimeout(nextQuest,1500)};
+
+// A bouncing arrow that points at what to tap next: a button in the dock, a tab or button inside an open window,
+// or the "Plow here" chip. Farm tiles get their arrow on the canvas (drawTutArrow).
+function tutDomTarget(){
+  if(!tutOn()||!$('title').hidden)return null;const t=TUT[S.tut],m=mq[0],q=sel=>document.querySelector('#sheetBody '+sel),vis=e=>e&&e.offsetParent!==null&&!e.disabled?e:null;
+  const visBtn=id=>{const e=$(id);return e&&e.offsetParent!==null?e:null};
+  if(t.id==='seed'){if(m&&m.title==='Market'){if(marketCat!=='seeds')return q('[data-tut="mtab-seeds"]');const b=q('[data-tut="buy-seeds-soybean"]');if(b&&!b.dataset.tutScrolled){b.dataset.tutScrolled=1;b.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})}return b}return m?null:visBtn('openMarket')}
+  if(t.id==='grass'){const c=document.querySelector('.plowchip');return c}
+  if(t.id==='egg'&&m)return vis(q('[data-tut="collect"]'));
+  if(t.id==='feed'&&m)return vis(q('[data-tut="feed"]'));
+  if(t.id==='deliv'){if(m&&m.deliv)return vis(q('[data-tut="send"]'));return m?null:visBtn('btnDeliv')}
+  if(t.id==='sell'){if(m)return vis(q('[data-tut="sell1"]'));return visBtn('btnBarn')}
+  if(t.id==='trades'){if(m)return null;return !$('morePop').hidden?visBtn('btnTrade'):visBtn('btnMore')}
+  return null;
+}
+let tutArrowEl=null;
+function tutArrowTick(){
+  requestAnimationFrame(tutArrowTick);
+  const e=tutDomTarget();
+  if(!e){if(tutArrowEl)tutArrowEl.hidden=true;tutLift(0,null,null);return}
+  if(!tutArrowEl){tutArrowEl=document.createElement('div');tutArrowEl.className='tutarrow';tutArrowEl.setAttribute('aria-hidden','true');tutArrowEl.innerHTML='<svg viewBox="0 0 40 48"><path d="M13 2h14v20h10L20 46 3 22h10z" fill="#ffd23f" stroke="#6b3c15" stroke-width="3" stroke-linejoin="round"/><path d="M16 5h4v18h-4z" fill="rgba(255,255,255,.55)"/></svg>';document.body.appendChild(tutArrowEl)}
+  const r=e.getBoundingClientRect();if(!r.width){tutArrowEl.hidden=true;tutLift(0,null,null);return}
+  const up=r.top<70;tutArrowEl.hidden=false;tutArrowEl.classList.toggle('up',up);
+  const ax=r.left+r.width/2,ay=up?r.bottom+4:r.top-4;
+  tutArrowEl.style.left=ax+'px';tutArrowEl.style.top=ay+'px';
+  if(!e.classList.contains('tutpulse'))e.classList.add('tutpulse');
+  tutLift(ax,up?ay:ay-52,up?ay+52:ay);
+}
+// keep the tip card clear of the arrow: if they would overlap (arrow over a dock button), slide the card up
+let tutLiftPx=0;
+function tutLift(ax,top,bot){
+  const b=$('tut');if(!b)return;let want=0;
+  if(top!==null&&!b.hidden){const r=b.getBoundingClientRect(),cb=r.bottom+tutLiftPx,ct=r.top+tutLiftPx;
+    if(ax>r.left-20&&ax<r.right+20&&bot>ct&&top<cb)want=Math.ceil(cb-top)+6}
+  if(want!==tutLiftPx){tutLiftPx=want;b.style.translate=want?'0 '+(-want)+'px':''}
+}
+requestAnimationFrame(tutArrowTick);
 let tutNudge=0;
+// the grass step has no object to point at: suggest an empty tile next to the field
+function tutGrassTile(){let best=null,bd=1e9;for(let y=1;y<N-1;y++)for(let x=1;x<N-1;x++){if(occ[x+','+y]||pend[x+','+y]||S.tiles[x+','+y]||!effective(x,y).grass)continue;let near=1e9;for(const k in S.tiles){const o=S.tiles[k];if(o.k!=='plot')continue;const[a,b]=k.split(',').map(Number);near=Math.min(near,Math.abs(a-x)+Math.abs(b-y))}if(near<1||near>2)continue;const d=near*10+Math.hypot(x-farmer.x,y-farmer.y);if(d<bd){bd=d;best=[x,y]}}return best}
 function drawTutArrow(now){
-  if(!tutOn())return;const t=TUT[S.tut];if(!t.find)return;
+  if(!tutOn())return;const t=TUT[S.tut];
+  if(t.grass&&!document.querySelector('.plowchip')){const gt=tutGrassTile();if(gt){const[x,y]=gt,pulse=reduce?.5:(Math.sin(now/220)+1)/2;poly([P(x,y),P(x+1,y),P(x+1,y+1),P(x,y+1)],'rgba(255,226,90,'+(.18+pulse*.2).toFixed(2)+')','rgba(255,210,40,'+(.7+pulse*.3).toFixed(2)+')',3);const[px,py]=P(x+.5,y+.5),b=reduce?0:Math.abs(Math.sin(now/240))*-10;g.save();g.translate(px,py-44+b);g.scale(1.25,1.25);poly([[-7,-16],[7,-16],[7,-4],[13,-4],[0,9],[-13,-4],[-7,-4]],'#ffd23f','#6b3c15',2);g.restore()}return}
+  if(!t.find)return;
   let best=null;for(const k in S.tiles){if(pend[k])continue;const o=S.tiles[k];if(t.find(o)){const[x,y]=k.split(',').map(Number);if(!best||x+y<best[0]+best[1])best=[x,y,k]}}
   if(!best)return;
   const o=S.tiles[best[2]],n=size(o),pulse=reduce?.5:(Math.sin(now/220)+1)/2,nud=Math.max(0,1-(performance.now()-tutNudge)/700);
