@@ -1,7 +1,19 @@
 // Farm Village: Chinese, simplified (中文). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'zh',time:{s:'$1秒',hm:'$1小时$2分'},
 font:{css:'family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@500;700',display:"'ZCOOL KuaiLe'",body:"'Noto Sans SC','PingFang SC','Microsoft YaHei'"},
-x:`I'm too tired… I need food and water.|我太累了……我需要吃的和水。
+x:`Waking the rooster…|正在叫醒公鸡…
+Plowing the fields…|正在耕地…
+Watering the crops…|正在浇灌作物…
+Feeding the animals…|正在喂动物…
+Opening the barn doors…|正在打开谷仓大门…
+Tap to skip|点击跳过
+Tip: watered crops grow faster.|提示：浇过水的作物长得更快。
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|提示：饥饿的动物不会产出。让饲料磨坊一直运转吧。
+Tip: Dale pays well for deliveries and gives lots of XP.|提示：戴尔的送货报酬很高，还能得到大量经验。
+Tip: spin the Lucky Wheel for free once a day.|提示：每天可以免费转一次幸运转盘。
+Tip: neighbors trade boards, nails, bricks and paint.|提示：邻居们会交换木板、钉子、砖块和油漆。
+Tip: press and hold on the grass, then drag to plow a whole row.|提示：在草地上长按并拖动，就能耕出一整排。
+I'm too tired… I need food and water.|我太累了……我需要吃的和水。
 So tired… I have to eat and drink something.|好累……我得吃点喝点东西。
 I'm dehydrated! I need water, now.|我脱水了!现在就需要水。
 Water… I can barely walk…|水……我快走不动了……

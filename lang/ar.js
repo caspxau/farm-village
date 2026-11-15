@@ -1,7 +1,19 @@
 // Farm Village: Arabic (العربية), read right to left. Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ar',rtl:true,time:{s:'$1 ث',hm:'$1 س $2 د'},
 font:{css:'family=Baloo+Bhaijaan+2:wght@500;600;700;800',display:"'Baloo Bhaijaan 2'",body:"'Baloo Bhaijaan 2'"},
-x:`I'm too tired… I need food and water.|أنا متعب جدًا… أحتاج إلى طعام وماء.
+x:`Waking the rooster…|نوقظ الديك…
+Plowing the fields…|نحرث الحقول…
+Watering the crops…|نسقي المحاصيل…
+Feeding the animals…|نطعم الحيوانات…
+Opening the barn doors…|نفتح أبواب الحظيرة…
+Tap to skip|اضغط للتخطي
+Tip: watered crops grow faster.|نصيحة: المحاصيل المسقية تنمو أسرع.
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|نصيحة: الحيوانات الجائعة تتوقف عن الإنتاج. أبقِ مطحنة العلف تعمل.
+Tip: Dale pays well for deliveries and gives lots of XP.|نصيحة: يدفع ديل جيدًا مقابل التوصيلات ويمنح الكثير من الخبرة.
+Tip: spin the Lucky Wheel for free once a day.|نصيحة: أدر عجلة الحظ مجانًا مرة كل يوم.
+Tip: neighbors trade boards, nails, bricks and paint.|نصيحة: يتبادل الجيران الألواح والمسامير والطوب والطلاء.
+Tip: press and hold on the grass, then drag to plow a whole row.|نصيحة: اضغط مطولًا على العشب ثم اسحب لحرث صف كامل.
+I'm too tired… I need food and water.|أنا متعب جدًا… أحتاج إلى طعام وماء.
 So tired… I have to eat and drink something.|متعب للغاية… يجب أن آكل وأشرب شيئًا.
 I'm dehydrated! I need water, now.|أنا مصاب بالجفاف! أحتاج إلى الماء الآن.
 Water… I can barely walk…|ماء… بالكاد أستطيع المشي…

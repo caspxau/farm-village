@@ -1,6 +1,18 @@
 // Farm Village: Indonesian (Bahasa Indonesia). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'id',time:{s:'$1 dtk',hm:'$1 j $2 mnt'},
-x:`I'm too tired… I need food and water.|Aku terlalu lelah… aku butuh makanan dan air.
+x:`Waking the rooster…|Membangunkan ayam jago…
+Plowing the fields…|Membajak ladang…
+Watering the crops…|Menyiram tanaman…
+Feeding the animals…|Memberi makan hewan…
+Opening the barn doors…|Membuka pintu lumbung…
+Tap to skip|Ketuk untuk lewati
+Tip: watered crops grow faster.|Tips: tanaman yang disiram tumbuh lebih cepat.
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|Tips: hewan yang lapar berhenti menghasilkan. Jaga Penggiling Pakan tetap bekerja.
+Tip: Dale pays well for deliveries and gives lots of XP.|Tips: Dale membayar mahal untuk pengiriman dan memberi banyak XP.
+Tip: spin the Lucky Wheel for free once a day.|Tips: putar Roda Keberuntungan gratis sekali sehari.
+Tip: neighbors trade boards, nails, bricks and paint.|Tips: tetangga menukar papan, paku, bata, dan cat.
+Tip: press and hold on the grass, then drag to plow a whole row.|Tips: tekan lama di rumput, lalu geser untuk membajak satu baris.
+I'm too tired… I need food and water.|Aku terlalu lelah… aku butuh makanan dan air.
 So tired… I have to eat and drink something.|Capek sekali… aku harus makan dan minum sesuatu.
 I'm dehydrated! I need water, now.|Aku dehidrasi! Aku butuh air, sekarang.
 Water… I can barely walk…|Air… aku hampir tidak bisa berjalan…

@@ -1,6 +1,18 @@
 // Farm Village: Spanish (Español). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'es',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`I'm too tired… I need food and water.|Estoy agotado… necesito comida y agua.
+x:`Waking the rooster…|Despertando al gallo…
+Plowing the fields…|Arando los campos…
+Watering the crops…|Regando los cultivos…
+Feeding the animals…|Dando de comer a los animales…
+Opening the barn doors…|Abriendo las puertas del granero…
+Tap to skip|Toca para saltar
+Tip: watered crops grow faster.|Consejo: los cultivos regados crecen más rápido.
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|Consejo: los animales con hambre no producen. Mantén ocupado el Molino de pienso.
+Tip: Dale pays well for deliveries and gives lots of XP.|Consejo: Dale paga bien por las entregas y da mucha XP.
+Tip: spin the Lucky Wheel for free once a day.|Consejo: gira la Ruleta de la suerte gratis una vez al día.
+Tip: neighbors trade boards, nails, bricks and paint.|Consejo: los vecinos intercambian tablas, clavos, ladrillos y pintura.
+Tip: press and hold on the grass, then drag to plow a whole row.|Consejo: mantén pulsada la hierba y arrastra para arar una fila entera.
+I'm too tired… I need food and water.|Estoy agotado… necesito comida y agua.
 So tired… I have to eat and drink something.|Qué cansancio… tengo que comer y beber algo.
 I'm dehydrated! I need water, now.|¡Estoy deshidratado! Necesito agua, ya.
 Water… I can barely walk…|Agua… casi no puedo andar…

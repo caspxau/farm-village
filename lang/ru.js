@@ -1,7 +1,19 @@
 // Farm Village: Russian (Русский). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'ru',time:{s:'$1 с',hm:'$1 ч $2 мин'},
 font:{css:'family=Russo+One&family=Nunito:wght@600;700;800',display:"'Russo One'",body:"'Nunito'"},
-x:`I'm too tired… I need food and water.|Я слишком устал… мне нужны еда и вода.
+x:`Waking the rooster…|Будим петуха…
+Plowing the fields…|Пашем поля…
+Watering the crops…|Поливаем грядки…
+Feeding the animals…|Кормим животных…
+Opening the barn doors…|Открываем ворота амбара…
+Tap to skip|Нажмите, чтобы пропустить
+Tip: watered crops grow faster.|Совет: политые культуры растут быстрее.
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|Совет: голодные животные ничего не производят. Пусть Кормовая мельница не простаивает.
+Tip: Dale pays well for deliveries and gives lots of XP.|Совет: Дейл хорошо платит за доставки и даёт много опыта.
+Tip: spin the Lucky Wheel for free once a day.|Совет: раз в день крутите Колесо удачи бесплатно.
+Tip: neighbors trade boards, nails, bricks and paint.|Совет: соседи меняют доски, гвозди, кирпичи и краску.
+Tip: press and hold on the grass, then drag to plow a whole row.|Совет: зажмите траву и проведите пальцем, чтобы вспахать целый ряд.
+I'm too tired… I need food and water.|Я слишком устал… мне нужны еда и вода.
 So tired… I have to eat and drink something.|Так устал… надо поесть и попить.
 I'm dehydrated! I need water, now.|У меня обезвоживание! Срочно нужна вода.
 Water… I can barely walk…|Воды… еле иду…

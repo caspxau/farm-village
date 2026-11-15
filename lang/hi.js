@@ -1,7 +1,19 @@
 // Farm Village: Hindi (हिन्दी). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'hi',time:{s:'$1 सेकंड',hm:'$1 घं $2 मि'},
 font:{css:'family=Baloo+2:wght@500;600;700;800',display:"'Baloo 2'",body:"'Baloo 2'"},
-x:`I'm too tired… I need food and water.|मैं बहुत थक गया हूँ… मुझे खाना और पानी चाहिए।
+x:`Waking the rooster…|मुर्गे को जगा रहे हैं…
+Plowing the fields…|खेत जोत रहे हैं…
+Watering the crops…|फसलों को पानी दे रहे हैं…
+Feeding the animals…|जानवरों को खिला रहे हैं…
+Opening the barn doors…|खलिहान के दरवाज़े खोल रहे हैं…
+Tap to skip|छोड़ने के लिए टैप करें
+Tip: watered crops grow faster.|सुझाव: पानी दी गई फसलें तेज़ी से बढ़ती हैं।
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|सुझाव: भूखे जानवर कुछ नहीं बनाते। चारा चक्की को चालू रखें।
+Tip: Dale pays well for deliveries and gives lots of XP.|सुझाव: डेल डिलीवरी के अच्छे पैसे और खूब XP देता है।
+Tip: spin the Lucky Wheel for free once a day.|सुझाव: दिन में एक बार किस्मत का पहिया मुफ़्त में घुमाएँ।
+Tip: neighbors trade boards, nails, bricks and paint.|सुझाव: पड़ोसी तख्ते, कीलें, ईंटें और पेंट का लेन-देन करते हैं।
+Tip: press and hold on the grass, then drag to plow a whole row.|सुझाव: घास पर दबाकर रखें, फिर खींचकर पूरी कतार जोतें।
+I'm too tired… I need food and water.|मैं बहुत थक गया हूँ… मुझे खाना और पानी चाहिए।
 So tired… I have to eat and drink something.|बहुत थकान… कुछ खाना-पीना होगा।
 I'm dehydrated! I need water, now.|मुझे पानी की कमी हो गई है! अभी पानी चाहिए।
 Water… I can barely walk…|पानी… मुश्किल से चल पा रहा हूँ…

@@ -1,6 +1,18 @@
 // Farm Village: French (Français). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'fr',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`I'm too tired… I need food and water.|Je suis trop fatigué… il me faut à manger et à boire.
+x:`Waking the rooster…|On réveille le coq…
+Plowing the fields…|On laboure les champs…
+Watering the crops…|On arrose les cultures…
+Feeding the animals…|On nourrit les animaux…
+Opening the barn doors…|On ouvre les portes de la grange…
+Tap to skip|Touchez pour passer
+Tip: watered crops grow faster.|Astuce : les cultures arrosées poussent plus vite.
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|Astuce : les animaux affamés ne produisent rien. Faites tourner le Moulin à aliments.
+Tip: Dale pays well for deliveries and gives lots of XP.|Astuce : Dale paie bien les livraisons et donne beaucoup d’XP.
+Tip: spin the Lucky Wheel for free once a day.|Astuce : faites tourner la Roue de la chance gratuitement une fois par jour.
+Tip: neighbors trade boards, nails, bricks and paint.|Astuce : les voisins échangent planches, clous, briques et peinture.
+Tip: press and hold on the grass, then drag to plow a whole row.|Astuce : maintenez le doigt sur l’herbe puis glissez pour labourer toute une rangée.
+I'm too tired… I need food and water.|Je suis trop fatigué… il me faut à manger et à boire.
 So tired… I have to eat and drink something.|Tellement fatigué… je dois manger et boire quelque chose.
 I'm dehydrated! I need water, now.|Je suis déshydraté ! Il me faut de l'eau, tout de suite.
 Water… I can barely walk…|De l'eau… j'arrive à peine à marcher…

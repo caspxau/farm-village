@@ -1,6 +1,18 @@
 // Farm Village: Portuguese (Português). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'pt',time:{s:'$1 s',hm:'$1 h $2 min'},
-x:`I'm too tired… I need food and water.|Estou cansado demais… preciso de comida e água.
+x:`Waking the rooster…|Acordando o galo…
+Plowing the fields…|Arando os campos…
+Watering the crops…|Regando as plantações…
+Feeding the animals…|Alimentando os animais…
+Opening the barn doors…|Abrindo as portas do celeiro…
+Tap to skip|Toque para pular
+Tip: watered crops grow faster.|Dica: plantações regadas crescem mais rápido.
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|Dica: animais com fome não produzem. Mantenha o Moinho de ração ocupado.
+Tip: Dale pays well for deliveries and gives lots of XP.|Dica: o Dale paga bem pelas entregas e dá muito XP.
+Tip: spin the Lucky Wheel for free once a day.|Dica: gire a Roda da sorte de graça uma vez por dia.
+Tip: neighbors trade boards, nails, bricks and paint.|Dica: os vizinhos trocam tábuas, pregos, tijolos e tinta.
+Tip: press and hold on the grass, then drag to plow a whole row.|Dica: toque e segure na grama e arraste para arar uma fileira inteira.
+I'm too tired… I need food and water.|Estou cansado demais… preciso de comida e água.
 So tired… I have to eat and drink something.|Que cansaço… tenho de comer e beber alguma coisa.
 I'm dehydrated! I need water, now.|Estou desidratado! Preciso de água, já.
 Water… I can barely walk…|Água… mal consigo andar…

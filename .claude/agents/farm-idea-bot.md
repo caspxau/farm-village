@@ -33,6 +33,10 @@ web page and as a Play Store app (Trusted Web Activity). You either pitch ideas 
   (`XM_TRACK`, `xmCheck`), Lucky Wheel (`WHEEL`, `showWheel`, daily free spin), mystery crates (`spawnCrate`,
   `openCrate`, every 8 min of play), harvest combos (`comboHarvest`), flying coins (`coinFly`), and Jake the farm
   helper (`HLP`, `updateHelper`, `showHelper`, energy-limited, hired in Market > Farm). Horse Stable holds 3.
+- Boot: the title screen shows a loading bar (`bootLoad`) and Play only appears once `#title` has the class `loaded`.
+  On a device's first boot a hawk intro plays first (`hawkIntro`, remembered in localStorage `fv-intro`). Headless
+  tests should set `localStorage.setItem('fv-intro','1')` before the game loads and wait for `#title.loaded` before
+  clicking `#tplay`. Headless Chromium has a 500px minimum viewport width, so use `--window-size=500,...` or wider.
 - Helper scripts used before (may still be in the session scratchpad): a level 1-99 bot playthrough, a full
   function test, and an every-button sweep, all driven through `__G` in headless Chromium.
 

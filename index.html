@@ -1990,6 +1990,37 @@ body .wheelbox .goals-head{background:linear-gradient(rgba(242,197,58,.36),rgba(
 @media (prefers-reduced-motion:reduce){.tutarrow{animation:none}}
 #sheetBody .tutpulse{position:relative;z-index:1}
 .tut{transition:translate .2s ease}
+
+/* ---- loading bar on the title screen ---- */
+.tload{display:none}
+#title.loading .tload{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:0 6px}
+#title.loading .tmenu{background:none;border-color:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+#title.loading .tmenu>:not(.tload){visibility:hidden}
+#title.loaded .tmenu{animation:tmpop .5s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes tmpop{0%{transform:scale(.82) translateY(10px);opacity:0}100%{transform:none;opacity:1}}
+.tlstep{margin:0 0 10px;font-family:var(--f-display);font-weight:800;font-size:21px;letter-spacing:.2px;color:#fffaf0;text-shadow:0 2px 0 rgba(58,35,16,.6),0 4px 16px rgba(30,20,6,.45);white-space:nowrap}
+.tlstep.done{color:#ffe27a}
+.tlbar{position:relative;width:min(380px,100%);height:32px;border-radius:17px;background:linear-gradient(#a06a35,#6b4219 60%,#58350f);border:3px solid #3a220e;box-shadow:0 4px 0 #3a220e,inset 0 2px 0 rgba(255,236,200,.35),0 12px 26px rgba(30,20,6,.35)}
+.tlbar::before{content:'';position:absolute;inset:5px;border-radius:11px;background:linear-gradient(#2e1c0b,#4a2f15);box-shadow:inset 0 3px 6px rgba(0,0,0,.5)}
+.tlbar::after{content:'';position:absolute;left:12px;right:12px;top:3px;height:2px;border-radius:2px;background:rgba(255,240,210,.35)}
+.tlfill{position:absolute;left:5px;top:5px;bottom:5px;width:0;min-width:16px;border-radius:11px;overflow:hidden;background:linear-gradient(#fff0a0,#ffd23f 40%,#f2a21e 80%,#d98a12);box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -3px 0 rgba(150,80,0,.35)}
+.tlfill::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 38%,rgba(255,255,255,.34) 38% 58%,transparent 58%);background-size:36px 100%;animation:tlslide .9s linear infinite}
+@keyframes tlslide{to{background-position:36px 0}}
+.tlpct{position:absolute;inset:0;z-index:2;display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff;text-shadow:0 1px 0 #5a300c,0 0 5px rgba(80,40,0,.7);font-variant-numeric:tabular-nums}
+.tlsprout{position:absolute;bottom:22px;left:5px;z-index:3;width:26px;height:31px;margin-left:-13px;transform-origin:50% 100%;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(30,20,6,.35))}
+.tlsprout svg{width:100%;height:100%;display:block}
+.tltip{margin:0;max-width:34ch;min-height:2.6em;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:14px;line-height:1.3;color:var(--ink);background:rgba(255,250,240,.88);border-radius:14px;padding:6px 14px;box-shadow:0 4px 16px rgba(30,20,6,.2);transition:opacity .35s,transform .35s}
+.tltip.swap{opacity:0;transform:translateY(4px)}
+@media (max-height:520px) and (orientation:landscape){.tltip{display:none}.tlstep{font-size:17px}}
+@media (prefers-reduced-motion:reduce){.tlfill::after,#title.loaded .tmenu{animation:none}}
+
+/* ---- hawk intro on first boot ---- */
+.hawk{position:fixed;inset:0;z-index:80;background:#24497e}
+.hawk[hidden]{display:none}
+.hawk.clear{background:transparent;pointer-events:none}
+.hawk canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hskip{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:1;min-height:38px;padding:6px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.55);background:rgba(20,30,50,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font:700 14px var(--f-body,system-ui);letter-spacing:.3px;cursor:pointer;transition:opacity .4s}
+.hawk.clear .hskip{opacity:0}
 </style>
 </head>
 <body>
@@ -2157,9 +2188,15 @@ body .wheelbox .goals-head{background:linear-gradient(rgba(242,197,58,.36),rgba(
     <button class="go tplay" id="tplay">Play</button>
     <small>Music starts when you press Play</small>
     <div class="torient" id="torient" role="group" aria-label="Screen"><span>Play in</span></div>
+    <div class="tload" id="tload" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <p class="tlstep" id="tlstep">Waking the rooster…</p>
+      <div class="tlbar"><i class="tlfill" id="tlfill"></i><b class="tlpct" id="tlpct" translate="no">0%</b><span class="tlsprout" id="tlsprout" aria-hidden="true"><svg viewBox="0 0 34 40"><path d="M17 39C16 30 17 22 18 14" stroke="#3f7a2a" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M17.5 24C10 25 4 20 2.5 12 10 10.5 16 15 17.5 24Z" fill="#6cc04a" stroke="#2f5e1e" stroke-width="1.8"/><path d="M18 17C25 15 31 9 31 2 23 2 18 8 18 17Z" fill="#8fd65e" stroke="#2f5e1e" stroke-width="1.8"/><path d="M6 14C10 15 13 18 15 21M28 5C25 8 22 11 20 14" stroke="#c8f0a0" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".8"/></svg></span></div>
+      <p class="tltip" id="tltip"></p>
+    </div>
   </div>
   <div class="tlang" id="tlang" role="group" aria-label="Language"></div>
 </div>
+<div class="hawk" id="hawk" hidden aria-hidden="true"><canvas id="hawkcv"></canvas><button class="hskip" id="hskip" aria-hidden="false">Tap to skip</button></div>
 <div class="rotate" id="rotate" hidden role="dialog" aria-labelledby="rotTitle">
   <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="20" y="6" width="24" height="44" rx="5" fill="#fff7e6" stroke="#6b3c15" stroke-width="3.5"/><circle cx="32" cy="44" r="2.4" fill="#6b3c15"/><path d="M10 40a24 24 0 0 0 16 18" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/><path d="M22 56l5 3-1-6" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   <h2 class="outline" id="rotTitle"></h2>
@@ -2207,6 +2244,18 @@ function setLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}location.relo
 // Polish. PL_EXACT: English text (trimmed) -> Polish. PL_PATS: sentences with numbers and names.
 // Inside patterns: L_w() translates a captured name, L_t() a time, p3() picks the Polish plural form.
 const PL_EXACT={
+'Waking the rooster…':'Budzimy koguta…',
+'Plowing the fields…':'Oramy pola…',
+'Watering the crops…':'Podlewamy uprawy…',
+'Feeding the animals…':'Karmimy zwierzęta…',
+'Opening the barn doors…':'Otwieramy wrota stodoły…',
+'Tap to skip':'Dotknij, aby pominąć',
+'Tip: watered crops grow faster.':'Wskazówka: podlane uprawy rosną szybciej.',
+'Tip: hungry animals stop making goods. Keep the Feed Mill busy.':'Wskazówka: głodne zwierzęta nic nie dają. Niech Młyn paszowy ciągle pracuje.',
+'Tip: Dale pays well for deliveries and gives lots of XP.':'Wskazówka: Dale dobrze płaci za dostawy i daje dużo XP.',
+'Tip: spin the Lucky Wheel for free once a day.':'Wskazówka: raz dziennie zakręć Kołem fortuny za darmo.',
+'Tip: neighbors trade boards, nails, bricks and paint.':'Wskazówka: sąsiedzi wymieniają deski, gwoździe, cegły i farbę.',
+'Tip: press and hold on the grass, then drag to plow a whole row.':'Wskazówka: przytrzymaj trawę i przeciągnij, aby zaorać cały rząd.',
 "Dairy":"Mleczarnia","Churns milk into butter, cream, goat cheese and yogurt.":"Ubija mleko na masło, śmietanę, kozi ser i jogurt.","Weaving Loom":"Krosno","Spins cotton, fur and wool into fabric and cozy things to wear.":"Przędzie bawełnę, futerko i wełnę na tkaninę i ciepłe ubrania.","Juice Bar":"Bar z sokami","Fresh juice, lemonade and smoothies from your orchard.":"Świeże soki, lemoniada i koktajle z twojego sadu.","Bakery":"Piekarnia","A wood oven for croissants, cakes, tarts and pies. Uses butter and cream from the Dairy.":"Piec opalany drewnem na rogaliki, ciasta, tarty i placki. Używa masła i śmietany z Mleczarni.","Flower Shop":"Kwiaciarnia","Ties your flowers into bouquets and pours lavender candles.":"Wiąże kwiaty w bukiety i odlewa lawendowe świece.","Sugar Mill":"Cukrownia","Grinds beets into sugar for sauces, caramel apples and ice cream.":"Miele buraki na cukier do sosów, jabłek w karmelu i lodów.","Country Diner":"Wiejski bar","Hot meals for hungry towns: pizza, sushi and stir fry.":"Ciepłe posiłki dla głodnych miast: pizza, sushi i warzywa z woka.","Tailor":"Krawiec","Sews quilts, saddles, scarves and teddy bears from fabric, feathers and fur.":"Szyje kołdry, siodła, szaliki i misie z tkaniny, piór i futerka.","Butter":"Masło","Fresh Cream":"Świeża śmietana","Goat Cheese":"Kozi ser","Blueberry Yogurt":"Jogurt jagodowy","Cotton Fabric":"Tkanina bawełniana","Angora Mittens":"Rękawiczki z angory","Llama Poncho":"Ponczo z lamy","Down Pillow":"Poduszka z puchu","Orange Juice":"Sok pomarańczowy","Honey Lemonade":"Lemoniada z miodem","Peach Smoothie":"Koktajl brzoskwiniowy","Melon Cooler":"Napój arbuzowy","Croissant":"Rogalik","Carrot Cake":"Ciasto marchewkowe","Plum Tart":"Tarta ze śliwkami","Lemon Cream Pie":"Tarta cytrynowa","Spring Bouquet":"Wiosenny bukiet","Rose Bouquet":"Bukiet róż","Sunny Bouquet":"Słoneczny bukiet","Lavender Candle":"Świeca lawendowa","Beet Sugar":"Cukier buraczany","Cranberry Sauce":"Sos żurawinowy","Caramel Apple":"Jabłko w karmelu","Cherry Ice Cream":"Lody wiśniowe","Farm Pizza":"Pizza z farmy","Pepper Pizza":"Pizza z papryką","Sushi Rolls":"Rolki sushi","Veggie Stir Fry":"Warzywa z woka","Patchwork Quilt":"Kołdra patchworkowa","Leather Saddle":"Skórzane siodło","Woolly Scarf":"Wełniany szalik","Teddy Bear":"Miś pluszowy","Butter Up":"Masło na start","Threads and Yarns":"Nici i włóczki","Summer Stand":"Letnie stoisko","Fresh From the Oven":"Prosto z pieca","Say It With Flowers":"Powiedz to kwiatami","Sweet Cargo":"Słodki ładunek","Diner Days":"Dni w barze","A Cozy Winter":"Przytulna zima","Ice Cream Social":"Lodowy piknik","Pride of the Valley":"Duma doliny","Folks in town are tired of plain milk. Build a Dairy and we will sell them butter by the barrel.":"Ludzie w mieście mają dość zwykłego mleka. Zbuduj Mleczarnię, a będziemy sprzedawać masło beczkami.","My little brother keeps losing his mittens! Could you weave some fabric and make him a warm pair?":"Mój młodszy brat ciągle gubi rękawiczki! Utkasz trochę tkaniny i zrobisz mu ciepłą parę?","The summer fair needs a juice stand and I am too old to squeeze oranges all day. Help an old friend?":"Letni festyn potrzebuje stoiska z sokami, a ja jestem za stara, by cały dzień wyciskać pomarańcze. Pomożesz starej przyjaciółce?","My daughter turns ten this week and she only wants croissants and carrot cake. A bakery would save the day!":"Moja córka kończy w tym tygodniu dziesięć lat i chce tylko rogalików i ciasta marchewkowego. Piekarnia uratuje sytuację!","I want to ask Mabel to the harvest dance. Do not laugh! I need the prettiest bouquet in the valley.":"Chcę zaprosić Mabel na dożynkowe tańce. Nie śmiej się! Potrzebuję najpiękniejszego bukietu w dolinie.","The candy shop in town wants sugar, and lots of it. My truck is ready if your mill is.":"Sklep ze słodyczami w mieście chce cukru, i to dużo. Moja ciężarówka jest gotowa, jeśli twoja cukrownia też.","Every trucker in the county stops for lunch. Open a diner and feed them a proper farm pizza!":"Każdy kierowca w okolicy zatrzymuje się na obiad. Otwórz bar i nakarm ich porządną pizzą z farmy!","Winter is coming and my old quilt is more holes than quilt. A tailor could patch the whole valley!":"Nadchodzi zima, a moja stara kołdra ma więcej dziur niż kołdry. Krawiec połatałby całą dolinę!","The school picnic is on Saturday. Could you bring ice cream and caramel apples for everyone?":"W sobotę jest szkolny piknik. Przyniesiesz lody i jabłka w karmelu dla wszystkich?","The county fair judges are coming to see the finest farm around. Show them what you have built!":"Sędziowie z jarmarku przyjeżdżają zobaczyć najlepszą farmę w okolicy. Pokaż im, co zbudowałeś!","Build a Dairy":"Zbuduj Mleczarnię","Bring Hank 3 butter":"Przynieś Hankowi 3 masła","Collect from animals 30 times":"Zbierz od zwierząt 30 razy","Build a Weaving Loom":"Zbuduj Krosno","Bring Juniper 2 cotton fabric":"Przynieś Juniper 2 tkaniny bawełniane","Bring Juniper 1 pair of angora mittens":"Przynieś Juniper 1 parę rękawiczek z angory","Build a Juice Bar":"Zbuduj Bar z sokami","Bring Mabel 3 orange juices":"Przynieś Mabel 3 soki pomarańczowe","Pick fruit 40 times":"Zbierz owoce 40 razy","Build a Bakery":"Zbuduj Piekarnię","Bring Rosa 4 croissants":"Przynieś Rosie 4 rogaliki","Bring Rosa 1 carrot cake":"Przynieś Rosie 1 ciasto marchewkowe","Build a Flower Shop":"Zbuduj Kwiaciarnię","Bring Otis 1 rose bouquet":"Przynieś Otisowi 1 bukiet róż","Harvest 60 crops":"Zbierz 60 plonów","Build a Sugar Mill":"Zbuduj Cukrownię","Bring Dale 6 beet sugar":"Przynieś Dale'owi 6 cukru buraczanego","Complete 10 deliveries":"Wykonaj 10 dostaw","Build a Country Diner":"Zbuduj Wiejski bar","Bring Hank 2 farm pizzas":"Przynieś Hankowi 2 pizze z farmy","Make 25 goods in your buildings":"Zrób 25 produktów w budynkach","Build a Tailor":"Zbuduj Krawca","Bring Mabel 1 patchwork quilt":"Przynieś Mabel 1 kołdrę patchworkową","Fill 10 neighbor orders":"Zrealizuj 10 zamówień sąsiadów","Bring Juniper 3 cherry ice creams":"Przynieś Juniper 3 lody wiśniowe","Bring Juniper 4 caramel apples":"Przynieś Juniper 4 jabłka w karmelu","Harvest 5 golden crops":"Zbierz 5 złotych plonów","Bring Otis 2 teddy bears":"Przynieś Otisowi 2 misie pluszowe","Bring Otis 2 leather saddles":"Przynieś Otisowi 2 skórzane siodła","Complete 15 deliveries":"Wykonaj 15 dostaw","Farm Report":"Raport z farmy","Let's go!":"Do dzieła!","Spend Farm Cash?":"Wydać farmdolary?","Yes, buy":"Tak, kupuję","Don't ask me again":"Nie pytaj ponownie","Not enough Farm Cash":"Za mało farmdolarów","Not now":"Nie teraz","Ask before spending Farm Cash":"Pytaj przed wydaniem farmdolarów","Farm report when you come back":"Raport z farmy po powrocie",
 
 "Cash Shop":"Sklep z farmdolarami","Get Farm Cash":"Zdobądź farmdolary","Farm Cash buys premium outfits, furniture, decorations and helpers. Every 5 levels and your daily goals still give a little for free.":"Za farmdolary kupisz stroje premium, meble, dekoracje i pomocników. Co 5 poziomów i za cele dnia nadal dostajesz trochę za darmo.","Popular":"Popularne","Best value":"Najlepsza oferta","Spend it":"Wydaj je","Premium outfits":"Stroje premium","Premium furniture":"Meble premium","Premium decorations":"Dekoracje premium","Premium":"Premium","Purchases are made through Google Play. Farm Cash is stored on this device with your farm.":"Zakupy odbywają się przez Google Play. Farmdolary są zapisane na tym urządzeniu razem z farmą.","Buying Farm Cash works in the Farm Village app from Google Play.":"Farmdolary można kupić w aplikacji Farm Village z Google Play.","The purchase did not go through.":"Zakup się nie udał.","Chef hat":"Czapka kucharza","Wizard hat":"Kapelusz czarodzieja","Pirate hat":"Kapelusz pirata","Viking helmet":"Hełm wikinga","Hawaiian shirt":"Koszula hawajska","Tuxedo":"Smoking","Royal robe":"Szata królewska","Tartan kilt":"Kilt w kratę","Golden overalls":"Złote ogrodniczki","Bow tie":"Muszka","Gold chain":"Złoty łańcuch","Hero cape":"Peleryna bohatera","Fairy wings":"Skrzydła wróżki","Fish Tank":"Akwarium","Arcade Machine":"Automat do gier","Grand Piano":"Fortepian","Bright tropical fish to feed.":"Kolorowe rybki tropikalne do karmienia.","Play a round for a few coins every half hour.":"Zagraj rundę i zgarnij monety co pół godziny.","Play a tune for bonus XP every hour.":"Zagraj melodię i zdobądź bonusowe XP co godzinę.","Royal Damask":"Królewski adamaszek","Marble Tiles":"Płytki marmurowe","Golden Gnome":"Złoty krasnal","Rainbow Arch":"Tęczowy łuk","Unicorn Statue":"Posąg jednorożca","Feed the fish":"Nakarm rybki","Play the piano":"Zagraj na fortepianie","Play a game":"Zagraj w grę","Feeding the fish":"Karmienie rybek","Playing piano":"Gra na fortepianie","Playing":"Granie","The fish swim up for their food.":"Rybki podpływają po jedzenie.","What a lovely tune!":"Co za piękna melodia!",
@@ -8174,6 +8223,189 @@ function paintTitleBg(){
   // a soft vignette to keep the eye on the middle
   q=x.createRadialGradient(w/2,h*.45,m*.3,w/2,h*.5,Math.max(w,h)*.8);q.addColorStop(0,'rgba(0,0,0,0)');q.addColorStop(1,'rgba(20,30,10,.32)');x.fillStyle=q;x.fillRect(0,0,w,h);
 }
+/* ================= boot: loading bar and the hawk intro ================= */
+const LOAD_STEPS=['Waking the rooster…','Plowing the fields…','Watering the crops…','Feeding the animals…','Opening the barn doors…'];
+const LOAD_TIPS=['Tip: watered crops grow faster.','Tip: hungry animals stop making goods. Keep the Feed Mill busy.','Tip: Dale pays well for deliveries and gives lots of XP.','Tip: spin the Lucky Wheel for free once a day.','Tip: neighbors trade boards, nails, bricks and paint.','Tip: press and hold on the grass, then drag to plow a whole row.'];
+// Real start-up work behind a friendly bar: fonts, the first farm frames, every item icon (so the market opens instantly), pet sounds.
+// gate: a promise the bar waits for before it may finish (the hawk intro); done: called once Play is showing.
+function bootLoad(gate,done){
+  const t=$('title'),fill=$('tlfill'),pct=$('tlpct'),stepEl=$('tlstep'),tip=$('tltip'),sprout=$('tlsprout'),bar=$('tload');
+  t.classList.add('loading');let shown=0,target=4,fin=false,si=-1,ti=Math.floor(Math.random()*LOAD_TIPS.length),last=performance.now(),over=false;
+  tip.textContent=LOAD_TIPS[ti];
+  const tipTimer=setInterval(()=>{tip.classList.add('swap');setTimeout(()=>{ti=(ti+1)%LOAD_TIPS.length;tip.textContent=LOAD_TIPS[ti];tip.classList.remove('swap')},350)},3200);
+  function paint(now){
+    if(over)return;const dt=Math.max(0,Math.min(.1,(now-last)/1000));last=now;
+    // ease toward the target, with a slow creep so the bar never looks frozen
+    shown+=(target-shown)*Math.min(1,dt*(fin?9:4));if(!fin&&shown<target+6&&shown<95)shown+=dt*1.5;shown=Math.min(shown,fin?100:97);
+    const p=shown/100,w=bar.querySelector('.tlbar').clientWidth-10;
+    fill.style.width=Math.max(16,w*p)+'px';sprout.style.left=(5+Math.max(16,w*p)-6)+'px';sprout.style.transform='scale('+(.45+.6*p).toFixed(3)+') rotate('+(Math.sin(now/420)*6).toFixed(1)+'deg)';
+    const n=Math.round(shown);pct.textContent=n+'%';bar.setAttribute('aria-valuenow',n);
+    const s=fin&&shown>99.4?LOAD_STEPS.length:Math.min(LOAD_STEPS.length-1,Math.floor(shown/20));
+    if(s!==si){si=s;stepEl.textContent=s<LOAD_STEPS.length?LOAD_STEPS[s]:'Ready!';stepEl.classList.toggle('done',s===LOAD_STEPS.length)}
+    if(fin&&shown>99.4){over=true;clearInterval(tipTimer);pct.textContent='100%';
+      setTimeout(()=>{t.classList.remove('loading');t.classList.add('loaded');if(!reduce)SFX.coin&&tone(880,.12,'triangle',.06);done&&done()},reduce?60:380);return}
+    requestAnimationFrame(paint);
+  }
+  requestAnimationFrame(paint);
+  const wait=ms=>new Promise(r=>setTimeout(r,ms)),nextFrame=()=>new Promise(r=>{requestAnimationFrame(()=>r());setTimeout(r,60)});
+  const T0=performance.now(),minMs=1300;
+  (async()=>{
+    try{await Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),wait(2500)])}catch(e){}target=22;
+    await nextFrame();await nextFrame();target=34;
+    const ids=Object.keys(ITEMS);
+    for(let i=0;i<ids.length;i++){try{itemIcon(ids[i])}catch(e){}if(i%5===4){target=34+48*(i/ids.length);await nextFrame()}}
+    target=84;
+    await Promise.race([Promise.all(['dog_bark1','cat_meow1'].map(n=>fetch('sounds/'+n+'.mp3').catch(()=>0))),wait(1500)]);target=92;
+    const left=minMs-(performance.now()-T0);if(left>0)await wait(left);
+    if(gate)await gate;
+    target=100;fin=true;
+    // a hidden tab draws no frames: finish anyway so Play is ready when the player looks
+    setTimeout(()=>{if(!over){shown=100;paint(performance.now())}},1500);
+  })();
+}
+
+// A hawk seen from below, head pointing up (-y), wingspan about 300 units. flap: -1 (down) .. 1 (up).
+function drawHawk(x,flap,bank){
+  const sp=1-.26*flap*flap,ty=-flap*26,ink='rgba(40,22,8,.8)';
+  x.save();x.scale(1-.32*Math.abs(bank),1);x.lineJoin='round';x.lineCap='round';
+  // tail: a rusty fan with a dark band and a pale edge
+  let q=x.createLinearGradient(0,34,0,90);q.addColorStop(0,'#c46a3a');q.addColorStop(.7,'#b4532a');q.addColorStop(1,'#e9c8a0');
+  x.beginPath();x.moveTo(-9,32);x.quadraticCurveTo(-30,70,-25,86);x.quadraticCurveTo(0,96,25,86);x.quadraticCurveTo(30,70,9,32);x.closePath();
+  x.fillStyle=q;x.fill();x.strokeStyle=ink;x.lineWidth=1.8;x.stroke();
+  x.beginPath();x.moveTo(-24,78);x.quadraticCurveTo(0,87,24,78);x.strokeStyle='rgba(60,24,10,.7)';x.lineWidth=3.2;x.stroke();
+  x.strokeStyle='rgba(90,40,16,.35)';x.lineWidth=1;for(let i=-3;i<=3;i++){x.beginPath();x.moveTo(i*2.4,38);x.lineTo(i*7.6,86);x.stroke()}
+  // wings, far side first
+  for(const s of [-1,1]){
+    x.save();x.scale(s,1);
+    const wx=74*sp,wy=-30+ty*.45,hx=128*sp,hy=-22+ty;
+    q=x.createLinearGradient(0,-30,0,40);q.addColorStop(0,'#eedcb8');q.addColorStop(.6,'#d6ba8c');q.addColorStop(1,'#b08a5c');
+    // primaries: five fingers fanning from the hand
+    for(let i=0;i<5;i++){
+      const a=-.22+i*.24,bx=hx-14-i*6*sp,by=hy+4+i*5.5,len=(44-i*4)*(.75+.25*sp);
+      x.save();x.translate(bx,by);x.rotate(a);const fg=x.createLinearGradient(0,0,len+2,0);fg.addColorStop(0,'#dcc49a');fg.addColorStop(.5,'#c4a274');fg.addColorStop(.6,'#4a2e18');fg.addColorStop(1,'#22140a');
+      x.beginPath();x.moveTo(-4,-5.5+i*.3);x.quadraticCurveTo(len*.7,-6.5+i*.3,len+2,0);x.quadraticCurveTo(len*.7,6.5-i*.3,-4,5.5-i*.3);x.closePath();x.fillStyle=fg;x.fill();x.strokeStyle=ink;x.lineWidth=1.2;x.stroke();x.restore();
+    }
+    // inner wing
+    const wp=new Path2D();wp.moveTo(8,-22);wp.quadraticCurveTo(38,-36,wx,wy);wp.quadraticCurveTo(hx-14,hy-6,hx-4,hy+2);
+    wp.quadraticCurveTo(hx-10,hy+26,hx-32*sp,hy+34+(-ty*.15));wp.quadraticCurveTo(58*sp,32+ty*.2,30*sp,30+ty*.1);wp.quadraticCurveTo(16,26,9,18);wp.closePath();
+    x.fillStyle=q;x.fill(wp);
+    x.save();x.clip(wp);
+    x.strokeStyle='rgba(120,80,44,.28)';x.lineWidth=1.1;for(let k=0;k<5;k++){x.beginPath();x.moveTo(14,14+k*3.4);x.quadraticCurveTo(60*sp,26+ty*.2+k*2,hx-24*sp,hy+26+k*1.2-ty*.1);x.stroke()}
+    x.fillStyle='rgba(255,250,235,.3)';x.beginPath();x.ellipse(40*sp,-16+ty*.2,32*sp,7,-.1,0,Math.PI*2);x.fill();
+    x.restore();
+    x.strokeStyle=ink;x.lineWidth=1.8;x.stroke(wp);
+    // dark bar along the leading edge and the comma at the wrist
+    x.beginPath();x.moveTo(12,-20);x.quadraticCurveTo(38,-31,wx-6,wy+3);x.strokeStyle='rgba(58,34,16,.85)';x.lineWidth=5;x.stroke();
+    x.beginPath();x.ellipse(wx+2,wy+9,7.5,4,.35,0,Math.PI*2);x.fillStyle='rgba(50,28,12,.85)';x.fill();
+    x.restore();
+  }
+  // body: pale belly with a streaked band
+  q=x.createLinearGradient(0,-30,0,40);q.addColorStop(0,'#f6e8cc');q.addColorStop(1,'#d4b384');
+  x.beginPath();x.ellipse(0,2,15,38,0,0,Math.PI*2);x.fillStyle=q;x.fill();x.strokeStyle=ink;x.lineWidth=1.8;x.stroke();
+  x.fillStyle='rgba(84,48,20,.75)';for(let i=0;i<9;i++){const bx=-11+i*2.75,by=8+((i*7)%5);x.beginPath();x.ellipse(bx,by,1.5,3.6,0,0,Math.PI*2);x.fill()}
+  x.fillStyle='#e8b33a';x.beginPath();x.ellipse(-5,30,3.4,2.6,0,0,Math.PI*2);x.ellipse(5,30,3.4,2.6,0,0,Math.PI*2);x.fill();
+  // head and hooked beak
+  q=x.createRadialGradient(-3,-46,2,0,-40,15);q.addColorStop(0,'#9a6a3e');q.addColorStop(1,'#5e3a1c');
+  x.beginPath();x.arc(0,-40,13,0,Math.PI*2);x.fillStyle=q;x.fill();x.strokeStyle=ink;x.lineWidth=1.6;x.stroke();
+  x.beginPath();x.ellipse(0,-35,8,6,0,0,Math.PI*2);x.fillStyle='#f3e4c6';x.fill();
+  x.beginPath();x.moveTo(-4.5,-51);x.quadraticCurveTo(0,-62,4.5,-51);x.closePath();x.fillStyle='#f0c640';x.fill();
+  x.beginPath();x.moveTo(-2.6,-55);x.quadraticCurveTo(0,-63,2.6,-55);x.quadraticCurveTo(0,-57,-2.6,-55);x.fillStyle='#3b3b40';x.fill();
+  x.fillStyle='#1c120a';x.beginPath();x.arc(-8.5,-45,1.9,0,Math.PI*2);x.arc(8.5,-45,1.9,0,Math.PI*2);x.fill();
+  x.restore();
+}
+// a short "kee-eeer" made from two detuned saws through a band-pass filter, with a little noise for the rasp
+function hawkCry(delay){
+  try{if(!S||!S.sound)return;const a=ac();if(!a||a.state!=='running')return;const t=a.currentTime+(delay||0),v=.07*(S.sfxVol??1);
+    const out=a.createGain();out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(v,t+.06);out.gain.setValueAtTime(v,t+.5);out.gain.exponentialRampToValueAtTime(.0001,t+1.25);
+    const bp=a.createBiquadFilter();bp.type='bandpass';bp.Q.value=4;bp.frequency.setValueAtTime(3000,t);bp.frequency.exponentialRampToValueAtTime(1900,t+1.2);bp.connect(out).connect(a.destination);
+    const lfo=a.createOscillator(),lg=a.createGain();lfo.frequency.value=28;lg.gain.value=60;lfo.connect(lg);
+    for(const d of [0,9]){const o=a.createOscillator();o.type='sawtooth';o.detune.value=d;o.frequency.setValueAtTime(2400,t);o.frequency.linearRampToValueAtTime(3100,t+.12);o.frequency.exponentialRampToValueAtTime(1500,t+1.2);lg.connect(o.frequency);o.connect(bp);o.start(t);o.stop(t+1.3)}
+    lfo.start(t);lfo.stop(t+1.3);
+    const n=a.createBuffer(1,Math.floor(a.sampleRate*1.2),a.sampleRate),ch=n.getChannelData(0);for(let i=0;i<ch.length;i++)ch[i]=(Math.random()*2-1)*.35;
+    const src=a.createBufferSource();src.buffer=n;src.connect(bp);src.start(t);
+  }catch(e){}
+}
+function whoosh(){try{noise(.7,.18,700)}catch(e){}}
+
+// First boot on this device: a hawk glides in over the clouds, swoops past the camera and reveals the farm, then circles away.
+// Returns a promise that resolves when the farm is revealed, or null when the intro is not shown.
+function hawkIntro(){
+  let seen=true;try{seen=!!localStorage.getItem('fv-intro')}catch(e){}
+  if(seen||reduce)return null;try{localStorage.setItem('fv-intro','1')}catch(e){}
+  const ov=$('hawk'),cv=$('hawkcv'),x=cv.getContext('2d');ov.hidden=false;
+  let W=0,H=0,pd=1;const fit=()=>{pd=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=Math.round(W*pd);cv.height=Math.round(H*pd)};fit();addEventListener('resize',fit);
+  const R=(i)=>{const v=Math.sin(i*127.1+311.7)*43758.5453;return v-Math.floor(v)};
+  const clouds=[];for(let i=0;i<15;i++)clouds.push({x:(R(i)-.5)*2.8,y:(R(i+50)-.5)*1.3-.1,z:.15+R(i+90)*.85,r:.16+R(i+130)*.16,k:2+Math.floor(R(i+170)*3)});
+  let t0=performance.now(),last=t0,revealed=false,resolve;const gate=new Promise(r=>resolve=r);
+  const skip=()=>{const t=(performance.now()-t0)/1000;if(t<3.25)t0=performance.now()-3250};
+  ov.addEventListener('pointerdown',skip);$('hskip').onclick=skip;
+  const ease=v=>v<0?0:v>1?1:v*v*(3-2*v),cl=v=>v<0?0:v>1?1:v;
+  const bez=(p,u)=>{const m=1-u;return[m*m*m*p[0][0]+3*m*m*u*p[1][0]+3*m*u*u*p[2][0]+u*u*u*p[3][0],m*m*m*p[0][1]+3*m*m*u*p[1][1]+3*m*u*u*p[2][1]+u*u*u*p[3][1]]};
+  const A=[[1.18,.1],[.82,.02],[.46,.12],[.33,.38]],B=[[.33,.38],[.24,.56],[.48,.82],[.64,1.3]],C=[[-.12,.34],[.25,.12],[.7,.3],[1.15,.04]];
+  let cried=0,whooshed=false;
+  function cloud(c,cx,cy,r,a){
+    const n=c.k+2;
+    x.save();x.globalAlpha*=a;
+    // shaded belly first, then the sunlit puffs on top
+    let q=x.createRadialGradient(cx,cy+r*.18,r*.1,cx,cy+r*.18,r*1.25);q.addColorStop(0,'rgba(196,186,206,.9)');q.addColorStop(.7,'rgba(206,192,206,.55)');q.addColorStop(1,'rgba(206,192,206,0)');
+    x.fillStyle=q;x.beginPath();x.ellipse(cx,cy+r*.18,r*1.25,r*.42,0,0,Math.PI*2);x.fill();
+    for(let i=0;i<n;i++){const f=i/(n-1)-.5,ox=f*r*1.9,dome=Math.cos(f*Math.PI),rr=r*(.34+.32*dome)*(.85+.3*R(i+c.k*7)),oy=-dome*r*.38+r*.05;
+      q=x.createRadialGradient(cx+ox-rr*.25,cy+oy-rr*.35,rr*.05,cx+ox,cy+oy,rr);
+      q.addColorStop(0,'#fffdf8');q.addColorStop(.55,'#fdf3e8');q.addColorStop(.86,'rgba(238,220,214,.95)');q.addColorStop(1,'rgba(232,212,210,0)');
+      x.fillStyle=q;x.beginPath();x.arc(cx+ox,cy+oy,rr,0,Math.PI*2);x.fill()}
+    x.restore();
+  }
+  function hawkAt(px,py,size,ang,flap,bank,alpha){
+    x.save();x.globalAlpha=alpha;x.translate(px,py);x.rotate(ang);const s=size/300;x.scale(s,s);drawHawk(x,flap,bank);x.restore();
+  }
+  function frame(now){
+    const t=(now-t0)/1000,dt=Math.min(.05,(now-last)/1000);last=now;const m=Math.min(W,H);
+    x.setTransform(pd,0,0,pd,0,0);x.clearRect(0,0,W,H);
+    const skyA=1-ease((t-3.25)/.75);
+    if(skyA>0){
+      x.globalAlpha=skyA;
+      let q=x.createLinearGradient(0,0,0,H);q.addColorStop(0,'#24497e');q.addColorStop(.42,'#5f8fc4');q.addColorStop(.75,'#e9c99a');q.addColorStop(1,'#f4b878');x.fillStyle=q;x.fillRect(0,0,W,H);
+      const sx=W*.74,sy=H*.7;q=x.createRadialGradient(sx,sy,0,sx,sy,Math.max(W,H)*.7);q.addColorStop(0,'rgba(255,240,200,.95)');q.addColorStop(.12,'rgba(255,224,160,.55)');q.addColorStop(1,'rgba(255,200,140,0)');x.fillStyle=q;x.fillRect(0,0,W,H);
+      // the valley rises into view as the hawk dives
+      const hy=H*(1.12-.38*ease((t-1.6)/1.8));
+      const ridge=(y0,amp,f,col,ph)=>{x.beginPath();x.moveTo(0,H);for(let i=0;i<=24;i++){const px=W*i/24;x.lineTo(px,y0-Math.sin(i*f+ph)*amp-Math.sin(i*f*2.3+ph)*amp*.4)}x.lineTo(W,H);x.closePath();x.fillStyle=col;x.fill()};
+      ridge(hy,H*.03,.55,'#8fa9b8',1);ridge(hy+H*.06,H*.025,.7,'#7f9f6a',2.4);ridge(hy+H*.12,H*.02,.9,'#6a9445',4);
+      if(hy<H){x.fillStyle='rgba(210,170,80,.55)';for(let i=0;i<7;i++){const fx=W*(.12+i*.13),fy=hy+H*.15+(i%3)*H*.02;x.beginPath();x.ellipse(fx,fy,W*.045,H*.008,0,0,Math.PI*2);x.fill()}}
+      // fly through the clouds
+      const cx0=W*.5,cy0=H*.42;
+      clouds.sort((a,b)=>b.z-a.z);
+      for(const c of clouds){c.z-=dt*.2;if(c.z<.12){c.z=1;c.x=(Math.random()-.5)*2.6;c.y=(Math.random()-.5)*1.4-.15}
+        const a=Math.min(1,(1-c.z)*2.5)*Math.min(1,(c.z-.12)*3.5)*(c.z<.35?.6+c.z:.95);if(a<=.01)continue;
+        cloud(c,cx0+c.x*m/c.z*.5,cy0+c.y*m/c.z*.5,c.r*m/c.z*.5,a.toFixed(3))}
+      x.globalAlpha=1;
+    }
+    if(t>=3.25&&!revealed){revealed=true;ov.classList.add('clear');$('hskip').hidden=true;resolve()}
+    // the hawk
+    if(t>.35&&t<4.2){
+      let p,size,flap,bank=0,u;
+      if(t<2.6){u=ease((t-.35)/2.25);p=bez(A,u);size=m*(.06+.14*u);flap=t<1.6?Math.sin((t-.35)*2*Math.PI*1.8):.18+Math.sin(t*3)*.05}
+      else{u=cl((t-2.6)/1.6);u=u*u*(1.4-.4*u);p=bez(B,u);size=m*(.2+2.6*u*u);flap=t<3.0?Math.sin((t-2.6)*2*Math.PI*2.4):-.15;bank=.45*Math.sin(u*Math.PI*.8)}
+      const p2=t<2.6?bez(A,Math.min(1,u+.02)):bez(B,Math.min(1,u+.02)),ang=Math.atan2(p2[1]-p[1],p2[0]-p[0])+Math.PI/2;
+      // speed lines as it rushes past
+      if(t>2.9){const k=cl((t-2.9)/.6)*(1-cl((t-3.6)/.4));x.strokeStyle='rgba(255,255,255,'+(.35*k).toFixed(3)+')';x.lineWidth=2;
+        for(let i=0;i<18;i++){const a=i/18*Math.PI*2+R(i)*0.3,r0=m*(.35+R(i+9)*.2),r1=r0+m*(.25+R(i+19)*.3);x.beginPath();x.moveTo(W*.5+Math.cos(a)*r0,H*.5+Math.sin(a)*r0);x.lineTo(W*.5+Math.cos(a)*r1,H*.5+Math.sin(a)*r1);x.stroke()}}
+      hawkAt(p[0]*W,p[1]*H,size,ang,flap,bank,Math.min(1,(t-.35)*3));
+      if(!cried&&t>.9){cried=1;hawkCry()}
+      if(!whooshed&&t>2.95){whooshed=true;whoosh()}
+    }
+    // after the reveal it circles high over the farm and leaves
+    if(t>4.3&&t<8.2){const u=(t-4.3)/3.9,p=bez(C,u),p2=bez(C,Math.min(1,u+.02)),ang=Math.atan2(p2[1]-p[1],p2[0]-p[0])+Math.PI/2;
+      const fl=(u>.55&&u<.75)?Math.sin(u*60):.15;hawkAt(p[0]*W,p[1]*H,m*.085,ang,fl,.25*Math.sin(u*Math.PI*2),Math.min(1,(t-4.3)*2)*(1-cl((u-.9)*10)));
+      if(cried===1&&t>4.6){cried=2;hawkCry()}}
+    if(t>=8.2){ov.hidden=true;ov.classList.remove('clear');removeEventListener('resize',fit);return}
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  // safety net: if no frames are drawn (a hidden tab), don't hold the game hostage
+  setTimeout(()=>{if(!revealed){revealed=true;t0=-1e9;ov.hidden=true;resolve()}},10000);
+  return gate;
+}
+
 function showTitle(){
   const t=$('title'),cv2=$('tstage'),pd=Math.min(window.devicePixelRatio||1,2);
   if(S.level>2||S.farmerName)$('tsub').textContent='Welcome back'+(S.farmerName?', '+S.farmerName:'')+'! '+S.farmName+' is waiting. Level '+S.level+'.';
@@ -8190,8 +8422,9 @@ function showTitle(){
     g=prev;raf=requestAnimationFrame(loop);
   }
   raf=requestAnimationFrame(loop);
-  const play=()=>{if(t.hidden)return;SFX.click();wakeAudio();lockOrient();t.classList.add('out');setTimeout(()=>{t.hidden=true;cancelAnimationFrame(raf);checkTut();setTimeout(awaySummary,900);renderWx();setTimeout(nextQuest,2500);heldToasts.splice(0).forEach((m,i)=>setTimeout(()=>toast(m),i*700))},520)};
-  $('tplay').onclick=play;$('tplay').focus();
+  const play=()=>{if(t.hidden||t.classList.contains('loading'))return;SFX.click();wakeAudio();lockOrient();t.classList.add('out');setTimeout(()=>{t.hidden=true;cancelAnimationFrame(raf);checkTut();setTimeout(awaySummary,900);renderWx();setTimeout(nextQuest,2500);heldToasts.splice(0).forEach((m,i)=>setTimeout(()=>toast(m),i*700))},520)};
+  $('tplay').onclick=play;
+  bootLoad(hawkIntro(),()=>$('tplay').focus({preventScroll:true}));
 }
 
 /* ================= materials, barn storage and building upgrades ================= */

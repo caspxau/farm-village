@@ -1,7 +1,19 @@
 // Farm Village: Bengali (বাংলা). Lines are "English|translation"; p: holds sentence templates by pattern number.
 FV_PACK={code:'bn',time:{s:'$1 সেকেন্ড',hm:'$1 ঘ $2 মি'},
 font:{css:'family=Baloo+Da+2:wght@500;600;700;800',display:"'Baloo Da 2'",body:"'Baloo Da 2'"},
-x:`I'm too tired… I need food and water.|আমি খুব ক্লান্ত… আমার খাবার আর জল চাই।
+x:`Waking the rooster…|মোরগকে জাগানো হচ্ছে…
+Plowing the fields…|মাঠ চাষ করা হচ্ছে…
+Watering the crops…|ফসলে জল দেওয়া হচ্ছে…
+Feeding the animals…|পশুদের খাওয়ানো হচ্ছে…
+Opening the barn doors…|গোলাঘরের দরজা খোলা হচ্ছে…
+Tap to skip|এড়িয়ে যেতে ট্যাপ করুন
+Tip: watered crops grow faster.|টিপ: জল দেওয়া ফসল দ্রুত বাড়ে।
+Tip: hungry animals stop making goods. Keep the Feed Mill busy.|টিপ: ক্ষুধার্ত পশুরা কিছু উৎপাদন করে না। খাদ্য কল চালু রাখুন।
+Tip: Dale pays well for deliveries and gives lots of XP.|টিপ: ডেল ডেলিভারির জন্য ভালো টাকা আর অনেক XP দেয়।
+Tip: spin the Lucky Wheel for free once a day.|টিপ: দিনে একবার বিনামূল্যে ভাগ্যের চাকা ঘোরান।
+Tip: neighbors trade boards, nails, bricks and paint.|টিপ: প্রতিবেশীরা তক্তা, পেরেক, ইট আর রং বিনিময় করে।
+Tip: press and hold on the grass, then drag to plow a whole row.|টিপ: ঘাসে চেপে ধরে টেনে নিন, পুরো এক সারি চাষ হবে।
+I'm too tired… I need food and water.|আমি খুব ক্লান্ত… আমার খাবার আর জল চাই।
 So tired… I have to eat and drink something.|খুব ক্লান্ত… কিছু খেতে আর পান করতে হবে।
 I'm dehydrated! I need water, now.|আমার শরীরে জলশূন্যতা! এখনই জল চাই।
 Water… I can barely walk…|জল… আমি প্রায় হাঁটতেই পারছি না…
