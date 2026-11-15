@@ -11,7 +11,7 @@ to GitHub reach players without a new Play release.
 |---|---|
 | `icon-512.png` | App icon (512 x 512) |
 | `feature-graphic-1024x500.png` | Feature graphic |
-| `screenshots/*.png` | Phone screenshots (1080 x 1920, upload 2 to 8) |
+| `screenshots/*.png` | Phone screenshots (1080 x 1920, 7 shots: farm, market, bakery, deliveries, Christmas event, wardrobe, farmhouse) |
 | `../privacy.html` | Privacy policy URL: https://caspxau.github.io/farm-village/privacy.html |
 
 ## Store listing text
@@ -25,21 +25,27 @@ Grow crops, raise animals and build the coziest farm in the valley.
 Welcome to Farm Village, a cozy farming game you can play anywhere, even offline.
 
 Plant wheat, strawberries, pumpkins and 24 other crops, each with its own season.
-Raise chickens, cows, sheep, pigs, horses and llamas, and give every animal a home.
-Pick fruit from apple, cherry and peach trees.
+Raise chickens, ducks, cows, sheep, goats, pigs, rabbits, turkeys, horses and llamas, and
+give every animal a home. Pick fruit from apple, cherry, peach, orange, lemon and plum trees.
 
-Turn your harvest into jam, bread, cheese, pies and cider in the Farm Kitchen, Cider
-Press and more. Load Dale's truck and send deliveries to town, fill your neighbors'
-orders, and trade with them for the materials to upgrade your barn and buildings.
+Build 14 production buildings, from the Feed Mill and Farm Kitchen to the Dairy, Bakery,
+Weaving Loom, Juice Bar, Flower Shop, Sugar Mill, Country Diner and Tailor, and turn your
+harvest into more than 60 goods: jam, bread, cheese, pies, cider, quilts, pizza and more.
+Load Dale's truck and send deliveries to town, fill your neighbors' orders, and trade with
+them for the materials to upgrade your barn and buildings and grow your land to 50 by 50.
 
-Decorate with fences, flower beds, gnomes, a windmill and a hot air balloon, furnish
-your farmhouse, and dress your farmer just the way you like.
+Decorate with fences, flower beds, gnomes, a windmill and a hot air balloon, furnish your
+farmhouse, look after your farmer's food and drink, adopt a dog or a cat, and dress your
+farmer just the way you like.
 
+Every December the valley celebrates Christmas: earn candy canes, open an advent calendar
+door every day and win a Santa outfit, a Christmas tree and more.
+
+- 99 levels, 22 story quests, ribbons, collections and daily goals
 - Painted, hand-drawn style with a Cartoon option
 - Seasons and weather that change how your crops grow
 - Tractor, seeder and harvester to farm whole fields at once
-- Ribbons, collections, daily goals and quests
-- Plays in portrait or landscape, works offline
+- Plays in portrait or landscape, works offline, in 11 languages
 - No ads, no accounts, no data collected
 - Optional Farm Cash packs for premium outfits, furniture and decorations
 

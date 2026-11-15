@@ -1967,7 +1967,7 @@ body .evbox .goals-head{background:linear-gradient(rgba(212,42,42,.26),rgba(47,1
       <svg viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="hst" cx="40%" cy="30%" r="75%"><stop offset="0" stop-color="#fff6c8"/><stop offset=".35" stop-color="#ffd54a"/><stop offset=".8" stop-color="#e09a14"/><stop offset="1" stop-color="#b06e08"/></radialGradient><linearGradient id="hsb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2b0"/><stop offset="1" stop-color="#9a5e06"/></linearGradient></defs><path d="M32 5l8.4 17.6 19.4 2.4-14.3 13.3 3.8 19.2L32 48 14.7 57.5l3.8-19.2L4.2 25l19.4-2.4z" transform="translate(0 2.4)" fill="#6e3f06" opacity=".55"/><path d="M32 3l8.6 18.3 20 2.4-14.8 13.7 4 19.8L32 47.3 14.2 57.2l4-19.8L3.4 23.7l20-2.4z" fill="url(#hst)" stroke="#7a4806" stroke-width="2.4" stroke-linejoin="round"/><path d="M32 11.5l6.2 13.2 14.4 1.8-10.6 9.8 2.9 14.2L32 43.4l-12.9 7.1L22 36.3l-10.6-9.8 14.4-1.8z" fill="none" stroke="url(#hsb)" stroke-width="1.6" stroke-linejoin="round" opacity=".9"/><path d="M32 9l5 10.8 11.6 1.4" fill="none" stroke="#fffbe0" stroke-width="2.4" stroke-linecap="round" opacity=".85"/></svg>
       <span class="outline" id="lvl">1</span>
     </div>
-    <div class="xpbox"><span class="xplabel"><span>To level <b id="lvlnext">2</b></span><span id="xpleft">30 to go</span></span><div class="xpbar"><i id="xpfill" style="width:0%"></i><span class="xptext" id="xptext">0 / 30 XP</span></div></div>
+    <div class="xpbox"><span class="xplabel"><span id="lvlto">To level <b id="lvlnext">2</b></span><span id="xpleft">30 to go</span></span><div class="xpbar"><i id="xpfill" style="width:0%"></i><span class="xptext" id="xptext">0 / 30 XP</span></div></div>
   </div>
   <div class="pill coins" title="Coins"><span class="coin"></span><b id="coins">0</b></div>
   <div class="pill cashp" title="Farm Cash"><span class="bill">$</span><b id="cash">0</b><button class="plus" id="cashPlus" aria-label="Get Farm Cash">+</button></div>
@@ -2894,6 +2894,7 @@ function norm(s){
   if(!s.born)s.born=Date.now();if(s.farmName==='Clover Hollow')s.farmName='Farm Village';if(s.pet&&!['dog','cat'].includes(s.pet.kind))s.pet=null;
   s.barnLvl=Math.min(6,Math.max(1,s.barnLvl|0));
   if(s.level>99){s.level=99;s.xp=0}
+  delete s.unlimited;
   if(!s.tapMode)s.tapMode=s.tapGrass==='plow'?'plow':'farm';
   // the Walk / Plow step was added as tutorial step 4: older saves past step 3 move up one
   if(s.tutV!==2&&s.tutV!==3){if(typeof s.tut==='number'&&s.tut>=3)s.tut++;s.tutV=2}
@@ -5739,8 +5740,33 @@ const MK_LOOK={
   diner:{wallL:'#f4f0e6',wallR:'#dad4c6',wall:'lap',stoneTo:9,roof:['#d9402f','#b02e20','#7a1c12'],metal:true,trim:'#d9402f',door:'#2a4a70',front:'awning',awn:['#d9402f','#ffffff'],chimney:1,props:[['crate','tomato'],['crate','pepper'],['barrel']],yard:'#c8bc9c',c:['#f4f0e6','#dad4c6','#d9402f','#a82c22']},
   tailor:{wallL:'#c9d8e8',wallR:'#aebfd2',wall:'batten',roof:['#4a4f6a','#363a52','#24273a'],trim:'#fbf8f0',door:'#8a4a6a',front:'awning',awn:['#4a4f6a','#e8d8b0'],props:[['crate','a_sheep'],['sack','#d8c8e8'],['crate','a_turkey']],yard:'#c2b69a',c:['#cfdcea','#b2c2d4','#4a4f6a','#363a52']}
 };
+// Each later building gets its own landmark so it reads at a glance: one structure behind it and a sign on the roof.
+function lateBack(x,y,id){
+  const[px,py]=P(x+1.78,y+.4);
+  if(id==='dairy'){cylinder(px,py,8.5,3.8,36,'#eef1f4','#9aa4ae','#f6f8fa');g.beginPath();g.ellipse(px,py-36,8.5,3.8,0,Math.PI,0);g.quadraticCurveTo(px,py-46,px-8.5,py-36);g.fillStyle=lgr([px-8,0],[px+8,0],['#ffffff','#d8dee4','#a8b2bc']);g.fill();g.strokeStyle='#6a747e';g.lineWidth=.8;g.stroke();
+    poly([[px-8.5,py-20],[px+8.5,py-20],[px+8.5,py-16],[px-8.5,py-16]],'#3f6a9a');g.fillStyle='#fff';g.font='bold 3.4px sans-serif';g.textAlign='center';g.fillText('MILK',px,py-17);g.strokeStyle='#7a848e';g.lineWidth=.6;for(let k=0;k<6;k++)line([px+5.4,py-3-k*5],[px+7.6,py-3-k*5]);line([px+5.4,py],[px+5.4,py-31]);line([px+7.6,py],[px+7.6,py-31])}
+  else if(id==='sugarmill'){isoBox(x+1.68,y+.3,.18,.18,74,'#a8584a','#86402f','#c06a5a','#4a2418');const[tx,ty]=P(x+1.77,y+.39,74);ell(tx,ty,5.4,2.6,'#3a2a24','#2a1a14',.6);
+    g.strokeStyle='rgba(255,230,210,.35)';g.lineWidth=.5;for(let z=8;z<74;z+=6){line(P(x+1.68,y+.48,z),P(x+1.86,y+.48,z))}
+    if(!reduce&&!ICON_MODE){const t=performance.now()/1000;for(let i=0;i<4;i++){const q=(t*.35+i/4)%1;ell(tx+Math.sin(q*4+i)*4+q*6,ty-q*30,2.4+q*6,2+q*4.6,'rgba(235,235,235,'+(.55*(1-q)).toFixed(2)+')')}}else for(let i=0;i<3;i++)ell(tx+i*3,ty-6-i*7,3+i*1.6,2.4+i*1.2,'rgba(235,235,235,.5)')}
+  else if(id==='florist'){const gx=x+1.56,gy=y+.08;isoBox(gx,gy,.38,.5,13,'rgba(190,230,240,.7)','rgba(160,205,220,.75)',null,'#e8f2f4');
+    const T1=P(gx,gy+.25,22),T2=P(gx+.38,gy+.25,22);poly([P(gx,gy,13),P(gx+.38,gy,13),T2,T1],'rgba(215,240,248,.75)','#ffffff',.8);poly([T1,T2,P(gx+.38,gy+.5,13),P(gx,gy+.5,13)],'rgba(230,248,252,.8)','#ffffff',.8);
+    for(let i=0;i<7;i++){const[fx,fy]=P(gx+.06+hash(i,4)*.28,gy+.48,3+hash(4,i)*6);ball(fx,fy,1.4,1.4,['#e0457b','#ffd23f','#ff7a3a','#ffffff','#a24ad0'][i%5])}}
+  else if(id==='loom'){const a=P(x+1.9,y+.25),b=P(x+1.9,y+1.25);g.strokeStyle='#5e3a1c';g.lineWidth=1.6;line(a,[a[0],a[1]-26]);line(b,[b[0],b[1]-26]);g.strokeStyle='#eee';g.lineWidth=.5;g.beginPath();g.moveTo(a[0],a[1]-25);g.quadraticCurveTo((a[0]+b[0])/2,(a[1]+b[1])/2-21,b[0],b[1]-25);g.stroke();
+    ['#e0457b','#3f9ad8','#ffd23f','#8a4ec0'].forEach((c,i)=>{const t=(i+.6)/4.4,cx=a[0]+(b[0]-a[0])*t,cy=a[1]+(b[1]-a[1])*t-25+Math.sin(t*Math.PI)*4;poly([[cx-2.6,cy],[cx+2.6,cy+1.3],[cx+2.6,cy+11],[cx-2.6,cy+9.6]],c,shade(c,-.35),.4);g.strokeStyle='rgba(255,255,255,.5)';g.lineWidth=.4;line([cx-2.6,cy+3],[cx+2.6,cy+4.3])})}
+}
+function lateSign(x,y,id){
+  const[rx,ry]=P(x+.9,y+.82,NATURAL?44:42);
+  if(id==='diner'){g.strokeStyle='#3a3a3a';g.lineWidth=1.2;line([rx-8,ry],[rx-8,ry-7]);line([rx+8,ry],[rx+8,ry-7]);
+    const on=reduce||ICON_MODE||Math.floor(performance.now()/700)%4!==0;if(on){g.save();g.shadowColor='#ff5a4a';g.shadowBlur=6}
+    g.beginPath();g.roundRect?g.roundRect(rx-15,ry-17,30,10,4):g.rect(rx-15,ry-17,30,10);g.fillStyle='#2a1a1a';g.fill();g.strokeStyle=on?'#ff6a5a':'#8a3a30';g.lineWidth=1.4;g.stroke();if(on)g.restore();
+    g.fillStyle=on?'#ffe066':'#9a8a50';g.font='bold 7px sans-serif';g.textAlign='center';g.fillText('DINER',rx,ry-9.6);return}
+  const icon={juicebar:'ojuice',bakery:'croissant',tailor:'fabric',dairy:'butter',loom:'quilt',florist:'rosebq',sugarmill:'sugar'}[id];if(!icon)return;
+  g.strokeStyle='#4e331e';g.lineWidth=1.4;line([rx,ry],[rx,ry-5]);
+  const rim=MK_LOOK[id].roof[1];ell(rx,ry-17,13,13,lgr([rx,ry-30],[rx,ry-4],['#fffaf0','#efe2c4']),rim,2.2);ell(rx,ry-17,10.6,10.6,null,'rgba(120,80,30,.25)',.6);
+  drawGood(icon,rx,ry-17,.78);
+}
 function makerLateN(x,y,id){
-  const L=MK_LOOK[id],[cx,cy]=P(x+1,y+1);shadow(cx,cy+6,62,20);yardN(x,y,L.yard);
+  const L=MK_LOOK[id],[cx,cy]=P(x+1,y+1);shadow(cx,cy+6,62,20);yardN(x,y,L.yard);lateBack(x,y,id);
   const m=makerShedN(x+.16,y+.3,1.3,1.1,28,15,{wallL:L.wallL,wallR:L.wallR,wall:L.wall,stoneTo:L.stoneTo,metal:L.metal,roof:L.roof,trim:L.trim,decor:(F,S2,k)=>{
     // a door with a little window, two front windows with shutters, and the building's own front
     const a=.5,b=.8;fp(F,[[a,k.base],[b,k.base],[b,k.base+17],[a,k.base+17]],L.door,'rgba(20,10,5,.5)',.6);fp(F,[[a+.06,k.base+11],[b-.06,k.base+11],[b-.06,k.base+15],[a+.06,k.base+15]],'#cfe6f2');ell(...F(b-.05,k.base+8),.9,.9,'#d9b25a');
@@ -5755,6 +5781,7 @@ function makerLateN(x,y,id){
   // yard props along the front
   L.props.forEach(([k,v],i)=>{const u=x+1.08+i*.27,w=y+1.62+(i%2)*.14,[px,py]=P(u,w);
     if(k==='crate')crateN(u-.13,w-.1,.3,.22,8,0,v);else if(k==='sack')sackN(px,py,.8,v);else if(k==='drum')drumN(px,py,5,13,v);else{barrelN(px,py,6,13)}});
+  lateSign(x,y,id);
   signN(x+.1,y+1.92,MAKERS[id].recipes[0].out);
 }
 function drawMakerN(x,y,id){
@@ -5979,10 +6006,10 @@ function drawMakerC(x,y,id){
     for(const[a,b]of[[x+.35,y+1.7],[x+.55,y+1.85]]){const[ax,ay]=P(a,b);g.save();g.translate(ax,ay-5);g.scale(.5,.5);drawGood('t_apple',0,0,1);g.restore()}
   }else if(MK_LOOK[id]){
     // the later buildings: a gable house in their own colours with crates of what they use out front
-    const c=MK_LOOK[id].c;gableHouse(x+.2,y+.25,1.5,1.1,24,17,c[0],c[1],c[2],c[3],'#6b3c15');const yy=y+.25+1.1;
+    lateBack(x,y,id);const c=MK_LOOK[id].c;gableHouse(x+.2,y+.25,1.5,1.1,24,17,c[0],c[1],c[2],c[3],'#6b3c15');const yy=y+.25+1.1;
     faceQuad(x+.75,x+1.05,yy,0,16,'#8a5530','#4e2c12');faceQuad(x+.32,x+.6,yy,9,18,'#8fd0f5','#6b3c15');faceQuad(x+1.2,x+1.48,yy,9,18,'#8fd0f5','#6b3c15');
     if(MK_LOOK[id].chimney)isoBox(x+1.25,y+.45,.22,.22,54,'#b8584a','#c9685a','#d47a6a','#6b2a20');
-    MK_LOOK[id].props.forEach(([k,v],i)=>{if(k!=='crate')return;const[ax,ay]=P(x+1.3+i*.18,y+1.75);g.save();g.translate(ax,ay-5);g.scale(.5,.5);drawGood(v,0,0,1);g.restore()});
+    MK_LOOK[id].props.forEach(([k,v],i)=>{if(k!=='crate')return;const[ax,ay]=P(x+1.3+i*.18,y+1.75);g.save();g.translate(ax,ay-5);g.scale(.5,.5);drawGood(v,0,0,1);g.restore()});lateSign(x,y,id);
   }else{
     // a cream cottage with a striped awning, a brick chimney and treats cooling out front
     gableHouse(x+.18,y+.25,1.64,1.12,25,18,'#fff4dc','#ead9b4','#e0457b','#b8325f','#8a5a32');
@@ -7727,12 +7754,13 @@ function toastKind(m){
   if(/barn|collect|harvest|picked|got |stored/i.test(m))return'k-item';
   return'';
 }
-function hud(){richTopUp();
+function hud(){
   animCounters();
   if(shownLvl!==null&&S.level>shownLvl){const l=$('lvl').closest('.lvl');l.classList.remove('up');void l.offsetWidth;l.classList.add('up')}
   const xpTot=S.level*1e7+S.xp;if(shownXP!==null&&xpTot>shownXP)delta($('xptext').closest('.xpbox'),S.level>shownLvl?'Level up!':'+'+(S.xp-shownXPv)+' XP','xp');
   shownLvl=S.level;shownXP=xpTot;shownXPv=S.xp;
   $('lvl').textContent=S.level;
+  $('lvlto').hidden=S.level>=MAX_LVL;
   if(S.level>=MAX_LVL){$('lvlnext').textContent=MAX_LVL;$('xpleft').textContent='Top level!';$('xpfill').style.width='100%';$('xptext').textContent='Max level'}
   else{$('lvlnext').textContent=S.level+1;$('xpleft').textContent=(need(S.level)-S.xp).toLocaleString()+' to go';
   $('xpfill').style.width=Math.min(100,S.xp/need(S.level)*100)+'%';$('xptext').textContent=S.xp.toLocaleString()+' / '+need(S.level).toLocaleString()+' XP'}
@@ -9121,7 +9149,7 @@ function levelStarArt(lv){
 }
 function countUp(node,to,fmt,delay){
   if(reduce){node.textContent=fmt(to);return}
-  node.textContent=fmt(0);setTimeout(()=>{const t0=performance.now(),d=Math.min(1100,350+to*2);const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);node.textContent=fmt(Math.round(to*e));if(k<1)requestAnimationFrame(step);else{node.parentNode.classList.add('done');SFX.coin()}};requestAnimationFrame(step)},delay)
+  node.textContent=fmt(0);setTimeout(()=>{const t0=performance.now(),d=Math.min(1100,350+to*2);const step=t=>{const k=Math.max(0,Math.min(1,(t-t0)/d)),e=1-Math.pow(1-k,3);node.textContent=fmt(Math.round(to*e));if(k<1)requestAnimationFrame(step);else{node.parentNode.classList.add('done');SFX.coin()}};requestAnimationFrame(step)},delay)
 }
 function celebrate(b,o){
   const wrap=el('div','cele '+(o.tone||'gold'));
@@ -9640,19 +9668,13 @@ function showSettings(){
     b.appendChild(p);
   }});
 }
-// Secret code: the right code turns unlimited coins and Farm Cash on (or back off), and always jumps straight to level 99.
-const SECRET='2899',RICH_COINS=9999999,RICH_CASH=99999;
-function richTopUp(){if(S&&S.unlimited){if(S.coins<RICH_COINS)S.coins=RICH_COINS;if(S.cash<RICH_CASH)S.cash=RICH_CASH}}
+// Secret code box: 1225 previews the Christmas event.
 function secretModal(){
   modal({title:'Secret code',color:'',small:true,render(b){
     const p=el('div','body-pad'),i=document.createElement('input');i.type='password';i.inputMode='numeric';i.autocomplete='off';i.className='secretin';i.setAttribute('aria-label','Secret code');i.dataset.focus='1';
     const go=el('button','go','Unlock'),msg=el('p','hint','');
     const tryIt=()=>{if(i.value.trim()===XM_CODE){S.xmPreview=!S.xmPreview;closeModal();changed();SFX.golden();toast(S.xmPreview?'Christmas event preview on!':'Christmas event preview off.');xmCheck();return}
-      if(i.value.trim()===SECRET){S.unlimited=!S.unlimited;const l0=S.level;
-        if(l0<MAX_LVL){for(let l=l0+1;l<=MAX_LVL;l++){S.coins+=20*l;if(l%5===0)S.cash+=1}S.level=MAX_LVL;S.xp=0}
-        if(S.unlimited){richTopUp();SFX.golden();confetti();toast('Unlimited cash unlocked!')}else toast('Unlimited cash turned off.');changed();hud();closeModal();
-        if(S.level>l0){SFX.level();showLevelUp(l0);if(!S.champ)setTimeout(championGift,600)}}
-      else{SFX.error();i.value='';msg.textContent='Wrong code.';shakeEl(i)}};
+      {SFX.error();i.value='';msg.textContent='Wrong code.';shakeEl(i)}};
     go.onclick=tryIt;i.onkeydown=e=>{if(e.key==='Enter')tryIt()};p.appendChild(i);p.appendChild(go);p.appendChild(msg);b.appendChild(p);
   }});
 }
@@ -10975,7 +10997,7 @@ function askBox(title,msg,yesTxt,noTxt,onYes,opt){
 }
 // true when the purchase may go ahead now; otherwise it asks, and on Yes runs again() so the purchase repeats with the pass
 function cashPass(amount,what,again){
-  if(!amount||S.cashAsk===false||S.unlimited){return true}
+  if(!amount||S.cashAsk===false){return true}
   if(CASH_PASS){CASH_PASS=false;return true}
   askBox('Spend Farm Cash?','Spend '+amount+' Farm Cash on '+what+'?','Yes, buy','Cancel',never=>{if(never)S.cashAsk=false;CASH_PASS=true;again();CASH_PASS=false},{never:true,cash:true});
   return false;
