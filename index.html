@@ -1736,7 +1736,7 @@ body header.hud .pill:hover{filter:brightness(1.03)}
 /* tiles */
 #morePop .popgrid{gap:30px 14px;padding:2px 2px 22px;justify-content:center}
 #morePop .mbtn{--tc:#c98a4b}
-#btnOrders{--tc:#f2a21e}#btnNbrs{--tc:#3f9a3c}#btnWardrobe{--tc:#d9402f}#btnGifts{--tc:#e0457b}#btnColl{--tc:#2d8fe3}#btnTrade{--tc:#2ba0a0}#btnRib{--tc:#e8b81e}
+#btnOrders{--tc:#f2a21e}#btnNbrs{--tc:#3f9a3c}#btnWardrobe{--tc:#d9402f}#btnGifts{--tc:#e0457b}#btnColl{--tc:#2d8fe3}#btnTrade{--tc:#2ba0a0}#btnRib{--tc:#e8b81e}#btnWheel{--tc:#ff8fb5}
 #btnMusic{--tc:#7a4ec0}#btnSound{--tc:#2d8fe3}#btnSettings{--tc:#7d8a99}
 #morePop .popgrid .mbtn{border-radius:16px;border:1.5px solid color-mix(in srgb,var(--tc) 45%,#4a2f17);
   background:radial-gradient(circle at 50% 46%,color-mix(in srgb,var(--tc) 42%,#fff) 0 19px,color-mix(in srgb,var(--tc) 70%,#fff) 19.5px 21px,transparent 21.5px),
@@ -1954,6 +1954,23 @@ body .evbox .goals-head{background:linear-gradient(rgba(212,42,42,.26),rgba(47,1
 .xmdoor.open{background:#fffaf2;border-color:#e3cfa8;color:#a81c1c;filter:none;opacity:1}
 .xmdoor.open .cane{width:20px;height:20px}.xmdoor small{font-family:var(--f-body);font-weight:800;font-size:11px}.xmdoor small.xc{color:#1f6b28}
 .ptag.xmtag{border-color:#d42a2a;color:#a81c1c;font-weight:800}.ptag.xmtag .cane{width:12px;height:12px}
+
+/* ---- Lucky Wheel, mystery crates, flying coins ---- */
+body.visiting #wheelbox{display:none}
+.wheelbox{pointer-events:auto}
+body .wheelbox .goals-head{background:linear-gradient(rgba(242,197,58,.36),rgba(255,143,181,.14))}
+.wheelbox .goals-head .wheelic{width:28px;height:28px;flex:none}
+.wheelbox .goals-head .wheelic{animation:wheelspin 6s linear infinite}
+.wheelbox .goals-head i{background:#e0352b;color:#fff;border-color:#7a1010;animation:xmpulse 1.6s ease-in-out infinite}
+@keyframes wheelspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.wheelbox .goals-head .wheelic,.wheelbox .goals-head i{animation:none}}
+.wheelwrap{display:flex;flex-direction:column;align-items:center;text-align:center}
+.wheelcv{width:min(300px,78vw,40vh);height:auto;aspect-ratio:1;margin:6px auto 4px;filter:drop-shadow(0 6px 10px rgba(60,30,10,.25))}
+.wheelrow{display:flex;justify-content:center;margin-top:6px}
+.wheelgo{min-width:180px;font-size:20px}
+.wheelgo .bill{width:22px;height:16px;flex-basis:22px;font-size:10px;border-width:1px;margin:0 3px;vertical-align:-2px}
+.coinfly{position:fixed;left:-11px;top:-11px;z-index:9999;pointer-events:none;will-change:transform}
+.coinfly .coin{width:22px;height:22px;flex-basis:22px;border-width:1.5px;box-shadow:0 2px 4px rgba(0,0,0,.25)}
 </style>
 </head>
 <body>
@@ -2041,6 +2058,9 @@ body .evbox .goals-head{background:linear-gradient(rgba(212,42,42,.26),rgba(47,1
     <button class="mbtn" id="btnRib" aria-label="Ribbons">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 18l-4 12 5-3 3 4 2-12zM21 18l4 12-5-3-3 4-2-12z" fill="#2d6fd0" stroke="#6b3c15" stroke-width="1.5" stroke-linejoin="round"/><circle cx="16" cy="13" r="10" fill="#ffd23f" stroke="#6b3c15" stroke-width="2"/><circle cx="16" cy="13" r="5.5" fill="#fff3b0"/></svg>
       <em aria-hidden="true">Ribbons</em></button>
+    <button class="mbtn" id="btnWheel" aria-label="Lucky Wheel" data-lv="2">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="13" fill="#6b3c15"/><circle cx="16" cy="17" r="11" fill="#ffd23f"/><path d="M16 17L16 6A11 11 0 0 1 27 17ZM16 17L16 28A11 11 0 0 1 5 17Z" fill="#7cc8ff"/><path d="M16 17L27 17A11 11 0 0 1 16 28ZM16 17L5 17A11 11 0 0 1 16 6Z" fill="#ff8fb5"/><circle cx="16" cy="17" r="3.4" fill="#f2c53a" stroke="#6b3c15"/><path d="M16 6l-3.4-5h6.8z" fill="#e0352b" stroke="#6b3c15" stroke-width="1"/></svg>
+      <em aria-hidden="true">Wheel</em></button>
   </div>
   <div class="poputil">
     <button class="mbtn" id="btnMusic" aria-label="Music on" aria-pressed="true">
@@ -2085,7 +2105,7 @@ body .evbox .goals-head{background:linear-gradient(rgba(212,42,42,.26),rgba(47,1
 </footer>
 <div id="neighbors" hidden></div>
 
-<div class="side" id="side"><aside class="goals evbox closed" id="evbox" hidden aria-label="Christmas event"></aside><div class="qtrack" id="qtrack" hidden aria-label="Quest"></div><aside class="goals" id="goals" aria-label="Today's goals"></aside></div>
+<div class="side" id="side"><aside class="goals evbox closed" id="evbox" hidden aria-label="Christmas event"></aside><aside class="goals wheelbox closed" id="wheelbox" hidden aria-label="Lucky Wheel"></aside><div class="qtrack" id="qtrack" hidden aria-label="Quest"></div><aside class="goals" id="goals" aria-label="Today's goals"></aside></div>
 <div class="tut" id="tut" hidden><div><small id="tutStep"></small><strong id="tutText"></strong></div><button class="btn2" id="tutSkip">Skip</button></div>
 <div class="visitbar" id="visitbar" hidden><div><strong id="vbName"></strong><small id="vbInfo"></small></div><button class="go" id="vbHome">Go home</button></div>
 <div class="title" id="title">
@@ -2286,7 +2306,7 @@ const PL_EXACT={
 'At Level 99 you win the Champion Trophy, 50,000 coins and 50 Farm Cash.':'Na poziomie 99 zdobędziesz Puchar Mistrza, 50 000 monet i 50 farmdolarów.',
 'Auto Waterer':'Automatyczny zraszacz','The Auto Waterer is full.':'Zraszacz jest pełny.',
 'Animals live in their home. Switch Animals to Free roam in Settings to move them around.':'Zwierzęta mieszkają w swoim domu. Aby je przestawiać, wybierz w ustawieniach Zwierzęta: Swobodnie.',
-'Art style':'Styl grafiki','Collect all':'Odbierz wszystko','Hungry':'Głodne','Animals in this home':'Zwierzęta w tym domu','Feed your animals to start production.':'Nakarm zwierzęta, by zaczęły produkcję.','A chicken laid an egg. Tap the Chicken Coop to collect it.':'Kura zniosła jajko. Dotknij kurnika, by je zebrać.','Now that chicken is hungry. Tap the Chicken Coop and press Feed all.':'Teraz kura jest głodna. Dotknij kurnika i naciśnij Nakarm wszystkie.','The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.':'Cała dolina szykuje się do świąt! Każda praca na farmie daje laski cukrowe. Zbierz ich dość, a wygrasz świąteczne ubrania i ozdoby.','Event':'Wydarzenie','Christmas':'Boże Narodzenie','Christmas on the Farm':'Święta na farmie','candy canes':'laski cukrowe','Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.':'Praca na farmie daje laski cukrowe: czasem przy zbiorach, zwierzętach i drzewach owocowych, za każdy gotowy towar, 3 za zamówienie sąsiada i 5 za dostawę.','The event ends tomorrow.':'Wydarzenie kończy się jutro.','Christmas prizes':'Świąteczne nagrody','Claim':'Odbierz','Claimed':'Odebrano','Advent calendar':'Kalendarz adwentowy','Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.':'Otwieraj nowe okienko każdego dnia aż do Wigilii. Ominął cię dzień? Wcześniejsze okienka nadal czekają.','The advent calendar opens on December 1.':'Kalendarz adwentowy otwiera się 1 grudnia.','Elf hat':'Czapka elfa','Reindeer antlers':'Rogi renifera','Santa hat':'Czapka Mikołaja','Christmas sweater':'Świąteczny sweter','Santa coat':'Płaszcz Mikołaja','Santa trousers':'Spodnie Mikołaja','Christmas lights':'Świąteczne lampki','Gift Pile':'Stos prezentów','Snowman':'Bałwan','Christmas Tree':'Choinka','Christmas is coming!':'Święta tuż-tuż!','Look for the Christmas card on the left of the screen.':'Szukaj świątecznej karty po lewej stronie ekranu.','Ho ho ho!':'Ho ho ho!','Christmas event preview on!':'Podgląd świątecznego wydarzenia włączony!','Christmas event preview off.':'Podgląd świątecznego wydarzenia wyłączony.','Christmas event':'Świąteczne wydarzenie','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
+'Art style':'Styl grafiki','Lucky Wheel':'Koło fortuny','Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.':'Kręć raz dziennie i wygraj darmową nagrodę: monety, materiały, paszę, nawóz, XP, a nawet farmdolary.','Spin!':'Kręć!','Spin again':'Kręć jeszcze raz','Next free spin tomorrow.':'Następne darmowe kręcenie jutro.','Free spin':'Darmowe kręcenie','Wheel':'Koło','an extra spin':'dodatkowe kręcenie','A mystery crate appeared on your farm! Tap it to open.':'Na farmie pojawiła się tajemnicza skrzynia! Dotknij, by ją otworzyć.','Mystery crate: tap to open':'Tajemnicza skrzynia: dotknij, by otworzyć','Collect all':'Odbierz wszystko','Hungry':'Głodne','Animals in this home':'Zwierzęta w tym domu','Feed your animals to start production.':'Nakarm zwierzęta, by zaczęły produkcję.','A chicken laid an egg. Tap the Chicken Coop to collect it.':'Kura zniosła jajko. Dotknij kurnika, by je zebrać.','Now that chicken is hungry. Tap the Chicken Coop and press Feed all.':'Teraz kura jest głodna. Dotknij kurnika i naciśnij Nakarm wszystkie.','The whole valley is getting ready for Christmas! Every bit of farm work earns candy canes. Collect enough and you can win Christmas clothes and decorations.':'Cała dolina szykuje się do świąt! Każda praca na farmie daje laski cukrowe. Zbierz ich dość, a wygrasz świąteczne ubrania i ozdoby.','Event':'Wydarzenie','Christmas':'Boże Narodzenie','Christmas on the Farm':'Święta na farmie','candy canes':'laski cukrowe','Farm work brings candy canes: harvesting, animals and fruit trees now and then, every finished good, 3 for a neighbor order and 5 for a delivery.':'Praca na farmie daje laski cukrowe: czasem przy zbiorach, zwierzętach i drzewach owocowych, za każdy gotowy towar, 3 za zamówienie sąsiada i 5 za dostawę.','The event ends tomorrow.':'Wydarzenie kończy się jutro.','Christmas prizes':'Świąteczne nagrody','Claim':'Odbierz','Claimed':'Odebrano','Advent calendar':'Kalendarz adwentowy','Open a new door every day until Christmas Eve. Missed a day? Earlier doors stay open for you.':'Otwieraj nowe okienko każdego dnia aż do Wigilii. Ominął cię dzień? Wcześniejsze okienka nadal czekają.','The advent calendar opens on December 1.':'Kalendarz adwentowy otwiera się 1 grudnia.','Elf hat':'Czapka elfa','Reindeer antlers':'Rogi renifera','Santa hat':'Czapka Mikołaja','Christmas sweater':'Świąteczny sweter','Santa coat':'Płaszcz Mikołaja','Santa trousers':'Spodnie Mikołaja','Christmas lights':'Świąteczne lampki','Gift Pile':'Stos prezentów','Snowman':'Bałwan','Christmas Tree':'Choinka','Christmas is coming!':'Święta tuż-tuż!','Look for the Christmas card on the left of the screen.':'Szukaj świątecznej karty po lewej stronie ekranu.','Ho ho ho!':'Ho ho ho!','Christmas event preview on!':'Podgląd świątecznego wydarzenia włączony!','Christmas event preview off.':'Podgląd świątecznego wydarzenia wyłączony.','Christmas event':'Świąteczne wydarzenie','Your farmer\'s food and drink. Eat and drink at home to refill. Tap to go home':'Jedzenie i picie farmera. Jedz i pij w domu, by je uzupełnić. Dotknij, by wejść do domu','Farmer':'Farmer','Eat & drink at home':'Jedz i pij w domu','Vibrate on tap':'Wibracje przy dotknięciu','Affordable':'Na każdą kieszeń','In season':'W sezonie','Fastest':'Najszybsze','Most profit':'Największy zysk','Best in spring':'Najlepsze wiosną','Best in summer':'Najlepsze latem','Best in autumn':'Najlepsze jesienią','Best in winter':'Najlepsze zimą','Plant free':'Posadź za darmo','+50% price':'+50% ceny','Waters growing crops up to 2 plots away.':'Podlewa rosnące plony do 2 pól dalej.','Cartoon':'Kreskówka','Natural look: soft light and painted textures.':'Naturalny wygląd: miękkie światło i malowane tekstury.','Cartoon look: bold outlines.':'Wygląd kreskówki: wyraźne kontury.'
 ,
 'Plow':'Orka','Tapping grass: walk or plow':'Dotknięcie trawy: idź albo zaorz','Tapping grass now plows it into new farmland.':'Dotknięcie trawy zamienia ją teraz w nowe pole.','Tapping grass now walks your farmer there.':'Dotknięcie trawy wysyła teraz tam farmera.','Tapping grass makes your farmer walk there. Use the Walk / Plow switch to make new farmland instead. Tap it now.':'Dotknięcie trawy wysyła tam farmera. Przełącznikiem Chodzenie / Orka zrobisz zamiast tego nowe pole. Dotknij go teraz.',
 'Back before you know it!':'Wrócę, zanim się obejrzysz!','Got anything for town?':'Masz coś do miasta?','The truck is ready to roll!':'Ciężarówka gotowa do drogi!','Nice day for a drive.':'Piękny dzień na przejażdżkę.','Fill a contract and I will take it to town.':'Wypełnij kontrakt, a zawiozę go do miasta.','I can take that to town!':'Mogę to zawieźć do miasta!',
@@ -2543,6 +2563,11 @@ const PL_PATS=[
 [/^Next (.+) in (.+)\.$/,m=>'Następne ('+L_w(m[1]).toLowerCase()+') za '+L_t(m[2])+'.'],
 [/^(.+) ready to collect\.$/,m=>L_w(m[1])+' – gotowe do odbioru.'],
 [/^Feed all \((\d+)\) · (\d+) feed$/,m=>'Nakarm wszystkie ('+m[1]+') · '+m[2]+' paszy'],
+[/^\+(\d+) animal feed$/,m=>'+'+m[1]+' paszy'],
+[/^\+(\d+) fertilizer$/,m=>'+'+m[1]+' nawozu'],
+[/^Lucky Wheel: (.+)!$/,m=>'Koło fortuny: '+m[1]+'!'],
+[/^Mystery crate: (.+)!$/,m=>'Tajemnicza skrzynia: '+m[1]+'!'],
+[/^Combo x(\d+)!$/,m=>'Kombo x'+m[1]+'!'],
 ];
 
 // Other languages: a pack gives exact phrases (one "English|translation" per line) and templates for the
@@ -7595,6 +7620,7 @@ function burst(x,y,colors){
   for(let i=0;i<10;i++){const a=Math.random()*Math.PI*2,v=1+Math.random()*2;parts.push({x:px,y:py-8,vx:Math.cos(a)*v,vy:-1.5-Math.random()*2.5,c:colors[i%colors.length],t0:performance.now()})}
 }
 function drawEffects(t){
+  drawCrate(t);
   {const cap=QL>=2?320:QL?200:110;if(parts.length>cap)parts.splice(0,parts.length-cap)}
   for(let i=parts.length-1;i>=0;i--){
     const p=parts[i],age=(t-p.t0)/1000,life=p.life||.7;if(age>life){parts.splice(i,1);continue}
@@ -7913,7 +7939,7 @@ function addXP(n){
   S.xp+=n;const l0=S.level;
   while(S.level<MAX_LVL&&S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=20*S.level;if(S.level%5===0)S.cash+=1}
   if(S.level>=MAX_LVL)S.xp=0;
-  if(S.level>l0){SFX.level();showLevelUp(l0);if(S.level>=MAX_LVL&&!S.champ)setTimeout(championGift,600);else setTimeout(nextQuest,800)}
+  if(S.level>l0){SFX.level();showLevelUp(l0);renderWheelCard();if(S.level>=MAX_LVL&&!S.champ)setTimeout(championGift,600);else setTimeout(nextQuest,800)}
 }
 function championGift(){
   if(S.champ)return;S.champ=Date.now();S.coins+=CHAMP.coins;S.cash+=CHAMP.cash;S.inv['deco:champion']=(S.inv['deco:champion']||0)+1;changed();
@@ -8026,7 +8052,7 @@ function animCounters(){
   if(shownCoins===null||reduce){shownCoins=target;ce.textContent=target.toLocaleString()}
   else if(target!==shownCoins){
     const from=shownCoins,t0=performance.now();shownCoins=target;bumpPill(ce);cancelAnimationFrame(coinRaf);
-    delta(ce.parentElement,(target>from?'+':'−')+Math.abs(target-from).toLocaleString(),target>from?'up':'down');
+    delta(ce.parentElement,(target>from?'+':'−')+Math.abs(target-from).toLocaleString(),target>from?'up':'down');if(target>from)coinFly(Math.min(7,2+Math.floor(Math.log10(target-from+1)*1.6)));
     const step=()=>{const k=Math.max(0,Math.min(1,(performance.now()-t0)/500)),v=Math.round(from+(target-from)*(1-Math.pow(1-k,3)));ce.textContent=v.toLocaleString();if(k<1)coinRaf=requestAnimationFrame(step)};coinRaf=requestAnimationFrame(step);
   }
   if(shownCash!==null&&shownCash!==S.cash){bumpPill($('cash'));delta($('cash').parentElement,(S.cash>shownCash?'+':'−')+Math.abs(S.cash-shownCash),S.cash>shownCash?'up':'down')}
@@ -8895,7 +8921,7 @@ function goHome(){
   S.tiles=VIS.home.tiles;S.size=VIS.home.size;N=S.size;farmer.x=VIS.fx;farmer.y=VIS.fy;VIS=null;placePet();renderTut();
   visitors.length=0;for(const k in ROAM)delete ROAM[k];for(const k in GATE)delete GATE[k];
   document.body.classList.remove('visiting');$('visitbar').hidden=true;
-  buildBorder();changed();GC=null;fit();renderNeighbors();renderGoals();renderEvent();SFX.click();toast('Back home at '+S.farmName+'.');
+  buildBorder();changed();GC=null;fit();renderNeighbors();renderGoals();renderEvent();renderWheelCard();SFX.click();toast('Back home at '+S.farmName+'.');
 }
 function updateVisitBar(){
   if(!VIS)return;const c=helpedHere(VIS.n.id).length;
@@ -9190,7 +9216,7 @@ function babyBorn(id,x,y,now){
   }
 }
 function harvested(id,x,y){
-  stat('harvest');
+  stat('harvest');comboHarvest(x,y);
   S.mastery[id]=(S.mastery[id]||0)+1;
   const ml=S.mlvl[id]||0;
   if(ml<3&&S.mastery[id]>=MASTERY[ml]){
@@ -9496,6 +9522,7 @@ function act(hx,hy){
   if(placing){place(hx,hy);return}
   if(!inGrid(hx,hy)&&!(hx<=HX&&S.tiles[hx+','+hy]))return;
   if(VIS){actVisit(hx,hy);return}
+  if(S.crate&&S.crate.x===hx&&S.crate.y===hy&&!placing&&tool==='multi'){openCrate();return}
   if(tutLocked()){const t=TUT[S.tut],key=target(hx,hy),o=key&&S.tiles[key];if(!(t.btn==='btnBarn'&&o&&o.k==='bld'&&o.id==='barn')&&!(t.grass&&!o&&inGrid(hx,hy))&&(!t.find||!o||!tutHit(t,o)||pend[key])){SFX.error();tutNudge=performance.now();toast('Follow the tip: '+t.txt);return}}
   if(tool==='delete'){
     const key=target(hx,hy);if(!key)return;const o=S.tiles[key];
@@ -9560,6 +9587,7 @@ cv.addEventListener('wheel',e=>{e.preventDefault();
 
 function tipText(hx,hy){
   if(!inGrid(hx,hy))return'';
+  if(S.crate&&!VIS&&S.crate.x===hx&&S.crate.y===hy)return'Mystery crate: tap to open';
   if(VIS)return visitTip(hx,hy);
   if(placing)return(fits(hx,hy,placing.n)?'Place here':'Spot taken')+(ROTATABLE.has(placing.ghost.id)?' (R to turn)':'');
   if(VEH[tool]){const n=vsize(tool)**2;let pc=0;if(tool==='tractor')for(const[x,y]of vehicleArea(hx,hy))if(planAt(x,y)==='plow')pc+=plowCost(x,y);return{tractor:'Plow '+n+' plots ('+pc+' coins)',seeder:'Plant '+n+' plots of '+CROPS[S.seed].name.toLowerCase(),harvester:'Harvest '+n+' plots'}[tool]}
@@ -9736,6 +9764,7 @@ function showCashShop(){
 $('btnMusic').onclick=()=>{S.music=!S.music;save();hud();SFX.click();wakeAudio();musicSync();toast(S.music?'Music on':'Music off')};
 $('btnSound').onclick=()=>{S.sound=!S.sound;const a=ac();if(a&&a.state==='suspended')a.resume();save();hud();SFX.click()};
 $('btnRib').onclick=()=>{SFX.click();showRibbons()};
+$('btnWheel').onclick=()=>{SFX.click();closePops();showWheel()};
 $('btnTrade').onclick=()=>{SFX.click();closePops();showTrades()};
 $('btnColl').onclick=()=>{SFX.click();showCollections()};
 $('btnGifts').onclick=()=>{SFX.click();showGifts()};
@@ -10875,7 +10904,7 @@ function checkTut(){
   if(!S||typeof S.tut!=='number'||S.tut>=TUT.length)return;
   let moved=false;while(S.tut<TUT.length&&TUT[S.tut].done()){S.tut++;moved=true}
   if(moved){
-    if(S.tut>=TUT.length){S.coins+=150;S.cash+=1;SFX.level();confetti();toast('Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!');save();setTimeout(dailyBonus,1800);setTimeout(nextQuest,2500)}
+    if(S.tut>=TUT.length){S.coins+=150;S.cash+=1;SFX.level();confetti();toast('Tutorial complete! +150 coins and 1 Farm Cash. Happy farming!');save();setTimeout(dailyBonus,1800);setTimeout(nextQuest,2500);setTimeout(renderWheelCard,3000)}
     else SFX.find();
   }
   renderTut();
@@ -11240,6 +11269,111 @@ function xmCheck(){
   const e=S.ev;if(!e||e.done)return;const left=[];
   XM_TRACK.forEach((r,i)=>{if(e.canes>=r.at&&!e.got.includes(i)){e.got.push(i);xmGive(r);left.push(tr(xmPrizeName(r)))}});
   e.done=true;if(left.length){toast('Christmas is over. Your last prizes are yours: '+left.join(', ')+'.');changed();hud()}else save();
+}
+/* ================= Lucky Wheel: one free spin a day ================= */
+// Eight prizes on a painted wheel. The free spin comes back every day; an extra spin costs a little Farm Cash.
+const WHEEL=[{k:'coins',n:150,w:22,c:'#ffd23f'},{k:'mats',n:3,w:16,c:'#e8a35a'},{k:'coins',n:400,w:15,c:'#7cc8ff'},{k:'feed',n:20,w:14,c:'#b9e07a'},
+  {k:'cash',n:1,w:5,c:'#ff8fb5'},{k:'fert',n:4,w:12,c:'#8fd86a'},{k:'coins',n:1000,w:5,c:'#ffb35a'},{k:'xp',n:60,w:11,c:'#c9a6ff'}];
+const WHEEL_CASH=3;
+function wheelReady(){return!!S&&(!S.wheel||S.wheel.day!==today())}
+function wheelAmount(p){return p.k==='coins'?Math.round(p.n*(1+S.level/25)/10)*10:p.k==='xp'?Math.round(p.n*(1+S.level/12)):p.n}
+function wheelText(p){const n=wheelAmount(p);return p.k==='coins'?'+'+n.toLocaleString()+' coins':p.k==='cash'?'+'+n+' Farm Cash':p.k==='mats'?'+'+n+' building materials':p.k==='feed'?'+'+n+' animal feed':p.k==='fert'?'+'+n+' fertilizer':'+'+n+' XP'}
+function wheelGive(p){const n=wheelAmount(p);if(p.k==='coins')S.coins+=n;else if(p.k==='cash')S.cash+=n;else if(p.k==='mats'){for(let i=0;i<n;i++)addMat(randMat(),1)}else if(p.k==='feed')addGood('feed',n);else if(p.k==='fert')addGood('fert',n);else addXP(n)}
+function drawWheel(c,ang){
+  const x=c.getContext('2d'),R=c.width/2,prev=g;g=x;x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);const s=c.width/300;x.setTransform(s,0,0,s,0,0);
+  const cx=150,cy=150,r=132,n=WHEEL.length,seg=Math.PI*2/n;
+  x.beginPath();x.arc(cx,cy+6,r+12,0,7);x.fillStyle='rgba(60,30,10,.25)';x.fill();
+  x.beginPath();x.arc(cx,cy,r+12,0,7);const rim=x.createLinearGradient(0,cy-r,0,cy+r);rim.addColorStop(0,'#b8702a');rim.addColorStop(1,'#6b3c15');x.fillStyle=rim;x.fill();
+  for(let i=0;i<n;i++){const a0=ang+i*seg-Math.PI/2-seg/2,a1=a0+seg;x.beginPath();x.moveTo(cx,cy);x.arc(cx,cy,r,a0,a1);x.closePath();
+    const gr=x.createRadialGradient(cx,cy,10,cx,cy,r);gr.addColorStop(0,'#fffaf0');gr.addColorStop(.55,WHEEL[i].c);gr.addColorStop(1,shade(WHEEL[i].c,-.18));x.fillStyle=gr;x.fill();x.strokeStyle='#fffaf0';x.lineWidth=2.4;x.stroke()}
+  for(let i=0;i<n;i++){const p=WHEEL[i],a=ang+i*seg-Math.PI/2;x.save();x.translate(cx+Math.cos(a)*r*.62,cy+Math.sin(a)*r*.62);x.rotate(a+Math.PI/2);
+    if(p.k==='coins'){for(let k=0;k<(p.n>=1000?3:p.n>=400?2:1);k++){x.beginPath();x.arc(-6+k*6,-6-k*2,9,0,7);const cg=x.createRadialGradient(-9+k*6,-10-k*2,1,-6+k*6,-6-k*2,9);cg.addColorStop(0,'#fff3b0');cg.addColorStop(.5,'#f2c53a');cg.addColorStop(1,'#b8860b');x.fillStyle=cg;x.fill();x.strokeStyle='#8a6000';x.lineWidth=1.2;x.stroke()}}
+    else if(p.k==='cash'){x.fillStyle='#3fae4a';x.strokeStyle='#1f6b28';x.lineWidth=1.4;x.beginPath();x.roundRect?x.roundRect(-14,-16,28,18,3):x.rect(-14,-16,28,18);x.fill();x.stroke();x.fillStyle='#fff';x.font='bold 13px sans-serif';x.textAlign='center';x.fillText('$',0,-3)}
+    else if(p.k==='xp'){x.fillStyle='#7a4ec0';x.beginPath();for(let k=0;k<10;k++){const aa=k*Math.PI/5-Math.PI/2,rr=k%2?6:13;x.lineTo(Math.cos(aa)*rr,-7+Math.sin(aa)*rr)}x.closePath();x.fill();x.strokeStyle='#fff';x.lineWidth=1.4;x.stroke()}
+    else{x.save();x.translate(0,-6);x.scale(.95,.95);drawGood(p.k==='mats'?'board':p.k,0,0,1);x.restore()}
+    x.fillStyle='#4a2a10';x.strokeStyle='#fffaf0';x.lineWidth=3.4;x.lineJoin='round';x.font='bold 15px Nunito, Fredoka, sans-serif';x.textAlign='center';const t=(p.k==='coins'?'':'+')+wheelAmount(p).toLocaleString();x.strokeText(t,0,22);x.fillText(t,0,22);
+    x.restore()}
+  for(let i=0;i<n;i++){const a=ang+i*seg-Math.PI/2-seg/2;x.beginPath();x.arc(cx+Math.cos(a)*(r+6),cy+Math.sin(a)*(r+6),3.4,0,7);x.fillStyle='#ffe066';x.fill();x.strokeStyle='#8a6000';x.lineWidth=1;x.stroke()}
+  x.beginPath();x.arc(cx,cy,22,0,7);const hub=x.createRadialGradient(cx-6,cy-6,2,cx,cy,22);hub.addColorStop(0,'#fff6c0');hub.addColorStop(.6,'#f2c53a');hub.addColorStop(1,'#a8700a');x.fillStyle=hub;x.fill();x.strokeStyle='#6b3c15';x.lineWidth=3;x.stroke();
+  x.fillStyle='#6b3c15';x.beginPath();x.moveTo(cx,cy-r-2);x.lineTo(cx-13,cy-r-26);x.lineTo(cx+13,cy-r-26);x.closePath();x.fill();x.fillStyle='#e0352b';x.beginPath();x.moveTo(cx,cy-r-6);x.lineTo(cx-9,cy-r-23);x.lineTo(cx+9,cy-r-23);x.closePath();x.fill();
+  g=prev;
+}
+let wheelSpinning=false;
+function showWheel(){
+  modal({title:'Lucky Wheel',color:'gold',small:true,render(b){
+    const p=el('div','body-pad wheelwrap');p.appendChild(el('p',null,'Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.'));
+    const c=document.createElement('canvas'),dpr=Math.min(2,window.devicePixelRatio||1);c.width=c.height=Math.round(300*dpr);c.className='wheelcv';c.setAttribute('role','img');c.setAttribute('aria-label','Lucky Wheel');p.appendChild(c);
+    let ang=S.wheel&&S.wheel.ang||0;drawWheel(c,ang);
+    const row=el('div','wheelrow'),free=wheelReady(),btn=el('button','go wheelgo',free?'Spin!':'Spin again');
+    if(!free){const t=el('p','hint','Next free spin tomorrow.');p.appendChild(t);btn.classList.add('cashbuy');btn.innerHTML='';btn.append(tr('Spin again')+' · ');const bl=el('span','bill','$');btn.appendChild(bl);btn.append(String(WHEEL_CASH))}
+    btn.onclick=()=>{
+      if(wheelSpinning)return;const paid=!wheelReady();
+      if(paid){if(S.cash<WHEEL_CASH){cashShort(WHEEL_CASH);return}if(!cashPass(WHEEL_CASH,'an extra spin',()=>btn.onclick()))return;S.cash-=WHEEL_CASH;hud()}
+      const tot=WHEEL.reduce((a,q)=>a+q.w,0);let r=Math.random()*tot,i=0;for(;i<WHEEL.length;i++){r-=WHEEL[i].w;if(r<=0)break}i=Math.min(i,WHEEL.length-1);
+      const seg=Math.PI*2/WHEEL.length,start=ang,target=Math.ceil(start/(Math.PI*2))*Math.PI*2+Math.PI*2*5-i*seg+(Math.random()-.5)*seg*.6,dur=reduce?300:3800,t0=performance.now();
+      wheelSpinning=true;btn.disabled=true;S.wheel={day:today(),ang:0};save();renderWheelCard();let lastTick=-1;
+      const step=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,4);ang=start+(target-start)*e;drawWheel(c,ang);
+        const tick=Math.floor((ang+seg/2)/seg);if(tick!==lastTick){lastTick=tick;if(!reduce&&k<.97)clink(0,1800+Math.random()*300,.025)}
+        if(k<1){requestAnimationFrame(step);return}
+        wheelSpinning=false;const prize=WHEEL[i];S.wheel={day:today(),ang:ang%(Math.PI*2)};wheelGive(prize);stat('spin');SFX.golden();confetti();
+        toast('Lucky Wheel: '+tr(wheelText(prize))+'!');hud();changed();renderWheelCard();rerender()};
+      requestAnimationFrame(step);
+    };
+    row.appendChild(btn);p.appendChild(row);b.appendChild(p);
+  }});
+}
+function renderWheelCard(){
+  const box=$('wheelbox');if(!box)return;
+  if(!S||VIS||S.level<2||tutOn()||!wheelReady()){box.hidden=true;return}
+  box.hidden=false;box.className='goals wheelbox closed';box.innerHTML='';
+  const head=el('button','goals-head');head.setAttribute('aria-label','Lucky Wheel');head.innerHTML=WHEEL_SVG+'<span><small>'+tr('Free spin')+'</small>'+tr('Lucky Wheel')+'</span><i>!</i>';
+  head.onclick=()=>{SFX.click();showWheel()};box.appendChild(head);
+}
+const WHEEL_SVG='<svg class="wheelic" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="13" fill="#6b3c15"/><g transform="translate(16 17)">'+[0,1,2,3,4,5,6,7].map(i=>'<path d="M0 0L'+(Math.cos(i*Math.PI/4)*11).toFixed(2)+' '+(Math.sin(i*Math.PI/4)*11).toFixed(2)+'A11 11 0 0 1 '+(Math.cos((i+1)*Math.PI/4)*11).toFixed(2)+' '+(Math.sin((i+1)*Math.PI/4)*11).toFixed(2)+'Z" fill="'+['#ffd23f','#e8a35a','#7cc8ff','#b9e07a','#ff8fb5','#8fd86a','#ffb35a','#c9a6ff'][i]+'"/>').join('')+'</g><circle cx="16" cy="17" r="3.4" fill="#f2c53a" stroke="#6b3c15"/><path d="M16 6l-3.4-5h6.8z" fill="#e0352b" stroke="#6b3c15" stroke-width="1"/></svg>';
+
+/* ================= mystery crates: a little surprise for every few minutes of play ================= */
+const CRATE_EVERY=8*60e3;let crateClock=0;
+setInterval(()=>{if(!S||VIS||document.hidden||!$('title').hidden||tutOn()||S.crate||mq.length)return;crateClock+=1000;if(crateClock>=CRATE_EVERY){crateClock=0;spawnCrate()}},1000);
+function crateSpot(){for(let i=0;i<60;i++){const x=1+Math.floor(Math.random()*(N-2)),y=1+Math.floor(Math.random()*(N-2)),k=x+','+y;if(!occ[k]&&!pend[k]&&!S.tiles[k])return[x,y]}return null}
+function spawnCrate(){const p=crateSpot();if(!p)return;S.crate={x:p[0],y:p[1],t:Date.now()};SFX.find();burst(p[0],p[1],['#fff','#ffe066','#e8a35a']);toast('A mystery crate appeared on your farm! Tap it to open.');save()}
+function drawCrate(t){
+  const c=S&&!VIS&&S.crate;if(!c)return;const k=c.x+','+c.y;if(occ[k]||S.tiles[k]){const p=crateSpot();if(p){c.x=p[0];c.y=p[1]}else return}
+  const[px,py]=P(c.x+.5,c.y+.5),bob=reduce?0:Math.abs(Math.sin(t/380))*-5,sq=reduce?1:1+Math.sin(t/190)*.03;
+  ell(px,py+1,13-bob*.4,5,'rgba(30,20,5,.25)');g.save();g.translate(px,py+bob);g.scale(1/sq,sq);
+  const F=[[-11,-4],[0,1.5],[0,-14],[-11,-19.5]],Rf=[[0,1.5],[11,-4],[11,-19.5],[0,-14]],T=[[-11,-19.5],[0,-14],[11,-19.5],[0,-25]];
+  poly(F,'#c98a4b','#5e3a1c',1);poly(Rf,'#a8692f','#5e3a1c',1);poly(T,'#e2a866','#5e3a1c',1);
+  g.strokeStyle='#5e3a1c';g.lineWidth=1.6;line([-11,-11.8],[0,-6.2]);line([0,-6.2],[11,-11.8]);line([-5.5,-22.2],[5.5,-16.8]);
+  g.strokeStyle='#ffd23f';g.lineWidth=2;line([-5.5,-1.2],[-5.5,-16.8]);line([5.5,-1.2],[5.5,-16.8]);line([-5.5,-16.8],[5.5,-22.2]);line([5.5,-16.8],[-5.5,-22.2]);
+  g.fillStyle='#fff';g.strokeStyle='#5e3a1c';g.lineWidth=2.6;g.font='bold 11px sans-serif';g.textAlign='center';g.strokeText('?',-5.5,-6);g.fillText('?',-5.5,-6);
+  g.restore();if(!reduce){const s=(Math.sin(t/260)+1)/2;sparkle(px+12,py-28+bob,2+s*2,s);sparkle(px-12,py-16+bob,1.6+(1-s)*1.6,1-s)}
+}
+function openCrate(){
+  const c=S.crate;if(!c)return;S.crate=null;const R=Math.random(),lv=S.level;let msg;
+  if(R<.04){S.cash+=1;msg='+1 Farm Cash'}
+  else if(R<.3){const n=Math.round((40+lv*12)/5)*5;S.coins+=n;msg='+'+n.toLocaleString()+' coins'}
+  else if(R<.5){addMat(randMat(),1);addMat(randMat(),1);msg='+2 building materials'}
+  else if(R<.65){addGood('feed',15);msg='+15 animal feed'}
+  else if(R<.78){addGood('fert',3);msg='+3 fertilizer'}
+  else if(R<.9){const n=10+lv*2;addXP(n);msg='+'+n+' XP'}
+  else{const coll=COLLECTIONS[Math.floor(Math.random()*COLLECTIONS.length)];drop(coll.id,c.x,c.y);msg=null}
+  SFX.golden();burst(c.x,c.y,['#ffd23f','#fff7c0','#e8a35a','#fff']);burst(c.x,c.y,['#ffe066','#fff']);stat('crate');
+  if(msg){floatText(c.x,c.y-.8,msg,'#ffe7a0');toast('Mystery crate: '+tr(msg)+'!')}
+  hud();changed();
+}
+/* ================= feedback: coins fly to the counter, harvest combos ================= */
+let LAST_TAP={x:innerWidth/2,y:innerHeight/2};document.addEventListener('pointerdown',e=>{LAST_TAP={x:e.clientX,y:e.clientY}},true);
+function coinFly(n){
+  if(reduce)return;const pill=$('coins');if(!pill)return;const r=pill.getBoundingClientRect(),tx=r.left+10,ty=r.top+r.height/2,ox=LAST_TAP.x,oy=LAST_TAP.y;
+  for(let i=0;i<n;i++){const d=document.createElement('span');d.className='coinfly';d.innerHTML='<span class="coin"></span>';const sx=ox+(Math.random()-.5)*40,sy=oy+(Math.random()-.5)*30;
+    d.style.transform='translate('+sx+'px,'+sy+'px) scale(.6)';document.body.appendChild(d);
+    setTimeout(()=>{d.style.transition='transform .62s cubic-bezier(.5,-.3,.7,1), opacity .2s .5s';d.style.transform='translate('+tx+'px,'+ty+'px) scale(1)';d.style.opacity='0'},20+i*55);
+    setTimeout(()=>d.remove(),760+i*55)}
+}
+const COMBO={n:0,t:0};
+function comboHarvest(x,y){
+  const now=performance.now();COMBO.n=now-COMBO.t<3000?COMBO.n+1:1;COMBO.t=now;const n=COMBO.n;
+  if(n===3||n%5===0){floatText(x,y-1.3,'Combo x'+n+'!','#ffcf5a',120)}
+  if(n%5===0){const b=n;S.coins+=b;floatText(x,y-1.9,'+'+b,'#ffd23f',260)}
 }
 /* ================= daily bonus ================= */
 function dailyBonus(){
@@ -12120,8 +12254,8 @@ function start(data){
   else if(!S.tips.homes&&Object.values(S.tiles).some(o=>o.k==='animal'&&!hasHome(o.id))){S.tips.homes=true;setTimeout(()=>toast('Your chickens and sheep need homes! Buy a Chicken Coop and a Sheep Pen in Market > Homes.'),3200)}
   if(first)toast('Welcome to Farm Village! Your wheat is ready: click it and your farmer will harvest it.');
   if(!S.tips.avatar)showWardrobe(true);
-  dailyBonus();xmCheck();
-  renderGoals();setInterval(()=>{if(S.goals&&S.goals.day!==today())renderGoals();xmCheck()},60000);
+  dailyBonus();xmCheck();renderWheelCard();
+  renderGoals();setInterval(()=>{if(S.goals&&S.goals.day!==today())renderGoals();xmCheck();renderWheelCard()},60000);
   tickOrders();tickDeliv();renderQuest();setTimeout(()=>{if($('title').hidden)nextQuest()},4000);
   showTitle();
 }

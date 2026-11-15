@@ -1236,7 +1236,17 @@ Hungry|جائع
 Animals in this home|الحيوانات في هذا البيت
 Feed your animals to start production.|أطعم حيواناتك لتبدأ الإنتاج.
 A chicken laid an egg. Tap the Chicken Coop to collect it.|وضعت دجاجة بيضة. انقر على قن الدجاج لجمعها.
-Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|الدجاجة جائعة الآن. انقر على قن الدجاج ثم اضغط إطعام الكل.`,
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|الدجاجة جائعة الآن. انقر على قن الدجاج ثم اضغط إطعام الكل.
+Lucky Wheel|عجلة الحظ
+Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.|أدر العجلة مرة يوميًا لجائزة مجانية: عملات ومواد وعلف وسماد وخبرة وحتى نقود المزرعة.
+Spin!|أدِر!
+Spin again|أدِر مرة أخرى
+Next free spin tomorrow.|الدورة المجانية التالية غدًا.
+Free spin|دورة مجانية
+Wheel|العجلة
+an extra spin|دورة إضافية
+A mystery crate appeared on your farm! Tap it to open.|ظهر صندوق غامض في مزرعتك! انقر لفتحه.
+Mystery crate: tap to open|صندوق غامض: انقر للفتح`,
 p:`0|$1 عملة
 1|$1 / $2 خبرة
 2|باقي $1
@@ -1475,4 +1485,9 @@ p:`0|$1 عملة
 235|جائعة: $1
 236|التالي ({1}) بعد {t2}.
 237|{1}: جاهز للجمع.
-238|إطعام الكل ($1) · $2 علف`};
+238|إطعام الكل ($1) · $2 علف
+239|+$1 علف
+240|+$1 سماد
+241|عجلة الحظ: $1!
+242|صندوق غامض: $1!
+243|كومبو x$1!`};

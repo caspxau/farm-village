@@ -1228,7 +1228,17 @@ Hungry|Lapar
 Animals in this home|Hewan di kandang ini
 Feed your animals to start production.|Beri makan hewanmu untuk mulai produksi.
 A chicken laid an egg. Tap the Chicken Coop to collect it.|Seekor ayam bertelur. Ketuk Kandang Ayam untuk mengambilnya.
-Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Sekarang ayam itu lapar. Ketuk Kandang Ayam lalu tekan Beri makan semua.`,
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Sekarang ayam itu lapar. Ketuk Kandang Ayam lalu tekan Beri makan semua.
+Lucky Wheel|Roda Keberuntungan
+Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.|Putar sekali sehari untuk hadiah gratis: koin, bahan, pakan, pupuk, XP, bahkan Uang Kebun.
+Spin!|Putar!
+Spin again|Putar lagi
+Next free spin tomorrow.|Putaran gratis berikutnya besok.
+Free spin|Putaran gratis
+Wheel|Roda
+an extra spin|putaran tambahan
+A mystery crate appeared on your farm! Tap it to open.|Peti misteri muncul di kebunmu! Ketuk untuk membukanya.
+Mystery crate: tap to open|Peti misteri: ketuk untuk membuka`,
 p:`0|$1 koin
 1|$1 / $2 XP
 2|kurang $1
@@ -1467,4 +1477,9 @@ p:`0|$1 koin
 235|$1 lapar
 236|Berikutnya ({1}) dalam {t2}.
 237|{1} siap diambil.
-238|Beri makan semua ($1) · $2 pakan`};
+238|Beri makan semua ($1) · $2 pakan
+239|+$1 pakan
+240|+$1 pupuk
+241|Roda Keberuntungan: $1!
+242|Peti misteri: $1!
+243|Kombo x$1!`};

@@ -1236,7 +1236,17 @@ Hungry|भूखा
 Animals in this home|इस घर के जानवर
 Feed your animals to start production.|उत्पादन शुरू करने के लिए जानवरों को खिलाएँ।
 A chicken laid an egg. Tap the Chicken Coop to collect it.|एक मुर्गी ने अंडा दिया। लेने के लिए मुर्गीघर पर टैप करें।
-Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|अब वह मुर्गी भूखी है। मुर्गीघर पर टैप करें और सबको खिलाएँ दबाएँ।`,
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|अब वह मुर्गी भूखी है। मुर्गीघर पर टैप करें और सबको खिलाएँ दबाएँ।
+Lucky Wheel|किस्मत का पहिया
+Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.|रोज़ एक बार घुमाएँ और मुफ़्त इनाम पाएँ: सिक्के, सामग्री, चारा, खाद, XP या फ़ार्म कैश भी।
+Spin!|घुमाएँ!
+Spin again|फिर घुमाएँ
+Next free spin tomorrow.|अगला मुफ़्त स्पिन कल।
+Free spin|मुफ़्त स्पिन
+Wheel|पहिया
+an extra spin|एक और स्पिन
+A mystery crate appeared on your farm! Tap it to open.|आपके फ़ार्म पर एक रहस्य बक्सा आया है! खोलने के लिए टैप करें।
+Mystery crate: tap to open|रहस्य बक्सा: खोलने के लिए टैप करें`,
 p:`0|$1 सिक्के
 1|$1 / $2 XP
 2|$1 बाक़ी
@@ -1475,4 +1485,9 @@ p:`0|$1 सिक्के
 235|$1 भूखे
 236|अगला {1} {t2} में।
 237|{1} लेने के लिए तैयार।
-238|सबको खिलाएँ ($1) · $2 चारा`};
+238|सबको खिलाएँ ($1) · $2 चारा
+239|+$1 चारा
+240|+$1 खाद
+241|किस्मत का पहिया: $1!
+242|रहस्य बक्सा: $1!
+243|कॉम्बो x$1!`};

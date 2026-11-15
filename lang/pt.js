@@ -1228,7 +1228,17 @@ Hungry|Com fome
 Animals in this home|Animais nesta casa
 Feed your animals to start production.|Alimente seus animais para começar a produção.
 A chicken laid an egg. Tap the Chicken Coop to collect it.|Uma galinha botou um ovo. Toque no galinheiro para coletar.
-Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Agora essa galinha está com fome. Toque no galinheiro e aperte Alimentar todos.`,
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Agora essa galinha está com fome. Toque no galinheiro e aperte Alimentar todos.
+Lucky Wheel|Roda da sorte
+Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.|Gire uma vez por dia e ganhe um prêmio: moedas, materiais, ração, fertilizante, XP ou até dinheiro da fazenda.
+Spin!|Girar!
+Spin again|Girar de novo
+Next free spin tomorrow.|Próximo giro grátis amanhã.
+Free spin|Giro grátis
+Wheel|Roda
+an extra spin|um giro extra
+A mystery crate appeared on your farm! Tap it to open.|Uma caixa misteriosa apareceu na sua fazenda! Toque para abrir.
+Mystery crate: tap to open|Caixa misteriosa: toque para abrir`,
 p:`0|$1 {p1:moeda|moedas}
 1|$1 / $2 XP
 2|faltam $1
@@ -1467,4 +1477,9 @@ p:`0|$1 {p1:moeda|moedas}
 235|$1 com fome
 236|Próximo ({1}) em {t2}.
 237|{1}: pronto para coletar.
-238|Alimentar todos ($1) · $2 de ração`};
+238|Alimentar todos ($1) · $2 de ração
+239|+$1 de ração
+240|+$1 de fertilizante
+241|Roda da sorte: $1!
+242|Caixa misteriosa: $1!
+243|Combo x$1!`};

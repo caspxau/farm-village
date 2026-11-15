@@ -1228,7 +1228,17 @@ Hungry|Affamé
 Animals in this home|Animaux de cet abri
 Feed your animals to start production.|Nourris tes animaux pour lancer la production.
 A chicken laid an egg. Tap the Chicken Coop to collect it.|Une poule a pondu un œuf. Touche le poulailler pour le récupérer.
-Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Cette poule a faim maintenant. Touche le poulailler et appuie sur Tout nourrir.`,
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Cette poule a faim maintenant. Touche le poulailler et appuie sur Tout nourrir.
+Lucky Wheel|Roue de la chance
+Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.|Fais tourner la roue une fois par jour pour un cadeau gratuit : pièces, matériaux, aliments, engrais, XP ou même des billets de ferme.
+Spin!|Tourner !
+Spin again|Retourner
+Next free spin tomorrow.|Prochain tour gratuit demain.
+Free spin|Tour gratuit
+Wheel|Roue
+an extra spin|un tour de plus
+A mystery crate appeared on your farm! Tap it to open.|Une caisse mystère est apparue sur ta ferme ! Touche-la pour l'ouvrir.
+Mystery crate: tap to open|Caisse mystère : touche pour ouvrir`,
 p:`0|$1 {p1:pièce|pièces}
 1|$1 / $2 XP
 2|encore $1
@@ -1467,4 +1477,9 @@ p:`0|$1 {p1:pièce|pièces}
 235|$1 {p1:affamé|affamés}
 236|Prochain lot ({1}) dans {t2}.
 237|{1} : prêt à récupérer.
-238|Tout nourrir ($1) · $2 aliments`};
+238|Tout nourrir ($1) · $2 aliments
+239|+$1 aliments
+240|+$1 engrais
+241|Roue de la chance : $1 !
+242|Caisse mystère : $1 !
+243|Combo x$1 !`};

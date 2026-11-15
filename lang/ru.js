@@ -1236,7 +1236,17 @@ Hungry|Голоден
 Animals in this home|Животные в этом домике
 Feed your animals to start production.|Покорми животных, чтобы начать производство.
 A chicken laid an egg. Tap the Chicken Coop to collect it.|Курица снесла яйцо. Нажми на курятник, чтобы забрать его.
-Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Теперь курица голодна. Нажми на курятник и выбери «Покормить всех».`,
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|Теперь курица голодна. Нажми на курятник и выбери «Покормить всех».
+Lucky Wheel|Колесо удачи
+Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.|Крути раз в день и получай приз: монеты, материалы, корм, удобрение, опыт или даже фермерские доллары.
+Spin!|Крутить!
+Spin again|Крутить ещё
+Next free spin tomorrow.|Следующее бесплатное вращение завтра.
+Free spin|Бесплатное вращение
+Wheel|Колесо
+an extra spin|дополнительное вращение
+A mystery crate appeared on your farm! Tap it to open.|На ферме появился таинственный ящик! Нажми, чтобы открыть.
+Mystery crate: tap to open|Таинственный ящик: нажми, чтобы открыть`,
 p:`0|$1 {p1:монета|монеты|монет}
 1|$1 / $2 XP
 2|ещё $1
@@ -1475,4 +1485,9 @@ p:`0|$1 {p1:монета|монеты|монет}
 235|Голодных: $1
 236|Следующее ({1}) через {t2}.
 237|{1}: можно забрать.
-238|Покормить всех ($1) · корм: $2`};
+238|Покормить всех ($1) · корм: $2
+239|+$1 корма
+240|+$1 удобрения
+241|Колесо удачи: $1!
+242|Таинственный ящик: $1!
+243|Комбо x$1!`};

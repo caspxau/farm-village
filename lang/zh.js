@@ -1236,7 +1236,17 @@ Hungry|饿了
 Animals in this home|这个家里的动物
 Feed your animals to start production.|喂养动物才能开始生产。
 A chicken laid an egg. Tap the Chicken Coop to collect it.|一只鸡下了蛋。点击鸡舍收取。
-Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|现在那只鸡饿了。点击鸡舍，然后按“全部喂食”。`,
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|现在那只鸡饿了。点击鸡舍，然后按“全部喂食”。
+Lucky Wheel|幸运转盘
+Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.|每天转一次赢免费奖励：金币、建材、饲料、肥料、经验，甚至农场币。
+Spin!|转！
+Spin again|再转一次
+Next free spin tomorrow.|明天还有一次免费转盘。
+Free spin|免费转盘
+Wheel|转盘
+an extra spin|额外一次转盘
+A mystery crate appeared on your farm! Tap it to open.|农场上出现了一个神秘箱！点击打开。
+Mystery crate: tap to open|神秘箱：点击打开`,
 p:`0|$1金币
 1|$1 / $2 经验
 2|还差 $1
@@ -1475,4 +1485,9 @@ p:`0|$1金币
 235|$1只饿了
 236|下一批{1}还需{t2}。
 237|{1}可以收取了。
-238|全部喂食（$1）· $2份饲料`};
+238|全部喂食（$1）· $2份饲料
+239|+$1份饲料
+240|+$1份肥料
+241|幸运转盘：$1！
+242|神秘箱：$1！
+243|连击x$1！`};

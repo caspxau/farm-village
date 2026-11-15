@@ -1236,7 +1236,17 @@ Hungry|ক্ষুধার্ত
 Animals in this home|এই ঘরের পশু
 Feed your animals to start production.|উৎপাদন শুরু করতে পশুদের খাওয়াও।
 A chicken laid an egg. Tap the Chicken Coop to collect it.|একটি মুরগি ডিম পেড়েছে। নিতে মুরগির খোপে ট্যাপ করো।
-Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|এখন মুরগিটি ক্ষুধার্ত। মুরগির খোপে ট্যাপ করে সবাইকে খাওয়াও চাপো।`,
+Now that chicken is hungry. Tap the Chicken Coop and press Feed all.|এখন মুরগিটি ক্ষুধার্ত। মুরগির খোপে ট্যাপ করে সবাইকে খাওয়াও চাপো।
+Lucky Wheel|ভাগ্যের চাকা
+Spin once a day for a free prize: coins, materials, feed, fertilizer, XP or even Farm Cash.|দিনে একবার ঘুরিয়ে বিনামূল্যে পুরস্কার জেতো: কয়েন, সামগ্রী, খাবার, সার, এক্সপি, এমনকি ফার্ম ক্যাশ।
+Spin!|ঘোরাও!
+Spin again|আবার ঘোরাও
+Next free spin tomorrow.|পরের বিনামূল্যের ঘোরানো কাল।
+Free spin|বিনামূল্যে ঘোরানো
+Wheel|চাকা
+an extra spin|একটি বাড়তি ঘোরানো
+A mystery crate appeared on your farm! Tap it to open.|তোমার খামারে একটি রহস্য বাক্স এসেছে! খুলতে ট্যাপ করো।
+Mystery crate: tap to open|রহস্য বাক্স: খুলতে ট্যাপ করো`,
 p:`0|$1 কয়েন
 1|$1 / $2 XP
 2|আর $1
@@ -1475,4 +1485,9 @@ p:`0|$1 কয়েন
 235|$1টি ক্ষুধার্ত
 236|পরের {1} {t2} পরে।
 237|{1} নেওয়ার জন্য তৈরি।
-238|সবাইকে খাওয়াও ($1) · $2 খাবার`};
+238|সবাইকে খাওয়াও ($1) · $2 খাবার
+239|+$1 পশুখাদ্য
+240|+$1 সার
+241|ভাগ্যের চাকা: $1!
+242|রহস্য বাক্স: $1!
+243|কম্বো x$1!`};
