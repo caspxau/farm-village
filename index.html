@@ -2275,7 +2275,7 @@ const PL_EXACT={
 'Season Guide':'Przewodnik po porach roku','Nice day for farming.':'Piękny dzień na pracę w polu.','Rain is watering every growing crop for you.':'Deszcz podlewa za ciebie wszystkie rosnące plony.','Rain is watering your crops!':'Deszcz podlewa twoje plony!',
 'Rain comes and goes. When it rains, every growing crop gets watered for free.':'Deszcz przychodzi i odchodzi. Gdy pada, wszystkie rosnące plony są podlewane za darmo.','Snow blankets the farm. Winter crops grow at full speed; others grow slower.':'Śnieg przykrył farmę. Zimowe plony rosną normalnie, pozostałe wolniej.',
 'Crops planted in their season get a 25% head start. In winter, crops that are not winter crops grow 20% slower.':'Plony posadzone w swojej porze roku startują 25% szybciej. Zimą plony niezimowe rosną o 20% wolniej.',
-'In season now!':'Teraz w sezonie!',
+'In season now!':'Teraz w sezonie!','Sunny skies every day of the year.':'Słoneczne niebo przez cały rok.','Crops planted in their season get a 25% head start.':'Plony posadzone w swojej porze roku startują 25% szybciej.',
 // ---- modal titles and tabs
 'Seeds':'Nasiona','Trees':'Drzewa','Animals':'Zwierzęta','Homes':'Domy','Decorations':'Dekoracje','Buildings':'Budynki','Farm':'Farma','Specials':'Specjalne','Everything':'Wszystko','Crops':'Plony','Animal goods':'Produkty zwierzęce','Fruit':'Owoce','Kitchen goods':'Wyroby kuchenne','Supplies':'Zaopatrzenie','Materials':'Materiały',
 'Gift Box':'Pudełko z prezentami','Delivery Board':'Tablica dostaw','Daily Bonus':'Bonus dzienny','New Quest':'Nowe zadanie','Quest Complete!':'Zadanie ukończone!','Ribbon Earned!':'Zdobyto wstęgę!','Ribbons and Stats':'Wstęgi i statystyki','Start Over?':'Zacząć od nowa?','Create Your Farmer':'Stwórz swojego farmera','Load a Save':'Wczytaj zapis','Your Save Code':'Twój kod zapisu','Install Farm Village':'Zainstaluj Farm Village',
@@ -2744,7 +2744,7 @@ const CROPS={
 const CROP_SEASON={strawberry:'spring',carrot:'spring',daisy:'spring',daffodil:'spring',tulip:'spring',raspberry:'spring',blueberry:'spring',
   tomato:'summer',corn:'summer',sunflower:'summer',watermelon:'summer',pepper:'summer',eggplant:'summer',glory:'summer',lavender:'summer',
   pumpkin:'autumn',wheat:'autumn',potato:'autumn',grapes:'autumn',cotton:'autumn',squash:'autumn',cranberry:'autumn',beet:'autumn',
-  soybean:'winter',rice:'winter',barley:'winter',rose:'winter'};
+  soybean:'summer',rice:'spring',barley:'autumn',rose:'spring'};
 const ANIMALS={
   chicken:{name:'Chicken',lvl:1,cost:100,every:60,give:17,feed:1,xp:1,product:'Eggs',buyxp:5},
   duck:{name:'Duck',lvl:14,cost:900,every:90,give:59,feed:1,xp:1,product:'Feathers',buyxp:9},
@@ -11165,14 +11165,15 @@ function updateFireflies(dt){if(reduce||darkness()<.2)return;for(const f of fire
 
 /* ================= seasons and weather ================= */
 // A season lasts six farm days (about an hour and a half). Weather changes every seven minutes and depends on the season.
-const SEASONS=[{id:'spring',name:'Spring',bg:['#a6d96a','#82c048']},{id:'summer',name:'Summer',bg:['#b0d860','#8cc040']},{id:'autumn',name:'Autumn',bg:['#c8c66a','#a6a446']},{id:'winter',name:'Winter',bg:['#dfe9e6','#c4d6d0']}];
+const SEASONS=[{id:'spring',name:'Spring',bg:['#a6d96a','#82c048']},{id:'summer',name:'Summer',bg:['#b0d860','#8cc040']},{id:'autumn',name:'Autumn',bg:['#c8c66a','#a6a446']}];
 const SEASON_LEN=DAY_LEN*6*1000,WX_SLOT=420000;
 const WX={sunny:{name:'Sunny'},cloudy:{name:'Cloudy'},rain:{name:'Rain'},storm:{name:'Thunderstorm'},snow:{name:'Snow'}};
 const WX_TABLE={spring:[['rain',.35],['cloudy',.2]],summer:[['storm',.08],['rain',.12],['cloudy',.12]],autumn:[['storm',.1],['rain',.25],['cloudy',.25]],winter:[['snow',.45],['cloudy',.25]]};
-function season(){return SEASONS[Math.floor(Date.now()/SEASON_LEN)%4]}
+function season(){return SEASONS[Math.floor(Date.now()/SEASON_LEN)%SEASONS.length]}
 function seasonLeft(){return(SEASON_LEN-Date.now()%SEASON_LEN)/1000}
 function inSeason(id){return CROP_SEASON[id]===season().id}
-function weather(){const slot=Math.floor(Date.now()/WX_SLOT),r=hash(slot*.731,17.3);let a=0;for(const[w,p]of WX_TABLE[season().id]){a+=p;if(r<a)return w}return'sunny'}
+// the farm has no winter and every day is sunny
+function weather(){return'sunny'}
 function wet(){const w=weather();return w==='rain'||w==='storm'}
 function seasonCrops(id){return Object.keys(CROPS).filter(c=>CROP_SEASON[c]===id)}
 const WX_ICON={
@@ -11191,24 +11192,24 @@ function showSeason(){
   modal({title:'Season Guide',color:'green',render(b){
     const se=season(),w=weather(),p=el('div','store');
     p.appendChild(el('p',null,se.name+' lasts another '+fmt(seasonLeft())+'. Weather right now: '+WX[w].name+'.'));
-    p.appendChild(el('p','hint',w==='rain'||w==='storm'?'Rain is watering every growing crop for you.':w==='snow'?'Snow blankets the farm. Winter crops grow at full speed; others grow slower.':'Rain comes and goes. When it rains, every growing crop gets watered for free.'));
+    p.appendChild(el('p','hint','Sunny skies every day of the year.'));
     for(const s2 of SEASONS){
       const row=el('div','seasonrow'+(s2.id===se.id?' now':''));row.appendChild(el('strong',null,s2.name+(s2.id===se.id?' (now)':'')));
       const list=el('div','want');for(const c of seasonCrops(s2.id)){const r=el('span','req'+(CROPS[c].lvl<=S.level?' ok':'')),im=el('img');im.src=itemIcon(c);im.alt='';r.appendChild(im);r.appendChild(el('b',null,CROPS[c].name));list.appendChild(r)}
       row.appendChild(list);p.appendChild(row);
     }
-    p.appendChild(el('p','hint','Crops planted in their season get a 25% head start. In winter, crops that are not winter crops grow 20% slower.'));
+    p.appendChild(el('p','hint','Crops planted in their season get a 25% head start.'));
     b.appendChild(p);
   }});
 }
 let lastRainWater=0,rainToldSlot=-1,flashT=0,nextBolt=0,curSeason=null;
-// Auto Waterers (Level 10) collect rain and snowmelt in their barrel and water growing crops within SPR_R plots.
+// Auto Waterers (Level 10) slowly fill their barrel and water growing crops within SPR_R plots.
 const SPR_MAX=100,SPR_USE=10,SPR_R=2,SPR_FILL=40;
 function sprinklerTick(now,w){
   if(VIS)return;
   for(const k in S.tiles){const o=S.tiles[k];if(o.k!=='deco'||o.id!=='sprinkler')continue;
     if(o.w==null)o.w=60;
-    o.w=Math.min(SPR_MAX,o.w+(w==='rain'||w==='storm'?6:w==='snow'?2:w==='cloudy'?.12:.06));
+    o.w=Math.min(SPR_MAX,o.w+(w==='rain'||w==='storm'?6:w==='snow'?2:w==='cloudy'?.12:1.5));
     if(o.w<SPR_USE)continue;
     const[x,y]=k.split(',').map(Number);
     for(let dy=-SPR_R;dy<=SPR_R;dy++)for(let dx=-SPR_R;dx<=SPR_R;dx++){
