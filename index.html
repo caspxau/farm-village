@@ -4932,13 +4932,19 @@ function drawBarnN(x,y,o){
   slope(0,y0-ov,yy,mLo);slope(1,y0-ov,yy,mMid);
   fp(S,[[0,0],[d,0],[d,base],[0,base]],'#a29e95');
   const sw=[[0,base],[d,base],[d,h],[0,h]];fp(S,sw,'#a3261c');battensN(S,sw,0,d,base,h,.085);
-  for(const v of[.3,.8,1.3])windowN(S,v-.075,v+.075,base+11,base+19,{panes:true,lit:lv>=3});
-  fp(S,[[0,h-5],[d,h-5],[d,h],[0,h]],'rgba(20,6,4,.22)');
+  for(const v of[.27,1.33])windowN(S,v-.075,v+.075,base+11,base+19,{panes:true,lit:lv>=3});
+  {const a=.56,c2=1.04,t=.03,zt=base+20,zm=base+12;fp(S,[[a,base],[c2,base],[c2,zt],[a,zt]],'#b42c22');
+    g.strokeStyle='rgba(60,10,6,.4)';g.lineWidth=.5;for(let u=a+.045;u<c2;u+=.045)fl(S,[u,base],[u,zt]);
+    for(const q of[[[a-t,base],[a,base],[a,zt+1.4],[a-t,zt+1.4]],[[c2,base],[c2+t,base],[c2+t,zt+1.4],[c2,zt+1.4]],[[a-t,zt],[c2+t,zt],[c2+t,zt+1.6],[a-t,zt+1.6]],[[a,zm-.8],[c2,zm-.8],[c2,zm+.8],[a,zm+.8]],[[a,base],[c2,base],[c2,base+1.4],[a,base+1.4]]])fp(S,q,white,'rgba(80,60,50,.35)',.4);
+    g.strokeStyle=white;g.lineWidth=1.6;fl(S,[a+.02,base+1.4],[c2-.02,zm-.8]);fl(S,[a+.02,zm-.8],[c2-.02,base+1.4]);
+    g.strokeStyle='#38332f';g.lineWidth=1.4;fl(S,[a-.08,zt+3],[c2+.08,zt+3])}
+  fp(S,[[0,h-5],[d,h-5],[d,h],[0,h]],'rgba(20,6,4,.18)');
+  fp(S,[[0,base],[.06,base],[.06,h],[0,h]],'#e6e1d8');
   // gable end: concrete footing, red boards, white corner boards and an eave band
   fp(F,[[0,0],[bw,0],[bw,base],[0,base]],'#bab6ad');
   const gw=[[0,base],[bw,base],[bw,h],[bw-b,h+r1],[bw/2,zp],[b,h+r1],[0,h]];fp(F,gw,'#d0362a');battensN(F,gw,0,bw,base,zp,.08);
-  fp(F,[[0,base],[.045,base],[.045,h],[0,h]],white);fp(F,[[bw-.045,base],[bw,base],[bw,h],[bw-.045,h]],white);fp(S,[[d-.04,base],[d,base],[d,h],[d-.04,h]],'#d9d4ca');
-  fp(F,[[0,h-1.2],[bw,h-1.2],[bw,h+.4],[0,h+.4]],white);
+  fp(F,[[0,base],[.07,base],[.07,h],[0,h]],white);fp(F,[[bw-.07,base],[bw,base],[bw,h],[bw-.07,h]],white);fp(S,[[d-.06,base],[d,base],[d,h],[d-.06,h]],'#e6e1d8');
+  fp(F,[[0,h-1.6],[bw,h-1.6],[bw,h+.6],[0,h+.6]],white);fp(F,[[0,base],[bw,base],[bw,base+1.2],[0,base+1.2]],white);
   // sliding doors on a track: the right leaf stands a little open on the dark, hay-strewn inside
   const d0=bw*.25,d1=bw*.75,dm=bw/2,dz=base+21;
   fp(F,[[d0-.06,dz+1],[d1+.2,dz+1],[d1+.2,dz+2.6],[d0-.06,dz+2.6]],'#38332f');
@@ -4950,23 +4956,25 @@ function drawBarnN(x,y,o){
   leaf(d0,dm);leaf(dm+.11,d1+.11);
   // hay loft door with a pulley beam under the peak
   const l0=bw*.41,l1=bw*.59,lz0=h+3,lz1=h+14;
-  fp(F,[[l0,lz0],[l1,lz0],[l1,lz1],[l0,lz1]],'#b42c22');
-  for(const q of[[[l0,lz0],[l1,lz0],[l1,lz0+1.3],[l0,lz0+1.3]],[[l0,lz1-1.3],[l1,lz1-1.3],[l1,lz1],[l0,lz1]],[[l0,lz0],[l0+.022,lz0],[l0+.022,lz1],[l0,lz1]],[[l1-.022,lz0],[l1,lz0],[l1,lz1],[l1-.022,lz1]]])fp(F,q,white);
-  g.strokeStyle=white;g.lineWidth=1.3;fl(F,[l0+.022,lz0+1.3],[l1-.022,lz1-1.3]);fl(F,[l0+.022,lz1-1.3],[l1-.022,lz0+1.3]);
+  fp(F,[[l0,lz0],[l1,lz0],[l1,lz1],[l0,lz1]],'#2a1610');fp(F,[[l0,lz1-4],[l1,lz1-4],[l1,lz1],[l0,lz1]],'#170c08');
+  {const hy=[[l0+.01,lz0+.5],[l1-.01,lz0+.5],[l1-.01,lz0+4.5],[(l0+l1)/2,lz0+6],[l0+.01,lz0+4]];fp(F,hy,'#e2b23a');
+    g.lineCap='round';for(let i=0;i<11;i++){const u=l0+.02+hash(i,5)*(l1-l0-.04),z=lz0+1+hash(5,i)*4.5,[sx,sy]=F(u,z);g.strokeStyle=i%3?'#f4cc4e':'#c8902a';g.lineWidth=1;line([sx,sy],[sx+(hash(i,9)-.5)*7,sy+2+hash(9,i)*5])}}
+  for(const q of[[[l0-.02,lz0-1],[l1+.02,lz0-1],[l1+.02,lz0+.6],[l0-.02,lz0+.6]],[[l0-.02,lz1-.6],[l1+.02,lz1-.6],[l1+.02,lz1+1],[l0-.02,lz1+1]],[[l0-.03,lz0-1],[l0+.01,lz0-1],[l0+.01,lz1+1],[l0-.03,lz1+1]],[[l1-.01,lz0-1],[l1+.03,lz0-1],[l1+.03,lz1+1],[l1-.01,lz1+1]]])fp(F,q,white);
   g.strokeStyle='#4a3a2c';g.lineWidth=2;line(P(xm,yy,zp-3.5),P(xm,yy+.2,zp-3.5));{const[px2,py2]=P(xm,yy+.18,zp-5);ell(px2,py2,1.4,1.4,'#2a2a2a');g.strokeStyle='rgba(120,100,70,.8)';g.lineWidth=.5;line([px2,py2],[px2,py2+9])}
   // the near roof slopes in ribbed metal, then the overhang over the gable and the white fascia
   slope(2,y0-ov,yy+ov,lgr(P(xm,y0,zp),P(x0+bw-b,yy,h+r1),[mHi,mMid]));seams(2,y0-ov,yy+ov);
   slope(3,y0-ov,yy+ov,lgr(P(x0+bw-b,y0,h+r1),P(x0+bw,yy,h),[mMid,mLo]));seams(3,y0-ov,yy+ov);
   slope(0,yy,yy+ov,mLo);slope(1,yy,yy+ov,mMid);
   g.strokeStyle=white;g.lineWidth=3.2;g.lineJoin='round';g.beginPath();rp.forEach(([u,z],i)=>{const[sx,sy]=P(x0+u,yy+ov,z);i?g.lineTo(sx,sy):g.moveTo(sx,sy)});g.stroke();
-  g.strokeStyle='#5e646a';g.lineWidth=1.5;line(P(xm,y0-ov,zp+.9),P(xm,yy+ov,zp+.9));
-  g.strokeStyle='#e4dfd6';g.lineWidth=1.2;line(P(x0+bw+ov,y0-ov,h-2),P(x0+bw+ov,yy+ov,h-2));
+  g.strokeStyle='#4a1a14';g.lineWidth=1.8;line(P(xm,y0-ov,zp+.9),P(xm,yy+ov,zp+.9));
+  g.strokeStyle=white;g.lineWidth=2.6;line(P(x0+bw+ov,y0-ov,h-2),P(x0+bw+ov,yy+ov,h-2));
   // cupola with louvres and a weathervane (level 3+)
-  if(lv>=3){const yc=y0+d/2,q=.1;isoBox(xm-q,yc-q,q*2,q*2,9,'#f0ece4','#cfc9bf',null,null,zp-2);
-    g.strokeStyle='rgba(60,50,40,.45)';g.lineWidth=.5;for(let z=zp;z<zp+6.5;z+=1.3){line(P(xm-q+.03,yc+q,z),P(xm+q-.03,yc+q,z));line(P(xm+q,yc+q-.03,z),P(xm+q,yc-q+.03,z))}
+  {const yc=y0+d/2,q=.1;isoBox(xm-q,yc-q,q*2,q*2,9,'#c8342a','#9a261e',null,null,zp-2);
+    g.strokeStyle=white;g.lineWidth=1.2;line(P(xm-q,yc+q,zp+6.6),P(xm+q,yc+q,zp+6.6));line(P(xm+q,yc+q,zp+6.6),P(xm+q,yc-q,zp+6.6));line(P(xm-q,yc+q,zp-1),P(xm-q,yc+q,zp+6.6));line(P(xm+q,yc+q,zp-1),P(xm+q,yc+q,zp+6.6));line(P(xm+q,yc-q,zp-1),P(xm+q,yc-q,zp+6.6));
+    g.strokeStyle='rgba(60,20,10,.5)';g.lineWidth=.5;for(let z=zp;z<zp+6.5;z+=1.3){line(P(xm-q+.03,yc+q,z),P(xm+q-.03,yc+q,z));line(P(xm+q,yc+q-.03,z),P(xm+q,yc-q+.03,z))}
     const ap=P(xm,yc,zp+15),e=q+.035;poly([P(xm-e,yc+e,zp+7),P(xm+e,yc+e,zp+7),ap],mHi);poly([P(xm+e,yc+e,zp+7),P(xm+e,yc-e,zp+7),ap],mLo);
-    const[vx,vy]=ap;g.strokeStyle='#2b2b2b';g.lineWidth=1.1;line([vx,vy],[vx,vy-12]);line([vx-4,vy-7],[vx+4,vy-7]);
-    poly([[vx-7,vy-11.5],[vx+4,vy-11.5],[vx+7,vy-10],[vx+4,vy-8.5],[vx-7,vy-8.5],[vx-4.5,vy-10]],'#2b2b2b');ball(vx,vy-13,1.4,1.4,'#c99a2e')}
+    if(lv>=3){const[vx,vy]=ap;g.strokeStyle='#2b2b2b';g.lineWidth=1.1;line([vx,vy],[vx,vy-12]);line([vx-4,vy-7],[vx+4,vy-7]);
+    poly([[vx-7,vy-11.5],[vx+4,vy-11.5],[vx+7,vy-10],[vx+4,vy-8.5],[vx-7,vy-8.5],[vx-4.5,vy-10]],'#2b2b2b');ball(vx,vy-13,1.4,1.4,'#c99a2e')}}
   // round hay bales by the side wall
   const bale=(u,v)=>{const a=P(u,v-.11,7),c2=P(u,v+.11,7);ell(a[0],a[1],6,7,'#a58a45');poly([[a[0],a[1]-7],[c2[0],c2[1]-7],[c2[0],c2[1]+7],[a[0],a[1]+7]],lgr([a[0],a[1]-7],[a[0],a[1]+7],['#d9bf72','#b39549','#8a6f30']));
     g.strokeStyle='rgba(110,85,35,.45)';g.lineWidth=.45;for(let k=-5;k<=5;k+=2.5)line([a[0],a[1]+k],[c2[0],c2[1]+k]);
