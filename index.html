@@ -48,7 +48,7 @@ button:focus-visible{outline:3px solid var(--xp);outline-offset:2px}
 #farm.grab{cursor:grabbing}
 /* static sunlight and vignette as one CSS layer, and a low-resolution night layer the browser scales up: no per-frame full-screen drawing */
 .farmfx,#nightCv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
-.farmfx{background:radial-gradient(ellipse at 12% -10%,rgba(255,240,180,.26),rgba(255,230,160,.07) 45%,rgba(255,230,160,0) 75%),radial-gradient(ellipse at 50% 46%,rgba(20,40,8,0) 52%,rgba(20,40,8,.1) 75%,rgba(20,40,8,.36) 100%)}
+.farmfx{background:radial-gradient(ellipse at 12% -10%,rgba(255,240,180,.26),rgba(255,230,160,.07) 45%,rgba(255,230,160,0) 75%),radial-gradient(ellipse at 50% 46%,rgba(20,40,8,0) 52%,rgba(20,40,8,.06) 75%,rgba(20,40,8,.2) 100%)}
 #nightCv{display:block}
 body.inhouse .farmfx,body.inhouse #nightCv{display:none}
 .outline{color:#fff;text-shadow:2px 0 0 var(--ink),-2px 0 0 var(--ink),0 2px 0 var(--ink),0 -2px 0 var(--ink),2px 2px 0 var(--ink),-2px 2px 0 var(--ink),2px -2px 0 var(--ink),-2px -2px 0 var(--ink),0 4px 0 var(--ink)}
@@ -3515,9 +3515,8 @@ function naturalFinish(c){
   const t=document.createElement('canvas');t.width=w;t.height=h;const tx=t.getContext('2d');
   tx.drawImage(c,0,0);
   tx.globalCompositeOperation='soft-light';tx.globalAlpha=.5;tx.fillStyle=tx.createPattern(GRAIN,'repeat');tx.fillRect(0,0,w,h);
-  tx.globalCompositeOperation='saturation';tx.globalAlpha=.14;tx.fillStyle='#808080';tx.fillRect(0,0,w,h);
   tx.globalCompositeOperation='soft-light';tx.globalAlpha=1;
-  const lg=tx.createLinearGradient(0,0,w*.55,h);lg.addColorStop(0,'rgba(255,236,190,.75)');lg.addColorStop(.45,'rgba(128,128,128,0)');lg.addColorStop(1,'rgba(28,34,72,.6)');
+  const lg=tx.createLinearGradient(0,0,w*.55,h);lg.addColorStop(0,'rgba(255,236,190,.75)');lg.addColorStop(.45,'rgba(128,128,128,0)');lg.addColorStop(1,'rgba(28,34,72,.42)');
   tx.fillStyle=lg;tx.fillRect(0,0,w,h);
   tx.globalCompositeOperation='destination-in';tx.drawImage(solid,0,0);
   x.save();x.setTransform(1,0,0,1,0,0);x.drawImage(t,0,0);
@@ -3618,10 +3617,10 @@ function sparkle(x,y,r,a){
    match), soft lush and dry patches laid over it, and textured, furrowed soil. */
 const GTEX=2; // texture pixels per world unit
 const GROUND_PAL={
-  spring:{base:'#6c9e3e',dk:['#4b7b2a','#3c6922','#567e2e'],lt:['#88b850','#9cc460','#b2cd70'],dry:'#a9b25a',fl:['#f4f1e6','#f0d34a','#d6b4e0']},
-  summer:{base:'#68973a',dk:['#487627','#3a6420','#53782b'],lt:['#83af4a','#97bd58','#adc366'],dry:'#b5ab56',fl:['#f4f1e6','#f0d34a','#e9a24a']},
-  autumn:{base:'#87903f',dk:['#67712f','#586226','#77682c'],lt:['#a5a654','#b9ab5a','#c8a04c'],dry:'#c2984a',fl:['#f0e6d0','#e2b046','#c96a3a']},
-  winter:{base:'#8c977b',dk:['#6d7a61','#5d6a53','#788268'],lt:['#a4ae94','#b6bea8','#c6ccba'],dry:'#a6a486',fl:[]}
+  spring:{base:'#52b52e',dk:['#38961f','#2c871a','#43a226'],lt:['#74d03c','#8adc4a','#a4e65c'],dry:'#b4c450',fl:['#ffffff','#ffd83a','#e59ae8']},
+  summer:{base:'#4bb02a',dk:['#33921e','#278218','#3f9e24'],lt:['#6cca38','#84d846','#9ce258'],dry:'#c2b84a',fl:['#ffffff','#ffd83a','#ff9a3a']},
+  autumn:{base:'#a8ac34',dk:['#88922a','#7a8624','#a08a26'],lt:['#cac846','#e2c048','#eea83c'],dry:'#d89a3a',fl:['#fff2d8','#f2b83a','#e2622e']},
+  winter:{base:'#b4c4b0',dk:['#94a892','#86998a','#a2b4a4'],lt:['#cad8cc','#d8e4dc','#e4ece8'],dry:'#c2c4a8',fl:[]}
 };
 const GTEX_C={},PAT_C=new WeakMap();
 function grassTex(se){
@@ -3630,10 +3629,10 @@ function grassTex(se){
   x.fillStyle=P0.base;x.fillRect(0,0,n,n);mottle(x,n,tileNoise(n,8,se.length*1.37),.34,.07);
   x.lineCap='round';
   const wrap=(bx,by,fn)=>{for(const ox of[-n,0,n])for(const oy of[-n,0,n]){const X=bx+ox,Y=by+oy;if(X>-12&&X<n+12&&Y>-4&&Y<n+14)fn(X,Y)}};
-  for(let i=0;i<900;i++)wrap(Math.random()*n,Math.random()*n,(X,Y)=>{x.fillStyle='rgba(20,38,8,.2)';x.beginPath();x.ellipse(X,Y,1.5,.7,0,0,7);x.fill()});
+  for(let i=0;i<900;i++)wrap(Math.random()*n,Math.random()*n,(X,Y)=>{x.fillStyle='rgba(20,38,8,.12)';x.beginPath();x.ellipse(X,Y,1.5,.7,0,0,7);x.fill()});
   for(let i=0;i<2800;i++){const r=Math.random(),col=r<.42?P0.dk[i%3]:r<.93?P0.lt[i%3]:P0.dry,len=3+Math.random()*6,lean=(Math.random()-.5)*4,lw=.75+Math.random()*.7;
     wrap(Math.random()*n,Math.random()*n,(X,Y)=>{x.strokeStyle=col;x.lineWidth=lw;x.beginPath();x.moveTo(X,Y);x.quadraticCurveTo(X+lean*.3,Y-len*.6,X+lean,Y-len);x.stroke()})}
-  if(se==='winter'){x.globalAlpha=.42;x.fillStyle='#eef3fa';x.fillRect(0,0,n,n);x.globalAlpha=1;for(let i=0;i<500;i++)wrap(Math.random()*n,Math.random()*n,(X,Y)=>{x.fillStyle='rgba(255,255,255,.75)';x.beginPath();x.ellipse(X,Y,1.6+Math.random()*2,.8+Math.random(),0,0,7);x.fill()})}
+  if(se==='winter'){x.globalAlpha=.5;x.fillStyle='#f6faff';x.fillRect(0,0,n,n);x.globalAlpha=1;for(let i=0;i<500;i++)wrap(Math.random()*n,Math.random()*n,(X,Y)=>{x.fillStyle='rgba(255,255,255,.75)';x.beginPath();x.ellipse(X,Y,1.6+Math.random()*2,.8+Math.random(),0,0,7);x.fill()})}
   // the average colour, for the background beyond the painted meadow
   const d=x.getImageData(0,0,n,n).data;let r=0,gg=0,b=0;for(let i=0;i<d.length;i+=16){r+=d[i];gg+=d[i+1];b+=d[i+2]}const k=d.length/16;
   c.avg='#'+((1<<24)|(Math.round(r/k)<<16)|(Math.round(gg/k)<<8)|Math.round(b/k)).toString(16).slice(1);
@@ -3643,6 +3642,11 @@ const SOILTEX=(()=>{const n=128,c=document.createElement('canvas');c.width=c.hei
   for(let i=0;i<650;i++){const px=Math.random()*n,py=Math.random()*n,r=.6+Math.random()*1.7,l=Math.random(),col=l<.5?'rgba(38,22,9,.5)':l<.9?'rgba(152,110,72,.5)':'rgba(196,186,170,.75)';
     for(const ox of[-n,0,n])for(const oy of[-n,0,n]){x.fillStyle=col;x.beginPath();x.ellipse(px+ox,py+oy,r*1.3,r,0,0,7);x.fill()}}
   return c})();
+const PLOTTEX=(()=>{const n=128,c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d');x.fillStyle='#b04a1c';x.fillRect(0,0,n,n);mottle(x,n,tileNoise(n,8,6.1),.3,.12);
+  for(let i=0;i<520;i++){const px=Math.random()*n,py=Math.random()*n,r=.5+Math.random()*1.4,l=Math.random(),col=l<.55?'rgba(96,30,6,.45)':l<.92?'rgba(232,132,70,.5)':'rgba(250,214,150,.7)';
+    for(const ox of[-n,0,n])for(const oy of[-n,0,n]){x.fillStyle=col;x.beginPath();x.ellipse(px+ox,py+oy,r*1.3,r,0,0,7);x.fill()}}
+  return c})();
+function plotPat(){return pat('plot',PLOTTEX,1/GTEX)}
 // patterns belong to the canvas they are made on, so each canvas keeps its own
 function pat(key,tex,scale){
   let m=PAT_C.get(g);if(!m){m={};PAT_C.set(g,m)}
@@ -3655,7 +3659,7 @@ function farMeadowPat(){
   const se=season().id;if(FARPAT[se])return FARPAT[se];
   const T=1600,sc=.32,c=document.createElement('canvas');c.width=c.height=Math.round(T*sc);const x=c.getContext('2d');x.scale(sc,sc);
   for(let i=0;i<70;i++){const h=hash(i*1.7+.3,4.1),cx=hash(i,7.3)*T,cy=hash(3.9,i)*T,rx=(1.3+hash(i+3,2.2)*2.2)*W*.72,ry=rx*.5,
-      kind=se==='winter'?(h<.55?'snow':'dk'):h<.5?'dk':h<.82?'lt':'dk';
+      kind=se==='winter'?(h<.55?'snow':'ice'):h<.5?'dk':h<.82?'lt':'dk';
     x.globalAlpha=kind==='snow'?.7:kind==='lt'?.22+hash(2,i)*.18:.18+hash(i,2)*.16;
     for(const ox of[-T,0,T])for(const oy of[-T,0,T])if(cx+ox+rx>0&&cx+ox-rx<T&&cy+oy+ry>0&&cy+oy-ry<T)x.drawImage(BLOB[kind],cx+ox-rx,cy+oy-ry,rx*2,ry*2)}
   const p=g.createPattern(c,'repeat');p.setTransform(new DOMMatrix([1/sc,0,0,1/sc,0,0]));return FARPAT[se]=p;
@@ -3663,14 +3667,14 @@ function farMeadowPat(){
 function groundBg(){const c=grassTex(season().id).avg;return[shade(c,.04),shade(c,-.07)]}
 const BLOB=(()=>{const mk=(r,gg,b)=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),gr=x.createRadialGradient(32,32,0,32,32,32);
     gr.addColorStop(0,'rgba('+r+','+gg+','+b+',1)');gr.addColorStop(.5,'rgba('+r+','+gg+','+b+',.55)');gr.addColorStop(1,'rgba('+r+','+gg+','+b+',0)');x.fillStyle=gr;x.fillRect(0,0,64,64);return c};
-  return{dk:mk(28,60,12),lt:mk(200,192,98),snow:mk(248,250,255)}})();
+  return{dk:mk(34,104,18),lt:mk(196,226,92),snow:mk(248,250,255),ice:mk(170,200,236)}})();
 // soft patches of lush and sun-dried grass (snow in winter), placed on a world grid so they look the same however they are repainted
 function patchesAt(x0,y0,x1,y1){
   const se=season().id;
   for(let j=Math.floor((y0-4)/2);j<=Math.ceil((y1+4)/2);j++)for(let i=Math.floor((x0-4)/2);i<=Math.ceil((x1+4)/2);i++){
     const h=hash(i*1.31+.7,j*2.17+.3),cx=i*2+hash(i,j+5)*2,cy=j*2+hash(j+9,i)*2,r=1.3+hash(i+3,j*3)*2.2;
     if(cx+r<x0||cx-r>x1||cy+r<y0||cy-r>y1)continue;
-    const[px,py]=P(cx,cy),rx=r*W*.72,ry=rx*.5,kind=se==='winter'?(h<.55?'snow':'dk'):h<.5?'dk':h<.82?'lt':'dk';
+    const[px,py]=P(cx,cy),rx=r*W*.72,ry=rx*.5,kind=se==='winter'?(h<.55?'snow':'ice'):h<.5?'dk':h<.82?'lt':'dk';
     g.globalAlpha=kind==='snow'?.7:kind==='lt'?.22+hash(j,i)*.18:.18+hash(j,i)*.16;
     g.drawImage(BLOB[kind],px-rx,py-ry,rx*2,ry*2);
   }
@@ -3724,36 +3728,36 @@ function drawGrass(x,y){
 function plotState(o){return!o||o.fallow?'f':!o.crop?'e':o.wet?'w':'p'}
 function isPlotAt(a,b){const t=S&&S.tiles[a+','+b];return!!(t&&t.k==='plot')}
 function plotMask(x,y){return(isPlotAt(x-1,y)?0:1)|(isPlotAt(x+1,y)?0:2)|(isPlotAt(x,y-1)?0:4)|(isPlotAt(x,y+1)?0:8)}
-const SOIL_TONE={e:['rgba(236,206,160,.34)','rgba(120,84,46,.10)'],p:['rgba(255,226,186,.06)','rgba(24,12,2,.26)'],w:['rgba(40,22,8,.32)','rgba(10,4,0,.42)'],f:['rgba(230,200,150,.24)','rgba(30,16,4,.14)']};
+const SOIL_TONE={e:['rgba(255,190,120,.22)','rgba(120,40,10,.08)'],p:['rgba(255,170,100,.08)','rgba(60,14,2,.22)'],w:['rgba(60,16,4,.36)','rgba(30,6,0,.44)'],f:['rgba(236,200,150,.4)','rgba(80,40,10,.2)']};
 function drawSoil(x,y,o){
   if(typeof o!=='object')o={k:'plot',fallow:!!o};
   const st=plotState(o),m=.075,z=BED_Z,mask=ICON_MODE?15:plotMask(x,y);
   const top=[P(x+m,y+m,z),P(x+1-m,y+m,z),P(x+1-m,y+1-m,z),P(x+m,y+1-m,z)];
   // soft shadow toward the bottom right, then the two lit/shaded sides of the bed
   poly([P(x+m+.03,y+m+.05),P(x+1-m+.05,y+m+.05),P(x+1-m+.05,y+1-m+.04),P(x+m+.05,y+1-m+.04)],'rgba(20,14,4,.3)');
-  const sideL=st==='w'?'#3e2814':st==='e'||st==='f'?'#7a5534':'#5a3b20',sideR=shade(sideL,-.25);
+  const sideL=st==='w'?'#5a1e0a':st==='f'?'#8a5a34':'#8a3412',sideR=shade(sideL,-.28);
   poly([P(x+m,y+1-m,z),P(x+1-m,y+1-m,z),P(x+1-m,y+1-m,0),P(x+m,y+1-m,0)],sideL);
   poly([P(x+1-m,y+m,z),P(x+1-m,y+1-m,z),P(x+1-m,y+1-m,0),P(x+1-m,y+m,0)],sideR);
   g.strokeStyle='rgba(255,230,190,.16)';g.lineWidth=.7;line(P(x+m,y+1-m,z-.6),P(x+1-m,y+1-m,z-.6));
   // the bed top: painted soil, tinted by state
-  poly(top,NATURAL?soilPat():(st==='e'||st==='f'?'#a9784a':'#86552f'));
+  poly(top,NATURAL?plotPat():(st==='f'?'#a9784a':'#b8501f'));
   const[t0,t1]=SOIL_TONE[st],a=P(x,y,z),b=P(x+1,y+1,z),gr=g.createLinearGradient(a[0],a[1],b[0],b[1]);gr.addColorStop(0,t0);gr.addColorStop(1,t1);poly(top,gr);
   g.lineCap='round';
-  g.lineWidth=1.4;g.strokeStyle='rgba(28,14,4,.48)';line(P(x+m,y+1-m,z),P(x+m,y+m,z));line(P(x+m,y+m,z),P(x+1-m,y+m,z));
-  g.lineWidth=.9;g.strokeStyle='rgba(255,226,184,.22)';line(P(x+1-m,y+m+.02,z),P(x+1-m,y+1-m,z));line(P(x+1-m,y+1-m,z),P(x+m+.02,y+1-m,z));
+  g.lineWidth=1.6;g.strokeStyle='rgba(70,16,2,.7)';line(P(x+m,y+1-m,z),P(x+m,y+m,z));line(P(x+m,y+m,z),P(x+1-m,y+m,z));
+  g.lineWidth=1;g.strokeStyle='rgba(255,186,120,.4)';line(P(x+1-m,y+m+.02,z),P(x+1-m,y+1-m,z));line(P(x+1-m,y+1-m,z),P(x+m+.02,y+1-m,z));
   if(st==='f'){
     for(let i=0;i<20;i++){const[px,py]=P(x+.12+hash(x+i,y*1.3)*.76,y+.12+hash(y+i,x*1.7)*.76,z);g.strokeStyle=i%3?'rgba(210,180,112,.8)':'rgba(150,118,66,.75)';g.lineWidth=.8;line([px,py],[px+(hash(i,x)-.5)*1.6,py-2-hash(x,i)*2.4])}
     for(let i=0;i<5;i++){const[px,py]=P(x+.15+hash(x+i,y)*.7,y+.15+hash(y,x+i)*.7,z);ell(px+.4,py+.6,2,1,'rgba(26,14,4,.3)');ell(px,py,1.8,1,i%2?'#5c3c20':'#8a6440')}
   }else{
     // furrows: a shaded trough and a lit ridge
-    const dark=st==='w'?'rgba(10,4,0,.6)':st==='e'?'rgba(70,40,16,.42)':'rgba(28,14,4,.52)',ridge=st==='w'?'rgba(96,64,38,.95)':st==='e'?'rgba(196,156,110,.9)':'rgba(130,92,58,.95)',lit=st==='w'?'rgba(170,190,210,.35)':st==='e'?'rgba(250,226,186,.7)':'rgba(206,162,116,.55)';
-    for(const t of[.24,.45,.66,.86]){
-      g.strokeStyle=dark;g.lineWidth=3;line(P(x+.12,y+t,z),P(x+.88,y+t,z));
-      g.strokeStyle=ridge;g.lineWidth=2;line(P(x+.12,y+t-.085,z),P(x+.88,y+t-.085,z));
-      g.strokeStyle=lit;g.lineWidth=.8;line(P(x+.12,y+t-.11,z),P(x+.88,y+t-.11,z));
+    const dark=st==='w'?'rgba(40,8,0,.62)':'rgba(96,24,4,.55)',ridge=st==='w'?'rgba(140,52,20,.95)':'rgba(206,96,42,.95)',lit=st==='w'?'rgba(190,200,220,.38)':'rgba(255,170,100,.75)';
+    for(const t of[.3,.56,.82]){
+      g.strokeStyle=dark;g.lineWidth=3.6;line(P(x+.14,y+t,z),P(x+.86,y+t,z));
+      g.strokeStyle=ridge;g.lineWidth=3;line(P(x+.14,y+t-.1,z),P(x+.86,y+t-.1,z));
+      g.strokeStyle=lit;g.lineWidth=1;line(P(x+.14,y+t-.135,z),P(x+.86,y+t-.135,z));
     }
-    if(st==='e')for(let i=0;i<7;i++){const[px,py]=P(x+.15+hash(x*3+i,y)*.7,y+.15+hash(y*3,x+i)*.7,z);ell(px,py,1.3,.7,i%2?'#c9a57a':'#8a6440')}
-    else for(let i=0;i<4;i++){const[px,py]=P(x+.15+hash(x*3+i,y)*.7,y+.15+hash(y*3,x+i)*.7,z);ell(px,py,1.1,.6,'#3a2412')}
+    if(st==='e')for(let i=0;i<8;i++){const[px,py]=P(x+.15+hash(x*3+i,y)*.7,y+.15+hash(y*3,x+i)*.7,z);ell(px,py,1.3,.7,i%2?'#f0a05a':'#7a2a0c')}
+    else for(let i=0;i<4;i++){const[px,py]=P(x+.15+hash(x*3+i,y)*.7,y+.15+hash(y*3,x+i)*.7,z);ell(px,py,1.1,.6,'#5a1a06')}
     if(st==='w'){// damp sheen: soft highlights catching the sky
       for(let i=0;i<4;i++){const[px,py]=P(x+.2+hash(x*7+i,y)*.6,y+.2+hash(y*7,x+i)*.6,z);ell(px,py,4+hash(i,x)*3,1,'rgba(190,220,255,.28)',null,0,.46)}
       const[sx,sy]=P(x+.32,y+.3,z);ell(sx,sy,6,1.3,'rgba(255,255,255,.18)',null,0,.46);
@@ -3780,11 +3784,13 @@ function drawTile(x,y,base){
 }
 // Where your land ends: the wild meadow outside is a touch darker, and a low dry-stone wall runs along the two
 // back edges (everything on the farm stands in front of it), with grass tufts at its foot.
+// the land beyond the farm is shaded a little so the farm stands out: green-dark in the green seasons, cool blue on snow
+function outTint(){return season().id==='winter'?'52,84,132':'26,44,10'}
 function landTint(r){
   const A=P(0,0),B=P(N,0),C=P(N,N),D=P(0,N);
   for(const[e,a]of[[0,.12],[.25,.05]]){const q=[P(-e,-e),P(N+e,-e),P(N+e,N+e),P(-e,N+e)];
     g.beginPath();g.rect(r[0]-60,r[1]-60,r[2]-r[0]+120,r[3]-r[1]+120);g.moveTo(q[0][0],q[0][1]);for(let i=3;i>=1;i--)g.lineTo(q[i][0],q[i][1]);g.closePath();
-    g.fillStyle='rgba(26,44,10,'+a+')';g.fill('evenodd')}
+    g.fillStyle='rgba('+outTint()+','+a+')';g.fill('evenodd')}
 }
 function stoneWall(){
   const P0=GROUND_PAL[season().id],tuft=NATURAL?P0.dk[1]:'#4e8624';
@@ -4918,33 +4924,33 @@ function drawBarnN(x,y,o){
   const[cx,cy]=P(x+1,y+1);shadow(cx-4,cy+4,60,21);
   const prof=[[0,h],[b,h+r1],[bw/2,zp],[bw-b,h+r1],[bw,h]],rp=[[-ov,h-2],[b,h+r1],[bw/2,zp+.6],[bw-b,h+r1],[bw+ov,h-2]];
   const F=(u,z)=>P(x0+u,yy,z),S=(v,z)=>P(x0+bw,y0+v,z),white='#f2eee6';
-  const mHi=lv>=3?'#b3b9bf':'#a1a7ac',mMid=lv>=3?'#959ca3':'#878d92',mLo=lv>=3?'#737a82':'#666c71';
+  const mHi=lv>=3?'#9c4232':'#8e3a2c',mMid=lv>=3?'#7e3024':'#722c22',mLo=lv>=3?'#5e2018':'#561e18';
   const slope=(i,ya,yb,fill)=>{const[a,za]=rp[i],[c,zc]=rp[i+1];poly([P(x0+a,ya,za),P(x0+c,ya,zc),P(x0+c,yb,zc),P(x0+a,yb,za)],fill)};
-  const seams=(i,ya,yb)=>{const[a,za]=rp[i],[c,zc]=rp[i+1];for(let v=ya+.035;v<yb;v+=.07){g.strokeStyle='rgba(255,255,255,.26)';g.lineWidth=.7;line(P(x0+a,v,za),P(x0+c,v,zc));g.strokeStyle='rgba(30,34,40,.35)';g.lineWidth=.5;line(P(x0+a,v+.012,za),P(x0+c,v+.012,zc))}
+  const seams=(i,ya,yb)=>{const[a,za]=rp[i],[c,zc]=rp[i+1];for(let v=ya+.035;v<yb;v+=.07){g.strokeStyle='rgba(255,200,170,.16)';g.lineWidth=.7;line(P(x0+a,v,za),P(x0+c,v,zc));g.strokeStyle='rgba(30,34,40,.35)';g.lineWidth=.5;line(P(x0+a,v+.012,za),P(x0+c,v+.012,zc))}
     if(lv<3)for(let k=0;k<4;k++){const v=ya+hash(k,i*2.7)*(yb-ya),ww=.02+hash(i,k)*.03;poly([P(x0+a,v,za),P(x0+c,v,zc),P(x0+c,v+ww,zc),P(x0+a,v+ww,za)],'rgba(140,72,30,.18)')}};
   // back slopes, then the long side wall
   slope(0,y0-ov,yy,mLo);slope(1,y0-ov,yy,mMid);
   fp(S,[[0,0],[d,0],[d,base],[0,base]],'#a29e95');
-  const sw=[[0,base],[d,base],[d,h],[0,h]];fp(S,sw,'#7c271f');battensN(S,sw,0,d,base,h,.085);
+  const sw=[[0,base],[d,base],[d,h],[0,h]];fp(S,sw,'#a3261c');battensN(S,sw,0,d,base,h,.085);
   for(const v of[.3,.8,1.3])windowN(S,v-.075,v+.075,base+11,base+19,{panes:true,lit:lv>=3});
   fp(S,[[0,h-5],[d,h-5],[d,h],[0,h]],'rgba(20,6,4,.22)');
   // gable end: concrete footing, red boards, white corner boards and an eave band
   fp(F,[[0,0],[bw,0],[bw,base],[0,base]],'#bab6ad');
-  const gw=[[0,base],[bw,base],[bw,h],[bw-b,h+r1],[bw/2,zp],[b,h+r1],[0,h]];fp(F,gw,'#a2342a');battensN(F,gw,0,bw,base,zp,.08);
+  const gw=[[0,base],[bw,base],[bw,h],[bw-b,h+r1],[bw/2,zp],[b,h+r1],[0,h]];fp(F,gw,'#d0362a');battensN(F,gw,0,bw,base,zp,.08);
   fp(F,[[0,base],[.045,base],[.045,h],[0,h]],white);fp(F,[[bw-.045,base],[bw,base],[bw,h],[bw-.045,h]],white);fp(S,[[d-.04,base],[d,base],[d,h],[d-.04,h]],'#d9d4ca');
   fp(F,[[0,h-1.2],[bw,h-1.2],[bw,h+.4],[0,h+.4]],white);
   // sliding doors on a track: the right leaf stands a little open on the dark, hay-strewn inside
   const d0=bw*.25,d1=bw*.75,dm=bw/2,dz=base+21;
   fp(F,[[d0-.06,dz+1],[d1+.2,dz+1],[d1+.2,dz+2.6],[d0-.06,dz+2.6]],'#38332f');
   fp(F,[[dm,base],[dm+.11,base],[dm+.11,dz],[dm,dz]],'#1b1510');fp(F,[[dm,base],[dm+.11,base],[dm+.11,base+3],[dm,base+3]],'#b8983e');
-  const leaf=(a,c2)=>{fp(F,[[a,base],[c2,base],[c2,dz],[a,dz]],'#8f2b22');g.strokeStyle='rgba(50,10,6,.45)';g.lineWidth=.5;for(let u=a+.04;u<c2;u+=.04)fl(F,[u,base],[u,dz]);
+  const leaf=(a,c2)=>{fp(F,[[a,base],[c2,base],[c2,dz],[a,dz]],'#b42c22');g.strokeStyle='rgba(50,10,6,.45)';g.lineWidth=.5;for(let u=a+.04;u<c2;u+=.04)fl(F,[u,base],[u,dz]);
     const t=.024;for(const q of[[[a,base],[c2,base],[c2,base+1.5],[a,base+1.5]],[[a,dz-1.5],[c2,dz-1.5],[c2,dz],[a,dz]],[[a,base],[a+t,base],[a+t,dz],[a,dz]],[[c2-t,base],[c2,base],[c2,dz],[c2-t,dz]],[[a,(base+dz)/2-.7],[c2,(base+dz)/2-.7],[c2,(base+dz)/2+.7],[a,(base+dz)/2+.7]]])fp(F,q,white);
     g.strokeStyle=white;g.lineWidth=1.5;fl(F,[a+t,base+1.5],[c2-t,dz-1.5]);fl(F,[a+t,dz-1.5],[c2-t,base+1.5]);
     const[r1x,r1y]=F(a+.05,dz+1.8),[r2x,r2y]=F(c2-.05,dz+1.8);ell(r1x,r1y,1,1,'#222');ell(r2x,r2y,1,1,'#222')};
   leaf(d0,dm);leaf(dm+.11,d1+.11);
   // hay loft door with a pulley beam under the peak
   const l0=bw*.41,l1=bw*.59,lz0=h+3,lz1=h+14;
-  fp(F,[[l0,lz0],[l1,lz0],[l1,lz1],[l0,lz1]],'#8f2b22');
+  fp(F,[[l0,lz0],[l1,lz0],[l1,lz1],[l0,lz1]],'#b42c22');
   for(const q of[[[l0,lz0],[l1,lz0],[l1,lz0+1.3],[l0,lz0+1.3]],[[l0,lz1-1.3],[l1,lz1-1.3],[l1,lz1],[l0,lz1]],[[l0,lz0],[l0+.022,lz0],[l0+.022,lz1],[l0,lz1]],[[l1-.022,lz0],[l1,lz0],[l1,lz1],[l1-.022,lz1]]])fp(F,q,white);
   g.strokeStyle=white;g.lineWidth=1.3;fl(F,[l0+.022,lz0+1.3],[l1-.022,lz1-1.3]);fl(F,[l0+.022,lz1-1.3],[l1-.022,lz0+1.3]);
   g.strokeStyle='#4a3a2c';g.lineWidth=2;line(P(xm,yy,zp-3.5),P(xm,yy+.2,zp-3.5));{const[px2,py2]=P(xm,yy+.18,zp-5);ell(px2,py2,1.4,1.4,'#2a2a2a');g.strokeStyle='rgba(120,100,70,.8)';g.lineWidth=.5;line([px2,py2],[px2,py2+9])}
@@ -4952,7 +4958,7 @@ function drawBarnN(x,y,o){
   slope(2,y0-ov,yy+ov,lgr(P(xm,y0,zp),P(x0+bw-b,yy,h+r1),[mHi,mMid]));seams(2,y0-ov,yy+ov);
   slope(3,y0-ov,yy+ov,lgr(P(x0+bw-b,y0,h+r1),P(x0+bw,yy,h),[mMid,mLo]));seams(3,y0-ov,yy+ov);
   slope(0,yy,yy+ov,mLo);slope(1,yy,yy+ov,mMid);
-  g.strokeStyle=white;g.lineWidth=2;g.lineJoin='round';g.beginPath();rp.forEach(([u,z],i)=>{const[sx,sy]=P(x0+u,yy+ov,z);i?g.lineTo(sx,sy):g.moveTo(sx,sy)});g.stroke();
+  g.strokeStyle=white;g.lineWidth=3.2;g.lineJoin='round';g.beginPath();rp.forEach(([u,z],i)=>{const[sx,sy]=P(x0+u,yy+ov,z);i?g.lineTo(sx,sy):g.moveTo(sx,sy)});g.stroke();
   g.strokeStyle='#5e646a';g.lineWidth=1.5;line(P(xm,y0-ov,zp+.9),P(xm,yy+ov,zp+.9));
   g.strokeStyle='#e4dfd6';g.lineWidth=1.2;line(P(x0+bw+ov,y0-ov,h-2),P(x0+bw+ov,yy+ov,h-2));
   // cupola with louvres and a weathervane (level 3+)
@@ -4972,9 +4978,9 @@ function drawBarnN(x,y,o){
     ell(sx,sy,r,4.6,null,null);g.beginPath();g.ellipse(sx,sy,r,4.6,0,0,Math.PI);g.fillStyle='#b4b0a7';g.fill();
     g.strokeStyle='rgba(60,56,50,.38)';g.lineWidth=.55;for(let z=5;z<hh;z+=4.4){g.beginPath();g.ellipse(sx,sy-z,r,4.6,0,0,Math.PI);g.stroke()}
     for(let i=0;i<8;i++){const t=hash(i,6)*1.6-.8;poly([[sx+t*r,sy-hh+2],[sx+t*r+1.2,sy-hh+2],[sx+t*r+1.5,sy-hh*(.4+hash(6,i)*.5)],[sx+t*r+.3,sy-hh*(.4+hash(6,i)*.5)]],'rgba(90,80,60,.12)')}
-    g.beginPath();g.ellipse(sx,sy-hh,r,12,0,Math.PI,0);g.closePath();g.fillStyle=lgr([sx-r,sy-hh-10],[sx+r,sy-hh],['#d4d8dc','#9ea4aa','#6f757b']);g.fill();
+    g.beginPath();g.ellipse(sx,sy-hh,r,12,0,Math.PI,0);g.closePath();g.fillStyle=lgr([sx-r,sy-hh-10],[sx+r,sy-hh],['#b4d4f0','#78a6d2','#4a76a6']);g.fill();
     g.strokeStyle='rgba(40,44,50,.3)';g.lineWidth=.5;for(const k of[-.6,-.2,.2,.6]){g.beginPath();g.moveTo(sx+k*r,sy-hh);g.quadraticCurveTo(sx+k*r*.6,sy-hh-11,sx,sy-hh-12);g.stroke()}
-    ball(sx,sy-hh-12,2,1.6,'#9ea4aa');
+    ball(sx,sy-hh-12,2,1.6,'#78a6d2');
     g.strokeStyle='#5a5650';g.lineWidth=.7;const lx=sx-r*.55;line([lx-1.6,sy-2],[lx-1.6,sy-hh+1]);line([lx+1.6,sy-2],[lx+1.6,sy-hh+1]);for(let z=4;z<hh;z+=3)line([lx-1.6,sy-z],[lx+1.6,sy-z])}
 }
 function drawBuilding(x,y,o){
@@ -7937,7 +7943,7 @@ function frameStep(t){
   const gb=gBounds(),vx=-cam.x/cam.z,vy=-cam.y/cam.z,vw2=GW/dpr/cam.z,vh2=GH/dpr/cam.z,covered=vx>=gb[0]+430&&vx+vw2<=gb[2]-430&&vy>=gb[1]+345&&vy+vh2<=gb[3]-345;
   if(NATURAL&&!covered){g.setTransform(cam.z*dpr,0,0,cam.z*dpr,cam.x*dpr,cam.y*dpr);
     g.fillStyle=grassPat();g.fillRect(vx,vy,vw2,vh2);if(season().id==='winter'){g.fillStyle='rgba(238,243,250,.18)';g.fillRect(vx,vy,vw2,vh2)}
-    g.fillStyle=farMeadowPat();g.fillRect(vx,vy,vw2,vh2);g.fillStyle='rgba(26,44,10,.164)';g.fillRect(vx,vy,vw2,vh2);g.setTransform(1,0,0,1,0,0)}
+    g.fillStyle=farMeadowPat();g.fillRect(vx,vy,vw2,vh2);g.fillStyle='rgba('+outTint()+',.164)';g.fillRect(vx,vy,vw2,vh2);g.setTransform(1,0,0,1,0,0)}
   soft=blitLayer('ground');
       }finally{g=prevG;cam.x=cx0;cam.y=cy0;vw=vw0;vh=vh0;clipW=clipH=0}
       // chunks still waiting to be repainted sharp after a zoom: compose again next frame
@@ -11232,10 +11238,10 @@ for(let i=0;i<16;i++)FALL.push({x:Math.random(),y:Math.random(),s:.6+Math.random
 function drawWeather(now,dt){
   const w=weather(),se=season().id,W2=cv.width,H2=cv.height;
   g.setTransform(1,0,0,1,0,0);
-  const tint={spring:'rgba(255,190,220,.05)',summer:'rgba(255,230,140,.05)',autumn:'rgba(255,140,30,.09)',winter:'rgba(205,228,255,.14)'}[se];g.fillStyle=tint;g.fillRect(0,0,W2,H2);
-  if(w==='cloudy'){g.fillStyle='rgba(70,80,100,.1)';g.fillRect(0,0,W2,H2)}
+  const tint={spring:'rgba(255,190,220,.05)',summer:'rgba(255,230,140,.05)',autumn:'rgba(255,140,30,.09)',winter:'rgba(205,228,255,.05)'}[se];g.fillStyle=tint;g.fillRect(0,0,W2,H2);
+  if(w==='cloudy'){g.fillStyle='rgba(70,80,100,.06)';g.fillRect(0,0,W2,H2)}
   if(w==='rain'||w==='storm'){g.fillStyle=w==='storm'?'rgba(25,35,60,.3)':'rgba(40,60,90,.17)';g.fillRect(0,0,W2,H2)}
-  if(w==='snow'){g.fillStyle='rgba(235,242,255,.12)';g.fillRect(0,0,W2,H2)}
+  if(w==='snow'){g.fillStyle='rgba(235,242,255,.05)';g.fillRect(0,0,W2,H2)}
   if(reduce||S.fx===false)return;
   const sc=dpr;
   if(w==='rain'||w==='storm'){
