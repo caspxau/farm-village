@@ -7915,7 +7915,7 @@ function frameStep(t){
   const now=Date.now();
   if(HV){updateFarmer(dt,now);requestAnimationFrame(frame);return}
   liveBudget=2;FRAME_SCALE=0;SPR_DEADLINE=0;if(INKC.size>120&&Math.random()<.02){const tn=performance.now();for(const[k,c]of INKC)if(c.u&&tn-c.u>5000)INKC.delete(k)}
-  seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateHelper(dt);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
+  camStep(dt);seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateHelper(dt);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
   // The background (base colour, the endless meadow and the ground chunks) is composed into a screen-sized canvas only
   // when the camera, the canvas, the season or a ground chunk changes; otherwise each frame stamps it 1:1, which is
   // cheap even where the browser draws without the graphics card.
@@ -8062,7 +8062,7 @@ function addXP(n){
   S.xp+=n;const l0=S.level;
   while(S.level<MAX_LVL&&S.xp>=need(S.level)){S.xp-=need(S.level);S.level++;S.coins+=20*S.level;if(S.level%5===0)S.cash+=1}
   if(S.level>=MAX_LVL)S.xp=0;
-  if(S.level>l0){SFX.level();showLevelUp(l0);renderWheelCard();if(S.level>=MAX_LVL&&!S.champ)setTimeout(championGift,600);else setTimeout(nextQuest,800)}
+  if(S.level>l0){SFX.level();haptic([25,60,25,60,45]);showLevelUp(l0);renderWheelCard();if(S.level>=MAX_LVL&&!S.champ)setTimeout(championGift,600);else setTimeout(nextQuest,800)}
 }
 function championGift(){
   if(S.champ)return;S.champ=Date.now();S.coins+=CHAMP.coins;S.cash+=CHAMP.cash;S.inv['deco:champion']=(S.inv['deco:champion']||0)+1;changed();
@@ -9881,7 +9881,7 @@ const VEH={tractor:1,seeder:1,harvester:1};
 let down=null,pinch=null,lastPtr={x:innerWidth/2,y:innerHeight/2},lastMove={x:0,y:0};const pointers=new Map();
 function tileAt(cx,cy){const wx=(cx-cam.x)/cam.z,wy=(cy-cam.y)/cam.z,a=wx/(W/2),b=wy/(H/2);return[Math.floor((a+b)/2),Math.floor((b-a)/2)]}
 cv.addEventListener('pointerdown',e=>{
-  lastMove={x:e.clientX,y:e.clientY};hidePlowChip();
+  lastMove={x:e.clientX,y:e.clientY};hidePlowChip();camHalt();
   const a=ac();if(a&&a.state==='suspended')a.resume();
   cv.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(pointers.size===1){down={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y,moved:false};
@@ -9894,7 +9894,7 @@ cv.addEventListener('pointermove',e=>{
   if(pointers.has(e.pointerId))pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});lastMove={x:e.clientX,y:e.clientY};
   if(SWEEP){sweepMove(e.clientX,e.clientY);return}
   if(pinch&&pointers.size===2){const[p1,p2]=[...pointers.values()],mx=(p1.x+p2.x)/2,my=(p1.y+p2.y)/2;cam.x+=mx-pinch.mx;cam.y+=my-pinch.my;pinch.mx=mx;pinch.my=my;zoomAt(mx,my,pinch.z*Math.hypot(p1.x-p2.x,p1.y-p2.y)/pinch.d/cam.z);return}
-  if(down){const dx=e.clientX-down.x,dy=e.clientY-down.y;if(!down.moved&&Math.hypot(dx,dy)>7){down.moved=true;clearTimeout(down.hold);cv.classList.add('grab');hover=null;$('tip').hidden=true}if(down.moved){cam.x=down.cx+dx;cam.y=down.cy+dy;return}}
+  if(down){const dx=e.clientX-down.x,dy=e.clientY-down.y;if(!down.moved&&Math.hypot(dx,dy)>7){down.moved=true;clearTimeout(down.hold);cv.classList.add('grab');hover=null;$('tip').hidden=true}if(down.moved){cam.x=down.cx+dx;cam.y=down.cy+dy;camRubber();camSample(e.clientX,e.clientY);return}}
   hover=tileAt(e.clientX,e.clientY);
   updateTip(e.clientX,e.clientY);
 });
@@ -9909,15 +9909,52 @@ function endPointer(e){
   else if(down&&!down.moved&&e.type==='pointerup'&&!placing&&tool==='multi'&&!VIS&&!tutLocked()&&bubbleAt(e.clientX,e.clientY)){tapBubble(bubbleAt(e.clientX,e.clientY))}
   else if(down&&!down.moved&&e.type==='pointerup'&&!placing&&tool==='multi'&&helperAt(e.clientX,e.clientY)){SFX.click();showHelper()}
   else if(down&&!down.moved&&e.type==='pointerup'){const v=!placing&&tool==='multi'&&visitorAt(e.clientX,e.clientY),ak=!placing&&!VEH[tool]&&animalAt(e.clientX,e.clientY);if(v)clickVisitor(v);else if(ak){const[x,y]=ak.split(',').map(Number);hover=[x,y];act(x,y)}else{const[x,y]=tileAt(e.clientX,e.clientY);hover=[x,y];act(x,y)}}
-  if(pointers.size===0){down=null;cv.classList.remove('grab')}
+  if(pointers.size===0){if(down&&down.moved&&e.type==='pointerup')camFling();down=null;cv.classList.remove('grab')}
 }
 cv.addEventListener('pointerup',endPointer);cv.addEventListener('pointercancel',endPointer);
 cv.addEventListener('pointerleave',()=>{if(!down){hover=null;$('tip').hidden=true}});
-function zoomAt(cx,cy,f){lastZoomT=performance.now();const nz=Math.max(Math.min(.35,Math.max(.16,Math.min(vw/(N*W*1.1),(vh-150)/(N*H*1.1)))),Math.min(2.2,cam.z*f));f=nz/cam.z;cam.x=cx-(cx-cam.x)*f;cam.y=cy-(cy-cam.y)*f;cam.z=nz}
+function zMin(){return Math.min(.35,Math.max(.16,Math.min(vw/(N*W*1.1),(vh-150)/(N*H*1.1))))}
+function zoomAt(cx,cy,f){lastZoomT=performance.now();const nz=Math.max(zMin(),Math.min(2.2,cam.z*f));f=nz/cam.z;cam.x=cx-(cx-cam.x)*f;cam.y=cy-(cy-cam.y)*f;cam.z=nz}
 cv.addEventListener('wheel',e=>{e.preventDefault();
   if(e.ctrlKey){zoomAt(e.clientX,e.clientY,Math.exp(-e.deltaY*.012));return}
   if(e.deltaMode===0&&(Math.abs(e.deltaX)>0||Math.abs(e.deltaY)<40)){cam.x-=e.deltaX;cam.y-=e.deltaY;return}
-  zoomAt(e.clientX,e.clientY,e.deltaY<0?1.1:1/1.1)},{passive:false});
+  camZoomTo(e.clientX,e.clientY,(CAMF.zt||cam.z)*(e.deltaY<0?1.18:1/1.18))},{passive:false});
+
+/* camera feel: a flung drag keeps gliding and slows down, the mouse wheel zooms smoothly, and the farm can never be
+   lost off-screen: drag past the edge and it pulls back like a rubber band. Arrow keys / WASD pan, + and - zoom. */
+const CAMF={vx:0,vy:0,zt:0,zx:0,zy:0,smp:[],keys:new Set()};
+function camHalt(){CAMF.vx=CAMF.vy=0;CAMF.smp.length=0}
+function camOver(){ // how far the camera must move so that a good piece of the land stays on screen
+  const z=cam.z,m=Math.min(vw,vh)*.28,l=cam.x+P(0,N)[0]*z,r=cam.x+P(N,0)[0]*z,t=cam.y+P(0,0)[1]*z,b=cam.y+P(N,N)[1]*z;
+  return[r<m?m-r:l>vw-m?vw-m-l:0,b<m+60?m+60-b:t>vh-m-60?vh-m-60-t:0]}
+function camRubber(){const[ox,oy]=camOver();cam.x+=ox*.62;cam.y+=oy*.62}
+function camSample(x,y){const t=performance.now(),s=CAMF.smp;s.push([t,x,y]);while(s.length>2&&t-s[0][0]>90)s.shift()}
+function camFling(){const s=CAMF.smp;if(s.length>=2){const a=s[0],b=s[s.length-1],dt=(b[0]-a[0])/1000;
+  if(dt>.008&&performance.now()-b[0]<60){CAMF.vx=(b[1]-a[1])/dt;CAMF.vy=(b[2]-a[2])/dt;const sp=Math.hypot(CAMF.vx,CAMF.vy),mx=4000;if(sp<180)CAMF.vx=CAMF.vy=0;else if(sp>mx){CAMF.vx*=mx/sp;CAMF.vy*=mx/sp}}}
+  s.length=0}
+function camZoomTo(x,y,z){CAMF.zt=Math.max(zMin(),Math.min(2.2,z));CAMF.zx=x;CAMF.zy=y}
+function camStep(dt){
+  if(HV||SWEEP)return;
+  const held=(down&&down.moved)||pinch;
+  if(CAMF.keys.size&&!placing){const k=CAMF.keys,sp=650;let kx=0,ky=0;
+    if(k.has('l'))kx+=sp;if(k.has('r'))kx-=sp;if(k.has('u'))ky+=sp;if(k.has('d'))ky-=sp;
+    const f=1-Math.exp(-dt*10);CAMF.vx+=(kx-CAMF.vx)*f;CAMF.vy+=(ky-CAMF.vy)*f}
+  if(!held&&(CAMF.vx||CAMF.vy)){cam.x+=CAMF.vx*dt;cam.y+=CAMF.vy*dt;
+    const[ox,oy]=camOver(),fr=Math.exp(-dt*(ox||oy?16:3.6));CAMF.vx*=fr;CAMF.vy*=fr;
+    if(Math.hypot(CAMF.vx,CAMF.vy)<12&&!CAMF.keys.size)CAMF.vx=CAMF.vy=0}
+  if(CAMF.zt&&!pinch){const want=CAMF.zt,nz=cam.z+(want-cam.z)*(1-Math.exp(-dt*16));
+    if(Math.abs(want/cam.z-1)<.003){zoomAt(CAMF.zx,CAMF.zy,want/cam.z);CAMF.zt=0}else zoomAt(CAMF.zx,CAMF.zy,nz/cam.z)}
+  if(!held){const[ox,oy]=camOver();if(ox||oy){const f=1-Math.exp(-dt*9);
+    cam.x+=Math.abs(ox)<.5?ox:ox*f;cam.y+=Math.abs(oy)<.5?oy:oy*f}}
+}
+const CAM_KEYS={ArrowLeft:'l',ArrowRight:'r',ArrowUp:'u',ArrowDown:'d',a:'l',d:'r',w:'u',s:'d',A:'l',D:'r',W:'u',S:'d'};
+function camKeyOk(e){const t=e.target;return!(t instanceof HTMLInputElement||t instanceof HTMLTextAreaElement||t instanceof HTMLSelectElement||(t&&t.isContentEditable))&&!mq.length&&$('title').hidden&&!HV&&!e.ctrlKey&&!e.metaKey&&!e.altKey}
+addEventListener('keydown',e=>{if(!camKeyOk(e))return;const k=CAM_KEYS[e.key];
+  if(k){CAMF.keys.add(k);e.preventDefault();return}
+  if(e.key==='+'||e.key==='='){camZoomTo(vw/2,vh/2,(CAMF.zt||cam.z)*1.25);e.preventDefault()}
+  else if(e.key==='-'||e.key==='_'){camZoomTo(vw/2,vh/2,(CAMF.zt||cam.z)/1.25);e.preventDefault()}});
+addEventListener('keyup',e=>{const k=CAM_KEYS[e.key];if(k)CAMF.keys.delete(k)});
+addEventListener('blur',()=>CAMF.keys.clear());
 
 
 function tipText(hx,hy){
@@ -10354,7 +10391,7 @@ function shopProfit(cat,id,d){
   return null;
 }
 function shakeEl(e){if(!e)return;e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');setTimeout(()=>e.classList.remove('shake'),450)}
-function haptic(){if(S&&S.haptics!==false&&navigator.vibrate)try{navigator.vibrate(10)}catch(e){}}
+function haptic(p){if(S&&S.haptics!==false&&navigator.vibrate)try{navigator.vibrate(p||10)}catch(e){}}
 function shopCat(k){if(k===marketCat)return;marketCat=k;marketAnim=true;mFilter.season=false;SFX.click();haptic();rerender()}
 function renderShop(body){
   $('sheet').classList.add('market');
@@ -11442,7 +11479,7 @@ function finishQuest(){
   const q=qDef(),who=PEOPLE().find(p=>p.id===q.who),r=q.reward;
   const hl0=houseLv();S.qdone=[...(S.qdone||[]),q.id];S.q=null;const houseUp=houseLv()>hl0;S.coins+=r.coins;if(r.cash)S.cash+=r.cash;
   let prize=null;if(r.item){S.inv[r.item]=(S.inv[r.item]||0)+1;const[cat,id]=r.item.split(':');prize=DECOR[id]}
-  SFX.level();confetti();stat('quest');
+  SFX.level();haptic([20,50,35]);confetti();stat('quest');
   modal({title:'Quest Complete!',color:'gold',small:true,render(b){
     const p=el('div','body-pad'),face=el('div','vface');face.innerHTML=avatar(who);p.appendChild(face);
     p.appendChild(el('h3',null,q.title));p.appendChild(el('p',null,who.name+': "Thank you so much! Here is something for your trouble."'));
@@ -12725,7 +12762,7 @@ function start(data){
   const first=!S.tips.welcome;S.tips.welcome=true;
   if(S.tips.homeGift===false){S.tips.homeGift=true;setTimeout(()=>toast('Animals now live in homes! Free homes for your animals are waiting in your Gift Box.'),1500)}
   else if(!S.tips.homes&&Object.values(S.tiles).some(o=>o.k==='animal'&&!hasHome(o.id))){S.tips.homes=true;setTimeout(()=>toast('Your chickens and sheep need homes! Buy a Chicken Coop and a Sheep Pen in Market > Homes.'),3200)}
-  if(first)toast('Welcome to Farm Village! Your wheat is ready: click it and your farmer will harvest it.');
+  if(first&&!tutOn())toast('Welcome to Farm Village! Your wheat is ready: click it and your farmer will harvest it.');
   if(!S.tips.avatar)showWardrobe(true);
   dailyBonus();xmCheck();renderWheelCard();
   renderGoals();setInterval(()=>{if(S.goals&&S.goals.day!==today())renderGoals();xmCheck();renderWheelCard()},60000);
