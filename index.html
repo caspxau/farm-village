@@ -6589,7 +6589,7 @@ function drawHomeBuilding(x,y,id,lv){
   const H=HOMES[id],G=homeGeo(id),st=G.style,[b0,b1,b2,b3]=G.b,x0=x+b0,y0=y+b1,w=b2-b0,d=b3-b1,white='#f2eee6';
   const[cx,cy]=P(x0+w/2,y0+d/2);shadow(cx+4,cy+8,w*34,d*20);
   if(st==='barn'){// dairy barn: white boards, red X-braced doors, hay loft with hay, metal roof
-    const r=shedN(x0,y0,w,d,34,22,{wall:'#f1ede4',wall2:'#d9d3c6',roof:lv>=3?'#8e969e':'#7c8288',roofType:'metal',boards:'batten',trim:'#b8382c',base:4,fascia:'#b8382c',
+    const r=shedN(x0,y0,w,d,34,22,{wall:'#f1ede4',wall2:'#d9d3c6',roof:lv>=3?'#c04a38':'#b04434',roofType:'metal',boards:'batten',trim:'#b8382c',base:4,fascia:'#b8382c',
       onWalls:(F,S,k)=>{const dm=k.w/2;xDoor(F,dm-.36,dm,k.base,k.base+24,'#b03a2e',white);xDoor(F,dm+.02,dm+.38,k.base,k.base+24,'#b03a2e',white);
         fp(F,[[dm-.42,k.base+25],[dm+.44,k.base+25],[dm+.44,k.base+26.6],[dm-.42,k.base+26.6]],'#3a332f');
         const l0=dm-.2,l1=dm+.2,lz=k.h+2;fp(F,[[l0,lz],[l1,lz],[l1,lz+12],[l0,lz+12]],'#2a1c12');
@@ -6599,7 +6599,7 @@ function drawHomeBuilding(x,y,id,lv){
     if(lv>=3){const xm=x0+w/2,yc=y0+d/2,q=.1,zp=r.top;isoBox(xm-q,yc-q,q*2,q*2,8,'#f0ece4','#cfc9bf',null,null,zp-3);poly([P(xm-q-.04,yc+q+.04,zp+5),P(xm+q+.04,yc+q+.04,zp+5),P(xm,yc,zp+13)],'#b03a2e');poly([P(xm+q+.04,yc+q+.04,zp+5),P(xm+q+.04,yc-q-.04,zp+5),P(xm,yc,zp+13)],'#8a2a20')}
   }else if(st==='stilts'){// raised coop: boards on stilts, nest boxes on the side, a ramp down to the yard
     const red=id==='turkey'?'#b8702e':'#c8432f';
-    const r=shedN(x0,y0,w,d,20,13,{z:11,wall:red,wall2:shade(red,-.2),roof:id==='turkey'?'#7a5a3a':'#4d6f96',roofType:id==='turkey'?null:'metal',boards:'batten',trim:white,fascia:white,
+    const r=shedN(x0,y0,w,d,20,13,{z:11,wall:red,wall2:shade(red,-.2),roof:id==='turkey'?'#2f7a6e':'#4d6f96',roofType:'metal',boards:'batten',trim:white,fascia:white,
       onWalls:(F,S,k)=>{const dm=k.w/2;fp(F,[[dm-.14,0],[dm+.14,0],[dm+.14,12],[dm-.14,12]],'#2a1a10');fp(F,[[dm-.14,12],[dm+.14,12],[dm+.14,13.4],[dm-.14,13.4]],white);
         const[ox,oy]=F(dm,k.h+6);ell(ox,oy,3,3,'#2a2a2a',white,1.2);
         // nest boxes on the side wall with a hinged lid
@@ -6608,18 +6608,18 @@ function drawHomeBuilding(x,y,id,lv){
   }else if(st==='pond'){
     shedN(x0,y0,w,d,20,14,{wall:H.wall,wall2:H.wall2,roof:H.roof,boards:'siding',trim:white,onWalls:(F,S,k)=>{const dm=k.w/2;fp(F,[[dm-.14,0],[dm+.14,0],[dm+.14,12],[dm-.14,12]],'#2a1a10');windowN(S,k.d/2-.1,k.d/2+.1,8,15,{trim:white})}});
   }else if(st==='stone'){
-    shedN(x0,y0,w,d,22,15,{wall:'#b8b2a6',wall2:'#9a948a',roof:'#7a5432',boards:'stone',onWalls:(F,S,k)=>{const dm=k.w/2;fp(F,[[dm-.18,0],[dm+.18,0],[dm+.18,15],[dm-.18,15]],'#4a3018','#2a1a0a',.6);fp(F,[[dm-.18,7],[dm+.18,7],[dm+.18,8],[dm-.18,8]],'#2a1a0a')}});
+    shedN(x0,y0,w,d,22,15,{wall:'#cfc8ba',wall2:'#aaa294',roof:'#b8583a',boards:'stone',onWalls:(F,S,k)=>{const dm=k.w/2;fp(F,[[dm-.18,0],[dm+.18,0],[dm+.18,15],[dm-.18,15]],'#4a3018','#2a1a0a',.6);fp(F,[[dm-.18,7],[dm+.18,7],[dm+.18,8],[dm-.18,8]],'#2a1a0a')}});
   }else if(st==='mud'){
-    shedN(x0,y0,w,d,18,13,{wall:'#c98a6a',wall2:'#a8705a',roof:'#7a5432',boards:'batten',trim:'#f0d0c0',onWalls:(F,S,k)=>{const dm=k.w/2;fp(F,[[dm-.16,0],[dm+.16,0],[dm+.16,11],[dm-.16,11]],'#2a1a10')}});
+    shedN(x0,y0,w,d,18,13,{wall:'#eba48c',wall2:'#c8836c',roof:'#a8452f',boards:'batten',trim:'#fff0e6',onWalls:(F,S,k)=>{const dm=k.w/2;fp(F,[[dm-.16,0],[dm+.16,0],[dm+.16,11],[dm-.16,11]],'#2a1a10')}});
   }else if(st==='stable'||st==='lodge'){
     const lodge=st==='lodge';
-    shedN(x0,y0,w,d,28,18,{wall:lodge?'#d8c49c':'#8a5530',wall2:lodge?'#bca880':'#6e4424',roof:lodge?'#b8305e':'#3f5f90',boards:lodge?'log':'batten',trim:lodge?'#f2e6cf':white,fascia:lodge?'#f2e6cf':white,
+    shedN(x0,y0,w,d,28,18,{wall:lodge?'#e6d3a8':'#a8643a',wall2:lodge?'#c8b088':'#86502e',roof:lodge?'#c8346a':'#3f6fb0',boards:lodge?'log':'batten',trim:lodge?'#f2e6cf':white,fascia:lodge?'#f2e6cf':white,
       onWalls:(F,S,k)=>{for(const[a,c]of[[.18,.68],[1.1,1.6]]){if(c>k.w-.1)continue;fp(F,[[a,0],[c,0],[c,11],[a,11]],lodge?'#7a5432':'#5e3418','#2a1608',.5);fp(F,[[a,11],[c,11],[c,21],[a,21]],'#1e140c');g.strokeStyle=white;g.lineWidth=1;fl(F,[a,0],[c,11]);fl(F,[a,11],[c,0])}
         if(lodge){g.strokeStyle='#ffd23f';g.lineWidth=1;fl(F,[0,k.h-1],[k.w,k.h-1]);for(let i=0;i<7;i++){const u=.08+i*.26;fp(F,[[u,k.h-1],[u+.13,k.h-1],[u+.065,k.h-5]],['#e0457b','#2ba0a0','#ffd23f'][i%3])}}}});
   }else if(st==='hutch'){
     shedN(x0,y0,w,d,15,11,{z:9,wall:'#e8d2a0',wall2:'#ccb482',roof:'#3f8a3c',boards:'siding',trim:white,onWalls:(F,S,k)=>{fp(F,[[.1,1],[k.w*.62,1],[k.w*.62,12],[.1,12]],'rgba(210,225,230,.5)','#6b6b6b',.6);g.strokeStyle='rgba(90,90,90,.6)';g.lineWidth=.5;for(let u=.16;u<k.w*.62;u+=.09)fl(F,[u,1],[u,12]);for(let zz=3;zz<12;zz+=2.6)fl(F,[.1,zz],[k.w*.62,zz]);fp(F,[[k.w*.68,1],[k.w-.1,1],[k.w-.1,12],[k.w*.68,12]],'#7a5432','#3a2010',.5)}});
   }else{// sheep pen: an open shed with a hay rack
-    shedN(x0,y0,w,d,20,14,{wall:'#c9a06a',wall2:'#a8804e',roof:'#6a7a4a',boards:'batten',trim:'#f4ead6',onWalls:(F,S,k)=>{fp(F,[[.2,0],[k.w-.2,0],[k.w-.2,14],[.2,14]],'#2e2014');for(let i=0;i<5;i++){const u=.3+i*(k.w-.6)/4;g.strokeStyle='#e0c060';g.lineWidth=1.4;fl(F,[u,4],[u+.05,9])}}});
+    shedN(x0,y0,w,d,20,14,{wall:'#e0b878',wall2:'#bf975c',roof:'#4f9a4a',boards:'batten',trim:'#fff6e4',onWalls:(F,S,k)=>{fp(F,[[.2,0],[k.w-.2,0],[k.w-.2,14],[.2,14]],'#2e2014');for(let i=0;i<5;i++){const u=.3+i*(k.w-.6)/4;g.strokeStyle='#e0c060';g.lineWidth=1.4;fl(F,[u,4],[u+.05,9])}}});
   }
 }
 function drawHome3(x,y,id,lv){
