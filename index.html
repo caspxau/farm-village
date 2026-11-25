@@ -2021,12 +2021,46 @@ body .wheelbox .goals-head{background:linear-gradient(rgba(242,197,58,.36),rgba(
 .hawk canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hskip{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:1;min-height:38px;padding:6px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.55);background:rgba(20,30,50,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font:700 14px var(--f-body,system-ui);letter-spacing:.3px;cursor:pointer;transition:opacity .4s}
 .hawk.clear .hskip{opacity:0}
+
+/* ===== Atmosphere: drifting cloud shadows locked to the ground, soft sun rays and distance haze (composited layers only) ===== */
+.atmo{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+body.inhouse .atmo{display:none}
+.atmo i{position:absolute;display:block}
+.cshade{left:0;top:0;width:3000px;height:2000px;will-change:transform;transform-origin:0 0;transition:opacity 1.2s;
+  background:
+   radial-gradient(closest-side,rgba(20,46,64,.26),rgba(20,46,64,.17) 55%,rgba(24,52,70,0)) 120px 80px/520px 260px no-repeat,
+   radial-gradient(closest-side,rgba(20,46,64,.24),rgba(20,46,64,.14) 50%,rgba(24,52,70,0)) 330px 170px/380px 200px no-repeat,
+   radial-gradient(closest-side,rgba(20,46,64,.25),rgba(20,46,64,.15) 55%,rgba(24,52,70,0)) 760px 520px/600px 280px no-repeat,
+   radial-gradient(closest-side,rgba(20,46,64,.22),rgba(20,46,64,.12) 50%,rgba(24,52,70,0)) 980px 600px/340px 180px no-repeat;
+  background-repeat:no-repeat}
+.rays{left:-20vw;top:-30vh;width:90vw;height:90vh;opacity:.55;animation:raybreathe 9s ease-in-out infinite;
+  background:repeating-conic-gradient(from 100deg at 0 0,rgba(255,246,206,.16) 0 3deg,rgba(255,246,206,0) 3deg 9deg,rgba(255,240,190,.09) 9deg 11deg,rgba(255,246,206,0) 11deg 17deg);
+  -webkit-mask:radial-gradient(ellipse at 0 0,#000 10%,rgba(0,0,0,.5) 40%,transparent 72%);mask:radial-gradient(ellipse at 0 0,#000 10%,rgba(0,0,0,.5) 40%,transparent 72%)}
+.haze{inset:0;background:linear-gradient(180deg,rgba(214,234,246,.26),rgba(214,234,246,.1) 14%,rgba(214,234,246,0) 30%),linear-gradient(0deg,rgba(255,226,170,.1),rgba(255,226,170,0) 22%)}
+@keyframes raybreathe{50%{opacity:.85}}
+body.lowfx .cshade,body.lowfx .rays{display:none}
+@media (prefers-reduced-motion:reduce){.rays{animation:none}}
+
+/* ===== Finish pass: every floating panel shares the top bar's material (cream parchment held in a wooden frame),
+   dialogs sit in a carved wooden frame, and cards lift under the pointer ===== */
+body .side .qtrack,body .side .goals,body .seedpill,body .needpill,body .tut{
+  background:linear-gradient(#fffdf7,#f8eed6 65%,#f0e0bc)!important;border:2px solid #8a5a2e!important;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8),inset 0 -3px 0 rgba(160,110,40,.14),0 3px 0 #5a3414,0 9px 18px rgba(30,15,5,.26)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+body .side .qtrack .qhead,body .side .goals:not(.evbox):not(.wheelbox) .goals-head{background:linear-gradient(#fff3d2,#f4dfae)!important;border-bottom:1.5px solid #d6b578!important;box-shadow:inset 0 1px 0 #fff}
+body .tut strong{color:#3a2310}
+body .sheet{border:3px solid #5a3414!important;
+  box-shadow:0 0 0 4px #b07a44,0 0 0 6px #4a2a10,inset 0 0 0 2px rgba(255,255,255,.65),0 8px 0 6px #3a200a,0 28px 56px rgba(20,10,0,.5)!important}
+body .modal{background:radial-gradient(ellipse at 50% 45%,rgba(40,25,10,.28),rgba(25,14,4,.66))}
+body .card{transition:transform .14s ease,box-shadow .14s ease}
+@media (hover:hover){body .card:not(.locked):hover{transform:translateY(-3px);box-shadow:0 8px 16px rgba(60,35,10,.2)}}
+@media (prefers-reduced-motion:reduce){body .card{transition:none}}
 </style>
 </head>
 <body>
 <svg class="icdefs" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><defs><linearGradient id="igG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6e0"/><stop offset=".5" stop-color="#f6cf96"/><stop offset="1" stop-color="#d9974e"/></linearGradient><linearGradient id="igC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc0f0"/><stop offset="1" stop-color="#2f74bb"/></linearGradient><linearGradient id="ibR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ec5b48"/><stop offset="1" stop-color="#a8261c"/></linearGradient><linearGradient id="ibT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9b0b6"/><stop offset="1" stop-color="#5f666d"/></linearGradient><linearGradient id="ioW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2a86a"/><stop offset="1" stop-color="#a5652c"/></linearGradient><linearGradient id="ioM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#8e979f"/></linearGradient><linearGradient id="imW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d99a5c"/><stop offset="1" stop-color="#9a5e2a"/></linearGradient><linearGradient id="imC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6b06e"/><stop offset="1" stop-color="#b5763c"/></linearGradient><clipPath id="imA"><path d="M7 21 13.5 8h29L49 21z"/></clipPath><linearGradient id="idR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f26a52"/><stop offset="1" stop-color="#b02a1c"/></linearGradient><linearGradient id="idW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dba266"/><stop offset="1" stop-color="#9c6230"/></linearGradient><linearGradient id="inW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a066"/><stop offset="1" stop-color="#93582a"/></linearGradient></defs></svg>
 <canvas id="farm" aria-label="Your farm. Click tiles to plow, plant and harvest."></canvas>
-<canvas id="nightCv" aria-hidden="true"></canvas><div class="farmfx" aria-hidden="true"></div>
+<canvas id="nightCv" aria-hidden="true"></canvas><div class="farmfx" aria-hidden="true"></div><div class="atmo" id="atmo" aria-hidden="true"><i class="cshade" id="cshade"></i><i class="rays"></i><i class="haze"></i></div>
 
 <header class="hud">
   <div class="lvl" title="Your level">
@@ -6529,6 +6563,7 @@ function shedN(x0,y0,w,d,h,rh,o){
     else if(o.boards==='stone'){g.save();clipPts(pts.map(p=>f(p[0],p[1])));for(let r=0;r<12;r++)for(let c2=0;c2<10;c2++){const u=(c2+(r%2)*.5)/10*u1,zz=base+r*4;const q=[f(u+.01,zz+.5),f(u+u1/10-.01,zz+.5),f(u+u1/10-.01,zz+3.6),f(u+.01,zz+3.6)];poly(q,shade(o.wall,(hash(r,c2)-.5)*.25),'rgba(60,55,48,.45)',.4)}g.restore()}
     else if(o.boards==='log'){g.save();clipPts(pts.map(p=>f(p[0],p[1])));for(let zz=base;zz<z1;zz+=3.4){fp(f,[[0,zz],[u1,zz],[u1,zz+3],[0,zz+3]],lgr(f(0,zz+3),f(0,zz),[shade(o.wall,.1),shade(o.wall,-.25)]));g.strokeStyle='rgba(40,20,6,.4)';g.lineWidth=.5;fl(f,[0,zz],[u1,zz])}g.restore()}};
   tex(S,sw,d,h);tex(F,gw,w,h+rh);
+  fp(S,sw,null,'rgba(58,36,20,.6)',1);fp(F,gw,null,'rgba(58,36,20,.6)',1);
   // light: walls catch the sky up top and sink into shade at the ground; the side wall is in shade
   fp(S,sw,lgr(S(0,h),S(0,base),['rgba(255,250,235,.06)','rgba(20,12,4,.22)']));fp(F,gw,lgr(F(0,h+rh),F(0,base),['rgba(255,250,235,.12)','rgba(20,12,4,.12)']));
   fp(S,[[0,h-4],[d,h-4],[d,h],[0,h]],'rgba(20,10,4,.22)');
@@ -6563,8 +6598,8 @@ function drawHomeBuilding(x,y,id,lv){
         for(const v of[.3,.75])windowN(S,v-.08,v+.08,k.base+12,k.base+20,{panes:true,trim:white});}});
     if(lv>=3){const xm=x0+w/2,yc=y0+d/2,q=.1,zp=r.top;isoBox(xm-q,yc-q,q*2,q*2,8,'#f0ece4','#cfc9bf',null,null,zp-3);poly([P(xm-q-.04,yc+q+.04,zp+5),P(xm+q+.04,yc+q+.04,zp+5),P(xm,yc,zp+13)],'#b03a2e');poly([P(xm+q+.04,yc+q+.04,zp+5),P(xm+q+.04,yc-q-.04,zp+5),P(xm,yc,zp+13)],'#8a2a20')}
   }else if(st==='stilts'){// raised coop: boards on stilts, nest boxes on the side, a ramp down to the yard
-    const red=id==='turkey'?'#a8642a':'#b8402f';
-    const r=shedN(x0,y0,w,d,20,13,{z:11,wall:red,wall2:shade(red,-.2),roof:id==='turkey'?'#7a5a3a':'#6a5a52',boards:'batten',trim:white,fascia:white,
+    const red=id==='turkey'?'#b8702e':'#c8432f';
+    const r=shedN(x0,y0,w,d,20,13,{z:11,wall:red,wall2:shade(red,-.2),roof:id==='turkey'?'#7a5a3a':'#4d6f96',roofType:id==='turkey'?null:'metal',boards:'batten',trim:white,fascia:white,
       onWalls:(F,S,k)=>{const dm=k.w/2;fp(F,[[dm-.14,0],[dm+.14,0],[dm+.14,12],[dm-.14,12]],'#2a1a10');fp(F,[[dm-.14,12],[dm+.14,12],[dm+.14,13.4],[dm-.14,13.4]],white);
         const[ox,oy]=F(dm,k.h+6);ell(ox,oy,3,3,'#2a2a2a',white,1.2);
         // nest boxes on the side wall with a hinged lid
@@ -7888,6 +7923,22 @@ function paintChunk(which,i,j){if(which==='ground')groundVer++;
   }else for(const t of BORDER)if(!t.back&&treeNear(t,r))drawWildTree(t);
   g=prev;return{c,used:chTick,s:chS};
 }
+// Cloud shadows: a tile of soft shadows that pans with the ground (and drifts with the wind), scaled to the zoom.
+// The tile is repeated by placing the layer at the camera offset modulo its size; only a transform changes per frame.
+let atmoK='';const CS_W=1200,CS_H=800,CS_POS=[[120,80],[330,170],[760,520],[980,600]],CS_SZ=[[520,260],[380,200],[600,280],[340,180]];
+function atmoSync(t){
+  const el=$('cshade');if(!el||QL<2)return;
+  const z=cam.z,tw=CS_W*z,th=CS_H*z,key=vw+'x'+vh;
+  // enough repeats to cover the screen at the widest zoom; rebuilt only when the screen size changes
+  if(key!==atmoK){atmoK=key;if(!el.dataset.b)el.dataset.b=JSON.stringify(getComputedStyle(el).backgroundImage.split(/,(?=\s*radial)/).map(x=>x.trim()));
+    const B=JSON.parse(el.dataset.b),nx=Math.ceil(vw/(CS_W*.3))+2,ny=Math.ceil(vh/(CS_H*.3))+2,img=[],ps=[],ss=[];
+    for(let i=0;i<nx;i++)for(let j=0;j<ny;j++)B.forEach((b,k)=>{img.push(b);ps.push((CS_POS[k][0]+i*CS_W)+'px '+(CS_POS[k][1]+j*CS_H)+'px');ss.push(CS_SZ[k][0]+'px '+CS_SZ[k][1]+'px')});
+    el.style.width=nx*CS_W+'px';el.style.height=ny*CS_H+'px';
+    el.style.backgroundImage=img.join(',');el.style.backgroundPosition=ps.join(',');el.style.backgroundSize=ss.join(',')}
+  const drift=t*.006,ox=((cam.x+drift*z)%tw+tw)%tw-tw,oy=((cam.y+drift*.5*z)%th+th)%th-th;
+  el.style.transform='translate3d('+ox.toFixed(1)+'px,'+oy.toFixed(1)+'px,0) scale('+z.toFixed(4)+')';
+  const op=(1-darkness()).toFixed(2);if(el.style.opacity!==op)el.style.opacity=op;
+}
 function syncLayers(t){
   // Ground chunks are big canvases: past a certain total the browser starts shuffling them in and out of graphics
   // memory and every frame crawls. Their resolution is chosen so the chunks on screen stay within a pixel budget.
@@ -7941,7 +7992,7 @@ function frameStep(t){
   const now=Date.now();
   if(HV){updateFarmer(dt,now);requestAnimationFrame(frame);return}
   liveBudget=2;FRAME_SCALE=0;SPR_DEADLINE=0;if(INKC.size>120&&Math.random()<.02){const tn=performance.now();for(const[k,c]of INKC)if(c.u&&tn-c.u>5000)INKC.delete(k)}
-  camStep(dt);seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateHelper(dt);updateAnimals(dt);updateAmbient(dt);syncLayers(t);
+  camStep(dt);seasonSync();updateFarmer(dt,now);updatePet(dt);updateFireflies(dt);updateVisitors(dt,now);updateHelper(dt);updateAnimals(dt);updateAmbient(dt);syncLayers(t);atmoSync(t);
   // The background (base colour, the endless meadow and the ground chunks) is composed into a screen-sized canvas only
   // when the camera, the canvas, the season or a ground chunk changes; otherwise each frame stamps it 1:1, which is
   // cheap even where the browser draws without the graphics card.
